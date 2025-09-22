@@ -1,0 +1,30 @@
+{
+  "name": "sample-apps",
+  "version": "1.0.0",
+  "description": "Monorepo of all the sample apps",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build --continue",
+    "lint": "turbo run lint --continue",
+    "list": "node scripts/list-apps.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/velt-js/sample-apps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/velt-js/sample-apps/issues"
+  },
+  "homepage": "https://github.com/velt-js/sample-apps#readme",
+  "devDependencies": {
+    "turbo": "^2.5.6"
+  },
+  "private": true,
+  "workspaces": [
+    "apps/*/*"
+  ]
+}

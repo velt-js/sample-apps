@@ -1,0 +1,9 @@
+# Node
+node_modules
+npm-debug.log*
+# Builds
+.next
+dist
+build
+# Misc
+.DS_Store
