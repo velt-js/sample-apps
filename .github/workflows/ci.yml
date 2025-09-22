@@ -1,19 +1,57 @@
 name: CI
+
 on:
-  push:
   pull_request:
+    paths:
+      - "apps/**"
+      - "package.json"
+      - "package-lock.json"
+      - "turbo.json"
+      - ".github/**"
+      - "scripts/**"
+  push:
+    branches: [ "main" ]
+    paths:
+      - "apps/**"
+      - "package.json"
+      - "package-lock.json"
+      - "turbo.json"
+      - ".github/**"
+      - "scripts/**"
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  discover:
+    name: Discover changed apps
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for git diff/merge-base
+      - name: Compute matrix
+        id: set-matrix
+        run: |
+          MATRIX_JSON="$(
+            .github/scripts/changed-apps.sh
+          )"
+          echo "Changed apps matrix:"
+          echo "$MATRIX_JSON"
+          echo "matrix=$MATRIX_JSON" >> "$GITHUB_OUTPUT"
+
+  lint:
+    name: Lint (${{ matrix.app }})
+    needs: discover
+    if: ${{ fromJSON(needs.discover.outputs.matrix)[0] != null }}  # skip if empty
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        app:
-          - apps/reactflow/reactflow-basic
-          # Add more paths as you add demos:
-          # - apps/reactflow/reactflow-pipeline-demo
-          # - apps/tiptap/tiptap-crdt-notes
-          # - apps/codemirror/codemirror-crdt-collab
+        app: ${{ fromJSON(needs.discover.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,4 +59,25 @@ jobs:
           node-version: "20"
           cache: "npm"
       - run: npm ci
-      - run: npm run --workspace "${{ matrix.app }}" build
+      - name: Lint app
+        run: npm run --workspace "${{ matrix.app }}" lint
+        continue-on-error: true  # don't block builds if some demos lack lint config
+
+  build:
+    name: Build (${{ matrix.app }})
+    needs: discover
+    if: ${{ fromJSON(needs.discover.outputs.matrix)[0] != null }}  # skip if empty
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - name: Build app
+        run: npm run --workspace "${{ matrix.app }}" build
