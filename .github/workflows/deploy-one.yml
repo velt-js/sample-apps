@@ -1,0 +1,27 @@
+name: Deploy Demo (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      app:
+        description: "App path (e.g. apps/reactflow/reactflow-comments-cursor)"
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      # Replace the following with your real deploy command (e.g., vercel CLI)
+      - name: Build app
+        run: npm run --workspace "${{ inputs.app }}" build
+      - name: Deploy app
+        run: echo "TODO: run vercel --token=$VERCEL_TOKEN --prod in ${{ inputs.app }}"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
