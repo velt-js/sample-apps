@@ -1,0 +1,24 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app:
+          - apps/reactflow/reactflow-basic
+          # Add more paths as you add demos:
+          # - apps/reactflow/reactflow-pipeline-demo
+          # - apps/tiptap/tiptap-crdt-notes
+          # - apps/codemirror/codemirror-crdt-collab
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run --workspace "${{ matrix.app }}" build
