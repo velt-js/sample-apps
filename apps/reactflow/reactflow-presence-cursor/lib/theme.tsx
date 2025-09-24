@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+
 import { createContext, useContext, useEffect, useState } from "react"
 
 type Theme = "light" | "dark"
@@ -17,28 +18,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-    try {
-      const savedTheme = localStorage.getItem("theme") as Theme
-      if (savedTheme && (savedTheme === "light" || savedTheme === "dark")) {
-        setTheme(savedTheme)
-      } else if (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setTheme("dark")
-      }
-    } catch (error) {
-      console.warn("Failed to load theme from localStorage:", error)
-      setTheme("light")
+    const savedTheme = localStorage.getItem("theme") as Theme
+    if (savedTheme) {
+      setTheme(savedTheme)
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark")
     }
+    setMounted(true)
   }, [])
 
   useEffect(() => {
     if (mounted) {
-      try {
-        localStorage.setItem("theme", theme)
-        document.documentElement.classList.toggle("dark", theme === "dark")
-      } catch (error) {
-        console.warn("Failed to save theme to localStorage:", error)
-      }
+      localStorage.setItem("theme", theme)
+      document.documentElement.setAttribute("data-theme", theme)
     }
   }, [theme, mounted])
 
@@ -47,13 +39,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   if (!mounted) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-gray-900">
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white"></div>
-        </div>
-      </div>
-    )
+    return null
   }
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>

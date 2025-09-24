@@ -1,15 +1,25 @@
 "use client";
-import { VeltInitializeUser } from "./VeltInitializeUser";
-import { VeltInitializeDocument } from "./VeltInitializeDocument";
+import { useVeltClient, VeltCursor } from "@veltdev/react";
+import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
-import { VeltTools } from "./VeltTools";
+import { useEffect } from "react";
+import { useAppUser } from "@/app/userAuth/AppUserContext";
 
 export function VeltCollaboration() {
-    return (
-        <>
-            <VeltInitializeUser />
-            <VeltInitializeDocument />
-            <VeltCustomization />
-        </>
-    );
+  const { isUserLoggedIn } = useAppUser();
+  const { client } = useVeltClient();
+
+  // [Velt] Sign out user when user logs out, getting user login state from host app
+  useEffect(() => {
+    if (isUserLoggedIn === false && client) {
+      client.signOutUser();
+    }
+  }, [isUserLoggedIn, client]);
+  return (
+    <>
+      <VeltInitializeDocument />
+      <VeltCursor />
+      <VeltCustomization />
+    </>
+  );
 }

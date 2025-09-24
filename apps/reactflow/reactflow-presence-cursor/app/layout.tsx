@@ -1,42 +1,27 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import { JetBrains_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
-import { ThemeProvider } from "@/lib/theme"
-import { Suspense } from "react"
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-})
+import type React from "react";
+import type { Metadata } from "next";
+import { ThemeProvider } from "@/lib/theme";
+import "./globals.css";
+import { AppUserProvider } from "@/app/userAuth/useAppUser";
 
 export const metadata: Metadata = {
-  title: "Reactflow with Presence and Cursor Powered by Velt",
-  description: "Powered by Velt",
-}
+  title: "Velt-Ready Prototype",
+  description: "A collaborative document editor prototype",
+  generator: "v0.app",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${inter.variable} ${jetbrainsMono.variable}`}>
-        <Suspense fallback={<div>Loading...</div>}>
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
+        <AppUserProvider>
           <ThemeProvider>{children}</ThemeProvider>
-        </Suspense>
-        <Analytics />
+        </AppUserProvider>
       </body>
     </html>
-  )
+  );
 }

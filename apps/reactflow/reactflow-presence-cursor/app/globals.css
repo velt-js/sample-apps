@@ -37,11 +37,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --font-inter: "Inter", sans-serif;
-  --font-jetbrains-mono: "JetBrains Mono", monospace;
 }
 
-.dark {
+[data-theme="dark"] {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -77,9 +75,7 @@
 }
 
 @theme inline {
-  /* Update font variables to use Google Fonts */
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono);
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -118,56 +114,27 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+* {
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid rgb(var(--primary));
+  outline-offset: 2px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
-  }
-
-  /* Enhanced focus styles for better accessibility */
-  .react-flow__node:focus,
-  .react-flow__node:focus-visible {
-    outline: 2px solid hsl(var(--ring));
-    outline-offset: 2px;
-  }
-
-  /* Improved contrast for React Flow controls */
-  .react-flow__controls-button {
-    @apply bg-card border-border text-card-foreground;
-  }
-
-  .react-flow__controls-button:hover {
-    @apply bg-accent text-accent-foreground;
-  }
-
-  /* Better minimap styling */
-  .react-flow__minimap {
-    @apply bg-muted;
-  }
-
-  /* Ensure proper contrast for edges */
-  .react-flow__edge-path {
-    stroke: hsl(var(--foreground));
-    stroke-opacity: 0.6;
-  }
-
-  .react-flow__edge.selected .react-flow__edge-path {
-    stroke: hsl(var(--primary));
-    stroke-opacity: 1;
-  }
-
-  /* Screen reader only utility class */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
   }
 }
