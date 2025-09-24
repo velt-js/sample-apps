@@ -9,7 +9,7 @@ import {
 } from '@xyflow/react';
 import { useCallback, useRef } from 'react';
 import { useVeltInitState } from '@veltdev/react';
-import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt';
+import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt/esm';
 import '@xyflow/react/dist/style.css';
 
 const getId = () => crypto.randomUUID();
