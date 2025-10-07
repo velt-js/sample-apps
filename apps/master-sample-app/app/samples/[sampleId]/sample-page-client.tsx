@@ -3,11 +3,14 @@
 import { useState } from "react"
 import { Sidebar } from "@/components/sidebar"
 import { SampleViewer } from "@/components/viewer/sample-viewer"
-import { getDefaultSample } from "@/samples"
+import { Sample } from "@/types/sample"
 
-export default function Page() {
+interface SamplePageClientProps {
+  sample: Sample
+}
+
+export function SamplePageClient({ sample }: SamplePageClientProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const defaultSample = getDefaultSample()
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
@@ -16,10 +19,11 @@ export default function Page() {
 
       {/* Main Content */}
       <SampleViewer 
-        sample={defaultSample}
+        sample={sample}
         sidebarOpen={sidebarOpen}
         onSidebarToggle={() => setSidebarOpen(!sidebarOpen)}
       />
     </div>
   )
 }
+

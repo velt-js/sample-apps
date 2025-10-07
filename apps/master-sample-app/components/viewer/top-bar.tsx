@@ -8,9 +8,24 @@ interface TopBarProps {
   onModeChange: (mode: "code" | "demo") => void
   sidebarOpen: boolean
   onSidebarToggle: () => void
+  title?: string
+  githubUrl?: string
 }
 
-export function TopBar({ mode, onModeChange, sidebarOpen, onSidebarToggle }: TopBarProps) {
+export function TopBar({ 
+  mode, 
+  onModeChange, 
+  sidebarOpen, 
+  onSidebarToggle,
+  title = "TIPTAP · CRDT DEMO",
+  githubUrl = "https://github.com/velt-js/tiptap-velt-nextjs"
+}: TopBarProps) {
+  const handleGithubClick = () => {
+    if (githubUrl) {
+      window.open(githubUrl, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
     <header className="flex h-14 items-center justify-between border-b border-border bg-background px-4">
       {/* Left: Toggle + Title */}
@@ -22,7 +37,7 @@ export function TopBar({ mode, onModeChange, sidebarOpen, onSidebarToggle }: Top
         >
           <ChevronLeft className={cn("h-4 w-4 text-foreground transition-transform", !sidebarOpen && "rotate-180")} />
         </button>
-        <h1 className="text-sm font-medium text-foreground">TIPTAP · CRDT DEMO</h1>
+        <h1 className="text-sm font-medium text-foreground">{title}</h1>
       </div>
 
       {/* Center: Mode Toggle */}
@@ -52,10 +67,14 @@ export function TopBar({ mode, onModeChange, sidebarOpen, onSidebarToggle }: Top
         <button className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent transition-colors">
           <Settings className="h-4 w-4 text-foreground" />
         </button>
-        <button className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent transition-colors">
+        <button 
+          onClick={handleGithubClick}
+          className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent transition-colors"
+        >
           <Github className="h-4 w-4 text-foreground" />
         </button>
       </div>
     </header>
   )
 }
+
