@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "start": "next start"
   },
   "dependencies": {
@@ -80,5 +81,13 @@
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
+  },
+  "resolutions": {
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "overrides": {
+    "react": "^19",
+    "react-dom": "^19"
   }
 }

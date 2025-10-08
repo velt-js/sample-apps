@@ -1,8 +1,8 @@
-name: CI (minimal)
+name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
     paths-ignore:
       - 'README.md'
       - 'docs/**'
@@ -12,10 +12,15 @@ on:
       - 'docs/**'
 
 jobs:
-  check:
+  lint-and-fix:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
@@ -25,8 +30,18 @@ jobs:
       - name: Install deps (root + workspaces)
         run: npm ci
 
-      - name: Lint (all workspaces, if present)
-        run: npm run --workspaces --if-present lint || true
+      - name: Run lint with auto-fix
+        run: npm run lint:fix
+        continue-on-error: true
 
-      - name: Build (all workspaces, if present)
-        run: npm run --workspaces --if-present build
+      - name: Commit and push lint fixes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: auto-fix lint issues [skip ci]"
+          git push || echo "No changes to push"
+        continue-on-error: true
+
+      - name: Build (all workspaces)
+        run: npm run build
