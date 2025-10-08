@@ -1,8 +1,14 @@
 import { Sample } from '@/types/sample'
 import tiptapCrdtMeta from './tiptap-crdt/metadata'
 import { codeFiles as tiptapCrdtCodeFiles } from './tiptap-crdt/code-files'
+import cursorsPlaygroundMeta from './cursors-playground/metadata'
+import { codeFiles as cursorsPlaygroundCodeFiles } from './cursors-playground/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
+  'cursors-playground': {
+    metadata: cursorsPlaygroundMeta,
+    codeFiles: cursorsPlaygroundCodeFiles
+  },
   'tiptap-crdt': {
     metadata: tiptapCrdtMeta,
     codeFiles: tiptapCrdtCodeFiles

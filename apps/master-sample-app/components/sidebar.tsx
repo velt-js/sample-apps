@@ -8,13 +8,16 @@ import { cn } from "@/lib/utils"
 interface SidebarProps {
   isOpen: boolean
   onToggle: () => void
+  currentSampleId?: string
+  onSampleSelect?: (sampleId: string) => void
 }
 
-export function Sidebar({ isOpen, onToggle }: SidebarProps) {
+export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    cursors: true,
     comments: true,
   })
-  const [selectedItem, setSelectedItem] = useState<string>("custom")
+  const [selectedItem, setSelectedItem] = useState<string>("playground")
   const [activePill, setActivePill] = useState<"app-type" | "feature">("feature")
 
   const toggleSection = (section: string) => {
@@ -83,6 +86,33 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
           <nav className="flex-1 overflow-y-auto px-3">
             {activePill === "feature" ? (
               <>
+                {/* Cursors Section */}
+                <div className="mb-1">
+                  <button
+                    onClick={() => toggleSection("cursors")}
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
+                  >
+                    <span>Cursors</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.cursors && "rotate-90")} />
+                  </button>
+                  {expandedSections.cursors && (
+                    <div className="mt-2 space-y-1">
+                      <button
+                        onClick={() => {
+                          setSelectedItem("playground")
+                          onSampleSelect?.("cursors-playground")
+                        }}
+                        className={cn(
+                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                          selectedItem === "playground" ? "bg-secondary" : "hover:bg-secondary/50",
+                        )}
+                      >
+                        Playground
+                      </button>
+                    </div>
+                  )}
+                </div>
+
                 {/* Comments Section */}
                 <div className="mb-1">
                   <button
@@ -98,7 +128,10 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         TABLE
                       </div>
                       <button
-                        onClick={() => setSelectedItem("custom")}
+                        onClick={() => {
+                          setSelectedItem("custom")
+                          onSampleSelect?.("tiptap-crdt")
+                        }}
                         className={cn(
                           "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
                           selectedItem === "custom" ? "bg-secondary" : "hover:bg-secondary/50",

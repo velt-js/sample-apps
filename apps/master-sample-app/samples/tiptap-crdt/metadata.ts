@@ -8,7 +8,8 @@ const metadata: SampleMetadata = {
   iframeUrl: 'https://demo-examples.vercel.app/realtime/cursors',
   githubUrl: 'https://github.com/velt-js/tiptap-velt-nextjs',
   githubRepoPath: 'velt-js/tiptap-velt-nextjs',
-  isDefault: true
+  displayMode: 'dual',
+  isDefault: false
 }
 
 export default metadata
