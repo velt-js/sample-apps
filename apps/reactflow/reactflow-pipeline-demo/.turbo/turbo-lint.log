@@ -1,0 +1,14 @@
+
+> lint
+> next lint --fix
+
+info  - Loaded env from /home/runner/work/sample-apps/sample-apps/apps/reactflow/reactflow-pipeline-demo/.env.local
+warn  - You have enabled experimental feature (appDir) in next.config.js.
+info  - Thank you for testing `appDir` please leave your feedback at https://nextjs.link/app-feedback
+warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+
+? How would you like to configure ESLint? https://nextjs.org/docs/basic-features/eslint
+[?25l❯  Strict (recommended)
+   Base
+warn  - If you set up ESLint yourself, we recommend adding the Next.js ESLint plugin. See https://nextjs.org/docs/basic-features/eslint#migrating-existing-config
+   Cancel
