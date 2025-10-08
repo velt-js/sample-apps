@@ -1,0 +1,34 @@
+
+> build
+> next build
+
+info  - Loaded env from /Users/yoenzhang/Downloads/sample-apps/apps/reactflow/reactflow-pipeline-demo/.env.local
+warn  - You have enabled experimental feature (appDir) in next.config.js.
+warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+info  - Thank you for testing `appDir` please leave your feedback at https://nextjs.link/app-feedback
+
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Linting and checking validity of types...
+error - ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+info  - Collecting page data...
+info  - Generating static pages (0/3)
+info  - Generating static pages (3/3)
+info  - Finalizing page optimization...
+
+Route (app)                                Size     First Load JS
+─ ○ /                                      0 B                0 B
++ First Load JS shared by all              82.8 kB
+  ├ chunks/878-99e57b3be0eb5a52.js         80.4 kB
+  ├ chunks/main-app-de5a3e9c82f9e068.js    215 B
+  └ chunks/webpack-b8a2d7d3c09c8d09.js     2.12 kB
+
+Route (pages)                              Size     First Load JS
+─ ○ /404                                   178 B          81.3 kB
++ First Load JS shared by all              81.1 kB
+  ├ chunks/main-6c55dcefd59a21f8.js        78.8 kB
+  ├ chunks/pages/_app-73d3d776fbcc4b0b.js  189 B
+  └ chunks/webpack-b8a2d7d3c09c8d09.js     2.12 kB
+
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+

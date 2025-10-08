@@ -38,10 +38,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme((prev) => (prev === "light" ? "dark" : "light"))
   }
 
-  if (!mounted) {
-    return null
-  }
-
+  // Always render children, even during SSR
+  // This prevents "Cannot read properties of null (reading 'useContext')" errors during prerendering
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
 }
 
