@@ -16,6 +16,7 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     cursors: true,
     comments: true,
+    crdt: true,
   })
   const [selectedItem, setSelectedItem] = useState<string>("playground")
   const [activePill, setActivePill] = useState<"app-type" | "feature">("feature")
@@ -162,15 +163,6 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                         <span>TEXT</span>
                         <Minus className="h-4 w-4" />
                       </button>
-                      <button
-                        onClick={() => setSelectedItem("blocknote")}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-muted-foreground transition-colors",
-                          selectedItem === "blocknote" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
-                      >
-                        BlockNote
-                      </button>
                     </div>
                   )}
                 </div>
@@ -184,6 +176,58 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                     <span>CRDT</span>
                     <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdt && "rotate-90")} />
                   </button>
+                  {expandedSections.crdt && (
+                    <div className="mt-2 space-y-1">
+                      <button
+                        onClick={() => {
+                          setSelectedItem("reactflow-playground")
+                          onSampleSelect?.("reactflow-playground")
+                        }}
+                        className={cn(
+                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                          selectedItem === "reactflow-playground" ? "bg-secondary" : "hover:bg-secondary/50",
+                        )}
+                      >
+                        ReactFlow
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedItem("tiptap-crdt")
+                          onSampleSelect?.("tiptap-crdt")
+                        }}
+                        className={cn(
+                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                          selectedItem === "tiptap-crdt" ? "bg-secondary" : "hover:bg-secondary/50",
+                        )}
+                      >
+                        Tiptap
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedItem("codemirror-crdt")
+                          onSampleSelect?.("codemirror-crdt")
+                        }}
+                        className={cn(
+                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                          selectedItem === "codemirror-crdt" ? "bg-secondary" : "hover:bg-secondary/50",
+                        )}
+                      >
+                        CodeMirror
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedItem("blocknote-crdt")
+                          onSampleSelect?.("blocknote-crdt")
+                        }}
+                        className={cn(
+                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                          selectedItem === "blocknote-crdt" ? "bg-secondary" : "hover:bg-secondary/50",
+                        )}
+                      >
+                        Blocknote
+                      </button>
+                    </div>
+                  )}
                 </div>
 
                 {/* Recording Sections */}

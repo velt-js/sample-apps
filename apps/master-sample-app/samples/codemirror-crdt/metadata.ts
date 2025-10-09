@@ -1,15 +1,16 @@
 import { SampleMetadata } from '@/types/sample'
 
 const metadata: SampleMetadata = {
-  id: 'tiptap-crdt',
-  title: 'TIPTAP · CRDT',
+  id: 'codemirror-crdt',
+  title: 'CODEMIRROR · CRDT',
   category: 'feature',
   section: 'CRDT',
   iframeUrl: 'https://demo-examples.vercel.app/realtime/cursors',
-  githubUrl: 'https://github.com/velt-js/tiptap-velt-nextjs',
-  githubRepoPath: 'velt-js/tiptap-velt-nextjs',
+  githubUrl: 'https://github.com/velt-js/velt-js',
+  githubRepoPath: 'velt-js/velt-js',
   displayMode: 'dual',
   isDefault: false
 }
 
 export default metadata
+
