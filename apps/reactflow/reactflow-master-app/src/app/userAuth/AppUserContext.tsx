@@ -2,6 +2,7 @@
 
 import type { User } from "@veltdev/types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import { demoUsers } from "./users";
 
 const SAMPLE_APP_USER = "user"; // [Velt]
 
@@ -22,11 +23,19 @@ export function AppUserProvider({ children }: { children: React.ReactNode }) {
     undefined
   );
 
-  // load on mount
+  // load on mount - auto-login as Jim Halpert
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(SAMPLE_APP_USER);
-      if (raw) setUser(JSON.parse(raw));
+      if (raw) {
+        setUser(JSON.parse(raw));
+      } else {
+        // Auto-login as Jim Halpert for demo purposes
+        const jimUser = demoUsers.jim;
+        setUser(jimUser);
+        setIsUserLoggedIn(true);
+        window.localStorage.setItem(SAMPLE_APP_USER, JSON.stringify(jimUser));
+      }
     } catch {}
   }, []);
 

@@ -17,7 +17,7 @@ import "@xyflow/react/dist/style.css"
 // [Velt] Presence + NotificationsTool + CommentTool + SidebarButton
 import { Presence, NotificationsTool, CommentTool, SidebarButton } from '@/components/velt/VeltTools';
 // [Velt] Login
-import LoginPanel from '@/app/userAuth/LoginPanel';
+// Auto-login enabled - LoginPanel removed for demo
 
 const getId = () => crypto.randomUUID()
 
@@ -652,16 +652,10 @@ export default function ReactFlowComponent() {
   
   return (
     <div className="relative w-full h-screen">
-      {/* [Velt] Toolbar - Always visible for login access */}
+      {/* [Velt] Toolbar - Auto-logged in as Jim Halpert */}
       <div className="absolute top-2 right-6 flex items-center gap-1 bg-[#1a1a1a] rounded-full px-2 py-2 shadow-2xl border border-[#2a2a2a] z-50">
-        {/* [Velt] Login Panel */}
-        <div className="px-2">
-          <LoginPanel />
-        </div>
-
         {veltInitialized && (
           <>
-            <div className="w-px h-6 bg-[#2a2a2a]" />
 
             {/* [Velt] SidebarButton (Comment Panel) */}
             <div className="px-2">
