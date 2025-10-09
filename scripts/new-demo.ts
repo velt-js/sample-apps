@@ -14,7 +14,8 @@ interface DemoOptions {
 }
 
 function parseArgs(): DemoOptions | null {
-  const args = process.argv.slice(2);
+  // Filter out the '--' separator that pnpm adds
+  const args = process.argv.slice(2).filter(arg => arg !== '--');
   const options: Partial<DemoOptions> = {};
 
   for (let i = 0; i < args.length; i += 2) {
