@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@apps/*": ["apps/*"],
+      "@react/*": ["apps/react/*"],
+      "@docs/*": ["apps/react/*/*"],
+      "@impl/*": ["apps/react/*/*/*"],
+      "@lib/*": ["apps/react/*/*/*/libraries/*"],
+      "@custom/*": ["apps/react/*/*/*/custom-implementation/*"]
+    }
+  }
+}
+
