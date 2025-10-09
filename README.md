@@ -1,160 +1,356 @@
 # Velt Sample Apps (Monorepo)
 
-A lightweight monorepo that groups demo apps by category (ReactFlow, Tiptap, CodeMirror, etc.).
-Each demo is **self-contained** — no shared utils/packages.
+A structured monorepo showcasing Velt Collaboration SDK integrations across different frameworks, libraries, and use cases. Each demo is **self-contained** and follows a consistent 5-level directory hierarchy.
 
 ---
 
-## Structure
+## 🏗️ Structure
 
-- `apps/reactflow/*`
-- `apps/tiptap/*`
-- `apps/codemirror/*`
-- `apps/misc/*`
-- `docs/` — shared guidelines (no shared code)
+This monorepo follows a strict **5-level hierarchy** for organization and discoverability:
 
-Each app lives under `apps/<category>/<demo-name>` and exposes standard npm scripts:
-- `dev` — run the app locally
-- `build` — production build
-- `lint` — lint the codebase
+```
+apps/
+  <framework>/          # Level 1: Framework (react, vue, angular)
+    <document>/         # Level 2: Feature/Document (canvas, crdt, comments, recording)
+      <type>/           # Level 3: Subdomain (text-editors, screen-recording, table)
+        <implementation>/ # Level 4: libraries or custom-implementation
+          <library>/    # Level 5: Library name (reactflow, tiptap) or solution name
+            <demo>/     # Individual demo applications
+```
+
+### Current Apps
+
+```
+apps/
+  master-sample-app/                      # Top-level demo aggregator
+  react/
+    canvas/
+      libraries/
+        reactflow/
+          reactflow-master-app/           # ReactFlow master demo
+          reactflow-pipeline-demo/        # ReactFlow pipeline demo
+          reactflow-presence-cursor/      # ReactFlow presence/cursor demo
+```
+
+**📚 For detailed structure documentation, see:**
+- [`README_MONOREPO.md`](./README_MONOREPO.md) - Complete structure guide and conventions
+- [`docs/structure.md`](./docs/structure.md) - 5-level hierarchy with examples
 
 ---
 
-## For new developers
+## 🚀 Quickstart
 
-### Interesting folders
+### Prerequisites
+- Node.js 20+ recommended
+- pnpm (installed automatically via Corepack)
 
-- See `Structure` for `apps/*` categories and layout.
-- `scripts/` — helper scripts like `list-apps.js`.
-- `docs/` — shared guidelines and checklists (no shared code).
-- `turbo.json` — Turborepo configuration for running builds/dev across workspaces.
-- `package.json` — workspace root with npm scripts and workspaces config.
+### Install & Run
 
-### How to try and run
+```bash
+# Install all dependencies
+pnpm -w install
 
-1. Install dependencies (Node 20+ recommended). See Quickstart below.
+# Run all apps in dev mode (parallel)
+pnpm -w dev
 
-2. List available demos. See Useful commands below.
+# Build all apps
+pnpm -w build
 
-3. Run one specific app. See Useful commands below.
+# Lint all apps
+pnpm -w lint
+```
 
-4. Environment variables: Some apps (e.g., ReactFlow presence/cursor) require a `.env.local` in that app folder. Typical keys:
+---
 
-       NEXT_PUBLIC_VELT_API_KEY=YOUR_VELT_API_KEY
-       VELT_AUTH_TOKEN=YOUR_VELT_AUTH_TOKEN
+## 📋 Common Commands
 
-   See each app’s README for exact variables and setup.
+### List all available demos
 
-### Velt Collaboration SDK
+```bash
+pnpm run list
+```
+
+### Run a specific app
+
+```bash
+# Using the scoped package name
+pnpm --filter @apps/react-canvas-reactflow-reactflow-master-app dev
+
+# Or navigate to the app directory
+cd apps/react/canvas/libraries/reactflow/reactflow-master-app
+pnpm dev
+```
+
+### Build a specific app
+
+```bash
+pnpm --filter @apps/react-canvas-reactflow-reactflow-master-app build
+```
+
+### Lint a specific app
+
+```bash
+pnpm --filter @apps/react-canvas-reactflow-reactflow-master-app lint
+```
+
+---
+
+## ➕ Adding a New Demo
+
+### Using the Scaffolding Tool (Recommended)
+
+The easiest way to add a new demo:
+
+```bash
+pnpm new:demo -- \
+  --framework react \
+  --document canvas \
+  --type general \
+  --implementation libraries \
+  --libraryOrSolution reactflow \
+  --demo my-new-demo
+```
+
+This creates:
+- Complete directory structure following the 5-level hierarchy
+- Basic Next.js app with TypeScript and Tailwind
+- Properly scoped package.json with correct naming
+- README.md template
+- All necessary config files
+
+### Manual Creation
+
+If you prefer to create a demo manually:
+
+```bash
+# 1. Create the directory following the 5-level structure
+mkdir -p apps/react/canvas/libraries/reactflow/my-demo
+cd apps/react/canvas/libraries/reactflow/my-demo
+
+# 2. Initialize your app (Next.js example)
+npx create-next-app@latest . --typescript --tailwind --app
+
+# 3. Update package.json with scoped name
+# Edit package.json: "name": "@apps/react-canvas-reactflow-my-demo"
+
+# 4. Install from root
+cd ../../../../../..
+pnpm -w install
+
+# 5. Test the build
+pnpm --filter @apps/react-canvas-reactflow-my-demo build
+```
+
+**📖 For detailed instructions, see [`README_MONOREPO.md`](./README_MONOREPO.md#how-to-add-a-new-demo)**
+
+---
+
+## 🗂️ Understanding the 5-Level Hierarchy
+
+### The Levels
+
+1. **Framework** - The frontend framework (react, vue, angular)
+2. **Document** - The feature area (canvas, crdt, comments, recording)
+3. **Type** - The subdomain (text-editors, screen-recording, table)
+4. **Implementation** - Either `libraries` or `custom-implementation`
+5. **Library/Solution** - Library name (reactflow, tiptap) or custom solution name
+
+### Examples
+
+**ReactFlow Canvas Demo:**
+```
+apps/react/canvas/libraries/reactflow/reactflow-master-app/
+     └──┬─ └───┬── └──┬── └───┬──── └────┬───── └────────┬──────
+        │      │      │        │          │                │
+   Framework Document Type  Impl.     Library           Demo
+```
+
+**TipTap Text Editor (Conceptual):**
+```
+apps/react/crdt/text-editors/libraries/tiptap/tiptap-basic/
+```
+
+**Custom Screen Recording (Conceptual):**
+```
+apps/react/recording/screen-recording/custom-implementation/with-pip-mode/
+```
+
+---
+
+## 🔧 Environment Variables
+
+Some apps require environment variables. Create a `.env.local` file in the specific app directory:
+
+```bash
+# Example: apps/react/canvas/libraries/reactflow/reactflow-master-app/.env.local
+NEXT_PUBLIC_VELT_API_KEY=your_velt_api_key
+VELT_AUTH_TOKEN=your_velt_auth_token
+```
+
+See each app's README for specific environment variable requirements.
+
+---
+
+## 🎨 Velt Collaboration SDK
 
 With Velt SDK you can add powerful collaboration features to your product extremely fast. The SDK provides fullstack components that are fully customizable and backed by a fully‑managed, scalable realtime backend.
 
-#### Key features
+### Key Features
 
-- Comments like Figma, Frame.io, Google Docs, Sheets and more
-- Recording like Loom (audio, video, screen)
-- Huddle like Slack (audio, video, screensharing)
-- In‑app and off‑app notifications
-- @mentions and assignment
-- Presence, Cursors, Live Selection
-- Live state sync with Single Editor mode
-- Multiplayer editing with conflict resolution
-- Follow mode like Figma
-- …and much more
+- **Comments** - Like Figma, Frame.io, Google Docs, Sheets and more
+- **Recording** - Like Loom (audio, video, screen)
+- **Huddle** - Like Slack (audio, video, screensharing)
+- **Notifications** - In‑app and off‑app notifications
+- **Mentions & Assignment** - @mentions and task assignment
+- **Presence & Cursors** - Live presence, cursors, and selection
+- **Live State Sync** - Single Editor mode with state synchronization
+- **Multiplayer Editing** - With conflict resolution via CRDTs
+- **Follow Mode** - Like Figma's follow feature
+- **…and much more**
 
-#### Installation
+### Installation
 
 ```bash
 npm install @veltdev/client
+# or
+pnpm add @veltdev/client
 ```
 
-#### Documentation
+### Documentation & Resources
 
-- Velt Collaboration SDK docs: https://docs.velt.dev
-- NPM package: https://www.npmjs.com/package/@veltdev/client
+- **Docs:** https://docs.velt.dev
+- **NPM:** https://www.npmjs.com/package/@veltdev/client
+- **Security:** SOC2 Type 2 and HIPAA compliant
 
-#### Use cases
+### Community
 
-- Explore examples and patterns in this repo’s `apps/*/*` folders and in the official docs to see how collaboration could look in your product.
-
-#### Releases
-
-- See the latest changes on NPM: https://www.npmjs.com/package/@veltdev/client
-
-#### Security
-
-- Velt is SOC2 Type 2 and HIPAA compliant.
-
-#### Community
-
-- X (formerly Twitter): updates, announcements, and general Velt tips
-- Discord: ask questions and share tips (less active)
-
-#### Keywords
-
-react, velt, real-time, realtime, toolkit, multiplayer, websockets, collaboration, collaborative, presence, synchronize, rooms, documents, conflict resolution, huddle, crdts, comment, comments, recording, video call, audio call, screen recording, webrtc, cursors, notifications, cord, liveblocks
+- **X (Twitter):** Updates, announcements, and tips
+- **Discord:** Ask questions and share insights
 
 ---
 
-## Quickstart
+## 📦 Package Naming Convention
 
-    npm ci
-    npm run dev      # runs dev across all apps (in parallel if they expose dev)
-    npm run build    # builds all apps
-    npm run lint     # lints all apps
+All apps use scoped package names following this pattern:
 
----
+```
+@apps/<framework>-<document>-<library-or-solution>-<demo>
+```
 
-## Useful commands
-
-### List all demos (by category)
-
-    npm run list
-
-### Run one specific app
-
-    # dev
-    npm run --workspace "apps/<category>/<demo-name>" dev
-
-    # build
-    npm run --workspace "apps/<category>/<demo-name>" build
-
-    # lint
-    npm run --workspace "apps/<category>/<demo-name>" lint
-
-### Add a brand-new demo (Next.js example)
-
-    # scaffold the folder
-    mkdir -p apps/<category>/<demo-name>
-    cd apps/<category>/<demo-name>
-
-    # create a Next.js TS app using npm
-    npm create next-app@latest . -- --ts --eslint --use-npm
-
-    # back to repo root & commit
-    cd ../../../
-    git add -A
-    git commit -m "feat(<category>): add <demo-name>"
-
-### Bring in an existing repo (fast, no history)
-
-    mkdir -p apps/<category>/<demo-name>
-    rsync -a ../path-to-existing-repo/ apps/<category>/<demo-name>/ --exclude .git
-    git add -A
-    git commit -m "chore(<category>): add <demo-name> (no history)"
-
-### Bring in an existing repo (with history, via git subtree)
-
-    git remote add <short> git@github.com:velt-js/<source-repo>.git
-    git fetch <short>
-    git subtree add --prefix=apps/<category>/<demo-name> <short> main --squash
-    # (omit --squash to keep every commit)
+**Examples:**
+- `@apps/master-sample-app` (special case)
+- `@apps/react-canvas-reactflow-reactflow-master-app`
+- `@apps/react-canvas-reactflow-reactflow-pipeline-demo`
+- `@apps/react-canvas-reactflow-reactflow-presence-cursor`
 
 ---
 
-## Conventions
+## 🛠️ Workspace Configuration
 
-- **No shared packages** — keep apps independent.
-- **Consistent scripts** — `dev`, `build`, `lint` in every app.
-- **Namespacing** — `apps/<category>/<demo-name>` (kebab-case).
-- **Node version** — use Node 20+ to match CI.
+### pnpm Workspaces
+
+The monorepo uses pnpm workspaces with glob patterns supporting the 5-level structure:
+
+```yaml
+# pnpm-workspace.yaml
+packages:
+  - "apps/*"
+  - "apps/*/*"
+  - "apps/*/*/*"
+  - "apps/*/*/*/*"
+  - "apps/*/*/*/*/*"
+  - "packages/*"
+```
+
+### Turbo Configuration
+
+Turbo orchestrates builds, dev servers, and linting across all apps:
+
+```json
+{
+  "tasks": {
+    "build": { "outputs": [".next/**", "dist/**", "build/**"] },
+    "dev": { "cache": false },
+    "lint": { "cache": false }
+  }
+}
+```
+
+---
+
+## 📝 Conventions
+
+### Do's ✅
+
+- Follow the exact 5-level hierarchy for all new demos
+- Use kebab-case for all directory and demo names
+- Name packages with scoped convention: `@apps/<framework>-<document>-<library>-<demo>`
+- Include standard scripts in every app: `dev`, `build`, `lint`
+- Test builds before committing: `pnpm -w build`
+- Update documentation when adding new demos
+
+### Don'ts ❌
+
+- Don't create custom directory structures outside the 5-level schema
+- Don't place apps directly under `apps/` (except `master-sample-app`)
+- Don't skip levels in the hierarchy
+- Don't use camelCase or PascalCase for directory names
+- Don't create shared packages (keep apps independent)
+- Don't modify app logic when restructuring (only paths/configs)
+
+---
+
+## 🔄 Migration & History
+
+### Bringing in Existing Repos
+
+**Fast (no history):**
+```bash
+mkdir -p apps/react/<document>/<type>/<implementation>/<library>/<demo>
+rsync -a ../existing-repo/ apps/react/.../demo/ --exclude .git
+pnpm -w install
+git add -A
+git commit -m "chore: add <demo> demo"
+```
+
+**With history (git subtree):**
+```bash
+git remote add <shortname> git@github.com:org/<repo>.git
+git fetch <shortname>
+git subtree add --prefix=apps/react/.../demo <shortname> main --squash
+```
+
+---
+
+## 📚 Additional Resources
+
+- **Monorepo Structure Guide:** [`README_MONOREPO.md`](./README_MONOREPO.md)
+- **Structure Examples:** [`docs/structure.md`](./docs/structure.md)
+- **Scaffolding Tool:** [`scripts/new-demo.ts`](./scripts/new-demo.ts)
+- **PR Template:** [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md)
+
+---
+
+## 🤝 Contributing
+
+When adding a new demo:
+
+1. Use `pnpm new:demo` to scaffold the structure
+2. Follow the 5-level hierarchy strictly
+3. Use the scoped package naming convention
+4. Include comprehensive README in your demo
+5. Test builds: `pnpm -w build`
+6. Update master-sample-app if your demo should be showcased
+7. Create a PR using the provided template
+
+---
+
+## 📄 License
+
+ISC
+
+---
+
+## 🏷️ Keywords
+
+react, velt, real-time, realtime, toolkit, multiplayer, websockets, collaboration, collaborative, presence, synchronize, rooms, documents, conflict resolution, huddle, crdts, comment, comments, recording, video call, audio call, screen recording, webrtc, cursors, notifications, cord, liveblocks, reactflow, tiptap, codemirror, monorepo, pnpm, turbo
