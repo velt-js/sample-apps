@@ -21,6 +21,21 @@ import LoginPanel from '@/app/userAuth/LoginPanel';
 
 const getId = () => crypto.randomUUID()
 
+// [Velt] Type definitions
+interface NodeData {
+  label: string;
+  icon?: string;
+  iconBg?: string;
+  badge?: string | number;
+  code?: string;
+  onLabelChange?: (nodeId: string, newLabel: string) => void;
+}
+
+interface ConnectionState {
+  isValid: boolean | null;
+  fromNode: { id: string } | null;
+}
+
 // SVG icon strings
 const ICONS = {
   agent:
@@ -48,7 +63,7 @@ const ICONS = {
     '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 14.5C11.5899 14.5 14.5 11.5899 14.5 8C14.5 4.41015 11.5899 1.5 8 1.5C4.41015 1.5 1.5 4.41015 1.5 8C1.5 11.5899 4.41015 14.5 8 14.5Z" stroke="#000" strokeWidth="1.5"/><path d="M5.5 8L7 9.5L10.5 6" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>',
 }
 
-function WorkflowNode({ data, id }: { data: any; id: string }) {
+function WorkflowNode({ data, id }: { data: NodeData; id: string }) {
   const [isEditing, setIsEditing] = useState(false)
   const [label, setLabel] = useState(data.label)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -323,7 +338,7 @@ function AddNodeOnEdgeDrop() {
     data: { ...node.data, onLabelChange: handleLabelChange },
   }))
 
-  const onDragStart = (event: DragEvent, nodeData: any) => {
+  const onDragStart = (event: DragEvent, nodeData: Partial<NodeData>) => {
     event.dataTransfer.effectAllowed = "move"
     event.dataTransfer.setData("application/reactflow", JSON.stringify(nodeData))
   }
@@ -359,8 +374,8 @@ function AddNodeOnEdgeDrop() {
   )
 
   const onConnectEnd = useCallback(
-    (event: any, connectionState: any) => {
-      if (!connectionState.isValid) {
+    (event: MouseEvent | TouchEvent, connectionState: ConnectionState) => {
+      if (!connectionState.isValid && connectionState.fromNode) {
         const id = getId()
         const { clientX, clientY } = "changedTouches" in event ? event.changedTouches[0] : event
         const newNode: Node = {
