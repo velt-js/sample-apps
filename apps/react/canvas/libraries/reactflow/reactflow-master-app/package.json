@@ -1,5 +1,5 @@
 {
-  "name": "reactflow-master-app",
+  "name": "@apps/react-canvas-reactflow-reactflow-master-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {

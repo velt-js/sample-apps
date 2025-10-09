@@ -1,5 +1,5 @@
 {
-  "name": "react-flow-boilerplate",
+  "name": "@apps/react-canvas-reactflow-reactflow-pipeline-demo",
   "description": "A minimal React Flow boilerplate using Next.js and Zustand.",
   "license": "Apache-2.0",
   "private": true,
