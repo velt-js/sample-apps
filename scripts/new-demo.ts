@@ -165,6 +165,7 @@ ${demo}/
 ├── public/                 # Static assets
 ├── styles/                 # Global styles
 │   └── globals.css
+├── .npmrc                  # pnpm config to prevent Tailwind v4 hoisting
 ├── next.config.js
 ├── tailwind.config.js
 ├── tsconfig.json
@@ -216,6 +217,16 @@ pnpm --filter ${packageName} build
 - **\`components/document/\`** - Contains the main application logic and ${libraryOrSolution} integration
 - **\`hooks/\`** - Custom React hooks for state management and side effects
 - **\`lib/\`** - Utility functions and helpers
+
+## Important Configuration
+
+### .npmrc File
+This demo includes a \`.npmrc\` file that prevents pnpm from hoisting Tailwind CSS v4 from other workspace packages. This is necessary because:
+- This demo uses Tailwind CSS v3.4.x with traditional PostCSS configuration
+- Other apps in the monorepo may use Tailwind CSS v4
+- Without the \`.npmrc\`, pnpm would hoist v4 and cause PostCSS errors
+
+**Do not delete the \`.npmrc\` file** - it ensures the correct Tailwind version is used.
 
 ## Next Steps
 
@@ -306,6 +317,15 @@ next-env.d.ts
 
   console.log(`📝 Creating .gitignore`);
   writeFileSync(join(demoPath, '.gitignore'), gitignore);
+
+  // Create .npmrc to prevent Tailwind v4 hoisting from other workspace packages
+  const npmrc = `public-hoist-pattern[]=*
+public-hoist-pattern[]=!tailwindcss
+shamefully-hoist=false
+`;
+
+  console.log(`📝 Creating .npmrc`);
+  writeFileSync(join(demoPath, '.npmrc'), npmrc);
 
   // Create directory structure
   const appDir = join(demoPath, 'app');
@@ -628,9 +648,12 @@ module.exports = {
 
   console.log('\n✅ Demo scaffolding complete!');
   console.log('\n📋 Next steps:');
-  console.log(`   1. cd apps/${framework}/${document}/${implementation}/${libraryOrSolution}/${demo}`);
-  console.log(`   2. pnpm -w install`);
-  console.log(`   3. pnpm --filter ${packageName} dev`);
+  console.log(`   1. Add pnpm override to root package.json:`);
+  console.log(`      "${packageName}>tailwindcss": "3.4.18"`);
+  console.log(`   2. cd apps/${framework}/${document}/${implementation}/${libraryOrSolution}/${demo}`);
+  console.log(`   3. pnpm -w install`);
+  console.log(`   4. pnpm --filter ${packageName} dev`);
+  console.log('\n⚠️  IMPORTANT: Add the pnpm override to prevent Tailwind v4 hoisting!');
   console.log('\n🎉 Happy coding!');
 }
 
