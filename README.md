@@ -1,21 +1,20 @@
 # Velt Sample Apps (Monorepo)
 
-A structured monorepo showcasing Velt Collaboration SDK integrations across different frameworks, libraries, and use cases. Each demo is **self-contained** and follows a consistent 5-level directory hierarchy.
+A structured monorepo showcasing Velt Collaboration SDK integrations across different frameworks, libraries, and use cases. Each demo is **self-contained** and follows a consistent 4-level directory hierarchy.
 
 ---
 
 ## 🏗️ Structure
 
-This monorepo follows a strict **5-level hierarchy** for organization and discoverability:
+This monorepo follows a strict **4-level hierarchy** for organization and discoverability:
 
 ```
 apps/
   <framework>/          # Level 1: Framework (react, vue, angular)
     <document>/         # Level 2: Feature/Document (canvas, crdt, comments, recording)
-      <type>/           # Level 3: Subdomain (text-editors, screen-recording, table)
-        <implementation>/ # Level 4: libraries or custom-implementation
-          <library>/    # Level 5: Library name (reactflow, tiptap) or solution name
-            <demo>/     # Individual demo applications
+      <implementation>/ # Level 3: libraries or custom-implementation
+        <library>/      # Level 4: Library name (reactflow, tiptap) or solution name
+          <demo>/       # Individual demo applications
 ```
 
 ### Current Apps
@@ -34,7 +33,7 @@ apps/
 
 **📚 For detailed structure documentation, see:**
 - [`README_MONOREPO.md`](./README_MONOREPO.md) - Complete structure guide and conventions
-- [`docs/structure.md`](./docs/structure.md) - 5-level hierarchy with examples
+- [`docs/structure.md`](./docs/structure.md) - 4-level hierarchy with examples
 
 ---
 
@@ -105,14 +104,13 @@ The easiest way to add a new demo:
 pnpm new:demo -- \
   --framework react \
   --document canvas \
-  --type general \
   --implementation libraries \
   --libraryOrSolution reactflow \
   --demo my-new-demo
 ```
 
 This creates:
-- Complete directory structure following the 5-level hierarchy
+- Complete directory structure following the 4-level hierarchy
 - Basic Next.js app with TypeScript and Tailwind
 - Properly scoped package.json with correct naming
 - README.md template
@@ -123,7 +121,7 @@ This creates:
 If you prefer to create a demo manually:
 
 ```bash
-# 1. Create the directory following the 5-level structure
+# 1. Create the directory following the 4-level structure
 mkdir -p apps/react/canvas/libraries/reactflow/my-demo
 cd apps/react/canvas/libraries/reactflow/my-demo
 
@@ -134,7 +132,7 @@ npx create-next-app@latest . --typescript --tailwind --app
 # Edit package.json: "name": "@apps/react-canvas-reactflow-my-demo"
 
 # 4. Install from root
-cd ../../../../../..
+cd ../../../../..
 pnpm -w install
 
 # 5. Test the build
@@ -145,34 +143,33 @@ pnpm --filter @apps/react-canvas-reactflow-my-demo build
 
 ---
 
-## 🗂️ Understanding the 5-Level Hierarchy
+## 🗂️ Understanding the 4-Level Hierarchy
 
 ### The Levels
 
 1. **Framework** - The frontend framework (react, vue, angular)
 2. **Document** - The feature area (canvas, crdt, comments, recording)
-3. **Type** - The subdomain (text-editors, screen-recording, table)
-4. **Implementation** - Either `libraries` or `custom-implementation`
-5. **Library/Solution** - Library name (reactflow, tiptap) or custom solution name
+3. **Implementation** - Either `libraries` or `custom-implementation`
+4. **Library/Solution** - Library name (reactflow, tiptap) or custom solution name
 
 ### Examples
 
 **ReactFlow Canvas Demo:**
 ```
 apps/react/canvas/libraries/reactflow/reactflow-master-app/
-     └──┬─ └───┬── └──┬── └───┬──── └────┬───── └────────┬──────
-        │      │      │        │          │                │
-   Framework Document Type  Impl.     Library           Demo
+     └──┬─ └───┬── └───┬──── └────┬───── └────────┬──────
+        │      │        │          │                │
+   Framework Document Impl.     Library           Demo
 ```
 
-**TipTap Text Editor (Conceptual):**
+**TipTap CRDT Editor (Conceptual):**
 ```
-apps/react/crdt/text-editors/libraries/tiptap/tiptap-basic/
+apps/react/crdt/libraries/tiptap/tiptap-basic/
 ```
 
-**Custom Screen Recording (Conceptual):**
+**Custom Recording (Conceptual):**
 ```
-apps/react/recording/screen-recording/custom-implementation/with-pip-mode/
+apps/react/recording/custom-implementation/basic/screen-recording-demo/
 ```
 
 ---
@@ -249,7 +246,7 @@ All apps use scoped package names following this pattern:
 
 ### pnpm Workspaces
 
-The monorepo uses pnpm workspaces with glob patterns supporting the 5-level structure:
+The monorepo uses pnpm workspaces with glob patterns supporting the 4-level structure:
 
 ```yaml
 # pnpm-workspace.yaml
@@ -258,7 +255,6 @@ packages:
   - "apps/*/*"
   - "apps/*/*/*"
   - "apps/*/*/*/*"
-  - "apps/*/*/*/*/*"
   - "packages/*"
 ```
 
@@ -282,7 +278,7 @@ Turbo orchestrates builds, dev servers, and linting across all apps:
 
 ### Do's ✅
 
-- Follow the exact 5-level hierarchy for all new demos
+- Follow the exact 4-level hierarchy for all new demos
 - Use kebab-case for all directory and demo names
 - Name packages with scoped convention: `@apps/<framework>-<document>-<library>-<demo>`
 - Include standard scripts in every app: `dev`, `build`, `lint`
@@ -291,7 +287,7 @@ Turbo orchestrates builds, dev servers, and linting across all apps:
 
 ### Don'ts ❌
 
-- Don't create custom directory structures outside the 5-level schema
+- Don't create custom directory structures outside the 4-level schema
 - Don't place apps directly under `apps/` (except `master-sample-app`)
 - Don't skip levels in the hierarchy
 - Don't use camelCase or PascalCase for directory names
@@ -306,7 +302,7 @@ Turbo orchestrates builds, dev servers, and linting across all apps:
 
 **Fast (no history):**
 ```bash
-mkdir -p apps/react/<document>/<type>/<implementation>/<library>/<demo>
+mkdir -p apps/react/<document>/<implementation>/<library>/<demo>
 rsync -a ../existing-repo/ apps/react/.../demo/ --exclude .git
 pnpm -w install
 git add -A
@@ -336,7 +332,7 @@ git subtree add --prefix=apps/react/.../demo <shortname> main --squash
 When adding a new demo:
 
 1. Use `pnpm new:demo` to scaffold the structure
-2. Follow the 5-level hierarchy strictly
+2. Follow the 4-level hierarchy strictly
 3. Use the scoped package naming convention
 4. Include comprehensive README in your demo
 5. Test builds: `pnpm -w build`
