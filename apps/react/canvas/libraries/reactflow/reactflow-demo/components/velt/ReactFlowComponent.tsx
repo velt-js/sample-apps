@@ -10,7 +10,7 @@ import {
     Handle,
     Position
 } from '@xyflow/react';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState, useEffect } from 'react';
 import { useVeltInitState } from '@veltdev/react';
 import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt';
 import '@xyflow/react/dist/style.css';
@@ -44,7 +44,7 @@ function CustomNode({ data }: NodeProps) {
                 background: '#1d1d1d',
                 borderRadius: '17.75px',
                 padding: '0',
-                minWidth: '169.578px',
+                minWidth: 'fit-content',
                 height: '48px',
                 display: 'flex',
                 alignItems: 'center',
@@ -52,7 +52,8 @@ function CustomNode({ data }: NodeProps) {
                 paddingLeft: '7.5px',
                 paddingRight: '15px',
                 position: 'relative',
-                border: selected ? '2px solid #046ded' : 'none',
+                border: '2px solid transparent',
+                borderColor: selected ? '#046ded' : 'transparent',
                 boxSizing: 'border-box'
             }}
         >
@@ -163,7 +164,7 @@ function CustomNode({ data }: NodeProps) {
 
 // Simple Node Component (for Slack Message)
 function SimpleNode({ data }: NodeProps) {
-    const { label, icon, accentColor } = data;
+    const { label, icon, accentColor, selected } = data;
 
     return (
         <div
@@ -171,11 +172,17 @@ function SimpleNode({ data }: NodeProps) {
                 background: '#1d1d1d',
                 borderRadius: '17.75px',
                 height: '48px',
-                width: '205px',
+                minWidth: 'fit-content',
                 position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
-                padding: '0'
+                padding: '0',
+                paddingLeft: '5.95px',
+                paddingRight: '15px',
+                gap: '9.6px',
+                border: '2px solid transparent',
+                borderColor: selected ? '#046ded' : 'transparent',
+                boxSizing: 'border-box'
             }}
         >
             <Handle
@@ -192,14 +199,15 @@ function SimpleNode({ data }: NodeProps) {
             {/* Icon */}
             <div
                 style={{
-                    position: 'absolute',
-                    left: '5.95px',
                     background: accentColor || '#99e6d0',
                     borderRadius: '11.25px',
                     padding: '7.5px',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    width: '37.14px',
+                    height: '37.14px',
+                    flexShrink: 0
                 }}
             >
                 <img
@@ -222,9 +230,7 @@ function SimpleNode({ data }: NodeProps) {
                     lineHeight: '1.3',
                     color: 'white',
                     margin: 0,
-                    whiteSpace: 'nowrap',
-                    position: 'absolute',
-                    left: '53.05px'
+                    whiteSpace: 'nowrap'
                 }}
             >
                 {label}
@@ -262,8 +268,8 @@ const initialNodes: Node[] = [
             label: 'Parser',
             icon: imgTablerIconFunction,
             accentColor: '#f7c44e',
-            showBadge: true,
-            badgeCount: 2,
+            showBadge: false,
+            badgeCount: 0,
             selected: true
         },
         position: { x: 450, y: 200 },
@@ -321,8 +327,68 @@ function AddNodeOnEdgeDrop() {
     });
 
     const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
-    const { screenToFlowPosition, setViewport } = useReactFlow();
+    const { screenToFlowPosition, setViewport, fitView, zoomIn, zoomOut } = useReactFlow();
     const [selectedNodeId, setSelectedNodeId] = useState<string | null>(step2Id);
+    const [isPanelOpen, setIsPanelOpen] = useState<boolean>(true);
+
+    // Center nodes on initial load
+    useEffect(() => {
+        // Small delay to ensure nodes are rendered
+        const timer = setTimeout(() => {
+            fitView({ padding: 0.2, duration: 400 });
+        }, 100);
+        return () => clearTimeout(timer);
+    }, [fitView]);
+
+    // Handle node click to select it
+    const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
+        setSelectedNodeId(node.id);
+        setIsPanelOpen(true);
+
+        // Update all nodes to set selected state
+        onNodesChange(
+            nodes.map((n) => ({
+                type: 'replace',
+                id: n.id,
+                item: {
+                    ...n,
+                    data: {
+                        ...n.data,
+                        selected: n.id === node.id
+                    }
+                }
+            }))
+        );
+    }, [nodes, onNodesChange]);
+
+    // Update node name
+    const updateNodeName = useCallback((nodeId: string, newName: string) => {
+        onNodesChange(
+            nodes.map((n) => {
+                if (n.id === nodeId) {
+                    return {
+                        type: 'replace',
+                        id: n.id,
+                        item: {
+                            ...n,
+                            data: {
+                                ...n.data,
+                                label: newName
+                            }
+                        }
+                    };
+                }
+                return {
+                    type: 'replace',
+                    id: n.id,
+                    item: n
+                };
+            })
+        );
+    }, [nodes, onNodesChange]);
+
+    // Get selected node
+    const selectedNode = nodes.find(n => n.id === selectedNodeId);
 
     const onConnectEnd = useCallback(
         (event: any, connectionState: any) => {
@@ -427,6 +493,7 @@ function AddNodeOnEdgeDrop() {
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
                 onConnectEnd={onConnectEnd}
+                onNodeClick={onNodeClick}
                 nodeTypes={nodeTypes}
                 defaultEdgeOptions={{
                     style: { stroke: '#666666', strokeWidth: 2 }
@@ -545,9 +612,7 @@ function AddNodeOnEdgeDrop() {
                         justifyContent: 'center',
                         borderRadius: '32px'
                     }}
-                    onClick={() => {
-                        setViewport((vp) => ({ ...vp, zoom: vp.zoom * 1.2 }), { duration: 200 });
-                    }}
+                    onClick={() => zoomIn({ duration: 200 })}
                 >
                     <img src={imgTablerIconPlus} alt="Zoom In" style={{ width: '16px', height: '16px' }} />
                 </button>
@@ -562,62 +627,74 @@ function AddNodeOnEdgeDrop() {
                         justifyContent: 'center',
                         borderRadius: '32px'
                     }}
-                    onClick={() => {
-                        setViewport((vp) => ({ ...vp, zoom: vp.zoom / 1.2 }), { duration: 200 });
-                    }}
+                    onClick={() => zoomOut({ duration: 200 })}
                 >
                     <img src={imgTablerIconMinus} alt="Zoom Out" style={{ width: '16px', height: '16px' }} />
                 </button>
             </div>
 
             {/* Side Panel (Top Right) */}
-            <div
-                style={{
-                    position: 'absolute',
-                    top: '48px',
-                    right: '20px',
-                    width: '295px',
-                    background: '#131313',
-                    borderRadius: '20px',
-                    padding: '20px',
-                    boxShadow: '0px -24px 100px 0px rgba(0, 0, 0, 0.25)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '20px',
-                    zIndex: 5
-                }}
-            >
-                {/* Header */}
-                <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <p
+            {isPanelOpen && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '48px',
+                        right: '20px',
+                        width: '295px',
+                        background: '#131313',
+                        borderRadius: '20px',
+                        padding: '20px',
+                        boxShadow: '0px -24px 100px 0px rgba(0, 0, 0, 0.25)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '20px',
+                        zIndex: 5
+                    }}
+                >
+                    {/* Header */}
+                    <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                            <p
+                                style={{
+                                    fontFamily: 'Urbanist, sans-serif',
+                                    fontWeight: 600,
+                                    fontSize: '18px',
+                                    lineHeight: '1.3',
+                                    color: 'white',
+                                    margin: 0
+                                }}
+                            >
+                                Functions
+                            </p>
+                            <p
+                                style={{
+                                    fontFamily: 'Inter, sans-serif',
+                                    fontWeight: 400,
+                                    fontSize: '14px',
+                                    lineHeight: '1.3',
+                                    color: 'white',
+                                    opacity: 0.52,
+                                    margin: 0
+                                }}
+                            >
+                                Run JS functions using data
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => setIsPanelOpen(false)}
                             style={{
-                                fontFamily: 'Urbanist, sans-serif',
-                                fontWeight: 600,
-                                fontSize: '18px',
-                                lineHeight: '1.3',
-                                color: 'white',
-                                margin: 0
+                                background: 'transparent',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: 0,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
                             }}
                         >
-                            Functions
-                        </p>
-                        <p
-                            style={{
-                                fontFamily: 'Inter, sans-serif',
-                                fontWeight: 400,
-                                fontSize: '14px',
-                                lineHeight: '1.3',
-                                color: 'white',
-                                opacity: 0.52,
-                                margin: 0
-                            }}
-                        >
-                            Run JS functions using data
-                        </p>
+                            <img src={imgTablerIconTrash} alt="Close" style={{ width: '16px', height: '16px' }} />
+                        </button>
                     </div>
-                    <img src={imgTablerIconTrash} alt="Delete" style={{ width: '16px', height: '16px' }} />
-                </div>
 
                 {/* Name Field */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -644,7 +721,14 @@ function AddNodeOnEdgeDrop() {
                             alignItems: 'center'
                         }}
                     >
-                        <p
+                        <input
+                            type="text"
+                            value={selectedNode?.data?.label || ''}
+                            onChange={(e) => {
+                                if (selectedNodeId) {
+                                    updateNodeName(selectedNodeId, e.target.value);
+                                }
+                            }}
                             style={{
                                 fontFamily: 'Inter, sans-serif',
                                 fontWeight: 400,
@@ -652,11 +736,12 @@ function AddNodeOnEdgeDrop() {
                                 lineHeight: '1.3',
                                 color: 'white',
                                 margin: 0,
-                                flex: 1
+                                flex: 1,
+                                background: 'transparent',
+                                border: 'none',
+                                outline: 'none'
                             }}
-                        >
-                            Parser
-                        </p>
+                        />
                     </div>
                 </div>
 
@@ -722,7 +807,8 @@ function AddNodeOnEdgeDrop() {
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
+            )}
         </div>
     );
 }
