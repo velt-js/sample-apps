@@ -1,40 +1,34 @@
 "use client";
 
-import { useVeltInitState } from "@veltdev/react";
+import { useVeltInitState, useVeltClient } from "@veltdev/react";
 import { Presence, NotificationsTool, CommentTool, SidebarButton } from '../velt/VeltTools';
+import { useEffect } from 'react';
 
 export default function Header() {
   const veltInitialized = useVeltInitState();
+  const { client } = useVeltClient();
+
+  useEffect(() => {
+    if (client) {
+      client.setDarkMode(true);
+    }
+  }, [client]);
 
   return (
-    <div className="absolute top-2 right-6 flex items-center gap-1 bg-[#1a1a1a] rounded-full px-2 py-2 shadow-2xl border border-[#2a2a2a] z-50">
+    <div className="absolute top-2 right-6 flex items-center gap-[6px] z-50">
       {veltInitialized && (
         <>
-          {/* [Velt] SidebarButton (Comment Panel) */}
-          <div className="px-2">
-            <SidebarButton />
-          </div>
+          {/* [Velt] Presence */}
+          <Presence />
 
-          <div className="w-px h-6 bg-[#2a2a2a]" />
+          {/* [Velt] SidebarButton (Comment Panel) */}
+          <SidebarButton />
 
           {/* [Velt] NotificationsTool */}
-          <div className="px-2">
-            <NotificationsTool />
-          </div>
-
-          <div className="w-px h-6 bg-[#2a2a2a]" />
+          <NotificationsTool />
 
           {/* [Velt] Single CommentTool - Click to add popover comments on any element */}
-          <div className="px-2">
-            <CommentTool />
-          </div>
-
-          <div className="w-px h-6 bg-[#2a2a2a]" />
-
-          {/* [Velt] Presence */}
-          <div className="px-2">
-            <Presence />
-          </div>
+          <CommentTool />
         </>
       )}
     </div>
