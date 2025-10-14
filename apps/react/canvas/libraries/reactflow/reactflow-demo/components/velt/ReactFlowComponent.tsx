@@ -13,7 +13,7 @@ import {
 import { useCallback, useRef, useState, useEffect } from 'react';
 import { useVeltInitState } from '@veltdev/react';
 import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt';
-import { Presence, NotificationsTool, CommentTool, SidebarButton } from './VeltTools';
+import Header from '../header/header';
 import '@xyflow/react/dist/style.css';
 
 // Figma Asset URLs
@@ -35,9 +35,20 @@ const imgTablerIconTrash = "http://localhost:3845/assets/806e4f2e279a93f9df83f2c
 
 const getId = () => crypto.randomUUID();
 
+// Type for node data
+type CustomNodeData = {
+    id?: string;
+    label: string;
+    icon: string;
+    accentColor: string;
+    showBadge?: boolean;
+    badgeCount?: number;
+    selected?: boolean;
+}
+
 // Custom Node Component matching Figma design
 function CustomNode({ data }: NodeProps) {
-    const { label, icon, accentColor, showBadge, badgeCount, selected } = data;
+    const { label, icon, accentColor, showBadge, badgeCount, selected } = data as CustomNodeData;
 
     return (
         <div
@@ -96,6 +107,7 @@ function CustomNode({ data }: NodeProps) {
 
             {/* Label */}
             <p
+                data-velt-target-comment-element-id={(data as CustomNodeData).id || 'unknown'}
                 style={{
                     fontFamily: 'Urbanist, sans-serif',
                     fontWeight: 400,
@@ -103,7 +115,9 @@ function CustomNode({ data }: NodeProps) {
                     lineHeight: '1.3',
                     color: 'white',
                     margin: 0,
-                    whiteSpace: 'nowrap'
+                    whiteSpace: 'nowrap',
+                    position: 'relative',
+                    zIndex: 1
                 }}
             >
                 {label}
@@ -165,7 +179,7 @@ function CustomNode({ data }: NodeProps) {
 
 // Simple Node Component (for Slack Message)
 function SimpleNode({ data }: NodeProps) {
-    const { label, icon, accentColor, selected } = data;
+    const { label, icon, accentColor, selected } = data as CustomNodeData;
 
     return (
         <div
@@ -224,6 +238,7 @@ function SimpleNode({ data }: NodeProps) {
 
             {/* Label */}
             <p
+                data-velt-target-comment-element-id={(data as CustomNodeData).id || 'unknown'}
                 style={{
                     fontFamily: 'Urbanist, sans-serif',
                     fontWeight: 400,
@@ -231,7 +246,9 @@ function SimpleNode({ data }: NodeProps) {
                     lineHeight: '1.3',
                     color: 'white',
                     margin: 0,
-                    whiteSpace: 'nowrap'
+                    whiteSpace: 'nowrap',
+                    position: 'relative',
+                    zIndex: 1
                 }}
             >
                 {label}
@@ -256,6 +273,7 @@ const initialNodes: Node[] = [
         id: step1Id,
         type: 'simple',
         data: {
+            id: step1Id,
             label: 'Slack Message',
             icon: imgTablerIconPlayerPlayFilled1,
             accentColor: '#99e6d0'
@@ -266,6 +284,7 @@ const initialNodes: Node[] = [
         id: step2Id,
         type: 'custom',
         data: {
+            id: step2Id,
             label: 'Parser',
             icon: imgTablerIconFunction,
             accentColor: '#f7c44e',
@@ -279,6 +298,7 @@ const initialNodes: Node[] = [
         id: step3Id,
         type: 'custom',
         data: {
+            id: step3Id,
             label: 'Bandwidth Agent',
             icon: imgTablerIconPointer,
             accentColor: '#99c8e6'
@@ -289,6 +309,7 @@ const initialNodes: Node[] = [
         id: step4Id,
         type: 'custom',
         data: {
+            id: step4Id,
             label: 'OCR Agent',
             icon: imgTablerIconPointer1,
             accentColor: '#99c8e6'
@@ -402,6 +423,7 @@ function AddNodeOnEdgeDrop() {
                     type: 'custom',
                     position: screenToFlowPosition({ x: clientX, y: clientY }),
                     data: {
+                        id,
                         label: 'New Node',
                         icon: imgTablerIconPointer,
                         accentColor: '#99c8e6'
@@ -445,6 +467,7 @@ function AddNodeOnEdgeDrop() {
                 type: 'custom',
                 position,
                 data: {
+                    id,
                     label: parsedData.label,
                     icon: parsedData.icon,
                     accentColor: parsedData.accentColor
@@ -488,46 +511,7 @@ function AddNodeOnEdgeDrop() {
             />
 
             {/* Header with Velt Tools */}
-            {veltInitialized && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '8px',
-                        right: '24px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        background: '#1a1a1a',
-                        borderRadius: '9999px',
-                        padding: '8px',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-                        border: '1px solid #2a2a2a',
-                        zIndex: 50
-                    }}
-                >
-                    <div style={{ padding: '0 8px' }}>
-                        <SidebarButton />
-                    </div>
-
-                    <div style={{ width: '1px', height: '24px', background: '#2a2a2a' }} />
-
-                    <div style={{ padding: '0 8px' }}>
-                        <NotificationsTool />
-                    </div>
-
-                    <div style={{ width: '1px', height: '24px', background: '#2a2a2a' }} />
-
-                    <div style={{ padding: '0 8px' }}>
-                        <CommentTool />
-                    </div>
-
-                    <div style={{ width: '1px', height: '24px', background: '#2a2a2a' }} />
-
-                    <div style={{ padding: '0 8px' }}>
-                        <Presence />
-                    </div>
-                </div>
-            )}
+            <Header />
 
             <ReactFlow
                 style={{ backgroundColor: 'transparent', position: 'relative', zIndex: 1 }}
@@ -767,7 +751,7 @@ function AddNodeOnEdgeDrop() {
                     >
                         <input
                             type="text"
-                            value={selectedNode?.data?.label || ''}
+                            value={(selectedNode?.data?.label as string) || ''}
                             onChange={(e) => {
                                 if (selectedNodeId) {
                                     updateNodeName(selectedNodeId, e.target.value);
