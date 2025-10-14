@@ -322,7 +322,7 @@ const nodeOrigin: [number, number] = [0.5, 0];
 
 function AddNodeOnEdgeDrop() {
     const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFlowCrdtExtension({
-        editorId: 'react-flow-crdt-2025-09-19-v2',
+        editorId: 'react-flow-crdt-2025-09-19-v3',
         initialEdges,
         initialNodes,
     });
@@ -330,7 +330,7 @@ function AddNodeOnEdgeDrop() {
     const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
     const { screenToFlowPosition, setViewport, fitView, zoomIn, zoomOut } = useReactFlow();
     const [selectedNodeId, setSelectedNodeId] = useState<string | null>(step2Id);
-    const [isPanelOpen, setIsPanelOpen] = useState<boolean>(true);
+    const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
     const veltInitialized = useVeltInitState();
 
     // Center nodes on initial load
@@ -858,8 +858,8 @@ function AddNodeOnEdgeDrop() {
 }
 
 export default function ReactFlowComponent() {
-    // const veltInitialized = useVeltInitState();
-    // if (!veltInitialized) return <div>Loading...</div>;
+    const veltInitialized = useVeltInitState();
+    if (!veltInitialized) return <div>Loading...</div>;
     return (
         <ReactFlowProvider>
             <AddNodeOnEdgeDrop />

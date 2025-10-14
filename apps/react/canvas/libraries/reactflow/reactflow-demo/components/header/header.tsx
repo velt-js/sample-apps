@@ -1,7 +1,7 @@
 "use client";
 
 import { useVeltInitState } from "@veltdev/react";
-import { Presence, NotificationsTool, CommentTool, SidebarButton } from './velt/VeltTools';
+import { Presence, NotificationsTool, CommentTool, SidebarButton } from '../velt/VeltTools';
 
 export default function Header() {
   const veltInitialized = useVeltInitState();
@@ -24,7 +24,7 @@ export default function Header() {
 
           <div className="w-px h-6 bg-[#2a2a2a]" />
 
-          {/* [Velt] CommentTool */}
+          {/* [Velt] Single CommentTool - Click to add popover comments on any element */}
           <div className="px-2">
             <CommentTool />
           </div>
