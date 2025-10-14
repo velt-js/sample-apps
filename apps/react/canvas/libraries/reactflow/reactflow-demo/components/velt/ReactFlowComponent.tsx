@@ -13,6 +13,7 @@ import {
 import { useCallback, useRef, useState, useEffect } from 'react';
 import { useVeltInitState } from '@veltdev/react';
 import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt';
+import { Presence, NotificationsTool, CommentTool, SidebarButton } from './VeltTools';
 import '@xyflow/react/dist/style.css';
 
 // Figma Asset URLs
@@ -330,6 +331,7 @@ function AddNodeOnEdgeDrop() {
     const { screenToFlowPosition, setViewport, fitView, zoomIn, zoomOut } = useReactFlow();
     const [selectedNodeId, setSelectedNodeId] = useState<string | null>(step2Id);
     const [isPanelOpen, setIsPanelOpen] = useState<boolean>(true);
+    const veltInitialized = useVeltInitState();
 
     // Center nodes on initial load
     useEffect(() => {
@@ -484,6 +486,48 @@ function AddNodeOnEdgeDrop() {
                     zIndex: 0
                 }}
             />
+
+            {/* Header with Velt Tools */}
+            {veltInitialized && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '8px',
+                        right: '24px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        background: '#1a1a1a',
+                        borderRadius: '9999px',
+                        padding: '8px',
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                        border: '1px solid #2a2a2a',
+                        zIndex: 50
+                    }}
+                >
+                    <div style={{ padding: '0 8px' }}>
+                        <SidebarButton />
+                    </div>
+
+                    <div style={{ width: '1px', height: '24px', background: '#2a2a2a' }} />
+
+                    <div style={{ padding: '0 8px' }}>
+                        <NotificationsTool />
+                    </div>
+
+                    <div style={{ width: '1px', height: '24px', background: '#2a2a2a' }} />
+
+                    <div style={{ padding: '0 8px' }}>
+                        <CommentTool />
+                    </div>
+
+                    <div style={{ width: '1px', height: '24px', background: '#2a2a2a' }} />
+
+                    <div style={{ padding: '0 8px' }}>
+                        <Presence />
+                    </div>
+                </div>
+            )}
 
             <ReactFlow
                 style={{ backgroundColor: 'transparent', position: 'relative', zIndex: 1 }}

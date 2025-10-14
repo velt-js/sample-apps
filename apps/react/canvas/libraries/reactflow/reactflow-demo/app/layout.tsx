@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
+import { AppUserProvider } from "@/app/userAuth/useAppUser";
 
 export const metadata: Metadata = {
   title: 'reactflow-demo',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppUserProvider>{children}</AppUserProvider>
+      </body>
     </html>
   )
 }
