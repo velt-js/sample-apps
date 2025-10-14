@@ -353,10 +353,48 @@ function AddNodeOnEdgeDrop() {
         [screenToFlowPosition, onNodesChange, onEdgesChange]
     );
 
+    const onDragOver = useCallback((event: React.DragEvent) => {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+    }, []);
+
+    const onDrop = useCallback(
+        (event: React.DragEvent) => {
+            event.preventDefault();
+
+            const nodeData = event.dataTransfer.getData('nodeData');
+            if (!nodeData) return;
+
+            const parsedData = JSON.parse(nodeData);
+            const position = screenToFlowPosition({
+                x: event.clientX,
+                y: event.clientY,
+            });
+
+            const id = getId();
+            const newNode: Node = {
+                id,
+                type: 'custom',
+                position,
+                data: {
+                    label: parsedData.label,
+                    icon: parsedData.icon,
+                    accentColor: parsedData.accentColor
+                },
+                origin: [0.5, 0.0],
+            };
+
+            onNodesChange([{ type: 'add', item: newNode }]);
+        },
+        [screenToFlowPosition, onNodesChange]
+    );
+
     return (
         <div
             className="react-flow-container"
             ref={reactFlowWrapper}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
             style={{
                 width: '100%',
                 height: '100%',
