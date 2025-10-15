@@ -11,7 +11,7 @@ import {
     Position
 } from '@xyflow/react';
 import { useCallback, useRef, useState, useEffect } from 'react';
-import { useVeltInitState } from '@veltdev/react';
+import { useVeltInitState, VeltCommentBubble, VeltCommentTool } from '@veltdev/react';
 import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt';
 import Header from '../header/header';
 import '@xyflow/react/dist/style.css';
@@ -50,9 +50,12 @@ type CustomNodeData = {
 // Custom Node Component matching Figma design
 function CustomNode({ data }: NodeProps) {
     const { label, icon, accentColor, showBadge, badgeCount, selected } = data as CustomNodeData;
+    const nodeId = (data as CustomNodeData).id || 'unknown';
 
     return (
         <div
+            id={nodeId}
+            data-id={nodeId}
             style={{
                 background: '#1d1d1d',
                 borderRadius: '17.75px',
@@ -108,7 +111,7 @@ function CustomNode({ data }: NodeProps) {
 
             {/* Label */}
             <p
-                data-velt-target-comment-element-id={(data as CustomNodeData).id || 'unknown'}
+                data-velt-target-comment-element-id={nodeId}
                 style={{
                     fontFamily: 'Urbanist, sans-serif',
                     fontWeight: 400,
@@ -124,56 +127,28 @@ function CustomNode({ data }: NodeProps) {
                 {label}
             </p>
 
-            {/* Badge */}
-            {showBadge && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '-10px',
-                        right: '-10px',
-                        background: 'rgba(255, 255, 255, 0.08)',
-                        borderRadius: '18.667px',
-                        padding: '4.667px 8px 4.667px 6.222px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '3.111px',
-                        height: '28px'
-                    }}
-                >
-                    <div
-                        style={{
-                            width: '15.556px',
-                            height: '15.556px',
-                            position: 'relative'
-                        }}
-                    >
-                        <div
-                            style={{
-                                position: 'absolute',
-                                left: '50%',
-                                top: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                width: '11px',
-                                height: '11px',
-                                border: '1.5px solid white',
-                                borderRadius: '6px 6px 6px 1px'
-                            }}
-                        />
-                    </div>
-                    <p
-                        style={{
-                            fontFamily: 'Urbanist, sans-serif',
-                            fontWeight: 700,
-                            fontSize: '14px',
-                            lineHeight: '1.3',
-                            color: 'white',
-                            margin: 0
-                        }}
-                    >
-                        {badgeCount}
-                    </p>
-                </div>
-            )}
+            {/* Comment Badge (replacing the old badge) */}
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '-10px',
+                    right: '-10px',
+                    zIndex: 10
+                }}
+            >
+                <VeltCommentBubble targetElementId={nodeId} />
+            </div>
+
+            {/* Comment Tool */}
+            <div
+                style={{
+                    marginLeft: '8px',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                <VeltCommentTool targetElementId={nodeId} />
+            </div>
         </div>
     );
 }
@@ -181,9 +156,12 @@ function CustomNode({ data }: NodeProps) {
 // Simple Node Component (for Slack Message)
 function SimpleNode({ data }: NodeProps) {
     const { label, icon, accentColor, selected } = data as CustomNodeData;
+    const nodeId = (data as CustomNodeData).id || 'unknown';
 
     return (
         <div
+            id={nodeId}
+            data-id={nodeId}
             style={{
                 background: '#1d1d1d',
                 borderRadius: '17.75px',
@@ -239,7 +217,7 @@ function SimpleNode({ data }: NodeProps) {
 
             {/* Label */}
             <p
-                data-velt-target-comment-element-id={(data as CustomNodeData).id || 'unknown'}
+                data-velt-target-comment-element-id={nodeId}
                 style={{
                     fontFamily: 'Urbanist, sans-serif',
                     fontWeight: 400,
@@ -254,6 +232,29 @@ function SimpleNode({ data }: NodeProps) {
             >
                 {label}
             </p>
+
+            {/* Comment Badge */}
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '-10px',
+                    right: '-10px',
+                    zIndex: 10
+                }}
+            >
+                <VeltCommentBubble targetElementId={nodeId} />
+            </div>
+
+            {/* Comment Tool */}
+            <div
+                style={{
+                    marginLeft: '8px',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                <VeltCommentTool targetElementId={nodeId} />
+            </div>
         </div>
     );
 }
