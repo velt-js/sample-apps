@@ -60,7 +60,7 @@ function CustomNode({ data }: NodeProps) {
                 background: '#1d1d1d',
                 borderRadius: '17.75px',
                 padding: '0',
-                minWidth: 'fit-content',
+                width: 'max-content',
                 height: '48px',
                 display: 'flex',
                 alignItems: 'center',
@@ -127,26 +127,18 @@ function CustomNode({ data }: NodeProps) {
                 {label}
             </p>
 
-            {/* Comment Badge (replacing the old badge) */}
+            {/* Comment Badge - inline with node content */}
             <div
                 style={{
-                    position: 'absolute',
-                    top: '-10px',
-                    right: '-10px',
-                    zIndex: 10
+                    marginLeft: 'auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    paddingLeft: '12px',
+                    flexShrink: 0
                 }}
             >
                 <VeltCommentBubble targetElementId={nodeId} />
-            </div>
-
-            {/* Comment Tool */}
-            <div
-                style={{
-                    marginLeft: '8px',
-                    display: 'flex',
-                    alignItems: 'center'
-                }}
-            >
                 <VeltCommentTool targetElementId={nodeId} />
             </div>
         </div>
@@ -166,7 +158,7 @@ function SimpleNode({ data }: NodeProps) {
                 background: '#1d1d1d',
                 borderRadius: '17.75px',
                 height: '48px',
-                minWidth: 'fit-content',
+                width: 'max-content',
                 position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
@@ -233,26 +225,18 @@ function SimpleNode({ data }: NodeProps) {
                 {label}
             </p>
 
-            {/* Comment Badge */}
+            {/* Comment Badge - inline with node content */}
             <div
                 style={{
-                    position: 'absolute',
-                    top: '-10px',
-                    right: '-10px',
-                    zIndex: 10
+                    marginLeft: 'auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    paddingLeft: '12px',
+                    flexShrink: 0
                 }}
             >
                 <VeltCommentBubble targetElementId={nodeId} />
-            </div>
-
-            {/* Comment Tool */}
-            <div
-                style={{
-                    marginLeft: '8px',
-                    display: 'flex',
-                    alignItems: 'center'
-                }}
-            >
                 <VeltCommentTool targetElementId={nodeId} />
             </div>
         </div>
@@ -341,7 +325,7 @@ const initialEdges: Edge[] = [
     },
 ];
 
-const nodeOrigin: [number, number] = [0.5, 0];
+const nodeOrigin: [number, number] = [0, 0];
 
 function AddNodeOnEdgeDrop() {
     const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFlowCrdtExtension({

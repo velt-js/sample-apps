@@ -4,15 +4,16 @@ import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react';
 const VeltCommentBubbleWf = () => {
   return (
     <VeltCommentBubbleWireframe>
-      <div 
-        className="flex items-center justify-center"
+      <div
         style={{
           position: 'relative',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center'
         }}
       >
         <VeltIf condition="{commentAnnotation.comments.length} > 0">
-          <div 
+          <div
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
               borderRadius: '18.667px',
@@ -20,20 +21,22 @@ const VeltCommentBubbleWf = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '3.111px',
-              height: '28px'
+              height: '28px',
+              flexShrink: 0
             }}
           >
             <div
               style={{
                 width: '15.556px',
                 height: '15.556px',
-                position: 'relative'
+                position: 'relative',
+                overflow: 'clip'
               }}
             >
               <div
                 style={{
                   position: 'absolute',
-                  left: '50%',
+                  left: 'calc(50% + 0.492px)',
                   top: '50%',
                   transform: 'translate(-50%, -50%)',
                   width: '11px',
@@ -59,7 +62,7 @@ const VeltCommentBubbleWf = () => {
         </VeltIf>
 
         <VeltIf condition="{commentAnnotation.comments.length} === 0">
-          <div style={{ width: '0px', height: '0px' }} />
+          <div style={{ width: '0px', height: '0px', flexShrink: 0 }} />
         </VeltIf>
       </div>
     </VeltCommentBubbleWireframe>
