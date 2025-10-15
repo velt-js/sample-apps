@@ -20,9 +20,11 @@ const VeltCommentBubbleWf = () => {
               padding: '4.667px 8px 4.667px 6.222px',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '3.111px',
               height: '28px',
-              flexShrink: 0
+              flexShrink: 0,
+              boxSizing: 'border-box'
             }}
           >
             <div
@@ -30,7 +32,8 @@ const VeltCommentBubbleWf = () => {
                 width: '15.556px',
                 height: '15.556px',
                 position: 'relative',
-                overflow: 'clip'
+                overflow: 'clip',
+                flexShrink: 0
               }}
             >
               <div
@@ -42,7 +45,8 @@ const VeltCommentBubbleWf = () => {
                   width: '11px',
                   height: '11px',
                   border: '1.5px solid white',
-                  borderRadius: '6px 6px 6px 1px'
+                  borderRadius: '6px 6px 6px 1px',
+                  boxSizing: 'border-box'
                 }}
               />
             </div>
@@ -53,7 +57,9 @@ const VeltCommentBubbleWf = () => {
                 fontSize: '14px',
                 lineHeight: '1.3',
                 color: 'white',
-                margin: 0
+                margin: 0,
+                whiteSpace: 'pre',
+                flexShrink: 0
               }}
             >
               <VeltCommentBubbleWireframe.CommentsCount />

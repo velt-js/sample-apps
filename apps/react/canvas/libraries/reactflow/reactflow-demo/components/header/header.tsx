@@ -27,9 +27,6 @@ export default function Header() {
           {/* [Velt] NotificationsTool */}
           <NotificationsTool />
 
-          {/* [Velt] Single CommentTool - Click to add popover comments on any element */}
-          <CommentTool />
-
           {/* [Velt] HuddleTool */}
           <HuddleTool />
         </>

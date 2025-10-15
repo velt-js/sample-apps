@@ -340,11 +340,17 @@ function AddNodeOnEdgeDrop() {
     const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
     const veltInitialized = useVeltInitState();
 
-    // Center nodes on initial load
+    // Center nodes on initial load with offset for sidebar
     useEffect(() => {
         // Small delay to ensure nodes are rendered
         const timer = setTimeout(() => {
-            fitView({ padding: 0.2, duration: 400 });
+            // Account for sidebar width (295px) + padding (20px) + extra margin
+            const sidebarOffset = (295 + 40) / 2;
+            fitView({
+                padding: 0.5, // More padding to zoom out further
+                duration: 400,
+                offset: { x: -sidebarOffset, y: 0 } // Shift center to the left
+            });
         }, 100);
         return () => clearTimeout(timer);
     }, [fitView]);
@@ -380,6 +386,7 @@ function AddNodeOnEdgeDrop() {
                         id: n.id,
                         item: {
                             ...n,
+                            position: n.position, // Preserve exact position
                             data: {
                                 ...n.data,
                                 label: newName
@@ -514,6 +521,7 @@ function AddNodeOnEdgeDrop() {
                 }}
                 fitView={false}
                 nodeOrigin={nodeOrigin}
+                proOptions={{ hideAttribution: true }}
             >
                 {/* No Background component - using custom pattern */}
             </ReactFlow>
@@ -832,19 +840,29 @@ export default function ReactFlowComponent() {
     if (!veltInitialized)
         return <div
             style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
                 width: '100%',
                 height: '100%',
-                backgroundImage: `url('${imgImage46}')`,
-                backgroundRepeat: 'repeat',
-                backgroundSize: '16px 16px',
-                opacity: 0.08,
-                pointerEvents: 'none',
-                zIndex: 0
+                position: 'relative',
+                background: '#000000'
             }}
-        />
+        >
+            {/* Background pattern */}
+            <div
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundImage: `url('${imgImage46}')`,
+                    backgroundRepeat: 'repeat',
+                    backgroundSize: '16px 16px',
+                    opacity: 0.08,
+                    pointerEvents: 'none',
+                    zIndex: 0
+                }}
+            />
+        </div>
     return (
         <ReactFlowProvider>
             <AddNodeOnEdgeDrop />
