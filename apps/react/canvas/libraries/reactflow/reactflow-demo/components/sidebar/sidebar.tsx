@@ -2,20 +2,20 @@
 
 import { useState } from 'react';
 
-// Figma Asset URLs
-const imgTablerIconChevronLeftPipe = "http://localhost:3845/assets/8711cbc78504775633042ade7f76f8c9b6775c18.svg";
-const imgTablerIconPointer = "http://localhost:3845/assets/5020f9eedea273d5827b162835e60bf3fd91aa04.svg";
-const imgTablerIconPlayerStopFilled = "http://localhost:3845/assets/a75186877e0c30c53276160e1cf17fff0234e51d.svg";
-const imgTablerIconNote = "http://localhost:3845/assets/f678fa5417e4bb046e384c4a96a79ba784ede46f.svg";
-const imgTablerIconFunction = "http://localhost:3845/assets/b7d1506742e92dd5a464615ffa1e0bb0472cb5fc.svg";
-const imgTablerIconDatabase = "http://localhost:3845/assets/c1bf9c17882f9f7491117c55086113ee92b67eaa.svg";
-const imgTablerIconTopologyRing = "http://localhost:3845/assets/d41237e3fc56722648e000d7bb5378984ecaefc6.svg";
-const imgTablerIconShieldCheckFilled = "http://localhost:3845/assets/d1583a7db57259d5ca42e31f24c0587506ecfd0a.svg";
-const imgTablerIconRouteAltRight = "http://localhost:3845/assets/275a5716425f11ecc8ee8fa1e95e6c781e00e86c.svg";
-const imgTablerIconRepeat = "http://localhost:3845/assets/55569313b7d7aba8e7d895d69333ac68fec0ff83.svg";
-const imgTablerIconEyeCheck = "http://localhost:3845/assets/f860e69817a0128b4c7ad994c307c0e40bf1c0cc.svg";
-const imgTablerIconTransform = "http://localhost:3845/assets/0bb389ed5e8cce0ec63ef8978a2e2dae83be9153.svg";
-const imgTablerIconCircleDotFilled = "http://localhost:3845/assets/ca34fbf9d4917e4ed77e70ee537813d79be3571e.svg";
+// Local Icon URLs (from /public/icons/)
+const imgTablerIconChevronLeftPipe = "/icons/chevron-left-pipe.svg";
+const imgTablerIconPointer = "/icons/pointer.svg";
+const imgTablerIconPlayerStopFilled = "/icons/player-stop.svg";
+const imgTablerIconNote = "/icons/note.svg";
+const imgTablerIconFunction = "/icons/function.svg";
+const imgTablerIconDatabase = "/icons/database.svg";
+const imgTablerIconTopologyRing = "/icons/topology-ring.svg";
+const imgTablerIconShieldCheckFilled = "/icons/shield-check.svg";
+const imgTablerIconRouteAltRight = "/icons/route-alt-right.svg";
+const imgTablerIconRepeat = "/icons/repeat.svg";
+const imgTablerIconEyeCheck = "/icons/eye-check.svg";
+const imgTablerIconTransform = "/icons/transform.svg";
+const imgTablerIconCircleDotFilled = "/icons/circle-dot.svg";
 
 interface SidebarItemProps {
   icon: string;

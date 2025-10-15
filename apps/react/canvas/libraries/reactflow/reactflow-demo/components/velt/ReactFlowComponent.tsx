@@ -16,22 +16,23 @@ import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt';
 import Header from '../header/header';
 import '@xyflow/react/dist/style.css';
 
-// Figma Asset URLs
-const imgImage46 = "http://localhost:3845/assets/deaa2c5724bcd940d0dd46d05dc05dfa624b4c24.png";
-const imgTablerIconHandStop = "http://localhost:3845/assets/eb84c4567e65cd84f87b85b45fbbf0ee0d798f93.svg";
-const imgTablerIconArrowBackUp = "http://localhost:3845/assets/0f1fd8eda4fde670e7ea71d90c159af08ec2bd3e.svg";
-const imgTablerIconArrowBackUp1 = "http://localhost:3845/assets/88bd5643cb27407d35b69d360f0f7e8585cf3349.svg";
-const imgTablerIconPlayerPlayFilled = "http://localhost:3845/assets/8da914422064b0f6b2c0233c0f200fdd0b82d5ee.svg";
-const imgTablerIconPlayerPlayFilled1 = "http://localhost:3845/assets/0b58abac33ad705dd116bcd4f450b219722306fc.svg";
-const imgTablerIconPointer = "http://localhost:3845/assets/5c4837fcbd8e071c207e3d52ed27e5f0d072fb84.svg";
-const imgTablerIconPointer1 = "http://localhost:3845/assets/3a719abeec531d45947e9277d1ad90d95a914ab0.svg";
-const imgTablerIconFunction = "http://localhost:3845/assets/0de72777d4401db5d30bb9cad699bf2d4692c1c8.svg";
-const imgVector457 = "http://localhost:3845/assets/b42bb90d3c9be3ea2c8292e6600bfc7b6bad6fc8.svg";
-const imgVector458 = "http://localhost:3845/assets/0bc92386fc03911b05b1a35116bbc1542100cd35.svg";
-const imgVector459 = "http://localhost:3845/assets/a3275422aeb7197fcb12762e5b15019147bf593c.svg";
-const imgTablerIconPlus = "http://localhost:3845/assets/f1c90ea341f2d6cd0eb3ae3c46583554c9cc7e74.svg";
-const imgTablerIconMinus = "http://localhost:3845/assets/4ddafc0d341538819eaf2dbb3617bd5e4a051b64.svg";
-const imgTablerIconTrash = "http://localhost:3845/assets/806e4f2e279a93f9df83f2c5d52607855a2e3f1b.svg";
+// Local Icon URLs (from /public/icons/)
+const imgImage46 = "/background-pattern.png";
+const imgTablerIconHandStop = "/icons/hand-stop.svg";
+const imgTablerIconArrowBackUp = "/icons/arrow-back-up.svg";
+const imgTablerIconArrowBackUp1 = "/icons/arrow-redo.svg";
+const imgTablerIconPlayerPlayFilled = "/icons/player-play.svg";
+// Slack Message node - filled play button
+const imgTablerIconPlayerPlayFilled1 = "/icons/player-play-filled.svg";
+// Bandwidth Agent node - main pointer
+const imgTablerIconPointer = "/icons/pointer.svg";
+// OCR Agent node - alt pointer
+const imgTablerIconPointer1 = "/icons/pointer.svg";
+// Parser node - function icon
+const imgTablerIconFunction = "/icons/function.svg";
+const imgTablerIconPlus = "/icons/plus.svg";
+const imgTablerIconMinus = "/icons/minus.svg";
+const imgTablerIconTrash = "/icons/trash.svg";
 
 const getId = () => crypto.randomUUID();
 
@@ -343,7 +344,7 @@ const nodeOrigin: [number, number] = [0.5, 0];
 
 function AddNodeOnEdgeDrop() {
     const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFlowCrdtExtension({
-        editorId: 'react-flow-crdt-2025-09-19-v3',
+        editorId: 'react-flow-crdt-2025-09-19-v4',
         initialEdges,
         initialNodes,
     });
