@@ -1,7 +1,7 @@
 "use client";
 
 import { useVeltInitState, useVeltClient } from "@veltdev/react";
-import { Presence, NotificationsTool, CommentTool, SidebarButton } from '../velt/VeltTools';
+import { Presence, NotificationsTool, CommentTool, SidebarButton, HuddleTool } from '../velt/VeltTools';
 import { useEffect } from 'react';
 
 export default function Header() {
@@ -29,6 +29,9 @@ export default function Header() {
 
           {/* [Velt] Single CommentTool - Click to add popover comments on any element */}
           <CommentTool />
+
+          {/* [Velt] HuddleTool */}
+          <HuddleTool />
         </>
       )}
     </div>

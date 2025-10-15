@@ -1,9 +1,10 @@
 "use client";
-import { 
-  VeltPresence, 
-  VeltSidebarButton, 
+import {
+  VeltPresence,
+  VeltSidebarButton,
   VeltNotificationsTool,
-  VeltCommentTool 
+  VeltCommentTool,
+  VeltHuddleTool
 } from "@veltdev/react";
 
 // Individual, importable wrappers
@@ -33,6 +34,10 @@ export function CommentTool() {
   return <VeltCommentTool />;
 }
 
+export function HuddleTool() {
+  return <VeltHuddleTool type='all' />;
+}
+
 // Aggregator that renders all tools together
 function VeltTools() {
   return (
@@ -41,6 +46,7 @@ function VeltTools() {
       <NotificationsTool />
       <Presence />
       <CommentTool />
+      <HuddleTool />
     </>
   );
 }
