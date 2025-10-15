@@ -49,7 +49,7 @@ type CustomNodeData = {
 
 // Custom Node Component matching Figma design
 function CustomNode({ data }: NodeProps) {
-    const { label, icon, accentColor, showBadge, badgeCount, selected } = data as CustomNodeData;
+    const { label, icon, accentColor, selected } = data as CustomNodeData;
     const nodeId = (data as CustomNodeData).id || 'unknown';
 
     return (
@@ -127,7 +127,7 @@ function CustomNode({ data }: NodeProps) {
                 {label}
             </p>
 
-            {/* Comment Badge - inline with node content */}
+            {/* Comment Actions - inline with node content */}
             <div
                 style={{
                     marginLeft: 'auto',
@@ -225,7 +225,7 @@ function SimpleNode({ data }: NodeProps) {
                 {label}
             </p>
 
-            {/* Comment Badge - inline with node content */}
+            {/* Comment Actions - inline with node content */}
             <div
                 style={{
                     marginLeft: 'auto',
@@ -329,7 +329,7 @@ const nodeOrigin: [number, number] = [0, 0];
 
 function AddNodeOnEdgeDrop() {
     const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFlowCrdtExtension({
-        editorId: 'react-flow-crdt-2025-09-19-v4',
+        editorId: 'react-flow-crdt-2025-10-10',
         initialEdges,
         initialNodes,
     });
@@ -829,7 +829,22 @@ function AddNodeOnEdgeDrop() {
 
 export default function ReactFlowComponent() {
     const veltInitialized = useVeltInitState();
-    if (!veltInitialized) return <div>Loading...</div>;
+    if (!veltInitialized)
+        return <div
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundImage: `url('${imgImage46}')`,
+                backgroundRepeat: 'repeat',
+                backgroundSize: '16px 16px',
+                opacity: 0.08,
+                pointerEvents: 'none',
+                zIndex: 0
+            }}
+        />
     return (
         <ReactFlowProvider>
             <AddNodeOnEdgeDrop />
