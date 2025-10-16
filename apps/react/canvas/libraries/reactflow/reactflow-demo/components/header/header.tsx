@@ -1,7 +1,7 @@
 "use client";
 
 import { useVeltInitState, useVeltClient } from "@veltdev/react";
-import { Presence, NotificationsTool, CommentTool, SidebarButton, HuddleTool } from '../velt/VeltTools';
+import VeltTools from '../velt/VeltTools';
 import { useEffect } from 'react';
 
 export default function Header() {
@@ -16,21 +16,7 @@ export default function Header() {
 
   return (
     <div className="absolute top-2 right-6 flex items-center gap-[6px] z-50">
-      {veltInitialized && (
-        <>
-          {/* [Velt] Presence */}
-          <Presence />
-
-          {/* [Velt] SidebarButton (Comment Panel) */}
-          <SidebarButton />
-
-          {/* [Velt] NotificationsTool */}
-          <NotificationsTool />
-
-          {/* [Velt] HuddleTool */}
-          <HuddleTool />
-        </>
-      )}
+      {veltInitialized && <VeltTools />}
     </div>
   );
 }

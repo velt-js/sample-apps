@@ -4,6 +4,7 @@ import { useAppUser } from "@/app/userAuth/useAppUser";
 import type { VeltAuthProvider } from "@veltdev/types";
 import { useMemo } from "react";
 
+// [Velt] Call your backend API to generate a JWT token for the user
 async function getVeltJwtFromBackend(user: {
   userId: string;
   organizationId: string;
@@ -30,12 +31,14 @@ async function getVeltJwtFromBackend(user: {
 }
 
 export function useVeltAuthProvider() {
+  // Get your app's current authenticated user to authenticate with Velt.
   const { user } = useAppUser();
+  
+  // [Velt] Create auth provider object to pass to VeltProvider
   const authProvider: VeltAuthProvider | undefined = useMemo(() => {
     if (!user) return undefined;
     return {
       user,
-      options: { replaceContacts: false },
       retryConfig: { retryCount: 3, retryDelay: 1000 },
       generateToken: async () => {
         return await getVeltJwtFromBackend({

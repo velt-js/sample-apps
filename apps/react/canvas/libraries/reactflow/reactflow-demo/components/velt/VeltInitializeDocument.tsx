@@ -1,8 +1,7 @@
-// [Velt] Thin adapter that mirrors the hook into Velt SDK state
 'use client';
 import { useEffect } from 'react';
 import { useSetDocuments } from '@veltdev/react';
-import { useCurrentDocument } from '@/components/velt/hooks/useCurrentDocument';
+import { useCurrentDocument } from '@/app/document/useCurrentDocument';
 import { useAppUser } from '@/app/userAuth/useAppUser';
 
 export default function VeltInitializeDocument() {
@@ -11,9 +10,9 @@ export default function VeltInitializeDocument() {
 
   const { setDocuments } = useSetDocuments();
 
-  // [Velt] Set documents only when Velt is ready AND a user is logged in
+  // [Velt] Set document in Velt. This is the resource where all Velt collaboration data will be scoped.
   useEffect(() => {
-    if (!user) return;
+    if (!user || !documentId || !documentName) return;
     setDocuments([
       { id: documentId, metadata: { documentName: documentName || 'Untitled' } },
     ]);

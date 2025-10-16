@@ -17,25 +17,45 @@ const AppUserContext = React.createContext<AppUserContextValue | undefined>(
   undefined
 );
 
+// Map user query param to demo users (like playground component)
+const userMap: Record<string, User> = {
+  "1": demoUsers.jim,
+  "2": demoUsers.pam,
+  "3": demoUsers.michael,
+};
+
 export function AppUserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean | undefined>(
     undefined
   );
 
-  // load on mount - auto-login as Jim Halpert
+  // Load on mount - check URL param for user, then sessionStorage, then default to Jim
   useEffect(() => {
     try {
-      const raw = window.localStorage.getItem(SAMPLE_APP_USER);
-      if (raw) {
-        setUser(JSON.parse(raw));
+      // Get user param from URL (e.g., ?user=1, ?user=2, ?user=3)
+      const urlParams = new URLSearchParams(window.location.search);
+      const userParam = urlParams.get('user');
+      
+      let selectedUser: User | undefined;
+      
+      // If URL has user param, use it
+      if (userParam && userMap[userParam]) {
+        selectedUser = userMap[userParam];
       } else {
-        // Auto-login as Jim Halpert for demo purposes
-        const jimUser = demoUsers.jim;
-        setUser(jimUser);
-        setIsUserLoggedIn(true);
-        window.localStorage.setItem(SAMPLE_APP_USER, JSON.stringify(jimUser));
+        // Otherwise, check sessionStorage
+        const raw = window.sessionStorage.getItem(SAMPLE_APP_USER);
+        if (raw) {
+          selectedUser = JSON.parse(raw);
+        } else {
+          // Default to Jim Halpert for demo purposes
+          selectedUser = demoUsers.jim;
+        }
       }
+      
+      setUser(selectedUser);
+      setIsUserLoggedIn(true);
+      window.sessionStorage.setItem(SAMPLE_APP_USER, JSON.stringify(selectedUser));
     } catch {}
   }, []);
 
@@ -43,7 +63,7 @@ export function AppUserProvider({ children }: { children: React.ReactNode }) {
     try {
       setUser(next);
       setIsUserLoggedIn(true);
-      window.localStorage.setItem(SAMPLE_APP_USER, JSON.stringify(next));
+      window.sessionStorage.setItem(SAMPLE_APP_USER, JSON.stringify(next));
     } catch {}
   }, []);
 
@@ -51,7 +71,7 @@ export function AppUserProvider({ children }: { children: React.ReactNode }) {
     try {
       setUser(undefined);
       setIsUserLoggedIn(false);
-      window.localStorage.removeItem(SAMPLE_APP_USER);
+      window.sessionStorage.removeItem(SAMPLE_APP_USER);
     }
      catch {}
   }, []);

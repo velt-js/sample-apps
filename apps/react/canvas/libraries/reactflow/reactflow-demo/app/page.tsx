@@ -3,8 +3,7 @@
 import { VeltProvider } from "@veltdev/react";
 import { useVeltAuthProvider } from "@/components/velt/VeltInitializeUser";
 import { VeltCollaboration } from "@/components/velt/VeltCollaboration";
-import ReactFlowComponent from '@/components/velt/ReactFlowComponent'
-import Sidebar from '@/components/sidebar/sidebar'
+import DocumentCanvas from '@/components/document/document-canvas'
 
 export default function Home() {
   // [Velt] Auth provider (reads from app/userAuth/useAppUser)
@@ -20,13 +19,7 @@ export default function Home() {
       <VeltCollaboration />
 
       {/* --- App UI --- */}
-      <main className="relative flex h-screen w-screen">
-        <ReactFlowComponent />
-        {/* Sidebar overlay positioned at top-left as per Figma design */}
-        <div className="absolute left-3 top-3 z-10">
-          <Sidebar />
-        </div>
-      </main>
+      <DocumentCanvas />
     </VeltProvider>
   );
 }
