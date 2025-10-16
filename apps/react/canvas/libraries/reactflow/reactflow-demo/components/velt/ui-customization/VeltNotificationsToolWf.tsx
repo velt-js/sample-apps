@@ -1,7 +1,7 @@
 "use client";
 import { VeltNotificationsToolWireframe } from '@veltdev/react';
 
-const bellIcon = "http://localhost:3845/assets/bf3441e93d1ae4556348dcbfe7c1fe0d7cdeb4f0.svg";
+const bellIcon = "/icons/bell-icon.svg";
 
 const VeltNotificationsToolWf = () => {
   return (
@@ -10,7 +10,7 @@ const VeltNotificationsToolWf = () => {
         style={{
           background: '#141414',
           borderRadius: '23.333px',
-          padding: '5.833px 3px 5.833px 7px',
+          padding: '5.833px 2px 5.833px 7px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

@@ -1,7 +1,7 @@
 "use client";
 import { VeltSidebarButtonWireframe } from '@veltdev/react';
 
-const inboxIcon = "http://localhost:3845/assets/dc5877167057758b07de4a56c967d02885b26646.svg";
+const inboxIcon = "/icons/inbox-icon.svg";
 
 const VeltSidebarButtonWf = () => {
   return (
@@ -10,7 +10,7 @@ const VeltSidebarButtonWf = () => {
         style={{
           background: '#141414',
           borderRadius: '24px',
-          padding: '6px 8px 6px 12px',
+          padding: '6px 7px 6px 12px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -23,10 +23,9 @@ const VeltSidebarButtonWf = () => {
       >
         <div
           style={{
-            width: '17px',
-            height: '17px',
+            width: '19.444px',
+            height: '19.444px',
             position: 'relative',
-            overflow: 'clip',
             flexShrink: 0
           }}
         >
