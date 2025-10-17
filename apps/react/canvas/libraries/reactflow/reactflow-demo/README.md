@@ -1,9 +1,8 @@
 # React Flow CRDT Demo
 
 > **[🚀 View Live Demo](https://sample-apps-reactflow-demo.vercel.app/)**
-> **[Video Demo](https://github.com/user-attachments/assets/f9ea9bab-0e12-4f62-b791-eba0bef649bc)**
 
-
+https://github.com/user-attachments/assets/f9ea9bab-0e12-4f62-b791-eba0bef649bc
 
 ## Overview
 
