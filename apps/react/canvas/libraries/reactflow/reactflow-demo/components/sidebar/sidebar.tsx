@@ -91,7 +91,7 @@ function SidebarSection({ title, items }: SidebarSectionProps) {
 }
 
 export default function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const coreItems = [
     { icon: imgTablerIconPointer, label: 'Agent', bgColor: '#99c8e6', nodeType: 'agent' },
