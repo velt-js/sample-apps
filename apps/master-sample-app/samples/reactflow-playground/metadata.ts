@@ -6,7 +6,7 @@ const metadata: SampleMetadata = {
   category: 'feature',
   section: 'ReactFlow',
   iframeUrl: 'https://sample-apps-reactflow-demo.vercel.app/?user=1',
-  iframeUrl2: 'https://sample-apps-reactflow-demo.vercel.app/?user=2',
+  iframeUrl2: 'https://sample-apps-reactflow-demo-git-main-velt-team-eng.vercel.app/?user=2',
   githubUrl: 'https://github.com/velt-js/sample-apps/tree/main/apps/react/canvas/libraries/reactflow/reactflow-demo',
   githubRepoPath: 'velt-js/sample-apps',
   displayMode: 'dual',
