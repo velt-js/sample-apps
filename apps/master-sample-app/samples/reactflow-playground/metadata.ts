@@ -5,10 +5,10 @@ const metadata: SampleMetadata = {
   title: 'REACTFLOW · PLAYGROUND',
   category: 'feature',
   section: 'ReactFlow',
-  iframeUrl: 'https://reactflow-master-sample-app.vercel.app/',
-  iframeUrl2: 'https://reactflow-master-app.vercel.app/',
-  githubUrl: 'https://github.com/velt-js/reactflow-master-sample-app',
-  githubRepoPath: 'velt-js/reactflow-master-sample-app',
+  iframeUrl: 'https://sample-apps-reactflow-demo.vercel.app/?user=1',
+  iframeUrl2: 'https://sample-apps-reactflow-demo.vercel.app/?user=2',
+  githubUrl: 'https://github.com/velt-js/sample-apps/tree/main/apps/react/canvas/libraries/reactflow/reactflow-demo',
+  githubRepoPath: 'velt-js/sample-apps',
   displayMode: 'dual',
   isDefault: false
 }
