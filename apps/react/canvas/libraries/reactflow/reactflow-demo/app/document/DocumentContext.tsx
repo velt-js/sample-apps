@@ -11,7 +11,7 @@ export function useCurrentDocument(): CurrentDocument {
   // [Velt] Demo values — change as needed
   return useMemo(
     () => ({
-      documentId: "general-document-1",
+      documentId: "general-document-2",
       documentName: "General Document",
     }),
     []
