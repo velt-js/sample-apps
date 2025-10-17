@@ -199,11 +199,11 @@ importers:
   apps/react/canvas/libraries/reactflow/reactflow-demo:
     dependencies:
       '@veltdev/react':
-        specifier: ^4.5.6-beta.9
-        version: 4.5.6-beta.15(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^4.5.5
+        version: 4.5.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@veltdev/reactflow-crdt':
-        specifier: ^4.5.0-beta.6
-        version: 4.5.0-beta.6(yjs@13.6.27)
+        specifier: ^1.0.1
+        version: 1.0.1
       '@xyflow/react':
         specifier: ^12.8.6
         version: 12.8.6(@types/react@19.2.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -242,8 +242,8 @@ importers:
         specifier: ^19
         version: 19.2.1(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.6-beta.9
-        version: 4.5.6-beta.9
+        specifier: ^4.5.5
+        version: 4.5.5
       autoprefixer:
         specifier: ^10
         version: 10.4.21(postcss@8.5.6)
@@ -2403,11 +2403,8 @@ packages:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
 
-  '@veltdev/react@4.5.6-beta.15':
-    resolution: {integrity: sha512-nauDnb9EtyAxGmgvrfF4kApHLBh1dL+ZhDMgc0hL9GJwPfroA8swSDcPSJ7Z8lNlcqKOZDpOXtOmlpNVN2yf9w==}
-    peerDependencies:
-      react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
-      react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
+  '@veltdev/reactflow-crdt@1.0.1':
+    resolution: {integrity: sha512-xSgvxH7P8yec9gq2hJaLBiFAjREmJbcRQljAxUxUcNjgqWbD4PZc5faHegEjPZQrqfAfKKaBgQORVR68/hBc0g==}
 
   '@veltdev/reactflow-crdt@4.5.0-beta.6':
     resolution: {integrity: sha512-a0Hakanz5zJ0wisCStSMaixH8mX4n+P1fdQqvsh34Dhc//8pPQnqlXp1MG2tIotEMcEuSjPgh+9H4Egt0BBuuw==}
@@ -2422,9 +2419,6 @@ packages:
 
   '@veltdev/types@4.5.6-beta.8':
     resolution: {integrity: sha512-f8qRI0vTsEAO82KthCa8PnToTI53YQN7vN4VHEzSfmzvjJCdHov8aPal/y1NpQqhsg0W/GDgazBab55oWFqFjQ==}
-
-  '@veltdev/types@4.5.6-beta.9':
-    resolution: {integrity: sha512-tur4QMpaTS8Dgi21+/l+15Q/T5sz31qQEeftdK5QcJKH+s2YnXJnh219tt367u9LgFmmJjrniKoGUR1arQDKiA==}
 
   '@vercel/analytics@1.3.1':
     resolution: {integrity: sha512-xhSlYgAuJ6Q4WQGkzYTLmXwhYl39sWjoMA3nHxfkvG+WdBT25c563a7QhwwKivEOZtPJXifYHR1m2ihoisbWyA==}
@@ -6194,10 +6188,7 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@veltdev/react@4.5.6-beta.15(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
+  '@veltdev/reactflow-crdt@1.0.1': {}
 
   '@veltdev/reactflow-crdt@4.5.0-beta.6(yjs@13.6.27)':
     dependencies:
@@ -6208,8 +6199,6 @@ snapshots:
   '@veltdev/types@4.5.5': {}
 
   '@veltdev/types@4.5.6-beta.8': {}
-
-  '@veltdev/types@4.5.6-beta.9': {}
 
   '@vercel/analytics@1.3.1(next@15.2.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
     dependencies:
