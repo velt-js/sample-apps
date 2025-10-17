@@ -202,8 +202,8 @@ importers:
         specifier: ^4.5.5
         version: 4.5.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@veltdev/reactflow-crdt':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^4.5.0-beta.6
+        version: 4.5.0-beta.6(yjs@13.6.27)
       '@xyflow/react':
         specifier: ^12.8.6
         version: 12.8.6(@types/react@19.2.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -2402,9 +2402,6 @@ packages:
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
-
-  '@veltdev/reactflow-crdt@1.0.1':
-    resolution: {integrity: sha512-xSgvxH7P8yec9gq2hJaLBiFAjREmJbcRQljAxUxUcNjgqWbD4PZc5faHegEjPZQrqfAfKKaBgQORVR68/hBc0g==}
 
   '@veltdev/reactflow-crdt@4.5.0-beta.6':
     resolution: {integrity: sha512-a0Hakanz5zJ0wisCStSMaixH8mX4n+P1fdQqvsh34Dhc//8pPQnqlXp1MG2tIotEMcEuSjPgh+9H4Egt0BBuuw==}
@@ -6187,8 +6184,6 @@ snapshots:
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-
-  '@veltdev/reactflow-crdt@1.0.1': {}
 
   '@veltdev/reactflow-crdt@4.5.0-beta.6(yjs@13.6.27)':
     dependencies:

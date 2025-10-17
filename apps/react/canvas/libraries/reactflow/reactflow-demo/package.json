@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@veltdev/react": "^4.5.5",
-    "@veltdev/reactflow-crdt": "^1.0.1",
+    "@veltdev/reactflow-crdt": "^4.5.0-beta.6",
     "@xyflow/react": "^12.8.6",
     "clsx": "^2",
     "lucide-react": "^0.454.0",
