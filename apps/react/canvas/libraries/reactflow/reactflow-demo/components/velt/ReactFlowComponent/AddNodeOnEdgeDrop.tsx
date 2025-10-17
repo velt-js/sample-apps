@@ -30,7 +30,7 @@ export function AddNodeOnEdgeDrop() {
   // [Velt] This hook returns synchronized nodes/edges that automatically sync across all users in real-time
   // All changes through onNodesChange/onEdgesChange are automatically broadcast to other users
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFlowCrdtExtension({
-    editorId: 'react-flow-crdt-2025-10-10',
+    editorId: 'react-flow-crdt-main-editor',
     initialEdges,
     initialNodes,
   });

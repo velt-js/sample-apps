@@ -11,8 +11,8 @@ export function useCurrentDocument(): CurrentDocument {
   // [Velt] Demo values — change as needed
   return useMemo(
     () => ({
-      documentId: "general-document-2",
-      documentName: "General Document",
+      documentId: "react-flow-canvas-main",
+      documentName: "React Flow Canvas",
     }),
     []
   );
