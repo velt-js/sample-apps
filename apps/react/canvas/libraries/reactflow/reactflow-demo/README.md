@@ -1,8 +1,12 @@
-# ReactFlow CRDT Demo
+# React Flow CRDT Demo
+
+> **[🚀 View Live Demo](https://sample-apps-reactflow-demo.vercel.app/)**
 
 ## Overview
 
-This demo showcases **real-time collaborative canvas** functionality using **ReactFlow** with **Velt's CRDT** extension. Multiple users can simultaneously create, edit, and comment on nodes and edges in real-time with automatic conflict resolution.
+This demo showcases **real-time collaborative workflow builder** built using **ReactFlow** with **Velt's CRDT** extension. Multiple users can simultaneously create, edit, and comment on nodes and edges in real-time with automatic conflict resolution.
+
+Velt's CRDT extension is based on Yjs.
 
 ## Path
 
@@ -33,50 +37,73 @@ apps/react/canvas/libraries/reactflow/reactflow-demo/
 - **Zoom Controls**: Zoom in/out with dedicated controls
 - **Auto-fit View**: Canvas automatically centers nodes on load
 
-### UI Components
-- **Dark Mode**: Custom dark theme with Velt integration
-- **Custom Styling**: Matching Figma design specifications
-- **Interactive Controls**: Bottom toolbar with preview, undo/redo (UI placeholders)
-- **Side Panel**: Edit node names and properties
 
 ## Directory Structure
 
 ```
 reactflow-demo/
 ├── app/
+│   ├── api/
+│   │   └── velt/
+│   │       └── token/
+│   │           └── route.ts            # Velt JWT token generation endpoint
+│   ├── document/
+│   │   ├── DocumentContext.tsx         # Document context provider
+│   │   └── useCurrentDocument.ts       # Document management hook
+│   ├── userAuth/
+│   │   ├── AppUserContext.tsx          # User authentication context
+│   │   ├── LoginPanel.tsx              # User login panel component
+│   │   ├── useAppUser.ts               # User authentication hook
+│   │   └── users.ts                    # Mock user data
 │   ├── layout.tsx                      # Root layout with Velt provider
 │   └── page.tsx                        # Main page
 ├── components/
 │   ├── header/
-│   │   └── header.tsx                  # Velt tools (presence, notifications, huddle)
+│   │   └── header.tsx                  # Header with Velt tools (presence, notifications, huddle)
 │   ├── sidebar/
 │   │   └── sidebar.tsx                 # Left sidebar for dragging nodes
 │   ├── document/
-│   │   └── document-canvas.tsx         # Document wrapper
+│   │   └── document-canvas.tsx         # Document wrapper component
 │   └── velt/
-│       ├── ReactFlowComponent.tsx      # Main ReactFlow + Velt CRDT integration
-│       ├── VeltInitializeUser.tsx      # User initialization
-│       ├── VeltInitializeDocument.tsx  # Document setup
+│       ├── ReactFlowComponent/
+│       │   ├── nodes/
+│       │   │   ├── CustomNode.tsx      # Custom node with Velt comments
+│       │   │   └── SimpleNode.tsx      # Simple node component
+│       │   ├── ui/
+│       │   │   ├── BottomToolbar.tsx   # Bottom toolbar controls
+│       │   │   ├── SidePanel.tsx       # Right side panel
+│       │   │   └── ZoomControls.tsx    # Zoom controls component
+│       │   ├── AddNodeOnEdgeDrop.tsx   # Add node on edge drop handler
+│       │   ├── constants.ts            # ReactFlow constants
+│       │   ├── index.tsx               # ReactFlow component index
+│       │   ├── ReactFlowComponent.tsx  # Main ReactFlow + Velt CRDT integration
+│       │   └── types.ts                # TypeScript type definitions
+│       ├── ui-customization/
+│       │   ├── VeltCommentBubbleWf.tsx # Customized comment bubble
+│       │   ├── VeltCommentToolWf.tsx   # Customized comment tool
+│       │   ├── VeltCustomization.tsx   # Velt UI customization wrapper
+│       │   ├── VeltNotificationsToolWf.tsx # Customized notifications
+│       │   ├── VeltSidebarButtonWf.tsx # Customized sidebar button
+│       │   └── styles.css              # Custom Velt styles
 │       ├── VeltCollaboration.tsx       # Velt client setup
-│       ├── VeltTools.tsx               # Velt component exports
-│       ├── hooks/
-│       │   └── useCurrentDocument.ts   # Document management hook
-│       └── ui-customization/           # Customized Velt components
-│           ├── VeltCommentBubbleWf.tsx
-│           ├── VeltCommentToolWf.tsx
-│           ├── VeltNotificationsToolWf.tsx
-│           ├── VeltSidebarButtonWf.tsx
-│           ├── VeltCustomization.tsx
-│           └── styles.css
+│       ├── VeltInitializeDocument.tsx  # Document initialization
+│       ├── VeltInitializeUser.tsx      # User initialization
+│       └── VeltTools.tsx               # Velt component exports
 ├── hooks/                              # Custom React hooks
 ├── lib/
 │   └── utils.ts                        # Utility functions
 ├── public/
 │   ├── icons/                          # SVG icons for nodes and controls
+│   │   ├── arrow-back-up.svg
+│   │   ├── arrow-redo.svg
+│   │   ├── circle-dot.svg
+│   │   ├── database.svg
+│   │   ├── function.svg
+│   │   ├── pointer.svg
+│   │   └── ...                         # Additional icons
 │   └── background-pattern.png          # Canvas background pattern
 ├── styles/
 │   └── globals.css                     # Global styles
-├── .npmrc                              # pnpm config (prevents Tailwind v4 hoisting)
 ├── next.config.js
 ├── tailwind.config.js
 ├── tsconfig.json
@@ -131,9 +158,34 @@ pnpm --filter @apps/react-canvas-reactflow-reactflow-demo build
 
 ## Implementation Details
 
+### Application Architecture
+
+The application is structured around several key areas:
+
+**User Authentication** (`app/userAuth/`)
+- `AppUserContext` provides user state across the application
+- `useAppUser` hook manages user selection and authentication
+- `LoginPanel` allows switching between mock users for testing collaboration
+- Mock user data simulates multi-user scenarios
+
+**Document Management** (`app/document/`)
+- `DocumentContext` manages the current document state
+- `useCurrentDocument` hook provides document access and switching capabilities
+- Documents represent separate collaborative canvases
+
+**JWT Token Generation** (`app/api/velt/token/`)
+- Backend route generates secure JWT tokens for Velt authentication
+- Integrates with Velt's Auth Provider approach
+
+**ReactFlow Canvas** (`components/velt/ReactFlowComponent/`)
+- **Main component** orchestrates the entire ReactFlow canvas with Velt integration
+- **Nodes** (CustomNode, SimpleNode) render individual flowchart elements with Velt commenting
+- **UI components** (BottomToolbar, SidePanel, ZoomControls) provide canvas controls
+- **AddNodeOnEdgeDrop** handles drag-and-drop node creation on edges
+
 ### Velt CRDT Integration
 
-The core integration uses the `useVeltReactFlowCrdtExtension` hook:
+The core integration uses the `useVeltReactFlowCrdtExtension` hook in `ReactFlowComponent.tsx`:
 
 ```tsx
 const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFlowCrdtExtension({
@@ -144,9 +196,10 @@ const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFl
 ```
 
 This hook provides:
-- Real-time synchronized nodes and edges
+- Real-time synchronized nodes and edges across all connected users
 - Automatic conflict resolution when multiple users edit simultaneously
 - Change handlers that broadcast updates to all connected users
+- CRDT-based state management for collaborative editing
 
 ### Custom Node Components
 
@@ -169,25 +222,19 @@ Each node includes Velt commenting capabilities:
 <VeltCommentTool targetElementId={nodeId} />
 ```
 
-The `data-velt-target-comment-element-id` attribute on the node label enables targeted commenting.
+- `VeltCommentTool` provides the interface to add new comments
+- `VeltCommentBubble` renders existing comments as interactive bubbles
+- The `data-velt-target-comment-element-id` attribute on the node label enables targeted commenting
 
-## Important Configuration
+## Customization
 
-### .npmrc File
+### UI Customization
 
-This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS v4 from other workspace packages:
-
-```
-public-hoist-pattern[]=*
-public-hoist-pattern[]=!@tailwindcss*
-```
-
-**Why this matters**:
-- This demo uses Tailwind CSS v3.4.x with traditional PostCSS configuration
-- Other apps in the monorepo may use Tailwind CSS v4
-- Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
-
-**Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
+Velt components are customized using wireframes in `components/velt/ui-customization/`:
+- Custom comment bubble styling
+- Branded notification panel
+- Styled sidebar button
+- Theme-matched comment tools
 
 ## Usage
 
@@ -213,37 +260,6 @@ public-hoist-pattern[]=!@tailwindcss*
 - **Join huddle**: Start audio/video call with collaborators
 - **View comments**: Click sidebar button to see all canvas comments
 
-## Customization
-
-### UI Customization
-
-Velt components are customized using wireframes in `components/velt/ui-customization/`:
-- Custom comment bubble styling
-- Branded notification panel
-- Styled sidebar button
-- Theme-matched comment tools
-
-### Adding New Node Types
-
-1. Define node data type in `ReactFlowComponent.tsx`
-2. Create a new node component function
-3. Add to `nodeTypes` object
-4. Include in sidebar for drag & drop
-
-### Styling
-
-- Global styles: `styles/globals.css`
-- Velt customization: `components/velt/ui-customization/styles.css`
-- Tailwind config: `tailwind.config.js`
-
-## Development Notes
-
-- **Velt initialization**: App waits for `useVeltInitState()` before rendering ReactFlow
-- **Document setup**: Users are initialized with `VeltInitializeUser` and documents with `VeltInitializeDocument`
-- **Dark mode**: Automatically enabled via `client.setDarkMode(true)`
-- **Auto-fit**: Canvas centers nodes on load with offset for sidebar
-- **Node IDs**: Generated using `crypto.randomUUID()` for uniqueness
-
 ## Troubleshooting
 
 ### PostCSS Errors
@@ -263,24 +279,63 @@ If changes aren't syncing:
 1. Check browser console for errors
 2. Verify the `editorId` is unique for your document
 3. Ensure multiple users are on the same document ID
+4. Test with two unique users on two different browser profiles (e.g., Chrome regular + Chrome incognito, or different browsers)
 
-## Next Steps
+## About Velt SDK
 
-- [ ] Implement undo/redo functionality (currently UI placeholders)
-- [ ] Add more node types with different behaviors
-- [ ] Implement node grouping and nested structures
-- [ ] Add export/import functionality for canvas state
-- [ ] Create more sophisticated edge styling options
-- [ ] Add mini-map for large canvases
-- [ ] Implement node search and filtering
+<a href="https://npmjs.org/package/@veltdev/react">
+  <img src="https://img.shields.io/npm/v/@veltdev/react?style=flat&label=npm&color=09f" alt="NPM" />
+</a>
 
-## Learn More
+With Velt SDK you can add powerful collaboration features to your product extremely fast.
 
+The SDK provides **fullstack components**:
+- UI and behavior are fully customizable to match your product's needs
+- Fully-managed on a scalable realtime backend
+
+**Features include:**
+- **Comments** like Figma, Frame.io, Google Docs, Sheets and more
+- **Recording** like Loom (audio, video, screen)
+- **Huddle** like Slack (audio, video, screensharing)
+- In-app and off-app **notifications**
+- **@mentions** and assignment
+- **Presence**, **Cursors**, **Live Selection**
+- **Live state sync** with Single Editor mode
+- **Multiplayer editing** with conflict resolution
+- **Follow mode** like Figma
+- ... and so much more
+
+
+### Resources
+- 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
+- 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
+- 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
+- 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
+- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
 - [ReactFlow Documentation](https://reactflow.dev/)
 - [Velt Documentation](https://docs.velt.dev)
 - [Velt ReactFlow CRDT Guide](https://docs.velt.dev/live-co-editing/canvas/reactflow)
-- [Monorepo Structure Guide](../../../../README_MONOREPO.md)
-- [Structure Documentation](../../../../docs/structure.md)
+
+## Important Configuration
+
+### .npmrc File
+
+This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS v4 from other workspace packages:
+
+```
+public-hoist-pattern[]=*
+public-hoist-pattern[]=!@tailwindcss*
+```
+
+**Why this matters**:
+- This demo uses Tailwind CSS v3.4.x with traditional PostCSS configuration
+- Other apps in the monorepo may use Tailwind CSS v4
+- Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
+
+**Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
+
 
 ## Support
 
