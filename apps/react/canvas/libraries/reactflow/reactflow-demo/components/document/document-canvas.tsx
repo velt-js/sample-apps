@@ -1,6 +1,6 @@
 'use client'
 
-import ReactFlowComponent from '@/components/velt/ReactFlowComponent'
+import ReactFlowComponent from '@/components/document/ReactFlowComponent'
 import Sidebar from '@/components/sidebar/sidebar'
 
 export default function DocumentCanvas() {

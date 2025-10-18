@@ -65,21 +65,21 @@ reactflow-demo/
 │   ├── sidebar/
 │   │   └── sidebar.tsx                 # Left sidebar for dragging nodes
 │   ├── document/
-│   │   └── document-canvas.tsx         # Document wrapper component
+│   │   ├── document-canvas.tsx         # Document wrapper component
+│   │   └── ReactFlowComponent/
+│   │       ├── nodes/
+│   │       │   ├── CustomNode.tsx      # Custom node with Velt comments
+│   │       │   └── SimpleNode.tsx      # Simple node component
+│   │       ├── ui/
+│   │       │   ├── BottomToolbar.tsx   # Bottom toolbar controls
+│   │       │   ├── SidePanel.tsx       # Right side panel
+│   │       │   └── ZoomControls.tsx    # Zoom controls component
+│   │       ├── AddNodeOnEdgeDrop.tsx   # Add node on edge drop handler
+│   │       ├── constants.ts            # ReactFlow constants
+│   │       ├── index.tsx               # ReactFlow component index
+│   │       ├── ReactFlowComponent.tsx  # Main ReactFlow + Velt CRDT integration
+│   │       └── types.ts                # TypeScript type definitions
 │   └── velt/
-│       ├── ReactFlowComponent/
-│       │   ├── nodes/
-│       │   │   ├── CustomNode.tsx      # Custom node with Velt comments
-│       │   │   └── SimpleNode.tsx      # Simple node component
-│       │   ├── ui/
-│       │   │   ├── BottomToolbar.tsx   # Bottom toolbar controls
-│       │   │   ├── SidePanel.tsx       # Right side panel
-│       │   │   └── ZoomControls.tsx    # Zoom controls component
-│       │   ├── AddNodeOnEdgeDrop.tsx   # Add node on edge drop handler
-│       │   ├── constants.ts            # ReactFlow constants
-│       │   ├── index.tsx               # ReactFlow component index
-│       │   ├── ReactFlowComponent.tsx  # Main ReactFlow + Velt CRDT integration
-│       │   └── types.ts                # TypeScript type definitions
 │       ├── ui-customization/
 │       │   ├── VeltCommentBubbleWf.tsx # Customized comment bubble
 │       │   ├── VeltCommentToolWf.tsx   # Customized comment tool
@@ -179,7 +179,7 @@ The application is structured around several key areas:
 - Backend route generates secure JWT tokens for Velt authentication
 - Integrates with Velt's Auth Provider approach
 
-**ReactFlow Canvas** (`components/velt/ReactFlowComponent/`)
+**ReactFlow Canvas** (`components/document/ReactFlowComponent/`)
 - **Main component** orchestrates the entire ReactFlow canvas with Velt integration
 - **Nodes** (CustomNode, SimpleNode) render individual flowchart elements with Velt commenting
 - **UI components** (BottomToolbar, SidePanel, ZoomControls) provide canvas controls
