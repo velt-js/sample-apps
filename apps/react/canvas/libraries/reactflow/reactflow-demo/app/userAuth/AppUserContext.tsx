@@ -1,10 +1,7 @@
 "use client";
 
 import type { User } from "@veltdev/types";
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { demoUsers } from "./users";
-
-const SAMPLE_APP_USER = "user"; // [Velt]
+import React, { useCallback, useContext, useEffect, useState, useRef } from "react";
 
 type AppUserContextValue = {
   user: User | undefined;
@@ -16,13 +13,6 @@ type AppUserContextValue = {
 const AppUserContext = React.createContext<AppUserContextValue | undefined>(
   undefined
 );
-
-// Map user query param to demo users (like playground component)
-const userMap: Record<string, User> = {
-  "1": demoUsers.jim,
-  "2": demoUsers.pam,
-  "3": demoUsers.michael,
-};
 
 // Generate a random user with unique ID
 function generateRandomUser(): User {
@@ -46,56 +36,90 @@ function generateRandomUser(): User {
   };
 }
 
-export function AppUserProvider({ children }: { children: React.ReactNode }) {
+export function AppUserProvider({ 
+  children,
+  documentId 
+}: { 
+  children: React.ReactNode;
+  documentId?: string;
+}) {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean | undefined>(
     undefined
   );
 
-  // Load on mount - check URL param for user, then sessionStorage, then generate random user
+  // Generate unique iframe instance ID to ensure isolated storage per iframe
+  const iframeInstanceId = useRef<string>('main');
+
   useEffect(() => {
+    if (!documentId || documentId === 'loading') return;
+    if (typeof window === 'undefined') return; // Guard against SSR
+    
     try {
-      // Get user param from URL (e.g., ?user=1, ?user=2, ?user=3)
-      const urlParams = new URLSearchParams(window.location.search);
-      const userParam = urlParams.get('user');
+      // Detect if running in iframe (for master-sample-app dual view)
+      const isInIframe = window.self !== window.top;
       
-      let selectedUser: User | undefined;
+      // Set unique iframe instance ID once
+      if (iframeInstanceId.current === 'main' && isInIframe) {
+        iframeInstanceId.current = `iframe-${Math.random().toString(36).substring(2, 11)}`;
+      }
       
-      // If URL has user param, use it
-      if (userParam && userMap[userParam]) {
-        selectedUser = userMap[userParam];
+      // Choose storage based on iframe context:
+      // - In iframe: use sessionStorage with unique instance ID
+      // - Not in iframe: use localStorage (same user across tabs)
+      const storage = isInIframe ? sessionStorage : localStorage;
+      const STORAGE_KEY = isInIframe 
+        ? `reactflow-user-${iframeInstanceId.current}` // Unique key per iframe
+        : 'reactflow-user'; // Shared key for regular browser
+      
+      // Check storage for existing user
+      const stored = storage.getItem(STORAGE_KEY);
+      
+      let selectedUser: User;
+      if (stored) {
+        // Use existing user from storage
+        selectedUser = JSON.parse(stored);
       } else {
-        // Otherwise, check sessionStorage for existing session user
-        const raw = window.sessionStorage.getItem(SAMPLE_APP_USER);
-        if (raw) {
-          selectedUser = JSON.parse(raw);
-        } else {
-          // Generate a new random user for this session
-          selectedUser = generateRandomUser();
-        }
+        // Generate NEW random user
+        selectedUser = generateRandomUser();
+        storage.setItem(STORAGE_KEY, JSON.stringify(selectedUser));
       }
       
       setUser(selectedUser);
       setIsUserLoggedIn(true);
-      window.sessionStorage.setItem(SAMPLE_APP_USER, JSON.stringify(selectedUser));
     } catch {}
-  }, []);
+  }, [documentId]);
 
   const login = useCallback((next: User) => {
+    if (typeof window === 'undefined') return;
+    
     try {
+      const isInIframe = window.self !== window.top;
+      const storage = isInIframe ? sessionStorage : localStorage;
+      const STORAGE_KEY = isInIframe 
+        ? `reactflow-user-${iframeInstanceId.current}` 
+        : 'reactflow-user';
+      
       setUser(next);
       setIsUserLoggedIn(true);
-      window.sessionStorage.setItem(SAMPLE_APP_USER, JSON.stringify(next));
+      storage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch {}
   }, []);
 
   const logout = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    
     try {
+      const isInIframe = window.self !== window.top;
+      const storage = isInIframe ? sessionStorage : localStorage;
+      const STORAGE_KEY = isInIframe 
+        ? `reactflow-user-${iframeInstanceId.current}` 
+        : 'reactflow-user';
+      
       setUser(undefined);
       setIsUserLoggedIn(false);
-      window.sessionStorage.removeItem(SAMPLE_APP_USER);
-    }
-     catch {}
+      storage.removeItem(STORAGE_KEY);
+    } catch {}
   }, []);
 
   return (
