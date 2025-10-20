@@ -48,9 +48,6 @@ export function AppUserProvider({
     undefined
   );
 
-  // Generate unique iframe instance ID to ensure isolated storage per iframe
-  const iframeInstanceId = useRef<string>('main');
-
   useEffect(() => {
     if (!documentId || documentId === 'loading') return;
     if (typeof window === 'undefined') return; // Guard against SSR
@@ -59,18 +56,11 @@ export function AppUserProvider({
       // Detect if running in iframe (for master-sample-app dual view)
       const isInIframe = window.self !== window.top;
       
-      // Set unique iframe instance ID once
-      if (iframeInstanceId.current === 'main' && isInIframe) {
-        iframeInstanceId.current = `iframe-${Math.random().toString(36).substring(2, 11)}`;
-      }
-      
       // Choose storage based on iframe context:
-      // - In iframe: use sessionStorage with unique instance ID
+      // - In iframe: use sessionStorage (each origin/port is isolated automatically)
       // - Not in iframe: use localStorage (same user across tabs)
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = isInIframe 
-        ? `reactflow-user-${iframeInstanceId.current}` // Unique key per iframe
-        : 'reactflow-user'; // Shared key for regular browser
+      const STORAGE_KEY = 'reactflow-user';
       
       // Check storage for existing user
       const stored = storage.getItem(STORAGE_KEY);
@@ -96,9 +86,7 @@ export function AppUserProvider({
     try {
       const isInIframe = window.self !== window.top;
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = isInIframe 
-        ? `reactflow-user-${iframeInstanceId.current}` 
-        : 'reactflow-user';
+      const STORAGE_KEY = 'reactflow-user';
       
       setUser(next);
       setIsUserLoggedIn(true);
@@ -112,9 +100,7 @@ export function AppUserProvider({
     try {
       const isInIframe = window.self !== window.top;
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = isInIframe 
-        ? `reactflow-user-${iframeInstanceId.current}` 
-        : 'reactflow-user';
+      const STORAGE_KEY = 'reactflow-user';
       
       setUser(undefined);
       setIsUserLoggedIn(false);
