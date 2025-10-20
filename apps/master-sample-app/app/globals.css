@@ -137,3 +137,36 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Syntax highlighting for code display */
+.code-highlight {
+  color: #d4d4d4;
+}
+
+.code-comment {
+  color: #6a9955;
+}
+
+.code-string {
+  color: #ce9178;
+}
+
+.code-keyword {
+  color: #569cd6;
+}
+
+.code-number {
+  color: #b5cea8;
+}
+
+.code-literal {
+  color: #569cd6;
+}
+
+.code-function {
+  color: #dcdcaa;
+}
+
+.code-type {
+  color: #4ec9b0;
+}

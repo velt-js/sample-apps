@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronLeft, Settings, Github } from "lucide-react"
+import { ChevronLeft, Github, RotateCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 
@@ -13,6 +13,7 @@ interface TopBarProps {
   githubUrl?: string
   routePath?: string
   documentId?: string
+  onReset?: () => void
 }
 
 export function TopBar({ 
@@ -23,9 +24,11 @@ export function TopBar({
   title = "TIPTAP · CRDT DEMO",
   githubUrl = "https://github.com/velt-js/tiptap-velt-nextjs",
   routePath,
-  documentId
+  documentId,
+  onReset
 }: TopBarProps) {
   const [copied, setCopied] = useState(false)
+  const [resetting, setResetting] = useState(false)
 
   const handleGithubClick = () => {
     if (githubUrl) {
@@ -49,6 +52,14 @@ export function TopBar({
     }
   }
 
+  const handleReset = () => {
+    if (onReset) {
+      setResetting(true)
+      onReset()
+      // Reset will trigger a page reload, so no need to reset the state
+    }
+  }
+
   return (
     <header className="relative flex h-14 items-center border-b border-border bg-background px-4">
       {/* Left: Toggle + Title */}
@@ -63,20 +74,8 @@ export function TopBar({
         <h1 className="text-sm font-medium text-foreground">{displayText}</h1>
       </div>
 
-      {/* Center: Share Button + Mode Toggle - Absolutely Centered */}
+      {/* Center: Mode Toggle - Absolutely Centered */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-1 rounded-lg bg-muted p-1">
-        <button
-          onClick={handleShare}
-          className={cn(
-            "rounded-md px-4 py-1.5 text-xs font-semibold transition-colors",
-            copied 
-              ? "bg-green-500 text-white" 
-              : "bg-[#ffc31c] text-black hover:bg-[#ffcf4d]"
-          )}
-          aria-label="Copy link"
-        >
-          {copied ? "Copied!" : "Share"}
-        </button>
         <button
           onClick={() => onModeChange("code")}
           className={cn(
@@ -99,8 +98,31 @@ export function TopBar({
 
       {/* Right: Icons */}
       <div className="ml-auto flex items-center gap-2">
-        <button className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent transition-colors">
-          <Settings className="h-4 w-4 text-foreground" />
+        <button
+          onClick={handleReset}
+          className={cn(
+            "rounded-md px-3 py-1.5 text-xs font-medium transition-colors flex items-center gap-1.5",
+            resetting 
+              ? "bg-blue-500 text-white hover:bg-blue-600" 
+              : "hover:bg-accent text-foreground"
+          )}
+          aria-label="Reset document"
+          disabled={resetting}
+        >
+          <RotateCcw className="h-3 w-3" />
+          {resetting ? "Resetting..." : "Reset"}
+        </button>
+        <button
+          onClick={handleShare}
+          className={cn(
+            "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
+            copied 
+              ? "bg-green-500 text-white hover:bg-green-600" 
+              : "hover:bg-accent text-foreground"
+          )}
+          aria-label="Copy link"
+        >
+          {copied ? "Copied!" : "Share"}
         </button>
         <button 
           onClick={handleGithubClick}

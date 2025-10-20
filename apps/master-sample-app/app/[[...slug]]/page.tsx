@@ -71,6 +71,28 @@ export default function Page() {
     }
   }, [])
 
+  // Handle reset: generate new document ID and refresh
+  const handleReset = () => {
+    if (typeof window === 'undefined') return
+
+    try {
+      // Generate a new document ID
+      const newDocId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+      
+      // Update localStorage
+      localStorage.setItem('master-app-document-id', newDocId)
+      
+      // Reload the page with the new document ID
+      const sample = getSampleById(currentSampleId)
+      const routePath = sample?.metadata.routePath || ''
+      const newUrl = `${routePath}?documentId=${newDocId}`
+      
+      window.location.href = newUrl
+    } catch (error) {
+      console.error('Error resetting document:', error)
+    }
+  }
+
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       {/* Sidebar */}
@@ -87,6 +109,7 @@ export default function Page() {
         sidebarOpen={sidebarOpen}
         onSidebarToggle={() => setSidebarOpen(!sidebarOpen)}
         documentId={documentId}
+        onReset={handleReset}
       />
     </div>
   )

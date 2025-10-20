@@ -50,8 +50,8 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
             </span>
           </div>
 
-          {/* Search */}
-          <div className="px-3 py-3">
+          {/* Search - Hidden for now, keeping for future use */}
+          <div className="px-3 py-3 hidden">
             <div className="relative">
               <Search className="absolute left-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
               <input
@@ -62,22 +62,13 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
             </div>
           </div>
 
+          {/* Feature tab - showing only FEATURE, APP TYPE hidden */}
           <div className="px-3 pb-3">
             <div className="flex items-center gap-1 rounded-lg bg-secondary p-1">
               <button
-                onClick={() => setActivePill("app-type")}
-                className={cn(
-                  "flex-1 rounded-md px-2 py-1.5 text-[11px] font-bold font-mono uppercase tracking-wide transition-colors",
-                  activePill === "app-type" ? "bg-[#ffc31c] text-black" : "text-muted-foreground hover:text-foreground",
-                )}
-              >
-                APP TYPE
-              </button>
-              <button
                 onClick={() => setActivePill("feature")}
                 className={cn(
-                  "flex-1 rounded-md px-2 py-1.5 text-[11px] font-bold font-mono uppercase tracking-wide transition-colors",
-                  activePill === "feature" ? "bg-[#ffc31c] text-black" : "text-muted-foreground hover:text-foreground",
+                  "w-full rounded-md px-2 py-1.5 text-[11px] font-bold font-mono uppercase tracking-wide transition-colors bg-[#ffc31c] text-black"
                 )}
               >
                 FEATURE

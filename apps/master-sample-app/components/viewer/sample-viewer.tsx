@@ -11,9 +11,10 @@ interface SampleViewerProps {
   sidebarOpen: boolean
   onSidebarToggle: () => void
   documentId: string
+  onReset?: () => void
 }
 
-export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId }: SampleViewerProps) {
+export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId, onReset }: SampleViewerProps) {
   const [mode, setMode] = useState<"code" | "demo">("demo")
 
   // Dynamically append documentId to iframe URLs
@@ -48,6 +49,7 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId 
                 githubUrl={sample.metadata.githubUrl}
                 routePath={sample.metadata.routePath}
                 documentId={documentId}
+                onReset={onReset}
               />
 
       {/* Content Area */}
