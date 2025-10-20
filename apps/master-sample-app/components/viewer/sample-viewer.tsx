@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { Sample } from "@/types/sample"
 import { TopBar } from "./top-bar"
 import { IframePair } from "./iframe-pair"
@@ -10,10 +10,28 @@ interface SampleViewerProps {
   sample: Sample
   sidebarOpen: boolean
   onSidebarToggle: () => void
+  documentId: string
 }
 
-export function SampleViewer({ sample, sidebarOpen, onSidebarToggle }: SampleViewerProps) {
+export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId }: SampleViewerProps) {
   const [mode, setMode] = useState<"code" | "demo">("demo")
+
+  // Dynamically append documentId to iframe URLs
+  const iframeUrl = useMemo(() => {
+    if (!documentId || !sample.metadata.iframeUrl) return sample.metadata.iframeUrl
+    const url = new URL(sample.metadata.iframeUrl)
+    url.searchParams.set('documentId', documentId)
+    url.searchParams.set('iframeId', '1')
+    return url.toString()
+  }, [sample.metadata.iframeUrl, documentId])
+
+  const iframeUrl2 = useMemo(() => {
+    if (!documentId || !sample.metadata.iframeUrl2) return sample.metadata.iframeUrl2
+    const url = new URL(sample.metadata.iframeUrl2)
+    url.searchParams.set('documentId', documentId)
+    url.searchParams.set('iframeId', '2')
+    return url.toString()
+  }, [sample.metadata.iframeUrl2, documentId])
 
   return (
     <div
@@ -23,21 +41,23 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle }: SampleVie
       }}
     >
       {/* Top Bar */}
-      <TopBar
-        mode={mode}
-        onModeChange={setMode}
-        sidebarOpen={sidebarOpen}
-        onSidebarToggle={onSidebarToggle}
-        title={sample.metadata.title}
-        githubUrl={sample.metadata.githubUrl}
-      />
+              <TopBar
+                mode={mode}
+                onModeChange={setMode}
+                sidebarOpen={sidebarOpen}
+                onSidebarToggle={onSidebarToggle}
+                title={sample.metadata.title}
+                githubUrl={sample.metadata.githubUrl}
+                routePath={sample.metadata.routePath}
+                documentId={documentId}
+              />
 
       {/* Content Area */}
       <main className="flex-1 overflow-hidden p-4">
         {mode === "demo" ? (
           <IframePair 
-            url={sample.metadata.iframeUrl}
-            secondUrl={sample.metadata.iframeUrl2}
+            url={iframeUrl}
+            secondUrl={iframeUrl2}
             height="calc(100vh - 120px)"
             displayMode={sample.metadata.displayMode || 'dual'}
           />
@@ -51,8 +71,8 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle }: SampleVie
 
             {/* Right: IframePair */}
             <IframePair 
-              url={sample.metadata.iframeUrl}
-              secondUrl={sample.metadata.iframeUrl2}
+              url={iframeUrl}
+              secondUrl={iframeUrl2}
               height="100%"
               displayMode={sample.metadata.displayMode || 'dual'}
             />

@@ -1,6 +1,6 @@
 "use client"
 
-import { Search, ChevronRight, Plus, Minus, Menu } from "lucide-react"
+import { Search, ChevronRight, Menu } from "lucide-react"
 import { useState } from "react"
 import { ThemeToggle } from "./theme-toggle"
 import { cn } from "@/lib/utils"
@@ -15,8 +15,10 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     cursors: true,
-    comments: true,
-    crdt: true,
+    react: true,
+    canvas: true,
+    libraries: true,
+    reactflow: true,
   })
   const [selectedItem, setSelectedItem] = useState<string>("playground")
   const [activePill, setActivePill] = useState<"app-type" | "feature">("feature")
@@ -114,140 +116,67 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                   )}
                 </div>
 
-                {/* Comments Section */}
+                {/* React Section with nested hierarchy */}
                 <div className="mb-1">
                   <button
-                    onClick={() => toggleSection("comments")}
+                    onClick={() => toggleSection("react")}
                     className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
                   >
-                    <span>Comments</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.comments && "rotate-90")} />
+                    <span>React</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.react && "rotate-90")} />
                   </button>
-                  {expandedSections.comments && (
-                    <div className="mt-2 space-y-1">
-                      <div className="text-sm font-mono font-semibold text-muted-foreground px-3 py-1.5 uppercase tracking-wider">
-                        TABLE
-                      </div>
+                  {expandedSections.react && (
+                    <div className="mt-2 ml-2 space-y-1">
+                      {/* Canvas Section */}
                       <button
-                        onClick={() => {
-                          setSelectedItem("custom")
-                          onSampleSelect?.("tiptap-crdt")
-                        }}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                          selectedItem === "custom" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
+                        onClick={() => toggleSection("canvas")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
                       >
-                        Custom
+                        <span>Canvas</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.canvas && "rotate-90")} />
                       </button>
-                      <button
-                        onClick={() => setSelectedItem("ag-grid")}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-muted-foreground transition-colors",
-                          selectedItem === "ag-grid" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
-                      >
-                        AG Grid
-                      </button>
-                      <button
-                        onClick={() => setSelectedItem("text-plus")}
-                        className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm font-mono text-muted-foreground hover:bg-secondary/50 transition-colors"
-                      >
-                        <span>TEXT</span>
-                        <Plus className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => setSelectedItem("text-minus")}
-                        className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm font-mono text-muted-foreground hover:bg-secondary/50 transition-colors"
-                      >
-                        <span>TEXT</span>
-                        <Minus className="h-4 w-4" />
-                      </button>
+                      {expandedSections.canvas && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          {/* Libraries Section */}
+                          <button
+                            onClick={() => toggleSection("libraries")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>Libraries</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.libraries && "rotate-90")} />
+                          </button>
+                          {expandedSections.libraries && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              {/* ReactFlow Section */}
+                              <button
+                                onClick={() => toggleSection("reactflow")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>ReactFlow</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.reactflow && "rotate-90")} />
+                              </button>
+                              {expandedSections.reactflow && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("reactflow-demo")
+                                      onSampleSelect?.("react-canvas-libraries-reactflow-reactflow-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "reactflow-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    reactflow-demo
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
-                </div>
-
-                {/* CRDT Section */}
-                <div className="mb-1">
-                  <button
-                    onClick={() => toggleSection("crdt")}
-                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
-                  >
-                    <span>CRDT</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdt && "rotate-90")} />
-                  </button>
-                  {expandedSections.crdt && (
-                    <div className="mt-2 space-y-1">
-                      <button
-                        onClick={() => {
-                          setSelectedItem("reactflow-playground")
-                          onSampleSelect?.("reactflow-playground")
-                        }}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                          selectedItem === "reactflow-playground" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
-                      >
-                        ReactFlow
-                      </button>
-                      <button
-                        onClick={() => {
-                          setSelectedItem("tiptap-crdt")
-                          onSampleSelect?.("tiptap-crdt")
-                        }}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                          selectedItem === "tiptap-crdt" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
-                      >
-                        Tiptap
-                      </button>
-                      <button
-                        onClick={() => {
-                          setSelectedItem("codemirror-crdt")
-                          onSampleSelect?.("codemirror-crdt")
-                        }}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                          selectedItem === "codemirror-crdt" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
-                      >
-                        CodeMirror
-                      </button>
-                      <button
-                        onClick={() => {
-                          setSelectedItem("blocknote-crdt")
-                          onSampleSelect?.("blocknote-crdt")
-                        }}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                          selectedItem === "blocknote-crdt" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
-                      >
-                        Blocknote
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Recording Sections */}
-                <div className="mb-1">
-                  <button
-                    onClick={() => toggleSection("recording1")}
-                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
-                  >
-                    <span>Recording</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.recording1 && "rotate-90")} />
-                  </button>
-                </div>
-                <div className="mb-1">
-                  <button
-                    onClick={() => toggleSection("recording2")}
-                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
-                  >
-                    <span>Recording</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.recording2 && "rotate-90")} />
-                  </button>
                 </div>
               </>
             ) : (

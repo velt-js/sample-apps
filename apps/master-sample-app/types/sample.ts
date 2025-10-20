@@ -9,6 +9,7 @@ export interface SampleMetadata {
   githubRepoPath?: string
   isDefault?: boolean
   displayMode?: 'single' | 'dual'
+  routePath?: string
 }
 
 export interface SampleCodeFile {

@@ -1,41 +1,17 @@
 import { Sample } from '@/types/sample'
-import tiptapCrdtMeta from './tiptap-crdt/metadata'
-import { codeFiles as tiptapCrdtCodeFiles } from './tiptap-crdt/code-files'
 import cursorsPlaygroundMeta from './cursors-playground/metadata'
 import { codeFiles as cursorsPlaygroundCodeFiles } from './cursors-playground/code-files'
 import reactflowCrdtMeta from './reactflow-crdt/metadata'
 import { codeFiles as reactflowCrdtCodeFiles } from './reactflow-crdt/code-files'
-import reactflowPlaygroundMeta from './reactflow-playground/metadata'
-import { codeFiles as reactflowPlaygroundCodeFiles } from './reactflow-playground/code-files'
-import codemirrorCrdtMeta from './codemirror-crdt/metadata'
-import { codeFiles as codemirrorCrdtCodeFiles } from './codemirror-crdt/code-files'
-import blocknoteCrdtMeta from './blocknote-crdt/metadata'
-import { codeFiles as blocknoteCrdtCodeFiles } from './blocknote-crdt/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
     metadata: cursorsPlaygroundMeta,
     codeFiles: cursorsPlaygroundCodeFiles
   },
-  'tiptap-crdt': {
-    metadata: tiptapCrdtMeta,
-    codeFiles: tiptapCrdtCodeFiles
-  },
-  'reactflow-crdt': {
+  'react-canvas-libraries-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles
-  },
-  'reactflow-playground': {
-    metadata: reactflowPlaygroundMeta,
-    codeFiles: reactflowPlaygroundCodeFiles
-  },
-  'codemirror-crdt': {
-    metadata: codemirrorCrdtMeta,
-    codeFiles: codemirrorCrdtCodeFiles
-  },
-  'blocknote-crdt': {
-    metadata: blocknoteCrdtMeta,
-    codeFiles: blocknoteCrdtCodeFiles
   }
 }
 

@@ -1,19 +1,18 @@
 import { SampleMetadata } from '@/types/sample'
 
-// Shared document ID for both iframes to collaborate on the same document
-const SHARED_DOCUMENT_ID = 'reactflow-crdt-demo'
-
+// Document ID will be dynamically generated and appended by SampleViewer
 const metadata: SampleMetadata = {
-  id: 'reactflow-crdt',
-  title: 'REACTFLOW · CRDT',
+  id: 'react-canvas-libraries-reactflow-reactflow-demo',
+  title: 'React / Canvas / Libraries / ReactFlow / reactflow-demo',
   category: 'feature',
-  section: 'CRDT',
-  iframeUrl: `https://sample-apps-reactflow-demo.vercel.app?documentId=${SHARED_DOCUMENT_ID}`,
-  iframeUrl2: `https://sample-apps-reactflow-demo.vercel.app?documentId=${SHARED_DOCUMENT_ID}`,
+  section: 'ReactFlow',
+  iframeUrl: 'http://localhost:3000',
+  iframeUrl2: 'http://localhost:3006',
   githubUrl: 'https://github.com/velt-js/sample-apps/tree/main/apps/react/canvas/libraries/reactflow/reactflow-demo',
   githubRepoPath: 'velt-js/sample-apps',
   displayMode: 'dual',
-  isDefault: false
+  isDefault: false,
+  routePath: '/react/canvas/libraries/reactflow/reactflow-demo'
 }
 
 export default metadata
