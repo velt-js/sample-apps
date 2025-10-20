@@ -21,7 +21,6 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId 
     if (!documentId || !sample.metadata.iframeUrl) return sample.metadata.iframeUrl
     const url = new URL(sample.metadata.iframeUrl)
     url.searchParams.set('documentId', documentId)
-    url.searchParams.set('iframeId', '1')
     return url.toString()
   }, [sample.metadata.iframeUrl, documentId])
 
@@ -29,7 +28,6 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId 
     if (!documentId || !sample.metadata.iframeUrl2) return sample.metadata.iframeUrl2
     const url = new URL(sample.metadata.iframeUrl2)
     url.searchParams.set('documentId', documentId)
-    url.searchParams.set('iframeId', '2')
     return url.toString()
   }, [sample.metadata.iframeUrl2, documentId])
 

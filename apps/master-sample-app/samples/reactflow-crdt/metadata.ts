@@ -7,7 +7,7 @@ const metadata: SampleMetadata = {
   category: 'feature',
   section: 'ReactFlow',
   iframeUrl: 'http://localhost:3000',
-  iframeUrl2: 'http://localhost:3006',
+  iframeUrl2: 'http://localhost:3001',
   githubUrl: 'https://github.com/velt-js/sample-apps/tree/main/apps/react/canvas/libraries/reactflow/reactflow-demo',
   githubRepoPath: 'velt-js/sample-apps',
   displayMode: 'dual',
