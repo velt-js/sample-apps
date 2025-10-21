@@ -1,7 +1,7 @@
 import { Editor } from '@tiptap/react'
 
 export interface TipTapComponentProps {
-  scrollContainerRef?: React.RefObject<HTMLDivElement>
+  scrollContainerRef?: React.RefObject<HTMLDivElement | null>
 }
 
 export interface ToolbarButtonProps {
