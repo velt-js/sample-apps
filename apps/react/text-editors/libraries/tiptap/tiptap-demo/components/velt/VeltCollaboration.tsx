@@ -18,7 +18,11 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
-      <VeltComments textMode={false} />
+      <VeltComments
+        textMode={false}
+        scrollToComment={false}
+        autoCategorize={false}
+      />
       <VeltCommentsSidebar />
       <VeltCursor />
       <VeltCustomization />

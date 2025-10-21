@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useCallback } from 'react'
-import TiptapEditor from '@/components/tiptap/tiptap-editor'
+import TipTapComponent from './TipTapComponent'
 import Sidebar from '../sidebar/sidebar'
 import Header from '../header/header'
 
@@ -39,7 +39,7 @@ export default function DocumentCanvas() {
       <Header />
 
       {/* Tiptap Editor - Full screen */}
-      <TiptapEditor scrollContainerRef={scrollContainerRef} />
+      <TipTapComponent scrollContainerRef={scrollContainerRef} />
 
       {/* Sidebar - Positioned on top of editor */}
       <div className="absolute top-0 left-0 z-10">
