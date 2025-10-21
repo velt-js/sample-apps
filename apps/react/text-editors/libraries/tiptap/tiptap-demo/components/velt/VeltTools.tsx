@@ -3,7 +3,6 @@ import {
   VeltPresence,
   VeltSidebarButton,
   VeltNotificationsTool,
-  VeltCommentTool,
   VeltHuddleTool
 } from "@veltdev/react";
 
@@ -11,7 +10,11 @@ function VeltTools() {
   return (
     <>
       <VeltPresence />
+
       <VeltSidebarButton />
+
+      <VeltHuddleTool type='all' />
+
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}
@@ -21,7 +24,6 @@ function VeltTools() {
           all: { name: "All", enable: true },
         }}
       />
-      <VeltHuddleTool type='all' />
     </>
   );
 }

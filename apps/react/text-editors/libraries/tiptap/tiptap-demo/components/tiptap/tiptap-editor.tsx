@@ -6,6 +6,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import React from 'react'
 import { InlineH1, InlineH2, InlineH3 } from './extensions'
+import Header from '../header/header'
 
 // Icon assets from public/icons directory
 const imgTablerIconAlignLeft = "/icons/align-left.svg"
@@ -115,6 +116,9 @@ export default function TiptapEditor() {
 
   return (
     <div className="bg-black relative size-full overflow-hidden" data-name="Tiptap / Expanded Toolbar">
+      {/* Header with Velt Tools */}
+      <Header />
+
       {/* Document Content - Scrollable */}
       <div className="absolute inset-0 overflow-y-auto pb-20">
         <div className="flex justify-center pt-[51px]">

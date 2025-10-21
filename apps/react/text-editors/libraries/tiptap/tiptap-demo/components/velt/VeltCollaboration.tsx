@@ -18,12 +18,13 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
-      <VeltComments 
-        popoverMode={true} 
-        textMode={false} 
-        commentPinHighlighter={false} 
-        dialogOnHover={false} 
-        popoverTriangleComponent={false} 
+      <VeltComments
+        popoverMode={true}
+        textMode={false}
+        textCommentMode={false}
+        commentPinHighlighter={false}
+        dialogOnHover={false}
+        popoverTriangleComponent={false}
       />
       <VeltCommentsSidebar />
       <VeltCursor />
