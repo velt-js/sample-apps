@@ -8,7 +8,7 @@ export const EditorContentArea: React.FC<EditorContentAreaProps> = ({
   addTiptapVeltComment,
 }) => {
   return (
-    <div className="w-[738px]">
+    <div className="w-full max-w-[738px]">
       <div
         className={`flex items-center gap-2 text-sm px-2 py-2 bg-white/[0.04] rounded-lg mb-4 transition-opacity duration-300 ${
           hasSelection ? 'opacity-30' : 'opacity-100 animate-pulse-subtle'

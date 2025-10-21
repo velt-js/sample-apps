@@ -283,8 +283,8 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   return (
     <div className="bg-black relative size-full overflow-hidden" data-name="Tiptap / Expanded Toolbar">
       <div ref={scrollContainerRef} className="absolute inset-0 overflow-y-auto pb-20">
-        <div className="flex justify-start pt-[51px] pl-[280px]">
-          <div className="w-[850px]">
+        <div className="flex justify-center pt-[51px] px-4">
+          <div className="w-full max-w-[850px]">
             <div className="bg-[rgb(17,17,17)] border border-[rgb(20,20,20)] border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]">
               <EditorContentArea
                 editor={editor}

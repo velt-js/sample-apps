@@ -55,10 +55,10 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
       {/* Content Area */}
       <main className="flex-1 overflow-hidden p-4">
         {mode === "demo" ? (
-          <IframePair 
+          <IframePair
             url={iframeUrl}
             secondUrl={iframeUrl2}
-            height="calc(100vh - 120px)"
+            height="calc(100vh - 88px)"
             displayMode={sample.metadata.displayMode || 'dual'}
           />
         ) : (

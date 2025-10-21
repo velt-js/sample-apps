@@ -3,6 +3,8 @@ import cursorsPlaygroundMeta from './cursors-playground/metadata'
 import { codeFiles as cursorsPlaygroundCodeFiles } from './cursors-playground/code-files'
 import reactflowCrdtMeta from './reactflow-crdt/metadata'
 import { codeFiles as reactflowCrdtCodeFiles } from './reactflow-crdt/code-files'
+import tiptapDemoMeta from './tiptap-demo/metadata'
+import { codeFiles as tiptapDemoCodeFiles } from './tiptap-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -12,6 +14,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-canvas-libraries-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles
+  },
+  'react-text-editors-libraries-tiptap-tiptap-demo': {
+    metadata: tiptapDemoMeta,
+    codeFiles: tiptapDemoCodeFiles
   }
 }
 
