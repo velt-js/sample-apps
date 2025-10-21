@@ -9,7 +9,6 @@ export const EditorContentArea: React.FC<EditorContentAreaProps> = ({
 }) => {
   return (
     <div className="w-[738px]">
-      {/* Helper Text */}
       <div
         className={`flex items-center gap-2 text-sm px-2 py-2 bg-white/[0.04] rounded-lg mb-4 transition-opacity duration-300 ${
           hasSelection ? 'opacity-30' : 'opacity-100 animate-pulse-subtle'
@@ -29,7 +28,6 @@ export const EditorContentArea: React.FC<EditorContentAreaProps> = ({
         className="tiptap-editor-content prose prose-invert max-w-none"
       />
 
-      {/* Bubble Menu for Comments */}
       <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
         <div className="bubble-menu bg-[rgb(34,34,34)] rounded-full p-[6px] shadow-[0_0_80px_rgba(0,0,0,1)]">
           <button

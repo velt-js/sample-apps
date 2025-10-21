@@ -1,3 +1,4 @@
+// [Velt] API endpoint to generate authentication tokens
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
