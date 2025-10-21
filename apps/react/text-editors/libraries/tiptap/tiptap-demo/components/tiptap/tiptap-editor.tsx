@@ -223,7 +223,11 @@ const ToolbarDivider: React.FC = () => {
   )
 }
 
-export default function TiptapEditor() {
+interface TiptapEditorProps {
+  scrollContainerRef?: React.RefObject<HTMLDivElement>
+}
+
+export default function TiptapEditor({ scrollContainerRef }: TiptapEditorProps) {
   const [, setForceUpdate] = React.useState({})
   const [hasSelection, setHasSelection] = React.useState(false)
 
@@ -278,7 +282,7 @@ export default function TiptapEditor() {
   return (
     <div className="bg-black relative size-full overflow-hidden" data-name="Tiptap / Expanded Toolbar">
       {/* Document Content - Scrollable */}
-      <div className="absolute inset-0 overflow-y-auto pb-20">
+      <div ref={scrollContainerRef} className="absolute inset-0 overflow-y-auto pb-20">
         <div className="flex justify-start pt-[51px] pl-[280px]">
           <div className="w-[850px]">
             {/* Document Background */}

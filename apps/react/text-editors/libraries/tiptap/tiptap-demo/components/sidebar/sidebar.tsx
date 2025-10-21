@@ -22,7 +22,11 @@ const tableOfContentsItems: TableOfContentsItem[] = [
   { id: 'references', label: 'References' },
 ]
 
-export default function Sidebar() {
+interface SidebarProps {
+  onScrollToHeading?: (headingText: string) => void
+}
+
+export default function Sidebar({ onScrollToHeading }: SidebarProps) {
   const [activeItem, setActiveItem] = useState('abstract')
 
   return (
@@ -61,7 +65,12 @@ export default function Sidebar() {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveItem(item.id)}
+                onClick={() => {
+                  setActiveItem(item.id)
+                  if (onScrollToHeading) {
+                    onScrollToHeading(item.label)
+                  }
+                }}
                 className={`flex gap-[${isActive ? '8' : '10'}px] items-center ${isActive ? '' : 'opacity-[0.52]'} w-full text-left`}
               >
                 {/* Indicator */}
