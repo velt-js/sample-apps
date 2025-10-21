@@ -50,7 +50,7 @@ export default function Sidebar() {
         {/* ToC Header */}
         <div className="flex gap-[8px] items-center">
           <div className="font-['Geist_Mono',monospace] font-normal leading-[0] opacity-[0.52] text-[10px] text-white uppercase">
-            <p className="leading-[1.5] whitespace-pre">Table of Content</p>
+            <p className="leading-[1.5] whitespace-pre">Table of Contents</p>
           </div>
         </div>
 
@@ -77,7 +77,7 @@ export default function Sidebar() {
                 </div>
 
                 {/* Label */}
-                <div className="font-['Urbanist',sans-serif] font-normal text-[12px] text-white">
+                <div className="font-['Geist_Mono',monospace] font-normal text-[12px] text-white">
                   <p className="leading-[2.2] whitespace-pre">{item.label}</p>
                 </div>
               </button>
@@ -86,15 +86,6 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Settings Footer */}
-      <div className="absolute left-[24px] bottom-[20px] right-[156px] flex gap-[8px] items-center">
-        <div className="relative shrink-0 size-[16px]">
-          <img alt="" className="block max-w-none size-full" src={imgTablerIconSettings} />
-        </div>
-        <div className="font-['Urbanist',sans-serif] font-normal opacity-50 text-[14px] text-white">
-          <p className="leading-[1.2] whitespace-pre">Settings</p>
-        </div>
-      </div>
     </div>
   )
 }
