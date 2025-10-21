@@ -18,6 +18,7 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
+      <VeltComments textMode={false} />
       <VeltCommentsSidebar />
       <VeltCursor />
       <VeltCustomization />

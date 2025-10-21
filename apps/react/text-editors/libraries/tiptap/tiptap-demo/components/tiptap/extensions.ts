@@ -1,5 +1,19 @@
 import { Mark, mergeAttributes } from '@tiptap/core'
 
+declare module '@tiptap/core' {
+  interface Commands<ReturnType> {
+    inlineH1: {
+      toggleInlineH1: () => ReturnType
+    }
+    inlineH2: {
+      toggleInlineH2: () => ReturnType
+    }
+    inlineH3: {
+      toggleInlineH3: () => ReturnType
+    }
+  }
+}
+
 // Custom mark for H1 styling (inline)
 export const InlineH1 = Mark.create({
   name: 'inlineH1',

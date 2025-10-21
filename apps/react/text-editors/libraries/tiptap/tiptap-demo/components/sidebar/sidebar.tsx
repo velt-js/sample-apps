@@ -35,7 +35,7 @@ export default function Sidebar() {
             <img alt="" className="block max-w-none size-full" src={imgTablerIconMenu2} />
           </div>
           <p className="font-['Urbanist',sans-serif] font-normal leading-none opacity-50 text-[12px] text-white whitespace-pre">
-            Mihir's Workspace
+            Mihir&apos;s Workspace
           </p>
         </div>
 

@@ -1,11 +1,13 @@
 'use client'
 
-import { EditorContent, useEditor } from '@tiptap/react'
+import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { InlineH1, InlineH2, InlineH3 } from './extensions'
+import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments'
+import { useCommentAnnotations } from '@veltdev/react'
 
 // Icon assets from public/icons directory
 const imgTablerIconAlignLeft = "/icons/align-left.svg"
@@ -98,6 +100,7 @@ export default function TiptapEditor() {
       InlineH1,
       InlineH2,
       InlineH3,
+      TiptapVeltComments,
     ],
     content: initialContent,
     immediatelyRender: false,
@@ -108,6 +111,23 @@ export default function TiptapEditor() {
       setForceUpdate({})
     },
   })
+
+  // Get comment annotations from Velt
+  const commentAnnotations = useCommentAnnotations()
+
+  // Render comments in the editor when annotations change
+  useEffect(() => {
+    if (editor && commentAnnotations?.length) {
+      renderComments({ editor, commentAnnotations })
+    }
+  }, [editor, commentAnnotations])
+
+  // Handler to add a comment
+  const addTiptapVeltComment = () => {
+    if (editor) {
+      addComment({ editor })
+    }
+  }
 
   if (!editor) {
     return null
@@ -127,6 +147,28 @@ export default function TiptapEditor() {
                   editor={editor}
                   className="tiptap-editor-content prose prose-invert max-w-none"
                 />
+                
+                {/* Bubble Menu for Comments */}
+                <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+                  <div className="bubble-menu bg-[rgb(34,34,34)] rounded-full p-[6px] shadow-[0_0_80px_rgba(0,0,0,1)]">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        addTiptapVeltComment()
+                      }}
+                      className="flex items-center justify-center p-[6px] hover:bg-white/10 rounded-full transition-all cursor-pointer"
+                      title="Add comment"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="white">
+                        <path
+                          d="M10 17.25H4C3.30964 17.25 2.75 16.6904 2.75 16V10C2.75 5.99594 5.99594 2.75 10 2.75C14.0041 2.75 17.25 5.99594 17.25 10C17.25 14.0041 14.0041 17.25 10 17.25Z"
+                          strokeWidth="1.5"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </BubbleMenu>
               </div>
             </div>
           </div>
