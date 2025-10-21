@@ -10,11 +10,8 @@ function VeltTools() {
   return (
     <>
       <VeltPresence />
-
       <VeltSidebarButton />
-
       <VeltHuddleTool type='all' />
-
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}
