@@ -133,3 +133,17 @@ velt-comment-text[comment-available="true"] {
 velt-comment-text[comment-available="true"]:hover {
   background-color: rgba(255, 208, 0, 0.4);
 }
+
+/* Helper Text Animation */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

@@ -56,13 +56,22 @@ interface ToolbarButtonProps {
 const ToolbarButton: React.FC<ToolbarButtonProps> = ({ icon, alt, onClick, active }) => {
   return (
     <div
-      className={`box-border content-stretch flex gap-[10px] items-center p-[8px] relative rounded-[12px] shrink-0 cursor-pointer transition-all ${
-        active ? 'bg-white' : 'hover:bg-white/10'
+      className={`box-border content-stretch flex items-center p-[8px] relative rounded-[12px] shrink-0 cursor-pointer transition-all ${
+        active ? 'bg-[rgb(255,255,255)]' : 'hover:bg-white/10'
       }`}
       onClick={onClick}
     >
-      <div className={`relative shrink-0 size-[20px] transition-all ${active ? 'text-[rgb(23,23,23)]' : 'text-white'}`}>
-        <img alt={alt} className="block max-w-none size-full" src={icon} />
+      <div className={`relative shrink-0 size-[20px] transition-all`}>
+        <img 
+          alt={alt} 
+          className="block max-w-none size-full" 
+          src={icon}
+          style={{
+            filter: active 
+              ? 'brightness(0) saturate(100%) invert(9%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(92%)' // rgb(23,23,23)
+              : 'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(0deg) brightness(100%) contrast(100%)' // rgb(255,255,255)
+          }}
+        />
       </div>
     </div>
   )
@@ -70,23 +79,15 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({ icon, alt, onClick, activ
 
 const ToolbarDivider: React.FC = () => {
   return (
-    <div
-      className="flex h-[calc(1px*((var(--transform-inner-width)*1)+(var(--transform-inner-height)*0)))] items-center justify-center relative shrink-0 w-[calc(1px*((var(--transform-inner-height)*1)+(var(--transform-inner-width)*0)))]"
-      style={{ '--transform-inner-width': '12', '--transform-inner-height': '0' } as React.CSSProperties}
-    >
-      <div className="flex-none rotate-[90deg]">
-        <div className="h-0 relative w-[12px]">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-            <img alt="" className="block max-w-none size-full" src={imgLine1} />
-          </div>
-        </div>
-      </div>
+    <div className="flex items-center justify-center relative shrink-0 h-[20px]">
+      <div className="w-[1px] h-full bg-[rgb(255,255,255)] opacity-20"></div>
     </div>
   )
 }
 
 export default function TiptapEditor() {
   const [, setForceUpdate] = React.useState({})
+  const [hasSelection, setHasSelection] = React.useState(false)
 
   const editor = useEditor({
     extensions: [
@@ -107,7 +108,10 @@ export default function TiptapEditor() {
     onUpdate: () => {
       setForceUpdate({})
     },
-    onSelectionUpdate: () => {
+    onSelectionUpdate: ({ editor }) => {
+      // Track if text is selected
+      const { from, to } = editor.state.selection
+      setHasSelection(from !== to)
       setForceUpdate({})
     },
   })
@@ -143,6 +147,21 @@ export default function TiptapEditor() {
             <div className="bg-[rgb(17,17,17)] border border-[rgb(20,20,20)] border-solid rounded-[16px] p-[42px_42px_64px_42px] min-h-[880px]">
               {/* Editor Content Container */}
               <div className="w-[558px] mx-auto">
+                {/* Helper Text */}
+                <div 
+                  className={`flex items-center gap-2 text-sm px-2 py-2 bg-white/[0.04] rounded-lg mb-4 transition-opacity duration-300 ${
+                    hasSelection ? 'opacity-30' : 'opacity-100 animate-pulse-subtle'
+                  }`}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-50 shrink-0">
+                    <path
+                      d="M8.00004 1.33334C11.682 1.33334 14.6667 4.31801 14.6667 8.00001C14.6681 9.75033 13.9811 11.431 12.754 12.6791C11.5269 13.9272 9.85814 14.6427 8.10806 14.6711C6.35797 14.6994 4.66693 14.0384 3.40004 12.8307C2.13315 11.623 1.39203 9.96545 1.33671 8.21601L1.33337 8.00001L1.33604 7.81334C1.43471 4.21801 4.38004 1.33334 8.00004 1.33334ZM8.00004 7.33334H7.33337L7.25537 7.33801C7.09334 7.35728 6.944 7.43531 6.83565 7.55732C6.7273 7.67933 6.66745 7.83684 6.66745 8.00001C6.66745 8.16319 6.7273 8.32069 6.83565 8.4427C6.944 8.56471 7.09334 8.64274 7.25537 8.66201L7.33337 8.66668V10.6667L7.33804 10.7447C7.35559 10.8935 7.42276 11.032 7.52872 11.138C7.63467 11.244 7.77323 11.3111 7.92204 11.3287L8.00004 11.3333H8.66671L8.74471 11.3287C8.89352 11.3111 9.03208 11.244 9.13803 11.138C9.24399 11.032 9.31116 10.8935 9.32871 10.7447L9.33337 10.6667L9.32871 10.5887C9.31277 10.4527 9.25533 10.3249 9.1642 10.2226C9.07307 10.1204 8.95267 10.0487 8.81937 10.0173L8.74471 10.004L8.66671 10V8.00001L8.66204 7.92201C8.64449 7.7732 8.57732 7.63464 8.47137 7.52868C8.36541 7.42273 8.22685 7.35556 8.07804 7.33801L8.00004 7.33334ZM8.00671 5.33334L7.92204 5.33801C7.76001 5.35728 7.61067 5.43531 7.50232 5.55732C7.39396 5.67933 7.33412 5.83684 7.33412 6.00001C7.33412 6.16319 7.39396 6.32069 7.50232 6.4427C7.61067 6.56471 7.76001 6.64274 7.92204 6.66201L8.00004 6.66668L8.08471 6.66201C8.24674 6.64274 8.39608 6.56471 8.50443 6.4427C8.61279 6.32069 8.67263 6.16319 8.67263 6.00001C8.67263 5.83684 8.61279 5.67933 8.50443 5.55732C8.39608 5.43531 8.24674 5.35728 8.08471 5.33801L8.00671 5.33334Z"
+                      fill="white"
+                    />
+                  </svg>
+                  <span className="text-white opacity-50">Select text to add comment</span>
+                </div>
+                
                 <EditorContent
                   editor={editor}
                   className="tiptap-editor-content prose prose-invert max-w-none"
