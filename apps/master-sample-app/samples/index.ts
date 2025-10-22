@@ -15,10 +15,10 @@ export const SAMPLES: Record<string, Sample> = {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles
   },
-  'react-text-editors-libraries-tiptap-tiptap-demo': {
-    metadata: tiptapDemoMeta,
-    codeFiles: tiptapDemoCodeFiles
-  }
+  // 'react-text-editors-libraries-tiptap-tiptap-demo': {
+  //   metadata: tiptapDemoMeta,
+  //   codeFiles: tiptapDemoCodeFiles
+  // }
 }
 
 export function getSampleById(id: string): Sample | undefined {
