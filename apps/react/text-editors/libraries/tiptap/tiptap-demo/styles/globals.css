@@ -67,7 +67,7 @@
   color: white;
 }
 
-.tiptap-editor-content span[data-heading="h1"] {
+.tiptap-editor-content h1 {
   font-family: 'Urbanist', sans-serif !important;
   font-size: 32px !important;
   font-weight: 700 !important;
@@ -75,9 +75,10 @@
   color: white !important;
   opacity: 1 !important;
   background: transparent !important;
+  margin-bottom: 16px;
 }
 
-.tiptap-editor-content span[data-heading="h2"] {
+.tiptap-editor-content h2 {
   font-family: 'Urbanist', sans-serif !important;
   font-size: 20px !important;
   font-weight: 700 !important;
@@ -85,9 +86,10 @@
   color: white !important;
   opacity: 1 !important;
   background: transparent !important;
+  margin-bottom: 16px;
 }
 
-.tiptap-editor-content span[data-heading="h3"] {
+.tiptap-editor-content h3 {
   font-family: 'Urbanist', sans-serif !important;
   font-size: 16px !important;
   font-weight: 700 !important;
@@ -95,6 +97,7 @@
   color: white !important;
   opacity: 1 !important;
   background: transparent !important;
+  margin-bottom: 16px;
 }
 
 .tiptap-editor-content p {
@@ -146,4 +149,32 @@ velt-comment-text[comment-available="true"]:hover {
 
 .animate-pulse-subtle {
   animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Collaboration cursor styling - Dark theme adjustments */
+.collaboration-cursor__caret {
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  margin-left: -1px;
+  margin-right: -1px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+}
+
+/* Render the username above the caret */
+.collaboration-cursor__label {
+  border-radius: 3px 3px 3px 0;
+  color: #000000;
+  background: #ffffff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  left: -1px;
+  line-height: normal;
+  padding: 0.1rem 0.3rem;
+  position: absolute;
+  top: -1.4em;
+  user-select: none;
+  white-space: nowrap;
 }

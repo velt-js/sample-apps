@@ -11,12 +11,6 @@ export interface ToolbarButtonProps {
   active?: boolean
 }
 
-export interface EditorContentAreaProps {
-  editor: Editor
-  hasSelection: boolean
-  addTiptapVeltComment: () => void
-}
-
 export interface EditorToolbarProps {
   editor: Editor
 }
