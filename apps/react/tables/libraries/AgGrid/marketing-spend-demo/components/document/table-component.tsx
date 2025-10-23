@@ -136,8 +136,30 @@ export const TableComponent: React.FC = () => {
         formatting.underline ? 'underline' : '',
         formatting.strikethrough ? 'line-through' : '',
       ].filter(Boolean).join(' ') || 'none',
-      textAlign: formatting.align || (baseStyle.textAlign as any),
     };
+  };
+
+  const getCellAlignment = (row: number, col: number): React.CSSProperties => {
+    const cellKey = getCellKey(row, col);
+    const formatting = cellFormatting[cellKey] || {};
+
+    if (formatting.align) {
+      return {
+        display: 'flex',
+        justifyContent: formatting.align === 'left' ? 'flex-start' : formatting.align === 'center' ? 'center' : 'flex-end',
+        width: '100%',
+      };
+    }
+
+    return {};
+  };
+
+  const isColumnSelected = (col: number) => {
+    return selectedCell?.col === col;
+  };
+
+  const isRowSelected = (row: number) => {
+    return selectedCell?.row === row;
   };
 
   return (
@@ -256,28 +278,28 @@ export const TableComponent: React.FC = () => {
                   <p style={styles.headerTextMonoP}>-</p>
                 </div>
               </div>
-              <div style={{...styles.headerCell, ...styles.activeHeader}}>
-                <div style={styles.headerTextMonoSmallDiv}>
+              <div style={{...styles.headerCell, ...(isColumnSelected(0) && styles.activeHeader)}}>
+                <div style={isColumnSelected(0) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
                   <p style={styles.headerTextMonoSmallP}>A</p>
                 </div>
               </div>
-              <div style={styles.headerCell}>
-                <div style={styles.headerTextMonoSmallDimmed}>
+              <div style={{...styles.headerCell, ...(isColumnSelected(1) && styles.activeHeader)}}>
+                <div style={isColumnSelected(1) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
                   <p style={styles.headerTextMonoSmallP}>B</p>
                 </div>
               </div>
-              <div style={styles.headerCell}>
-                <div style={styles.headerTextMonoSmallDimmed}>
+              <div style={{...styles.headerCell, ...(isColumnSelected(2) && styles.activeHeader)}}>
+                <div style={isColumnSelected(2) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
                   <p style={styles.headerTextMonoSmallP}>C</p>
                 </div>
               </div>
-              <div style={styles.headerCell}>
-                <div style={styles.headerTextMonoSmallDimmed}>
+              <div style={{...styles.headerCell, ...(isColumnSelected(3) && styles.activeHeader)}}>
+                <div style={isColumnSelected(3) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
                   <p style={styles.headerTextMonoSmallP}>D</p>
                 </div>
               </div>
-              <div style={styles.headerCell}>
-                <div style={styles.headerTextMonoSmallDimmed}>
+              <div style={{...styles.headerCell, ...(isColumnSelected(4) && styles.activeHeader)}}>
+                <div style={isColumnSelected(4) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
                   <p style={styles.headerTextMonoSmallP}>E</p>
                 </div>
               </div>
@@ -285,8 +307,8 @@ export const TableComponent: React.FC = () => {
 
             {/* Column Title Row */}
             <div style={styles.dataRow}>
-              <div style={{...styles.dataCell, ...styles.rowNumberCell, ...styles.rowNumberCellActive}}>
-                <div style={styles.rowNumberDiv}>
+              <div style={{...styles.dataCell, ...styles.rowNumberCell, ...(isRowSelected(0) && styles.rowNumberCellActive)}}>
+                <div style={isRowSelected(0) ? styles.rowNumberDiv : styles.rowNumberDivDimmed}>
                   <p style={styles.rowNumberP}>1</p>
                 </div>
               </div>
@@ -294,6 +316,7 @@ export const TableComponent: React.FC = () => {
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 0) && styles.selectedCell),
+                  ...getCellAlignment(0, 0),
                   cursor: 'pointer'
                 }}
                 onClick={() => handleCellClick(0, 0)}
@@ -306,6 +329,7 @@ export const TableComponent: React.FC = () => {
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 1) && styles.selectedCell),
+                  ...getCellAlignment(0, 1),
                   cursor: 'pointer'
                 }}
                 onClick={() => handleCellClick(0, 1)}
@@ -318,6 +342,7 @@ export const TableComponent: React.FC = () => {
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 2) && styles.selectedCell),
+                  ...getCellAlignment(0, 2),
                   cursor: 'pointer'
                 }}
                 onClick={() => handleCellClick(0, 2)}
@@ -330,6 +355,7 @@ export const TableComponent: React.FC = () => {
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 3) && styles.selectedCell),
+                  ...getCellAlignment(0, 3),
                   cursor: 'pointer'
                 }}
                 onClick={() => handleCellClick(0, 3)}
@@ -342,6 +368,7 @@ export const TableComponent: React.FC = () => {
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 4) && styles.selectedCell),
+                  ...getCellAlignment(0, 4),
                   cursor: 'pointer'
                 }}
                 onClick={() => handleCellClick(0, 4)}
@@ -357,8 +384,8 @@ export const TableComponent: React.FC = () => {
               const rowNum = index + 1; // Row numbers start from 1 (0 is title row)
               return (
                 <div key={index} style={styles.dataRow}>
-                  <div style={{...styles.dataCell, ...styles.rowNumberCell}}>
-                    <div style={styles.rowNumberDivDimmed}>
+                  <div style={{...styles.dataCell, ...styles.rowNumberCell, ...(isRowSelected(rowNum) && styles.rowNumberCellActive)}}>
+                    <div style={isRowSelected(rowNum) ? styles.rowNumberDiv : styles.rowNumberDivDimmed}>
                       <p style={styles.rowNumberP}>{index + 2}</p>
                     </div>
                   </div>
@@ -366,6 +393,7 @@ export const TableComponent: React.FC = () => {
                     style={{
                       ...styles.dataCell,
                       ...(isCellSelected(rowNum, 0) && styles.selectedCell),
+                      ...getCellAlignment(rowNum, 0),
                       cursor: 'pointer'
                     }}
                     onClick={() => handleCellClick(rowNum, 0)}
@@ -379,6 +407,7 @@ export const TableComponent: React.FC = () => {
                       ...styles.dataCell,
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 1) && styles.selectedCell),
+                      ...getCellAlignment(rowNum, 1),
                       cursor: 'pointer'
                     }}
                     onClick={() => handleCellClick(rowNum, 1)}
@@ -392,6 +421,7 @@ export const TableComponent: React.FC = () => {
                       ...styles.dataCell,
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 2) && styles.selectedCell),
+                      ...getCellAlignment(rowNum, 2),
                       cursor: 'pointer'
                     }}
                     onClick={() => handleCellClick(rowNum, 2)}
@@ -405,6 +435,7 @@ export const TableComponent: React.FC = () => {
                       ...styles.dataCell,
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 3) && styles.selectedCell),
+                      ...getCellAlignment(rowNum, 3),
                       cursor: 'pointer'
                     }}
                     onClick={() => handleCellClick(rowNum, 3)}
@@ -417,6 +448,7 @@ export const TableComponent: React.FC = () => {
                     style={{
                       ...styles.dataCell,
                       ...(isCellSelected(rowNum, 4) && styles.selectedCell),
+                      ...getCellAlignment(rowNum, 4),
                       cursor: 'pointer'
                     }}
                     onClick={() => handleCellClick(rowNum, 4)}
