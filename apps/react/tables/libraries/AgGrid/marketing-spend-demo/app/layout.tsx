@@ -1,5 +1,12 @@
 import type { Metadata } from 'next'
+import { Urbanist } from 'next/font/google'
 import '../styles/globals.css'
+
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-urbanist',
+})
 
 export const metadata: Metadata = {
   title: 'marketing-spend-demo',
@@ -13,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={urbanist.variable}>{children}</body>
     </html>
   )
 }
