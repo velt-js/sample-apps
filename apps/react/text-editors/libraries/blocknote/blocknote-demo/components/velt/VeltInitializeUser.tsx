@@ -33,7 +33,7 @@ async function getVeltJwtFromBackend(user: {
 export function useVeltAuthProvider() {
   // Get your app's current authenticated user to authenticate with Velt.
   const { user } = useAppUser();
-  
+
   // [Velt] Create auth provider object to pass to VeltProvider
   const authProvider: VeltAuthProvider | undefined = useMemo(() => {
     if (!user) return undefined;

@@ -49,7 +49,9 @@ export function AppUserProvider({
   );
 
   useEffect(() => {
-    if (!documentId || documentId === 'loading') return;
+    if (!documentId || documentId === 'loading') {
+      return;
+    }
     if (typeof window === 'undefined') return; // Guard against SSR
     
     try {

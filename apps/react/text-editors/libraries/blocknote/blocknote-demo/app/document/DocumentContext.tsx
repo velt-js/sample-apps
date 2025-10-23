@@ -40,7 +40,7 @@ export function useCurrentDocument(): CurrentDocument {
       
       setDocumentId(docId);
     }
-    
+
     isInitialized.current = true;
   }, []);
   
