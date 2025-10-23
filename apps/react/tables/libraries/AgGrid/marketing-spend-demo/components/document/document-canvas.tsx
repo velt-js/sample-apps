@@ -2,6 +2,7 @@
 
 import Header from '@/components/header/header'
 import Sidebar from '@/components/sidebar/sidebar'
+import { TableComponent } from './table-component'
 
 export default function DocumentCanvas() {
   return (
@@ -9,24 +10,9 @@ export default function DocumentCanvas() {
       <Header />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <div className="flex-1 p-4">
-          <div className="w-full h-full border rounded-lg bg-card p-4">
-            <h2 className="text-2xl font-bold mb-4">marketing-spend-demo</h2>
-            <p className="text-muted-foreground mb-2">
-              <strong>Framework:</strong> react
-            </p>
-            <p className="text-muted-foreground mb-2">
-              <strong>Document:</strong> tables
-            </p>
-            <p className="text-muted-foreground mb-2">
-              <strong>Implementation:</strong> libraries
-            </p>
-            <p className="text-muted-foreground mb-2">
-              <strong>Library/Solution:</strong> AgGrid
-            </p>
-            <div className="mt-8 p-4 border rounded">
-              <p>Start building your AgGrid integration here!</p>
-            </div>
+        <div className="flex-1 overflow-auto">
+          <div className="flex items-center justify-center min-h-full p-8">
+            <TableComponent />
           </div>
         </div>
       </div>
