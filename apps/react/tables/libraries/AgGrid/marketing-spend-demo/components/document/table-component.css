@@ -5,38 +5,21 @@
   position: relative;
 }
 
-/* Comment tool wrapper styling - exact match from demo */
-.comment-tool-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Velt comment tool inside wrapper - hidden by default */
-.comment-tool-wrapper velt-comment-tool {
-  display: block;
-  border: 2px solid #000000;
+/* Velt comment tool - positioned directly in ag-cell, outside ag-cell-wrapper */
+.ag-cell > velt-comment-tool {
+  display: flex !important;
+  justify-content: flex-end !important;
   border-radius: 24px;
   opacity: 0;
   transition: all 150ms ease-in-out;
   transform: translateY(10%);
   overflow: hidden;
-  flex-shrink: 0;
-  min-width: 28px;
-  min-height: 28px;
 }
 
-/* Show comment tool on wrapper hover */
-.comment-tool-wrapper:hover velt-comment-tool {
+/* Show comment tool on cell hover only */
+.ag-cell:hover > velt-comment-tool {
   transform: translateY(0);
   opacity: 1;
-}
-
-/* Light mode support */
-@media (prefers-color-scheme: light) {
-  .comment-tool-wrapper velt-comment-tool {
-    border: 2px solid #ffffff;
-  }
 }
 
 /* Remove contentEditable outline/box */

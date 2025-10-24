@@ -107,12 +107,41 @@ const VeltCellRendererWithFormatting = (cellFormatting: Record<string, CellForma
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
 
-  // Set ID on parent AG Grid cell element
+  // Set ID on parent AG Grid cell element and add comment tool
   React.useEffect(() => {
-    if (props.eGridCell && props.eGridCell.id !== cellId) {
-      props.eGridCell.id = cellId;
+    if (props.eGridCell) {
+      if (props.eGridCell.id !== cellId) {
+        props.eGridCell.id = cellId;
+      }
+
+      // Check if comment tool already exists
+      let commentTool = props.eGridCell.querySelector('velt-comment-tool');
+      if (!commentTool) {
+        // Create and append comment tool directly to cell
+        commentTool = document.createElement('velt-comment-tool');
+        commentTool.setAttribute('target-comment-element-id', cellId);
+        commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
+
+        // Append to cell (outside ag-cell-wrapper)
+        props.eGridCell.appendChild(commentTool);
+      } else {
+        // Update target-comment-element-id if it changed
+        if (commentTool.getAttribute('target-comment-element-id') !== cellId) {
+          commentTool.setAttribute('target-comment-element-id', cellId);
+        }
+      }
     }
-  }, [cellId]);
+
+    return () => {
+      // Cleanup: remove comment tool when cell is destroyed
+      if (props.eGridCell) {
+        const commentTool = props.eGridCell.querySelector('velt-comment-tool');
+        if (commentTool) {
+          commentTool.remove();
+        }
+      }
+    };
+  }, [cellId, props.eGridCell]);
 
   const textStyle: React.CSSProperties = {
     fontWeight: formatting.bold ? 'bold' : 'normal',
@@ -126,23 +155,17 @@ const VeltCellRendererWithFormatting = (cellFormatting: Record<string, CellForma
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     width: '100%',
     height: '100%',
-    padding: '4px 4px 4px 12px',
-    gap: '8px',
+    padding: '4px 12px 4px 12px',
     textAlign: formatting.align || 'left',
   };
 
   return (
-    <>
-      <div style={containerStyle}>
-        <span style={textStyle}>{props.value}</span>
-        <div className="comment-tool-wrapper">
-          <VeltCommentTool targetCommentElementId={cellId} />
-        </div>
-      </div>
-    </>
+    <div style={containerStyle}>
+      <span style={textStyle}>{props.value}</span>
+    </div>
   );
 };
 
@@ -238,12 +261,41 @@ const createTitleRowRenderer = (sortState: { colId: string; sort: 'asc' | 'desc'
   };
   const title = columnTitles[props.colDef.field] || '';
 
-  // Set ID on parent AG Grid cell element
+  // Set ID on parent AG Grid cell element and add comment tool
   React.useEffect(() => {
-    if (props.eGridCell && props.eGridCell.id !== cellId) {
-      props.eGridCell.id = cellId;
+    if (props.eGridCell) {
+      if (props.eGridCell.id !== cellId) {
+        props.eGridCell.id = cellId;
+      }
+
+      // Check if comment tool already exists
+      let commentTool = props.eGridCell.querySelector('velt-comment-tool');
+      if (!commentTool) {
+        // Create and append comment tool directly to cell
+        commentTool = document.createElement('velt-comment-tool');
+        commentTool.setAttribute('target-comment-element-id', cellId);
+        commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
+
+        // Append to cell (outside ag-cell-wrapper)
+        props.eGridCell.appendChild(commentTool);
+      } else {
+        // Update target-comment-element-id if it changed
+        if (commentTool.getAttribute('target-comment-element-id') !== cellId) {
+          commentTool.setAttribute('target-comment-element-id', cellId);
+        }
+      }
     }
-  }, [cellId]);
+
+    return () => {
+      // Cleanup: remove comment tool when cell is destroyed
+      if (props.eGridCell) {
+        const commentTool = props.eGridCell.querySelector('velt-comment-tool');
+        if (commentTool) {
+          commentTool.remove();
+        }
+      }
+    };
+  }, [cellId, props.eGridCell]);
 
   const handleSort = () => {
     const currentSort = sortState?.colId === props.colDef.field ? sortState.sort : null;
@@ -263,10 +315,10 @@ const createTitleRowRenderer = (sortState: { colId: string; sort: 'asc' | 'desc'
       style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         width: '100%',
         height: '100%',
-        padding: '4px 4px 4px 12px',
+        padding: '4px 12px 4px 12px',
         gap: '8px',
         cursor: 'pointer',
       }}
@@ -287,9 +339,6 @@ const createTitleRowRenderer = (sortState: { colId: string; sort: 'asc' | 'desc'
         {title}
         <SortIcon direction={currentSort} />
       </span>
-      <div className="comment-tool-wrapper">
-        <VeltCommentTool targetCommentElementId={cellId} />
-      </div>
     </div>
   );
 };
