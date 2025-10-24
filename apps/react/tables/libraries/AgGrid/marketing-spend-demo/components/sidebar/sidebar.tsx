@@ -6,7 +6,7 @@ import {
   IconChevronLeftPipe,
   IconChevronRightPipe,
   IconFolder,
-  IconChartBar,
+  IconSpeakerphone,
   IconCurrencyDollar,
   IconFileAnalytics,
   IconSettings,
@@ -245,7 +245,7 @@ export default function Sidebar() {
                       height: "32px",
                     }}
                   >
-                    <IconChartBar
+                    <IconSpeakerphone
                       size={16}
                       color="rgb(255, 255, 255)"
                       stroke={1}
@@ -381,7 +381,7 @@ export default function Sidebar() {
                       height: "32px",
                     }}
                   >
-                    <IconChartBar
+                    <IconSpeakerphone
                       size={16}
                       color="rgb(255, 205, 46)"
                       stroke={1}

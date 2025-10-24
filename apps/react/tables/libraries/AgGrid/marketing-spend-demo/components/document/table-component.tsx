@@ -48,7 +48,7 @@ interface TableData {
   date: string;
   x: string;
   linkedin: string;
-  twitter: string;
+  facebook: string;
   instagram: string;
 }
 
@@ -90,7 +90,7 @@ const generateTableData = (): TableData[] => {
       date: `${day} ${month} ${year}`,
       x: `$${Math.floor(random() * 500) + 300}`,
       linkedin: `$${Math.floor(random() * 600) + 400}`,
-      twitter: `$${Math.floor(random() * 500) + 400}`,
+      facebook: `$${Math.floor(random() * 500) + 400}`,
       instagram: `$${Math.floor(random() * 600) + 400}`,
     });
   }
@@ -169,32 +169,66 @@ const VeltCellRendererWithFormatting = (cellFormatting: Record<string, CellForma
   );
 };
 
-// Custom Header Component with Column Letters
-const CustomHeaderComponent = (props: any) => {
-  // Map field names to letters: date=A, x=B, linkedin=C, twitter=D, instagram=E
-  const fieldToLetter: Record<string, string> = {
-    date: 'A',
-    x: 'B',
-    linkedin: 'C',
-    twitter: 'D',
-    instagram: 'E',
+// Custom Header Component with Titles and Sort Icons
+const CustomHeaderComponent = (
+  localSortState: { colId: string; sort: 'asc' | 'desc' } | null,
+  setLocalSortState: React.Dispatch<React.SetStateAction<{ colId: string; sort: 'asc' | 'desc' } | null>>
+) => (props: any) => {
+  const columnTitles: Record<string, string> = {
+    date: 'Dates',
+    x: 'X',
+    linkedin: 'LinkedIn',
+    facebook: 'Facebook',
+    instagram: 'Instagram',
   };
-  const letter = fieldToLetter[props.column.colId] || '';
+  const title = columnTitles[props.column.colId] || '';
+
+  const handleSort = () => {
+    const currentSort = localSortState?.colId === props.column.colId ? localSortState?.sort : null;
+    // Toggle between desc and asc only
+    let newSort: 'asc' | 'desc' = currentSort === 'asc' ? 'desc' : 'asc';
+
+    // Update local state immediately for instant icon feedback
+    setLocalSortState({ colId: props.column.colId, sort: newSort });
+
+    // Update AG Grid state (will trigger onSortChanged callback)
+    props.api.applyColumnState({
+      state: [{ colId: props.column.colId, sort: newSort }],
+      defaultState: { sort: null },
+    });
+  };
+
+  const currentSort = localSortState?.colId === props.column.colId ? localSortState?.sort : null;
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '100%',
-      height: '100%',
-      fontFamily: 'DM Mono, monospace',
-      fontSize: '12px',
-      color: 'rgba(255, 255, 255, 0.5)',
-      letterSpacing: '0.12px'
-    }}>
-      {letter}
+    <div
+      onClick={handleSort}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
+        height: '100%',
+        padding: '4px 12px 4px 12px',
+        gap: '8px',
+        cursor: 'pointer',
+      }}
+    >
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          fontFamily: 'Urbanist, sans-serif',
+          fontSize: '14px',
+          fontWeight: 600,
+          color: '#ffffff',
+          letterSpacing: '0.14px',
+        }}
+      >
+        {title}
+        <SortIcon direction={currentSort ?? null} />
+      </span>
     </div>
   );
 };
@@ -249,117 +283,15 @@ const SortIcon = ({ direction }: { direction: 'asc' | 'desc' | null }) => {
   }
 };
 
-// Custom Title Row Renderer Factory (for pinned top row)
-const createTitleRowRenderer = (sortState: { colId: string; sort: 'asc' | 'desc' } | null) => (props: any) => {
-  const cellId = `title-${props.colDef.field}`;
-  const columnTitles: Record<string, string> = {
-    date: 'Dates',
-    x: 'X',
-    linkedin: 'LinkedIn',
-    twitter: 'Twitter',
-    instagram: 'Instagram',
-  };
-  const title = columnTitles[props.colDef.field] || '';
-
-  // Set ID on parent AG Grid cell element and add comment tool
-  React.useEffect(() => {
-    if (props.eGridCell) {
-      if (props.eGridCell.id !== cellId) {
-        props.eGridCell.id = cellId;
-      }
-
-      // Check if comment tool already exists
-      let commentTool = props.eGridCell.querySelector('velt-comment-tool');
-      if (!commentTool) {
-        // Create and append comment tool directly to cell
-        commentTool = document.createElement('velt-comment-tool');
-        commentTool.setAttribute('target-comment-element-id', cellId);
-        commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
-
-        // Append to cell (outside ag-cell-wrapper)
-        props.eGridCell.appendChild(commentTool);
-      } else {
-        // Update target-comment-element-id if it changed
-        if (commentTool.getAttribute('target-comment-element-id') !== cellId) {
-          commentTool.setAttribute('target-comment-element-id', cellId);
-        }
-      }
-    }
-
-    return () => {
-      // Cleanup: remove comment tool when cell is destroyed
-      if (props.eGridCell) {
-        const commentTool = props.eGridCell.querySelector('velt-comment-tool');
-        if (commentTool) {
-          commentTool.remove();
-        }
-      }
-    };
-  }, [cellId, props.eGridCell]);
-
-  const handleSort = () => {
-    const currentSort = sortState?.colId === props.colDef.field ? sortState.sort : null;
-    // Toggle between desc and asc only
-    let newSort: 'asc' | 'desc' = currentSort === 'asc' ? 'desc' : 'asc';
-
-    props.api.applyColumnState({
-      state: [{ colId: props.colDef.field, sort: newSort }],
-      defaultState: { sort: null },
-    });
-  };
-
-  const currentSort = sortState?.colId === props.colDef.field ? sortState.sort : null;
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '100%',
-        height: '100%',
-        padding: '4px 12px 4px 12px',
-        gap: '8px',
-        cursor: 'pointer',
-      }}
-      onClick={handleSort}
-    >
-      <span
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          fontFamily: 'Urbanist, sans-serif',
-          fontSize: '14px',
-          fontWeight: 600,
-          color: '#ffffff',
-          letterSpacing: '0.14px',
-        }}
-      >
-        {title}
-        <SortIcon direction={currentSort} />
-      </span>
-    </div>
-  );
-};
-
 export const TableComponent: React.FC = () => {
   const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null);
   const [rowData, setRowData] = useState<TableData[]>(generateTableData());
   const [cellFormatting, setCellFormatting] = useState<Record<string, CellFormatting>>({});
   const [gridApi, setGridApi] = useState<any>(null);
   const [sortState, setSortState] = useState<{ colId: string; sort: 'asc' | 'desc' } | null>(null);
+  // Local state for immediate icon updates (no delay)
+  const [localSortState, setLocalSortState] = useState<{ colId: string; sort: 'asc' | 'desc' } | null>(null);
   const { client } = useVeltClient();
-
-  // Pinned top row data (column titles)
-  const pinnedTopRowData = useMemo(() => [{
-    id: -1,
-    date: 'Dates',
-    x: 'X',
-    linkedin: 'LinkedIn',
-    twitter: 'Twitter',
-    instagram: 'Instagram',
-  }], []);
 
   useEffect(() => {
     if (client) {
@@ -367,6 +299,13 @@ export const TableComponent: React.FC = () => {
       client.getCommentElement().disableCommentPinHighlighter();
     }
   }, [client]);
+
+  // Sync localSortState with sortState (when AG Grid updates)
+  useEffect(() => {
+    if (sortState) {
+      setLocalSortState(sortState);
+    }
+  }, [sortState]);
 
   // Update header highlighting when selection changes
   useEffect(() => {
@@ -401,15 +340,15 @@ export const TableComponent: React.FC = () => {
     }
   }, [selectedCell, gridApi]);
 
-  // Conditional Cell Renderer (Title row or Data cell)
-  const conditionalCellRenderer = useCallback((params: any) => {
-    if (params.node.rowPinned === 'top') {
-      const TitleRowRenderer = createTitleRowRenderer(sortState);
-      return TitleRowRenderer(params);
-    }
-    const VeltRenderer = VeltCellRendererWithFormatting(cellFormatting);
-    return VeltRenderer(params);
-  }, [cellFormatting, sortState]);
+  // Create header component with sorting
+  const headerComponent = useMemo(() => {
+    return CustomHeaderComponent(localSortState, setLocalSortState);
+  }, [localSortState]);
+
+  // Cell Renderer with Velt formatting
+  const veltCellRenderer = useMemo(() => {
+    return VeltCellRendererWithFormatting(cellFormatting);
+  }, [cellFormatting]);
 
   // Date comparator function to properly sort dates
   const dateComparator = useCallback((valueA: string, valueB: string) => {
@@ -433,27 +372,14 @@ export const TableComponent: React.FC = () => {
   const columnDefs = useMemo(() => [
     {
       headerName: '',
-      field: 'rowNumber',
+      field: 'rowNumber' as any,
       width: 50,
-      pinned: 'left',
+      pinned: 'left' as const,
       lockPosition: true,
       suppressMenu: true,
       sortable: false,
       editable: false,
-      cellRenderer: (params: any) => {
-        if (params.node.rowPinned === 'top') {
-          return (
-            <div style={{
-              fontFamily: 'DM Mono, monospace',
-              fontSize: '12px',
-              color: 'rgba(255, 255, 255, 0.5)',
-            }}>
-              1
-            </div>
-          );
-        }
-        return RowNumberRenderer(params);
-      },
+      cellRenderer: RowNumberRenderer,
       headerComponent: () => (
         <div style={{
           fontFamily: 'DM Mono, monospace',
@@ -471,57 +397,57 @@ export const TableComponent: React.FC = () => {
       },
     },
     {
-      field: 'date',
+      field: 'date' as any,
       headerName: 'Dates',
-      headerComponent: CustomHeaderComponent,
-      editable: (params: any) => params.node.rowPinned !== 'top',
+      headerComponent: headerComponent,
+      editable: true,
       sortable: true,
       comparator: dateComparator,
-      cellRenderer: conditionalCellRenderer,
+      cellRenderer: veltCellRenderer,
       flex: 1,
       minWidth: 150,
     },
     {
-      field: 'x',
+      field: 'x' as any,
       headerName: 'X',
-      headerComponent: CustomHeaderComponent,
-      editable: (params: any) => params.node.rowPinned !== 'top',
+      headerComponent: headerComponent,
+      editable: true,
       sortable: true,
-      cellRenderer: conditionalCellRenderer,
+      cellRenderer: veltCellRenderer,
       flex: 1,
       minWidth: 120,
     },
     {
-      field: 'linkedin',
+      field: 'linkedin' as any,
       headerName: 'LinkedIn',
-      headerComponent: CustomHeaderComponent,
-      editable: (params: any) => params.node.rowPinned !== 'top',
+      headerComponent: headerComponent,
+      editable: true,
       sortable: true,
-      cellRenderer: conditionalCellRenderer,
+      cellRenderer: veltCellRenderer,
       flex: 1,
       minWidth: 120,
     },
     {
-      field: 'twitter',
-      headerName: 'Twitter',
-      headerComponent: CustomHeaderComponent,
-      editable: (params: any) => params.node.rowPinned !== 'top',
+      field: 'facebook' as any,
+      headerName: 'Facebook',
+      headerComponent: headerComponent,
+      editable: true,
       sortable: true,
-      cellRenderer: conditionalCellRenderer,
+      cellRenderer: veltCellRenderer,
       flex: 1,
       minWidth: 120,
     },
     {
-      field: 'instagram',
+      field: 'instagram' as any,
       headerName: 'Instagram',
-      headerComponent: CustomHeaderComponent,
-      editable: (params: any) => params.node.rowPinned !== 'top',
+      headerComponent: headerComponent,
+      editable: true,
       sortable: true,
-      cellRenderer: conditionalCellRenderer,
+      cellRenderer: veltCellRenderer,
       flex: 1,
       minWidth: 120,
     },
-  ], [conditionalCellRenderer, dateComparator]);
+  ], [veltCellRenderer, dateComparator, headerComponent]);
 
   // Default column properties
   const defaultColDef = useMemo(() => ({
@@ -540,8 +466,9 @@ export const TableComponent: React.FC = () => {
       defaultState: { sort: null },
     });
 
-    // Initialize sort state
+    // Initialize both sort states
     setSortState({ colId: 'date', sort: 'asc' });
+    setLocalSortState({ colId: 'date', sort: 'asc' });
   }, []);
 
   // Sort changed handler
@@ -558,7 +485,7 @@ export const TableComponent: React.FC = () => {
 
   // Cell click handler
   const onCellClicked = useCallback((params: any) => {
-    if (params.node.rowPinned !== 'top' && params.data) {
+    if (params.data) {
       setSelectedCell({
         row: params.data.id,
         col: params.colDef.field,
@@ -731,7 +658,6 @@ export const TableComponent: React.FC = () => {
             rowData={rowData}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
-            pinnedTopRowData={pinnedTopRowData}
             onGridReady={onGridReady}
             onSortChanged={onSortChanged}
             onCellClicked={onCellClicked}
