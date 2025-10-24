@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { VeltComments, VeltCommentTool, useVeltClient } from '@veltdev/react';
+import { VeltComments, VeltCommentTool, useVeltClient, useLiveState } from '@veltdev/react';
 import './table-component.css';
 
 interface TableData {
@@ -57,8 +57,6 @@ const generateTableData = (): TableData[] => {
   return data;
 };
 
-const tableData: TableData[] = generateTableData();
-
 // Figma asset URLs
 const imgFrame = "http://localhost:3845/assets/209587c08c306a5d8ea4baadd1252bb9a8a07f4e.svg";
 const imgTablerIconChevronRight = "http://localhost:3845/assets/583003e84220653f4b462b3834513dcd22c65261.svg";
@@ -76,8 +74,34 @@ const imgTablerIconTriangleSquareCircle = "http://localhost:3845/assets/a1276b76
 const imgTablerIconLine = "http://localhost:3845/assets/e1bb298cc386ae6cf97f2bcb191e9a8d6b85d6bb.svg";
 
 export const TableComponent: React.FC = () => {
-  const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null);
-  const [cellFormatting, setCellFormatting] = useState<Record<string, CellFormatting>>({});
+  // Use Velt's useLiveState to sync selected cell across all users
+  const [selectedCell, setSelectedCell] = useLiveState<SelectedCell | null>(
+    'selected-cell',
+    null,
+    {
+      syncDuration: 50,
+      resetLiveState: false,
+    }
+  );
+  // Use Velt's useLiveState to sync table data across all users
+  const [tableData, setTableData] = useLiveState<TableData[]>(
+    'table-data',
+    generateTableData(),
+    {
+      syncDuration: 100,
+      resetLiveState: false,
+    }
+  );
+  // Use Velt's useLiveState to sync cell formatting across all users
+  const [cellFormatting, setCellFormatting] = useLiveState<Record<string, CellFormatting>>(
+    'cell-formatting',
+    {},
+    {
+      syncDuration: 50,
+      resetLiveState: false,
+      listenToNewChangesOnly: false, // Ensure we receive all historical data on mount
+    }
+  );
   const { client } = useVeltClient();
 
   useEffect(() => {
@@ -98,7 +122,7 @@ export const TableComponent: React.FC = () => {
   };
 
   const toggleFormatting = (format: keyof CellFormatting) => {
-    if (!selectedCell) return;
+    if (!selectedCell || !cellFormatting) return;
 
     const cellKey = getCellKey(selectedCell.row, selectedCell.col);
     const currentFormatting = cellFormatting[cellKey] || {};
@@ -115,7 +139,7 @@ export const TableComponent: React.FC = () => {
   };
 
   const setAlignment = (align: 'left' | 'center' | 'right') => {
-    if (!selectedCell) return;
+    if (!selectedCell || !cellFormatting) return;
 
     const cellKey = getCellKey(selectedCell.row, selectedCell.col);
     const currentFormatting = cellFormatting[cellKey] || {};
@@ -154,6 +178,8 @@ export const TableComponent: React.FC = () => {
   };
 
   const getCellStyle = (row: number, col: number, baseStyle: React.CSSProperties): React.CSSProperties => {
+    if (!cellFormatting) return baseStyle;
+
     const cellKey = getCellKey(row, col);
     const formatting = cellFormatting[cellKey] || {};
 
@@ -169,6 +195,8 @@ export const TableComponent: React.FC = () => {
   };
 
   const getCellAlignment = (row: number, col: number): React.CSSProperties => {
+    if (!cellFormatting) return {};
+
     const cellKey = getCellKey(row, col);
     const formatting = cellFormatting[cellKey] || {};
 
@@ -189,6 +217,17 @@ export const TableComponent: React.FC = () => {
 
   const isRowSelected = (row: number) => {
     return selectedCell?.row === row;
+  };
+
+  const handleCellEdit = (rowIndex: number, field: keyof TableData, newValue: string) => {
+    if (!tableData) return;
+
+    const updatedData = [...tableData];
+    updatedData[rowIndex] = {
+      ...updatedData[rowIndex],
+      [field]: newValue,
+    };
+    setTableData(updatedData);
   };
 
   return (
@@ -481,7 +520,14 @@ export const TableComponent: React.FC = () => {
                     onClick={() => handleCellClick(rowNum, 0)}
                   >
                     <div style={getCellStyle(rowNum, 0, styles.cellTextDiv)}>
-                      <p style={styles.cellTextP}>{row.date}</p>
+                      <p
+                        contentEditable
+                        suppressContentEditableWarning
+                        style={styles.cellTextP}
+                        onBlur={(e) => handleCellEdit(index, 'date', e.currentTarget.textContent || '')}
+                      >
+                        {row.date}
+                      </p>
                     </div>
                     <div className="comment-tool-wrapper">
                       <VeltCommentTool targetCommentElementId={`cell-${rowNum}-0`} />
@@ -503,7 +549,14 @@ export const TableComponent: React.FC = () => {
                     onClick={() => handleCellClick(rowNum, 1)}
                   >
                     <div style={getCellStyle(rowNum, 1, styles.cellTextDiv)}>
-                      <p style={styles.cellTextP}>{row.x}</p>
+                      <p
+                        contentEditable
+                        suppressContentEditableWarning
+                        style={styles.cellTextP}
+                        onBlur={(e) => handleCellEdit(index, 'x', e.currentTarget.textContent || '')}
+                      >
+                        {row.x}
+                      </p>
                     </div>
                     <div className="comment-tool-wrapper">
                       <VeltCommentTool targetCommentElementId={`cell-${rowNum}-1`} />
@@ -525,7 +578,14 @@ export const TableComponent: React.FC = () => {
                     onClick={() => handleCellClick(rowNum, 2)}
                   >
                     <div style={getCellStyle(rowNum, 2, styles.cellTextDiv)}>
-                      <p style={styles.cellTextP}>{row.linkedin}</p>
+                      <p
+                        contentEditable
+                        suppressContentEditableWarning
+                        style={styles.cellTextP}
+                        onBlur={(e) => handleCellEdit(index, 'linkedin', e.currentTarget.textContent || '')}
+                      >
+                        {row.linkedin}
+                      </p>
                     </div>
                     <div className="comment-tool-wrapper">
                       <VeltCommentTool targetCommentElementId={`cell-${rowNum}-2`} />
@@ -547,7 +607,14 @@ export const TableComponent: React.FC = () => {
                     onClick={() => handleCellClick(rowNum, 3)}
                   >
                     <div style={getCellStyle(rowNum, 3, styles.cellTextDiv)}>
-                      <p style={styles.cellTextP}>{row.twitter}</p>
+                      <p
+                        contentEditable
+                        suppressContentEditableWarning
+                        style={styles.cellTextP}
+                        onBlur={(e) => handleCellEdit(index, 'twitter', e.currentTarget.textContent || '')}
+                      >
+                        {row.twitter}
+                      </p>
                     </div>
                     <div className="comment-tool-wrapper">
                       <VeltCommentTool targetCommentElementId={`cell-${rowNum}-3`} />
@@ -568,7 +635,14 @@ export const TableComponent: React.FC = () => {
                     onClick={() => handleCellClick(rowNum, 4)}
                   >
                     <div style={getCellStyle(rowNum, 4, styles.cellTextDiv)}>
-                      <p style={styles.cellTextP}>{row.instagram}</p>
+                      <p
+                        contentEditable
+                        suppressContentEditableWarning
+                        style={styles.cellTextP}
+                        onBlur={(e) => handleCellEdit(index, 'instagram', e.currentTarget.textContent || '')}
+                      >
+                        {row.instagram}
+                      </p>
                     </div>
                     <div className="comment-tool-wrapper">
                       <VeltCommentTool targetCommentElementId={`cell-${rowNum}-4`} />
