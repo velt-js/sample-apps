@@ -3,7 +3,7 @@
 import Header from '@/components/header/header'
 import Sidebar from '@/components/sidebar/sidebar'
 import { SidebarProvider } from '@/components/sidebar/SidebarContext'
-import { TableComponent } from './table-component'
+import { TableComponent } from './day-view-table-component'
 
 export default function DocumentCanvas() {
   return (
