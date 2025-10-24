@@ -4,7 +4,6 @@ import {
   VeltSidebarButton,
   VeltNotificationsTool,
   VeltCommentTool,
-  VeltHuddleTool
 } from "@veltdev/react";
 
 function VeltTools() {
@@ -12,16 +11,16 @@ function VeltTools() {
     <>
       <VeltPresence />
       <VeltSidebarButton />
+      <VeltCommentTool />
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}
         tabConfig={{
           forYou: { name: "For You", enable: true },
-          documents: { name: "Payrolls", enable: true },
+          documents: { name: "Documents", enable: true },
           all: { name: "All", enable: true },
         }}
       />
-      <VeltHuddleTool type='all' />
     </>
   );
 }

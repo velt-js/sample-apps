@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { VeltComments, VeltCommentTool, useVeltClient } from '@veltdev/react';
+import './table-component.css';
 
 interface TableData {
   date: string;
@@ -21,22 +25,39 @@ interface SelectedCell {
   col: number;
 }
 
-const tableData: TableData[] = [
-  { date: '4 May 2025', x: '$635', linkedin: '$412', twitter: '$750', instagram: '$890' },
-  { date: '5 May 2025', x: '$520', linkedin: '$670', twitter: '$430', instagram: '$580' },
-  { date: '6 May 2025', x: '$720', linkedin: '$390', twitter: '$810', instagram: '$540' },
-  { date: '7 May 2025', x: '$660', linkedin: '$470', twitter: '$530', instagram: '$900' },
-  { date: '8 May 2025', x: '$310', linkedin: '$850', twitter: '$720', instagram: '$490' },
-  { date: '9 May 2025', x: '$600', linkedin: '$770', twitter: '$430', instagram: '$560' },
-  { date: '10 May 2025', x: '$680', linkedin: '$490', twitter: '$720', instagram: '$800' },
-  { date: '11 May 2025', x: '$590', linkedin: '$450', twitter: '$670', instagram: '$520' },
-  { date: '12 May 2025', x: '$710', linkedin: '$390', twitter: '$640', instagram: '$530' },
-  { date: '13 May 2025', x: '$490', linkedin: '$780', twitter: '$620', instagram: '$540' },
-  { date: '14 May 2025', x: '$710', linkedin: '$480', twitter: '$590', instagram: '$660' },
-  { date: '3 May 2025', x: '$720', linkedin: '$530', twitter: '$490', instagram: '$600' },
-  { date: '3 May 2025', x: '$740', linkedin: '$820', twitter: '$590', instagram: '$670' },
-  { date: '3 May 2025', x: '$430', linkedin: '$540', twitter: '$710', instagram: '$890' },
-];
+// Seeded random number generator for consistent SSR/client hydration
+const seededRandom = (seed: number) => {
+  let state = seed;
+  return () => {
+    state = (state * 9301 + 49297) % 233280;
+    return state / 233280;
+  };
+};
+
+// Generate 100 rows of data with deterministic values
+const generateTableData = (): TableData[] => {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const data: TableData[] = [];
+  const random = seededRandom(12345); // Fixed seed for consistency
+
+  for (let i = 0; i < 100; i++) {
+    const day = (i % 28) + 1;
+    const month = months[Math.floor(i / 28) % 12];
+    const year = 2025;
+
+    data.push({
+      date: `${day} ${month} ${year}`,
+      x: `$${Math.floor(random() * 500) + 300}`,
+      linkedin: `$${Math.floor(random() * 600) + 400}`,
+      twitter: `$${Math.floor(random() * 500) + 400}`,
+      instagram: `$${Math.floor(random() * 600) + 400}`,
+    });
+  }
+
+  return data;
+};
+
+const tableData: TableData[] = generateTableData();
 
 // Figma asset URLs
 const imgFrame = "http://localhost:3845/assets/209587c08c306a5d8ea4baadd1252bb9a8a07f4e.svg";
@@ -57,6 +78,14 @@ const imgTablerIconLine = "http://localhost:3845/assets/e1bb298cc386ae6cf97f2bcb
 export const TableComponent: React.FC = () => {
   const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null);
   const [cellFormatting, setCellFormatting] = useState<Record<string, CellFormatting>>({});
+  const { client } = useVeltClient();
+
+  useEffect(() => {
+    if (client) {
+      // Disable comment pin highlighter for popover mode
+      client.getCommentElement().disableCommentPinHighlighter();
+    }
+  }, [client]);
 
   const getCellKey = (row: number, col: number) => `${row}-${col}`;
 
@@ -182,6 +211,14 @@ export const TableComponent: React.FC = () => {
           <span style={styles.breadcrumbText}>Marketing Spend</span>
         </div>
       </div>
+
+      {/* Velt Comments - Popover Mode with Triangle */}
+      <VeltComments
+        popoverTriangleComponent={true}
+        popoverMode={true}
+        shadowDom={false}
+        textMode={false}
+      />
 
       {/* Table Container */}
       <div style={styles.tableContainer}>
@@ -313,68 +350,108 @@ export const TableComponent: React.FC = () => {
                 </div>
               </div>
               <div
+                id="cell-0-0"
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 0) && styles.selectedCell),
-                  ...getCellAlignment(0, 0),
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
                 }}
                 onClick={() => handleCellClick(0, 0)}
               >
                 <div style={getCellStyle(0, 0, styles.columnTitleDiv)}>
                   <p style={styles.columnTitleP}>Dates</p>
                 </div>
+                <div className="comment-tool-wrapper">
+                  <VeltCommentTool targetCommentElementId="cell-0-0" />
+                </div>
               </div>
               <div
+                id="cell-0-1"
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 1) && styles.selectedCell),
-                  ...getCellAlignment(0, 1),
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
                 }}
                 onClick={() => handleCellClick(0, 1)}
               >
                 <div style={getCellStyle(0, 1, styles.columnTitleDiv)}>
                   <p style={styles.columnTitleP}>X</p>
                 </div>
+                <div className="comment-tool-wrapper">
+                  <VeltCommentTool targetCommentElementId="cell-0-1" />
+                </div>
               </div>
               <div
+                id="cell-0-2"
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 2) && styles.selectedCell),
-                  ...getCellAlignment(0, 2),
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
                 }}
                 onClick={() => handleCellClick(0, 2)}
               >
                 <div style={getCellStyle(0, 2, styles.columnTitleDiv)}>
                   <p style={styles.columnTitleP}>LinkedIn</p>
                 </div>
+                <div className="comment-tool-wrapper">
+                  <VeltCommentTool targetCommentElementId="cell-0-2" />
+                </div>
               </div>
               <div
+                id="cell-0-3"
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 3) && styles.selectedCell),
-                  ...getCellAlignment(0, 3),
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
                 }}
                 onClick={() => handleCellClick(0, 3)}
               >
                 <div style={getCellStyle(0, 3, styles.columnTitleDiv)}>
                   <p style={styles.columnTitleP}>Twitter</p>
                 </div>
+                <div className="comment-tool-wrapper">
+                  <VeltCommentTool targetCommentElementId="cell-0-3" />
+                </div>
               </div>
               <div
+                id="cell-0-4"
                 style={{
                   ...styles.dataCell,
                   ...(isCellSelected(0, 4) && styles.selectedCell),
-                  ...getCellAlignment(0, 4),
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
                 }}
                 onClick={() => handleCellClick(0, 4)}
               >
                 <div style={getCellStyle(0, 4, styles.columnTitleDiv)}>
                   <p style={styles.columnTitleP}>Instagram</p>
+                </div>
+                <div className="comment-tool-wrapper">
+                  <VeltCommentTool targetCommentElementId="cell-0-4" />
                 </div>
               </div>
             </div>
@@ -390,71 +467,111 @@ export const TableComponent: React.FC = () => {
                     </div>
                   </div>
                   <div
+                    id={`cell-${rowNum}-0`}
                     style={{
                       ...styles.dataCell,
                       ...(isCellSelected(rowNum, 0) && styles.selectedCell),
-                      ...getCellAlignment(rowNum, 0),
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 0)}
                   >
                     <div style={getCellStyle(rowNum, 0, styles.cellTextDiv)}>
                       <p style={styles.cellTextP}>{row.date}</p>
                     </div>
+                    <div className="comment-tool-wrapper">
+                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-0`} />
+                    </div>
                   </div>
                   <div
+                    id={`cell-${rowNum}-1`}
                     style={{
                       ...styles.dataCell,
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 1) && styles.selectedCell),
-                      ...getCellAlignment(rowNum, 1),
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 1)}
                   >
                     <div style={getCellStyle(rowNum, 1, styles.cellTextDiv)}>
                       <p style={styles.cellTextP}>{row.x}</p>
                     </div>
+                    <div className="comment-tool-wrapper">
+                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-1`} />
+                    </div>
                   </div>
                   <div
+                    id={`cell-${rowNum}-2`}
                     style={{
                       ...styles.dataCell,
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 2) && styles.selectedCell),
-                      ...getCellAlignment(rowNum, 2),
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 2)}
                   >
                     <div style={getCellStyle(rowNum, 2, styles.cellTextDiv)}>
                       <p style={styles.cellTextP}>{row.linkedin}</p>
                     </div>
+                    <div className="comment-tool-wrapper">
+                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-2`} />
+                    </div>
                   </div>
                   <div
+                    id={`cell-${rowNum}-3`}
                     style={{
                       ...styles.dataCell,
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 3) && styles.selectedCell),
-                      ...getCellAlignment(rowNum, 3),
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 3)}
                   >
                     <div style={getCellStyle(rowNum, 3, styles.cellTextDiv)}>
                       <p style={styles.cellTextP}>{row.twitter}</p>
                     </div>
+                    <div className="comment-tool-wrapper">
+                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-3`} />
+                    </div>
                   </div>
                   <div
+                    id={`cell-${rowNum}-4`}
                     style={{
                       ...styles.dataCell,
                       ...(isCellSelected(rowNum, 4) && styles.selectedCell),
-                      ...getCellAlignment(rowNum, 4),
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 4)}
                   >
                     <div style={getCellStyle(rowNum, 4, styles.cellTextDiv)}>
                       <p style={styles.cellTextP}>{row.instagram}</p>
+                    </div>
+                    <div className="comment-tool-wrapper">
+                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-4`} />
                     </div>
                   </div>
                 </div>
@@ -471,11 +588,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   container: {
     backgroundColor: '#000000',
     width: '100%',
-    height: '100%',
+    minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: '32px',
+    paddingTop: '80px',
     gap: '16px',
   },
   breadcrumb: {
@@ -527,11 +645,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   tableContainer: {
     position: 'relative',
     width: '100%',
-    maxWidth: '1134px',
-    minHeight: '805px',
+    maxWidth: '1600px',
     backgroundColor: '#090909',
     borderRadius: '8px',
-    overflow: 'clip',
+    overflow: 'hidden',
+    paddingTop: '56px',
+    paddingBottom: '16px',
   },
   viewToggle: {
     position: 'absolute',
@@ -640,18 +759,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexShrink: 0,
   },
   tableContent: {
-    position: 'absolute',
-    left: '50%',
-    top: '52px',
-    transform: 'translateX(-50%)',
-    display: 'contents',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
   },
   tableInner: {
-    position: 'absolute',
-    left: '50%',
-    top: '52px',
-    transform: 'translateX(-50%)',
-    width: '1134px',
+    width: '100%',
+    maxWidth: '1600px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',

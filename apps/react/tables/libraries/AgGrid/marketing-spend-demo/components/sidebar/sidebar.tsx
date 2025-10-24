@@ -4,14 +4,17 @@ import { useState } from "react";
 import {
   IconMenu2,
   IconChevronLeftPipe,
+  IconChevronRightPipe,
   IconFolder,
   IconChartBar,
   IconCurrencyDollar,
   IconFileAnalytics,
   IconSettings,
 } from "@tabler/icons-react";
+import { useSidebar } from "./SidebarContext";
 
 export default function Sidebar() {
+  const { isCollapsed, toggleSidebar } = useSidebar();
   const [expandedSections, setExpandedSections] = useState<{
     [key: string]: boolean;
   }>({
@@ -28,83 +31,108 @@ export default function Sidebar() {
   };
 
   return (
-    <aside
-      className="flex flex-col justify-between"
-      style={{
-        width: "251px",
-        height: "780px",
-        backgroundColor: "rgb(14, 14, 14)",
-        borderRadius: "12px",
-      }}
-    >
-      {/* Top Section */}
-      <div className="flex flex-col">
-        {/* Header */}
+    <>
+      {/* Expand Button - shown when sidebar is collapsed */}
+      {isCollapsed && (
         <div
-          className="flex flex-row justify-between items-center"
+          className="fixed left-4 top-4 z-50 cursor-pointer flex items-center justify-center"
+          onClick={toggleSidebar}
           style={{
-            paddingTop: "12px",
-            paddingRight: "12px",
-            paddingBottom: "12px",
-            paddingLeft: "16px",
-            gap: "45px",
-            height: "48px",
+            width: "40px",
+            height: "40px",
+            backgroundColor: "rgb(14, 14, 14)",
+            borderRadius: "8px",
           }}
         >
-          {/* Logo and Workspace Name */}
+          <IconChevronRightPipe
+            size={20}
+            color="rgb(255, 255, 255)"
+            stroke={1}
+          />
+        </div>
+      )}
+
+      <aside
+        className="flex flex-col justify-between h-full transition-all duration-300"
+        style={{
+          width: isCollapsed ? "0px" : "251px",
+          backgroundColor: "rgb(14, 14, 14)",
+          borderRadius: "12px",
+          margin: "16px",
+          marginRight: "8px",
+          overflow: "hidden",
+          opacity: isCollapsed ? 0 : 1,
+        }}
+      >
+        {/* Top Section */}
+        <div className="flex flex-col">
+          {/* Header */}
           <div
-            className="flex flex-row items-center"
+            className="flex flex-row justify-between items-center"
             style={{
-              gap: "8px",
+              paddingTop: "12px",
+              paddingRight: "12px",
+              paddingBottom: "12px",
+              paddingLeft: "16px",
+              gap: "45px",
+              height: "48px",
             }}
           >
-            <IconMenu2 size={16} color="rgb(255, 255, 255)" stroke={1} />
-            <span
+            {/* Logo and Workspace Name */}
+            <div
+              className="flex flex-row items-center"
               style={{
-                color: "rgb(255, 255, 255)",
-                fontFamily: "Urbanist, sans-serif",
-                fontSize: "14px",
-                fontWeight: 400,
-                lineHeight: "14px",
+                gap: "8px",
               }}
             >
-              Bingo's Workspace
-            </span>
+              <IconMenu2 size={16} color="rgb(255, 255, 255)" stroke={1} />
+              <span
+                style={{
+                  color: "rgb(255, 255, 255)",
+                  fontFamily: "Urbanist, sans-serif",
+                  fontSize: "14px",
+                  fontWeight: 400,
+                  lineHeight: "14px",
+                }}
+              >
+                Bingo's Workspace
+              </span>
+            </div>
+
+            {/* Collapse Button */}
+            <div
+              className="flex flex-row items-center cursor-pointer"
+              onClick={toggleSidebar}
+              style={{
+                padding: "4px",
+                width: "24px",
+                height: "24px",
+                gap: "10px",
+              }}
+            >
+              <IconChevronLeftPipe
+                size={16}
+                color="rgb(255, 255, 255)"
+                stroke={1}
+              />
+            </div>
           </div>
 
-          {/* Collapse Button */}
+          {/* Navigation Section */}
           <div
-            className="flex flex-row items-center"
+            className="flex flex-col items-start flex-1"
             style={{
-              padding: "4px",
-              width: "24px",
-              height: "24px",
-              gap: "10px",
+              padding: "8px",
+              gap: "16px",
             }}
           >
-            <IconChevronLeftPipe
-              size={16}
-              color="rgb(255, 255, 255)"
-              stroke={1}
-            />
-          </div>
-        </div>
-
-        {/* Navigation Section */}
-        <div
-          className="flex flex-col items-start justify-center"
-          style={{
-            padding: "8px",
-            gap: "16px",
-          }}
-        >
-          <div
-            className="flex flex-col items-start"
-            style={{
-              width: "235px",
-              gap: "4px",
-            }}
-          >
+            <div
+              className="flex flex-col items-start"
+              style={{
+                width: "235px",
+                gap: "4px",
+              }}
+            >
             {/* Starred Label */}
             <div
               className="flex flex-row items-start"
@@ -344,7 +372,7 @@ export default function Sidebar() {
                   <div
                     className="flex flex-row items-center"
                     style={{
-                      backgroundColor: "rgb(255, 255, 255)",
+                      backgroundColor: "rgb(35, 35, 35)",
                       borderRadius: "8px",
                       padding: "8px",
                       gap: "12px",
@@ -359,7 +387,7 @@ export default function Sidebar() {
                     />
                     <span
                       style={{
-                        color: "rgb(14, 14, 14)",
+                        color: "rgb(255, 255, 255)",
                         fontFamily: "Urbanist, sans-serif",
                         fontSize: "15px",
                         fontWeight: 400,
@@ -433,30 +461,30 @@ export default function Sidebar() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
 
-      {/* Bottom Section - Settings */}
-      <div
-        className="flex flex-row items-start"
-        style={{
-          padding: "16px",
-          gap: "8px",
-          height: "49px",
-        }}
-      >
-        <IconSettings size={16} color="rgb(255, 255, 255)" stroke={1} />
-        <span
+        {/* Bottom Section - Settings */}
+        <div
+          className="flex flex-row items-center"
           style={{
-            color: "rgb(255, 255, 255)",
-            fontFamily: "Urbanist, sans-serif",
-            fontSize: "14px",
-            fontWeight: 400,
-            lineHeight: "17px",
+            padding: "16px",
+            gap: "8px",
           }}
         >
-          Settings
-        </span>
-      </div>
-    </aside>
+          <IconSettings size={16} color="rgb(255, 255, 255)" stroke={1} />
+          <span
+            style={{
+              color: "rgb(255, 255, 255)",
+              fontFamily: "Urbanist, sans-serif",
+              fontSize: "14px",
+              fontWeight: 400,
+              lineHeight: "17px",
+            }}
+          >
+            Settings
+          </span>
+        </div>
+      </aside>
+    </>
   );
 }
