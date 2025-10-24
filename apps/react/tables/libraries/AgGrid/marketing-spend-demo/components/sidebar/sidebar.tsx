@@ -53,9 +53,10 @@ export default function Sidebar() {
       )}
 
       <aside
-        className="flex flex-col justify-between h-full transition-all duration-300"
+        className="flex flex-col justify-between transition-all duration-300"
         style={{
           width: isCollapsed ? "0px" : "251px",
+          height: "calc(100vh - 32px)",
           backgroundColor: "rgb(14, 14, 14)",
           borderRadius: "12px",
           margin: "16px",
@@ -120,7 +121,7 @@ export default function Sidebar() {
 
           {/* Navigation Section */}
           <div
-            className="flex flex-col items-start flex-1"
+            className="flex flex-col items-start flex-1 overflow-auto"
             style={{
               padding: "8px",
               gap: "16px",

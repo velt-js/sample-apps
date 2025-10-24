@@ -1,7 +1,23 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { VeltComments, VeltCommentTool, useVeltClient, useLiveState } from '@veltdev/react';
+import { VeltComments, VeltCommentTool, useVeltClient } from '@veltdev/react';
+import {
+  IconFolder,
+  IconChevronRight,
+  IconBold,
+  IconItalic,
+  IconUnderline,
+  IconStrikethrough,
+  IconAlignLeft,
+  IconAlignCenter,
+  IconAlignRight,
+  IconPhoto,
+  IconShape,
+  IconLine,
+  IconArrowDown,
+  IconArrowUp
+} from '@tabler/icons-react';
 import './table-component.css';
 
 interface TableData {
@@ -57,52 +73,16 @@ const generateTableData = (): TableData[] => {
   return data;
 };
 
-// Figma asset URLs
-const imgFrame = "http://localhost:3845/assets/209587c08c306a5d8ea4baadd1252bb9a8a07f4e.svg";
-const imgTablerIconChevronRight = "http://localhost:3845/assets/583003e84220653f4b462b3834513dcd22c65261.svg";
-const imgFrame1 = "http://localhost:3845/assets/de7453bbd8e7dd9c53026c34b499633a4a2ccc06.svg";
-const imgTablerIconBold = "http://localhost:3845/assets/8a6bef95ce180e8134c2c6237820497ad9923bed.svg";
-const imgTablerIconItalic = "http://localhost:3845/assets/06f941657cf3dedd924fb74eba5e98e70c24d91c.svg";
-const imgTablerIconUnderline = "http://localhost:3845/assets/562e8943c33607ee26c45093bb2682f405b8dc9c.svg";
-const imgTablerIconStrikethrough = "http://localhost:3845/assets/2ce2305ea8b962573f60e0b7f3db929b815a216d.svg";
-const imgLine180 = "http://localhost:3845/assets/3579bb5816dcfb8ad8cec34a63e757dadb3af18b.svg";
-const imgTablerIconAlignLeft = "http://localhost:3845/assets/1958436804ed78d5a48539bc5ee30508416177ec.svg";
-const imgTablerIconAlignCenter = "http://localhost:3845/assets/4c8e6f0e74453bff611c837f8222d5bc1ce09318.svg";
-const imgTablerIconAlignRight = "http://localhost:3845/assets/1f1737f280a66283c478c40464de3ad68f21e88c.svg";
-const imgTablerIconPhoto = "http://localhost:3845/assets/fc538f485d08afce9065966af893cbfe90ab5b5d.svg";
-const imgTablerIconTriangleSquareCircle = "http://localhost:3845/assets/a1276b76c15fe1091c13cebe529377af99dc0b51.svg";
-const imgTablerIconLine = "http://localhost:3845/assets/e1bb298cc386ae6cf97f2bcb191e9a8d6b85d6bb.svg";
-
 export const TableComponent: React.FC = () => {
-  // Use Velt's useLiveState to sync selected cell across all users
-  const [selectedCell, setSelectedCell] = useLiveState<SelectedCell | null>(
-    'selected-cell',
-    null,
-    {
-      syncDuration: 50,
-      resetLiveState: false,
-    }
-  );
-  // Use Velt's useLiveState to sync table data across all users
-  const [tableData, setTableData] = useLiveState<TableData[]>(
-    'table-data',
-    generateTableData(),
-    {
-      syncDuration: 100,
-      resetLiveState: false,
-    }
-  );
-  // Use Velt's useLiveState to sync cell formatting across all users
-  const [cellFormatting, setCellFormatting] = useLiveState<Record<string, CellFormatting>>(
-    'cell-formatting',
-    {},
-    {
-      syncDuration: 50,
-      resetLiveState: false,
-      listenToNewChangesOnly: false, // Ensure we receive all historical data on mount
-    }
-  );
+  // Local state - not synced across users, resets on refresh
+  const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null);
+  const [tableData, setTableData] = useState<TableData[]>(generateTableData());
+  const [cellFormatting, setCellFormatting] = useState<Record<string, CellFormatting>>({});
   const { client } = useVeltClient();
+
+  // Sorting state (local, not synced)
+  const [sortColumn, setSortColumn] = useState<keyof TableData | null>(null);
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
 
   useEffect(() => {
     if (client) {
@@ -191,25 +171,10 @@ export const TableComponent: React.FC = () => {
         formatting.underline ? 'underline' : '',
         formatting.strikethrough ? 'line-through' : '',
       ].filter(Boolean).join(' ') || 'none',
+      textAlign: formatting.align || (baseStyle.textAlign as any),
     };
   };
 
-  const getCellAlignment = (row: number, col: number): React.CSSProperties => {
-    if (!cellFormatting) return {};
-
-    const cellKey = getCellKey(row, col);
-    const formatting = cellFormatting[cellKey] || {};
-
-    if (formatting.align) {
-      return {
-        display: 'flex',
-        justifyContent: formatting.align === 'left' ? 'flex-start' : formatting.align === 'center' ? 'center' : 'flex-end',
-        width: '100%',
-      };
-    }
-
-    return {};
-  };
 
   const isColumnSelected = (col: number) => {
     return selectedCell?.col === col;
@@ -219,34 +184,91 @@ export const TableComponent: React.FC = () => {
     return selectedCell?.row === row;
   };
 
-  const handleCellEdit = (rowIndex: number, field: keyof TableData, newValue: string) => {
+  const handleCellEdit = (rowData: TableData, field: keyof TableData, newValue: string) => {
     if (!tableData) return;
 
+    // Find the original index in tableData
+    const originalIndex = tableData.findIndex(row =>
+      row.date === rowData.date &&
+      row.x === rowData.x &&
+      row.linkedin === rowData.linkedin &&
+      row.twitter === rowData.twitter &&
+      row.instagram === rowData.instagram
+    );
+
+    if (originalIndex === -1) return;
+
     const updatedData = [...tableData];
-    updatedData[rowIndex] = {
-      ...updatedData[rowIndex],
+    updatedData[originalIndex] = {
+      ...updatedData[originalIndex],
       [field]: newValue,
     };
     setTableData(updatedData);
   };
+
+  const handleColumnSort = (column: keyof TableData) => {
+    if (sortColumn === column) {
+      // Toggle between desc -> asc -> no sort
+      if (sortDirection === 'desc') {
+        setSortDirection('asc');
+      } else {
+        // Reset to no sort
+        setSortColumn(null);
+        setSortDirection('desc');
+      }
+    } else {
+      // New column, start with descending
+      setSortColumn(column);
+      setSortDirection('desc');
+    }
+  };
+
+  const parsePrice = (priceString: string): number => {
+    return parseInt(priceString.replace('$', ''));
+  };
+
+  const parseDate = (dateString: string): Date => {
+    // Parse "1 Jan 2025" format
+    const [day, month, year] = dateString.split(' ');
+    const monthMap: { [key: string]: number } = {
+      'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+      'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+    };
+    return new Date(parseInt(year), monthMap[month], parseInt(day));
+  };
+
+  const getSortedData = (): TableData[] => {
+    if (!tableData || !sortColumn) return tableData;
+
+    const sorted = [...tableData].sort((a, b) => {
+      if (sortColumn === 'date') {
+        const dateA = parseDate(a.date).getTime();
+        const dateB = parseDate(b.date).getTime();
+        return sortDirection === 'desc' ? dateB - dateA : dateA - dateB;
+      } else {
+        // Sort by price for other columns
+        const priceA = parsePrice(a[sortColumn]);
+        const priceB = parsePrice(b[sortColumn]);
+        return sortDirection === 'desc' ? priceB - priceA : priceA - priceB;
+      }
+    });
+
+    return sorted;
+  };
+
+  const sortedTableData = getSortedData();
 
   return (
     <div style={styles.container}>
       {/* Breadcrumb Navigation */}
       <div style={styles.breadcrumb}>
         <div style={styles.breadcrumbItem}>
-          <div style={styles.iconWrapper14}>
-            <img alt="" style={styles.icon} src={imgFrame} />
-          </div>
+          <IconFolder size={14} stroke={1.5} color="rgba(255, 255, 255, 0.52)" />
           <span style={styles.breadcrumbText}>FY2025</span>
         </div>
-        <div style={styles.iconWrapper12}>
-          <img alt="" style={styles.icon} src={imgTablerIconChevronRight} />
-        </div>
+        <IconChevronRight size={12} stroke={1.5} color="rgba(255, 255, 255, 0.52)" />
         <div style={styles.breadcrumbItem}>
-          <div style={styles.iconWrapper14}>
-            <img alt="" style={styles.icon} src={imgFrame1} />
-          </div>
+          <IconFolder size={14} stroke={1.5} color="rgba(255, 255, 255, 0.52)" />
           <span style={styles.breadcrumbText}>Marketing Spend</span>
         </div>
       </div>
@@ -278,24 +300,16 @@ export const TableComponent: React.FC = () => {
         <div style={styles.toolbar}>
           <div style={styles.toolbarSectionNoGap}>
             <button style={styles.toolButton} onClick={() => toggleFormatting('bold')}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Bold" style={styles.icon} src={imgTablerIconBold} />
-              </div>
+              <IconBold size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
             <button style={styles.toolButton} onClick={() => toggleFormatting('italic')}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Italic" style={styles.icon} src={imgTablerIconItalic} />
-              </div>
+              <IconItalic size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
             <button style={styles.toolButton} onClick={() => toggleFormatting('underline')}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Underline" style={styles.icon} src={imgTablerIconUnderline} />
-              </div>
+              <IconUnderline size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
             <button style={styles.toolButton} onClick={() => toggleFormatting('strikethrough')}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Strikethrough" style={styles.icon} src={imgTablerIconStrikethrough} />
-              </div>
+              <IconStrikethrough size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
           </div>
 
@@ -305,19 +319,13 @@ export const TableComponent: React.FC = () => {
 
           <div style={styles.toolbarSection}>
             <button style={styles.toolButtonRounded} onClick={() => setAlignment('left')}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Align Left" style={styles.icon} src={imgTablerIconAlignLeft} />
-              </div>
+              <IconAlignLeft size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
             <button style={styles.toolButtonRounded} onClick={() => setAlignment('center')}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Align Center" style={styles.icon} src={imgTablerIconAlignCenter} />
-              </div>
+              <IconAlignCenter size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
             <button style={styles.toolButtonRounded} onClick={() => setAlignment('right')}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Align Right" style={styles.icon} src={imgTablerIconAlignRight} />
-              </div>
+              <IconAlignRight size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
           </div>
 
@@ -327,19 +335,13 @@ export const TableComponent: React.FC = () => {
 
           <div style={styles.toolbarSection}>
             <button style={styles.toolButtonRounded} onClick={handlePhotoInsert}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Photo" style={styles.icon} src={imgTablerIconPhoto} />
-              </div>
+              <IconPhoto size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
             <button style={styles.toolButtonRounded} onClick={handleShapesInsert}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Shapes" style={styles.icon} src={imgTablerIconTriangleSquareCircle} />
-              </div>
+              <IconShape size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
             <button style={styles.toolButtonRounded} onClick={handleLineInsert}>
-              <div style={styles.iconWrapper20}>
-                <img alt="Line" style={styles.icon} src={imgTablerIconLine} />
-              </div>
+              <IconLine size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
             </button>
           </div>
         </div>
@@ -394,16 +396,19 @@ export const TableComponent: React.FC = () => {
                   ...styles.dataCell,
                   ...(isCellSelected(0, 0) && styles.selectedCell),
                   cursor: 'pointer',
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '8px',
                 }}
-                onClick={() => handleCellClick(0, 0)}
+                onClick={(e) => {
+                  handleCellClick(0, 0);
+                  handleColumnSort('date');
+                }}
               >
-                <div style={getCellStyle(0, 0, styles.columnTitleDiv)}>
+                <div style={{...getCellStyle(0, 0, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
                   <p style={styles.columnTitleP}>Dates</p>
+                  {sortColumn === 'date' && (
+                    sortDirection === 'desc' ?
+                      <IconArrowDown size={14} color="#ffffff" /> :
+                      <IconArrowUp size={14} color="#ffffff" />
+                  )}
                 </div>
                 <div className="comment-tool-wrapper">
                   <VeltCommentTool targetCommentElementId="cell-0-0" />
@@ -415,16 +420,19 @@ export const TableComponent: React.FC = () => {
                   ...styles.dataCell,
                   ...(isCellSelected(0, 1) && styles.selectedCell),
                   cursor: 'pointer',
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '8px',
                 }}
-                onClick={() => handleCellClick(0, 1)}
+                onClick={(e) => {
+                  handleCellClick(0, 1);
+                  handleColumnSort('x');
+                }}
               >
-                <div style={getCellStyle(0, 1, styles.columnTitleDiv)}>
+                <div style={{...getCellStyle(0, 1, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
                   <p style={styles.columnTitleP}>X</p>
+                  {sortColumn === 'x' && (
+                    sortDirection === 'desc' ?
+                      <IconArrowDown size={14} color="#ffffff" /> :
+                      <IconArrowUp size={14} color="#ffffff" />
+                  )}
                 </div>
                 <div className="comment-tool-wrapper">
                   <VeltCommentTool targetCommentElementId="cell-0-1" />
@@ -436,16 +444,19 @@ export const TableComponent: React.FC = () => {
                   ...styles.dataCell,
                   ...(isCellSelected(0, 2) && styles.selectedCell),
                   cursor: 'pointer',
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '8px',
                 }}
-                onClick={() => handleCellClick(0, 2)}
+                onClick={(e) => {
+                  handleCellClick(0, 2);
+                  handleColumnSort('linkedin');
+                }}
               >
-                <div style={getCellStyle(0, 2, styles.columnTitleDiv)}>
+                <div style={{...getCellStyle(0, 2, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
                   <p style={styles.columnTitleP}>LinkedIn</p>
+                  {sortColumn === 'linkedin' && (
+                    sortDirection === 'desc' ?
+                      <IconArrowDown size={14} color="#ffffff" /> :
+                      <IconArrowUp size={14} color="#ffffff" />
+                  )}
                 </div>
                 <div className="comment-tool-wrapper">
                   <VeltCommentTool targetCommentElementId="cell-0-2" />
@@ -457,16 +468,19 @@ export const TableComponent: React.FC = () => {
                   ...styles.dataCell,
                   ...(isCellSelected(0, 3) && styles.selectedCell),
                   cursor: 'pointer',
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '8px',
                 }}
-                onClick={() => handleCellClick(0, 3)}
+                onClick={(e) => {
+                  handleCellClick(0, 3);
+                  handleColumnSort('twitter');
+                }}
               >
-                <div style={getCellStyle(0, 3, styles.columnTitleDiv)}>
+                <div style={{...getCellStyle(0, 3, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
                   <p style={styles.columnTitleP}>Twitter</p>
+                  {sortColumn === 'twitter' && (
+                    sortDirection === 'desc' ?
+                      <IconArrowDown size={14} color="#ffffff" /> :
+                      <IconArrowUp size={14} color="#ffffff" />
+                  )}
                 </div>
                 <div className="comment-tool-wrapper">
                   <VeltCommentTool targetCommentElementId="cell-0-3" />
@@ -478,16 +492,19 @@ export const TableComponent: React.FC = () => {
                   ...styles.dataCell,
                   ...(isCellSelected(0, 4) && styles.selectedCell),
                   cursor: 'pointer',
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '8px',
                 }}
-                onClick={() => handleCellClick(0, 4)}
+                onClick={(e) => {
+                  handleCellClick(0, 4);
+                  handleColumnSort('instagram');
+                }}
               >
-                <div style={getCellStyle(0, 4, styles.columnTitleDiv)}>
+                <div style={{...getCellStyle(0, 4, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
                   <p style={styles.columnTitleP}>Instagram</p>
+                  {sortColumn === 'instagram' && (
+                    sortDirection === 'desc' ?
+                      <IconArrowDown size={14} color="#ffffff" /> :
+                      <IconArrowUp size={14} color="#ffffff" />
+                  )}
                 </div>
                 <div className="comment-tool-wrapper">
                   <VeltCommentTool targetCommentElementId="cell-0-4" />
@@ -496,7 +513,7 @@ export const TableComponent: React.FC = () => {
             </div>
 
             {/* Data Rows */}
-            {tableData.map((row, index) => {
+            {sortedTableData.map((row, index) => {
               const rowNum = index + 1; // Row numbers start from 1 (0 is title row)
               return (
                 <div key={index} style={styles.dataRow}>
@@ -511,11 +528,6 @@ export const TableComponent: React.FC = () => {
                       ...styles.dataCell,
                       ...(isCellSelected(rowNum, 0) && styles.selectedCell),
                       cursor: 'pointer',
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 0)}
                   >
@@ -524,7 +536,7 @@ export const TableComponent: React.FC = () => {
                         contentEditable
                         suppressContentEditableWarning
                         style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(index, 'date', e.currentTarget.textContent || '')}
+                        onBlur={(e) => handleCellEdit(row, 'date', e.currentTarget.textContent || '')}
                       >
                         {row.date}
                       </p>
@@ -540,11 +552,6 @@ export const TableComponent: React.FC = () => {
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 1) && styles.selectedCell),
                       cursor: 'pointer',
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 1)}
                   >
@@ -553,7 +560,7 @@ export const TableComponent: React.FC = () => {
                         contentEditable
                         suppressContentEditableWarning
                         style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(index, 'x', e.currentTarget.textContent || '')}
+                        onBlur={(e) => handleCellEdit(row, 'x', e.currentTarget.textContent || '')}
                       >
                         {row.x}
                       </p>
@@ -569,11 +576,6 @@ export const TableComponent: React.FC = () => {
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 2) && styles.selectedCell),
                       cursor: 'pointer',
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 2)}
                   >
@@ -582,7 +584,7 @@ export const TableComponent: React.FC = () => {
                         contentEditable
                         suppressContentEditableWarning
                         style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(index, 'linkedin', e.currentTarget.textContent || '')}
+                        onBlur={(e) => handleCellEdit(row, 'linkedin', e.currentTarget.textContent || '')}
                       >
                         {row.linkedin}
                       </p>
@@ -598,11 +600,6 @@ export const TableComponent: React.FC = () => {
                       opacity: 0.8,
                       ...(isCellSelected(rowNum, 3) && styles.selectedCell),
                       cursor: 'pointer',
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 3)}
                   >
@@ -611,7 +608,7 @@ export const TableComponent: React.FC = () => {
                         contentEditable
                         suppressContentEditableWarning
                         style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(index, 'twitter', e.currentTarget.textContent || '')}
+                        onBlur={(e) => handleCellEdit(row, 'twitter', e.currentTarget.textContent || '')}
                       >
                         {row.twitter}
                       </p>
@@ -626,11 +623,6 @@ export const TableComponent: React.FC = () => {
                       ...styles.dataCell,
                       ...(isCellSelected(rowNum, 4) && styles.selectedCell),
                       cursor: 'pointer',
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '8px',
                     }}
                     onClick={() => handleCellClick(rowNum, 4)}
                   >
@@ -639,7 +631,7 @@ export const TableComponent: React.FC = () => {
                         contentEditable
                         suppressContentEditableWarning
                         style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(index, 'instagram', e.currentTarget.textContent || '')}
+                        onBlur={(e) => handleCellEdit(row, 'instagram', e.currentTarget.textContent || '')}
                       >
                         {row.instagram}
                       </p>
@@ -662,7 +654,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   container: {
     backgroundColor: '#000000',
     width: '100%',
-    minHeight: '100vh',
+    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -720,6 +712,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     width: '100%',
     maxWidth: '1600px',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: '#090909',
     borderRadius: '8px',
     overflow: 'hidden',
@@ -834,8 +829,10 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   tableContent: {
     width: '100%',
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
+    overflow: 'auto',
   },
   tableInner: {
     width: '100%',
@@ -855,7 +852,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexGrow: 1,
     flexBasis: 0,
     minWidth: '1px',
-    minHeight: '1px',
+    height: '48px',
     backgroundColor: '#090909',
     border: '1px solid #141414',
     boxSizing: 'border-box',
@@ -939,17 +936,20 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexGrow: 1,
     flexBasis: 0,
     minWidth: '1px',
-    minHeight: '1px',
+    height: '48px',
     border: '1px solid #141414',
     boxSizing: 'border-box',
     display: 'flex',
     alignItems: 'center',
-    padding: '16px',
+    justifyContent: 'space-between',
+    padding: '4px 4px 4px 12px',
     flexShrink: 0,
+    gap: '8px',
   },
   rowNumberCell: {
     flexGrow: 0,
     flexBasis: 'auto',
+    height: '48px',
     backgroundColor: '#090909',
     padding: '16px 12px',
   },
@@ -993,9 +993,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: 0,
   },
   columnTitleDiv: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: 'block',
+    flex: 1,
+    minWidth: 0,
     fontFamily: 'Urbanist, sans-serif',
     fontSize: '14px',
     fontWeight: 600,
@@ -1003,17 +1003,20 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: '#ffffff',
     letterSpacing: '0.14px',
     whiteSpace: 'nowrap',
-    flexShrink: 0,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   columnTitleP: {
     lineHeight: '16px',
     whiteSpace: 'pre',
     margin: 0,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   cellTextDiv: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: 'block',
+    flex: 1,
+    minWidth: 0,
     fontFamily: 'Urbanist, sans-serif',
     fontSize: '14px',
     fontWeight: 400,
@@ -1021,13 +1024,16 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: '#ffffff',
     letterSpacing: '0.14px',
     whiteSpace: 'nowrap',
-    flexShrink: 0,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
     opacity: 0.8,
   },
   cellTextP: {
     lineHeight: '16px',
     whiteSpace: 'pre',
     margin: 0,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   selectedCell: {
     border: '1px solid rgb(255, 205, 46)',

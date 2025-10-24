@@ -8,7 +8,7 @@ import { TableComponent } from './table-component'
 export default function DocumentCanvas() {
   return (
     <SidebarProvider>
-      <div className="flex w-full h-full overflow-hidden bg-black">
+      <div className="flex w-full h-screen overflow-hidden bg-black">
         <Sidebar />
         <div className="flex-1 overflow-auto relative">
           <Header />
