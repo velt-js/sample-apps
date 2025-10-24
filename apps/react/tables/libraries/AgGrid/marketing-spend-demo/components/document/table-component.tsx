@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { VeltComments, VeltCommentTool, useVeltClient } from '@veltdev/react';
 import {
   IconFolder,
@@ -15,12 +15,36 @@ import {
   IconPhoto,
   IconShape,
   IconLine,
-  IconArrowDown,
-  IconArrowUp
 } from '@tabler/icons-react';
+import { AgGridReact } from 'ag-grid-react';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import { themeQuartz } from 'ag-grid-community';
 import './table-component.css';
 
+// Register AG Grid modules
+ModuleRegistry.registerModules([AllCommunityModule]);
+
+// Create custom dark theme
+const customDarkTheme = themeQuartz.withParams({
+  backgroundColor: '#090909',
+  foregroundColor: 'rgba(255, 255, 255, 0.8)',
+  headerBackgroundColor: '#090909',
+  headerTextColor: '#ffffff',
+  oddRowBackgroundColor: 'transparent',
+  rowHoverColor: 'rgba(255, 255, 255, 0.05)',
+  borderColor: '#141414',
+  rowBorder: true,
+  columnBorder: true,
+  cellHorizontalPadding: 4,
+  fontFamily: 'Urbanist, sans-serif',
+  fontSize: 14,
+  headerHeight: 54,
+  rowHeight: 54,
+  spacing: 0,
+});
+
 interface TableData {
+  id: number;
   date: string;
   x: string;
   linkedin: string;
@@ -37,8 +61,8 @@ interface CellFormatting {
 }
 
 interface SelectedCell {
-  row: number;
-  col: number;
+  row: number; // Row ID (data.id)
+  col: string; // Column field name
 }
 
 // Seeded random number generator for consistent SSR/client hydration
@@ -62,6 +86,7 @@ const generateTableData = (): TableData[] => {
     const year = 2025;
 
     data.push({
+      id: i,
       date: `${day} ${month} ${year}`,
       x: `$${Math.floor(random() * 500) + 300}`,
       linkedin: `$${Math.floor(random() * 600) + 400}`,
@@ -73,16 +98,219 @@ const generateTableData = (): TableData[] => {
   return data;
 };
 
+// Get cell formatting key
+const getCellFormattingKey = (rowId: number, field: string) => `${rowId}-${field}`;
+
+// Custom Cell Renderer with Velt Comments and Formatting
+const VeltCellRendererWithFormatting = (cellFormatting: Record<string, CellFormatting>) => (props: any) => {
+  const cellId = `cell-${props.data.id}-${props.colDef.field}`;
+  const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
+  const formatting = cellFormatting[cellKey] || {};
+
+  // Set ID on parent AG Grid cell element
+  React.useEffect(() => {
+    if (props.eGridCell && props.eGridCell.id !== cellId) {
+      props.eGridCell.id = cellId;
+    }
+  }, [cellId]);
+
+  const textStyle: React.CSSProperties = {
+    fontWeight: formatting.bold ? 'bold' : 'normal',
+    fontStyle: formatting.italic ? 'italic' : 'normal',
+    textDecoration: [
+      formatting.underline ? 'underline' : '',
+      formatting.strikethrough ? 'line-through' : '',
+    ].filter(Boolean).join(' ') || 'none',
+  };
+
+  const containerStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    height: '100%',
+    padding: '4px 4px 4px 12px',
+    gap: '8px',
+    textAlign: formatting.align || 'left',
+  };
+
+  return (
+    <>
+      <div style={containerStyle}>
+        <span style={textStyle}>{props.value}</span>
+        <div className="comment-tool-wrapper">
+          <VeltCommentTool targetCommentElementId={cellId} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+// Custom Header Component with Column Letters
+const CustomHeaderComponent = (props: any) => {
+  // Map field names to letters: date=A, x=B, linkedin=C, twitter=D, instagram=E
+  const fieldToLetter: Record<string, string> = {
+    date: 'A',
+    x: 'B',
+    linkedin: 'C',
+    twitter: 'D',
+    instagram: 'E',
+  };
+  const letter = fieldToLetter[props.column.colId] || '';
+
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+      fontFamily: 'DM Mono, monospace',
+      fontSize: '12px',
+      color: 'rgba(255, 255, 255, 0.5)',
+      letterSpacing: '0.12px'
+    }}>
+      {letter}
+    </div>
+  );
+};
+
+// Row Number Cell Renderer
+const RowNumberRenderer = (props: any) => {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+      fontFamily: 'DM Mono, monospace',
+      fontSize: '12px',
+      color: 'rgba(255, 255, 255, 0.5)',
+      letterSpacing: '0.12px'
+    }}>
+      {props.node.rowIndex + 2}
+    </div>
+  );
+};
+
+// Sort Icon Component
+const SortIcon = ({ direction }: { direction: 'asc' | 'desc' | null }) => {
+  if (direction === 'asc') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9L7 5M7 5L11 9M7 5V19" stroke="#FFCD2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M21 15L17 19M17 19L13 15M17 19V5" stroke="white" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M21 15L17 19M17 19L13 15M17 19V5" stroke="black" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  } else if (direction === 'desc') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9L7 5M7 5L11 9M7 5V19" stroke="white" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 9L7 5M7 5L11 9M7 5V19" stroke="black" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M21 15L17 19M17 19L13 15M17 19V5" stroke="#FFCD2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  } else {
+    // Neutral state - both arrows grayed out
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9L7 5M7 5L11 9M7 5V19" stroke="white" strokeOpacity="0.3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 9L7 5M7 5L11 9M7 5V19" stroke="black" strokeOpacity="0.3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M21 15L17 19M17 19L13 15M17 19V5" stroke="white" strokeOpacity="0.3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M21 15L17 19M17 19L13 15M17 19V5" stroke="black" strokeOpacity="0.3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+};
+
+// Custom Title Row Renderer Factory (for pinned top row)
+const createTitleRowRenderer = (sortState: { colId: string; sort: 'asc' | 'desc' } | null) => (props: any) => {
+  const cellId = `title-${props.colDef.field}`;
+  const columnTitles: Record<string, string> = {
+    date: 'Dates',
+    x: 'X',
+    linkedin: 'LinkedIn',
+    twitter: 'Twitter',
+    instagram: 'Instagram',
+  };
+  const title = columnTitles[props.colDef.field] || '';
+
+  // Set ID on parent AG Grid cell element
+  React.useEffect(() => {
+    if (props.eGridCell && props.eGridCell.id !== cellId) {
+      props.eGridCell.id = cellId;
+    }
+  }, [cellId]);
+
+  const handleSort = () => {
+    const currentSort = sortState?.colId === props.colDef.field ? sortState.sort : null;
+    // Toggle between desc and asc only
+    let newSort: 'asc' | 'desc' = currentSort === 'asc' ? 'desc' : 'asc';
+
+    props.api.applyColumnState({
+      state: [{ colId: props.colDef.field, sort: newSort }],
+      defaultState: { sort: null },
+    });
+  };
+
+  const currentSort = sortState?.colId === props.colDef.field ? sortState.sort : null;
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        height: '100%',
+        padding: '4px 4px 4px 12px',
+        gap: '8px',
+        cursor: 'pointer',
+      }}
+      onClick={handleSort}
+    >
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          fontFamily: 'Urbanist, sans-serif',
+          fontSize: '14px',
+          fontWeight: 600,
+          color: '#ffffff',
+          letterSpacing: '0.14px',
+        }}
+      >
+        {title}
+        <SortIcon direction={currentSort} />
+      </span>
+      <div className="comment-tool-wrapper">
+        <VeltCommentTool targetCommentElementId={cellId} />
+      </div>
+    </div>
+  );
+};
+
 export const TableComponent: React.FC = () => {
-  // Local state - not synced across users, resets on refresh
   const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null);
-  const [tableData, setTableData] = useState<TableData[]>(generateTableData());
+  const [rowData, setRowData] = useState<TableData[]>(generateTableData());
   const [cellFormatting, setCellFormatting] = useState<Record<string, CellFormatting>>({});
+  const [gridApi, setGridApi] = useState<any>(null);
+  const [sortState, setSortState] = useState<{ colId: string; sort: 'asc' | 'desc' } | null>(null);
   const { client } = useVeltClient();
 
-  // Sorting state (local, not synced)
-  const [sortColumn, setSortColumn] = useState<keyof TableData | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  // Pinned top row data (column titles)
+  const pinnedTopRowData = useMemo(() => [{
+    id: -1,
+    date: 'Dates',
+    x: 'X',
+    linkedin: 'LinkedIn',
+    twitter: 'Twitter',
+    instagram: 'Instagram',
+  }], []);
 
   useEffect(() => {
     if (client) {
@@ -91,46 +319,248 @@ export const TableComponent: React.FC = () => {
     }
   }, [client]);
 
-  const getCellKey = (row: number, col: number) => `${row}-${col}`;
+  // Update header highlighting when selection changes
+  useEffect(() => {
+    if (gridApi) {
+      // Remove all previous highlighting
+      document.querySelectorAll('.ag-header-cell').forEach(el => {
+        el.classList.remove('header-selected');
+      });
+      document.querySelectorAll('.ag-pinned-left-cols-container .ag-cell').forEach(el => {
+        el.classList.remove('row-selected');
+      });
 
-  const isCellSelected = (row: number, col: number) => {
-    return selectedCell?.row === row && selectedCell?.col === col;
-  };
+      if (selectedCell) {
+        // Add highlighting to selected column header
+        const colElement = document.querySelector(`[col-id="${selectedCell.col}"]`);
+        if (colElement) {
+          colElement.classList.add('header-selected');
+        }
 
-  const handleCellClick = (row: number, col: number) => {
-    setSelectedCell({ row, col });
-  };
+        // Add highlighting to selected row number
+        const allCells = document.querySelectorAll('.ag-pinned-left-cols-container .ag-cell');
+        allCells.forEach(cell => {
+          const row = cell.closest('.ag-row');
+          if (row) {
+            const rowNode = gridApi.getRowNode(selectedCell.row.toString());
+            if (rowNode && row.getAttribute('row-id') === selectedCell.row.toString()) {
+              cell.classList.add('row-selected');
+            }
+          }
+        });
+      }
+    }
+  }, [selectedCell, gridApi]);
+
+  // Conditional Cell Renderer (Title row or Data cell)
+  const conditionalCellRenderer = useCallback((params: any) => {
+    if (params.node.rowPinned === 'top') {
+      const TitleRowRenderer = createTitleRowRenderer(sortState);
+      return TitleRowRenderer(params);
+    }
+    const VeltRenderer = VeltCellRendererWithFormatting(cellFormatting);
+    return VeltRenderer(params);
+  }, [cellFormatting, sortState]);
+
+  // Date comparator function to properly sort dates
+  const dateComparator = useCallback((valueA: string, valueB: string) => {
+    // Parse date strings like "1 Apr 2025" into Date objects
+    const parseDate = (dateStr: string): Date => {
+      const [day, month, year] = dateStr.split(' ');
+      const monthMap: Record<string, number> = {
+        'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+        'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+      };
+      return new Date(parseInt(year), monthMap[month], parseInt(day));
+    };
+
+    const dateA = parseDate(valueA);
+    const dateB = parseDate(valueB);
+
+    return dateA.getTime() - dateB.getTime();
+  }, []);
+
+  // Column Definitions
+  const columnDefs = useMemo(() => [
+    {
+      headerName: '',
+      field: 'rowNumber',
+      width: 50,
+      pinned: 'left',
+      lockPosition: true,
+      suppressMenu: true,
+      sortable: false,
+      editable: false,
+      cellRenderer: (params: any) => {
+        if (params.node.rowPinned === 'top') {
+          return (
+            <div style={{
+              fontFamily: 'DM Mono, monospace',
+              fontSize: '12px',
+              color: 'rgba(255, 255, 255, 0.5)',
+            }}>
+              1
+            </div>
+          );
+        }
+        return RowNumberRenderer(params);
+      },
+      headerComponent: () => (
+        <div style={{
+          fontFamily: 'DM Mono, monospace',
+          fontSize: '14px',
+          opacity: 0,
+        }}>
+          -
+        </div>
+      ),
+      cellStyle: {
+        backgroundColor: '#090909',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    },
+    {
+      field: 'date',
+      headerName: 'Dates',
+      headerComponent: CustomHeaderComponent,
+      editable: (params: any) => params.node.rowPinned !== 'top',
+      sortable: true,
+      comparator: dateComparator,
+      cellRenderer: conditionalCellRenderer,
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'x',
+      headerName: 'X',
+      headerComponent: CustomHeaderComponent,
+      editable: (params: any) => params.node.rowPinned !== 'top',
+      sortable: true,
+      cellRenderer: conditionalCellRenderer,
+      flex: 1,
+      minWidth: 120,
+    },
+    {
+      field: 'linkedin',
+      headerName: 'LinkedIn',
+      headerComponent: CustomHeaderComponent,
+      editable: (params: any) => params.node.rowPinned !== 'top',
+      sortable: true,
+      cellRenderer: conditionalCellRenderer,
+      flex: 1,
+      minWidth: 120,
+    },
+    {
+      field: 'twitter',
+      headerName: 'Twitter',
+      headerComponent: CustomHeaderComponent,
+      editable: (params: any) => params.node.rowPinned !== 'top',
+      sortable: true,
+      cellRenderer: conditionalCellRenderer,
+      flex: 1,
+      minWidth: 120,
+    },
+    {
+      field: 'instagram',
+      headerName: 'Instagram',
+      headerComponent: CustomHeaderComponent,
+      editable: (params: any) => params.node.rowPinned !== 'top',
+      sortable: true,
+      cellRenderer: conditionalCellRenderer,
+      flex: 1,
+      minWidth: 120,
+    },
+  ], [conditionalCellRenderer, dateComparator]);
+
+  // Default column properties
+  const defaultColDef = useMemo(() => ({
+    resizable: true,
+    sortable: true,
+    editable: true,
+  }), []);
+
+  // Grid ready handler
+  const onGridReady = useCallback((params: any) => {
+    setGridApi(params.api);
+
+    // Set default sort on date column (ascending)
+    params.api.applyColumnState({
+      state: [{ colId: 'date', sort: 'asc' }],
+      defaultState: { sort: null },
+    });
+
+    // Initialize sort state
+    setSortState({ colId: 'date', sort: 'asc' });
+  }, []);
+
+  // Sort changed handler
+  const onSortChanged = useCallback((params: any) => {
+    const columnState = params.api.getColumnState();
+    const sortedColumn = columnState.find((col: any) => col.sort !== null);
+
+    if (sortedColumn) {
+      setSortState({ colId: sortedColumn.colId, sort: sortedColumn.sort });
+    } else {
+      setSortState(null);
+    }
+  }, []);
+
+  // Cell click handler
+  const onCellClicked = useCallback((params: any) => {
+    if (params.node.rowPinned !== 'top' && params.data) {
+      setSelectedCell({
+        row: params.data.id,
+        col: params.colDef.field,
+      });
+    }
+  }, []);
+
+  // Cell value changed handler
+  const onCellValueChanged = useCallback((params: any) => {
+    console.log('Cell value changed:', params);
+    // Update row data with new value
+    setRowData(prevData => {
+      const updatedData = [...prevData];
+      const rowIndex = updatedData.findIndex(row => row.id === params.data.id);
+      if (rowIndex !== -1) {
+        updatedData[rowIndex] = { ...params.data };
+      }
+      return updatedData;
+    });
+  }, []);
 
   const toggleFormatting = (format: keyof CellFormatting) => {
-    if (!selectedCell || !cellFormatting) return;
+    if (!selectedCell) return;
 
-    const cellKey = getCellKey(selectedCell.row, selectedCell.col);
+    const cellKey = getCellFormattingKey(selectedCell.row, selectedCell.col);
     const currentFormatting = cellFormatting[cellKey] || {};
 
-    if (format === 'align') return; // Handle alignment separately
+    if (format === 'align') return;
 
-    setCellFormatting({
-      ...cellFormatting,
+    setCellFormatting(prev => ({
+      ...prev,
       [cellKey]: {
         ...currentFormatting,
         [format]: !currentFormatting[format],
       },
-    });
+    }));
   };
 
   const setAlignment = (align: 'left' | 'center' | 'right') => {
-    if (!selectedCell || !cellFormatting) return;
+    if (!selectedCell) return;
 
-    const cellKey = getCellKey(selectedCell.row, selectedCell.col);
+    const cellKey = getCellFormattingKey(selectedCell.row, selectedCell.col);
     const currentFormatting = cellFormatting[cellKey] || {};
 
-    setCellFormatting({
-      ...cellFormatting,
+    setCellFormatting(prev => ({
+      ...prev,
       [cellKey]: {
         ...currentFormatting,
         align,
       },
-    });
+    }));
   };
 
   const handlePhotoInsert = () => {
@@ -156,107 +586,6 @@ export const TableComponent: React.FC = () => {
     }
     alert('Line tool clicked! In a full implementation, this would allow drawing lines.');
   };
-
-  const getCellStyle = (row: number, col: number, baseStyle: React.CSSProperties): React.CSSProperties => {
-    if (!cellFormatting) return baseStyle;
-
-    const cellKey = getCellKey(row, col);
-    const formatting = cellFormatting[cellKey] || {};
-
-    return {
-      ...baseStyle,
-      fontWeight: formatting.bold ? 'bold' : baseStyle.fontWeight,
-      fontStyle: formatting.italic ? 'italic' : 'normal',
-      textDecoration: [
-        formatting.underline ? 'underline' : '',
-        formatting.strikethrough ? 'line-through' : '',
-      ].filter(Boolean).join(' ') || 'none',
-      textAlign: formatting.align || (baseStyle.textAlign as any),
-    };
-  };
-
-
-  const isColumnSelected = (col: number) => {
-    return selectedCell?.col === col;
-  };
-
-  const isRowSelected = (row: number) => {
-    return selectedCell?.row === row;
-  };
-
-  const handleCellEdit = (rowData: TableData, field: keyof TableData, newValue: string) => {
-    if (!tableData) return;
-
-    // Find the original index in tableData
-    const originalIndex = tableData.findIndex(row =>
-      row.date === rowData.date &&
-      row.x === rowData.x &&
-      row.linkedin === rowData.linkedin &&
-      row.twitter === rowData.twitter &&
-      row.instagram === rowData.instagram
-    );
-
-    if (originalIndex === -1) return;
-
-    const updatedData = [...tableData];
-    updatedData[originalIndex] = {
-      ...updatedData[originalIndex],
-      [field]: newValue,
-    };
-    setTableData(updatedData);
-  };
-
-  const handleColumnSort = (column: keyof TableData) => {
-    if (sortColumn === column) {
-      // Toggle between desc -> asc -> no sort
-      if (sortDirection === 'desc') {
-        setSortDirection('asc');
-      } else {
-        // Reset to no sort
-        setSortColumn(null);
-        setSortDirection('desc');
-      }
-    } else {
-      // New column, start with descending
-      setSortColumn(column);
-      setSortDirection('desc');
-    }
-  };
-
-  const parsePrice = (priceString: string): number => {
-    return parseInt(priceString.replace('$', ''));
-  };
-
-  const parseDate = (dateString: string): Date => {
-    // Parse "1 Jan 2025" format
-    const [day, month, year] = dateString.split(' ');
-    const monthMap: { [key: string]: number } = {
-      'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
-      'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
-    };
-    return new Date(parseInt(year), monthMap[month], parseInt(day));
-  };
-
-  const getSortedData = (): TableData[] => {
-    if (!tableData || !sortColumn) return tableData;
-
-    const sorted = [...tableData].sort((a, b) => {
-      if (sortColumn === 'date') {
-        const dateA = parseDate(a.date).getTime();
-        const dateB = parseDate(b.date).getTime();
-        return sortDirection === 'desc' ? dateB - dateA : dateA - dateB;
-      } else {
-        // Sort by price for other columns
-        const priceA = parsePrice(a[sortColumn]);
-        const priceB = parsePrice(b[sortColumn]);
-        return sortDirection === 'desc' ? priceB - priceA : priceA - priceB;
-      }
-    });
-
-    return sorted;
-  };
-
-  const sortedTableData = getSortedData();
 
   return (
     <div style={styles.container}>
@@ -346,304 +675,27 @@ export const TableComponent: React.FC = () => {
           </div>
         </div>
 
-        {/* Table Content */}
-        <div style={styles.tableContent}>
-          <div style={styles.tableInner}>
-            {/* Column Headers */}
-            <div style={styles.headerRow}>
-              <div style={{...styles.headerCell, ...styles.firstColumnHeader}}>
-                <div style={styles.headerTextHidden}>
-                  <p style={styles.headerTextMonoP}>-</p>
-                </div>
-              </div>
-              <div style={{...styles.headerCell, ...(isColumnSelected(0) && styles.activeHeader)}}>
-                <div style={isColumnSelected(0) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
-                  <p style={styles.headerTextMonoSmallP}>A</p>
-                </div>
-              </div>
-              <div style={{...styles.headerCell, ...(isColumnSelected(1) && styles.activeHeader)}}>
-                <div style={isColumnSelected(1) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
-                  <p style={styles.headerTextMonoSmallP}>B</p>
-                </div>
-              </div>
-              <div style={{...styles.headerCell, ...(isColumnSelected(2) && styles.activeHeader)}}>
-                <div style={isColumnSelected(2) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
-                  <p style={styles.headerTextMonoSmallP}>C</p>
-                </div>
-              </div>
-              <div style={{...styles.headerCell, ...(isColumnSelected(3) && styles.activeHeader)}}>
-                <div style={isColumnSelected(3) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
-                  <p style={styles.headerTextMonoSmallP}>D</p>
-                </div>
-              </div>
-              <div style={{...styles.headerCell, ...(isColumnSelected(4) && styles.activeHeader)}}>
-                <div style={isColumnSelected(4) ? styles.headerTextMonoSmallDiv : styles.headerTextMonoSmallDimmed}>
-                  <p style={styles.headerTextMonoSmallP}>E</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Column Title Row */}
-            <div style={styles.dataRow}>
-              <div style={{...styles.dataCell, ...styles.rowNumberCell, ...(isRowSelected(0) && styles.rowNumberCellActive)}}>
-                <div style={isRowSelected(0) ? styles.rowNumberDiv : styles.rowNumberDivDimmed}>
-                  <p style={styles.rowNumberP}>1</p>
-                </div>
-              </div>
-              <div
-                id="cell-0-0"
-                style={{
-                  ...styles.dataCell,
-                  ...(isCellSelected(0, 0) && styles.selectedCell),
-                  cursor: 'pointer',
-                }}
-                onClick={(e) => {
-                  handleCellClick(0, 0);
-                  handleColumnSort('date');
-                }}
-              >
-                <div style={{...getCellStyle(0, 0, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
-                  <p style={styles.columnTitleP}>Dates</p>
-                  {sortColumn === 'date' && (
-                    sortDirection === 'desc' ?
-                      <IconArrowDown size={14} color="#ffffff" /> :
-                      <IconArrowUp size={14} color="#ffffff" />
-                  )}
-                </div>
-                <div className="comment-tool-wrapper">
-                  <VeltCommentTool targetCommentElementId="cell-0-0" />
-                </div>
-              </div>
-              <div
-                id="cell-0-1"
-                style={{
-                  ...styles.dataCell,
-                  ...(isCellSelected(0, 1) && styles.selectedCell),
-                  cursor: 'pointer',
-                }}
-                onClick={(e) => {
-                  handleCellClick(0, 1);
-                  handleColumnSort('x');
-                }}
-              >
-                <div style={{...getCellStyle(0, 1, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
-                  <p style={styles.columnTitleP}>X</p>
-                  {sortColumn === 'x' && (
-                    sortDirection === 'desc' ?
-                      <IconArrowDown size={14} color="#ffffff" /> :
-                      <IconArrowUp size={14} color="#ffffff" />
-                  )}
-                </div>
-                <div className="comment-tool-wrapper">
-                  <VeltCommentTool targetCommentElementId="cell-0-1" />
-                </div>
-              </div>
-              <div
-                id="cell-0-2"
-                style={{
-                  ...styles.dataCell,
-                  ...(isCellSelected(0, 2) && styles.selectedCell),
-                  cursor: 'pointer',
-                }}
-                onClick={(e) => {
-                  handleCellClick(0, 2);
-                  handleColumnSort('linkedin');
-                }}
-              >
-                <div style={{...getCellStyle(0, 2, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
-                  <p style={styles.columnTitleP}>LinkedIn</p>
-                  {sortColumn === 'linkedin' && (
-                    sortDirection === 'desc' ?
-                      <IconArrowDown size={14} color="#ffffff" /> :
-                      <IconArrowUp size={14} color="#ffffff" />
-                  )}
-                </div>
-                <div className="comment-tool-wrapper">
-                  <VeltCommentTool targetCommentElementId="cell-0-2" />
-                </div>
-              </div>
-              <div
-                id="cell-0-3"
-                style={{
-                  ...styles.dataCell,
-                  ...(isCellSelected(0, 3) && styles.selectedCell),
-                  cursor: 'pointer',
-                }}
-                onClick={(e) => {
-                  handleCellClick(0, 3);
-                  handleColumnSort('twitter');
-                }}
-              >
-                <div style={{...getCellStyle(0, 3, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
-                  <p style={styles.columnTitleP}>Twitter</p>
-                  {sortColumn === 'twitter' && (
-                    sortDirection === 'desc' ?
-                      <IconArrowDown size={14} color="#ffffff" /> :
-                      <IconArrowUp size={14} color="#ffffff" />
-                  )}
-                </div>
-                <div className="comment-tool-wrapper">
-                  <VeltCommentTool targetCommentElementId="cell-0-3" />
-                </div>
-              </div>
-              <div
-                id="cell-0-4"
-                style={{
-                  ...styles.dataCell,
-                  ...(isCellSelected(0, 4) && styles.selectedCell),
-                  cursor: 'pointer',
-                }}
-                onClick={(e) => {
-                  handleCellClick(0, 4);
-                  handleColumnSort('instagram');
-                }}
-              >
-                <div style={{...getCellStyle(0, 4, styles.columnTitleDiv), display: 'flex', alignItems: 'center', gap: '4px'}}>
-                  <p style={styles.columnTitleP}>Instagram</p>
-                  {sortColumn === 'instagram' && (
-                    sortDirection === 'desc' ?
-                      <IconArrowDown size={14} color="#ffffff" /> :
-                      <IconArrowUp size={14} color="#ffffff" />
-                  )}
-                </div>
-                <div className="comment-tool-wrapper">
-                  <VeltCommentTool targetCommentElementId="cell-0-4" />
-                </div>
-              </div>
-            </div>
-
-            {/* Data Rows */}
-            {sortedTableData.map((row, index) => {
-              const rowNum = index + 1; // Row numbers start from 1 (0 is title row)
-              return (
-                <div key={index} style={styles.dataRow}>
-                  <div style={{...styles.dataCell, ...styles.rowNumberCell, ...(isRowSelected(rowNum) && styles.rowNumberCellActive)}}>
-                    <div style={isRowSelected(rowNum) ? styles.rowNumberDiv : styles.rowNumberDivDimmed}>
-                      <p style={styles.rowNumberP}>{index + 2}</p>
-                    </div>
-                  </div>
-                  <div
-                    id={`cell-${rowNum}-0`}
-                    style={{
-                      ...styles.dataCell,
-                      ...(isCellSelected(rowNum, 0) && styles.selectedCell),
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleCellClick(rowNum, 0)}
-                  >
-                    <div style={getCellStyle(rowNum, 0, styles.cellTextDiv)}>
-                      <p
-                        contentEditable
-                        suppressContentEditableWarning
-                        style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(row, 'date', e.currentTarget.textContent || '')}
-                      >
-                        {row.date}
-                      </p>
-                    </div>
-                    <div className="comment-tool-wrapper">
-                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-0`} />
-                    </div>
-                  </div>
-                  <div
-                    id={`cell-${rowNum}-1`}
-                    style={{
-                      ...styles.dataCell,
-                      opacity: 0.8,
-                      ...(isCellSelected(rowNum, 1) && styles.selectedCell),
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleCellClick(rowNum, 1)}
-                  >
-                    <div style={getCellStyle(rowNum, 1, styles.cellTextDiv)}>
-                      <p
-                        contentEditable
-                        suppressContentEditableWarning
-                        style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(row, 'x', e.currentTarget.textContent || '')}
-                      >
-                        {row.x}
-                      </p>
-                    </div>
-                    <div className="comment-tool-wrapper">
-                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-1`} />
-                    </div>
-                  </div>
-                  <div
-                    id={`cell-${rowNum}-2`}
-                    style={{
-                      ...styles.dataCell,
-                      opacity: 0.8,
-                      ...(isCellSelected(rowNum, 2) && styles.selectedCell),
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleCellClick(rowNum, 2)}
-                  >
-                    <div style={getCellStyle(rowNum, 2, styles.cellTextDiv)}>
-                      <p
-                        contentEditable
-                        suppressContentEditableWarning
-                        style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(row, 'linkedin', e.currentTarget.textContent || '')}
-                      >
-                        {row.linkedin}
-                      </p>
-                    </div>
-                    <div className="comment-tool-wrapper">
-                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-2`} />
-                    </div>
-                  </div>
-                  <div
-                    id={`cell-${rowNum}-3`}
-                    style={{
-                      ...styles.dataCell,
-                      opacity: 0.8,
-                      ...(isCellSelected(rowNum, 3) && styles.selectedCell),
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleCellClick(rowNum, 3)}
-                  >
-                    <div style={getCellStyle(rowNum, 3, styles.cellTextDiv)}>
-                      <p
-                        contentEditable
-                        suppressContentEditableWarning
-                        style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(row, 'twitter', e.currentTarget.textContent || '')}
-                      >
-                        {row.twitter}
-                      </p>
-                    </div>
-                    <div className="comment-tool-wrapper">
-                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-3`} />
-                    </div>
-                  </div>
-                  <div
-                    id={`cell-${rowNum}-4`}
-                    style={{
-                      ...styles.dataCell,
-                      ...(isCellSelected(rowNum, 4) && styles.selectedCell),
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleCellClick(rowNum, 4)}
-                  >
-                    <div style={getCellStyle(rowNum, 4, styles.cellTextDiv)}>
-                      <p
-                        contentEditable
-                        suppressContentEditableWarning
-                        style={styles.cellTextP}
-                        onBlur={(e) => handleCellEdit(row, 'instagram', e.currentTarget.textContent || '')}
-                      >
-                        {row.instagram}
-                      </p>
-                    </div>
-                    <div className="comment-tool-wrapper">
-                      <VeltCommentTool targetCommentElementId={`cell-${rowNum}-4`} />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        {/* AG Grid Table */}
+        <div style={styles.gridWrapper}>
+          <AgGridReact
+            theme={customDarkTheme}
+            rowData={rowData}
+            columnDefs={columnDefs}
+            defaultColDef={defaultColDef}
+            pinnedTopRowData={pinnedTopRowData}
+            onGridReady={onGridReady}
+            onSortChanged={onSortChanged}
+            onCellClicked={onCellClicked}
+            onCellValueChanged={onCellValueChanged}
+            domLayout="normal"
+            enableCellTextSelection={true}
+            ensureDomOrder={true}
+            animateRows={false}
+            suppressRowHoverHighlight={false}
+            suppressAnimationFrame={false}
+            suppressCellFocus={false}
+            getRowId={(params) => params.data.id.toString()}
+          />
         </div>
       </div>
     </div>
@@ -676,30 +728,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     gap: '8px',
     flexShrink: 0,
   },
-  iconWrapper14: {
-    position: 'relative',
-    flexShrink: 0,
-    width: '14px',
-    height: '14px',
-  },
-  iconWrapper12: {
-    position: 'relative',
-    flexShrink: 0,
-    width: '12px',
-    height: '12px',
-  },
-  iconWrapper20: {
-    position: 'relative',
-    flexShrink: 0,
-    width: '20px',
-    height: '20px',
-  },
-  icon: {
-    display: 'block',
-    maxWidth: 'none',
-    width: '100%',
-    height: '100%',
-  },
   breadcrumbText: {
     fontFamily: 'Inter, sans-serif',
     fontSize: '13px',
@@ -729,6 +757,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: 'row',
     alignItems: 'center',
     gap: '4px',
+    zIndex: 10,
   },
   viewButtonActive: {
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
@@ -776,6 +805,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: 'row',
     alignItems: 'center',
     gap: '16px',
+    zIndex: 10,
   },
   toolbarSection: {
     display: 'flex',
@@ -827,216 +857,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: 'rgb(26, 26, 26)',
     flexShrink: 0,
   },
-  tableContent: {
+  gridWrapper: {
     width: '100%',
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    overflow: 'auto',
-  },
-  tableInner: {
-    width: '100%',
-    maxWidth: '1600px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-  },
-  headerRow: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    flexShrink: 0,
-  },
-  headerCell: {
-    flexGrow: 1,
-    flexBasis: 0,
-    minWidth: '1px',
-    height: '48px',
-    backgroundColor: '#090909',
-    border: '1px solid #141414',
-    boxSizing: 'border-box',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '6px 12px',
-    flexShrink: 0,
-  },
-  firstColumnHeader: {
-    flexGrow: 0,
-    flexBasis: 'auto',
-  },
-  activeHeader: {
-    backgroundColor: '#171717',
-  },
-  headerTextHidden: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    fontFamily: 'DM Mono, sans-serif',
-    fontSize: '14px',
-    fontWeight: 400,
-    lineHeight: 0,
-    fontStyle: 'normal',
-    color: '#ffffff',
-    textAlign: 'center',
-    letterSpacing: '0.14px',
-    width: '8px',
-    flexShrink: 0,
-    opacity: 0,
-  },
-  headerTextMonoP: {
-    lineHeight: '16px',
-    margin: 0,
-  },
-  headerTextMonoSmallDiv: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    fontFamily: 'DM Mono, sans-serif',
-    fontSize: '12px',
-    fontWeight: 400,
-    lineHeight: 0,
-    fontStyle: 'normal',
-    color: '#ffffff',
-    textAlign: 'center',
-    letterSpacing: '0.12px',
-    width: '8px',
-    flexShrink: 0,
-    opacity: 0.5,
-  },
-  headerTextMonoSmallDimmed: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    fontFamily: 'DM Mono, sans-serif',
-    fontSize: '12px',
-    fontWeight: 400,
-    lineHeight: 0,
-    fontStyle: 'normal',
-    color: '#ffffff',
-    textAlign: 'center',
-    letterSpacing: '0.12px',
-    width: '8px',
-    flexShrink: 0,
-    opacity: 0.3,
-  },
-  headerTextMonoSmallP: {
-    lineHeight: '16px',
-    margin: 0,
-  },
-  dataRow: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    flexShrink: 0,
-  },
-  dataCell: {
-    flexGrow: 1,
-    flexBasis: 0,
-    minWidth: '1px',
-    height: '48px',
-    border: '1px solid #141414',
-    boxSizing: 'border-box',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '4px 4px 4px 12px',
-    flexShrink: 0,
-    gap: '8px',
-  },
-  rowNumberCell: {
-    flexGrow: 0,
-    flexBasis: 'auto',
-    height: '48px',
-    backgroundColor: '#090909',
-    padding: '16px 12px',
-  },
-  rowNumberCellActive: {
-    backgroundColor: '#171717',
-  },
-  rowNumberDiv: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    fontFamily: 'DM Mono, sans-serif',
-    fontSize: '12px',
-    fontWeight: 400,
-    lineHeight: 0,
-    fontStyle: 'normal',
-    color: '#ffffff',
-    textAlign: 'center',
-    letterSpacing: '0.12px',
-    width: '8px',
-    flexShrink: 0,
-    opacity: 0.5,
-  },
-  rowNumberDivDimmed: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    fontFamily: 'DM Mono, sans-serif',
-    fontSize: '12px',
-    fontWeight: 400,
-    lineHeight: 0,
-    fontStyle: 'normal',
-    color: '#ffffff',
-    textAlign: 'center',
-    letterSpacing: '0.12px',
-    width: '8px',
-    flexShrink: 0,
-    opacity: 0.3,
-  },
-  rowNumberP: {
-    lineHeight: '16px',
-    margin: 0,
-  },
-  columnTitleDiv: {
-    display: 'block',
-    flex: 1,
-    minWidth: 0,
-    fontFamily: 'Urbanist, sans-serif',
-    fontSize: '14px',
-    fontWeight: 600,
-    lineHeight: 0,
-    color: '#ffffff',
-    letterSpacing: '0.14px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  columnTitleP: {
-    lineHeight: '16px',
-    whiteSpace: 'pre',
-    margin: 0,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  cellTextDiv: {
-    display: 'block',
-    flex: 1,
-    minWidth: 0,
-    fontFamily: 'Urbanist, sans-serif',
-    fontSize: '14px',
-    fontWeight: 400,
-    lineHeight: 0,
-    color: '#ffffff',
-    letterSpacing: '0.14px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    opacity: 0.8,
-  },
-  cellTextP: {
-    lineHeight: '16px',
-    whiteSpace: 'pre',
-    margin: 0,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  selectedCell: {
-    border: '1px solid rgb(255, 205, 46)',
+    height: '100%',
+    padding: '16px',
   },
 };
 
