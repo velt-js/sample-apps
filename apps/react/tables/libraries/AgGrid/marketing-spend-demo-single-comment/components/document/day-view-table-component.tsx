@@ -46,8 +46,8 @@ export const TableComponent: React.FC = () => {
       const commentElement = client.getCommentElement();
       commentElement.disableCommentPinHighlighter();
 
-      // Enable location-based comments for stable attachment across sorting
-      commentElement.enablePriorityCommentLocationId();
+      // Location-based comments are enabled automatically via data-velt-location-id attribute
+      // Velt will prioritize location IDs when the attribute is present on elements
     }
   }, [client]);
 

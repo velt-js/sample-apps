@@ -36,7 +36,7 @@ const VeltCommentToolWf = () => {
               transform: 'translate(-50%, -50%)',
               width: '11px',
               height: '11px',
-              border: '0.972px solid white',
+              border: '1.5px solid white',
               borderRadius: '6px 6px 6px 1px',
               boxSizing: 'border-box'
             }}
