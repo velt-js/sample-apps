@@ -9,17 +9,27 @@ const seededRandom = (seed: number) => {
   };
 };
 
-// Get ISO week number for a date
-export const getISOWeekNumber = (date: Date): number => {
-  const target = new Date(date.valueOf());
-  const dayNumber = (date.getDay() + 6) % 7;
-  target.setDate(target.getDate() - dayNumber + 3);
-  const firstThursday = target.valueOf();
-  target.setMonth(0, 1);
-  if (target.getDay() !== 4) {
-    target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+// Get week number for a date based on day of month
+// Week 1: Jan 1-7, Week 2: Jan 8-15, etc.
+export const getWeekNumber = (date: Date): number => {
+  const year = date.getFullYear();
+  const month = date.getMonth(); // 0-indexed
+  const day = date.getDate();
+
+  // Days in each month (accounting for leap years)
+  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+  const daysInMonth = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  // Calculate the number of complete weeks from previous months
+  let weeksFromPreviousMonths = 0;
+  for (let i = 0; i < month; i++) {
+    weeksFromPreviousMonths += Math.ceil(daysInMonth[i] / 7);
   }
-  return 1 + Math.ceil((firstThursday - target.valueOf()) / 604800000);
+
+  // Calculate the current week within the current month (1-indexed)
+  const currentMonthWeek = Math.ceil(day / 7);
+
+  return weeksFromPreviousMonths + currentMonthWeek;
 };
 
 // Parse date string and return metadata
@@ -36,7 +46,7 @@ export const parseDateWithMetadata = (dateStr: string): TableData['dateMetadata'
     day: parseInt(day),
     month: monthMap[month],
     year: parseInt(year),
-    week: getISOWeekNumber(date),
+    week: getWeekNumber(date),
   };
 };
 
