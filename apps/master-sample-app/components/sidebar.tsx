@@ -18,6 +18,9 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     react: true,
     canvas: true,
     libraries: true,
+    tables: true,
+    tablesLibraries: true,
+    aggrid: true,
     reactflow: true,
     textEditors: true,
     textEditorLibraries: true,
@@ -168,9 +171,70 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                             </div>
                           )}
                         </div>
+                      )}
+
+                      {/* Tables Section */}
+                      <button
+                        onClick={() => toggleSection("tables")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>Tables</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tables && "rotate-90")} />
+                      </button>
+                      {expandedSections.tables && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          {/* Tables Libraries Section */}
+                          <button
+                            onClick={() => toggleSection("tablesLibraries")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>Libraries</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tablesLibraries && "rotate-90")} />
+                          </button>
+                          {expandedSections.tablesLibraries && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              {/* AgGrid Section */}
+                              <button
+                                onClick={() => toggleSection("aggrid")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>AgGrid</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.aggrid && "rotate-90")} />
+                              </button>
+                              {expandedSections.aggrid && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("marketing-spend-demo-multiple-comments")
+                                      onSampleSelect?.("react-tables-libraries-aggrid-marketing-spend-demo-multiple-comments")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "marketing-spend-demo-multiple-comments" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    marketing-spend-demo-multiple-comments
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("marketing-spend-demo-single-comment")
+                                      onSampleSelect?.("react-tables-libraries-aggrid-marketing-spend-demo-single-comment")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "marketing-spend-demo-single-comment" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    marketing-spend-demo-single-comment
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   )}
-                </div>
-              )}
               
               {/* Text Editors Section - Hidden for now */}
               {/* <button

@@ -3,6 +3,10 @@ import cursorsPlaygroundMeta from './cursors-playground/metadata'
 import { codeFiles as cursorsPlaygroundCodeFiles } from './cursors-playground/code-files'
 import reactflowCrdtMeta from './reactflow-crdt/metadata'
 import { codeFiles as reactflowCrdtCodeFiles } from './reactflow-crdt/code-files'
+import marketingSpendMeta from './marketing-spend-demo-multiple-comments/metadata'
+import { codeFiles as marketingSpendCodeFiles } from './marketing-spend-demo-multiple-comments/code-files'
+import marketingSpendSingleMeta from './marketing-spend-demo-single-comment/metadata'
+import { codeFiles as marketingSpendSingleCodeFiles } from './marketing-spend-demo-single-comment/code-files'
 import tiptapDemoMeta from './tiptap-demo/metadata'
 import { codeFiles as tiptapDemoCodeFiles } from './tiptap-demo/code-files'
 
@@ -14,6 +18,14 @@ export const SAMPLES: Record<string, Sample> = {
   'react-canvas-libraries-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles
+  },
+  'react-tables-libraries-aggrid-marketing-spend-demo-multiple-comments': {
+    metadata: marketingSpendMeta,
+    codeFiles: marketingSpendCodeFiles
+  },
+  'react-tables-libraries-aggrid-marketing-spend-demo-single-comment': {
+    metadata: marketingSpendSingleMeta,
+    codeFiles: marketingSpendSingleCodeFiles
   },
   // 'react-text-editors-libraries-tiptap-tiptap-demo': {
   //   metadata: tiptapDemoMeta,
