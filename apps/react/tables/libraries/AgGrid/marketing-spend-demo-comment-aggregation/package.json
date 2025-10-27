@@ -1,5 +1,5 @@
 {
-  "name": "@apps/react-tables-AgGrid-marketing-spend-demo",
+  "name": "@apps/react-tables-AgGrid-marketing-spend-demo-comment-aggregation",
   "version": "0.1.0",
   "private": true,
   "scripts": {
