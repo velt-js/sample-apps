@@ -1,4 +1,4 @@
-import { TableData } from './types';
+import { TableData, ViewType, CommentContext } from './types';
 
 // Seeded random number generator for consistent SSR/client hydration
 const seededRandom = (seed: number) => {
@@ -6,6 +6,37 @@ const seededRandom = (seed: number) => {
   return () => {
     state = (state * 9301 + 49297) % 233280;
     return state / 233280;
+  };
+};
+
+// Get ISO week number for a date
+export const getISOWeekNumber = (date: Date): number => {
+  const target = new Date(date.valueOf());
+  const dayNumber = (date.getDay() + 6) % 7;
+  target.setDate(target.getDate() - dayNumber + 3);
+  const firstThursday = target.valueOf();
+  target.setMonth(0, 1);
+  if (target.getDay() !== 4) {
+    target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+  }
+  return 1 + Math.ceil((firstThursday - target.valueOf()) / 604800000);
+};
+
+// Parse date string and return metadata
+export const parseDateWithMetadata = (dateStr: string): TableData['dateMetadata'] => {
+  const [day, month, year] = dateStr.split(' ');
+  const monthMap: Record<string, number> = {
+    'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+    'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+  };
+
+  const date = new Date(parseInt(year), monthMap[month] - 1, parseInt(day));
+
+  return {
+    day: parseInt(day),
+    month: monthMap[month],
+    year: parseInt(year),
+    week: getISOWeekNumber(date),
   };
 };
 
@@ -19,14 +50,16 @@ export const generateTableData = (): TableData[] => {
     const day = (i % 28) + 1;
     const month = months[Math.floor(i / 28) % 12];
     const year = 2025;
+    const dateStr = `${day} ${month} ${year}`;
 
     data.push({
       id: i,
-      date: `${day} ${month} ${year}`,
+      date: dateStr,
       x: `$${Math.floor(random() * 500) + 300}`,
       linkedin: `$${Math.floor(random() * 600) + 400}`,
       facebook: `$${Math.floor(random() * 500) + 400}`,
       instagram: `$${Math.floor(random() * 600) + 400}`,
+      dateMetadata: parseDateWithMetadata(dateStr),
     });
   }
 
@@ -52,4 +85,122 @@ export const dateComparator = (valueA: string, valueB: string) => {
   const dateB = parseDate(valueB);
 
   return dateA.getTime() - dateB.getTime();
+};
+
+// Helper function to sum channel spend
+const sumChannelSpend = (rows: TableData[], channel: keyof TableData): string => {
+  const sum = rows.reduce((acc, row) => {
+    const value = row[channel];
+    if (typeof value === 'string' && value.startsWith('$')) {
+      return acc + parseInt(value.substring(1));
+    }
+    return acc;
+  }, 0);
+  return `$${sum}`;
+};
+
+// Aggregate data by week
+export const aggregateDataByWeek = (data: TableData[]): TableData[] => {
+  const weekMap = new Map<string, TableData[]>();
+
+  data.forEach(row => {
+    if (!row.dateMetadata) return;
+    const key = `${row.dateMetadata.year}-W${row.dateMetadata.week}`;
+    if (!weekMap.has(key)) {
+      weekMap.set(key, []);
+    }
+    weekMap.get(key)!.push(row);
+  });
+
+  return Array.from(weekMap.entries()).map(([weekKey, rows], index) => {
+    const firstRow = rows[0];
+    const meta = firstRow.dateMetadata!;
+
+    return {
+      id: index,
+      date: `Week ${meta.week}, ${meta.year}`,
+      x: sumChannelSpend(rows, 'x'),
+      linkedin: sumChannelSpend(rows, 'linkedin'),
+      facebook: sumChannelSpend(rows, 'facebook'),
+      instagram: sumChannelSpend(rows, 'instagram'),
+      dateMetadata: {
+        week: meta.week,
+        month: meta.month,
+        year: meta.year,
+        day: 0, // No specific day for weekly view
+      },
+    };
+  });
+};
+
+// Aggregate data by month
+export const aggregateDataByMonth = (data: TableData[]): TableData[] => {
+  const monthMap = new Map<string, TableData[]>();
+
+  data.forEach(row => {
+    if (!row.dateMetadata) return;
+    const key = `${row.dateMetadata.year}-${row.dateMetadata.month}`;
+    if (!monthMap.has(key)) {
+      monthMap.set(key, []);
+    }
+    monthMap.get(key)!.push(row);
+  });
+
+  return Array.from(monthMap.entries()).map(([monthKey, rows], index) => {
+    const firstRow = rows[0];
+    const meta = firstRow.dateMetadata!;
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+
+    return {
+      id: index,
+      date: `${monthNames[meta.month - 1]} ${meta.year}`,
+      x: sumChannelSpend(rows, 'x'),
+      linkedin: sumChannelSpend(rows, 'linkedin'),
+      facebook: sumChannelSpend(rows, 'facebook'),
+      instagram: sumChannelSpend(rows, 'instagram'),
+      dateMetadata: {
+        month: meta.month,
+        year: meta.year,
+        week: 0,
+        day: 0,
+      },
+    };
+  });
+};
+
+// Generate comment context based on view type
+export const generateCommentContext = (
+  rowData: TableData,
+  channel: string,
+  viewType: ViewType
+): CommentContext => {
+  const { dateMetadata } = rowData;
+  if (!dateMetadata) return { channel, month: 1, year: 2025 };
+
+  const baseContext: CommentContext = {
+    channel,
+    month: dateMetadata.month,
+    year: dateMetadata.year,
+  };
+
+  switch (viewType) {
+    case 'day':
+      if (dateMetadata.day && dateMetadata.day > 0) {
+        baseContext.day = dateMetadata.day;
+      }
+      if (dateMetadata.week && dateMetadata.week > 0) {
+        baseContext.week = dateMetadata.week;
+      }
+      return baseContext;
+    case 'week':
+      if (dateMetadata.week && dateMetadata.week > 0) {
+        baseContext.week = dateMetadata.week;
+      }
+      return baseContext;
+    case 'month':
+      return baseContext;
+    default:
+      return baseContext;
+  }
 };

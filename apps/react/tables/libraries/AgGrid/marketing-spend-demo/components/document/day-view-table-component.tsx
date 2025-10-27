@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useState } from 'react';
 import { VeltComments, useVeltClient } from '@veltdev/react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
@@ -11,7 +11,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 // Import modularized components and utilities
 import { customDarkTheme } from './constants';
-import { dateComparator } from './utils';
+import { dateComparator, aggregateDataByWeek, aggregateDataByMonth } from './utils';
 import { createCustomHeaderComponent } from './grid-components/CustomHeaderComponent';
 import { RowNumberRenderer } from './grid-components/RowNumberRenderer';
 import { createVeltCellRenderer } from './grid-components/VeltCellRenderer';
@@ -20,9 +20,11 @@ import { ViewToggle } from './ui-components/ViewToggle';
 import { Toolbar } from './ui-components/Toolbar';
 import { styles } from './styles';
 import { useTableState } from './hooks/useTableState';
+import { ViewType } from './types';
 
 export const TableComponent: React.FC = () => {
   const { client } = useVeltClient();
+  const [viewType, setViewType] = useState<ViewType>('day');
   const {
     selectedCell,
     setSelectedCell,
@@ -38,6 +40,18 @@ export const TableComponent: React.FC = () => {
     toggleFormatting,
     setAlignment,
   } = useTableState();
+
+  // Generate display data based on view type
+  const displayData = useMemo(() => {
+    switch (viewType) {
+      case 'week':
+        return aggregateDataByWeek(rowData);
+      case 'month':
+        return aggregateDataByMonth(rowData);
+      default:
+        return rowData;
+    }
+  }, [viewType, rowData]);
 
   // Initialize Velt
   useEffect(() => {
@@ -91,10 +105,10 @@ export const TableComponent: React.FC = () => {
     return createCustomHeaderComponent(localSortState, setLocalSortState);
   }, [localSortState]);
 
-  // Cell Renderer with Velt formatting
+  // Cell Renderer with Velt formatting and context
   const veltCellRenderer = useMemo(() => {
-    return createVeltCellRenderer(cellFormatting);
-  }, [cellFormatting]);
+    return createVeltCellRenderer(cellFormatting, viewType);
+  }, [cellFormatting, viewType]);
 
   // Column Definitions
   const columnDefs = useMemo(() => [
@@ -258,7 +272,10 @@ export const TableComponent: React.FC = () => {
       />
 
       <div style={styles.tableContainer}>
-        <ViewToggle />
+        <ViewToggle
+          currentView={viewType}
+          onViewChange={setViewType}
+        />
 
         <Toolbar
           toggleFormatting={toggleFormatting}
@@ -271,7 +288,7 @@ export const TableComponent: React.FC = () => {
         <div style={styles.gridWrapper}>
           <AgGridReact
             theme={customDarkTheme}
-            rowData={rowData}
+            rowData={displayData}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
             onGridReady={onGridReady}
