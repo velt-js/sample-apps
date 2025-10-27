@@ -211,8 +211,10 @@ export const TableComponent: React.FC = () => {
       setTimeout(() => {
         // Force Velt to re-index comments after sort completes
         const commentElement = client.getCommentElement();
-        if (commentElement && typeof commentElement.reprocessComments === 'function') {
-          commentElement.reprocessComments();
+        const reprocess = (commentElement as unknown as { reprocessComments?: () => void })
+          .reprocessComments;
+        if (typeof reprocess === 'function') {
+          reprocess.call(commentElement);
         }
       }, 100);
     }
