@@ -7,6 +7,8 @@ import multipleToolsMeta from './multiple-tools/metadata'
 import { codeFiles as multipleToolsCodeFiles } from './multiple-tools/code-files'
 import agGridSingleToolMeta from './ag-grid-single-tool/metadata'
 import { codeFiles as agGridSingleToolCodeFiles } from './ag-grid-single-tool/code-files'
+import commentAggregationMeta from './comment-aggregation/metadata'
+import { codeFiles as commentAggregationCodeFiles } from './comment-aggregation/code-files'
 import tiptapDemoMeta from './tiptap-demo/metadata'
 import { codeFiles as tiptapDemoCodeFiles } from './tiptap-demo/code-files'
 
@@ -26,6 +28,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-tables-libraries-aggrid-single-tool': {
     metadata: agGridSingleToolMeta,
     codeFiles: agGridSingleToolCodeFiles
+  },
+  'react-tables-libraries-aggrid-comment-aggregation': {
+    metadata: commentAggregationMeta,
+    codeFiles: commentAggregationCodeFiles
   },
   // 'react-text-editors-libraries-tiptap-tiptap-demo': {
   //   metadata: tiptapDemoMeta,

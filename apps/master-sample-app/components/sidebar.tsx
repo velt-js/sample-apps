@@ -227,6 +227,18 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                   >
                                     single-tool
                                   </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("comment-aggregation")
+                                      onSampleSelect?.("react-tables-libraries-aggrid-comment-aggregation")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    comment-aggregation
+                                  </button>
                                 </div>
                               )}
                             </div>

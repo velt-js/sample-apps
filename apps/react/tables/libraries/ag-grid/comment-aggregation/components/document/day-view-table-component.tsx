@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useCallback, useState } from 'react';
 import { VeltComments, useVeltClient } from '@veltdev/react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import { useSidebar } from '@/components/sidebar/SidebarContext';
 import './day-view-table-component.css';
 
 // Register AG Grid modules
@@ -24,7 +25,9 @@ import { ViewType } from './types';
 
 export const TableComponent: React.FC = () => {
   const { client } = useVeltClient();
+  const { isCollapsed } = useSidebar();
   const [viewType, setViewType] = useState<ViewType>('day');
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const {
     selectedCell,
     setSelectedCell,
@@ -38,8 +41,17 @@ export const TableComponent: React.FC = () => {
     localSortState,
     setLocalSortState,
     toggleFormatting,
-    setAlignment,
   } = useTableState();
+
+  // Track window width for responsive behavior
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Hide toolbar if sidebar is open or screen is small (< 900px)
+  const showToolbar = isCollapsed || windowWidth >= 900;
 
   // Generate display data based on view type
   const displayData = useMemo(() => {
@@ -235,30 +247,7 @@ export const TableComponent: React.FC = () => {
     });
   }, []);
 
-  // Insert handlers (placeholders)
-  const handlePhotoInsert = () => {
-    if (!selectedCell) {
-      alert('Please select a cell first');
-      return;
-    }
-    alert('Photo insertion tool clicked! In a full implementation, this would open a file picker.');
-  };
-
-  const handleShapesInsert = () => {
-    if (!selectedCell) {
-      alert('Please select a cell first');
-      return;
-    }
-    alert('Shapes tool clicked! In a full implementation, this would open a shapes menu.');
-  };
-
-  const handleLineInsert = () => {
-    if (!selectedCell) {
-      alert('Please select a cell first');
-      return;
-    }
-    alert('Line tool clicked! In a full implementation, this would allow drawing lines.');
-  };
+  // Removed insert handlers (photo, shapes, line)
 
   return (
     <div style={styles.container}>
@@ -279,10 +268,7 @@ export const TableComponent: React.FC = () => {
 
         <Toolbar
           toggleFormatting={toggleFormatting}
-          setAlignment={setAlignment}
-          handlePhotoInsert={handlePhotoInsert}
-          handleShapesInsert={handleShapesInsert}
-          handleLineInsert={handleLineInsert}
+          visible={showToolbar}
         />
 
         <div style={styles.gridWrapper}>

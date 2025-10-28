@@ -4,29 +4,17 @@ import {
   IconItalic,
   IconUnderline,
   IconStrikethrough,
-  IconAlignLeft,
-  IconAlignCenter,
-  IconAlignRight,
-  IconPhoto,
-  IconShape,
-  IconLine,
 } from '@tabler/icons-react';
 import { CellFormatting } from '../types';
 
 interface ToolbarProps {
   toggleFormatting: (format: keyof CellFormatting) => void;
-  setAlignment: (align: 'left' | 'center' | 'right') => void;
-  handlePhotoInsert: () => void;
-  handleShapesInsert: () => void;
-  handleLineInsert: () => void;
+  visible?: boolean;
 }
 
 export const Toolbar: React.FC<ToolbarProps> = ({
   toggleFormatting,
-  setAlignment,
-  handlePhotoInsert,
-  handleShapesInsert,
-  handleLineInsert,
+  visible = true,
 }) => {
   const toolButton: React.CSSProperties = {
     backgroundColor: 'transparent',
@@ -43,6 +31,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
     ...toolButton,
     borderRadius: '32px',
   };
+
+  if (!visible) return null;
 
   return (
     <div style={{
@@ -71,37 +61,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         </button>
       </div>
 
-      {/* Divider */}
-      <div style={{ width: '1px', height: '16px', backgroundColor: 'rgb(26, 26, 26)' }} />
-
-      {/* Alignment */}
-      <div style={{ display: 'flex', gap: '8px' }}>
-        <button style={toolButtonRounded} onClick={() => setAlignment('left')}>
-          <IconAlignLeft size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
-        </button>
-        <button style={toolButtonRounded} onClick={() => setAlignment('center')}>
-          <IconAlignCenter size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
-        </button>
-        <button style={toolButtonRounded} onClick={() => setAlignment('right')}>
-          <IconAlignRight size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
-        </button>
-      </div>
-
-      {/* Divider */}
-      <div style={{ width: '1px', height: '16px', backgroundColor: 'rgb(26, 26, 26)' }} />
-
-      {/* Insert Tools */}
-      <div style={{ display: 'flex', gap: '8px' }}>
-        <button style={toolButtonRounded} onClick={handlePhotoInsert}>
-          <IconPhoto size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
-        </button>
-        <button style={toolButtonRounded} onClick={handleShapesInsert}>
-          <IconShape size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
-        </button>
-        <button style={toolButtonRounded} onClick={handleLineInsert}>
-          <IconLine size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
-        </button>
-      </div>
+      {/* Removed insert tools (photo, shape, line) and alignment buttons */}
     </div>
   );
 };
