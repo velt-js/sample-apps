@@ -19,9 +19,17 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   const veltUser = useVeltEventCallback('userUpdate')
 
   // Initialize CRDT extension
-  const { VeltCrdt } = useVeltTiptapCrdtExtension({
+  const { VeltCrdt, store } = useVeltTiptapCrdtExtension({
     editorId: documentId || 'default-editor',
   })
+
+  useEffect(() => {
+    console.log('VeltCrdt', VeltCrdt);
+  }, [VeltCrdt]);
+
+  useEffect(() => {
+    console.log('store', store);
+  }, [store]);
 
   // Initialize the editor
   const editor = useEditor({
