@@ -10,7 +10,7 @@ export default function Home() {
   const { authProvider } = useVeltAuthProvider();
 
   return (
-    // [Velt] Wrap app with VeltProvider
+    // [Velt] Wrap app with VeltProvider.
     <VeltProvider
       apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY!}
       authProvider={authProvider}
