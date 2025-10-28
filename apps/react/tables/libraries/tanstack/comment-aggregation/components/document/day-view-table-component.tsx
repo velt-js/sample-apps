@@ -364,20 +364,23 @@ export const TableComponent: React.FC = () => {
               <tbody className="tanstack-table-body">
                 {table.getRowModel().rows.map(row => (
                   <tr key={row.id} className="tanstack-table-row">
-                    {row.getVisibleCells().map((cell, index) => (
-                      <td
-                        key={cell.id}
-                        className={`tanstack-table-cell ${index === 0 ? 'tanstack-row-number-cell pinned-left' : ''}`}
-                        data-row-id={row.original.id}
-                        data-column-id={cell.column.id}
-                        style={{
-                          width: cell.column.getSize(),
-                          minWidth: cell.column.columnDef.minSize,
-                        }}
-                      >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                    ))}
+                    {row.getVisibleCells().map((cell, index) => {
+                      const isSelected = selectedCell?.row === row.original.id && selectedCell?.col === cell.column.id;
+                      return (
+                        <td
+                          key={cell.id}
+                          className={`tanstack-table-cell ${index === 0 ? 'tanstack-row-number-cell pinned-left' : ''} ${isSelected ? 'cell-selected' : ''}`}
+                          data-row-id={row.original.id}
+                          data-column-id={cell.column.id}
+                          style={{
+                            width: cell.column.getSize(),
+                            minWidth: cell.column.columnDef.minSize,
+                          }}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))}
               </tbody>

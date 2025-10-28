@@ -138,6 +138,21 @@
 .tanstack-table-cell:focus-within {
   border: 1px solid rgb(255, 205, 46) !important;
   outline: none !important;
+  box-shadow: inset 0 0 0 1px rgb(255, 205, 46) !important;
+}
+
+/* Cell in editing mode */
+.tanstack-table-cell:has([data-editing="true"]) {
+  border: 1px solid rgb(255, 205, 46) !important;
+  outline: none !important;
+  box-shadow: inset 0 0 0 1px rgb(255, 205, 46) !important;
+}
+
+/* Selected cell highlighting with yellow border */
+.tanstack-table-cell.cell-selected {
+  border: 1px solid rgb(255, 205, 46) !important;
+  outline: none !important;
+  box-shadow: inset 0 0 0 1px rgb(255, 205, 46) !important;
 }
 
 /* Comment bubble styling - Exact replication of popover-comments Angular demo */
@@ -180,14 +195,27 @@
 }
 
 /* Remove contentEditable outline/box */
-[contenteditable] {
+[contenteditable="true"] {
   outline: none !important;
   border: none !important;
+  cursor: text !important;
+  caret-color: #FFCD2E !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  min-height: 1em;
+  white-space: pre-wrap;
 }
 
-[contenteditable]:focus {
+[contenteditable="true"]:focus {
   outline: none !important;
   border: none !important;
+  cursor: text !important;
+  caret-color: #FFCD2E !important;
+}
+
+[contenteditable="true"]:empty:before {
+  content: attr(data-placeholder);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* Column hover effect */
