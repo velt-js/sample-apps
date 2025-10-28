@@ -205,27 +205,27 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 <div className="mt-2 ml-2 space-y-1">
                                   <button
                                     onClick={() => {
-                                      setSelectedItem("marketing-spend-demo-multiple-comments")
-                                      onSampleSelect?.("react-tables-libraries-aggrid-marketing-spend-demo-multiple-comments")
+                                      setSelectedItem("multiple-tools")
+                                      onSampleSelect?.("react-tables-libraries-aggrid-multiple-tools")
                                     }}
                                     className={cn(
                                       "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "marketing-spend-demo-multiple-comments" ? "bg-secondary" : "hover:bg-secondary/50",
+                                      selectedItem === "multiple-tools" ? "bg-secondary" : "hover:bg-secondary/50",
                                     )}
                                   >
-                                    marketing-spend-demo-multiple-comments
+                                    multiple-tools
                                   </button>
                                   <button
                                     onClick={() => {
-                                      setSelectedItem("marketing-spend-demo-single-comment")
-                                      onSampleSelect?.("react-tables-libraries-aggrid-marketing-spend-demo-single-comment")
+                                      setSelectedItem("single-tool")
+                                      onSampleSelect?.("react-tables-libraries-aggrid-single-tool")
                                     }}
                                     className={cn(
                                       "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "marketing-spend-demo-single-comment" ? "bg-secondary" : "hover:bg-secondary/50",
+                                      selectedItem === "single-tool" ? "bg-secondary" : "hover:bg-secondary/50",
                                     )}
                                   >
-                                    marketing-spend-demo-single-comment
+                                    single-tool
                                   </button>
                                 </div>
                               )}

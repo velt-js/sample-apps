@@ -3,10 +3,10 @@ import cursorsPlaygroundMeta from './cursors-playground/metadata'
 import { codeFiles as cursorsPlaygroundCodeFiles } from './cursors-playground/code-files'
 import reactflowCrdtMeta from './reactflow-crdt/metadata'
 import { codeFiles as reactflowCrdtCodeFiles } from './reactflow-crdt/code-files'
-import marketingSpendMeta from './marketing-spend-demo-multiple-comments/metadata'
-import { codeFiles as marketingSpendCodeFiles } from './marketing-spend-demo-multiple-comments/code-files'
-import marketingSpendSingleMeta from './marketing-spend-demo-single-comment/metadata'
-import { codeFiles as marketingSpendSingleCodeFiles } from './marketing-spend-demo-single-comment/code-files'
+import multipleToolsMeta from './multiple-tools/metadata'
+import { codeFiles as multipleToolsCodeFiles } from './multiple-tools/code-files'
+import agGridSingleToolMeta from './ag-grid-single-tool/metadata'
+import { codeFiles as agGridSingleToolCodeFiles } from './ag-grid-single-tool/code-files'
 import tiptapDemoMeta from './tiptap-demo/metadata'
 import { codeFiles as tiptapDemoCodeFiles } from './tiptap-demo/code-files'
 
@@ -19,13 +19,13 @@ export const SAMPLES: Record<string, Sample> = {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles
   },
-  'react-tables-libraries-aggrid-marketing-spend-demo-multiple-comments': {
-    metadata: marketingSpendMeta,
-    codeFiles: marketingSpendCodeFiles
+  'react-tables-libraries-aggrid-multiple-tools': {
+    metadata: multipleToolsMeta,
+    codeFiles: multipleToolsCodeFiles
   },
-  'react-tables-libraries-aggrid-marketing-spend-demo-single-comment': {
-    metadata: marketingSpendSingleMeta,
-    codeFiles: marketingSpendSingleCodeFiles
+  'react-tables-libraries-aggrid-single-tool': {
+    metadata: agGridSingleToolMeta,
+    codeFiles: agGridSingleToolCodeFiles
   },
   // 'react-text-editors-libraries-tiptap-tiptap-demo': {
   //   metadata: tiptapDemoMeta,
@@ -53,4 +53,3 @@ export function getSamplesByCategory(category: 'feature' | 'app-type'): Sample[]
 export function getSamplesBySection(section: string): Sample[] {
   return Object.values(SAMPLES).filter(s => s.metadata.section === section)
 }
-
