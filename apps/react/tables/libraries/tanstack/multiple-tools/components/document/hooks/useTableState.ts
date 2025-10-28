@@ -6,7 +6,6 @@ export const useTableState = () => {
   const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null);
   const [rowData, setRowData] = useState<TableData[]>(generateTableData());
   const [cellFormatting, setCellFormatting] = useState<Record<string, CellFormatting>>({});
-  const [gridApi, setGridApi] = useState<any>(null);
   const [sortState, setSortState] = useState<SortState | null>(null);
   const [localSortState, setLocalSortState] = useState<SortState | null>(null);
 
@@ -26,34 +25,16 @@ export const useTableState = () => {
     }));
   }, [selectedCell, cellFormatting]);
 
-  const setAlignment = useCallback((align: 'left' | 'center' | 'right') => {
-    if (!selectedCell) return;
-
-    const cellKey = getCellFormattingKey(selectedCell.row, selectedCell.col);
-    const currentFormatting = cellFormatting[cellKey] || {};
-
-    setCellFormatting(prev => ({
-      ...prev,
-      [cellKey]: {
-        ...currentFormatting,
-        align,
-      },
-    }));
-  }, [selectedCell, cellFormatting]);
-
   return {
     selectedCell,
     setSelectedCell,
     rowData,
     setRowData,
     cellFormatting,
-    gridApi,
-    setGridApi,
     sortState,
     setSortState,
     localSortState,
     setLocalSortState,
     toggleFormatting,
-    setAlignment,
   };
 };

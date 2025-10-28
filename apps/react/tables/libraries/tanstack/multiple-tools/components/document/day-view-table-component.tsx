@@ -1,25 +1,28 @@
 'use client';
 
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useState, useRef } from 'react';
 import { VeltComments, useVeltClient } from '@veltdev/react';
-import { AgGridReact } from 'ag-grid-react';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+  useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+  ColumnDef,
+  flexRender,
+  SortingState,
+} from '@tanstack/react-table';
 import './day-view-table-component.css';
 
-// Register AG Grid modules
-ModuleRegistry.registerModules([AllCommunityModule]);
-
 // Import modularized components and utilities
-import { customDarkTheme } from './constants';
 import { dateComparator } from './utils';
-import { createCustomHeaderComponent } from './grid-components/CustomHeaderComponent';
+import { CustomHeaderComponent } from './grid-components/CustomHeaderComponent';
 import { RowNumberRenderer } from './grid-components/RowNumberRenderer';
-import { createVeltCellRenderer } from './grid-components/VeltCellRenderer';
+import { VeltCellRenderer } from './grid-components/VeltCellRenderer';
 import { Breadcrumb } from './ui-components/Breadcrumb';
 import { ViewToggle } from './ui-components/ViewToggle';
 import { Toolbar } from './ui-components/Toolbar';
 import { styles } from './styles';
 import { useTableState } from './hooks/useTableState';
+import { TableData } from './types';
 
 export const TableComponent: React.FC = () => {
   const { client } = useVeltClient();
@@ -27,16 +30,14 @@ export const TableComponent: React.FC = () => {
     selectedCell,
     setSelectedCell,
     rowData,
-    setRowData,
     cellFormatting,
-    gridApi,
-    setGridApi,
-    sortState,
     setSortState,
     localSortState,
     setLocalSortState,
     toggleFormatting,
   } = useTableState();
+
+  const tableContainerRef = useRef<HTMLDivElement>(null);
 
   // Initialize Velt
   useEffect(() => {
@@ -45,69 +46,64 @@ export const TableComponent: React.FC = () => {
     }
   }, [client]);
 
-  // Sync localSortState with sortState (when AG Grid updates)
+  // TanStack Table sorting state
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'date', desc: false }]);
+
+  // Sync localSortState with sorting (when TanStack Table updates)
   useEffect(() => {
-    if (sortState) {
-      setLocalSortState(sortState);
+    if (sorting.length > 0) {
+      const sortedColumn = sorting[0];
+      const newSortState = {
+        colId: sortedColumn.id,
+        sort: sortedColumn.desc ? 'desc' as const : 'asc' as const,
+      };
+      setLocalSortState(newSortState);
+      setSortState(newSortState);
+    } else {
+      setLocalSortState(null);
+      setSortState(null);
     }
-  }, [sortState]);
+  }, [sorting, setLocalSortState, setSortState]);
 
   // Update header highlighting when selection changes
   useEffect(() => {
-    if (gridApi) {
+    if (tableContainerRef.current) {
       // Remove all previous highlighting
-      document.querySelectorAll('.ag-header-cell').forEach(el => {
+      document.querySelectorAll('.tanstack-header-cell').forEach(el => {
         el.classList.remove('header-selected');
       });
-      document.querySelectorAll('.ag-pinned-left-cols-container .ag-cell').forEach(el => {
+      document.querySelectorAll('.tanstack-row-number-cell').forEach(el => {
         el.classList.remove('row-selected');
       });
 
       if (selectedCell) {
         // Add highlighting to selected column header
-        const colElement = document.querySelector(`[col-id="${selectedCell.col}"]`);
+        const colElement = document.querySelector(`[data-column-id="${selectedCell.col}"]`);
         if (colElement) {
           colElement.classList.add('header-selected');
         }
 
         // Add highlighting to selected row number
-        const allCells = document.querySelectorAll('.ag-pinned-left-cols-container .ag-cell');
-        allCells.forEach(cell => {
-          const row = cell.closest('.ag-row');
-          if (row) {
-            const rowNode = gridApi.getRowNode(selectedCell.row.toString());
-            if (rowNode && row.getAttribute('row-id') === selectedCell.row.toString()) {
-              cell.classList.add('row-selected');
-            }
-          }
-        });
+        const rowElement = document.querySelector(`[data-row-id="${selectedCell.row}"]`);
+        if (rowElement) {
+          rowElement.classList.add('row-selected');
+        }
       }
     }
-  }, [selectedCell, gridApi]);
+  }, [selectedCell]);
 
-  // Create header component with sorting
-  const headerComponent = useMemo(() => {
-    return createCustomHeaderComponent(localSortState, setLocalSortState);
-  }, [localSortState]);
-
-  // Cell Renderer with Velt formatting
-  const veltCellRenderer = useMemo(() => {
-    return createVeltCellRenderer(cellFormatting);
-  }, [cellFormatting]);
+  // Custom sort function for date column
+  const dateSortFn = (rowA: any, rowB: any, columnId: string) => {
+    const valueA = rowA.getValue(columnId);
+    const valueB = rowB.getValue(columnId);
+    return dateComparator(valueA, valueB);
+  };
 
   // Column Definitions
-  const columnDefs = useMemo(() => [
+  const columns = useMemo<ColumnDef<TableData>[]>(() => [
     {
-      headerName: '',
-      field: 'rowNumber' as any,
-      width: 50,
-      pinned: 'left' as const,
-      lockPosition: true,
-      suppressMenu: true,
-      sortable: false,
-      editable: false,
-      cellRenderer: RowNumberRenderer,
-      headerComponent: () => (
+      id: 'rowNumber',
+      header: () => (
         <div style={{
           fontFamily: 'DM Mono, monospace',
           fontSize: '14px',
@@ -116,111 +112,173 @@ export const TableComponent: React.FC = () => {
           -
         </div>
       ),
-      cellStyle: {
-        backgroundColor: '#090909',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
+      cell: ({ row }) => <RowNumberRenderer rowIndex={row.index} />,
+      size: 50,
+      enableSorting: false,
+      enableResizing: false,
     },
     {
-      field: 'date' as any,
-      headerName: 'Dates',
-      headerComponent: headerComponent,
-      editable: true,
-      sortable: true,
-      comparator: dateComparator,
-      cellRenderer: veltCellRenderer,
-      flex: 1,
-      minWidth: 150,
+      accessorKey: 'date',
+      id: 'date',
+      header: ({ column }) => (
+        <CustomHeaderComponent
+          column={column}
+          title="Dates"
+          localSortState={localSortState}
+          setLocalSortState={setLocalSortState}
+          setSorting={setSorting}
+        />
+      ),
+      cell: ({ row, column }) => (
+        <VeltCellRenderer
+          data={row.original}
+          value={row.getValue('date')}
+          columnId={column.id}
+          cellFormatting={cellFormatting}
+          onCellClick={() => {
+            setSelectedCell({
+              row: row.original.id,
+              col: column.id,
+            });
+          }}
+        />
+      ),
+      sortingFn: dateSortFn,
+      size: 150,
+      minSize: 150,
     },
     {
-      field: 'x' as any,
-      headerName: 'X',
-      headerComponent: headerComponent,
-      editable: true,
-      sortable: true,
-      cellRenderer: veltCellRenderer,
-      flex: 1,
-      minWidth: 120,
+      accessorKey: 'x',
+      id: 'x',
+      header: ({ column }) => (
+        <CustomHeaderComponent
+          column={column}
+          title="X"
+          localSortState={localSortState}
+          setLocalSortState={setLocalSortState}
+          setSorting={setSorting}
+        />
+      ),
+      cell: ({ row, column }) => (
+        <VeltCellRenderer
+          data={row.original}
+          value={row.getValue('x')}
+          columnId={column.id}
+          cellFormatting={cellFormatting}
+          onCellClick={() => {
+            setSelectedCell({
+              row: row.original.id,
+              col: column.id,
+            });
+          }}
+        />
+      ),
+      size: 120,
+      minSize: 120,
     },
     {
-      field: 'linkedin' as any,
-      headerName: 'LinkedIn',
-      headerComponent: headerComponent,
-      editable: true,
-      sortable: true,
-      cellRenderer: veltCellRenderer,
-      flex: 1,
-      minWidth: 120,
+      accessorKey: 'linkedin',
+      id: 'linkedin',
+      header: ({ column }) => (
+        <CustomHeaderComponent
+          column={column}
+          title="LinkedIn"
+          localSortState={localSortState}
+          setLocalSortState={setLocalSortState}
+          setSorting={setSorting}
+        />
+      ),
+      cell: ({ row, column }) => (
+        <VeltCellRenderer
+          data={row.original}
+          value={row.getValue('linkedin')}
+          columnId={column.id}
+          cellFormatting={cellFormatting}
+          onCellClick={() => {
+            setSelectedCell({
+              row: row.original.id,
+              col: column.id,
+            });
+          }}
+        />
+      ),
+      size: 120,
+      minSize: 120,
     },
     {
-      field: 'facebook' as any,
-      headerName: 'Facebook',
-      headerComponent: headerComponent,
-      editable: true,
-      sortable: true,
-      cellRenderer: veltCellRenderer,
-      flex: 1,
-      minWidth: 120,
+      accessorKey: 'facebook',
+      id: 'facebook',
+      header: ({ column }) => (
+        <CustomHeaderComponent
+          column={column}
+          title="Facebook"
+          localSortState={localSortState}
+          setLocalSortState={setLocalSortState}
+          setSorting={setSorting}
+        />
+      ),
+      cell: ({ row, column }) => (
+        <VeltCellRenderer
+          data={row.original}
+          value={row.getValue('facebook')}
+          columnId={column.id}
+          cellFormatting={cellFormatting}
+          onCellClick={() => {
+            setSelectedCell({
+              row: row.original.id,
+              col: column.id,
+            });
+          }}
+        />
+      ),
+      size: 120,
+      minSize: 120,
     },
     {
-      field: 'instagram' as any,
-      headerName: 'Instagram',
-      headerComponent: headerComponent,
-      editable: true,
-      sortable: true,
-      cellRenderer: veltCellRenderer,
-      flex: 1,
-      minWidth: 120,
+      accessorKey: 'instagram',
+      id: 'instagram',
+      header: ({ column }) => (
+        <CustomHeaderComponent
+          column={column}
+          title="Instagram"
+          localSortState={localSortState}
+          setLocalSortState={setLocalSortState}
+          setSorting={setSorting}
+        />
+      ),
+      cell: ({ row, column }) => (
+        <VeltCellRenderer
+          data={row.original}
+          value={row.getValue('instagram')}
+          columnId={column.id}
+          cellFormatting={cellFormatting}
+          onCellClick={() => {
+            setSelectedCell({
+              row: row.original.id,
+              col: column.id,
+            });
+          }}
+        />
+      ),
+      size: 120,
+      minSize: 120,
     },
-  ], [veltCellRenderer, headerComponent]);
+  ], [cellFormatting, localSortState, setLocalSortState, setSelectedCell]);
 
-  // Default column properties
-  const defaultColDef = useMemo(() => ({
-    resizable: true,
-    sortable: true,
-    editable: true,
-  }), []);
-
-  // AG Grid event handlers
-  const onGridReady = useCallback((params: any) => {
-    setGridApi(params.api);
-    params.api.applyColumnState({
-      state: [{ colId: 'date', sort: 'asc' }],
-      defaultState: { sort: null },
-    });
-    setSortState({ colId: 'date', sort: 'asc' });
-    setLocalSortState({ colId: 'date', sort: 'asc' });
-  }, []);
-
-  const onSortChanged = useCallback((params: any) => {
-    const columnState = params.api.getColumnState();
-    const sortedColumn = columnState.find((col: any) => col.sort !== null);
-    setSortState(sortedColumn ? { colId: sortedColumn.colId, sort: sortedColumn.sort } : null);
-  }, []);
-
-  const onCellClicked = useCallback((params: any) => {
-    if (params.data) {
-      setSelectedCell({
-        row: params.data.id,
-        col: params.colDef.field,
-      });
-    }
-  }, []);
-
-  const onCellValueChanged = useCallback((params: any) => {
-    setRowData(prevData => {
-      const updatedData = [...prevData];
-      const rowIndex = updatedData.findIndex(row => row.id === params.data.id);
-      if (rowIndex !== -1) {
-        updatedData[rowIndex] = { ...params.data };
-      }
-      return updatedData;
-    });
-  }, []);
-
-  // Removed insert handlers (photo, shapes, line)
+  // TanStack Table instance
+  const table = useReactTable({
+    data: rowData,
+    columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    enableSorting: true,
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange',
+  });
 
   return (
     <div style={styles.container}>
@@ -240,25 +298,58 @@ export const TableComponent: React.FC = () => {
           toggleFormatting={toggleFormatting}
         />
 
-        <div style={styles.gridWrapper}>
-          <AgGridReact
-            theme={customDarkTheme}
-            rowData={rowData}
-            columnDefs={columnDefs}
-            defaultColDef={defaultColDef}
-            onGridReady={onGridReady}
-            onSortChanged={onSortChanged}
-            onCellClicked={onCellClicked}
-            onCellValueChanged={onCellValueChanged}
-            domLayout="normal"
-            enableCellTextSelection={true}
-            ensureDomOrder={true}
-            animateRows={false}
-            suppressRowHoverHighlight={false}
-            suppressAnimationFrame={false}
-            suppressCellFocus={false}
-            getRowId={(params) => params.data.id.toString()}
-          />
+        <div style={styles.gridWrapper} ref={tableContainerRef}>
+          <div className="tanstack-table-container">
+            <table className="tanstack-table">
+              <thead className="tanstack-table-header">
+                {table.getHeaderGroups().map(headerGroup => (
+                  <tr key={headerGroup.id} className="tanstack-table-header-row">
+                    {headerGroup.headers.map((header, index) => (
+                      <th
+                        key={header.id}
+                        className={`tanstack-header-cell ${index === 0 ? 'pinned-left' : ''}`}
+                        data-column-id={header.column.id}
+                        style={{
+                          width: header.column.getSize(),
+                          minWidth: header.column.columnDef.minSize,
+                        }}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody className="tanstack-table-body">
+                {table.getRowModel().rows.map(row => (
+                  <tr key={row.id} className="tanstack-table-row">
+                    {row.getVisibleCells().map((cell, index) => {
+                      const isSelected = selectedCell?.row === row.original.id && selectedCell?.col === cell.column.id;
+                      return (
+                        <td
+                          key={cell.id}
+                          className={`tanstack-table-cell ${index === 0 ? 'tanstack-row-number-cell pinned-left' : ''} ${isSelected ? 'cell-selected' : ''}`}
+                          data-row-id={row.original.id}
+                          data-column-id={cell.column.id}
+                          style={{
+                            width: cell.column.getSize(),
+                            minWidth: cell.column.columnDef.minSize,
+                          }}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
