@@ -1,0 +1,14 @@
+
+
+> @apps/react-tables-AgGrid-marketing-spend-demo-multiple-comments@0.1.0 dev /Users/yoenzhang/Downloads/sample-apps/apps/react/tables/libraries/ag-grid/multiple-tools
+> next dev
+
+ [33m[1m⚠[22m[39m Port 3000 is in use by process 2120, using available port 3004 instead.
+   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m
+   - Local:        http://localhost:3004
+   - Network:      http://10.0.0.70:3004
+   - Environments: .env.local
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Ready in 2.4s
+[?25h

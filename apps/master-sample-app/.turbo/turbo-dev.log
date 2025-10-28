@@ -1,0 +1,27 @@
+
+
+> @apps/master-sample-app@0.1.0 dev /Users/yoenzhang/Downloads/sample-apps/apps/master-sample-app
+> next dev
+
+ [33m[1m⚠[22m[39m Port 3000 is in use, trying 3001 instead.
+ [33m[1m⚠[22m[39m Port 3001 is in use, trying 3002 instead.
+ [33m[1m⚠[22m[39m Port 3002 is in use, trying 3003 instead.
+ [33m[1m⚠[22m[39m Port 3003 is in use, trying 3004 instead.
+ [33m[1m⚠[22m[39m Port 3004 is in use, trying 3005 instead.
+ [33m[1m⚠[22m[39m Port 3005 is in use, trying 3006 instead.
+ [33m[1m⚠[22m[39m Port 3006 is in use, trying 3007 instead.
+ [33m[1m⚠[22m[39m Port 3007 is in use, trying 3008 instead.
+ [33m[1m⚠[22m[39m Port 3008 is in use, trying 3009 instead.
+ [33m[1m⚠[22m[39m Port 3009 is in use, trying 3010 instead.
+   [1m[38;2;173;127;168m▲ Next.js 15.2.4[39m[22m
+   - Local:        http://localhost:3010
+   - Network:      http://10.0.0.70:3010
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Ready in 1739ms
+ [37m[1m○[22m[39m Compiling /[[...slug]] ...
+ [32m[1m✓[22m[39m Compiled /[[...slug]] in 744ms (744 modules)
+ [32m[1m✓[22m[39m Compiled in 41ms (349 modules)
+ GET / [32m200[39m in 1231ms
+ GET /favicon.ico [32m200[39m in 50ms
+[?25h
