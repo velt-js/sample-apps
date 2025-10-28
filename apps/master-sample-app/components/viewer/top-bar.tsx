@@ -57,15 +57,25 @@ export function TopBar({
     if (onReset) {
       setResetting(true)
       onReset()
+      
+      // Fallback: reset the button state after a timeout
+      setTimeout(() => {
+        setResetting(false)
+      }, 500)
     }
   }
 
   // Reset the resetting state when documentId changes
   useEffect(() => {
-    if (resetting && documentId && documentId !== prevDocumentId.current) {
-      setResetting(false)
+    if (resetting && documentId) {
+      const isDifferent = documentId !== prevDocumentId.current
+      prevDocumentId.current = documentId
+      if (isDifferent) {
+        setResetting(false)
+      }
+    } else if (documentId) {
+      prevDocumentId.current = documentId
     }
-    prevDocumentId.current = documentId
   }, [documentId, resetting])
 
   return (
