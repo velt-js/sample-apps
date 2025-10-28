@@ -1,9 +1,11 @@
 /* TanStack Table Container */
 .tanstack-table-container {
   width: 100%;
-  height: 100%;
-  overflow: auto;
+  height: fit-content;
+  min-height: 100%;
   background-color: #090909;
+  position: relative;
+  display: block;
 }
 
 /* TanStack Table */
@@ -23,6 +25,18 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 1px 0 0 #141414;
+}
+
+.tanstack-table-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #090909;
+  z-index: -1;
 }
 
 .tanstack-table-header-row {
@@ -71,6 +85,10 @@
   left: 0;
   z-index: 5;
   background-color: #090909 !important;
+}
+
+.tanstack-header-cell.pinned-left {
+  z-index: 11;
 }
 
 /* Table Body */
