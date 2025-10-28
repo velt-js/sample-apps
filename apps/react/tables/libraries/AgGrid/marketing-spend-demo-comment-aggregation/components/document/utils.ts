@@ -9,27 +9,17 @@ const seededRandom = (seed: number) => {
   };
 };
 
-// Get week number for a date based on day of month
-// Week 1: Jan 1-7, Week 2: Jan 8-15, etc.
+// Get week number for a date based on day of year
+// Week 1: Jan 1-7, Week 2: Jan 8-14, etc.
 export const getWeekNumber = (date: Date): number => {
-  const year = date.getFullYear();
-  const month = date.getMonth(); // 0-indexed
-  const day = date.getDate();
+  // Get the day of year (1-365/366)
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date.getTime() - start.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
 
-  // Days in each month (accounting for leap years)
-  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
-  const daysInMonth = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-  // Calculate the number of complete weeks from previous months
-  let weeksFromPreviousMonths = 0;
-  for (let i = 0; i < month; i++) {
-    weeksFromPreviousMonths += Math.ceil(daysInMonth[i] / 7);
-  }
-
-  // Calculate the current week within the current month (1-indexed)
-  const currentMonthWeek = Math.ceil(day / 7);
-
-  return weeksFromPreviousMonths + currentMonthWeek;
+  // Calculate week number (1-indexed)
+  return Math.ceil(dayOfYear / 7);
 };
 
 // Parse date string and return metadata

@@ -3,7 +3,6 @@ import {
   VeltPresence,
   VeltSidebarButton,
   VeltNotificationsTool,
-  VeltCommentTool,
 } from "@veltdev/react";
 
 function VeltTools() {
@@ -11,7 +10,6 @@ function VeltTools() {
     <>
       <VeltPresence />
       <VeltSidebarButton />
-      <VeltCommentTool />
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}

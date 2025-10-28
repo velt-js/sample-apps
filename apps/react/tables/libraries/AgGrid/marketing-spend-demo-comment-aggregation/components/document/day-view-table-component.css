@@ -16,10 +16,25 @@
   overflow: hidden;
 }
 
-/* Show comment tool on cell hover only */
+/* Show comment tool on cell hover only (when no comments exist) */
 .ag-cell:hover > velt-comment-tool {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* Velt comment bubble - always visible when comments exist */
+.ag-cell > velt-comment-bubble {
+  display: flex !important;
+  justify-content: flex-end !important;
+  border-radius: 24px;
+  transition: all 150ms ease-in-out;
+  overflow: hidden;
+  pointer-events: auto !important;
+}
+
+/* Hide comment tool when comment bubble is visible (has comments) */
+.ag-cell:has(velt-comment-bubble:not(:empty)) > velt-comment-tool {
+  display: none !important;
 }
 
 /* Remove contentEditable outline/box */

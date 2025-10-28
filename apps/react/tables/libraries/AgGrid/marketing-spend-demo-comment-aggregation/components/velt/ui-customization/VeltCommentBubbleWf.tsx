@@ -4,16 +4,16 @@ import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react';
 const VeltCommentBubbleWf = () => {
   return (
     <VeltCommentBubbleWireframe>
-      <div
-        style={{
-          position: 'relative',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center'
-        }}
-      >
-        {/* Show bubble with count when there are direct comments OR aggregated comments */}
-        <VeltIf condition="{commentAnnotation.comments.length} > 0 || {annotations.length} > 0">
+      {/* Only show bubble when there are direct comments OR aggregated comments */}
+      <VeltIf condition="{commentAnnotation.comments.length} > 0 || {annotations.length} > 0">
+        <div
+          style={{
+            position: 'relative',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
           <div
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
@@ -67,13 +67,8 @@ const VeltCommentBubbleWf = () => {
               <VeltCommentBubbleWireframe.CommentsCount />
             </p>
           </div>
-        </VeltIf>
-
-        {/* Show nothing when there are no comments */}
-        <VeltIf condition="{commentAnnotation.comments.length} === 0 && {annotations.length} === 0">
-          <div style={{ width: '0px', height: '0px', flexShrink: 0 }} />
-        </VeltIf>
-      </div>
+        </div>
+      </VeltIf>
     </VeltCommentBubbleWireframe>
   );
 };
