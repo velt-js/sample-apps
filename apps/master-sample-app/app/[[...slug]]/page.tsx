@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { Sidebar } from "@/components/sidebar"
 import { SampleViewer } from "@/components/viewer/sample-viewer"
 import { getDefaultSample, getSampleById, getAllSamples } from "@/samples"
@@ -13,7 +13,23 @@ export default function Page() {
   
   const currentSample = getSampleById(currentSampleId) || getDefaultSample()
 
-  // Update URL when sample changes
+  // Helper function to get document ID for a specific demo
+  const getDocumentIdForDemo = useCallback((demoId: string): string => {
+    if (typeof window === 'undefined') return ''
+    
+    // Check if there's a stored document ID for this demo
+    const stored = localStorage.getItem(`demo-${demoId}-document-id`)
+    if (stored) {
+      return stored
+    }
+    
+    // Generate a new document ID for this demo
+    const newDocId = `doc-${demoId}-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+    localStorage.setItem(`demo-${demoId}-document-id`, newDocId)
+    return newDocId
+  }, [])
+
+  // Update URL when sample or documentId changes
   useEffect(() => {
     if (typeof window === 'undefined' || !documentId) return
 
@@ -28,7 +44,7 @@ export default function Page() {
     }
   }, [currentSampleId, documentId])
 
-  // Generate or load document ID with URL support and determine sample from path
+  // Initialize: determine sample from path and get/set document ID
   useEffect(() => {
     if (isInitialized.current) return
     if (typeof window === 'undefined') return
@@ -39,9 +55,11 @@ export default function Page() {
       const allSamples = getAllSamples()
       const sampleFromPath = allSamples.find(s => s.metadata.routePath === currentPath)
       
+      let targetSampleId = getDefaultSample().metadata.id
       if (sampleFromPath) {
-        setCurrentSampleId(sampleFromPath.metadata.id)
+        targetSampleId = sampleFromPath.metadata.id
       }
+      setCurrentSampleId(targetSampleId)
 
       // 2. Check URL for documentId parameter
       const urlParams = new URLSearchParams(window.location.search)
@@ -50,18 +68,10 @@ export default function Page() {
       if (docId) {
         // Use document ID from URL (shareable link)
         setDocumentId(docId)
-        localStorage.setItem('master-app-document-id', docId)
+        localStorage.setItem(`demo-${targetSampleId}-document-id`, docId)
       } else {
-        // 3. Check localStorage for existing document
-        const stored = localStorage.getItem('master-app-document-id')
-        if (stored) {
-          docId = stored
-        } else {
-          // 4. Generate new document ID
-          docId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
-          localStorage.setItem('master-app-document-id', docId)
-        }
-        
+        // 3. Get document ID for this specific demo
+        docId = getDocumentIdForDemo(targetSampleId)
         setDocumentId(docId)
       }
       
@@ -69,25 +79,53 @@ export default function Page() {
     } catch (error) {
       console.error('Error initializing:', error)
     }
-  }, [])
+  }, [getDocumentIdForDemo])
 
-  // Handle reset: generate new document ID and refresh
+  // Handle sample change: get document ID for the new demo
+  useEffect(() => {
+    if (!isInitialized.current) return
+    if (typeof window === 'undefined') return
+
+    try {
+      const sample = getSampleById(currentSampleId)
+      if (!sample) return
+
+      // Get or generate document ID for this demo
+      const docId = getDocumentIdForDemo(currentSampleId)
+      setDocumentId(docId)
+
+      // Update URL
+      const routePath = sample.metadata.routePath || ''
+      const newUrl = `${routePath}?documentId=${docId}`
+      
+      if (window.location.pathname + window.location.search !== newUrl) {
+        window.history.pushState({}, '', newUrl)
+      }
+    } catch (error) {
+      console.error('Error changing sample:', error)
+    }
+  }, [currentSampleId, getDocumentIdForDemo])
+
+  // Handle reset: generate new document ID for current demo
   const handleReset = () => {
     if (typeof window === 'undefined') return
 
     try {
-      // Generate a new document ID
-      const newDocId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
-      
-      // Update localStorage
-      localStorage.setItem('master-app-document-id', newDocId)
-      
-      // Reload the page with the new document ID
       const sample = getSampleById(currentSampleId)
-      const routePath = sample?.metadata.routePath || ''
+      if (!sample) return
+
+      // Generate a new document ID for this specific demo
+      const newDocId = `doc-${currentSampleId}-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+      
+      // Update localStorage for this demo
+      localStorage.setItem(`demo-${currentSampleId}-document-id`, newDocId)
+      
+      // Update state and URL
+      setDocumentId(newDocId)
+      const routePath = sample.metadata.routePath || ''
       const newUrl = `${routePath}?documentId=${newDocId}`
       
-      window.location.href = newUrl
+      window.history.pushState({}, '', newUrl)
     } catch (error) {
       console.error('Error resetting document:', error)
     }
