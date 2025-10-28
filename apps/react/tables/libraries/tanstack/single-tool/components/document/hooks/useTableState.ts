@@ -6,7 +6,6 @@ export const useTableState = () => {
   const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null);
   const [rowData, setRowData] = useState<TableData[]>(generateTableData());
   const [cellFormatting, setCellFormatting] = useState<Record<string, CellFormatting>>({});
-  const [gridApi, setGridApi] = useState<any>(null);
   const [sortState, setSortState] = useState<SortState | null>(null);
   const [localSortState, setLocalSortState] = useState<SortState | null>(null);
 
@@ -32,8 +31,6 @@ export const useTableState = () => {
     rowData,
     setRowData,
     cellFormatting,
-    gridApi,
-    setGridApi,
     sortState,
     setSortState,
     localSortState,

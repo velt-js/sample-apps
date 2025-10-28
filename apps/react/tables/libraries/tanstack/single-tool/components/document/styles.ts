@@ -28,6 +28,8 @@ export const styles: { [key: string]: React.CSSProperties } = {
   gridWrapper: {
     width: '100%',
     height: '100%',
-    padding: '16px',
+    padding: '0 16px 16px 16px',
+    overflow: 'auto',
+    position: 'relative',
   },
 };

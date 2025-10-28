@@ -5,6 +5,11 @@ export interface TableData {
   linkedin: string;
   facebook: string;
   instagram: string;
+  dateMetadata?: {
+    day: number;
+    month: number;
+    year: number;
+  };
 }
 
 export interface CellFormatting {

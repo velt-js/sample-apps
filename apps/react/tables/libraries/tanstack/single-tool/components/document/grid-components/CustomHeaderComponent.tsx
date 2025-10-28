@@ -1,35 +1,36 @@
 import React from 'react';
+import { Column } from '@tanstack/react-table';
 import { SortIcon } from './SortIcon';
-import { COLUMN_TITLES } from '../constants';
-import { SortState } from '../types';
+import { SortState, TableData } from '../types';
 
 interface CustomHeaderComponentProps {
+  column: Column<TableData, unknown>;
+  title: string;
   localSortState: SortState | null;
   setLocalSortState: React.Dispatch<React.SetStateAction<SortState | null>>;
+  setSorting: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export const createCustomHeaderComponent = (
-  localSortState: SortState | null,
-  setLocalSortState: React.Dispatch<React.SetStateAction<SortState | null>>
-) => (props: any) => {
-  const title = COLUMN_TITLES[props.column.colId] || '';
-
+export const CustomHeaderComponent: React.FC<CustomHeaderComponentProps> = ({
+  column,
+  title,
+  localSortState,
+  setLocalSortState,
+  setSorting,
+}) => {
   const handleSort = () => {
-    const currentSort = localSortState?.colId === props.column.colId ? localSortState?.sort : null;
+    const currentSort = localSortState?.colId === column.id ? localSortState?.sort : null;
     // Toggle between desc and asc only
-    let newSort: 'asc' | 'desc' = currentSort === 'asc' ? 'desc' : 'asc';
+    const newSort: 'asc' | 'desc' = currentSort === 'asc' ? 'desc' : 'asc';
 
     // Update local state immediately for instant icon feedback
-    setLocalSortState({ colId: props.column.colId, sort: newSort });
+    setLocalSortState({ colId: column.id, sort: newSort });
 
-    // Update AG Grid state (will trigger onSortChanged callback)
-    props.api.applyColumnState({
-      state: [{ colId: props.column.colId, sort: newSort }],
-      defaultState: { sort: null },
-    });
+    // Update TanStack Table state
+    setSorting([{ id: column.id, desc: newSort === 'desc' }]);
   };
 
-  const currentSort = localSortState?.colId === props.column.colId ? localSortState?.sort : null;
+  const currentSort = localSortState?.colId === column.id ? localSortState?.sort : null;
 
   return (
     <div

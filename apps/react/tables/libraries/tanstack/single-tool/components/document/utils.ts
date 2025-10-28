@@ -9,6 +9,21 @@ const seededRandom = (seed: number) => {
   };
 };
 
+// Parse date string and return metadata
+export const parseDateWithMetadata = (dateStr: string): TableData['dateMetadata'] => {
+  const [day, month, year] = dateStr.split(' ');
+  const monthMap: Record<string, number> = {
+    'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+    'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+  };
+
+  return {
+    day: parseInt(day),
+    month: monthMap[month],
+    year: parseInt(year),
+  };
+};
+
 // Generate 100 rows of data with deterministic values
 export const generateTableData = (): TableData[] => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -19,14 +34,16 @@ export const generateTableData = (): TableData[] => {
     const day = (i % 28) + 1;
     const month = months[Math.floor(i / 28) % 12];
     const year = 2025;
+    const dateStr = `${day} ${month} ${year}`;
 
     data.push({
       id: i,
-      date: `${day} ${month} ${year}`,
+      date: dateStr,
       x: `$${Math.floor(random() * 500) + 300}`,
       linkedin: `$${Math.floor(random() * 600) + 400}`,
       facebook: `$${Math.floor(random() * 500) + 400}`,
       instagram: `$${Math.floor(random() * 600) + 400}`,
+      dateMetadata: parseDateWithMetadata(dateStr),
     });
   }
 

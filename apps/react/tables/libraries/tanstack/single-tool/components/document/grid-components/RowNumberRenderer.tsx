@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const RowNumberRenderer = (props: any) => {
+interface RowNumberRendererProps {
+  rowIndex: number;
+}
+
+export const RowNumberRenderer: React.FC<RowNumberRendererProps> = ({ rowIndex }) => {
   return (
     <div style={{
       display: 'flex',
@@ -13,7 +17,7 @@ export const RowNumberRenderer = (props: any) => {
       color: 'rgba(255, 255, 255, 0.5)',
       letterSpacing: '0.12px'
     }}>
-      {props.node.rowIndex + 1}
+      {rowIndex + 1}
     </div>
   );
 };
