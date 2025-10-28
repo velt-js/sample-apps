@@ -1,0 +1,188 @@
+/* TanStack Table Container */
+.tanstack-table-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #090909;
+}
+
+/* TanStack Table */
+.tanstack-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #090909;
+}
+
+/* Table Header */
+.tanstack-table-header {
+  background-color: #090909;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tanstack-table-header-row {
+  border-bottom: 1px solid #141414;
+}
+
+/* Header Cells */
+.tanstack-header-cell {
+  height: 54px;
+  padding: 0;
+  background-color: #090909;
+  border-right: 1px solid #141414;
+  border-bottom: 1px solid #141414;
+  font-weight: 600;
+  letter-spacing: 0.14px;
+  color: #ffffff;
+  text-align: left;
+  vertical-align: middle;
+  position: relative;
+  transition: background-color 150ms ease-in-out;
+}
+
+.tanstack-header-cell:hover {
+  background-color: #171717 !important;
+}
+
+.tanstack-header-cell:hover > div {
+  opacity: 1 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Selected column header highlighting */
+.tanstack-header-cell.header-selected {
+  background-color: #171717 !important;
+}
+
+.tanstack-header-cell.header-selected > div {
+  opacity: 1 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Pinned left column (row numbers) */
+.tanstack-header-cell.pinned-left,
+.tanstack-table-cell.pinned-left {
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background-color: #090909 !important;
+}
+
+/* Table Body */
+.tanstack-table-body {
+  background-color: #090909;
+}
+
+/* Table Rows */
+.tanstack-table-row {
+  border-bottom: 1px solid #141414;
+  transition: background-color 150ms ease-in-out;
+}
+
+.tanstack-table-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Table Cells */
+.tanstack-table-cell {
+  height: 54px;
+  padding: 0;
+  background-color: #090909;
+  border-right: 1px solid #141414;
+  text-align: left;
+  vertical-align: middle;
+  position: relative;
+  opacity: 0.8;
+}
+
+/* Row number cells */
+.tanstack-row-number-cell {
+  background-color: #090909 !important;
+  opacity: 1;
+}
+
+/* Selected row number highlighting */
+.tanstack-row-number-cell.row-selected {
+  background-color: #171717 !important;
+}
+
+.tanstack-row-number-cell.row-selected > div {
+  opacity: 1 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Cell focus and editing */
+.tanstack-table-cell:focus-within {
+  border: 1px solid rgb(255, 205, 46) !important;
+  outline: none !important;
+}
+
+/* Comment bubble styling - Exact replication of popover-comments Angular demo */
+/* Target table cells with comment IDs */
+.tanstack-table-cell[id^="cell-"],
+.tanstack-table-cell[id^="title-"] {
+  position: relative;
+}
+
+/* Velt comment tool - positioned directly in cell */
+.tanstack-table-cell > velt-comment-tool {
+  display: flex !important;
+  justify-content: flex-end !important;
+  border-radius: 24px;
+  opacity: 0;
+  transition: all 150ms ease-in-out;
+  transform: translateY(10%);
+  overflow: hidden;
+}
+
+/* Show comment tool on cell hover only (when no comments exist) */
+.tanstack-table-cell:hover > velt-comment-tool {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Velt comment bubble - always visible when comments exist */
+.tanstack-table-cell > velt-comment-bubble {
+  display: flex !important;
+  justify-content: flex-end !important;
+  border-radius: 24px;
+  transition: all 150ms ease-in-out;
+  overflow: hidden;
+  pointer-events: auto !important;
+}
+
+/* Hide comment tool when comment bubble is visible (has comments) */
+.tanstack-table-cell:has(velt-comment-bubble:not(:empty)) > velt-comment-tool {
+  display: none !important;
+}
+
+/* Remove contentEditable outline/box */
+[contenteditable] {
+  outline: none !important;
+  border: none !important;
+}
+
+[contenteditable]:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+/* Column hover effect */
+.tanstack-table-cell:hover {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Keep row number cells with background color */
+.tanstack-row-number-cell:hover {
+  background-color: #090909 !important;
+}
+
+/* Keep selected row number with highlight on hover */
+.tanstack-row-number-cell.row-selected:hover {
+  background-color: #171717 !important;
+}
