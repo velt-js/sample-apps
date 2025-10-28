@@ -2,7 +2,7 @@
 
 import { ChevronLeft, Github, RotateCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 
 interface TopBarProps {
   mode: "code" | "demo"
@@ -29,6 +29,7 @@ export function TopBar({
 }: TopBarProps) {
   const [copied, setCopied] = useState(false)
   const [resetting, setResetting] = useState(false)
+  const prevDocumentId = useRef<string | undefined>(documentId)
 
   const handleGithubClick = () => {
     if (githubUrl) {
@@ -56,9 +57,16 @@ export function TopBar({
     if (onReset) {
       setResetting(true)
       onReset()
-      // Reset will trigger a page reload, so no need to reset the state
     }
   }
+
+  // Reset the resetting state when documentId changes
+  useEffect(() => {
+    if (resetting && documentId && documentId !== prevDocumentId.current) {
+      setResetting(false)
+    }
+    prevDocumentId.current = documentId
+  }, [documentId, resetting])
 
   return (
     <header className="relative flex h-14 items-center border-b border-border bg-background px-4">
@@ -134,4 +142,5 @@ export function TopBar({
     </header>
   )
 }
+
 
