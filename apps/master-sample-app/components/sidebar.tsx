@@ -23,7 +23,7 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-tables-libraries-tanstack-comment-aggregation': 'tanstack-comment-aggregation',
     'react-tables-libraries-tanstack-multiple-tools': 'tanstack-multiple-tools',
     'react-tables-libraries-tanstack-single-tool': 'tanstack-single-tool',
-    'react-text-editors-libraries-tiptap-tiptap-demo': 'tiptap-demo',
+    'react-text-editors-libraries-tiptap-tiptap-comments-demo': 'tiptap-comments-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -321,55 +321,57 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                           )}
                         </div>
                       )}
-                    </div>
-                  )}
-              
-              {/* Text Editors Section - Hidden for now */}
-              {/* <button
-                onClick={() => toggleSection("textEditors")}
-                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
-              >
-                <span>Text Editors</span>
-                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.textEditors && "rotate-90")} />
-              </button>
-              {expandedSections.textEditors && (
-                <div className="mt-2 ml-2 space-y-1">
-                  <button
-                    onClick={() => toggleSection("textEditorLibraries")}
-                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                  >
-                    <span>Libraries</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.textEditorLibraries && "rotate-90")} />
-                  </button>
-                  {expandedSections.textEditorLibraries && (
-                    <div className="mt-2 ml-2 space-y-1">
+
+                      {/* Text Editors Section */}
                       <button
-                        onClick={() => toggleSection("tiptap")}
-                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                        onClick={() => toggleSection("textEditors")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
                       >
-                        <span>TipTap</span>
-                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tiptap && "rotate-90")} />
+                        <span>Text Editors</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.textEditors && "rotate-90")} />
                       </button>
-                      {expandedSections.tiptap && (
+                      {expandedSections.textEditors && (
                         <div className="mt-2 ml-2 space-y-1">
+                          {/* Text Editor Libraries Section */}
                           <button
-                            onClick={() => {
-                              setSelectedItem("tiptap-demo")
-                              onSampleSelect?.("react-text-editors-libraries-tiptap-tiptap-demo")
-                            }}
-                            className={cn(
-                              "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                              selectedItem === "tiptap-demo" ? "bg-secondary" : "hover:bg-secondary/50",
-                            )}
+                            onClick={() => toggleSection("textEditorLibraries")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
                           >
-                            tiptap-demo
+                            <span>Libraries</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.textEditorLibraries && "rotate-90")} />
                           </button>
+                          {expandedSections.textEditorLibraries && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              {/* TipTap Section */}
+                              <button
+                                onClick={() => toggleSection("tiptap")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>TipTap</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tiptap && "rotate-90")} />
+                              </button>
+                              {expandedSections.tiptap && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("tiptap-comments-demo")
+                                      onSampleSelect?.("react-text-editors-libraries-tiptap-tiptap-comments-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "tiptap-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    tiptap-comments-demo
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
                   )}
-                </div>
-              )} */}
             </div>
               </>
             ) : (

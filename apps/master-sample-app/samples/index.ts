@@ -17,6 +17,8 @@ import tanstackSingleToolMeta from './tanstack-single-tool/metadata'
 import { codeFiles as tanstackSingleToolCodeFiles } from './tanstack-single-tool/code-files'
 import tiptapDemoMeta from './tiptap-demo/metadata'
 import { codeFiles as tiptapDemoCodeFiles } from './tiptap-demo/code-files'
+import tiptapCommentsDemoMeta from './tiptap-comments-demo/metadata'
+import { codeFiles as tiptapCommentsDemoCodeFiles } from './tiptap-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -54,7 +56,11 @@ export const SAMPLES: Record<string, Sample> = {
   // 'react-text-editors-libraries-tiptap-tiptap-demo': {
   //   metadata: tiptapDemoMeta,
   //   codeFiles: tiptapDemoCodeFiles
-  // }
+  // },
+  'react-text-editors-libraries-tiptap-tiptap-comments-demo': {
+    metadata: tiptapCommentsDemoMeta,
+    codeFiles: tiptapCommentsDemoCodeFiles
+  }
 }
 
 export function getSampleById(id: string): Sample | undefined {
