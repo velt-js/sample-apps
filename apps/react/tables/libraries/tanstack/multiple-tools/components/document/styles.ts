@@ -22,12 +22,14 @@ export const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: '#090909',
     borderRadius: '8px',
     overflow: 'hidden',
-    paddingTop: '40px',
+    paddingTop: '45px',
     paddingBottom: '16px',
   },
   gridWrapper: {
     width: '100%',
     height: '100%',
-    padding: '16px',
+    padding: '0 16px 16px 16px',
+    overflow: 'auto',
+    position: 'relative',
   },
 };

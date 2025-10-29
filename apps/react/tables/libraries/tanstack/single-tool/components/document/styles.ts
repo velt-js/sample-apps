@@ -22,7 +22,7 @@ export const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: '#090909',
     borderRadius: '8px',
     overflow: 'hidden',
-    paddingTop: '40px',
+    paddingTop: '45px',
     paddingBottom: '16px',
   },
   gridWrapper: {

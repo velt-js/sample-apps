@@ -12,12 +12,11 @@ export const ViewToggle: React.FC = () => {
       gap: '4px',
       zIndex: 10,
     }}>
-      <button style={{
+      <div style={{
         backgroundColor: 'rgba(255, 255, 255, 0.08)',
         border: 'none',
         borderRadius: '8px',
         padding: '4px 8px',
-        cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -31,7 +30,7 @@ export const ViewToggle: React.FC = () => {
           whiteSpace: 'pre',
           letterSpacing: '0.13px',
         }}>Day View</span>
-      </button>
+      </div>
     </div>
   );
 };

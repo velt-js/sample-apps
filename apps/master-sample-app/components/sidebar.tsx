@@ -199,7 +199,7 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 onClick={() => toggleSection("aggrid")}
                                 className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
                               >
-                                <span>AgGrid</span>
+                                <span>AG Grid</span>
                                 <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.aggrid && "rotate-90")} />
                               </button>
                               {expandedSections.aggrid && (
@@ -255,18 +255,6 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 <div className="mt-2 ml-2 space-y-1">
                                   <button
                                     onClick={() => {
-                                      setSelectedItem("tanstack-comment-aggregation")
-                                      onSampleSelect?.("react-tables-libraries-tanstack-comment-aggregation")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "tanstack-comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    comment-aggregation
-                                  </button>
-                                  <button
-                                    onClick={() => {
                                       setSelectedItem("tanstack-multiple-tools")
                                       onSampleSelect?.("react-tables-libraries-tanstack-multiple-tools")
                                     }}
@@ -288,6 +276,18 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                     )}
                                   >
                                     single-tool
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("tanstack-comment-aggregation")
+                                      onSampleSelect?.("react-tables-libraries-tanstack-comment-aggregation")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "tanstack-comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    comment-aggregation
                                   </button>
                                 </div>
                               )}
