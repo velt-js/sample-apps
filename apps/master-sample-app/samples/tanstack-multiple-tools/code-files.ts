@@ -1,0 +1,38 @@
+import { SampleCodeFile } from '@/types/sample'
+
+export const codeFiles: SampleCodeFile[] = [
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/page.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/layout.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/document/DocumentContext.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/document/useCurrentDocument.ts', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/userAuth/AppUserContext.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/userAuth/AppProviders.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/userAuth/useAppUser.ts', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/app/userAuth/users.ts', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/VeltInitializeUser.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/VeltInitializeDocument.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/VeltCollaboration.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/VeltTools.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/ui-customization/VeltCustomization.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/ui-customization/VeltCommentToolWf.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/ui-customization/VeltCommentBubbleWf.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/ui-customization/VeltSidebarButtonWf.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/velt/ui-customization/VeltNotificationsToolWf.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/document-canvas.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/day-view-table-component.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/grid-components/VeltCellRenderer.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/grid-components/RowNumberRenderer.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/grid-components/CustomHeaderComponent.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/grid-components/SortIcon.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/ui-components/Breadcrumb.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/ui-components/Toolbar.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/ui-components/ViewToggle.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/hooks/useTableState.ts', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/types.ts', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/utils.ts', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/document/constants.ts', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/header/header.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/sidebar/SidebarContext.tsx', language: 'typescript' },
+  { path: 'apps/react/tables/libraries/tanstack/multiple-tools/components/sidebar/sidebar.tsx', language: 'typescript' }
+]
+

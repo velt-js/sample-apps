@@ -9,6 +9,12 @@ import agGridSingleToolMeta from './ag-grid-single-tool/metadata'
 import { codeFiles as agGridSingleToolCodeFiles } from './ag-grid-single-tool/code-files'
 import commentAggregationMeta from './comment-aggregation/metadata'
 import { codeFiles as commentAggregationCodeFiles } from './comment-aggregation/code-files'
+import tanstackCommentAggregationMeta from './tanstack-comment-aggregation/metadata'
+import { codeFiles as tanstackCommentAggregationCodeFiles } from './tanstack-comment-aggregation/code-files'
+import tanstackMultipleToolsMeta from './tanstack-multiple-tools/metadata'
+import { codeFiles as tanstackMultipleToolsCodeFiles } from './tanstack-multiple-tools/code-files'
+import tanstackSingleToolMeta from './tanstack-single-tool/metadata'
+import { codeFiles as tanstackSingleToolCodeFiles } from './tanstack-single-tool/code-files'
 import tiptapDemoMeta from './tiptap-demo/metadata'
 import { codeFiles as tiptapDemoCodeFiles } from './tiptap-demo/code-files'
 
@@ -32,6 +38,18 @@ export const SAMPLES: Record<string, Sample> = {
   'react-tables-libraries-aggrid-comment-aggregation': {
     metadata: commentAggregationMeta,
     codeFiles: commentAggregationCodeFiles
+  },
+  'react-tables-libraries-tanstack-comment-aggregation': {
+    metadata: tanstackCommentAggregationMeta,
+    codeFiles: tanstackCommentAggregationCodeFiles
+  },
+  'react-tables-libraries-tanstack-multiple-tools': {
+    metadata: tanstackMultipleToolsMeta,
+    codeFiles: tanstackMultipleToolsCodeFiles
+  },
+  'react-tables-libraries-tanstack-single-tool': {
+    metadata: tanstackSingleToolMeta,
+    codeFiles: tanstackSingleToolCodeFiles
   },
   // 'react-text-editors-libraries-tiptap-tiptap-demo': {
   //   metadata: tiptapDemoMeta,

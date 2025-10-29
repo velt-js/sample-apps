@@ -21,6 +21,7 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     tables: true,
     tablesLibraries: true,
     aggrid: true,
+    tanstack: true,
     reactflow: true,
     textEditors: true,
     textEditorLibraries: true,
@@ -238,6 +239,55 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                     )}
                                   >
                                     comment-aggregation
+                                  </button>
+                                </div>
+                              )}
+
+                              {/* TanStack Section */}
+                              <button
+                                onClick={() => toggleSection("tanstack")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>TanStack</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tanstack && "rotate-90")} />
+                              </button>
+                              {expandedSections.tanstack && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("tanstack-comment-aggregation")
+                                      onSampleSelect?.("react-tables-libraries-tanstack-comment-aggregation")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "tanstack-comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    comment-aggregation
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("tanstack-multiple-tools")
+                                      onSampleSelect?.("react-tables-libraries-tanstack-multiple-tools")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "tanstack-multiple-tools" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    multiple-tools
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("tanstack-single-tool")
+                                      onSampleSelect?.("react-tables-libraries-tanstack-single-tool")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "tanstack-single-tool" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    single-tool
                                   </button>
                                 </div>
                               )}
