@@ -247,8 +247,6 @@ export const TableComponent: React.FC = () => {
     });
   }, []);
 
-  // Removed insert handlers (photo, shapes, line)
-
   return (
     <div style={styles.container}>
       <Breadcrumb />

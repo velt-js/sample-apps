@@ -60,8 +60,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           <IconStrikethrough size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
         </button>
       </div>
-
-      {/* Removed insert tools (photo, shape, line) and alignment buttons */}
     </div>
   );
 };
