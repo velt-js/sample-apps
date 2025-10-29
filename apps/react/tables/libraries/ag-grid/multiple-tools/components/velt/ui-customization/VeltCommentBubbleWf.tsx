@@ -1,8 +1,9 @@
 "use client";
-import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react';
+import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react'; // [Velt]
 
 const VeltCommentBubbleWf = () => {
   return (
+    // [Velt] Custom wireframe for comment bubble UI
     <VeltCommentBubbleWireframe>
       <div
         style={{
@@ -12,6 +13,7 @@ const VeltCommentBubbleWf = () => {
           alignItems: 'center'
         }}
       >
+        {/* [Velt] Only show bubble when there are comments */}
         <VeltIf condition="{commentAnnotation.comments.length} > 0">
           <div
             style={{
@@ -62,6 +64,7 @@ const VeltCommentBubbleWf = () => {
                 flexShrink: 0
               }}
             >
+              {/* [Velt] Display comment count */}
               <VeltCommentBubbleWireframe.CommentsCount />
             </p>
           </div>

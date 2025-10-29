@@ -10,24 +10,24 @@ export const createVeltCellRenderer = (
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
 
-  // Generate comment context - this is the primary identifier for aggregation
+  // [Velt] Generate comment context - this is the primary identifier for aggregation
   const commentContext = generateCommentContext(
     props.data,
     props.colDef.field,
     viewType
   );
 
-  // Set ID on parent AG Grid cell element and add comment tool + bubble
+  // [Velt] Set ID on parent AG Grid cell element and add comment tool + bubble
   React.useEffect(() => {
     if (props.eGridCell) {
       if (props.eGridCell.id !== cellId) {
         props.eGridCell.id = cellId;
       }
 
-      // Check if comment tool already exists
+      // [Velt] Check if comment tool already exists
       let commentTool = props.eGridCell.querySelector('velt-comment-tool');
       if (!commentTool) {
-        // Create and append comment tool directly to cell
+        // [Velt] Create and append comment tool directly to cell
         commentTool = document.createElement('velt-comment-tool');
         commentTool.setAttribute('context', JSON.stringify(commentContext));
         commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
@@ -36,14 +36,14 @@ export const createVeltCellRenderer = (
         // Append to cell (outside ag-cell-wrapper)
         props.eGridCell.appendChild(commentTool);
       } else {
-        // Update context if it changed
+        // [Velt] Update context if it changed
         commentTool.setAttribute('context', JSON.stringify(commentContext));
       }
 
-      // Check if comment bubble already exists
+      // [Velt] Check if comment bubble already exists
       let commentBubble = props.eGridCell.querySelector('velt-comment-bubble');
       if (!commentBubble) {
-        // Create and append comment bubble directly to cell
+        // [Velt] Create and append comment bubble directly to cell
         commentBubble = document.createElement('velt-comment-bubble');
         commentBubble.setAttribute('context', JSON.stringify(commentContext));
         commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
@@ -53,13 +53,13 @@ export const createVeltCellRenderer = (
         // Append to cell (outside ag-cell-wrapper)
         props.eGridCell.appendChild(commentBubble);
       } else {
-        // Update context if it changed
+        // [Velt] Update context if it changed
         commentBubble.setAttribute('context', JSON.stringify(commentContext));
       }
     }
 
     return () => {
-      // Cleanup: remove comment tool and bubble when cell is destroyed
+      // [Velt] Cleanup: remove comment tool and bubble when cell is destroyed
       if (props.eGridCell) {
         const commentTool = props.eGridCell.querySelector('velt-comment-tool');
         if (commentTool) {

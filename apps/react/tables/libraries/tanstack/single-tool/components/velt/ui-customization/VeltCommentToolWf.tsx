@@ -1,8 +1,9 @@
 "use client";
-import { VeltCommentToolWireframe } from '@veltdev/react';
+import { VeltCommentToolWireframe } from '@veltdev/react'; // [Velt]
 
 const VeltCommentToolWf = () => {
   return (
+    // [Velt] Custom wireframe for comment tool UI
     <VeltCommentToolWireframe>
       <div
         style={{

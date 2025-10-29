@@ -1,10 +1,11 @@
 "use client";
-import { VeltNotificationsToolWireframe } from '@veltdev/react';
+import { VeltNotificationsToolWireframe } from '@veltdev/react'; // [Velt]
 
 const bellIcon = "/icons/bell-icon.svg";
 
 const VeltNotificationsToolWf = () => {
   return (
+    // [Velt] Custom wireframe for notifications tool UI
     <VeltNotificationsToolWireframe>
       <div
         style={{

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
+import { VeltComments, useVeltClient } from '@veltdev/react'; // [Velt]
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import './day-view-table-component.css';
@@ -23,6 +23,7 @@ import { useTableState } from './hooks/useTableState';
 import { useCurrentDocument } from '@/app/document/DocumentContext';
 
 export const TableComponent: React.FC = () => {
+  // [Velt] Get Velt client instance
   const { client } = useVeltClient();
   const { documentId } = useCurrentDocument();
   const {
@@ -40,13 +41,13 @@ export const TableComponent: React.FC = () => {
     toggleFormatting,
   } = useTableState();
 
-  // Initialize Velt
+  // [Velt] Initialize Velt settings
   useEffect(() => {
     if (client) {
       const commentElement = client.getCommentElement();
       commentElement.disableCommentPinHighlighter();
 
-      // Location-based comments are enabled automatically via data-velt-location-id attribute
+      // [Velt] Location-based comments are enabled automatically via data-velt-location-id attribute
       // Velt will prioritize location IDs when the attribute is present on elements
     }
   }, [client]);

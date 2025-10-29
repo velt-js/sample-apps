@@ -1,7 +1,7 @@
 "use client"
 
 import { Search, ChevronRight, Menu } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
 import { cn } from "@/lib/utils"
 
@@ -10,6 +10,22 @@ interface SidebarProps {
   onToggle: () => void
   currentSampleId?: string
   onSampleSelect?: (sampleId: string) => void
+}
+
+// Map full sample IDs to sidebar item names
+const sampleIdToItemName = (sampleId: string): string => {
+  const mapping: Record<string, string> = {
+    'cursors-playground': 'playground',
+    'react-canvas-libraries-reactflow-reactflow-demo': 'reactflow-demo',
+    'react-tables-libraries-aggrid-multiple-tools': 'multiple-tools',
+    'react-tables-libraries-aggrid-single-tool': 'single-tool',
+    'react-tables-libraries-aggrid-comment-aggregation': 'comment-aggregation',
+    'react-tables-libraries-tanstack-comment-aggregation': 'tanstack-comment-aggregation',
+    'react-tables-libraries-tanstack-multiple-tools': 'tanstack-multiple-tools',
+    'react-tables-libraries-tanstack-single-tool': 'tanstack-single-tool',
+    'react-text-editors-libraries-tiptap-tiptap-demo': 'tiptap-demo',
+  }
+  return mapping[sampleId] || 'playground'
 }
 
 export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
@@ -27,8 +43,18 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     textEditorLibraries: true,
     tiptap: true,
   })
-  const [selectedItem, setSelectedItem] = useState<string>("playground")
+  const [selectedItem, setSelectedItem] = useState<string>(() => {
+    // Initialize with current sample ID if available
+    return currentSampleId ? sampleIdToItemName(currentSampleId) : 'playground'
+  })
   const [activePill, setActivePill] = useState<"app-type" | "feature">("feature")
+
+  // Sync selectedItem with currentSampleId when it changes
+  useEffect(() => {
+    if (currentSampleId) {
+      setSelectedItem(sampleIdToItemName(currentSampleId))
+    }
+  }, [currentSampleId])
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => ({

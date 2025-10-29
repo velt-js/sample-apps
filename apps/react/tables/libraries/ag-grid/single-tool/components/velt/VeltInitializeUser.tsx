@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppUser } from "@/app/userAuth/useAppUser";
-import type { VeltAuthProvider } from "@veltdev/types";
+import type { VeltAuthProvider } from "@veltdev/types"; // [Velt]
 import { useMemo } from "react";
 
 // [Velt] Call your backend API to generate a JWT token for the user

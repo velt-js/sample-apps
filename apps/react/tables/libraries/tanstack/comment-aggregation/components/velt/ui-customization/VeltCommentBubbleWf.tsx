@@ -1,8 +1,9 @@
 "use client";
-import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react';
+import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react'; // [Velt]
 
 const VeltCommentBubbleWf = () => {
   return (
+    // [Velt] Custom wireframe for comment bubble UI
     <VeltCommentBubbleWireframe>
       {/* Only show bubble when there are direct comments OR aggregated comments */}
       <VeltIf condition="{commentAnnotation.comments.length} > 0 || {annotations.length} > 0">

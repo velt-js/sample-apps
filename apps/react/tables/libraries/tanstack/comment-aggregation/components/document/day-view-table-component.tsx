@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState, useRef } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
+import { VeltComments, useVeltClient } from '@veltdev/react'; // [Velt]
 import {
   useReactTable,
   getCoreRowModel,
@@ -26,6 +26,7 @@ import { useTableState } from './hooks/useTableState';
 import { ViewType, TableData } from './types';
 
 export const TableComponent: React.FC = () => {
+  // [Velt] Get Velt client instance
   const { client } = useVeltClient();
   const { isCollapsed } = useSidebar();
   const [viewType, setViewType] = useState<ViewType>('day');

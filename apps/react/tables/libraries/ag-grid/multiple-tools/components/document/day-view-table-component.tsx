@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
+import { VeltComments, useVeltClient } from '@veltdev/react'; // [Velt]
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import './day-view-table-component.css';
@@ -22,6 +22,7 @@ import { styles } from './styles';
 import { useTableState } from './hooks/useTableState';
 
 export const TableComponent: React.FC = () => {
+  // [Velt] Get Velt client instance
   const { client } = useVeltClient();
   const {
     selectedCell,
@@ -38,7 +39,7 @@ export const TableComponent: React.FC = () => {
     toggleFormatting,
   } = useTableState();
 
-  // Initialize Velt
+  // [Velt] Disable comment pin highlighter
   useEffect(() => {
     if (client) {
       client.getCommentElement().disableCommentPinHighlighter();

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import { useSetDocuments } from '@veltdev/react';
+import { useSetDocuments } from '@veltdev/react'; // [Velt]
 import { useCurrentDocument } from '@/app/document/useCurrentDocument';
 import { useAppUser } from '@/app/userAuth/useAppUser';
 
@@ -8,7 +8,7 @@ export default function VeltInitializeDocument() {
   const { documentId, documentName } = useCurrentDocument();
   const { user } = useAppUser();
 
-  const { setDocuments } = useSetDocuments();
+  const { setDocuments } = useSetDocuments(); // [Velt]
 
   // [Velt] Set document in Velt. This is the resource where all Velt collaboration data will be scoped.
   useEffect(() => {

@@ -7,15 +7,15 @@ export const createVeltCellRenderer = (
   documentId: string
 ) => (props: any) => {
   const cellId = `cell-${props.data.id}-${props.colDef.field}`;
-  // Create a stable location ID based on logical data row, not DOM position
+  // [Velt] Create a stable location ID based on logical data row, not DOM position
   const locationId = `${documentId}-row-${props.data.id}-${props.colDef.field}`;
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
 
-  // Set ID and location ID on parent AG Grid cell element
+  // [Velt] Set ID and location ID on parent AG Grid cell element
   React.useEffect(() => {
     if (props.eGridCell) {
-      // Set both the element ID and the Velt location ID
+      // [Velt] Set both the element ID and the Velt location ID
       // The location ID is stable and based on data row, not DOM position
       props.eGridCell.id = cellId;
       props.eGridCell.setAttribute('data-velt-location-id', locationId);

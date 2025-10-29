@@ -34,10 +34,10 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
           parentCell.id = cellId;
         }
 
-        // Check if comment tool already exists
+        // [Velt] Check if comment tool already exists
         let commentTool = parentCell.querySelector('velt-comment-tool') as HTMLElement | null;
         if (!commentTool) {
-          // Create and append comment tool directly to cell
+          // [Velt] Create and append comment tool directly to cell
           commentTool = document.createElement('velt-comment-tool') as HTMLElement;
           commentTool.setAttribute('target-comment-element-id', cellId);
           commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
@@ -54,7 +54,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
     }
 
     return () => {
-      // Cleanup: remove comment tool when cell is destroyed
+      // [Velt] Cleanup: remove comment tool when cell is destroyed
       if (cellRef.current) {
         const parentCell = cellRef.current.closest('td');
         if (parentCell) {

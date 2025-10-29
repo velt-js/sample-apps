@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
+import { VeltComments, useVeltClient } from '@veltdev/react'; // [Velt]
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { useSidebar } from '@/components/sidebar/SidebarContext';
@@ -24,7 +24,7 @@ import { useTableState } from './hooks/useTableState';
 import { ViewType } from './types';
 
 export const TableComponent: React.FC = () => {
-  const { client } = useVeltClient();
+  const { client } = useVeltClient(); // [Velt]
   const { isCollapsed } = useSidebar();
   const [viewType, setViewType] = useState<ViewType>('day');
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
@@ -65,7 +65,7 @@ export const TableComponent: React.FC = () => {
     }
   }, [viewType, rowData]);
 
-  // Initialize Velt
+  // [Velt] Initialize Velt
   useEffect(() => {
     if (client) {
       client.getCommentElement().disableCommentPinHighlighter();
@@ -251,6 +251,7 @@ export const TableComponent: React.FC = () => {
     <div style={styles.container}>
       <Breadcrumb />
 
+      {/* [Velt] Comments component */}
       <VeltComments
         popoverTriangleComponent={true}
         popoverMode={true}

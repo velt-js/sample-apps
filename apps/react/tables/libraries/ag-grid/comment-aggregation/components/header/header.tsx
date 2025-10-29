@@ -1,13 +1,14 @@
 "use client";
 
-import { useVeltInitState, useVeltClient } from "@veltdev/react";
+import { useVeltInitState, useVeltClient } from "@veltdev/react"; // [Velt]
 import VeltTools from "@/components/velt/VeltTools";
 import { useEffect } from 'react';
 
 export default function Header() {
-  const veltInitialized = useVeltInitState();
-  const { client } = useVeltClient();
+  const veltInitialized = useVeltInitState(); // [Velt]
+  const { client } = useVeltClient(); // [Velt]
 
+  // [Velt] Set dark mode
   useEffect(() => {
     if (client) {
       client.setDarkMode(true);
