@@ -1,4 +1,4 @@
-// [Velt] Minimal login UI that drives useAppUser via localStorage
+// [Velt] Demo login interface allowing users to switch between test accounts to experience multi-user collaboration
 'use client';
 
 import React from "react";

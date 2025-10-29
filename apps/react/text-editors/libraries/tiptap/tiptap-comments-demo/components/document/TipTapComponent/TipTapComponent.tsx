@@ -4,19 +4,15 @@ import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
-import React, { useEffect } from 'react'
-import { useCommentAnnotations } from '@veltdev/react'
-import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments'
+import { useEffect } from 'react'
+import { useCommentAnnotations } from '@veltdev/react' // [Velt] Hook that listens to comment annotations and provides real-time updates when comments are added/removed
+import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments' // [Velt] TipTap extension and utilities for integrating Velt comments into the editor
 import { EditorToolbar } from './ui/EditorToolbar'
 import { TipTapComponentProps } from './types'
 import { initialContent } from './constants'
-import { useCurrentDocument } from '@/app/document/useCurrentDocument'
 import { InlineH1, InlineH2, InlineH3 } from './extensions'
 
 export default function TipTapComponent({ scrollContainerRef }: TipTapComponentProps) {
-  const { documentId } = useCurrentDocument()
-
-  // Initialize the editor
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -30,23 +26,22 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
       InlineH1,
       InlineH2,
       InlineH3,
-      TiptapVeltComments,
+      TiptapVeltComments, // [Velt] Registers TipTap extension that enables comment markers and selection tracking in the editor
     ],
     content: initialContent,
   })
 
-  // Comment annotations
-  const commentAnnotations = useCommentAnnotations()
+  const commentAnnotations = useCommentAnnotations() // [Velt] Subscribes to comment data changes and returns array of all active comment annotations
 
   useEffect(() => {
     if (editor && commentAnnotations?.length) {
-      renderComments({ editor, commentAnnotations })
+      renderComments({ editor, commentAnnotations }) // [Velt] Renders comment highlights and markers in the editor based on annotation positions
     }
   }, [editor, commentAnnotations])
 
   const addTiptapVeltComment = () => {
     if (editor) {
-      addComment({ editor })
+      addComment({ editor }) // [Velt] Triggers comment creation flow on selected text in the editor
     }
   }
 
@@ -63,7 +58,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
                 />
               </div>
 
-              {/* Bubble Menu for Comments */}
+              {/* [Velt] Bubble menu appears on text selection to allow users to add comments */}
               {editor && (
                 <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
                   <div className="bubble-menu bg-[rgb(34,34,34)] rounded-full p-[6px] shadow-[0_0_80px_rgba(0,0,0,1)]">
@@ -71,7 +66,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
                       onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
-                        addTiptapVeltComment()
+                        addTiptapVeltComment() // [Velt] Opens comment composer for the selected text range
                       }}
                       className="flex items-center justify-center p-[6px] hover:bg-white/10 rounded-full transition-all cursor-pointer"
                       title="Add comment"

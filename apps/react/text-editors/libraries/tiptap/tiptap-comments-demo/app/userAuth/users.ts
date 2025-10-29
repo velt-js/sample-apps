@@ -1,5 +1,5 @@
-// [Velt] Hard-coded demo users
-import type { User } from "@veltdev/types";
+// [Velt] Hard-coded demo users for testing collaboration features
+import type { User } from "@veltdev/types"; // [Velt] TypeScript interface for user data structure required by Velt SDK
 
 export const demoUsers: Record<string, User> = {
   michael: {

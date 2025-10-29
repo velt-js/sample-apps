@@ -1,7 +1,7 @@
 "use client";
 
-import type { User } from "@veltdev/types";
-import React, { useCallback, useContext, useEffect, useState, useRef } from "react";
+import type { User } from "@veltdev/types"; // [Velt] TypeScript interface for user data structure required by Velt SDK
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 type AppUserContextValue = {
   user: User | undefined;
