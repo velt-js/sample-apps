@@ -7,7 +7,7 @@ export type CurrentDocument = {
 };
 
 export function useCurrentDocument(): CurrentDocument {
-  const [documentId, setDocumentId] = useState<string>('');
+  const [documentId, setDocumentId] = useState<string | null>(null);
   const isInitialized = useRef(false);
 
   useEffect(() => {

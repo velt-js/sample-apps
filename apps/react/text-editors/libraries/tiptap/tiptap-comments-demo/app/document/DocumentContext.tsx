@@ -31,8 +31,8 @@ export type CurrentDocument = {
 
 export function useCurrentDocument(): CurrentDocument {
   // Initialize documentId synchronously on first render to avoid timing issues
-  const [documentId, setDocumentId] = useState<string>(() => {
-    if (typeof window === 'undefined') return '';
+  const [documentId, setDocumentId] = useState<string | null>(() => {
+    if (typeof window === 'undefined') return null;
 
     const urlParams = new URLSearchParams(window.location.search);
     const urlDocId = urlParams.get('documentId');
@@ -43,7 +43,7 @@ export function useCurrentDocument(): CurrentDocument {
     }
 
     const stored = localStorage.getItem('tiptap-document-id');
-    return stored || '';
+    return stored || null;
   });
 
   const isInitialized = useRef(false);
