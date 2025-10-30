@@ -124,19 +124,6 @@
   background: transparent !important;
 }
 
-/* [Velt] Velt Comment Text Styling */
-velt-comment-text[comment-available="true"] {
-  background-color: rgba(255, 208, 0, 0.3);
-  border-radius: 2px;
-  padding: 2px 0;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-velt-comment-text[comment-available="true"]:hover {
-  background-color: rgba(255, 208, 0, 0.4);
-}
-
 /* Helper Text Animation */
 @keyframes pulse-subtle {
   0%, 100% {

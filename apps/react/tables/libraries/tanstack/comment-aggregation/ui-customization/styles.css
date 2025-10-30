@@ -1,0 +1,21 @@
+/* [Velt] UI Customization Styles */
+
+/* Comment Triangle Customization - Yellow to match selected border */
+velt-comment-dialog::part(triangle),
+velt-comment-dialog::part(triangle-fill) {
+  border-color: rgb(255, 205, 46) !important;
+  fill: rgb(255, 205, 46) !important;
+}
+
+/* Additional targeting for Velt triangle */
+velt-comment-dialog [part="triangle"],
+velt-comment-dialog [part="triangle-fill"] {
+  border-color: rgb(255, 205, 46) !important;
+  fill: rgb(255, 205, 46) !important;
+}
+
+/* Target the SVG triangle directly */
+velt-comment-dialog svg[class*="triangle"] path {
+  fill: rgb(255, 205, 46) !important;
+  stroke: rgb(255, 205, 46) !important;
+}
