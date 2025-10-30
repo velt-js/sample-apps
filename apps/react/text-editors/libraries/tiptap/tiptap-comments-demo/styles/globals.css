@@ -124,7 +124,7 @@
   background: transparent !important;
 }
 
-/* Velt Comment Text Styling */
+/* [Velt] Velt Comment Text Styling */
 velt-comment-text[comment-available="true"] {
   background-color: rgba(255, 208, 0, 0.3);
   border-radius: 2px;

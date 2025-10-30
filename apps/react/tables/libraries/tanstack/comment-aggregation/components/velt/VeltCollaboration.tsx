@@ -23,6 +23,13 @@ export function VeltCollaboration() {
     }
   }, [client]);
 
+  // [Velt] Disable comment pin highlighter
+  useEffect(() => {
+    if (client) {
+      client.getCommentElement().disableCommentPinHighlighter();
+    }
+  }, [client]);
+
   const groupConfig = {
     enable: false
   };
@@ -31,11 +38,12 @@ export function VeltCollaboration() {
     <>
       <VeltInitializeDocument />
       <VeltComments
+        popoverTriangleComponent={true}
         popoverMode={true}
+        shadowDom={false}
         textMode={false}
         commentPinHighlighter={false}
         dialogOnHover={false}
-        popoverTriangleComponent={false}
         groupMatchedComments={true}
         priority={true}
       />

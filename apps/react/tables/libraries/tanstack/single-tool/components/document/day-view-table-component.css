@@ -162,7 +162,7 @@
   position: relative;
 }
 
-/* Velt comment tool - positioned directly in cell */
+/* [Velt] Velt comment tool - positioned directly in cell */
 .tanstack-table-cell > velt-comment-tool {
   display: flex !important;
   justify-content: flex-end !important;

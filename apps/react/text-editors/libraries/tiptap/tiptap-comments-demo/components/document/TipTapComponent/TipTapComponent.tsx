@@ -59,7 +59,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
                 />
               </div>
 
-              {/* [Velt] Bubble menu appears on text selection to allow users to add comments */}
+              // [Velt] Bubble menu appears on text selection to allow users to add comments
               {editor && (
                 <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
                   <div className="bubble-menu bg-[rgb(34,34,34)] rounded-full p-[6px] shadow-[0_0_80px_rgba(0,0,0,1)]">

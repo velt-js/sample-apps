@@ -5,7 +5,7 @@
   position: relative;
 }
 
-/* Velt comment tool - positioned directly in ag-cell, outside ag-cell-wrapper */
+/* [Velt] Comment tool - positioned directly in ag-cell, outside ag-cell-wrapper */
 .ag-cell > velt-comment-tool {
   display: flex !important;
   justify-content: flex-end !important;
@@ -22,7 +22,7 @@
   opacity: 1;
 }
 
-/* Velt comment bubble - always visible when comments exist */
+/* [Velt] Comment bubble - always visible when comments exist */
 .ag-cell > velt-comment-bubble {
   display: flex !important;
   justify-content: flex-end !important;

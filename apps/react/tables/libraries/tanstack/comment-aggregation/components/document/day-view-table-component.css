@@ -162,7 +162,7 @@
   position: relative;
 }
 
-/* Velt comment tool - positioned directly in cell */
+/* [Velt] Comment tool - positioned directly in cell */
 .tanstack-table-cell > velt-comment-tool {
   display: flex !important;
   justify-content: flex-end !important;
@@ -179,7 +179,7 @@
   opacity: 1;
 }
 
-/* Velt comment bubble - always visible when comments exist */
+/* [Velt] Comment bubble - always visible when comments exist */
 .tanstack-table-cell > velt-comment-bubble {
   display: flex !important;
   justify-content: flex-end !important;

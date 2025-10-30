@@ -5,7 +5,7 @@ const VeltCommentBubbleWf = () => {
   return (
     // [Velt] Custom wireframe for comment bubble UI
     <VeltCommentBubbleWireframe>
-      {/* [Velt] Only show bubble when there are direct comments OR aggregated comments */}
+      // [Velt] Only show bubble when there are direct comments OR aggregated comments
         <div
           style={{
             position: 'relative',
@@ -63,7 +63,7 @@ const VeltCommentBubbleWf = () => {
                 flexShrink: 0
               }}
             >
-              {/* [Velt] Display total count including aggregated comments */}
+              // [Velt] Display total count including aggregated comments
               <VeltCommentBubbleWireframe.CommentsCount />
             </p>
           </div>

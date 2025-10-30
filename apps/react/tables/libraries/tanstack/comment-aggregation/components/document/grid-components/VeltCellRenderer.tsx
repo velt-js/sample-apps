@@ -125,7 +125,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
       />
-      {/* [Velt] Comment tool - automatically shows/hides based on comments */}
+      // [Velt] Comment tool - automatically shows/hides based on comments
       <VeltCommentTool
         context={commentContext}
         contextOptions={{ partialMatch: true }}
@@ -137,7 +137,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
           zIndex: 1,
         }}
       />
-      {/* [Velt] Comment bubble - automatically shows/hides based on comments */}
+      // [Velt] Comment bubble - automatically shows/hides based on comments
       <VeltCommentBubble
         context={commentContext}
         contextOptions={{ partialMatch: true }}

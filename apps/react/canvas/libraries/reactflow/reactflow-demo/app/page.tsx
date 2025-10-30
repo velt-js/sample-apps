@@ -15,10 +15,7 @@ export default function Home() {
       apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY!}
       authProvider={authProvider}
     >
-      {/* [Velt] Collaboration core (includes document init) */}
       <VeltCollaboration />
-
-      {/* --- App UI --- */}
       <DocumentCanvas />
     </VeltProvider>
   );
