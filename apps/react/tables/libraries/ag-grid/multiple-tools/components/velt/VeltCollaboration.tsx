@@ -38,7 +38,6 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
-      // [Velt] Enable comments in popover mode
       <VeltComments
         popoverTriangleComponent={true}
         popoverMode={true}
@@ -47,7 +46,6 @@ export function VeltCollaboration() {
         commentPinHighlighter={false}
         dialogOnHover={false}
       />
-      // [Velt] Comments sidebar panel
       <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />
     </>

@@ -5,7 +5,6 @@ const VeltCommentBubbleWf = () => {
   return (
     // [Velt] Custom wireframe for comment bubble UI
     <VeltCommentBubbleWireframe>
-      // [Velt] Only show bubble when there are direct comments OR aggregated comments
         <div
           style={{
             position: 'relative',

@@ -13,7 +13,6 @@ const VeltCommentBubbleWf = () => {
           alignItems: 'center'
         }}
       >
-        // [Velt] Only show bubble when there are comments
         <VeltIf condition="{commentAnnotation.comments.length} > 0">
           <div
             style={{

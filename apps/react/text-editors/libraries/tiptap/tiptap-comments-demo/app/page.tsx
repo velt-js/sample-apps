@@ -13,7 +13,6 @@ export default function Home() {
       apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY!} // [Velt] API key authenticates this app with Velt services
       authProvider={authProvider} // [Velt] Passes authentication provider to securely identify users and manage access
     >
-      // [Velt] Initializes all collaboration components (comments, presence, document tracking)
       <VeltCollaboration />
 
       <DocumentCanvas />
