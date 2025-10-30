@@ -99,7 +99,7 @@ export function useCurrentDocument(): CurrentDocument {
   return useMemo(
     () => ({
       documentId: documentId, // Return actual documentId, no 'loading' fallback
-      documentName: "TipTap Document",
+      documentName: "Tiptap Editor",
     }),
     [documentId]
   );

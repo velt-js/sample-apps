@@ -22,32 +22,32 @@ export function useCurrentDocument(): CurrentDocument {
     if (docId) {
       // Use document ID from URL (shareable link)
       setDocumentId(docId);
-      localStorage.setItem('reactflow-document-id', docId);
+      localStorage.setItem('blocknote-document-id', docId);
     } else {
       // 2. Check localStorage for existing document
-      const stored = localStorage.getItem('reactflow-document-id');
+      const stored = localStorage.getItem('blocknote-document-id');
       if (stored) {
         docId = stored;
       } else {
         // 3. Generate new document ID
         docId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-        localStorage.setItem('reactflow-document-id', docId);
+        localStorage.setItem('blocknote-document-id', docId);
       }
-      
+
       // Update URL with document ID for shareability
       const newUrl = `${window.location.pathname}?documentId=${docId}`;
       window.history.pushState({}, '', newUrl);
-      
+
       setDocumentId(docId);
     }
 
     isInitialized.current = true;
   }, []);
-  
+
   return useMemo(
     () => ({
       documentId: documentId || 'loading',
-      documentName: "React Flow Canvas",
+      documentName: "BlockNote Editor",
     }),
     [documentId]
   );

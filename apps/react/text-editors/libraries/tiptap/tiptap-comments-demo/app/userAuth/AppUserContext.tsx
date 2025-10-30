@@ -77,12 +77,10 @@ function generateRandomUser(): User {
   };
 }
 
-export function AppUserProvider({ 
-  children,
-  documentId 
-}: { 
+export function AppUserProvider({
+  children
+}: {
   children: React.ReactNode;
-  documentId?: string;
 }) {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean | undefined>(
@@ -90,8 +88,6 @@ export function AppUserProvider({
   );
 
   useEffect(() => {
-    // Wait for documentId to be set before initializing user
-    if (!documentId) return;
     if (typeof window === 'undefined') return; // Guard against SSR
     
     try {
@@ -120,7 +116,7 @@ export function AppUserProvider({
       setUser(selectedUser);
       setIsUserLoggedIn(true);
     } catch {}
-  }, [documentId]);
+  }, []);
 
   const login = useCallback((next: User) => {
     if (typeof window === 'undefined') return;

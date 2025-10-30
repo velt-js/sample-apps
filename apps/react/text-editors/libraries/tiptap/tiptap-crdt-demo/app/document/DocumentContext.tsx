@@ -67,7 +67,7 @@ export function useCurrentDocument(): CurrentDocument {
   return useMemo(
     () => ({
       documentId: documentId || 'loading',
-      documentName: "TipTap Document",
+      documentName: "Tiptap Editor",
     }),
     [documentId]
   );
