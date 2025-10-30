@@ -49,7 +49,8 @@ export function AppUserProvider({
   );
 
   useEffect(() => {
-    if (!documentId || documentId === 'loading') return;
+    // Wait for documentId to be set before initializing user
+    if (!documentId) return;
     if (typeof window === 'undefined') return; // Guard against SSR
     
     try {

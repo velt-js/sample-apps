@@ -29,6 +29,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
       TiptapVeltComments, // [Velt] Registers TipTap extension that enables comment markers and selection tracking in the editor
     ],
     content: initialContent,
+    immediatelyRender: false, // Prevents SSR hydration mismatches by only rendering on client
   })
 
   const commentAnnotations = useCommentAnnotations() // [Velt] Subscribes to comment data changes and returns array of all active comment annotations

@@ -7,7 +7,22 @@ export type CurrentDocument = {
 };
 
 export function useCurrentDocument(): CurrentDocument {
-  const [documentId, setDocumentId] = useState<string>('');
+  // Initialize documentId synchronously on first render to avoid timing issues
+  const [documentId, setDocumentId] = useState<string>(() => {
+    if (typeof window === 'undefined') return '';
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlDocId = urlParams.get('documentId');
+
+    if (urlDocId) {
+      localStorage.setItem('tiptap-document-id', urlDocId);
+      return urlDocId;
+    }
+
+    const stored = localStorage.getItem('tiptap-document-id');
+    return stored || '';
+  });
+
   const isInitialized = useRef(false);
 
   useEffect(() => {
@@ -17,9 +32,11 @@ export function useCurrentDocument(): CurrentDocument {
     let docId = urlParams.get('documentId');
 
     if (docId) {
+      // URL has documentId - use it
       setDocumentId(docId);
       localStorage.setItem('tiptap-document-id', docId);
     } else {
+      // No URL documentId - check localStorage or create new
       const stored = localStorage.getItem('tiptap-document-id');
       if (stored) {
         docId = stored;
@@ -48,25 +65,17 @@ export function useCurrentDocument(): CurrentDocument {
       }
     };
 
+    // Listen for browser back/forward navigation
     window.addEventListener('popstate', handleUrlChange);
-
-    const interval = setInterval(() => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const docId = urlParams.get('documentId');
-      if (docId && docId !== documentId) {
-        handleUrlChange();
-      }
-    }, 1000);
 
     return () => {
       window.removeEventListener('popstate', handleUrlChange);
-      clearInterval(interval);
     };
   }, [documentId]);
 
   return useMemo(
     () => ({
-      documentId: documentId || 'loading',
+      documentId: documentId, // Return actual documentId, no 'loading' fallback
       documentName: "TipTap Document",
     }),
     [documentId]
