@@ -3,6 +3,33 @@
 import type { User } from "@veltdev/types"; // [Velt] TypeScript interface for user data structure required by Velt SDK
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
+/**
+ * ⚠️ IMPORTANT DISCLAIMER FOR DEVELOPERS ⚠️
+ *
+ * This user authentication logic is ONLY for demo purposes.
+ * It generates random users and stores them in localStorage/sessionStorage to simulate
+ * a multi-user collaboration environment for demonstration.
+ *
+ * IN YOUR REAL APPLICATION:
+ * - Fetch the currently logged in user from YOUR existing authentication system
+ * - Use your own user management (Auth0, Firebase Auth, custom backend, etc.)
+ * - Simply pass your authenticated user object to Velt's identify() method
+ * - You do NOT need to generate random users or store users in localStorage
+ *
+ * Example of real-world usage:
+ * ```typescript
+ * // Get your authenticated user from your auth system
+ * const currentUser = await yourAuthSystem.getCurrentUser();
+ *
+ * // Pass it to Velt
+ * await client.identify(currentUser);
+ * ```
+ *
+ * The random user generation and storage logic here is purely for demo convenience
+ * to simulate multiple users without requiring actual authentication infrastructure.
+ * Do not replicate this pattern in your production application.
+ */
+
 type AppUserContextValue = {
   user: User | undefined;
   login: (u: User) => void;
@@ -14,25 +41,39 @@ const AppUserContext = React.createContext<AppUserContextValue | undefined>(
   undefined
 );
 
+// Simple hash function to convert userId to a consistent number
+function hashStringToIndex(str: string, arrayLength: number): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash) % arrayLength;
+}
+
 // Generate a random user with unique ID
 function generateRandomUser(): User {
   const randomId = `user-${Math.random().toString(36).substring(2, 11)}`;
   const avatarColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
-  const randomColor = avatarColors[Math.floor(Math.random() * avatarColors.length)];
-  
+
   const firstNames = ['Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Riley', 'Avery'];
   const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis'];
-  
+
   const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
   const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
   const fullName = `${firstName} ${lastName}`;
-  
+
+  // Use deterministic color based on userId for consistent photoUrl
+  const colorIndex = hashStringToIndex(randomId, avatarColors.length);
+  const avatarColor = avatarColors[colorIndex];
+
   return {
     userId: randomId,
     name: fullName,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
     organizationId: "demo-org-1",
-    photoUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=${randomColor.substring(1)}&color=fff&size=128`,
+    photoUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=${avatarColor.substring(1)}&color=fff&size=128`,
   };
 }
 
