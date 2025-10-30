@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react'; // [Velt]
+import { VeltComments, useVeltClient } from '@veltdev/react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { useSidebar } from '@/components/sidebar/SidebarContext';
@@ -24,7 +24,7 @@ import { useTableState } from './hooks/useTableState';
 import { ViewType } from './types';
 
 export const TableComponent: React.FC = () => {
-  const { client } = useVeltClient(); // [Velt]
+  const { client } = useVeltClient();
   const { isCollapsed } = useSidebar();
   const [viewType, setViewType] = useState<ViewType>('day');
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
@@ -64,13 +64,6 @@ export const TableComponent: React.FC = () => {
         return rowData;
     }
   }, [viewType, rowData]);
-
-  // [Velt] Initialize Velt
-  useEffect(() => {
-    if (client) {
-      client.getCommentElement().disableCommentPinHighlighter();
-    }
-  }, [client]);
 
   // Sync localSortState with sortState (when AG Grid updates)
   useEffect(() => {
@@ -250,14 +243,6 @@ export const TableComponent: React.FC = () => {
   return (
     <div style={styles.container}>
       <Breadcrumb />
-
-      {/* [Velt] Comments component */}
-      <VeltComments
-        popoverTriangleComponent={true}
-        popoverMode={true}
-        shadowDom={false}
-        textMode={false}
-      />
 
       <div style={styles.tableContainer}>
         <ViewToggle

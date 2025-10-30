@@ -15,6 +15,18 @@ export function VeltCollaboration() {
       client.signOutUser();
     }
   }, [isUserLoggedIn, client]);
+
+  // [Velt] Enable dark mode
+  useEffect(() => {
+    if (client) {
+      client.setDarkMode(true);
+    }
+  }, [client]);
+
+  const groupConfig = {
+    enable: false
+  };
+
   return (
     <>
       <VeltInitializeDocument />
@@ -24,10 +36,10 @@ export function VeltCollaboration() {
         commentPinHighlighter={false}
         dialogOnHover={false}
         popoverTriangleComponent={false}
-        groupMultipleMatch={true}
+        groupMatchedComments={true}
         priority={true}
       />
-      <VeltCommentsSidebar />
+      <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />
     </>
   );

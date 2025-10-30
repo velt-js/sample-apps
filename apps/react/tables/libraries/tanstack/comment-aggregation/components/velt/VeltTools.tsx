@@ -3,7 +3,7 @@ import {
   VeltPresence,
   VeltSidebarButton,
   VeltNotificationsTool,
-} from "@veltdev/react"; // [Velt]
+} from "@veltdev/react";
 
 function VeltTools() {
   return (

@@ -1,5 +1,5 @@
 "use client";
-import { VeltCommentToolWireframe } from '@veltdev/react'; // [Velt]
+import { VeltCommentToolWireframe } from '@veltdev/react';
 
 const VeltCommentToolWf = () => {
   return (

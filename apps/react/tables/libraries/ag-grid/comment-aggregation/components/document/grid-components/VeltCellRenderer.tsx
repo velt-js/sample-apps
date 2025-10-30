@@ -1,4 +1,5 @@
 import React from 'react';
+import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
 import { CellFormatting, ViewType } from '../types';
 import { getCellFormattingKey, generateCommentContext } from '../utils';
 
@@ -17,61 +18,14 @@ export const createVeltCellRenderer = (
     viewType
   );
 
-  // [Velt] Set ID on parent AG Grid cell element and add comment tool + bubble
+  // [Velt] Set ID on parent AG Grid cell element
   React.useEffect(() => {
     if (props.eGridCell) {
       if (props.eGridCell.id !== cellId) {
         props.eGridCell.id = cellId;
       }
-
-      // [Velt] Check if comment tool already exists
-      let commentTool = props.eGridCell.querySelector('velt-comment-tool');
-      if (!commentTool) {
-        // [Velt] Create and append comment tool directly to cell
-        commentTool = document.createElement('velt-comment-tool');
-        commentTool.setAttribute('context', JSON.stringify(commentContext));
-        commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-        commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
-
-        // Append to cell (outside ag-cell-wrapper)
-        props.eGridCell.appendChild(commentTool);
-      } else {
-        // [Velt] Update context if it changed
-        commentTool.setAttribute('context', JSON.stringify(commentContext));
-      }
-
-      // [Velt] Check if comment bubble already exists
-      let commentBubble = props.eGridCell.querySelector('velt-comment-bubble');
-      if (!commentBubble) {
-        // [Velt] Create and append comment bubble directly to cell
-        commentBubble = document.createElement('velt-comment-bubble');
-        commentBubble.setAttribute('context', JSON.stringify(commentContext));
-        commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-        commentBubble.setAttribute('type', 'popover');
-        commentBubble.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: auto;';
-
-        // Append to cell (outside ag-cell-wrapper)
-        props.eGridCell.appendChild(commentBubble);
-      } else {
-        // [Velt] Update context if it changed
-        commentBubble.setAttribute('context', JSON.stringify(commentContext));
-      }
     }
-
-    return () => {
-      // [Velt] Cleanup: remove comment tool and bubble when cell is destroyed
-      if (props.eGridCell) {
-        const commentTool = props.eGridCell.querySelector('velt-comment-tool');
-        if (commentTool) {
-          commentTool.remove();
-        }
-        const commentBubble = props.eGridCell.querySelector('velt-comment-bubble');
-        if (commentBubble) {
-          commentBubble.remove();
-        }
-      }
-    };
-  }, [cellId, props.eGridCell, commentContext]);
+  }, [cellId, props.eGridCell]);
 
   const textStyle: React.CSSProperties = {
     fontWeight: formatting.bold ? 'bold' : 'normal',
@@ -90,11 +44,38 @@ export const createVeltCellRenderer = (
     height: '100%',
     padding: '4px 12px 4px 12px',
     textAlign: formatting.align || 'left',
+    position: 'relative',
   };
 
   return (
     <div style={containerStyle}>
       <span style={textStyle}>{props.value}</span>
+      {/* [Velt] Comment tool - automatically shows/hides based on comments */}
+      <VeltCommentTool
+        context={commentContext}
+        contextOptions={{ partialMatch: true }}
+        style={{
+          position: 'absolute',
+          right: '4px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 1,
+        }}
+      />
+      {/* [Velt] Comment bubble - automatically shows/hides based on comments */}
+      <VeltCommentBubble
+        context={commentContext}
+        contextOptions={{ partialMatch: true }}
+        type="popover"
+        style={{
+          position: 'absolute',
+          right: '4px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 2,
+          pointerEvents: 'auto',
+        }}
+      />
     </div>
   );
 };

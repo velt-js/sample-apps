@@ -16,6 +16,10 @@ export function VeltCollaboration() {
     }
   }, [user, client]);
 
+  const groupConfig = {
+    enable: false
+  };
+
   return (
     <>
       <VeltInitializeDocument />
@@ -26,7 +30,7 @@ export function VeltCollaboration() {
         dialogOnHover={false}
         popoverTriangleComponent={false}
       />
-      <VeltCommentsSidebar />
+      <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCursor />
       <VeltCustomization />
     </>

@@ -15,17 +15,22 @@ export function VeltCollaboration() {
       client.signOutUser();
     }
   }, [isUserLoggedIn, client]);
+
+  const groupConfig = {
+    enable: false
+  };
+
   return (
     <>
       <VeltInitializeDocument />
-      <VeltComments 
-        popoverMode={true} 
-        textMode={false} 
-        commentPinHighlighter={false} 
-        dialogOnHover={false} 
-        popoverTriangleComponent={false} 
+      <VeltComments
+        popoverMode={true}
+        textMode={false}
+        commentPinHighlighter={false}
+        dialogOnHover={false}
+        popoverTriangleComponent={false}
       />
-      <VeltCommentsSidebar />
+      <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCursor />
       <VeltCustomization />
     </>

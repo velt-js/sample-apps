@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react'; // [Velt]
+import { VeltComments, useVeltClient } from '@veltdev/react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import './day-view-table-component.css';
@@ -244,13 +244,6 @@ export const TableComponent: React.FC = () => {
   return (
     <div style={styles.container}>
       <Breadcrumb />
-
-      <VeltComments
-        popoverTriangleComponent={true}
-        popoverMode={true}
-        shadowDom={false}
-        textMode={false}
-      />
 
       <div style={styles.tableContainer}>
         <ViewToggle />

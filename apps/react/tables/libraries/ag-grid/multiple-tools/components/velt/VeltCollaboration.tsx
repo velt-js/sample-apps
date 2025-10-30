@@ -1,5 +1,5 @@
 "use client";
-import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react"; // [Velt]
+import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
 import { useEffect } from "react";
@@ -16,19 +16,39 @@ export function VeltCollaboration() {
       client.signOutUser();
     }
   }, [isUserLoggedIn, client]);
+
+  // [Velt] Enable dark mode
+  useEffect(() => {
+    if (client) {
+      client.setDarkMode(true);
+    }
+  }, [client]);
+
+  // [Velt] Disable comment pin highlighter
+  useEffect(() => {
+    if (client) {
+      client.getCommentElement().disableCommentPinHighlighter();
+    }
+  }, [client]);
+
+  const groupConfig = {
+    enable: false
+  };
+
   return (
     <>
       <VeltInitializeDocument />
       {/* [Velt] Enable comments in popover mode */}
       <VeltComments
+        popoverTriangleComponent={true}
         popoverMode={true}
+        shadowDom={false}
         textMode={false}
         commentPinHighlighter={false}
         dialogOnHover={false}
-        popoverTriangleComponent={false}
       />
       {/* [Velt] Comments sidebar panel */}
-      <VeltCommentsSidebar />
+      <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />
     </>
   );

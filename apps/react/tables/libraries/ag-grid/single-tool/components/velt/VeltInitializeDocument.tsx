@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import { useSetDocuments } from '@veltdev/react'; // [Velt]
+import { useSetDocuments } from '@veltdev/react';
 import { useCurrentDocument } from '@/app/document/useCurrentDocument';
 import { useAppUser } from '@/app/userAuth/useAppUser';
 

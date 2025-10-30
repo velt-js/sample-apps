@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState, useRef } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react'; // [Velt]
+import { VeltComments, useVeltClient } from '@veltdev/react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -66,13 +66,6 @@ export const TableComponent: React.FC = () => {
         return rowData;
     }
   }, [viewType, rowData]);
-
-  // Initialize Velt
-  useEffect(() => {
-    if (client) {
-      client.getCommentElement().disableCommentPinHighlighter();
-    }
-  }, [client]);
 
   // TanStack Table sorting state
   const [sorting, setSorting] = useState<SortingState>([{ id: 'date', desc: false }]);
@@ -316,13 +309,6 @@ export const TableComponent: React.FC = () => {
   return (
     <div style={styles.container}>
       <Breadcrumb />
-
-      <VeltComments
-        popoverTriangleComponent={true}
-        popoverMode={true}
-        shadowDom={false}
-        textMode={false}
-      />
 
       <div style={styles.tableContainer}>
         <ViewToggle

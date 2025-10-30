@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
 import { CellFormatting, ViewType, TableData } from '../types';
 import { getCellFormattingKey, generateCommentContext } from '../utils';
 
@@ -29,68 +30,15 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   // [Velt] Generate comment context - this is the primary identifier for aggregation
   const commentContext = generateCommentContext(data, columnId, viewType);
 
-  // [Velt] Add Velt comment tool and bubble to the cell
+  // [Velt] Set ID on parent table cell for comment context
   useEffect(() => {
     if (cellRef.current) {
       const parentCell = cellRef.current.closest('td');
-      if (parentCell) {
-        // Set ID on parent table cell
-        if (parentCell.id !== cellId) {
-          parentCell.id = cellId;
-        }
-
-        // [Velt] Check if comment tool already exists
-        let commentTool = parentCell.querySelector('velt-comment-tool');
-        if (!commentTool) {
-          // [Velt] Create and append comment tool directly to cell
-          commentTool = document.createElement('velt-comment-tool');
-          commentTool.setAttribute('context', JSON.stringify(commentContext));
-          commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-          commentTool.setAttribute('style', 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;');
-
-          // Append to cell
-          parentCell.appendChild(commentTool);
-        } else {
-          // [Velt] Update context if it changed
-          commentTool.setAttribute('context', JSON.stringify(commentContext));
-        }
-
-        // [Velt] Check if comment bubble already exists
-        let commentBubble = parentCell.querySelector('velt-comment-bubble');
-        if (!commentBubble) {
-          // [Velt] Create and append comment bubble directly to cell
-          commentBubble = document.createElement('velt-comment-bubble');
-          commentBubble.setAttribute('context', JSON.stringify(commentContext));
-          commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-          commentBubble.setAttribute('type', 'popover');
-          commentBubble.setAttribute('style', 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: auto;');
-
-          // Append to cell
-          parentCell.appendChild(commentBubble);
-        } else {
-          // [Velt] Update context if it changed
-          commentBubble.setAttribute('context', JSON.stringify(commentContext));
-        }
+      if (parentCell && parentCell.id !== cellId) {
+        parentCell.id = cellId;
       }
     }
-
-    return () => {
-      // [Velt] Cleanup: remove comment tool and bubble when cell is destroyed
-      if (cellRef.current) {
-        const parentCell = cellRef.current.closest('td');
-        if (parentCell) {
-          const commentTool = parentCell.querySelector('velt-comment-tool');
-          if (commentTool) {
-            commentTool.remove();
-          }
-          const commentBubble = parentCell.querySelector('velt-comment-bubble');
-          if (commentBubble) {
-            commentBubble.remove();
-          }
-        }
-      }
-    };
-  }, [cellId, commentContext]);
+  }, [cellId]);
 
   // Update content when value changes (only when not editing)
   useEffect(() => {
@@ -160,6 +108,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
     outline: 'none',
     cursor: isEditing ? 'text' : 'default',
     userSelect: isEditing ? 'text' : 'none',
+    position: 'relative',
   };
 
   return (
@@ -175,6 +124,32 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
         style={{ outline: 'none', minWidth: '20px' }}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
+      />
+      {/* [Velt] Comment tool - automatically shows/hides based on comments */}
+      <VeltCommentTool
+        context={commentContext}
+        contextOptions={{ partialMatch: true }}
+        style={{
+          position: 'absolute',
+          right: '4px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 1,
+        }}
+      />
+      {/* [Velt] Comment bubble - automatically shows/hides based on comments */}
+      <VeltCommentBubble
+        context={commentContext}
+        contextOptions={{ partialMatch: true }}
+        type="popover"
+        style={{
+          position: 'absolute',
+          right: '4px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 2,
+          pointerEvents: 'auto',
+        }}
       />
     </div>
   );

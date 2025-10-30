@@ -1,5 +1,5 @@
 "use client";
-import { VeltSidebarButtonWireframe } from '@veltdev/react'; // [Velt]
+import { VeltSidebarButtonWireframe } from '@veltdev/react'; 
 
 const inboxIcon = "/icons/inbox-icon.svg";
 

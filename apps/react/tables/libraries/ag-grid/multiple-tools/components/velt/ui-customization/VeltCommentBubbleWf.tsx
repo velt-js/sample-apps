@@ -1,5 +1,5 @@
 "use client";
-import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react'; // [Velt]
+import { VeltCommentBubbleWireframe, VeltIf } from '@veltdev/react'; 
 
 const VeltCommentBubbleWf = () => {
   return (

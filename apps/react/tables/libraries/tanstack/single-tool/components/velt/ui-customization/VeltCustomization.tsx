@@ -1,5 +1,5 @@
 "use client";
-import { VeltWireframe } from "@veltdev/react"; // [Velt]
+import { VeltWireframe } from "@veltdev/react"; 
 import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
 import VeltCommentToolWf from "./VeltCommentToolWf";
 import VeltNotificationsToolWf from "./VeltNotificationsToolWf";

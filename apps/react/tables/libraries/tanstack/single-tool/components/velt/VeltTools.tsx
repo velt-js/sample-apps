@@ -4,7 +4,7 @@ import {
   VeltSidebarButton,
   VeltNotificationsTool,
   VeltCommentTool,
-} from "@veltdev/react"; // [Velt]
+} from "@veltdev/react";
 
 function VeltTools() {
   return (
