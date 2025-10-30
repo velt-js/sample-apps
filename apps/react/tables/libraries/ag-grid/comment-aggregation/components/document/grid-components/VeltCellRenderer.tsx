@@ -50,7 +50,6 @@ export const createVeltCellRenderer = (
   return (
     <div style={containerStyle}>
       <span style={textStyle}>{props.value}</span>
-      // [Velt] Comment tool - automatically shows/hides based on comments
       <VeltCommentTool
         context={commentContext}
         contextOptions={{ partialMatch: true }}
@@ -62,11 +61,9 @@ export const createVeltCellRenderer = (
           zIndex: 1,
         }}
       />
-      // [Velt] Comment bubble - automatically shows/hides based on comments
       <VeltCommentBubble
         context={commentContext}
         contextOptions={{ partialMatch: true }}
-        type="popover"
         style={{
           position: 'absolute',
           right: '4px',

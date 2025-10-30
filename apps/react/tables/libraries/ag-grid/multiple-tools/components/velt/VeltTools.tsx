@@ -9,13 +9,9 @@ import {
 function VeltTools() {
   return (
     <>
-      // [Velt] Show online users
       <VeltPresence />
-      // [Velt] Toggle comments sidebar
       <VeltSidebarButton />
-      // [Velt] Add comment tool
       <VeltCommentTool />
-      // [Velt] Notifications panel
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}

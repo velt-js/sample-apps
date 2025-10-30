@@ -84,7 +84,6 @@ export function SimpleNode({ data }: NodeProps) {
         {label}
       </p>
 
-      // [Velt] Comment bubble shows comment count, Comment tool lets users add comments
       <div
         style={{
           marginLeft: 'auto',
