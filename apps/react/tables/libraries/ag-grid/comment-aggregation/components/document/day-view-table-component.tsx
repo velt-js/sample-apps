@@ -130,7 +130,7 @@ export const TableComponent: React.FC = () => {
       width: 50,
       pinned: 'left' as const,
       lockPosition: true,
-      suppressMenu: true,
+      suppressHeaderMenuButton: true,
       sortable: false,
       editable: false,
       cellRenderer: RowNumberRenderer,
