@@ -3,7 +3,7 @@ import { useMemo, useEffect, useState, useRef } from 'react';
 
 // [Velt] Minimal hard-coded current document hook
 export type CurrentDocument = {
-  documentId: string;
+  documentId: string | null;
   documentName: string;
 };
 

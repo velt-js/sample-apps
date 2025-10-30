@@ -2,7 +2,7 @@
 import { useMemo, useEffect, useState, useRef } from 'react';
 
 export type CurrentDocument = {
-  documentId: string;
+  documentId: string | null;
   documentName: string;
 };
 
