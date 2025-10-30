@@ -50,7 +50,6 @@ const VeltNotificationsToolWf = () => {
             flexShrink: 0
           }}
         >
-          // [Velt] Display unread notification count
           <VeltNotificationsToolWireframe.UnreadCount />
         </div>
       </div>

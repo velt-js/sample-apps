@@ -51,7 +51,6 @@ const VeltSidebarButtonWf = () => {
             flexShrink: 0
           }}
         >
-          // [Velt] Display total comments count
           <VeltSidebarButtonWireframe.CommentsCount />
         </div>
       </div>

@@ -96,7 +96,7 @@ export default function Sidebar() {
                   lineHeight: "14px",
                 }}
               >
-                Bingo's Workspace
+                Bingo&apos;s Workspace
               </span>
             </div>
 

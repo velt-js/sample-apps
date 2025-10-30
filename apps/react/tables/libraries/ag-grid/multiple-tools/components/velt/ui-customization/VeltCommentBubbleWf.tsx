@@ -64,7 +64,6 @@ const VeltCommentBubbleWf = () => {
                 flexShrink: 0
               }}
             >
-              // [Velt] Display comment count
               <VeltCommentBubbleWireframe.CommentsCount />
             </p>
           </div>

@@ -4,11 +4,12 @@ import { getCellFormattingKey } from '../utils';
 
 export const createVeltCellRenderer = (
   cellFormatting: Record<string, CellFormatting>,
-  documentId: string
-) => (props: any) => {
+  documentId: string | null
+) => {
+  const VeltCellRenderer = (props: any) => {
   const cellId = `cell-${props.data.id}-${props.colDef.field}`;
   // [Velt] Create a stable location ID based on logical data row, not DOM position
-  const locationId = `${documentId}-row-${props.data.id}-${props.colDef.field}`;
+  const locationId = `${documentId || 'doc'}-row-${props.data.id}-${props.colDef.field}`;
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
 
@@ -46,4 +47,8 @@ export const createVeltCellRenderer = (
       <span style={textStyle}>{props.value}</span>
     </div>
   );
+  };
+
+  VeltCellRenderer.displayName = 'VeltCellRenderer';
+  return VeltCellRenderer;
 };

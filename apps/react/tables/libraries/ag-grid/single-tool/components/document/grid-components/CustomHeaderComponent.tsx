@@ -11,7 +11,8 @@ interface CustomHeaderComponentProps {
 export const createCustomHeaderComponent = (
   localSortState: SortState | null,
   setLocalSortState: React.Dispatch<React.SetStateAction<SortState | null>>
-) => (props: any) => {
+) => {
+  const CustomHeaderComponent = (props: any) => {
   const title = COLUMN_TITLES[props.column.colId] || '';
 
   const handleSort = () => {
@@ -62,4 +63,8 @@ export const createCustomHeaderComponent = (
       </span>
     </div>
   );
+  };
+
+  CustomHeaderComponent.displayName = 'CustomHeaderComponent';
+  return CustomHeaderComponent;
 };
