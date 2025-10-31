@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState, useRef } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -25,8 +24,6 @@ import { useTableState } from './hooks/useTableState';
 import { TableData } from './types';
 
 export const TableComponent: React.FC = () => {
-  // [Velt] Get Velt client instance
-  const { client } = useVeltClient();
   const {
     selectedCell,
     setSelectedCell,

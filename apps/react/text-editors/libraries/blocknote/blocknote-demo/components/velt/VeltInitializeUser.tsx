@@ -50,5 +50,5 @@ export function useVeltAuthProvider() {
     };
   }, [user]);
 
-  return { authProvider, user };
+  return { authProvider };
 }

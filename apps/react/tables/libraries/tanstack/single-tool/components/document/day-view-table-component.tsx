@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState, useRef } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
+import { useVeltClient } from '@veltdev/react';
 import {
   useReactTable,
   getCoreRowModel,

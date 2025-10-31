@@ -7,10 +7,10 @@ import DocumentCanvas from '@/components/document/document-canvas'
 
 export default function Home() {
   // [Velt] Auth provider (reads from app/userAuth/useAppUser)
-  const { authProvider, user } = useVeltAuthProvider();
+  const { authProvider } = useVeltAuthProvider();
 
   // [Velt] Wait for user to be initialized before rendering Velt
-  if (!user || !authProvider) {
+  if (!authProvider) {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>
         Initializing...

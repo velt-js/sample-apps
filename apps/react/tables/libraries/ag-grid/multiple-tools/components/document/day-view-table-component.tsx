@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import './day-view-table-component.css';
@@ -22,8 +21,6 @@ import { styles } from './styles';
 import { useTableState } from './hooks/useTableState';
 
 export const TableComponent: React.FC = () => {
-  // [Velt] Get Velt client instance
-  const { client } = useVeltClient();
   const {
     selectedCell,
     setSelectedCell,

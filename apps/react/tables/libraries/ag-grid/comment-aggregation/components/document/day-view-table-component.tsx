@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
-import { VeltComments, useVeltClient } from '@veltdev/react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { useSidebar } from '@/components/sidebar/SidebarContext';
@@ -24,7 +23,6 @@ import { useTableState } from './hooks/useTableState';
 import { ViewType } from './types';
 
 export const TableComponent: React.FC = () => {
-  const { client } = useVeltClient();
   const { isCollapsed } = useSidebar();
   const [viewType, setViewType] = useState<ViewType>('day');
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
