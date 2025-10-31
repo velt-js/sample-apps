@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
-import '../ui-customization/styles.css'
+import '../components/velt/ui-customization/styles.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
 export const metadata: Metadata = {

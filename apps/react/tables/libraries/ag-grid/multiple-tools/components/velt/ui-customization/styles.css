@@ -18,6 +18,12 @@ velt-comment-dialog [part="triangle-fill"] {
   fill: rgb(255, 205, 46) !important;
 }
 
+/* Target the SVG triangle directly */
+velt-comment-dialog svg[class*="triangle"] path {
+  fill: rgb(255, 205, 46) !important;
+  stroke: rgb(255, 205, 46) !important;
+}
+
 /* Theme Configuration - Based on Figma Design */
 
 /* Typography */

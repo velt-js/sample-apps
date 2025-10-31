@@ -24,13 +24,7 @@ export function VeltCollaboration() {
     }
   }, [client]);
 
-  // [Velt] Disable comment pin highlighter
-  useEffect(() => {
-    if (client) {
-      client.getCommentElement().disableCommentPinHighlighter();
-    }
-  }, [client]);
-
+ 
   const groupConfig = {
     enable: false
   };
