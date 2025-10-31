@@ -26,21 +26,20 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   const cellKey = getCellFormattingKey(data.id, columnId);
   const formatting = cellFormatting[cellKey] || {};
 
-  // Create a stable location ID based on logical data row, not DOM position
-  const locationId = `${documentId}-row-${data.id}-${columnId}`;
-
-  // Set ID and location ID on parent table cell element
+  // Set ID and attributes on parent table cell element
   useEffect(() => {
     if (cellRef.current) {
       const parentCell = cellRef.current.closest('td');
       if (parentCell) {
-        // Set both the element ID and the Velt location ID
-        // The location ID is stable and based on data row, not DOM position
+        // [Velt] Set the element ID
         parentCell.id = cellId;
-        parentCell.setAttribute('data-velt-location-id', locationId);
+        // [Velt] For single-tool pattern: add data-velt-target-comment-element-id
+        // This allows the single comment tool to attach comments to this specific cell
+        // Both id and data-velt-target-comment-element-id must have the same value
+        parentCell.setAttribute('data-velt-target-comment-element-id', cellId);
       }
     }
-  }, [cellId, locationId]);
+  }, [cellId]);
 
   // Update content when value changes (only when not editing)
   useEffect(() => {

@@ -8,20 +8,20 @@ export const createVeltCellRenderer = (
 ) => {
   const VeltCellRenderer = (props: any) => {
   const cellId = `cell-${props.data.id}-${props.colDef.field}`;
-  // [Velt] Create a stable location ID based on logical data row, not DOM position
-  const locationId = `${documentId || 'doc'}-row-${props.data.id}-${props.colDef.field}`;
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
 
-  // [Velt] Set ID and location ID on parent AG Grid cell element
+  // [Velt] Set ID and attributes on parent AG Grid cell element
   React.useEffect(() => {
     if (props.eGridCell) {
-      // [Velt] Set both the element ID and the Velt location ID
-      // The location ID is stable and based on data row, not DOM position
+      // [Velt] Set the element ID
       props.eGridCell.id = cellId;
-      props.eGridCell.setAttribute('data-velt-location-id', locationId);
+      // [Velt] For single-tool pattern: add data-velt-target-comment-element-id
+      // This allows the single comment tool to attach comments to this specific cell
+      // Both id and data-velt-target-comment-element-id must have the same value
+      props.eGridCell.setAttribute('data-velt-target-comment-element-id', cellId);
     }
-  }, [cellId, locationId, props.eGridCell]);
+  }, [cellId, props.eGridCell]);
 
   const textStyle: React.CSSProperties = {
     fontWeight: formatting.bold ? 'bold' : 'normal',
