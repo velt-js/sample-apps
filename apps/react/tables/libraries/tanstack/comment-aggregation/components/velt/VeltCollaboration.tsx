@@ -17,14 +17,6 @@ export function VeltCollaboration() {
     }
   }, [isUserLoggedIn, client]);
 
-  // [Velt] Enable dark mode
-  useEffect(() => {
-    if (client) {
-      client.setDarkMode(true);
-    }
-  }, [client]);
-
- 
   const groupConfig = {
     enable: false
   };
