@@ -9,6 +9,7 @@ import {
   imgTablerIconBold,
   imgTablerIconItalic,
   imgTablerIconUnderline,
+  imgTablerIconStrikethrough,
   imgTablerIconH1,
   imgTablerIconH2,
   imgTablerIconH3,
@@ -55,6 +56,12 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
           alt="Italic"
           active={editor.isActive('italic')}
           onClick={() => editor.chain().focus().toggleItalic().run()}
+        />
+        <ToolbarButton
+          icon={imgTablerIconStrikethrough}
+          alt="Strikethrough"
+          active={editor.isActive('strike')}
+          onClick={() => editor.chain().focus().toggleStrike().run()}
         />
         <ToolbarButton
           icon={imgTablerIconUnderline}
