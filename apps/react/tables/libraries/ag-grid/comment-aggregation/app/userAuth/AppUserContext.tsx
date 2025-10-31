@@ -146,10 +146,14 @@ export function AppUserProvider({
     } catch {}
   }, []);
 
+  // Memoize the context value to prevent unnecessary re-renders
+  const contextValue = React.useMemo(
+    () => ({ user, login, logout, isUserLoggedIn }),
+    [user, login, logout, isUserLoggedIn]
+  );
+
   return (
-    <AppUserContext.Provider
-      value={{ user, login, logout, isUserLoggedIn }}
-    >
+    <AppUserContext.Provider value={contextValue}>
       {children}
     </AppUserContext.Provider>
   );
