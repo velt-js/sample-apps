@@ -7,7 +7,7 @@ velt-comment-dialog::part(triangle-fill) {
   fill: rgb(255, 205, 46) !important;
 }
 
-/* Additional targeting for Velt triangle */
+/* [Velt] Additional targeting for Velt triangle */
 velt-comment-dialog [part="triangle"],
 velt-comment-dialog [part="triangle-fill"] {
   border-color: rgb(255, 205, 46) !important;

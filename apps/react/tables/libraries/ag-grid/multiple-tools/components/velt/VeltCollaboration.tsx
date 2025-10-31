@@ -7,7 +7,6 @@ import { useAppUser } from "@/app/userAuth/AppUserContext";
 
 export function VeltCollaboration() {
   const { isUserLoggedIn } = useAppUser();
-  // [Velt] Get Velt client instance
   const { client } = useVeltClient();
 
   // [Velt] Sign out user when user logs out, getting user login state from host app

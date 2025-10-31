@@ -18,7 +18,7 @@ export const createVeltCellRenderer = (
       props.eGridCell.id = cellId;
       // [Velt] For single-tool pattern: add data-velt-target-comment-element-id
       // This allows the single comment tool to attach comments to this specific cell
-      // Both id and data-velt-target-comment-element-id must have the same value
+      // [Velt] Both id and data-velt-target-comment-element-id must have the same value
       props.eGridCell.setAttribute('data-velt-target-comment-element-id', cellId);
     }
   }, [cellId, props.eGridCell]);

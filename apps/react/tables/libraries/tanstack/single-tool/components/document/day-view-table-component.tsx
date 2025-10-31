@@ -40,14 +40,14 @@ export const TableComponent: React.FC = () => {
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
-  // Initialize Velt
+  // [Velt] Initialize Velt
   useEffect(() => {
     if (client) {
       const commentElement = client.getCommentElement();
       commentElement.disableCommentPinHighlighter();
 
-      // Location-based comments are enabled automatically via data-velt-location-id attribute
-      // Velt will prioritize location IDs when the attribute is present on elements
+      // [Velt] Location-based comments are enabled automatically via data-velt-location-id attribute
+      // [Velt] Velt will prioritize location IDs when the attribute is present on elements
     }
   }, [client]);
 

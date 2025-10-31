@@ -48,7 +48,7 @@ export const TableComponent: React.FC = () => {
       commentElement.disableCommentPinHighlighter();
 
       // [Velt] Location-based comments are enabled automatically via data-velt-location-id attribute
-      // Velt will prioritize location IDs when the attribute is present on elements
+      // [Velt] Velt will prioritize location IDs when the attribute is present on elements
     }
   }, [client]);
 
@@ -97,7 +97,7 @@ export const TableComponent: React.FC = () => {
     return createCustomHeaderComponent(localSortState, setLocalSortState);
   }, [localSortState]);
 
-  // Cell Renderer with Velt formatting
+  // [Velt] Cell Renderer with Velt formatting
   const veltCellRenderer = useMemo(() => {
     return createVeltCellRenderer(cellFormatting, documentId);
   }, [cellFormatting, documentId]);
@@ -207,10 +207,10 @@ export const TableComponent: React.FC = () => {
     setSortState(sortedColumn ? { colId: sortedColumn.colId, sort: sortedColumn.sort } : null);
 
     // Trigger a small delay to allow DOM to stabilize after sorting
-    // This helps ensure location IDs are properly reassigned before Velt processes them
+    // [Velt] This helps ensure location IDs are properly reassigned before Velt processes them
     if (client) {
       setTimeout(() => {
-        // Force Velt to re-index comments after sort completes
+        // [Velt] Force Velt to re-index comments after sort completes
         const commentElement = client.getCommentElement();
         const reprocess = (commentElement as unknown as { reprocessComments?: () => void })
           .reprocessComments;

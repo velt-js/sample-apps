@@ -9,7 +9,7 @@ export default function Home() {
   // [Velt] Auth provider (reads from app/userAuth/useAppUser)
   const { authProvider, user } = useVeltAuthProvider();
 
-  // Wait for user to be initialized before rendering Velt
+  // [Velt] Wait for user to be initialized before rendering Velt
   if (!user || !authProvider) {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>

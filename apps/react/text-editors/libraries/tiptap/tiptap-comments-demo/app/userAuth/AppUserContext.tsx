@@ -21,8 +21,8 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
  * // Get your authenticated user from your auth system
  * const currentUser = await yourAuthSystem.getCurrentUser();
  *
- * // Pass it to Velt
- * await client.identify(currentUser);
+ * // Pass it to Velt via authProvider (see VeltInitializeUser.tsx for full implementation)
+ * const authProvider: VeltAuthProvider = { user: currentUser, generateToken: ... };
  * ```
  *
  * The random user generation and storage logic here is purely for demo convenience

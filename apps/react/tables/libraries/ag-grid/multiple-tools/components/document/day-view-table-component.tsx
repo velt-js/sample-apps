@@ -84,7 +84,7 @@ export const TableComponent: React.FC = () => {
     return createCustomHeaderComponent(localSortState, setLocalSortState);
   }, [localSortState]);
 
-  // Cell Renderer with Velt formatting
+  // [Velt] Cell Renderer with Velt formatting
   const veltCellRenderer = useMemo(() => {
     return createVeltCellRenderer(cellFormatting);
   }, [cellFormatting]);
