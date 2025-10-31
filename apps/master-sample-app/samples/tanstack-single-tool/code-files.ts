@@ -15,7 +15,6 @@ export const codeFiles: SampleCodeFile[] = [
   { path: 'apps/react/tables/libraries/tanstack/single-tool/components/velt/VeltTools.tsx', language: 'typescript' },
   { path: 'apps/react/tables/libraries/tanstack/single-tool/components/velt/ui-customization/VeltCustomization.tsx', language: 'typescript' },
   { path: 'apps/react/tables/libraries/tanstack/single-tool/components/velt/ui-customization/VeltCommentToolWf.tsx', language: 'typescript' },
-  { path: 'apps/react/tables/libraries/tanstack/single-tool/components/velt/ui-customization/VeltCommentBubbleWf.tsx', language: 'typescript' },
   { path: 'apps/react/tables/libraries/tanstack/single-tool/components/velt/ui-customization/VeltSidebarButtonWf.tsx', language: 'typescript' },
   { path: 'apps/react/tables/libraries/tanstack/single-tool/components/velt/ui-customization/VeltNotificationsToolWf.tsx', language: 'typescript' },
   { path: 'apps/react/tables/libraries/tanstack/single-tool/components/document/document-canvas.tsx', language: 'typescript' },

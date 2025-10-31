@@ -58,10 +58,6 @@ export const codeFiles: SampleCodeFile[] = [
     language: 'typescript'
   },
   {
-    path: 'apps/react/text-editors/libraries/tiptap/tiptap-comments-demo/components/velt/ui-customization/VeltCommentBubbleWf.tsx',
-    language: 'typescript'
-  },
-  {
     path: 'apps/react/text-editors/libraries/tiptap/tiptap-comments-demo/components/velt/ui-customization/VeltCommentToolWf.tsx',
     language: 'typescript'
   },
