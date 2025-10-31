@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
 import { CellFormatting, ViewType, TableData } from '../types';
 import { getCellFormattingKey, generateCommentContext } from '../utils';
 
@@ -30,15 +29,87 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   // [Velt] Generate comment context - this is the primary identifier for aggregation
   const commentContext = generateCommentContext(data, columnId, viewType);
 
-  // [Velt] Set ID on parent table cell for comment context
+  // [Velt] Set ID on parent table cell and add comment tool + bubble for aggregation
   useEffect(() => {
     if (cellRef.current) {
       const parentCell = cellRef.current.closest('td');
-      if (parentCell && parentCell.id !== cellId) {
-        parentCell.id = cellId;
+      if (parentCell) {
+        // Set the element ID
+        if (parentCell.id !== cellId) {
+          parentCell.id = cellId;
+        }
+
+        // [Velt] Check if comment tool already exists
+        let commentTool = parentCell.querySelector('velt-comment-tool') as HTMLElement | null;
+        if (!commentTool) {
+          // [Velt] Create and append comment tool directly to cell
+          commentTool = document.createElement('velt-comment-tool') as HTMLElement;
+          commentTool.setAttribute('target-comment-element-id', cellId);
+
+          // [Velt] Set context for aggregation
+          if (commentContext) {
+            commentTool.setAttribute('context', JSON.stringify(commentContext));
+            commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+          }
+
+          commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
+
+          // Append to cell (as direct child of td)
+          parentCell.appendChild(commentTool);
+        } else {
+          // Update attributes if they changed
+          if (commentTool.getAttribute('target-comment-element-id') !== cellId) {
+            commentTool.setAttribute('target-comment-element-id', cellId);
+          }
+          if (commentContext) {
+            commentTool.setAttribute('context', JSON.stringify(commentContext));
+            commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+          }
+        }
+
+        // [Velt] Check if comment bubble already exists
+        let commentBubble = parentCell.querySelector('velt-comment-bubble') as HTMLElement | null;
+        if (!commentBubble) {
+          // [Velt] Create and append comment bubble directly to cell for aggregation display
+          commentBubble = document.createElement('velt-comment-bubble') as HTMLElement;
+
+          // [Velt] Set context for aggregation
+          if (commentContext) {
+            commentBubble.setAttribute('context', JSON.stringify(commentContext));
+            commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+          }
+
+          commentBubble.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: auto;';
+
+          // Append to cell (as direct child of td)
+          parentCell.appendChild(commentBubble);
+        } else {
+          // Update context if it changed
+          if (commentContext) {
+            commentBubble.setAttribute('context', JSON.stringify(commentContext));
+            commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+          }
+        }
       }
     }
-  }, [cellId]);
+
+    return () => {
+      // [Velt] Cleanup: remove comment tool and bubble when cell is destroyed
+      if (cellRef.current) {
+        const parentCell = cellRef.current.closest('td');
+        if (parentCell) {
+          const commentTool = parentCell.querySelector('velt-comment-tool');
+          if (commentTool) {
+            commentTool.remove();
+          }
+          const commentBubble = parentCell.querySelector('velt-comment-bubble');
+          if (commentBubble) {
+            commentBubble.remove();
+          }
+        }
+      }
+    };
+  }, [cellId, commentContext]);
 
   // Update content when value changes (only when not editing)
   useEffect(() => {
@@ -108,7 +179,6 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
     outline: 'none',
     cursor: isEditing ? 'text' : 'default',
     userSelect: isEditing ? 'text' : 'none',
-    position: 'relative',
   };
 
   return (
@@ -124,29 +194,6 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
         style={{ outline: 'none', minWidth: '20px' }}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
-      />
-      <VeltCommentTool
-        context={commentContext}
-        contextOptions={{ partialMatch: true }}
-        style={{
-          position: 'absolute',
-          right: '4px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 1,
-        }}
-      />
-      <VeltCommentBubble
-        context={commentContext}
-        contextOptions={{ partialMatch: true }}
-        style={{
-          position: 'absolute',
-          right: '4px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 2,
-          pointerEvents: 'auto',
-        }}
       />
     </div>
   );

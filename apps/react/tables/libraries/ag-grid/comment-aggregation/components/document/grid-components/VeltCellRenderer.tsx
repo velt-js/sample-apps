@@ -1,5 +1,4 @@
 import React from 'react';
-import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
 import { CellFormatting, ViewType } from '../types';
 import { getCellFormattingKey, generateCommentContext } from '../utils';
 
@@ -18,14 +17,80 @@ export const createVeltCellRenderer = (
     viewType
   );
 
-  // [Velt] Set ID on parent AG Grid cell element
+  // [Velt] Set ID on parent AG Grid cell element and add comment tool + bubble for aggregation
   React.useEffect(() => {
     if (props.eGridCell) {
       if (props.eGridCell.id !== cellId) {
         props.eGridCell.id = cellId;
       }
+
+      // [Velt] Check if comment tool already exists
+      let commentTool = props.eGridCell.querySelector('velt-comment-tool');
+      if (!commentTool) {
+        // [Velt] Create and append comment tool directly to cell
+        commentTool = document.createElement('velt-comment-tool');
+        commentTool.setAttribute('target-comment-element-id', cellId);
+
+        // [Velt] Set context for aggregation
+        if (commentContext) {
+          commentTool.setAttribute('context', JSON.stringify(commentContext));
+          commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+        }
+
+        commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
+
+        // Append to cell (outside ag-cell-wrapper)
+        props.eGridCell.appendChild(commentTool);
+      } else {
+        // [Velt] Update attributes if they changed
+        if (commentTool.getAttribute('target-comment-element-id') !== cellId) {
+          commentTool.setAttribute('target-comment-element-id', cellId);
+        }
+        if (commentContext) {
+          commentTool.setAttribute('context', JSON.stringify(commentContext));
+          commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+        }
+      }
+
+      // [Velt] Check if comment bubble already exists
+      let commentBubble = props.eGridCell.querySelector('velt-comment-bubble');
+      if (!commentBubble) {
+        // [Velt] Create and append comment bubble directly to cell for aggregation display
+        commentBubble = document.createElement('velt-comment-bubble');
+
+        // [Velt] Set context for aggregation
+        if (commentContext) {
+          commentBubble.setAttribute('context', JSON.stringify(commentContext));
+          commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+        }
+
+        commentBubble.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: auto;';
+
+        // Append to cell (outside ag-cell-wrapper)
+        props.eGridCell.appendChild(commentBubble);
+      } else {
+        // [Velt] Update context if it changed
+        if (commentContext) {
+          commentBubble.setAttribute('context', JSON.stringify(commentContext));
+          commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
+        }
+      }
     }
-  }, [cellId, props.eGridCell]);
+
+    return () => {
+      // [Velt] Cleanup: remove comment tool and bubble when cell is destroyed
+      if (props.eGridCell) {
+        const commentTool = props.eGridCell.querySelector('velt-comment-tool');
+        if (commentTool) {
+          commentTool.remove();
+        }
+        const commentBubble = props.eGridCell.querySelector('velt-comment-bubble');
+        if (commentBubble) {
+          commentBubble.remove();
+        }
+      }
+    };
+  }, [cellId, props.eGridCell, commentContext]);
 
   const textStyle: React.CSSProperties = {
     fontWeight: formatting.bold ? 'bold' : 'normal',
@@ -44,35 +109,11 @@ export const createVeltCellRenderer = (
     height: '100%',
     padding: '4px 12px 4px 12px',
     textAlign: formatting.align || 'left',
-    position: 'relative',
   };
 
   return (
     <div style={containerStyle}>
       <span style={textStyle}>{props.value}</span>
-      <VeltCommentTool
-        context={commentContext}
-        contextOptions={{ partialMatch: true }}
-        style={{
-          position: 'absolute',
-          right: '4px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 1,
-        }}
-      />
-      <VeltCommentBubble
-        context={commentContext}
-        contextOptions={{ partialMatch: true }}
-        style={{
-          position: 'absolute',
-          right: '4px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 2,
-          pointerEvents: 'auto',
-        }}
-      />
     </div>
   );
 };

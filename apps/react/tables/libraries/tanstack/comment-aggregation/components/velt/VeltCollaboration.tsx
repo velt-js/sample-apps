@@ -39,7 +39,7 @@ export function VeltCollaboration() {
     <>
       <VeltInitializeDocument />
       <VeltComments
-        popoverTriangleComponent={true}
+        popoverTriangleComponent={false}
         popoverMode={true}
         shadowDom={false}
         textMode={false}
