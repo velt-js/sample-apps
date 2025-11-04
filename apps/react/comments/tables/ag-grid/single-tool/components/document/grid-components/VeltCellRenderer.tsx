@@ -26,10 +26,11 @@ export const createVeltCellRenderer = (
       formatting.underline ? 'underline' : '',
       formatting.strikethrough ? 'line-through' : '',
     ].filter(Boolean).join(' ') || 'none',
-    paddingLeft: '12px',
   };
 
   return (
-    <span style={textStyle}>{props.value}</span>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', height: '100%' }}>
+      <span style={{ ...textStyle, paddingLeft: '12px' }}>{props.value}</span>
+    </div>
   );
 };
