@@ -1,24 +1,16 @@
 import React from 'react';
+import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
 import { CellFormatting } from '../types';
 import { getCellFormattingKey } from '../utils';
 
 export const createVeltCellRenderer = (
-  cellFormatting: Record<string, CellFormatting>
-) => (props: any) => {
+  cellFormatting: Record<string, CellFormatting>,
+  documentId: string | null
+) => {
+  const VeltCellRenderer = (props: any) => {
   const cellId = `cell-${props.data.id}-${props.colDef.field}`;
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
-
-  // [Velt] Set ID and target attributes on AG Grid cell element for click-to-target comments
-  // Using useLayoutEffect for reliable DOM manipulation in both dev and production
-  React.useLayoutEffect(() => {
-    if (props.eGridCell) {
-      props.eGridCell.id = cellId;
-      // [Velt] For single-tool pattern with click-to-target: both id and data-velt-target-comment-element-id must match
-      // This allows users to click the comment tool and then click any cell to add a comment
-      props.eGridCell.setAttribute('data-velt-target-comment-element-id', cellId);
-    }
-  }, [cellId, props.eGridCell]);
 
   const textStyle: React.CSSProperties = {
     fontWeight: formatting.bold ? 'bold' : 'normal',
@@ -32,6 +24,14 @@ export const createVeltCellRenderer = (
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', height: '100%' }}>
       <span style={{ ...textStyle, paddingLeft: '12px' }}>{props.value}</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', paddingRight: '8px' }}>
+        <VeltCommentTool targetElementId={cellId} />
+        <VeltCommentBubble targetElementId={cellId} />
+      </div>
     </div>
   );
+  };
+
+  VeltCellRenderer.displayName = 'VeltCellRenderer';
+  return VeltCellRenderer;
 };

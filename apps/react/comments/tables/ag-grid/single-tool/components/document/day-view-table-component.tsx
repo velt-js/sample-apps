@@ -21,10 +21,12 @@ import { Toolbar } from './ui-components/Toolbar';
 import { styles } from './styles';
 import { useTableState } from './hooks/useTableState';
 import { useSelectedCell } from './SelectedCellContext';
+import { useCurrentDocument } from '@/app/document/DocumentContext';
 
 export const TableComponent: React.FC = () => {
   // [Velt] Get Velt client instance
   const { client } = useVeltClient();
+  const { documentId } = useCurrentDocument();
   const { setSelectedCellId } = useSelectedCell();
   const {
     selectedCell,
@@ -99,8 +101,8 @@ export const TableComponent: React.FC = () => {
 
   // [Velt] Cell Renderer with Velt formatting
   const veltCellRenderer = useMemo(() => {
-    return createVeltCellRenderer(cellFormatting);
-  }, [cellFormatting]);
+    return createVeltCellRenderer(cellFormatting, documentId);
+  }, [cellFormatting, documentId]);
 
   // Column Definitions
   const columnDefs = useMemo(() => [
