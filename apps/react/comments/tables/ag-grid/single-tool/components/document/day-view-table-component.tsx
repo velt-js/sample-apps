@@ -23,6 +23,8 @@ import { useTableState } from './hooks/useTableState';
 import { useSelectedCell } from './SelectedCellContext';
 
 export const TableComponent: React.FC = () => {
+  // [Velt] Get Velt client instance
+  const { client } = useVeltClient();
   const { setSelectedCellId } = useSelectedCell();
   const {
     selectedCell,
@@ -38,6 +40,17 @@ export const TableComponent: React.FC = () => {
     setLocalSortState,
     toggleFormatting,
   } = useTableState();
+
+  // [Velt] Initialize Velt
+  useEffect(() => {
+    if (client) {
+      const commentElement = client.getCommentElement();
+      commentElement.disableCommentPinHighlighter();
+
+      // [Velt] Location-based comments are enabled automatically via data-velt-location-id attribute
+      // [Velt] Velt will prioritize location IDs when the attribute is present on elements
+    }
+  }, [client]);
 
   // Sync localSortState with sortState (when AG Grid updates)
   useEffect(() => {
