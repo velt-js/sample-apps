@@ -32,33 +32,31 @@ export const createVeltCellRenderer = (
   useEffect(() => {
     if (!isMounted || !props.eGridCell) return;
 
-    // Set cell ID if not already set
-    if (props.eGridCell.id !== cellId) {
-      props.eGridCell.id = cellId;
-    }
+    // Set cell ID
+    props.eGridCell.id = cellId;
 
-    // Create or reuse a dedicated portal container with a unique ID
-    const portalId = `velt-portal-${cellId}`;
-    let portal = props.eGridCell.querySelector(`#${portalId}`) as HTMLElement;
+    // [CRITICAL] Remove ALL existing portal containers from this cell first
+    // This is necessary because AG Grid reuses cell elements during virtualization
+    const existingPortals = props.eGridCell.querySelectorAll('.velt-portal-container');
+    existingPortals.forEach((oldPortal: Element) => {
+      if (oldPortal.parentNode) {
+        oldPortal.parentNode.removeChild(oldPortal);
+      }
+    });
 
-    if (!portal) {
-      portal = document.createElement('div');
-      portal.id = portalId;
-      portal.className = 'velt-portal-container';
-      portal.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 4px; pointer-events: auto; z-index: 2;';
-      props.eGridCell.appendChild(portal);
-    }
+    // Create a fresh portal container
+    const portal = document.createElement('div');
+    portal.id = `velt-portal-${cellId}`;
+    portal.className = 'velt-portal-container';
+    portal.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 4px; pointer-events: auto; z-index: 2;';
+    props.eGridCell.appendChild(portal);
 
     // Add hover listener to cell to show/hide comment tool
     const handleMouseEnter = () => {
-      if (portal) {
-        portal.setAttribute('data-hover', 'true');
-      }
+      portal.setAttribute('data-hover', 'true');
     };
     const handleMouseLeave = () => {
-      if (portal) {
-        portal.removeAttribute('data-hover');
-      }
+      portal.removeAttribute('data-hover');
     };
 
     props.eGridCell.addEventListener('mouseenter', handleMouseEnter);
@@ -68,8 +66,10 @@ export const createVeltCellRenderer = (
 
     return () => {
       // Clean up event listeners
-      props.eGridCell.removeEventListener('mouseenter', handleMouseEnter);
-      props.eGridCell.removeEventListener('mouseleave', handleMouseLeave);
+      if (props.eGridCell) {
+        props.eGridCell.removeEventListener('mouseenter', handleMouseEnter);
+        props.eGridCell.removeEventListener('mouseleave', handleMouseLeave);
+      }
 
       // Clean up the portal container when component unmounts
       if (portal && portal.parentNode) {
