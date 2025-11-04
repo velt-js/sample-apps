@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback } from 'react';
-import { useVeltClient } from '@veltdev/react';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import './day-view-table-component.css';
@@ -20,12 +19,10 @@ import { ViewToggle } from './ui-components/ViewToggle';
 import { Toolbar } from './ui-components/Toolbar';
 import { styles } from './styles';
 import { useTableState } from './hooks/useTableState';
-import { useCurrentDocument } from '@/app/document/DocumentContext';
+import { useSelectedCell } from './SelectedCellContext';
 
 export const TableComponent: React.FC = () => {
-  // [Velt] Get Velt client instance
-  const { client } = useVeltClient();
-  const { documentId } = useCurrentDocument();
+  const { setSelectedCellId } = useSelectedCell();
   const {
     selectedCell,
     setSelectedCell,
@@ -40,17 +37,6 @@ export const TableComponent: React.FC = () => {
     setLocalSortState,
     toggleFormatting,
   } = useTableState();
-
-  // [Velt] Initialize Velt settings
-  useEffect(() => {
-    if (client) {
-      const commentElement = client.getCommentElement();
-      commentElement.disableCommentPinHighlighter();
-
-      // [Velt] Location-based comments are enabled automatically via data-velt-location-id attribute
-      // [Velt] Velt will prioritize location IDs when the attribute is present on elements
-    }
-  }, [client]);
 
   // Sync localSortState with sortState (when AG Grid updates)
   useEffect(() => {
@@ -99,8 +85,8 @@ export const TableComponent: React.FC = () => {
 
   // [Velt] Cell Renderer with Velt formatting
   const veltCellRenderer = useMemo(() => {
-    return createVeltCellRenderer(cellFormatting, documentId);
-  }, [cellFormatting, documentId]);
+    return createVeltCellRenderer(cellFormatting);
+  }, [cellFormatting]);
 
   // Column Definitions
   const columnDefs = useMemo(() => [
@@ -205,21 +191,7 @@ export const TableComponent: React.FC = () => {
     const columnState = params.api.getColumnState();
     const sortedColumn = columnState.find((col: any) => col.sort !== null);
     setSortState(sortedColumn ? { colId: sortedColumn.colId, sort: sortedColumn.sort } : null);
-
-    // Trigger a small delay to allow DOM to stabilize after sorting
-    // [Velt] This helps ensure location IDs are properly reassigned before Velt processes them
-    if (client) {
-      setTimeout(() => {
-        // [Velt] Force Velt to re-index comments after sort completes
-        const commentElement = client.getCommentElement();
-        const reprocess = (commentElement as unknown as { reprocessComments?: () => void })
-          .reprocessComments;
-        if (typeof reprocess === 'function') {
-          reprocess.call(commentElement);
-        }
-      }, 100);
-    }
-  }, [client]);
+  }, []);
 
   const onCellClicked = useCallback((params: any) => {
     if (params.data) {
@@ -227,8 +199,11 @@ export const TableComponent: React.FC = () => {
         row: params.data.id,
         col: params.colDef.field,
       });
+      // [Velt] Update selected cell ID for global comment tool
+      const cellId = `cell-${params.data.id}-${params.colDef.field}`;
+      setSelectedCellId(cellId);
     }
-  }, []);
+  }, [setSelectedCellId]);
 
   const onCellValueChanged = useCallback((params: any) => {
     setRowData(prevData => {

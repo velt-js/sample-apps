@@ -3,22 +3,18 @@ import { CellFormatting } from '../types';
 import { getCellFormattingKey } from '../utils';
 
 export const createVeltCellRenderer = (
-  cellFormatting: Record<string, CellFormatting>,
-  documentId: string | null
-) => {
-  const VeltCellRenderer = (props: any) => {
+  cellFormatting: Record<string, CellFormatting>
+) => (props: any) => {
   const cellId = `cell-${props.data.id}-${props.colDef.field}`;
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
 
-  // [Velt] Set ID and attributes on parent AG Grid cell element
+  // [Velt] Set ID and target attributes on AG Grid cell element for click-to-target comments
   React.useEffect(() => {
     if (props.eGridCell) {
-      // [Velt] Set the element ID
       props.eGridCell.id = cellId;
-      // [Velt] For single-tool pattern: add data-velt-target-comment-element-id
-      // This allows the single comment tool to attach comments to this specific cell
-      // [Velt] Both id and data-velt-target-comment-element-id must have the same value
+      // [Velt] For single-tool pattern with click-to-target: both id and data-velt-target-comment-element-id must match
+      // This allows users to click the comment tool and then click any cell to add a comment
       props.eGridCell.setAttribute('data-velt-target-comment-element-id', cellId);
     }
   }, [cellId, props.eGridCell]);
@@ -30,25 +26,10 @@ export const createVeltCellRenderer = (
       formatting.underline ? 'underline' : '',
       formatting.strikethrough ? 'line-through' : '',
     ].filter(Boolean).join(' ') || 'none',
-  };
-
-  const containerStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-    height: '100%',
-    padding: '4px 12px 4px 12px',
-    textAlign: formatting.align || 'left',
+    paddingLeft: '12px',
   };
 
   return (
-    <div style={containerStyle}>
-      <span style={textStyle}>{props.value}</span>
-    </div>
+    <span style={textStyle}>{props.value}</span>
   );
-  };
-
-  VeltCellRenderer.displayName = 'VeltCellRenderer';
-  return VeltCellRenderer;
 };

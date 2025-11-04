@@ -88,7 +88,7 @@ function generateRandomUser(): User {
     userId: userId,
     name: fullName,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
-    organizationId: "demo-org-1",
+    organizationId: "sample-apps-demo-org",
     photoUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=${avatarColor.substring(1)}&color=fff&size=128`,
   };
 }
@@ -140,7 +140,7 @@ export function AppUserProvider({
     try {
       const isInIframe = window.self !== window.top;
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = 'reactflow-user';
+      const STORAGE_KEY = 'ag-grid-comment-aggregation-user';
       
       setUser(next);
       setIsUserLoggedIn(true);
@@ -154,7 +154,7 @@ export function AppUserProvider({
     try {
       const isInIframe = window.self !== window.top;
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = 'reactflow-user';
+      const STORAGE_KEY = 'ag-grid-comment-aggregation-user';
       
       setUser(undefined);
       setIsUserLoggedIn(false);
@@ -162,10 +162,14 @@ export function AppUserProvider({
     } catch {}
   }, []);
 
+  // Memoize the context value to prevent unnecessary re-renders
+  const contextValue = React.useMemo(
+    () => ({ user, login, logout, isUserLoggedIn }),
+    [user, login, logout, isUserLoggedIn]
+  );
+
   return (
-    <AppUserContext.Provider
-      value={{ user, login, logout, isUserLoggedIn }}
-    >
+    <AppUserContext.Provider value={contextValue}>
       {children}
     </AppUserContext.Provider>
   );

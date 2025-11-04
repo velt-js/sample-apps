@@ -25,11 +25,15 @@ export const createVeltCellRenderer = (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', height: '100%' }}>
       <span style={{ ...textStyle, paddingLeft: '12px' }}>{props.value}</span>
       <div style={{ display: 'flex', alignItems: 'center', gap: '4px', paddingRight: '8px' }}>
+        {/* [Velt] VeltCommentTool renders a button that allows users to add comments to this specific cell */}
+        {/* [Velt] context provides metadata about the cell (row, column, view type) to organize and filter comments */}
         <VeltCommentTool
-          targetElementId={cellId}
           context={commentContext}
           contextOptions={{ partialMatch: true }}
         />
+        {/* [Velt] VeltCommentBubble displays the total number of comments on this cell */}
+        {/* [Velt] It shows comment indicators and allows users to view existing comments */}
+        {/* [Velt] contextOptions.partialMatch enables showing comments when context partially matches */}
         <VeltCommentBubble
           context={commentContext}
           contextOptions={{ partialMatch: true }}
