@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { CellFormatting, TableData } from '../types';
 import { getCellFormattingKey } from '../utils';
-import { useCurrentDocument } from '@/app/document/DocumentContext';
 
 interface VeltCellRendererProps {
   data: TableData;
@@ -21,21 +20,19 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   const cellRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const { documentId } = useCurrentDocument();
   const cellId = `cell-${data.id}-${columnId}`;
   const cellKey = getCellFormattingKey(data.id, columnId);
   const formatting = cellFormatting[cellKey] || {};
 
-  // Set ID and attributes on parent table cell element
+  // [Velt] Set ID and target attributes on parent table cell element for click-to-target comments
   useEffect(() => {
     if (cellRef.current) {
       const parentCell = cellRef.current.closest('td');
       if (parentCell) {
         // [Velt] Set the element ID
         parentCell.id = cellId;
-        // [Velt] For single-tool pattern: add data-velt-target-comment-element-id
-        // This allows the single comment tool to attach comments to this specific cell
-        // [Velt] Both id and data-velt-target-comment-element-id must have the same value
+        // [Velt] For single-tool pattern with click-to-target: both id and data-velt-target-comment-element-id must match
+        // This allows users to click the comment tool and then click any cell to add a comment
         parentCell.setAttribute('data-velt-target-comment-element-id', cellId);
       }
     }

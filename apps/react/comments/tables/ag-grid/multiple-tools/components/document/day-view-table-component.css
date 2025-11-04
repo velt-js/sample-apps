@@ -5,42 +5,6 @@
   position: relative;
 }
 
-/* [Velt] Comment tool wrapper - positioned on the right side of cell */
-.velt-comment-tool-wrapper {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex !important;
-  align-items: center;
-  gap: 4px;
-  opacity: 0;
-  transition: opacity 150ms ease-in-out;
-  pointer-events: none;
-}
-
-/* Show comment tool on cell hover only */
-.ag-cell:hover .velt-comment-tool-wrapper {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* [Velt] Comment tool - positioned directly in ag-cell, outside ag-cell-wrapper */
-.ag-cell > velt-comment-tool {
-  display: flex !important;
-  justify-content: flex-end !important;
-  border-radius: 24px;
-  opacity: 0;
-  transition: all 150ms ease-in-out;
-  transform: translateY(10%);
-  overflow: hidden;
-}
-
-/* Show comment tool on cell hover only */
-.ag-cell:hover > velt-comment-tool {
-  transform: translateY(0);
-  opacity: 1;
-}
 
 /* Remove contentEditable outline/box */
 [contenteditable] {

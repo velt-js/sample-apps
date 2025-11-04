@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
 import { CellFormatting, ViewType, TableData } from '../types';
 import { getCellFormattingKey, generateCommentContext } from '../utils';
 
@@ -29,7 +30,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   // [Velt] Generate comment context - this is the primary identifier for aggregation
   const commentContext = generateCommentContext(data, columnId, viewType);
 
-  // [Velt] Set ID on parent table cell and add comment tool + bubble for aggregation
+  // [Velt] Set ID on parent table cell
   useEffect(() => {
     if (cellRef.current) {
       const parentCell = cellRef.current.closest('td');
@@ -38,78 +39,9 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
         if (parentCell.id !== cellId) {
           parentCell.id = cellId;
         }
-
-        // [Velt] Check if comment tool already exists
-        let commentTool = parentCell.querySelector('velt-comment-tool') as HTMLElement | null;
-        if (!commentTool) {
-          // [Velt] Create and append comment tool directly to cell
-          commentTool = document.createElement('velt-comment-tool') as HTMLElement;
-          commentTool.setAttribute('target-comment-element-id', cellId);
-
-          // [Velt] Set context for aggregation
-          if (commentContext) {
-            commentTool.setAttribute('context', JSON.stringify(commentContext));
-            commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-          }
-
-          commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
-
-          // Append to cell (as direct child of td)
-          parentCell.appendChild(commentTool);
-        } else {
-          // Update attributes if they changed
-          if (commentTool.getAttribute('target-comment-element-id') !== cellId) {
-            commentTool.setAttribute('target-comment-element-id', cellId);
-          }
-          if (commentContext) {
-            commentTool.setAttribute('context', JSON.stringify(commentContext));
-            commentTool.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-          }
-        }
-
-        // [Velt] Check if comment bubble already exists
-        let commentBubble = parentCell.querySelector('velt-comment-bubble') as HTMLElement | null;
-        if (!commentBubble) {
-          // [Velt] Create and append comment bubble directly to cell for aggregation display
-          commentBubble = document.createElement('velt-comment-bubble') as HTMLElement;
-
-          // [Velt] Set context for aggregation
-          if (commentContext) {
-            commentBubble.setAttribute('context', JSON.stringify(commentContext));
-            commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-          }
-
-          commentBubble.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: auto;';
-
-          // Append to cell (as direct child of td)
-          parentCell.appendChild(commentBubble);
-        } else {
-          // Update context if it changed
-          if (commentContext) {
-            commentBubble.setAttribute('context', JSON.stringify(commentContext));
-            commentBubble.setAttribute('context-options', JSON.stringify({ partialMatch: true }));
-          }
-        }
       }
     }
-
-    return () => {
-      // [Velt] Cleanup: remove comment tool and bubble when cell is destroyed
-      if (cellRef.current) {
-        const parentCell = cellRef.current.closest('td');
-        if (parentCell) {
-          const commentTool = parentCell.querySelector('velt-comment-tool');
-          if (commentTool) {
-            commentTool.remove();
-          }
-          const commentBubble = parentCell.querySelector('velt-comment-bubble');
-          if (commentBubble) {
-            commentBubble.remove();
-          }
-        }
-      }
-    };
-  }, [cellId, commentContext]);
+  }, [cellId]);
 
   // Update content when value changes (only when not editing)
   useEffect(() => {
@@ -165,10 +97,14 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     width: '100%',
     height: '100%',
     padding: '4px 12px 4px 12px',
+    outline: 'none',
+  };
+
+  const contentStyle: React.CSSProperties = {
     textAlign: formatting.align || 'left',
     fontWeight: formatting.bold ? 'bold' : 'normal',
     fontStyle: formatting.italic ? 'italic' : 'normal',
@@ -177,6 +113,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
       formatting.strikethrough ? 'line-through' : '',
     ].filter(Boolean).join(' ') || 'none',
     outline: 'none',
+    minWidth: '20px',
     cursor: isEditing ? 'text' : 'default',
     userSelect: isEditing ? 'text' : 'none',
   };
@@ -191,10 +128,25 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
     >
       <div
         ref={contentRef}
-        style={{ outline: 'none', minWidth: '20px' }}
+        style={contentStyle}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
       />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        {/* [Velt] VeltCommentTool renders a button that allows users to add comments to this specific cell */}
+        {/* [Velt] context provides metadata about the cell (row, column, view type) to organize and filter comments */}
+        <VeltCommentTool
+          context={commentContext}
+          contextOptions={{ partialMatch: true }}
+        />
+        {/* [Velt] VeltCommentBubble displays the total number of comments on this cell */}
+        {/* [Velt] It shows comment indicators and allows users to view existing comments */}
+        {/* [Velt] contextOptions.partialMatch enables showing comments when context partially matches */}
+        <VeltCommentBubble
+          context={commentContext}
+          contextOptions={{ partialMatch: true }}
+        />
+      </div>
     </div>
   );
 };

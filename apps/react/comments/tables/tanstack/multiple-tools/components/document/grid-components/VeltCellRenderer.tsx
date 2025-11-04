@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { VeltCommentTool } from '@veltdev/react';
 import { CellFormatting, TableData } from '../types';
 import { getCellFormattingKey } from '../utils';
 
@@ -24,7 +25,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   const cellKey = getCellFormattingKey(data.id, columnId);
   const formatting = cellFormatting[cellKey] || {};
 
-  // Set ID on parent table cell element and add comment tool
+  // [Velt] Set ID on parent table cell element
   useEffect(() => {
     if (cellRef.current) {
       const parentCell = cellRef.current.closest('td');
@@ -33,38 +34,8 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
         if (parentCell.id !== cellId) {
           parentCell.id = cellId;
         }
-
-        // [Velt] Check if comment tool already exists
-        let commentTool = parentCell.querySelector('velt-comment-tool') as HTMLElement | null;
-        if (!commentTool) {
-          // [Velt] Create and append comment tool directly to cell
-          commentTool = document.createElement('velt-comment-tool') as HTMLElement;
-          commentTool.setAttribute('target-comment-element-id', cellId);
-          commentTool.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1;';
-
-          // Append to cell (as direct child of td)
-          parentCell.appendChild(commentTool);
-        } else {
-          // Update target-comment-element-id if it changed
-          if (commentTool.getAttribute('target-comment-element-id') !== cellId) {
-            commentTool.setAttribute('target-comment-element-id', cellId);
-          }
-        }
       }
     }
-
-    return () => {
-      // [Velt] Cleanup: remove comment tool when cell is destroyed
-      if (cellRef.current) {
-        const parentCell = cellRef.current.closest('td');
-        if (parentCell) {
-          const commentTool = parentCell.querySelector('velt-comment-tool');
-          if (commentTool) {
-            commentTool.remove();
-          }
-        }
-      }
-    };
   }, [cellId]);
 
   // Update content when value changes (only when not editing)
@@ -121,10 +92,14 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     width: '100%',
     height: '100%',
     padding: '4px 12px 4px 12px',
+    outline: 'none',
+  };
+
+  const contentStyle: React.CSSProperties = {
     textAlign: formatting.align || 'left',
     fontWeight: formatting.bold ? 'bold' : 'normal',
     fontStyle: formatting.italic ? 'italic' : 'normal',
@@ -133,6 +108,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
       formatting.strikethrough ? 'line-through' : '',
     ].filter(Boolean).join(' ') || 'none',
     outline: 'none',
+    minWidth: '20px',
     cursor: isEditing ? 'text' : 'default',
     userSelect: isEditing ? 'text' : 'none',
   };
@@ -147,10 +123,12 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
     >
       <div
         ref={contentRef}
-        style={{ outline: 'none', minWidth: '20px' }}
+        style={contentStyle}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
       />
+      {/* [Velt] VeltCommentTool renders a button that allows users to add comments to this specific cell */}
+      <VeltCommentTool targetCommentElementId={cellId} />
     </div>
   );
 };

@@ -24,6 +24,24 @@ velt-comment-dialog svg[class*="triangle"] path {
   stroke: rgb(255, 205, 46) !important;
 }
 
+/* Position comment tool absolutely on the cell */
+.ag-cell velt-comment-tool {
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 1 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.15s ease, visibility 0.15s ease !important;
+}
+
+/* Show on hover */
+.ag-cell:hover velt-comment-tool {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 /* Theme Configuration - Based on Figma Design */
 
 /* Typography */
