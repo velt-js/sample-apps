@@ -75,3 +75,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* [Velt] AG Grid cell comment tool hover behavior */
+.velt-portal-container velt-comment-tool {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.velt-portal-container[data-hover="true"] velt-comment-tool {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* [Velt] Prevent layout shift by ensuring consistent width for portal container */
+.velt-portal-container {
+  min-width: 24px; /* Ensure space is reserved even when empty */
+}

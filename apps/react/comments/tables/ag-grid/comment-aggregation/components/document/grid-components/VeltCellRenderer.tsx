@@ -44,13 +44,33 @@ export const createVeltCellRenderer = (
     if (!portal) {
       portal = document.createElement('div');
       portal.id = portalId;
+      portal.className = 'velt-portal-container';
       portal.style.cssText = 'position: absolute; right: 4px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 4px; pointer-events: auto; z-index: 2;';
       props.eGridCell.appendChild(portal);
     }
 
+    // Add hover listener to cell to show/hide comment tool
+    const handleMouseEnter = () => {
+      if (portal) {
+        portal.setAttribute('data-hover', 'true');
+      }
+    };
+    const handleMouseLeave = () => {
+      if (portal) {
+        portal.removeAttribute('data-hover');
+      }
+    };
+
+    props.eGridCell.addEventListener('mouseenter', handleMouseEnter);
+    props.eGridCell.addEventListener('mouseleave', handleMouseLeave);
+
     setPortalContainer(portal);
 
     return () => {
+      // Clean up event listeners
+      props.eGridCell.removeEventListener('mouseenter', handleMouseEnter);
+      props.eGridCell.removeEventListener('mouseleave', handleMouseLeave);
+
       // Clean up the portal container when component unmounts
       if (portal && portal.parentNode) {
         portal.parentNode.removeChild(portal);
