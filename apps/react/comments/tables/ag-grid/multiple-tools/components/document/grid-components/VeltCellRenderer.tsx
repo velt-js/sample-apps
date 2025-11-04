@@ -30,7 +30,7 @@ export const createVeltCellRenderer = (cellFormatting: Record<string, CellFormat
       <span style={textStyle}>{props.value}</span>
       {/* [Velt] VeltCommentTool renders a button that allows users to add comments to the AG Grid cell */}
       {/* [Velt] Positioned absolutely via CSS in ui-customization/styles.css */}
-      <VeltCommentTool targetCommentElementId={cellId} />
+      <VeltCommentTool targetElementId={cellId} />
     </>
   );
 };

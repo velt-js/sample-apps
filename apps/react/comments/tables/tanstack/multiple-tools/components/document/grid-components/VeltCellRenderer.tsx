@@ -21,6 +21,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   const cellRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const cellId = `cell-${data.id}-${columnId}`;
   const cellKey = getCellFormattingKey(data.id, columnId);
   const formatting = cellFormatting[cellKey] || {};
@@ -119,6 +120,8 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
       style={containerStyle}
       onClick={onCellClick}
       onDoubleClick={handleDoubleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       data-editing={isEditing}
     >
       <div
@@ -128,7 +131,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
         onKeyDown={handleKeyDown}
       />
       {/* [Velt] VeltCommentTool renders a button that allows users to add comments to this specific cell */}
-      <VeltCommentTool targetCommentElementId={cellId} />
+      {isHovered && <VeltCommentTool targetElementId={cellId} />}
     </div>
   );
 };

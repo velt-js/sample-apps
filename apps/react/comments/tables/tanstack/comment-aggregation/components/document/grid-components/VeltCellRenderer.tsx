@@ -23,6 +23,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
   const cellRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const cellId = `cell-${data.id}-${columnId}`;
   const cellKey = getCellFormattingKey(data.id, columnId);
   const formatting = cellFormatting[cellKey] || {};
@@ -124,6 +125,8 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
       style={containerStyle}
       onClick={onCellClick}
       onDoubleClick={handleDoubleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       data-editing={isEditing}
     >
       <div
@@ -135,13 +138,17 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
         {/* [Velt] VeltCommentTool renders a button that allows users to add comments to this specific cell */}
         {/* [Velt] context provides metadata about the cell (row, column, view type) to organize and filter comments */}
-        <VeltCommentTool
-          context={commentContext}
-          contextOptions={{ partialMatch: true }}
-        />
+        {/* Only show on hover */}
+        {isHovered && (
+          <VeltCommentTool
+            context={commentContext}
+            contextOptions={{ partialMatch: true }}
+          />
+        )}
         {/* [Velt] VeltCommentBubble displays the total number of comments on this cell */}
         {/* [Velt] It shows comment indicators and allows users to view existing comments */}
         {/* [Velt] contextOptions.partialMatch enables showing comments when context partially matches */}
+        {/* Always visible when there are comments */}
         <VeltCommentBubble
           context={commentContext}
           contextOptions={{ partialMatch: true }}
