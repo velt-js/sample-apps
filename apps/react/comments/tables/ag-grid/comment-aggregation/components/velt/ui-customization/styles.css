@@ -47,18 +47,15 @@ velt-comment-dialog svg[class*="triangle"] path {
   position: relative;
 }
 
-/* Hide comment tool by default, show on hover */
-.ag-cell.velt-comment-cell .velt-comment-tool-positioned {
+/* Hide comment tool and bubble by default, show on hover */
+.ag-cell.velt-comment-cell .velt-comment-tool-positioned,
+.ag-cell.velt-comment-cell .velt-comment-bubble-positioned {
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 
-.ag-cell.velt-comment-cell:hover .velt-comment-tool-positioned {
-  opacity: 1;
-}
-
-/* Always show comment bubble when comments exist */
-.ag-cell.velt-comment-cell .velt-comment-bubble-positioned {
+.ag-cell.velt-comment-cell:hover .velt-comment-tool-positioned,
+.ag-cell.velt-comment-cell:hover .velt-comment-bubble-positioned {
   opacity: 1;
 }
 
