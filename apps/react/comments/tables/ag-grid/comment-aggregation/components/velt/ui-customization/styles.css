@@ -24,19 +24,32 @@ velt-comment-dialog svg[class*="triangle"] path {
   stroke: rgb(255, 205, 46) !important;
 }
 
-/* Hide comment tool and bubble by default */
-.ag-cell velt-comment-tool,
-.ag-cell velt-comment-bubble {
+/* Position comment tool absolutely on the cell */
+.ag-cell velt-comment-tool {
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 1 !important;
   opacity: 0 !important;
   visibility: hidden !important;
-  transition: opacity 0.2s ease, visibility 0.2s ease !important;
+  transition: opacity 0.15s ease, visibility 0.15s ease !important;
 }
 
-/* Show on cell hover */
-.ag-cell:hover velt-comment-tool,
-.ag-cell:hover velt-comment-bubble {
+/* Show on hover */
+.ag-cell:hover velt-comment-tool {
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+/* Position comment bubble absolutely on the cell */
+.ag-cell velt-comment-bubble {
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 2 !important;
+  pointer-events: auto !important;
 }
 
 /* Alternative selectors for triangle */

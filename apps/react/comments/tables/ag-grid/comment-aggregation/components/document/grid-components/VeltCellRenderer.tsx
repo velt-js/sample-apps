@@ -22,19 +22,19 @@ export const createVeltCellRenderer = (
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '100%', padding: '0px 0px', position: 'relative' }}>
-      <span style={textStyle}>{props.value}</span>
-      <VeltCommentTool
-        targetElementId={cellId}
-        context={commentContext}
-        contextOptions={{ partialMatch: true }}
-        style={{ position: 'absolute', right: '4px', top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}
-      />
-      <VeltCommentBubble
-        context={commentContext}
-        contextOptions={{ partialMatch: true }}
-        style={{ position: 'absolute', right: '4px', top: '50%', transform: 'translateY(-50%)', zIndex: 2, pointerEvents: 'auto' }}
-      />
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', height: '100%' }}>
+      <span style={{ ...textStyle, paddingLeft: '12px' }}>{props.value}</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', paddingRight: '8px' }}>
+        <VeltCommentTool
+          targetElementId={cellId}
+          context={commentContext}
+          contextOptions={{ partialMatch: true }}
+        />
+        <VeltCommentBubble
+          context={commentContext}
+          contextOptions={{ partialMatch: true }}
+        />
+      </div>
     </div>
   );
 };
