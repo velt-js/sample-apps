@@ -3,6 +3,7 @@
 import { ChevronLeft, Github, RotateCcw } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useState, useEffect, useRef } from "react"
+import { VeltLogo } from "@/components/velt-logo"
 
 interface TopBarProps {
   mode: "code" | "demo"
@@ -89,7 +90,10 @@ export function TopBar({
         >
           <ChevronLeft className={cn("h-4 w-4 text-foreground transition-transform", !sidebarOpen && "rotate-180")} />
         </button>
-        <h1 className="text-sm font-medium text-foreground">{displayText}</h1>
+        <div className="flex items-center gap-2">
+          <VeltLogo className="text-foreground" />
+          <h1 className="text-sm font-medium text-foreground">{displayText}</h1>
+        </div>
       </div>
 
       {/* Center: Mode Toggle - Absolutely Centered */}

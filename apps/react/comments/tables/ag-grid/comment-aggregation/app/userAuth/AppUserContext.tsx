@@ -52,24 +52,40 @@ function hashStringToIndex(str: string, arrayLength: number): number {
   return Math.abs(hash) % arrayLength;
 }
 
-// Generate a random user with unique ID
+// Generate a deterministic hash from a string (for userId generation)
+function hashString(str: string): string {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  // Convert to base36 and pad to ensure consistent length
+  return Math.abs(hash).toString(36).padStart(8, '0');
+}
+
+// Generate a random user with deterministic ID based on name
 function generateRandomUser(): User {
-  const randomId = `user-${Math.random().toString(36).substring(2, 11)}`;
   const avatarColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
 
   const firstNames = ['Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Riley', 'Avery'];
   const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis'];
 
+  // Randomly select first and last name
   const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
   const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
   const fullName = `${firstName} ${lastName}`;
 
+  // Generate deterministic userId from the full name
+  // This ensures "Alex Smith" always gets the same ID
+  const userId = `user-${hashString(fullName)}`;
+
   // Use deterministic color based on userId for consistent photoUrl
-  const colorIndex = hashStringToIndex(randomId, avatarColors.length);
+  const colorIndex = hashStringToIndex(userId, avatarColors.length);
   const avatarColor = avatarColors[colorIndex];
 
   return {
-    userId: randomId,
+    userId: userId,
     name: fullName,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
     organizationId: "demo-org-1",
@@ -98,7 +114,7 @@ export function AppUserProvider({
       // - In iframe: use sessionStorage (each origin/port is isolated automatically)
       // - Not in iframe: use localStorage (same user across tabs)
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = 'reactflow-user';
+      const STORAGE_KEY = 'ag-grid-comment-aggregation-user';
       
       // Check storage for existing user
       const stored = storage.getItem(STORAGE_KEY);

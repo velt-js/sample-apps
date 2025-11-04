@@ -4,8 +4,8 @@ import '../styles/codemirror.css'
 import { AppProviders } from './userAuth/AppProviders'
 
 export const metadata: Metadata = {
-  title: 'codemirror-demo',
-  description: 'Library demo for codemirror',
+  title: 'Velt CodeMirror Demo',
+  description: 'CodeMirror editor with Velt collaboration features',
 }
 
 export default function RootLayout({

@@ -11,8 +11,8 @@ const urbanist = Urbanist({
 })
 
 export const metadata: Metadata = {
-  title: 'marketing-spend-demo',
-  description: 'Library demo for AgGrid',
+  title: 'Velt TanStack Table Comment Aggregation Demo',
+  description: 'TanStack Table demo with Velt comment aggregation features',
 }
 
 export default function RootLayout({

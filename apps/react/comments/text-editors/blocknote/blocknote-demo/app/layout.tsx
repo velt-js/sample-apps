@@ -3,8 +3,8 @@ import '../styles/globals.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
 export const metadata: Metadata = {
-  title: 'blocknote-demo',
-  description: 'Library demo for blocknote',
+  title: 'Velt BlockNote Demo',
+  description: 'BlockNote editor with Velt collaboration features',
 }
 
 export default function RootLayout({

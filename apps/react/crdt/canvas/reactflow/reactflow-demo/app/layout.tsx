@@ -3,8 +3,8 @@ import '../styles/globals.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
 export const metadata: Metadata = {
-  title: 'reactflow-demo',
-  description: 'Library demo for reactflow',
+  title: 'Velt ReactFlow CRDT Demo',
+  description: 'ReactFlow canvas with Velt CRDT real-time collaboration',
 }
 
 export default function RootLayout({

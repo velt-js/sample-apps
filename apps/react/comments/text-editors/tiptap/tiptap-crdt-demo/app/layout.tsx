@@ -4,8 +4,8 @@ import '../components/velt/ui-customization/styles.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
 export const metadata: Metadata = {
-  title: 'tiptap-demo',
-  description: 'Library demo for tiptap',
+  title: 'Velt Tiptap CRDT Demo',
+  description: 'Tiptap editor with Velt CRDT real-time collaboration',
 }
 
 export default function RootLayout({
