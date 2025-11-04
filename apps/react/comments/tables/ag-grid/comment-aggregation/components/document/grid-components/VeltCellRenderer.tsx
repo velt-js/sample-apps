@@ -22,7 +22,7 @@ export const createVeltCellRenderer = (
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '100%', padding: '4px 12px', position: 'relative' }}>
+    <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '100%', padding: '0px 0px', position: 'relative' }}>
       <span style={textStyle}>{props.value}</span>
       <VeltCommentTool
         targetElementId={cellId}

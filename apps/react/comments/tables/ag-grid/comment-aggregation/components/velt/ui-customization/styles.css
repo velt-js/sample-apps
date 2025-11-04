@@ -24,39 +24,19 @@ velt-comment-dialog svg[class*="triangle"] path {
   stroke: rgb(255, 205, 46) !important;
 }
 
-/* Comment Tool and Bubble Positioning */
-.velt-comment-tool-positioned,
-.velt-comment-bubble-positioned {
-  position: absolute !important;
-  right: 4px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  pointer-events: auto !important;
+/* Hide comment tool and bubble by default */
+.ag-cell velt-comment-tool,
+.ag-cell velt-comment-bubble {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease !important;
 }
 
-.velt-comment-tool-positioned {
-  z-index: 1 !important;
-}
-
-.velt-comment-bubble-positioned {
-  z-index: 2 !important;
-}
-
-/* Cell hover behavior - show comment tool on hover */
-.ag-cell.velt-comment-cell {
-  position: relative;
-}
-
-/* Hide comment tool and bubble by default, show on hover */
-.ag-cell.velt-comment-cell .velt-comment-tool-positioned,
-.ag-cell.velt-comment-cell .velt-comment-bubble-positioned {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.ag-cell.velt-comment-cell:hover .velt-comment-tool-positioned,
-.ag-cell.velt-comment-cell:hover .velt-comment-bubble-positioned {
-  opacity: 1;
+/* Show on cell hover */
+.ag-cell:hover velt-comment-tool,
+.ag-cell:hover velt-comment-bubble {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Alternative selectors for triangle */
