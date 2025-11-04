@@ -10,14 +10,17 @@ export const createVeltCellRenderer = (
   const formatting = cellFormatting[cellKey] || {};
 
   // [Velt] Set ID and target attributes on AG Grid cell element for click-to-target comments
-  React.useEffect(() => {
-    if (props.eGridCell) {
+  // Using direct assignment instead of useEffect to avoid re-render issues
+  if (props.eGridCell) {
+    if (props.eGridCell.id !== cellId) {
       props.eGridCell.id = cellId;
-      // [Velt] For single-tool pattern with click-to-target: both id and data-velt-target-comment-element-id must match
-      // This allows users to click the comment tool and then click any cell to add a comment
+    }
+    // [Velt] For single-tool pattern with click-to-target: both id and data-velt-target-comment-element-id must match
+    // This allows users to click the comment tool and then click any cell to add a comment
+    if (props.eGridCell.getAttribute('data-velt-target-comment-element-id') !== cellId) {
       props.eGridCell.setAttribute('data-velt-target-comment-element-id', cellId);
     }
-  }, [cellId, props.eGridCell]);
+  }
 
   const textStyle: React.CSSProperties = {
     fontWeight: formatting.bold ? 'bold' : 'normal',

@@ -8,6 +8,11 @@ export const createVeltCellRenderer = (cellFormatting: Record<string, CellFormat
   const cellKey = getCellFormattingKey(props.data.id, props.colDef.field);
   const formatting = cellFormatting[cellKey] || {};
 
+  // [Velt] Set ID on the AG Grid cell element so VeltCommentTool can target it
+  if (props.eGridCell && props.eGridCell.id !== cellId) {
+    props.eGridCell.id = cellId;
+  }
+
   const textStyle: React.CSSProperties = {
     fontWeight: formatting.bold ? 'bold' : 'normal',
     fontStyle: formatting.italic ? 'italic' : 'normal',
