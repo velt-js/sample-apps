@@ -114,7 +114,7 @@ export function AppUserProvider({
       // - In iframe: use sessionStorage (each origin/port is isolated automatically)
       // - Not in iframe: use localStorage (same user across tabs)
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = 'reactflow-user';
+      const STORAGE_KEY = 'tanstack-single-tool-user';
       
       // Check storage for existing user
       const stored = storage.getItem(STORAGE_KEY);
@@ -140,7 +140,7 @@ export function AppUserProvider({
     try {
       const isInIframe = window.self !== window.top;
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = 'reactflow-user';
+      const STORAGE_KEY = 'tanstack-single-tool-user';
       
       setUser(next);
       setIsUserLoggedIn(true);
@@ -154,7 +154,7 @@ export function AppUserProvider({
     try {
       const isInIframe = window.self !== window.top;
       const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = 'reactflow-user';
+      const STORAGE_KEY = 'tanstack-single-tool-user';
       
       setUser(undefined);
       setIsUserLoggedIn(false);
