@@ -1,9 +1,4 @@
 /* Comment bubble styling - Exact replication of popover-comments Angular demo */
-/* Target AG Grid cells with comment IDs */
-.ag-cell[id^="cell-"],
-.ag-cell[id^="title-"] {
-  position: relative;
-}
 
 /* [Velt] Comment tool - positioned directly in ag-cell, outside ag-cell-wrapper */
 .ag-cell > velt-comment-tool {

@@ -1,26 +1,5 @@
-/* Comment bubble styling - Exact replication of popover-comments Angular demo */
-/* Target AG Grid cells with comment IDs */
-.ag-cell[id^="cell-"],
-.ag-cell[id^="title-"] {
-  position: relative;
-}
+/* [Velt] Single-tool pattern: cells need position relative for click-to-target commenting */
 
-/* [Velt] Comment tool - positioned directly in ag-cell, outside ag-cell-wrapper */
-.ag-cell > velt-comment-tool {
-  display: flex !important;
-  justify-content: flex-end !important;
-  border-radius: 24px;
-  opacity: 0;
-  transition: all 150ms ease-in-out;
-  transform: translateY(10%);
-  overflow: hidden;
-}
-
-/* Show comment tool on cell hover only */
-.ag-cell:hover > velt-comment-tool {
-  transform: translateY(0);
-  opacity: 1;
-}
 
 /* Remove contentEditable outline/box */
 [contenteditable] {
