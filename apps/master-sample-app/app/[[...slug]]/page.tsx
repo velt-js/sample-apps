@@ -56,10 +56,24 @@ export default function Page() {
       const sampleFromPath = allSamples.find(s => s.metadata.routePath === currentPath)
       
       let targetSampleId = getDefaultSample().metadata.id
+      
+      // Priority order: URL path > localStorage > default
       if (sampleFromPath) {
         targetSampleId = sampleFromPath.metadata.id
+      } else {
+        // Fallback to last selected sample from localStorage
+        const lastSelected = localStorage.getItem('last-selected-sample-id')
+        if (lastSelected) {
+          const lastSample = getSampleById(lastSelected)
+          if (lastSample) {
+            targetSampleId = lastSelected
+          }
+        }
       }
+      
       setCurrentSampleId(targetSampleId)
+      // Store the selection
+      localStorage.setItem('last-selected-sample-id', targetSampleId)
 
       // 2. Check URL for documentId parameter
       const urlParams = new URLSearchParams(window.location.search)
@@ -89,6 +103,9 @@ export default function Page() {
     try {
       const sample = getSampleById(currentSampleId)
       if (!sample) return
+
+      // Store the current selection for persistence
+      localStorage.setItem('last-selected-sample-id', currentSampleId)
 
       // Get or generate document ID for this demo
       const docId = getDocumentIdForDemo(currentSampleId)

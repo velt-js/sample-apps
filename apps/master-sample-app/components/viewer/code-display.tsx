@@ -176,40 +176,15 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
   const [selectedFile, setSelectedFile] = useState<SampleCodeFile | null>(
     codeFiles.length > 0 ? codeFiles[0] : null
   )
-  const [codeContent, setCodeContent] = useState<string>("")
-  const [isLoading, setIsLoading] = useState(false)
   
   const fileTree = useMemo(() => buildFileTree(codeFiles), [codeFiles])
 
-  useEffect(() => {
-    const fetchCode = async () => {
-      if (!selectedFile) {
-        setCodeContent("// Select a file to view its contents")
-        return
-      }
-
-      try {
-        setIsLoading(true)
-        // The path is already relative to sample-apps root (e.g., 'apps/react/...')
-        // The API route will handle resolving it relative to the project structure
-        const response = await fetch(`/api/read-file?path=${encodeURIComponent(selectedFile.path)}`)
-        
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ error: 'Failed to read file' }))
-          throw new Error(errorData.error || 'Failed to read file')
-        }
-        
-        const text = await response.text()
-        setCodeContent(text)
-      } catch (err) {
-        console.error('Error reading code:', err)
-        setCodeContent(`// Failed to load ${selectedFile.path}\n// Error: ${err instanceof Error ? err.message : 'Unknown error'}`)
-      } finally {
-        setIsLoading(false)
-      }
+  // Get code content directly from the selected file (no async loading needed)
+  const codeContent = useMemo(() => {
+    if (!selectedFile) {
+      return "// Select a file to view its contents"
     }
-
-    fetchCode()
+    return selectedFile.content || `// No content available for ${selectedFile.path}`
   }, [selectedFile])
 
   if (codeFiles.length === 0) {
@@ -247,27 +222,21 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
           )}
           
             <div className="flex-1 overflow-auto bg-[#1a1a1a]">
-              {isLoading ? (
-                <div className="flex items-center justify-center h-full">
-                  <span className="text-sm text-muted-foreground">Loading code...</span>
+              <div className="flex">
+                {/* Line numbers */}
+                <div className="py-4 px-4 text-right select-none text-[#858585] text-xs font-mono leading-relaxed">
+                  {codeContent.split('\n').map((_, i) => (
+                    <div key={i}>{i + 1}</div>
+                  ))}
                 </div>
-              ) : (
-                <div className="flex">
-                  {/* Line numbers */}
-                  <div className="py-4 px-4 text-right select-none text-[#858585] text-xs font-mono leading-relaxed">
-                    {codeContent.split('\n').map((_, i) => (
-                      <div key={i}>{i + 1}</div>
-                    ))}
-                  </div>
-                  {/* Code content */}
-                  <pre className="flex-1 py-4 pr-4 text-xs font-mono leading-relaxed overflow-x-auto">
-                    <code 
-                      className="code-highlight"
-                      dangerouslySetInnerHTML={{ __html: highlightCode(codeContent) }}
-                    />
-                  </pre>
-                </div>
-              )}
+                {/* Code content */}
+                <pre className="flex-1 py-4 pr-4 text-xs font-mono leading-relaxed overflow-x-auto">
+                  <code 
+                    className="code-highlight"
+                    dangerouslySetInnerHTML={{ __html: highlightCode(codeContent) }}
+                  />
+                </pre>
+              </div>
             </div>
         </div>
       </div>

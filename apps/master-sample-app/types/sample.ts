@@ -15,6 +15,7 @@ export interface SampleMetadata {
 export interface SampleCodeFile {
   path: string
   language: string
+  content: string // Pre-loaded code content (imported with ?raw)
 }
 
 export interface Sample {
