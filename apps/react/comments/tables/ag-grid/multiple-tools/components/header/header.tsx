@@ -1,11 +1,8 @@
 "use client";
 
-import { useVeltInitState, VeltPresence, VeltSidebarButton, VeltNotificationsTool } from "@veltdev/react";
+import { VeltPresence, VeltSidebarButton, VeltNotificationsTool } from "@veltdev/react";
 
 export default function Header() {
-  // [Velt] Check if Velt is initialized
-  const veltInitialized = useVeltInitState();
-
   return (
     <div
       className="absolute top-0 right-0 z-50"
@@ -17,21 +14,17 @@ export default function Header() {
         padding: "16px",
       }}
     >
-      {veltInitialized && (
-        <>
-          <VeltPresence />
-          <VeltSidebarButton />
-          <VeltNotificationsTool
-            settings={true}
-            shadowDom={false}
-            tabConfig={{
-              forYou: { name: "For You", enable: true },
-              documents: { name: "Documents", enable: true },
-              all: { name: "All", enable: true },
-            }}
-          />
-        </>
-      )}
+      <VeltPresence />
+      <VeltSidebarButton />
+      <VeltNotificationsTool
+        settings={true}
+        shadowDom={false}
+        tabConfig={{
+          forYou: { name: "For You", enable: true },
+          documents: { name: "Documents", enable: true },
+          all: { name: "All", enable: true },
+        }}
+      />
     </div>
   );
 }

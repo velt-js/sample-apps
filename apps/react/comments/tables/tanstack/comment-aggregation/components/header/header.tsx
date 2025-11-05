@@ -1,12 +1,8 @@
 "use client";
 
-import { useVeltInitState } from "@veltdev/react";
 import VeltTools from "@/components/velt/VeltTools";
 
 export default function Header() {
-  // [Velt] Check if Velt is initialized
-  const veltInitialized = useVeltInitState();
-
   return (
     <div
       className="absolute top-0 right-0 z-50"
@@ -18,7 +14,7 @@ export default function Header() {
         padding: "16px",
       }}
     >
-      {veltInitialized && <VeltTools />}
+      <VeltTools />
     </div>
   );
 }
