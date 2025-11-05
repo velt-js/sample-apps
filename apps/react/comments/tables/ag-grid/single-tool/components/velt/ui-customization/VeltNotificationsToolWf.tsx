@@ -11,7 +11,7 @@ const VeltNotificationsToolWf = () => {
         style={{
           background: '#141414',
           borderRadius: '23.333px',
-          padding: '5.833px 2px 5.833px 7px',
+          padding: '5.833px 4px 5.833px 7px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
