@@ -9,9 +9,13 @@ import {
 function VeltTools() {
   return (
     <>
+      {/* [Velt] Show online users */}
       <VeltPresence />
+      {/* [Velt] Toggle comments sidebar */}
       <VeltSidebarButton />
+      {/* [Velt] Start huddle/video calls with other users */}
       <VeltHuddleTool type='all' />
+      {/* [Velt] Notifications panel */}
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}

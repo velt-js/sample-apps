@@ -9,9 +9,13 @@ import {
 function VeltTools() {
   return (
     <>
+      {/* [Velt] Show online users */}
       <VeltPresence />
+      {/* [Velt] Toggle comments sidebar */}
       <VeltSidebarButton />
+      {/* [Velt] Add comment tool - click to target any cell with data-velt-target-comment-element-id */}
       <VeltCommentTool />
+      {/* [Velt] Notifications panel */}
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}

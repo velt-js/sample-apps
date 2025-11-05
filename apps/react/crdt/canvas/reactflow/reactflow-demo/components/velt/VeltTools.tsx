@@ -9,8 +9,11 @@ import {
 function VeltTools() {
   return (
     <>
+      {/* [Velt] Show online users */}
       <VeltPresence />
+      {/* [Velt] Toggle comments sidebar */}
       <VeltSidebarButton />
+      {/* [Velt] Notifications panel */}
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}
@@ -20,6 +23,7 @@ function VeltTools() {
           all: { name: "All", enable: true },
         }}
       />
+      {/* [Velt] Start huddle/video calls with other users */}
       <VeltHuddleTool type='all' />
     </>
   );

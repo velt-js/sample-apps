@@ -8,6 +8,7 @@ export default function VeltInitializeDocument() {
   const { documentId, documentName } = useCurrentDocument();
   const { user } = useAppUser();
 
+  // [Velt] Get document setter hook
   const { setDocuments } = useSetDocuments();
 
   // [Velt] Set document in Velt. This is the resource where all Velt collaboration data will be scoped.

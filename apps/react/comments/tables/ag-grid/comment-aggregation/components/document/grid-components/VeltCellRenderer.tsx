@@ -1,7 +1,7 @@
 import React from 'react';
-import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
+import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react'; // [Velt] Components for comment tool button and comment bubble display
 import { CellFormatting, ViewType } from '../types';
-import { getCellFormattingKey, generateCommentContext } from '../utils';
+import { getCellFormattingKey, generateCommentContext } from '../utils'; // [Velt] Utility functions for cell formatting and comment context
 
 export const createVeltCellRenderer = (
   cellFormatting: Record<string, CellFormatting>,

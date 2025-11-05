@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { VeltCommentTool } from '@veltdev/react';
+import { VeltCommentTool } from '@veltdev/react'; // [Velt] Component that renders a comment tool button to add comments
 import { CellFormatting, TableData } from '../types';
-import { getCellFormattingKey } from '../utils';
+import { getCellFormattingKey } from '../utils'; // [Velt] Utility function to generate unique keys for cell-level formatting
 
 interface VeltCellRendererProps {
   data: TableData;
@@ -131,6 +131,8 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
         onKeyDown={handleKeyDown}
       />
       {/* [Velt] VeltCommentTool renders a button that allows users to add comments to this specific cell */}
+      {/* [Velt] targetElementId references the parent table cell with the ID set above */}
+      {/* [Velt] Comment tool only appears on hover over the entire cell */}
       {isHovered && <VeltCommentTool targetElementId={cellId} />}
     </div>
   );

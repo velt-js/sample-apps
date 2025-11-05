@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react';
+import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react'; // [Velt] Components for comment tool button and comment bubble display
 import { CellFormatting, ViewType, TableData } from '../types';
-import { getCellFormattingKey, generateCommentContext } from '../utils';
+import { getCellFormattingKey, generateCommentContext } from '../utils'; // [Velt] Utility functions for cell formatting and comment context
 
 interface VeltCellRendererProps {
   data: TableData;

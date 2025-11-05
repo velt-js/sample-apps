@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { CellFormatting, TableData } from '../types';
-import { getCellFormattingKey } from '../utils';
+import { getCellFormattingKey } from '../utils'; // [Velt] Utility function to generate unique keys for cell-level formatting
 
 interface VeltCellRendererProps {
   data: TableData;
