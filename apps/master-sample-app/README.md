@@ -9,8 +9,9 @@ This is a scalable Next.js application for displaying multiple sample apps in a 
 - ✅ **Single Page Application**: No routing, all samples load on one page
 - ✅ **Dynamic Sample Switching**: Switch between samples via state management
 - ✅ **Configuration-Driven**: Add new samples by creating config files
-- ✅ **GitHub Code Integration**: Automatically fetches code from GitHub repositories
+- ✅ **Monorepo Code Integration**: Automatically fetches code from local sample apps
 - ✅ **Side-by-Side Demos**: Display iframe demos with code view
+- ✅ **Works Locally & on Vercel**: Seamless deployment to production
 
 ## 📁 Project Structure
 
@@ -75,7 +76,8 @@ import { SampleCodeFile } from '@/types/sample'
 
 export const codeFiles: SampleCodeFile[] = [
   {
-    path: 'src/YourComponent.tsx',    // Path in GitHub repo
+    // Path relative to sample-apps root (e.g., apps/react/...)
+    path: 'apps/react/your-category/your-sample/src/YourComponent.tsx',
     language: 'typescript'             // Language for highlighting
   }
 ]
@@ -236,27 +238,40 @@ export function Sidebar({ currentSampleId, onSampleSelect }) {
 
 ## 🚦 Development
 
+### Local Development
+
 ```bash
-# Install dependencies
+# From the monorepo root (sample-apps/)
 npm install
 
-# Run development server
+# Run only master-sample-app
+cd apps/master-sample-app
 npm run dev
 
-# Build for production
-npm run build
-
-# Start production server
-npm start
+# Or run all apps (from root)
+npm run dev
 ```
+
+### Deployment to Vercel
+
+1. **Import your repository** to Vercel
+2. **Project Settings**:
+   - Framework Preset: `Next.js`
+   - Root Directory: `apps/master-sample-app`
+   - Build Command: `npm run build`
+   - Install Command: `cd ../.. && npm install`
+3. **Deploy**
+
+The app will automatically have access to all sample app source code in the monorepo.
 
 ## 🔧 Troubleshooting
 
-### Code not loading from GitHub
-- Verify `githubRepoPath` format: `owner/repo` (no https://)
-- Check file paths exist in repository
-- Ensure repository is public
-- Check browser console for CORS issues
+### Code not loading
+- Verify file paths in `code-files.ts` are relative to `sample-apps/` root
+- Example: `apps/react/comments/tables/ag-grid/single-tool/...`
+- Check file paths exist in the monorepo
+- Check browser console and Network tab for API errors
+- Verify the API route at `/api/read-file` is working
 
 ### Sample not switching
 - Verify sample ID matches exactly
@@ -268,13 +283,20 @@ npm start
 - Verify all imports are correct
 - Check sample metadata follows the interface
 
+### Vercel deployment issues
+- Ensure Root Directory is set to `apps/master-sample-app`
+- Verify Install Command includes `cd ../.. && npm install`
+- Check build logs for any file access errors
+- The entire monorepo should be accessible during build and runtime
+
 ## 📝 Notes
 
 - **No Routing**: All samples on one page, switched via state
 - **Performance**: Iframes reload when sample changes
-- **Code Fetching**: Done client-side from GitHub raw URLs
-- **Fallback**: Shows default code if GitHub fetch fails
-- **Sidebar**: Currently static, can be enhanced to be dynamic
+- **Code Fetching**: Server-side API route reads from local monorepo
+- **Monorepo Structure**: Leverages turborepo workspace structure
+- **Sidebar**: Dynamic navigation tree based on folder structure
+- **Production Ready**: Works seamlessly on Vercel with proper configuration
 
 ## 🎉 Benefits
 

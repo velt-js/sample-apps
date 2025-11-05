@@ -15,8 +15,6 @@ import tanstackMultipleToolsMeta from './tanstack-multiple-tools/metadata'
 import { codeFiles as tanstackMultipleToolsCodeFiles } from './tanstack-multiple-tools/code-files'
 import tanstackSingleToolMeta from './tanstack-single-tool/metadata'
 import { codeFiles as tanstackSingleToolCodeFiles } from './tanstack-single-tool/code-files'
-import tiptapDemoMeta from './tiptap-demo/metadata'
-import { codeFiles as tiptapDemoCodeFiles } from './tiptap-demo/code-files'
 import tiptapCommentsDemoMeta from './tiptap-comments-demo/metadata'
 import { codeFiles as tiptapCommentsDemoCodeFiles } from './tiptap-comments-demo/code-files'
 
@@ -25,39 +23,35 @@ export const SAMPLES: Record<string, Sample> = {
     metadata: cursorsPlaygroundMeta,
     codeFiles: cursorsPlaygroundCodeFiles
   },
-  'react-canvas-libraries-reactflow-reactflow-demo': {
+  'react-crdt-canvas-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles
   },
-  'react-tables-libraries-aggrid-multiple-tools': {
+  'react-comments-tables-aggrid-multiple-tools': {
     metadata: multipleToolsMeta,
     codeFiles: multipleToolsCodeFiles
   },
-  'react-tables-libraries-aggrid-single-tool': {
+  'react-comments-tables-aggrid-single-tool': {
     metadata: agGridSingleToolMeta,
     codeFiles: agGridSingleToolCodeFiles
   },
-  'react-tables-libraries-aggrid-comment-aggregation': {
+  'react-comments-tables-aggrid-comment-aggregation': {
     metadata: commentAggregationMeta,
     codeFiles: commentAggregationCodeFiles
   },
-  'react-tables-libraries-tanstack-comment-aggregation': {
+  'react-comments-tables-tanstack-comment-aggregation': {
     metadata: tanstackCommentAggregationMeta,
     codeFiles: tanstackCommentAggregationCodeFiles
   },
-  'react-tables-libraries-tanstack-multiple-tools': {
+  'react-comments-tables-tanstack-multiple-tools': {
     metadata: tanstackMultipleToolsMeta,
     codeFiles: tanstackMultipleToolsCodeFiles
   },
-  'react-tables-libraries-tanstack-single-tool': {
+  'react-comments-tables-tanstack-single-tool': {
     metadata: tanstackSingleToolMeta,
     codeFiles: tanstackSingleToolCodeFiles
   },
-  // 'react-text-editors-libraries-tiptap-tiptap-demo': {
-  //   metadata: tiptapDemoMeta,
-  //   codeFiles: tiptapDemoCodeFiles
-  // },
-  'react-text-editors-libraries-tiptap-tiptap-comments-demo': {
+  'react-comments-text-editors-tiptap-tiptap-comments-demo': {
     metadata: tiptapCommentsDemoMeta,
     codeFiles: tiptapCommentsDemoCodeFiles
   }

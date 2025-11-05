@@ -16,14 +16,14 @@ interface SidebarProps {
 const sampleIdToItemName = (sampleId: string): string => {
   const mapping: Record<string, string> = {
     'cursors-playground': 'playground',
-    'react-canvas-libraries-reactflow-reactflow-demo': 'reactflow-demo',
-    'react-tables-libraries-aggrid-multiple-tools': 'multiple-tools',
-    'react-tables-libraries-aggrid-single-tool': 'single-tool',
-    'react-tables-libraries-aggrid-comment-aggregation': 'comment-aggregation',
-    'react-tables-libraries-tanstack-comment-aggregation': 'tanstack-comment-aggregation',
-    'react-tables-libraries-tanstack-multiple-tools': 'tanstack-multiple-tools',
-    'react-tables-libraries-tanstack-single-tool': 'tanstack-single-tool',
-    'react-text-editors-libraries-tiptap-tiptap-comments-demo': 'tiptap-comments-demo',
+    'react-crdt-canvas-reactflow-reactflow-demo': 'reactflow-demo',
+    'react-comments-tables-aggrid-multiple-tools': 'aggrid-multiple-tools',
+    'react-comments-tables-aggrid-single-tool': 'aggrid-single-tool',
+    'react-comments-tables-aggrid-comment-aggregation': 'aggrid-comment-aggregation',
+    'react-comments-tables-tanstack-comment-aggregation': 'tanstack-comment-aggregation',
+    'react-comments-tables-tanstack-multiple-tools': 'tanstack-multiple-tools',
+    'react-comments-tables-tanstack-single-tool': 'tanstack-single-tool',
+    'react-comments-text-editors-tiptap-tiptap-comments-demo': 'tiptap-comments-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -31,17 +31,15 @@ const sampleIdToItemName = (sampleId: string): string => {
 export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     cursors: true,
-    react: true,
-    canvas: true,
-    libraries: true,
-    tables: true,
-    tablesLibraries: true,
-    aggrid: true,
+    comments: true,
+    commentsTables: true,
+    agGrid: true,
     tanstack: true,
-    reactflow: true,
-    textEditors: true,
-    textEditorLibraries: true,
+    commentsTextEditors: true,
     tiptap: true,
+    crdt: true,
+    crdtCanvas: true,
+    reactflow: true,
   })
   const [selectedItem, setSelectedItem] = useState<string>(() => {
     // Initialize with current sample ID if available
@@ -140,183 +138,122 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                   )}
                 </div>
 
-                {/* React Section with nested hierarchy */}
+                {/* Comments Section */}
                 <div className="mb-1">
                   <button
-                    onClick={() => toggleSection("react")}
+                    onClick={() => toggleSection("comments")}
                     className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
                   >
-                    <span>React</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.react && "rotate-90")} />
+                    <span>Comments</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.comments && "rotate-90")} />
                   </button>
-                  {expandedSections.react && (
+                  {expandedSections.comments && (
                     <div className="mt-2 ml-2 space-y-1">
-                      {/* Canvas Section */}
-                      <button
-                        onClick={() => toggleSection("canvas")}
-                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
-                      >
-                        <span>Canvas</span>
-                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.canvas && "rotate-90")} />
-                      </button>
-                      {expandedSections.canvas && (
-                        <div className="mt-2 ml-2 space-y-1">
-                          {/* Libraries Section */}
-                          <button
-                            onClick={() => toggleSection("libraries")}
-                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                          >
-                            <span>Libraries</span>
-                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.libraries && "rotate-90")} />
-                          </button>
-                          {expandedSections.libraries && (
-                            <div className="mt-2 ml-2 space-y-1">
-                              {/* ReactFlow Section */}
-                              <button
-                                onClick={() => toggleSection("reactflow")}
-                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
-                              >
-                                <span>ReactFlow</span>
-                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.reactflow && "rotate-90")} />
-                              </button>
-                              {expandedSections.reactflow && (
-                                <div className="mt-2 ml-2 space-y-1">
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("reactflow-demo")
-                                      onSampleSelect?.("react-canvas-libraries-reactflow-reactflow-demo")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "reactflow-demo" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    reactflow-demo
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      )}
-
                       {/* Tables Section */}
                       <button
-                        onClick={() => toggleSection("tables")}
+                        onClick={() => toggleSection("commentsTables")}
                         className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
                       >
                         <span>Tables</span>
-                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tables && "rotate-90")} />
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTables && "rotate-90")} />
                       </button>
-                      {expandedSections.tables && (
+                      {expandedSections.commentsTables && (
                         <div className="mt-2 ml-2 space-y-1">
-                          {/* Tables Libraries Section */}
+                          {/* AG Grid Section */}
                           <button
-                            onClick={() => toggleSection("tablesLibraries")}
+                            onClick={() => toggleSection("agGrid")}
                             className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
                           >
-                            <span>Libraries</span>
-                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tablesLibraries && "rotate-90")} />
+                            <span>AG Grid</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.agGrid && "rotate-90")} />
                           </button>
-                          {expandedSections.tablesLibraries && (
+                          {expandedSections.agGrid && (
                             <div className="mt-2 ml-2 space-y-1">
-                              {/* AgGrid Section */}
                               <button
-                                onClick={() => toggleSection("aggrid")}
-                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                                onClick={() => {
+                                  setSelectedItem("aggrid-comment-aggregation")
+                                  onSampleSelect?.("react-comments-tables-aggrid-comment-aggregation")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "aggrid-comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
                               >
-                                <span>AG Grid</span>
-                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.aggrid && "rotate-90")} />
+                                comment-aggregation
                               </button>
-                              {expandedSections.aggrid && (
-                                <div className="mt-2 ml-2 space-y-1">
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("multiple-tools")
-                                      onSampleSelect?.("react-tables-libraries-aggrid-multiple-tools")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "multiple-tools" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    multiple-tools
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("single-tool")
-                                      onSampleSelect?.("react-tables-libraries-aggrid-single-tool")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "single-tool" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    single-tool
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("comment-aggregation")
-                                      onSampleSelect?.("react-tables-libraries-aggrid-comment-aggregation")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    comment-aggregation
-                                  </button>
-                                </div>
-                              )}
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("aggrid-multiple-tools")
+                                  onSampleSelect?.("react-comments-tables-aggrid-multiple-tools")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "aggrid-multiple-tools" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                multiple-tools
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("aggrid-single-tool")
+                                  onSampleSelect?.("react-comments-tables-aggrid-single-tool")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "aggrid-single-tool" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                single-tool
+                              </button>
+                            </div>
+                          )}
 
-                              {/* TanStack Section */}
+                          {/* TanStack Section */}
+                          <button
+                            onClick={() => toggleSection("tanstack")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>TanStack</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tanstack && "rotate-90")} />
+                          </button>
+                          {expandedSections.tanstack && (
+                            <div className="mt-2 ml-2 space-y-1">
                               <button
-                                onClick={() => toggleSection("tanstack")}
-                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                                onClick={() => {
+                                  setSelectedItem("tanstack-comment-aggregation")
+                                  onSampleSelect?.("react-comments-tables-tanstack-comment-aggregation")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "tanstack-comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
                               >
-                                <span>TanStack</span>
-                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tanstack && "rotate-90")} />
+                                comment-aggregation
                               </button>
-                              {expandedSections.tanstack && (
-                                <div className="mt-2 ml-2 space-y-1">
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("tanstack-multiple-tools")
-                                      onSampleSelect?.("react-tables-libraries-tanstack-multiple-tools")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "tanstack-multiple-tools" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    multiple-tools
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("tanstack-single-tool")
-                                      onSampleSelect?.("react-tables-libraries-tanstack-single-tool")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "tanstack-single-tool" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    single-tool
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("tanstack-comment-aggregation")
-                                      onSampleSelect?.("react-tables-libraries-tanstack-comment-aggregation")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "tanstack-comment-aggregation" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    comment-aggregation
-                                  </button>
-                                </div>
-                              )}
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("tanstack-multiple-tools")
+                                  onSampleSelect?.("react-comments-tables-tanstack-multiple-tools")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "tanstack-multiple-tools" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                multiple-tools
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("tanstack-single-tool")
+                                  onSampleSelect?.("react-comments-tables-tanstack-single-tool")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "tanstack-single-tool" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                single-tool
+                              </button>
                             </div>
                           )}
                         </div>
@@ -324,55 +261,94 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
 
                       {/* Text Editors Section */}
                       <button
-                        onClick={() => toggleSection("textEditors")}
+                        onClick={() => toggleSection("commentsTextEditors")}
                         className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
                       >
                         <span>Text Editors</span>
-                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.textEditors && "rotate-90")} />
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTextEditors && "rotate-90")} />
                       </button>
-                      {expandedSections.textEditors && (
+                      {expandedSections.commentsTextEditors && (
                         <div className="mt-2 ml-2 space-y-1">
-                          {/* Text Editor Libraries Section */}
+                          {/* Tiptap Section */}
                           <button
-                            onClick={() => toggleSection("textEditorLibraries")}
+                            onClick={() => toggleSection("tiptap")}
                             className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
                           >
-                            <span>Libraries</span>
-                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.textEditorLibraries && "rotate-90")} />
+                            <span>Tiptap</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tiptap && "rotate-90")} />
                           </button>
-                          {expandedSections.textEditorLibraries && (
+                          {expandedSections.tiptap && (
                             <div className="mt-2 ml-2 space-y-1">
-                              {/* TipTap Section */}
                               <button
-                                onClick={() => toggleSection("tiptap")}
-                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                                onClick={() => {
+                                  setSelectedItem("tiptap-comments-demo")
+                                  onSampleSelect?.("react-comments-text-editors-tiptap-tiptap-comments-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "tiptap-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
                               >
-                                <span>TipTap</span>
-                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tiptap && "rotate-90")} />
+                                tiptap-comments-demo
                               </button>
-                              {expandedSections.tiptap && (
-                                <div className="mt-2 ml-2 space-y-1">
-                                  <button
-                                    onClick={() => {
-                                      setSelectedItem("tiptap-comments-demo")
-                                      onSampleSelect?.("react-text-editors-libraries-tiptap-tiptap-comments-demo")
-                                    }}
-                                    className={cn(
-                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                      selectedItem === "tiptap-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
-                                    )}
-                                  >
-                                    tiptap-comments-demo
-                                  </button>
-                                </div>
-                              )}
                             </div>
                           )}
                         </div>
                       )}
                     </div>
                   )}
-            </div>
+                </div>
+
+                {/* CRDT Section */}
+                <div className="mb-1">
+                  <button
+                    onClick={() => toggleSection("crdt")}
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
+                  >
+                    <span>CRDT</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdt && "rotate-90")} />
+                  </button>
+                  {expandedSections.crdt && (
+                    <div className="mt-2 ml-2 space-y-1">
+                      {/* Canvas Section */}
+                      <button
+                        onClick={() => toggleSection("crdtCanvas")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>Canvas</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtCanvas && "rotate-90")} />
+                      </button>
+                      {expandedSections.crdtCanvas && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          {/* ReactFlow Section */}
+                          <button
+                            onClick={() => toggleSection("reactflow")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>ReactFlow</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.reactflow && "rotate-90")} />
+                          </button>
+                          {expandedSections.reactflow && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("reactflow-demo")
+                                  onSampleSelect?.("react-crdt-canvas-reactflow-reactflow-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "reactflow-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                reactflow-demo
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </>
             ) : (
               <>

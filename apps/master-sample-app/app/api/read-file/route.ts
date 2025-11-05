@@ -14,13 +14,20 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Security check: ensure the file is within the sample-apps directory
-    const basePath = '/Users/yoenzhang/Downloads/sample-apps'
-    const normalizedPath = path.normalize(filePath)
+    // Get the base path relative to this project
+    // This works both locally and on Vercel
+    // We go up from master-sample-app to sample-apps root: ../../
+    const projectRoot = path.resolve(process.cwd(), '../../')
     
-    if (!normalizedPath.startsWith(basePath)) {
+    // Construct the full path
+    const fullPath = path.join(projectRoot, filePath)
+    const normalizedPath = path.normalize(fullPath)
+    const normalizedBase = path.normalize(projectRoot)
+    
+    // Security check: ensure the file is within the sample-apps directory
+    if (!normalizedPath.startsWith(normalizedBase)) {
       return NextResponse.json(
-        { error: 'Access denied' },
+        { error: 'Access denied - path outside of allowed directory' },
         { status: 403 }
       )
     }

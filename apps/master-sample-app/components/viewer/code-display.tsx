@@ -190,14 +190,13 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
 
       try {
         setIsLoading(true)
-        // Construct the full local path - files are in sample-apps workspace
-        const basePath = '/Users/yoenzhang/Downloads/sample-apps'
-        const fullPath = `${basePath}/${selectedFile.path}`
-        
-        const response = await fetch(`/api/read-file?path=${encodeURIComponent(fullPath)}`)
+        // The path is already relative to sample-apps root (e.g., 'apps/react/...')
+        // The API route will handle resolving it relative to the project structure
+        const response = await fetch(`/api/read-file?path=${encodeURIComponent(selectedFile.path)}`)
         
         if (!response.ok) {
-          throw new Error('Failed to read file')
+          const errorData = await response.json().catch(() => ({ error: 'Failed to read file' }))
+          throw new Error(errorData.error || 'Failed to read file')
         }
         
         const text = await response.text()
