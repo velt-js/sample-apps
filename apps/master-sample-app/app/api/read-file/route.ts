@@ -24,10 +24,22 @@ export async function GET(request: NextRequest) {
     const normalizedPath = path.normalize(fullPath)
     const normalizedBase = path.normalize(projectRoot)
     
+    // Log paths for debugging (helpful for Vercel deployment)
+    console.log('API Route Debug:', {
+      cwd: process.cwd(),
+      projectRoot,
+      filePath,
+      fullPath: normalizedPath,
+      exists: require('fs').existsSync(normalizedPath)
+    })
+    
     // Security check: ensure the file is within the sample-apps directory
     if (!normalizedPath.startsWith(normalizedBase)) {
       return NextResponse.json(
-        { error: 'Access denied - path outside of allowed directory' },
+        { 
+          error: 'Access denied - path outside of allowed directory',
+          debug: { normalizedPath, normalizedBase }
+        },
         { status: 403 }
       )
     }
@@ -43,8 +55,18 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error reading file:', error)
+    console.error('Error details:', {
+      cwd: process.cwd(),
+      filePath: searchParams.get('path'),
+      errorMessage: error instanceof Error ? error.message : 'Unknown error'
+    })
     return NextResponse.json(
-      { error: 'Failed to read file', details: error instanceof Error ? error.message : 'Unknown error' },
+      { 
+        error: 'Failed to read file', 
+        details: error instanceof Error ? error.message : 'Unknown error',
+        path: searchParams.get('path'),
+        cwd: process.cwd()
+      },
       { status: 500 }
     )
   }
