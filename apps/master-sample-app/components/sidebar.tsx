@@ -111,13 +111,13 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
           <nav className="flex-1 overflow-y-auto px-3">
             {activePill === "feature" ? (
               <>
-                {/* Cursors Section */}
+                {/* cursors Section */}
                 <div className="mb-1">
                   <button
                     onClick={() => toggleSection("cursors")}
                     className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
                   >
-                    <span>Cursors</span>
+                    <span>cursors</span>
                     <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.cursors && "rotate-90")} />
                   </button>
                   {expandedSections.cursors && (
@@ -132,39 +132,39 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                           selectedItem === "playground" ? "bg-secondary" : "hover:bg-secondary/50",
                         )}
                       >
-                        Playground
+                        playground
                       </button>
                     </div>
                   )}
                 </div>
 
-                {/* Comments Section */}
+                {/* comments Section */}
                 <div className="mb-1">
                   <button
                     onClick={() => toggleSection("comments")}
                     className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
                   >
-                    <span>Comments</span>
+                    <span>comments</span>
                     <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.comments && "rotate-90")} />
                   </button>
                   {expandedSections.comments && (
                     <div className="mt-2 ml-2 space-y-1">
-                      {/* Tables Section */}
+                      {/* tables Section */}
                       <button
                         onClick={() => toggleSection("commentsTables")}
                         className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
                       >
-                        <span>Tables</span>
+                        <span>tables</span>
                         <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTables && "rotate-90")} />
                       </button>
                       {expandedSections.commentsTables && (
                         <div className="mt-2 ml-2 space-y-1">
-                          {/* AG Grid Section */}
+                          {/* ag-grid Section */}
                           <button
                             onClick={() => toggleSection("agGrid")}
                             className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
                           >
-                            <span>AG Grid</span>
+                            <span>ag-grid</span>
                             <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.agGrid && "rotate-90")} />
                           </button>
                           {expandedSections.agGrid && (
@@ -208,12 +208,12 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                             </div>
                           )}
 
-                          {/* TanStack Section */}
+                          {/* tanstack Section */}
                           <button
                             onClick={() => toggleSection("tanstack")}
                             className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
                           >
-                            <span>TanStack</span>
+                            <span>tanstack</span>
                             <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tanstack && "rotate-90")} />
                           </button>
                           {expandedSections.tanstack && (
@@ -259,22 +259,22 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                         </div>
                       )}
 
-                      {/* Text Editors Section */}
+                      {/* text-editors Section */}
                       <button
                         onClick={() => toggleSection("commentsTextEditors")}
                         className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
                       >
-                        <span>Text Editors</span>
+                        <span>text-editors</span>
                         <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTextEditors && "rotate-90")} />
                       </button>
                       {expandedSections.commentsTextEditors && (
                         <div className="mt-2 ml-2 space-y-1">
-                          {/* Tiptap Section */}
+                          {/* tiptap Section */}
                           <button
                             onClick={() => toggleSection("tiptap")}
                             className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
                           >
-                            <span>Tiptap</span>
+                            <span>tiptap</span>
                             <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tiptap && "rotate-90")} />
                           </button>
                           {expandedSections.tiptap && (
@@ -299,33 +299,33 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                   )}
                 </div>
 
-                {/* CRDT Section */}
+                {/* crdt Section */}
                 <div className="mb-1">
                   <button
                     onClick={() => toggleSection("crdt")}
                     className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
                   >
-                    <span>CRDT</span>
+                    <span>crdt</span>
                     <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdt && "rotate-90")} />
                   </button>
                   {expandedSections.crdt && (
                     <div className="mt-2 ml-2 space-y-1">
-                      {/* Canvas Section */}
+                      {/* canvas Section */}
                       <button
                         onClick={() => toggleSection("crdtCanvas")}
                         className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
                       >
-                        <span>Canvas</span>
+                        <span>canvas</span>
                         <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtCanvas && "rotate-90")} />
                       </button>
                       {expandedSections.crdtCanvas && (
                         <div className="mt-2 ml-2 space-y-1">
-                          {/* ReactFlow Section */}
+                          {/* reactflow Section */}
                           <button
                             onClick={() => toggleSection("reactflow")}
                             className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
                           >
-                            <span>ReactFlow</span>
+                            <span>reactflow</span>
                             <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.reactflow && "rotate-90")} />
                           </button>
                           {expandedSections.reactflow && (
