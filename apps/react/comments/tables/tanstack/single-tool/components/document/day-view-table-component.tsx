@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState, useRef } from 'react';
-import { useVeltClient } from '@veltdev/react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -25,8 +24,6 @@ import { useTableState } from './hooks/useTableState';
 import { TableData } from './types';
 
 export const TableComponent: React.FC = () => {
-  // [Velt] Get Velt client instance
-  const { client } = useVeltClient();
   const {
     selectedCell,
     setSelectedCell,
@@ -39,17 +36,6 @@ export const TableComponent: React.FC = () => {
   } = useTableState();
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
-
-  // [Velt] Initialize Velt
-  useEffect(() => {
-    if (client) {
-      const commentElement = client.getCommentElement();
-      commentElement.disableCommentPinHighlighter();
-
-      // [Velt] Location-based comments are enabled automatically via data-velt-location-id attribute
-      // [Velt] Velt will prioritize location IDs when the attribute is present on elements
-    }
-  }, [client]);
 
   // TanStack Table sorting state
   const [sorting, setSorting] = useState<SortingState>([{ id: 'date', desc: false }]);

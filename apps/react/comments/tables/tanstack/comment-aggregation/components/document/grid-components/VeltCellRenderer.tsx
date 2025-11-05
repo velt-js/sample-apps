@@ -138,7 +138,7 @@ export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
         {/* [Velt] VeltCommentTool renders a button that allows users to add comments to this specific cell */}
         {/* [Velt] context provides metadata about the cell (row, column, view type) to organize and filter comments */}
-        {/* Only show on hover */}
+        {/* Only show on hover for better UX */}
         {isHovered && (
           <VeltCommentTool
             context={commentContext}

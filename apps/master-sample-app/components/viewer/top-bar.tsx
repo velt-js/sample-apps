@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronLeft, Github, RotateCcw } from "lucide-react"
+import { ChevronLeft, Github, RotateCcw, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useState, useEffect, useRef } from "react"
 import { VeltLogo } from "@/components/velt-logo"
@@ -15,6 +15,7 @@ interface TopBarProps {
   routePath?: string
   documentId?: string
   onReset?: () => void
+  iframeUrl?: string
 }
 
 export function TopBar({ 
@@ -26,7 +27,8 @@ export function TopBar({
   githubUrl = "https://github.com/velt-js/tiptap-velt-nextjs",
   routePath,
   documentId,
-  onReset
+  onReset,
+  iframeUrl
 }: TopBarProps) {
   const [copied, setCopied] = useState(false)
   const [resetting, setResetting] = useState(false)
@@ -35,6 +37,12 @@ export function TopBar({
   const handleGithubClick = () => {
     if (githubUrl) {
       window.open(githubUrl, '_blank', 'noopener,noreferrer')
+    }
+  }
+
+  const handleOpenInNewTab = () => {
+    if (iframeUrl) {
+      window.open(iframeUrl, '_blank', 'noopener,noreferrer')
     }
   }
 
@@ -133,6 +141,14 @@ export function TopBar({
         >
           <RotateCcw className="h-3 w-3" />
           {resetting ? "Resetting..." : "Reset"}
+        </button>
+        <button
+          onClick={handleOpenInNewTab}
+          className="rounded-md px-3 py-1.5 text-xs font-medium transition-colors flex items-center gap-1.5 hover:bg-accent text-foreground"
+          aria-label="Open in new tab"
+        >
+          <ExternalLink className="h-3 w-3" />
+          Open In New Tab
         </button>
         <button
           onClick={handleShare}

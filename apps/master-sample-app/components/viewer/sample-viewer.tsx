@@ -50,6 +50,7 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
                 routePath={sample.metadata.routePath}
                 documentId={documentId}
                 onReset={onReset}
+                iframeUrl={iframeUrl}
               />
 
       {/* Content Area */}

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { VeltCommentTool } from '@veltdev/react'; // [Velt] Component that renders a comment tool button to add comments
 import { CellFormatting, TableData } from '../types';
-import { getCellFormattingKey } from '../utils'; // [Velt] Utility function to generate unique keys for cell-level formatting
+import { getCellFormattingKey } from '../utils';
 
 interface VeltCellRendererProps {
   data: TableData;

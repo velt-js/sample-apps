@@ -1,6 +1,6 @@
 import React from 'react';
 import { CellFormatting } from '../types';
-import { getCellFormattingKey } from '../utils';
+import { getCellFormattingKey } from '../utils'; // [Velt] Utility function to generate unique keys for cell-level formatting
 
 export const createVeltCellRenderer = (
   cellFormatting: Record<string, CellFormatting>,
