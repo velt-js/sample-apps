@@ -1,6 +1,6 @@
 "use client";
 
-import { VeltPresence, VeltSidebarButton, VeltNotificationsTool } from "@veltdev/react";
+import VeltTools from "@/components/velt/VeltTools";
 
 export default function Header() {
   return (
@@ -14,17 +14,7 @@ export default function Header() {
         padding: "16px",
       }}
     >
-      <VeltPresence />
-      <VeltSidebarButton />
-      <VeltNotificationsTool
-        settings={true}
-        shadowDom={false}
-        tabConfig={{
-          forYou: { name: "For You", enable: true },
-          documents: { name: "Documents", enable: true },
-          all: { name: "All", enable: true },
-        }}
-      />
+      <VeltTools />
     </div>
   );
 }
