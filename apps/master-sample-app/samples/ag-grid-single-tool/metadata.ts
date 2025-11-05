@@ -1,7 +1,7 @@
 import { SampleMetadata } from '@/types/sample'
 
 const metadata: SampleMetadata = {
-  id: 'react-tables-libraries-aggrid-single-tool',
+  id: 'react-comments-tables-aggrid-single-tool',
   title: 'react / comments / tables / ag-grid / single-tool',
   category: 'feature',
   section: 'ag-grid',

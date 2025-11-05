@@ -1,7 +1,7 @@
 import { SampleMetadata } from '@/types/sample'
 
 const metadata: SampleMetadata = {
-  id: 'react-tables-libraries-tanstack-comment-aggregation',
+  id: 'react-comments-tables-tanstack-comment-aggregation',
   title: 'react / comments / tables / tanstack / comment-aggregation',
   category: 'feature',
   section: 'tanstack',

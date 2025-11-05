@@ -66,9 +66,7 @@ export function SimpleNode({ data }: NodeProps) {
       </div>
 
       {/* Label */}
-      {/* [Velt] data-velt-target-comment-element-id makes this element commentable */}
       <p
-        data-velt-target-comment-element-id={nodeId}
         style={{
           fontFamily: 'Urbanist, sans-serif',
           fontWeight: 400,

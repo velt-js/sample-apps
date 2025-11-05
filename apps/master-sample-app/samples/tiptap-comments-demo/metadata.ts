@@ -2,7 +2,7 @@ import { SampleMetadata } from '@/types/sample'
 
 // Document ID will be dynamically generated and appended by SampleViewer
 const metadata: SampleMetadata = {
-  id: 'react-text-editors-libraries-tiptap-tiptap-comments-demo',
+  id: 'react-comments-text-editors-tiptap-tiptap-comments-demo',
   title: 'react / comments / text-editors / tiptap / tiptap-comments-demo',
   category: 'feature',
   section: 'tiptap',

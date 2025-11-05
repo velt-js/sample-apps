@@ -7,8 +7,10 @@ import { getDefaultSample, getSampleById, getAllSamples } from "@/samples"
 
 export default function Page() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [currentSampleId, setCurrentSampleId] = useState<string>(() => getDefaultSample().metadata.id)
+  // Always initialize with default to match server render
+  const [currentSampleId, setCurrentSampleId] = useState<string>(getDefaultSample().metadata.id)
   const [documentId, setDocumentId] = useState<string>('')
+  const [isMounted, setIsMounted] = useState(false)
   const isInitialized = useRef(false)
   
   const currentSample = getSampleById(currentSampleId) || getDefaultSample()
@@ -44,13 +46,13 @@ export default function Page() {
     }
   }, [currentSampleId, documentId])
 
-  // Initialize: determine sample from path and get/set document ID
+  // Initialize: determine sample from URL path and get/set document ID
   useEffect(() => {
     if (isInitialized.current) return
     if (typeof window === 'undefined') return
 
     try {
-      // 1. Check URL path to determine which sample to load
+      // 1. Determine which sample to load based on URL path
       const currentPath = window.location.pathname
       const allSamples = getAllSamples()
       const sampleFromPath = allSamples.find(s => s.metadata.routePath === currentPath)
@@ -71,8 +73,12 @@ export default function Page() {
         }
       }
       
-      setCurrentSampleId(targetSampleId)
-      // Store the selection
+      // Update the sample ID if different from default
+      if (targetSampleId !== currentSampleId) {
+        setCurrentSampleId(targetSampleId)
+      }
+      
+      // Store the selection for persistence
       localStorage.setItem('last-selected-sample-id', targetSampleId)
 
       // 2. Check URL for documentId parameter
@@ -84,16 +90,18 @@ export default function Page() {
         setDocumentId(docId)
         localStorage.setItem(`demo-${targetSampleId}-document-id`, docId)
       } else {
-        // 3. Get document ID for this specific demo
+        // Get or generate document ID for this specific demo
         docId = getDocumentIdForDemo(targetSampleId)
         setDocumentId(docId)
       }
       
       isInitialized.current = true
+      setIsMounted(true)
     } catch (error) {
       console.error('Error initializing:', error)
+      setIsMounted(true)
     }
-  }, [getDocumentIdForDemo])
+  }, [currentSampleId, getDocumentIdForDemo])
 
   // Handle sample change: get document ID for the new demo
   useEffect(() => {
@@ -146,6 +154,15 @@ export default function Page() {
     } catch (error) {
       console.error('Error resetting document:', error)
     }
+  }
+
+  // Show loading state during hydration to prevent flash
+  if (!isMounted) {
+    return (
+      <div className="flex h-screen overflow-hidden bg-background items-center justify-center">
+        <div className="text-muted-foreground">Loading...</div>
+      </div>
+    )
   }
 
   return (

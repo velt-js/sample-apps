@@ -1,7 +1,7 @@
 import { SampleMetadata } from '@/types/sample'
 
 const metadata: SampleMetadata = {
-  id: 'react-tables-libraries-tanstack-multiple-tools',
+  id: 'react-comments-tables-tanstack-multiple-tools',
   title: 'react / comments / tables / tanstack / multiple-tools',
   category: 'feature',
   section: 'tanstack',
