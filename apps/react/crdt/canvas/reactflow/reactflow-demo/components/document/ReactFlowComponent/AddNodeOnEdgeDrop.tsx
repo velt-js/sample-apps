@@ -1,7 +1,6 @@
 "use client";
 import { ReactFlow, useReactFlow, type Node, type Edge } from '@xyflow/react';
 import { useCallback, useRef, useState, useEffect } from 'react';
-import { useVeltInitState } from '@veltdev/react';
 // [Velt] Import the ReactFlow CRDT hook - this replaces useNodesState/useEdgesState to enable real-time multiplayer sync
 import { useVeltReactFlowCrdtExtension } from '@veltdev/reactflow-crdt';
 import Header from '../../header/header';
@@ -39,7 +38,6 @@ export function AddNodeOnEdgeDrop() {
   const { screenToFlowPosition, fitView, zoomIn, zoomOut } = useReactFlow();
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(step2IdExport);
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
-  const veltInitialized = useVeltInitState();
 
   // Center nodes on initial load
   useEffect(() => {
@@ -204,6 +202,11 @@ export function AddNodeOnEdgeDrop() {
       {/* Header with Velt Tools */}
       <Header />
 
+      {/* [Velt] ReactFlow component from @xyflow/react enhanced with Velt CRDT capabilities
+          - nodes, edges: Synchronized state from useVeltReactFlowCrdtExtension hook
+          - onNodesChange, onEdgesChange, onConnect: Handlers that broadcast changes to all users in real-time
+          - All other props (onConnectEnd, onNodeClick, etc.) work normally with the native ReactFlow component
+      */}
       <ReactFlow
         style={{ backgroundColor: 'transparent', position: 'relative', zIndex: 1 }}
         nodes={nodes}

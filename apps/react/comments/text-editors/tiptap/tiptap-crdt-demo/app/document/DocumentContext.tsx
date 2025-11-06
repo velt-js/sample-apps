@@ -60,36 +60,9 @@ export function useCurrentDocument(): CurrentDocument {
     isInitialized.current = true;
   }, []);
 
-  useEffect(() => {
-    const handleUrlChange = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const docId = urlParams.get('documentId');
-
-      if (docId && docId !== documentId) {
-        setDocumentId(docId);
-        localStorage.setItem('tiptap-document-id', docId);
-      }
-    };
-
-    window.addEventListener('popstate', handleUrlChange);
-
-    const interval = setInterval(() => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const docId = urlParams.get('documentId');
-      if (docId && docId !== documentId) {
-        handleUrlChange();
-      }
-    }, 1000);
-
-    return () => {
-      window.removeEventListener('popstate', handleUrlChange);
-      clearInterval(interval);
-    };
-  }, [documentId]);
-
   return useMemo(
     () => ({
-      documentId: documentId || 'loading',
+      documentId: documentId,
       documentName: "Tiptap Editor",
     }),
     [documentId]

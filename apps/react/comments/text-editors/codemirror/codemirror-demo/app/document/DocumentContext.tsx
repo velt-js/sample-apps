@@ -69,7 +69,7 @@ export function useCurrentDocument(): CurrentDocument {
 
   return useMemo(
     () => ({
-      documentId: documentId || 'loading',
+      documentId: documentId,
       documentName: "CodeMirror Editor",
     }),
     [documentId]

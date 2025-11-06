@@ -30,44 +30,33 @@ export type CurrentDocument = {
 };
 
 export function useCurrentDocument(): CurrentDocument {
-  // Initialize documentId synchronously on first render to avoid timing issues
-  const [documentId, setDocumentId] = useState<string | null>(() => {
-    if (typeof window === 'undefined') return null;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlDocId = urlParams.get('documentId');
-
-    if (urlDocId) {
-      localStorage.setItem('tiptap-document-id', urlDocId);
-      return urlDocId;
-    }
-
-    const stored = localStorage.getItem('tiptap-document-id');
-    return stored || null;
-  });
-
+  const [documentId, setDocumentId] = useState<string | null>(null);
   const isInitialized = useRef(false);
 
   useEffect(() => {
+    // Prevent double initialization (React Strict Mode, HMR, etc.)
     if (isInitialized.current) return;
 
+    // 1. Check URL for documentId parameter first
     const urlParams = new URLSearchParams(window.location.search);
     let docId = urlParams.get('documentId');
 
     if (docId) {
-      // URL has documentId - use it
+      // Use document ID from URL (shareable link)
       setDocumentId(docId);
       localStorage.setItem('tiptap-document-id', docId);
     } else {
-      // No URL documentId - check localStorage or create new
+      // 2. Check localStorage for existing document
       const stored = localStorage.getItem('tiptap-document-id');
       if (stored) {
         docId = stored;
       } else {
+        // 3. Generate new document ID
         docId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
         localStorage.setItem('tiptap-document-id', docId);
       }
 
+      // Update URL with document ID for shareability
       const newUrl = `${window.location.pathname}?documentId=${docId}`;
       window.history.pushState({}, '', newUrl);
 
@@ -77,28 +66,9 @@ export function useCurrentDocument(): CurrentDocument {
     isInitialized.current = true;
   }, []);
 
-  useEffect(() => {
-    const handleUrlChange = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const docId = urlParams.get('documentId');
-
-      if (docId && docId !== documentId) {
-        setDocumentId(docId);
-        localStorage.setItem('tiptap-document-id', docId);
-      }
-    };
-
-    // Listen for browser back/forward navigation
-    window.addEventListener('popstate', handleUrlChange);
-
-    return () => {
-      window.removeEventListener('popstate', handleUrlChange);
-    };
-  }, [documentId]);
-
   return useMemo(
     () => ({
-      documentId: documentId, // Return actual documentId, no 'loading' fallback
+      documentId: documentId,
       documentName: "Tiptap Editor",
     }),
     [documentId]
