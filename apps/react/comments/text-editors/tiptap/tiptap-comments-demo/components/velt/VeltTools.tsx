@@ -21,7 +21,7 @@ function VeltTools() {
         shadowDom={false}
         tabConfig={{
           forYou: { name: "For You", enable: true },
-          documents: { name: "Payrolls", enable: true },
+          documents: { name: "Documents", enable: true },
           all: { name: "All", enable: true },
         }}
       />
