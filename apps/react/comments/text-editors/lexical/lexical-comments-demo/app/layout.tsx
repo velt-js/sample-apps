@@ -4,8 +4,8 @@ import '../components/velt/ui-customization/styles.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
 export const metadata: Metadata = {
-  title: 'Velt Tiptap Comments Demo',
-  description: 'Tiptap editor with Velt commenting features',
+  title: 'Velt Lexical Comments Demo',
+  description: 'Lexical editor with Velt commenting features',
 }
 
 export default function RootLayout({

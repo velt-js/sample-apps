@@ -1,23 +1,23 @@
-# tiptap-demo
+# lexical-comments-demo
 
 ## Overview
 
-This demo showcases **tiptap** (Library) for **text-editors** in **react**.
+This demo showcases **Lexical** (Library) for **text-editors** in **react** with Velt comments integration.
 
 ## Path
 
 ```
-apps/react/text-editors/libraries/tiptap/tiptap-demo/
+apps/react/comments/text-editors/lexical/lexical-comments-demo/
 ```
 
 ## Package Name
 
-`@apps/react-text-editors-tiptap-tiptap-demo`
+`@apps/react-text-editors-lexical-lexical-comments-demo`
 
 ## Directory Structure
 
 ```
-tiptap-demo/
+lexical-comments-demo/
 ├── app/
 │   ├── layout.tsx          # Root layout
 │   └── page.tsx            # Main page
@@ -55,35 +55,35 @@ pnpm -w install
 ### Run Development Server
 
 ```bash
-cd apps/react/text-editors/libraries/tiptap/tiptap-demo
+cd apps/react/comments/text-editors/lexical/lexical-comments-demo
 pnpm dev
 ```
 
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-text-editors-tiptap-tiptap-demo dev
+pnpm --filter @apps/react-text-editors-lexical-lexical-comments-demo dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-text-editors-tiptap-tiptap-demo build
+pnpm --filter @apps/react-text-editors-lexical-lexical-comments-demo build
 ```
 
 ## Structure
 
 - **Framework**: react
 - **Document**: text-editors
-- **Implementation**: libraries
-- **Library/Solution**: tiptap
-- **Demo**: tiptap-demo
+- **Implementation**: comments
+- **Library/Solution**: lexical
+- **Demo**: lexical-comments-demo
 
 ## Component Organization
 
 - **`components/header/`** - Contains Velt components like notifications, presence indicators, header buttons
 - **`components/sidebar/`** - Contains sidebar-related components
-- **`components/document/`** - Contains the main application logic and tiptap integration
+- **`components/document/`** - Contains the main application logic and Lexical integration with Velt comments
 - **`hooks/`** - Custom React hooks for state management and side effects
 - **`lib/`** - Utility functions and helpers
 
@@ -99,7 +99,7 @@ This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS
 
 ## Next Steps
 
-1. Add your tiptap implementation in `components/document/`
+1. Add your Lexical implementation in `components/document/`
 2. Add Velt collaboration features in `components/header/`
 3. Update this README with specific usage instructions
 4. Add the demo to `master-sample-app` if it should be showcased
