@@ -7,6 +7,7 @@ import Underline from '@tiptap/extension-underline'
 import { useEffect } from 'react'
 import { useCommentAnnotations } from '@veltdev/react' // [Velt] Hook that listens to comment annotations and provides real-time updates when comments are added/removed
 import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments' // [Velt] TipTap extension and utilities for integrating Velt comments into the editor
+import { EditorToolbar } from './ui/EditorToolbar'
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { TipTapComponentProps } from './types'
 import { initialContent } from './constants'
@@ -68,6 +69,8 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
           </div>
         </div>
       </div>
+
+      {editor && <EditorToolbar editor={editor} />}
     </div>
   )
 }
