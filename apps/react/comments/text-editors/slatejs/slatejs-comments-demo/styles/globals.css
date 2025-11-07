@@ -58,8 +58,8 @@
   }
 }
 
-/* TipTap Editor Styles - Matching Figma Design */
-.tiptap-editor-content {
+/* SlateJS Editor Styles - Matching Figma Design */
+.slatejs-editor-content {
   font-family: 'Geist Mono', monospace;
   font-size: 12px;
   font-weight: 400;
@@ -67,7 +67,8 @@
   color: white;
 }
 
-.tiptap-editor-content h1 {
+.slatejs-editor-content h1,
+.slatejs-editor-content span[data-heading="h1"] {
   font-family: 'Urbanist', sans-serif !important;
   font-size: 32px !important;
   font-weight: 700 !important;
@@ -75,10 +76,10 @@
   color: white !important;
   opacity: 1 !important;
   background: transparent !important;
-  margin-bottom: 16px;
 }
 
-.tiptap-editor-content h2 {
+.slatejs-editor-content h2,
+.slatejs-editor-content span[data-heading="h2"] {
   font-family: 'Urbanist', sans-serif !important;
   font-size: 20px !important;
   font-weight: 700 !important;
@@ -86,10 +87,10 @@
   color: white !important;
   opacity: 1 !important;
   background: transparent !important;
-  margin-bottom: 16px;
 }
 
-.tiptap-editor-content h3 {
+.slatejs-editor-content h3,
+.slatejs-editor-content span[data-heading="h3"] {
   font-family: 'Urbanist', sans-serif !important;
   font-size: 16px !important;
   font-weight: 700 !important;
@@ -97,31 +98,52 @@
   color: white !important;
   opacity: 1 !important;
   background: transparent !important;
-  margin-bottom: 16px;
 }
 
-.tiptap-editor-content p {
+.slatejs-editor-content p {
   margin-bottom: 16px;
   opacity: 0.8;
 }
 
-.tiptap-editor-content .ProseMirror {
+/* SlateJS contentEditable styles */
+.slatejs-editor-content [contenteditable="true"] {
   outline: none;
 }
 
-.tiptap-editor-content .ProseMirror:focus {
+.slatejs-editor-content [contenteditable="true"]:focus {
   outline: none;
 }
 
 /* Remove any default mark backgrounds */
-.tiptap-editor-content mark,
-.tiptap-editor-content .ProseMirror mark {
+.slatejs-editor-content mark {
   background: transparent !important;
 }
 
 /* Ensure no backgrounds on any inline elements */
-.tiptap-editor-content .ProseMirror span {
+.slatejs-editor-content span:not([data-heading]) {
   background: transparent !important;
+}
+
+/* Text formatting styles */
+.slatejs-editor-content .bold {
+  font-weight: 700;
+}
+
+.slatejs-editor-content .italic {
+  font-style: italic;
+}
+
+.slatejs-editor-content .underline {
+  text-decoration: underline;
+}
+
+.slatejs-editor-content .strikethrough {
+  text-decoration: line-through;
+}
+
+/* Velt comment highlighting */
+velt-comment-text[comment-available="true"] {
+  background-color: rgba(255, 255, 0, 0.2);
 }
 
 /* Helper Text Animation */

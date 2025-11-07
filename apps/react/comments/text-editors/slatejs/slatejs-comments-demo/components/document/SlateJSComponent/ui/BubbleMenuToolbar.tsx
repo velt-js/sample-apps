@@ -1,5 +1,6 @@
 import React from 'react'
-import { Editor } from '@tiptap/react'
+import { Editor } from 'slate'
+import { useSlate } from 'slate-react'
 import { ToolbarButton } from './ToolbarButton'
 import { ToolbarDivider } from './ToolbarDivider'
 import {
@@ -10,11 +11,27 @@ import {
 } from '../constants'
 
 interface BubbleMenuToolbarProps {
-  editor: Editor
   onAddComment: () => void
 }
 
-export const BubbleMenuToolbar: React.FC<BubbleMenuToolbarProps> = ({ editor, onAddComment }) => {
+const isMarkActive = (editor: Editor, format: string) => {
+  const marks = Editor.marks(editor)
+  return marks ? marks[format as keyof typeof marks] === true : false
+}
+
+const toggleMark = (editor: Editor, format: string) => {
+  const isActive = isMarkActive(editor, format)
+
+  if (isActive) {
+    Editor.removeMark(editor, format)
+  } else {
+    Editor.addMark(editor, format, true)
+  }
+}
+
+export const BubbleMenuToolbar: React.FC<BubbleMenuToolbarProps> = ({ onAddComment }) => {
+  const editor = useSlate()
+
   return (
     <div className="bubble-menu bg-[rgb(34,34,34)] rounded-full p-[6px] shadow-[0_0_80px_rgba(0,0,0,1)] flex gap-[4px] items-center">
       {/* Text Formatting Group */}
@@ -22,26 +39,26 @@ export const BubbleMenuToolbar: React.FC<BubbleMenuToolbarProps> = ({ editor, on
         <ToolbarButton
           icon={imgTablerIconBold}
           alt="Bold"
-          active={editor.isActive('bold')}
-          onClick={() => editor.chain().focus().toggleBold().run()}
+          active={isMarkActive(editor, 'bold')}
+          onClick={() => toggleMark(editor, 'bold')}
         />
         <ToolbarButton
           icon={imgTablerIconItalic}
           alt="Italic"
-          active={editor.isActive('italic')}
-          onClick={() => editor.chain().focus().toggleItalic().run()}
+          active={isMarkActive(editor, 'italic')}
+          onClick={() => toggleMark(editor, 'italic')}
         />
         <ToolbarButton
           icon={imgTablerIconStrikethrough}
           alt="Strikethrough"
-          active={editor.isActive('strike')}
-          onClick={() => editor.chain().focus().toggleStrike().run()}
+          active={isMarkActive(editor, 'strikethrough')}
+          onClick={() => toggleMark(editor, 'strikethrough')}
         />
         <ToolbarButton
           icon={imgTablerIconUnderline}
           alt="Underline"
-          active={editor.isActive('underline')}
-          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          active={isMarkActive(editor, 'underline')}
+          onClick={() => toggleMark(editor, 'underline')}
         />
       </div>
 

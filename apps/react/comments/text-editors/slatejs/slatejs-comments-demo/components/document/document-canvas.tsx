@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useCallback } from 'react'
-import TipTapComponent from './TipTapComponent'
+import SlateJSComponent from './SlateJSComponent'
 import Sidebar from '../sidebar/sidebar'
 import Header from '../header/header'
 
@@ -31,7 +31,7 @@ export default function DocumentCanvas() {
   return (
     <div className="w-full h-screen relative">
       <Header />
-      <TipTapComponent scrollContainerRef={scrollContainerRef} />
+      <SlateJSComponent scrollContainerRef={scrollContainerRef} />
       <div className="absolute top-0 left-0 z-10">
         <Sidebar onScrollToHeading={scrollToHeading} />
       </div>
