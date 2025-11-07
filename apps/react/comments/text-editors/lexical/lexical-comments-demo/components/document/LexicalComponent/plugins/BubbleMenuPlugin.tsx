@@ -15,6 +15,17 @@ export function BubbleMenuPlugin({ onAddComment }: BubbleMenuPluginProps) {
 
   useEffect(() => {
     const updateBubbleMenu = () => {
+      // Check native selection first for immediate feedback
+      const nativeSelection = window.getSelection()
+      const hasNativeSelection = nativeSelection &&
+        nativeSelection.rangeCount > 0 &&
+        nativeSelection.toString().length > 0
+
+      if (!hasNativeSelection) {
+        setIsTextSelected(false)
+        return
+      }
+
       editor.getEditorState().read(() => {
         const selection = $getSelection()
 
@@ -24,11 +35,18 @@ export function BubbleMenuPlugin({ onAddComment }: BubbleMenuPluginProps) {
             const range = nativeSelection.getRangeAt(0)
             const rect = range.getBoundingClientRect()
 
-            setPosition({
-              top: rect.top - 50,
-              left: rect.left + rect.width / 2,
-            })
-            setIsTextSelected(true)
+            // Only show if there's actual dimensions (text is selected)
+            if (rect.width > 0 && rect.height > 0) {
+              setPosition({
+                top: rect.top - 50,
+                left: rect.left + rect.width / 2,
+              })
+              setIsTextSelected(true)
+            } else {
+              setIsTextSelected(false)
+            }
+          } else {
+            setIsTextSelected(false)
           }
         } else {
           setIsTextSelected(false)
@@ -36,7 +54,7 @@ export function BubbleMenuPlugin({ onAddComment }: BubbleMenuPluginProps) {
       })
     }
 
-    return editor.registerCommand(
+    const unregisterCommand = editor.registerCommand(
       SELECTION_CHANGE_COMMAND,
       () => {
         updateBubbleMenu()
@@ -44,6 +62,18 @@ export function BubbleMenuPlugin({ onAddComment }: BubbleMenuPluginProps) {
       },
       1
     )
+
+    // Also listen to native selection changes for better responsiveness
+    const handleSelectionChange = () => {
+      updateBubbleMenu()
+    }
+
+    document.addEventListener('selectionchange', handleSelectionChange)
+
+    return () => {
+      unregisterCommand()
+      document.removeEventListener('selectionchange', handleSelectionChange)
+    }
   }, [editor])
 
   if (!isTextSelected) {

@@ -32,16 +32,7 @@ export class HeadingSpanNode extends DecoratorNode<React.ReactElement> {
   createDOM(): HTMLElement {
     const span = document.createElement('span')
     span.setAttribute('data-heading', this.__level)
-    span.textContent = this.__text
-
-    // Apply inline styles based on heading level
-    const styles = {
-      h1: 'font-family: Urbanist, sans-serif; font-size: 32px; font-weight: 700; line-height: 1.5; color: white;',
-      h2: 'font-family: Urbanist, sans-serif; font-size: 20px; font-weight: 700; line-height: 1.5; color: white;',
-      h3: 'font-family: Urbanist, sans-serif; font-size: 16px; font-weight: 700; line-height: 1.5; color: white;',
-    }
-
-    span.style.cssText = styles[this.__level]
+    // Don't set textContent here - DecoratorNode renders via decorate() method
     return span
   }
 
