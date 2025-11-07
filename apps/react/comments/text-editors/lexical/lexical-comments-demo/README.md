@@ -12,7 +12,7 @@ apps/react/comments/text-editors/lexical/lexical-comments-demo/
 
 ## Package Name
 
-`@apps/react-text-editors-lexical-lexical-comments-demo`
+`@apps/react-comments-text-editors-lexical-lexical-comments-demo`
 
 ## Directory Structure
 
@@ -62,13 +62,13 @@ pnpm dev
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-text-editors-lexical-lexical-comments-demo dev
+pnpm --filter @apps/react-comments-text-editors-lexical-lexical-comments-demo dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-text-editors-lexical-lexical-comments-demo build
+pnpm --filter @apps/react-comments-text-editors-lexical-lexical-comments-demo build
 ```
 
 ## Structure

@@ -4,8 +4,8 @@ import React, { useMemo, useState, useCallback, useEffect, useRef } from 'react'
 import { createEditor, Descendant, Editor, Transforms, Element as SlateElement, BaseEditor } from 'slate'
 import { Slate, Editable, withReact, ReactEditor, RenderElementProps, RenderLeafProps } from 'slate-react'
 import { withHistory, HistoryEditor } from 'slate-history'
-import { useCommentAnnotations } from '@veltdev/react'
-import { withVeltComments, addComment, renderComments, SlateVeltComment } from '@veltdev/slate-velt-comments'
+import { useCommentAnnotations } from '@veltdev/react' // [Velt] Hook that listens to comment annotations and provides real-time updates when comments are added/removed
+import { withVeltComments, addComment, renderComments, SlateVeltComment } from '@veltdev/slate-velt-comments' // [Velt] SlateJS plugin and utilities for integrating Velt comments into the editor
 import type { VeltCommentsElement } from '@veltdev/slate-velt-comments'
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { SlateJSComponentProps } from './types'
@@ -71,22 +71,22 @@ export default function SlateJSComponent({ scrollContainerRef }: SlateJSComponen
 
   const editor = useMemo(() => {
     const baseEditor = createEditor()
-    return withVeltComments(withReact(withHistory(baseEditor)), {
+    return withVeltComments(withReact(withHistory(baseEditor)), { // [Velt] Wraps SlateJS editor with Velt comments plugin to enable comment tracking
       HistoryEditor: HistoryEditor,
     }) as CustomEditor
   }, [])
 
-  const commentAnnotations = useCommentAnnotations()
+  const commentAnnotations = useCommentAnnotations() // [Velt] Subscribes to comment data changes and returns array of all active comment annotations
 
   useEffect(() => {
     if (editor && commentAnnotations?.length) {
-      renderComments({ editor, commentAnnotations })
+      renderComments({ editor, commentAnnotations }) // [Velt] Renders comment highlights and markers in the editor based on annotation positions
     }
   }, [editor, commentAnnotations])
 
   const handleAddComment = useCallback(() => {
     if (editor) {
-      addComment({ editor })
+      addComment({ editor }) // [Velt] Triggers comment creation flow on selected text in the editor
     }
   }, [editor])
 

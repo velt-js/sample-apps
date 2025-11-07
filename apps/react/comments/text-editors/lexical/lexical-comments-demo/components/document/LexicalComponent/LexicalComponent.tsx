@@ -7,8 +7,8 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary'
 import { useEffect } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import { useCommentAnnotations } from '@veltdev/react'
-import { CommentNode, addComment, renderComments } from '@veltdev/lexical-velt-comments'
+import { useCommentAnnotations } from '@veltdev/react' // [Velt] Hook that listens to comment annotations and provides real-time updates when comments are added/removed
+import { CommentNode, addComment, renderComments } from '@veltdev/lexical-velt-comments' // [Velt] Lexical node and utilities for integrating Velt comments into the editor
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { LexicalComponentProps } from './types'
 import { initialContent } from './constants'
@@ -21,17 +21,17 @@ import { HeadingSpanNode } from './nodes/HeadingSpanNode'
 
 function LexicalEditor({ scrollContainerRef }: LexicalComponentProps) {
   const [editor] = useLexicalComposerContext()
-  const commentAnnotations = useCommentAnnotations()
+  const commentAnnotations = useCommentAnnotations() // [Velt] Subscribes to comment data changes and returns array of all active comment annotations
 
   useEffect(() => {
     if (editor && commentAnnotations?.length) {
-      renderComments({ editor, commentAnnotations })
+      renderComments({ editor, commentAnnotations }) // [Velt] Renders comment highlights and markers in the editor based on annotation positions
     }
   }, [editor, commentAnnotations])
 
   const addLexicalVeltComment = () => {
     if (editor) {
-      addComment({ editor })
+      addComment({ editor }) // [Velt] Triggers comment creation flow on selected text in the editor
     }
   }
 
@@ -67,7 +67,7 @@ function LexicalEditor({ scrollContainerRef }: LexicalComponentProps) {
 export default function LexicalComponent({ scrollContainerRef }: LexicalComponentProps) {
   const initialConfig = {
     namespace: 'VeltLexicalEditor',
-    nodes: [CommentNode, HeadingSpanNode],
+    nodes: [CommentNode, HeadingSpanNode], // [Velt] Registers CommentNode to enable comment markers and tracking in the editor
     onError: (error: Error) => console.error(error),
     theme: {
       text: {

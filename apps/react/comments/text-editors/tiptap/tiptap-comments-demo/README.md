@@ -1,4 +1,4 @@
-# tiptap-demo
+# tiptap-comments-demo
 
 ## Overview
 
@@ -7,17 +7,17 @@ This demo showcases **tiptap** (Library) for **text-editors** in **react**.
 ## Path
 
 ```
-apps/react/text-editors/libraries/tiptap/tiptap-demo/
+apps/react/comments/text-editors/tiptap/tiptap-comments-demo/
 ```
 
 ## Package Name
 
-`@apps/react-text-editors-tiptap-tiptap-demo`
+`@apps/react-comments-text-editors-tiptap-tiptap-comments-demo`
 
 ## Directory Structure
 
 ```
-tiptap-demo/
+tiptap-comments-demo/
 ├── app/
 │   ├── layout.tsx          # Root layout
 │   └── page.tsx            # Main page
@@ -55,29 +55,29 @@ pnpm -w install
 ### Run Development Server
 
 ```bash
-cd apps/react/text-editors/libraries/tiptap/tiptap-demo
+cd apps/react/comments/text-editors/tiptap/tiptap-comments-demo
 pnpm dev
 ```
 
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-text-editors-tiptap-tiptap-demo dev
+pnpm --filter @apps/react-comments-text-editors-tiptap-tiptap-comments-demo dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-text-editors-tiptap-tiptap-demo build
+pnpm --filter @apps/react-comments-text-editors-tiptap-tiptap-comments-demo build
 ```
 
 ## Structure
 
 - **Framework**: react
 - **Document**: text-editors
-- **Implementation**: libraries
+- **Implementation**: comments
 - **Library/Solution**: tiptap
-- **Demo**: tiptap-demo
+- **Demo**: tiptap-comments-demo
 
 ## Component Organization
 
