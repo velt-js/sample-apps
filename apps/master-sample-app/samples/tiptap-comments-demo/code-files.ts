@@ -22,7 +22,6 @@ import tipTapIndexContent from '../../../react/comments/text-editors/tiptap/tipt
 import extensionsContent from '../../../react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/extensions.ts?raw'
 import tipTapConstantsContent from '../../../react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/constants.ts?raw'
 import tipTapTypesContent from '../../../react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/types.ts?raw'
-import editorToolbarContent from '../../../react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/EditorToolbar.tsx?raw'
 import bubbleMenuToolbarContent from '../../../react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/BubbleMenuToolbar.tsx?raw'
 import toolbarButtonContent from '../../../react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/ToolbarButton.tsx?raw'
 import toolbarDividerContent from '../../../react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/ToolbarDivider.tsx?raw'
@@ -66,7 +65,6 @@ export const codeFiles: SampleCodeFile[] = [
   { path: 'apps/react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/types.ts', language: 'typescript', content: tipTapTypesContent },
   
   // TipTap UI Components
-  { path: 'apps/react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/EditorToolbar.tsx', language: 'typescript', content: editorToolbarContent },
   { path: 'apps/react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/BubbleMenuToolbar.tsx', language: 'typescript', content: bubbleMenuToolbarContent },
   { path: 'apps/react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/ToolbarButton.tsx', language: 'typescript', content: toolbarButtonContent },
   { path: 'apps/react/comments/text-editors/tiptap/tiptap-comments-demo/components/document/TipTapComponent/ui/ToolbarDivider.tsx', language: 'typescript', content: toolbarDividerContent },

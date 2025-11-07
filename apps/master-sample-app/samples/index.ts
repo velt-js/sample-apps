@@ -17,6 +17,10 @@ import tanstackSingleToolMeta from './tanstack-single-tool/metadata'
 import { codeFiles as tanstackSingleToolCodeFiles } from './tanstack-single-tool/code-files'
 import tiptapCommentsDemoMeta from './tiptap-comments-demo/metadata'
 import { codeFiles as tiptapCommentsDemoCodeFiles } from './tiptap-comments-demo/code-files'
+import slatejsCommentsDemoMeta from './slatejs-comments-demo/metadata'
+import { codeFiles as slatejsCommentsDemoCodeFiles } from './slatejs-comments-demo/code-files'
+import lexicalCommentsDemoMeta from './lexical-comments-demo/metadata'
+import { codeFiles as lexicalCommentsDemoCodeFiles } from './lexical-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -54,6 +58,14 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-tiptap-tiptap-comments-demo': {
     metadata: tiptapCommentsDemoMeta,
     codeFiles: tiptapCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-slatejs-slatejs-comments-demo': {
+    metadata: slatejsCommentsDemoMeta,
+    codeFiles: slatejsCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-lexical-lexical-comments-demo': {
+    metadata: lexicalCommentsDemoMeta,
+    codeFiles: lexicalCommentsDemoCodeFiles
   }
 }
 

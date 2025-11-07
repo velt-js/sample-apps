@@ -14,22 +14,22 @@ export const imgTablerIconPilcrow = "/icons/pilcrow.svg"
 
 export const initialContent = `
 <p><span data-heading="h1">Attention Is All You Need</span></p>
-<p>Ashish Vaswani <br>
-Google Brain avaswani@google.com <br>
-Noam Shazeer <br>
-Google Brain noam@google.com <br>
-Niki Parmar <br>
-Google Research nikip@google.com <br>
-Jakob Uszkoreit <br>
-Google Research usz@google.com <br>
-Llion Jones <br>
-Google Research llion@google.com <br>
-Aidan N. Gomez <br>
-University of Toronto aidan@cs.toronto.edu <br>
-Łukasz Kaiser <br>
-Google Brain lukaszkaiser@google.com <br>
-Illia Polosukhin <br>
-illia.polosukhin@gmail.com <br>
+<p>Ashish Vaswani
+Google Brain avaswani@google.com
+Noam Shazeer
+Google Brain noam@google.com
+Niki Parmar
+Google Research nikip@google.com
+Jakob Uszkoreit
+Google Research usz@google.com
+Llion Jones
+Google Research llion@google.com
+Aidan N. Gomez
+University of Toronto aidan@cs.toronto.edu
+Łukasz Kaiser
+Google Brain lukaszkaiser@google.com
+Illia Polosukhin
+illia.polosukhin@gmail.com
 <br>
 Equal contribution. Listing order is random. Jakob proposed replacing RNNs with self-attention and started the effort to evaluate this idea. Ashish, with Illia, designed and implemented the first Transformer models and has been crucially involved in every aspect of this work. Noam proposed scaled dot-product attention, multi-head attention and the parameter-free position representation and became the other person involved in nearly every detail. Niki designed, implemented, tuned and evaluated countless model variants in our original codebase and tensor2tensor. Llion also experimented with novel model variants, was responsible for our initial codebase, and efficient inference and visualizations. Lukasz and Aidan spent countless long days designing various parts of and implementing tensor2tensor, replacing our earlier codebase, greatly improving results and massively accelerating our research. Work performed while at Google Brain.Work performed while at Google Research.</p>
 

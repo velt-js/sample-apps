@@ -24,6 +24,8 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-comments-tables-tanstack-multiple-tools': 'tanstack-multiple-tools',
     'react-comments-tables-tanstack-single-tool': 'tanstack-single-tool',
     'react-comments-text-editors-tiptap-tiptap-comments-demo': 'tiptap-comments-demo',
+    'react-comments-text-editors-slatejs-slatejs-comments-demo': 'slatejs-comments-demo',
+    'react-comments-text-editors-lexical-lexical-comments-demo': 'lexical-comments-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -37,6 +39,8 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     tanstack: true,
     commentsTextEditors: true,
     tiptap: true,
+    slatejs: true,
+    lexical: true,
     crdt: true,
     crdtCanvas: true,
     reactflow: true,
@@ -290,6 +294,56 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 )}
                               >
                                 tiptap-comments-demo
+                              </button>
+                            </div>
+                          )}
+
+                          {/* slatejs Section */}
+                          <button
+                            onClick={() => toggleSection("slatejs")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>slatejs</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.slatejs && "rotate-90")} />
+                          </button>
+                          {expandedSections.slatejs && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("slatejs-comments-demo")
+                                  onSampleSelect?.("react-comments-text-editors-slatejs-slatejs-comments-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "slatejs-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                slatejs-comments-demo
+                              </button>
+                            </div>
+                          )}
+
+                          {/* lexical Section */}
+                          <button
+                            onClick={() => toggleSection("lexical")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>lexical</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.lexical && "rotate-90")} />
+                          </button>
+                          {expandedSections.lexical && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("lexical-comments-demo")
+                                  onSampleSelect?.("react-comments-text-editors-lexical-lexical-comments-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "lexical-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                lexical-comments-demo
                               </button>
                             </div>
                           )}

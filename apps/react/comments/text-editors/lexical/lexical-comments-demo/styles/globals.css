@@ -63,8 +63,15 @@
   font-family: 'Geist Mono', monospace;
   font-size: 12px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.4;
   color: white;
+}
+
+/* Override prose styles for paragraphs */
+.lexical-editor-content.prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 0;
+  margin-bottom: 1em;
+  line-height: 1.4;
 }
 
 .lexical-editor-content h1,
@@ -103,6 +110,8 @@
 .lexical-editor-content p {
   margin-bottom: 16px;
   opacity: 0.8;
+  white-space: pre-wrap;
+  line-height: 1.4;
 }
 
 /* Lexical contentEditable styles */
