@@ -135,6 +135,63 @@ When user provides Figma JSON, extract values from these sections:
 - Validate target component file exists and is readable
 - Extract the Figma color palette (especially background vs edge colors)
 
+### Velt Component CSS Handling:
+**CRITICAL: When working with Velt components, ALL CSS must go to a centralized styles.css file.**
+
+**Detecting Velt Components:**
+- Target file path contains `components/velt/`
+- Component imports from `@veltdev/react`
+- Component names include Velt-related terms (VeltCollaboration, VeltCustomization, VeltCommentTool, VeltCommentBubble, VeltSidebarButton, VeltNotificationsTool, etc.)
+
+**CSS File Location:**
+When working with Velt components, CSS MUST be written to:
+```
+/Users/yoenzhang/Downloads/sample-apps/apps/react/[PATH_TO_DEMO_APP]/components/velt/ui-customization/styles.css
+```
+
+Where `[PATH_TO_DEMO_APP]` is the specific demo app path, such as:
+- `comments/tables/tanstack/single-tool`
+- `comments/tables/ag-grid/multiple-tools`
+- `comments/text-editors/tiptap/tiptap-comments-demo`
+- `crdt/canvas/reactflow/reactflow-demo`
+- etc.
+
+**CSS Implementation Rules for Velt:**
+1. **NO inline styles** in Velt component files - all CSS goes to styles.css
+2. Use Velt's CSS custom properties pattern: `--velt-property-name`
+3. Use CSS Parts for shadow DOM customization: `velt-component::part(element-name)`
+4. Organize CSS in styles.css into sections:
+   - Typography variables
+   - Border radius variables
+   - Light mode colors
+   - Dark mode colors
+   - Spacing variables
+   - Font size variables
+5. Include precise pixel comments from Figma: `/* 2.5px */`
+
+**Example Velt CSS Structure:**
+```css
+/* Typography */
+--velt-default-font-family: Poppins;
+
+/* Border Radius */
+--velt-border-radius-2xs: 0.061rem; /* 0.972px */
+--velt-border-radius-xs: 0.125rem;  /* 2px */
+
+/* Light Mode Colors */
+--velt-color-neutral-50: #FFFFFF;
+--velt-color-neutral-100: #F8F9FA;
+
+/* Shadow DOM Parts */
+velt-comment-dialog::part(triangle) {
+  border-color: rgb(255, 205, 46) !important;
+}
+```
+
+**Instructions to Sub-Agents:**
+Pass this requirement to ALL sub-agents:
+"CRITICAL: This is a Velt component. All CSS changes must be made to the centralized styles.css file at [path/to/styles.css]. DO NOT add inline styles to the component file. Use Velt CSS custom properties (--velt-*) and CSS parts (::part()) for styling."
+
 ## Phase 2: Launch Specialized Sub-Agents
 
 Launch ALL four sub-agents in PARALLEL using a SINGLE response with multiple Task tool calls.
@@ -199,6 +256,15 @@ Return format:
 **Specific Instructions to Agent B**:
 ```
 Compare EVERY style property in the target React component against Figma data.
+
+**VELT COMPONENT DETECTION:**
+If target file path contains "components/velt/" OR imports from "@veltdev/react":
+- This is a VELT COMPONENT
+- ALL CSS changes MUST go to: components/velt/ui-customization/styles.css
+- DO NOT add inline styles to component files
+- Use Velt CSS custom properties: --velt-property-name
+- Use CSS Parts for shadow DOM: velt-component::part(element-name)
+- When reporting findings, specify that changes go to styles.css, NOT the component file
 
 SOURCE OF TRUTH:
 - If Figma-generated code: Use exact CSS values from code
@@ -406,6 +472,7 @@ Implementation rules:
 4. **Ensure consistency** - if initialEdges and defaultEdgeOptions should match, make them match
 5. **Preserve ALL existing functionality** - only change styling, not logic
 6. **Maintain code structure** - same components, same organization
+7. **For Velt components**: All CSS goes to `components/velt/ui-customization/styles.css` - NO inline styles in component files
 
 Example edit approach:
 - Read the entire target file

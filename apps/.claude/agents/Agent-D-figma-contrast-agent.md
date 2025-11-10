@@ -32,6 +32,17 @@ You will receive:
 3. **Target React component file path** - the file to audit
 4. **Background color** - from Figma data (structure.styles.bg or code)
 
+**VELT COMPONENT COLOR RULES:**
+If target file path contains "components/velt/" OR imports from "@veltdev/react":
+- This is a VELT COMPONENT
+- ALL color fixes MUST go to: `/Users/yoenzhang/Downloads/sample-apps/apps/react/[PATH_TO_DEMO_APP]/components/velt/ui-customization/styles.css`
+- DO NOT add inline color styles to component files
+- Use Velt color variables:
+  - Light mode: `--velt-color-[semantic]-[shade]` (e.g., --velt-color-neutral-900)
+  - Dark mode: Same variable names, different section
+- When reporting contrast issues, specify fixes go to "components/velt/ui-customization/styles.css"
+- Color recommendations should use Velt's variable naming pattern
+
 ## What to Analyze
 
 ### Foreground vs Background Combinations

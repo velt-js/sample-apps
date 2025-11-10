@@ -30,6 +30,28 @@ You will receive ONE of these:
 - Preserve exact numeric values for weights, opacity, etc.
 - Verify background implementations match exactly
 
+**VELT COMPONENT CSS RULES:**
+If target file path contains "components/velt/" OR imports from "@veltdev/react":
+- This is a VELT COMPONENT - ALL CSS MUST go to centralized styles.css
+- CSS file location: `/Users/yoenzhang/Downloads/sample-apps/apps/react/[PATH_TO_DEMO_APP]/components/velt/ui-customization/styles.css`
+- DO NOT add inline styles to component files
+- Use Velt's CSS custom properties pattern:
+  - Colors: `--velt-color-[semantic-name]-[shade]` (e.g., --velt-color-neutral-50, --velt-color-primary-500)
+  - Typography: `--velt-default-font-family`, `--velt-font-size-*`
+  - Spacing: `--velt-spacing-*`
+  - Border radius: `--velt-border-radius-*`
+- Use CSS Parts for shadow DOM styling: `velt-component::part(element-name) { ... }`
+- Organize CSS into sections:
+  - Typography variables
+  - Border radius variables
+  - Light mode colors (--velt-color-*)
+  - Dark mode colors (--velt-color-*)
+  - Spacing variables
+  - Font size variables
+  - Shadow DOM part overrides
+- When reporting findings, ALL recommendations must specify changes go to "components/velt/ui-customization/styles.css"
+- Include Figma-precise pixel comments: `/* 0.972px */`
+
 ## Required Inputs
 
 You will receive:

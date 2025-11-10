@@ -34,6 +34,15 @@ You will receive:
 2. **Target React component file path** - the file to audit
 3. **Asset information** - URLs (from code) OR names + dimensions (from JSON)
 
+**VELT COMPONENT AWARENESS:**
+If target file path contains "components/velt/" OR imports from "@veltdev/react":
+- This is a VELT COMPONENT
+- Asset styling (dimensions, display properties) should go to:
+  `/Users/yoenzhang/Downloads/sample-apps/apps/react/[PATH_TO_DEMO_APP]/components/velt/ui-customization/styles.css`
+- Component files can reference assets via constants/imports, but CSS styling goes to styles.css
+- When reporting findings about asset styling, specify that CSS changes go to styles.css
+- Note: Asset constants/imports in component files are acceptable - only the STYLING goes to CSS file
+
 ## Assets to Verify
 
 ### Icons

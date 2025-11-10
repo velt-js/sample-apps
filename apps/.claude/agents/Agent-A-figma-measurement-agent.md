@@ -30,6 +30,19 @@ You will receive ONE of these:
 - **DO NOT** assume - verify every single measurement
 - Preserve exact precision from source (fractional pixels from code, integer pixels from JSON)
 
+**VELT COMPONENT CSS RULES:**
+If target file path contains "components/velt/" OR imports from "@veltdev/react":
+- This is a VELT COMPONENT
+- ALL CSS measurements (padding, margin, gap, border-radius, font-size, etc.) MUST go to:
+  `/Users/yoenzhang/Downloads/sample-apps/apps/react/[PATH_TO_DEMO_APP]/components/velt/ui-customization/styles.css`
+- DO NOT add inline style measurements to component files
+- Use Velt CSS custom properties for measurements:
+  - `--velt-border-radius-*` for border radius
+  - `--velt-spacing-*` for padding, margin, gap
+  - `--velt-font-size-*` for font sizes
+- Include precise pixel comments: `/* 2.5px */`
+- When reporting findings, specify CSS file location: "components/velt/ui-customization/styles.css"
+
 ## Required Inputs
 
 You will receive:
