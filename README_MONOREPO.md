@@ -122,12 +122,12 @@ If you prefer to create a demo manually, follow these steps:
 
 4. **Run install** from the root:
    ```bash
-   pnpm -w install
+   pnpm install
    ```
 
 5. **Test the build**:
    ```bash
-   pnpm -w build
+   pnpm build
    ```
 
 6. **Update master-sample-app** (if applicable):
@@ -154,13 +154,13 @@ packages:
 ### Root Scripts
 ```bash
 # Run all dev servers in parallel
-pnpm -w dev
+pnpm dev
 
 # Build all apps
-pnpm -w build
+pnpm build
 
 # Run linter across all apps
-pnpm -w lint
+pnpm lint
 ```
 
 ## Path Aliases

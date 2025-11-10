@@ -7,7 +7,7 @@ This demo showcases **blocknote** (Library) for **text-editors** in **react**.
 ## Path
 
 ```
-apps/react/text-editors/libraries/blocknote/blocknote-demo/
+apps/react/comments/text-editors/blocknote/blocknote-demo/
 ```
 
 ## Package Name
@@ -49,13 +49,13 @@ blocknote-demo/
 From the monorepo root:
 
 ```bash
-pnpm -w install
+pnpm install
 ```
 
 ### Run Development Server
 
 ```bash
-cd apps/react/text-editors/libraries/blocknote/blocknote-demo
+cd apps/react/comments/text-editors/blocknote/blocknote-demo
 pnpm dev
 ```
 

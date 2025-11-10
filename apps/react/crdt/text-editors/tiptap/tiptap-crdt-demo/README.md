@@ -7,7 +7,7 @@ This demo showcases **tiptap** for **crdt** (text-editors) in **react**.
 ## Path
 
 ```
-apps/react/crdt/text-editors/tiptap/tiptap-crdt-demo/
+apps/react/crdt/tiptap-crdt-demo/
 ```
 
 ## Package Name
@@ -55,7 +55,7 @@ pnpm install
 ### Run Development Server
 
 ```bash
-cd apps/react/crdt/text-editors/tiptap/tiptap-crdt-demo
+cd apps/react/crdt/tiptap-crdt-demo
 pnpm dev
 ```
 

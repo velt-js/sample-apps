@@ -1,23 +1,23 @@
-# marketing-spend-demo
+# dashboard-demo
 
 ## Overview
 
-This demo showcases **AgGrid** (Library) for **tables** in **react**.
+This demo showcases **page-comments** for **comments** (dashboard) in **react**.
 
 ## Path
 
 ```
-apps/react/comments/tables/ag-grid/single-tool/
+apps/react/comments/dashboard/page-comments/dashboard-demo/
 ```
 
 ## Package Name
 
-`@apps/react-tables-AgGrid-marketing-spend-demo-single-comment`
+`@apps/react-comments-dashboard-page-comments-dashboard-demo`
 
 ## Directory Structure
 
 ```
-marketing-spend-demo/
+dashboard-demo/
 ├── app/
 │   ├── layout.tsx          # Root layout
 │   └── page.tsx            # Main page
@@ -55,35 +55,35 @@ pnpm install
 ### Run Development Server
 
 ```bash
-cd apps/react/comments/tables/ag-grid/single-tool
+cd apps/react/comments/dashboard/page-comments/dashboard-demo
 pnpm dev
 ```
 
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo-single-comment dev
+pnpm --filter @apps/react-comments-dashboard-page-comments-dashboard-demo dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo-single-comment build
+pnpm --filter @apps/react-comments-dashboard-page-comments-dashboard-demo build
 ```
 
 ## Structure
 
 - **Framework**: react
-- **Document**: tables
-- **Implementation**: libraries
-- **Library/Solution**: AgGrid
-- **Demo**: marketing-spend-demo
+- **Feature**: comments
+- **Document**: dashboard
+- **Library**: page-comments
+- **Demo**: dashboard-demo
 
 ## Component Organization
 
 - **`components/header/`** - Contains Velt components like notifications, presence indicators, header buttons
 - **`components/sidebar/`** - Contains sidebar-related components
-- **`components/document/`** - Contains the main application logic and AgGrid integration
+- **`components/document/`** - Contains the main application logic and page-comments integration
 - **`hooks/`** - Custom React hooks for state management and side effects
 - **`lib/`** - Utility functions and helpers
 
@@ -99,7 +99,7 @@ This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS
 
 ## Next Steps
 
-1. Add your AgGrid implementation in `components/document/`
+1. Add your page-comments implementation in `components/document/`
 2. Add Velt collaboration features in `components/header/`
 3. Update this README with specific usage instructions
 4. Add the demo to `master-sample-app` if it should be showcased
@@ -107,6 +107,6 @@ This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS
 
 ## Learn More
 
-- [Monorepo Structure Guide](../../../../README_MONOREPO.md)
-- [Structure Documentation](../../../../docs/structure.md)
+- [Monorepo Structure Guide](../../../../../README_MONOREPO.md)
+- [Structure Documentation](../../../../../docs/structure.md)
 - [Velt Documentation](https://docs.velt.dev)

@@ -103,9 +103,9 @@ The easiest way to add a new demo:
 ```bash
 pnpm new:demo -- \
   --framework react \
-  --document canvas \
-  --implementation libraries \
-  --libraryOrSolution reactflow \
+  --feature CRDT \
+  --document dashboard \
+  --library reactflow \
   --demo my-new-demo
 ```
 

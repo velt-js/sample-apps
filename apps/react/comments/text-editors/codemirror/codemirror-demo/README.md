@@ -7,7 +7,7 @@ This demo showcases **codemirror** (Library) for **text-editors** in **react**.
 ## Path
 
 ```
-apps/react/text-editors/libraries/codemirror/codemirror-demo/
+apps/react/comments/text-editors/codemirror/codemirror-demo/
 ```
 
 ## Package Name
@@ -49,13 +49,13 @@ codemirror-demo/
 From the monorepo root:
 
 ```bash
-pnpm -w install
+pnpm install
 ```
 
 ### Run Development Server
 
 ```bash
-cd apps/react/text-editors/libraries/codemirror/codemirror-demo
+cd apps/react/comments/text-editors/codemirror/codemirror-demo
 pnpm dev
 ```
 

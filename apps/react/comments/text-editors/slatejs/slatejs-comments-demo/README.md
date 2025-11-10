@@ -12,7 +12,7 @@ apps/react/comments/text-editors/slatejs/slatejs-comments-demo/
 
 ## Package Name
 
-`@apps/react-comments-text-editors-slatejs-slatejs-comments-demo`
+`@apps/react-text-editors-slatejs-slatejs-comments-demo`
 
 ## Directory Structure
 
@@ -49,7 +49,7 @@ slatejs-comments-demo/
 From the monorepo root:
 
 ```bash
-pnpm -w install
+pnpm install
 ```
 
 ### Run Development Server
@@ -62,13 +62,13 @@ pnpm dev
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-comments-text-editors-slatejs-slatejs-comments-demo dev
+pnpm --filter @apps/react-text-editors-slatejs-slatejs-comments-demo dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-comments-text-editors-slatejs-slatejs-comments-demo build
+pnpm --filter @apps/react-text-editors-slatejs-slatejs-comments-demo build
 ```
 
 ## Structure

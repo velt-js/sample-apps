@@ -7,12 +7,12 @@ This demo showcases **AgGrid** (Library) for **tables** in **react**.
 ## Path
 
 ```
-apps/react/tables/libraries/AgGrid/marketing-spend-demo/
+apps/react/comments/tables/ag-grid/comment-aggregation/
 ```
 
 ## Package Name
 
-`@apps/react-tables-AgGrid-marketing-spend-demo`
+`@apps/react-tables-AgGrid-marketing-spend-demo-comment-aggregation`
 
 ## Directory Structure
 
@@ -49,26 +49,26 @@ marketing-spend-demo/
 From the monorepo root:
 
 ```bash
-pnpm -w install
+pnpm install
 ```
 
 ### Run Development Server
 
 ```bash
-cd apps/react/tables/libraries/AgGrid/marketing-spend-demo
+cd apps/react/comments/tables/ag-grid/comment-aggregation
 pnpm dev
 ```
 
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo dev
+pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo-comment-aggregation dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo build
+pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo-comment-aggregation build
 ```
 
 ## Structure
