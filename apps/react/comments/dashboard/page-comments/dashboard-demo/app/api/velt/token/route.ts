@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // [Velt] Replace with your own API key and auth token from https://console.velt.dev
 const NEXT_PUBLIC_VELT_API_KEY = "YOUR_VELT_API_KEY";
-const VELT_AUTH_TOKEN = "YOUR_VELT_AUTH_TOKEN";
+const VELT_AUTH_TOKEN = "bd4d5226050470b6c658054fcdf1092a";
 
 export async function POST(req: NextRequest) {
   try {

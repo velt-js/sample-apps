@@ -265,10 +265,11 @@ export default function DocumentCanvas() {
                 <div className="relative w-full h-[196px]">
                   <Image
                     alt="Visitors per Week Chart"
-                    className="block max-w-none size-full"
+                    className="block max-w-none"
                     src="/assets/dashboard/chart-graph.svg"
-                    width={504}
-                    height={196}
+                    fill
+                    priority
+                    style={{ objectFit: 'contain' }}
                   />
                 </div>
               </div>
@@ -287,17 +288,17 @@ export default function DocumentCanvas() {
                 <div className="relative w-full h-[196px]">
                   <Image
                     alt="Visitors per Week Chart"
-                    className="block max-w-none size-full"
+                    className="block max-w-none"
                     src="/assets/dashboard/chart-graph.svg"
-                    width={504}
-                    height={196}
+                    fill
+                    style={{ objectFit: 'contain' }}
                   />
                 </div>
               </div>
             </div>
 
             {/* Notification Banner */}
-            <div id="panel-notification" data-velt-target-comment-element-id="panel-notification" className="bg-[rgba(245,93,103,0.12)] box-border flex gap-[18px] h-[56px] items-center p-[16px] rounded-[8px] mb-[6px]">
+            <div id="panel-notification" className="bg-[rgba(245,93,103,0.12)] box-border flex gap-[18px] h-[56px] items-center p-[16px] rounded-[8px] mb-[6px]">
               <div className="relative size-[24px]">
                 <Image
                   alt=""
@@ -310,14 +311,10 @@ export default function DocumentCanvas() {
               <p className="flex-1 font-['Urbanist',sans-serif] font-normal leading-none text-[15px] text-nowrap text-white whitespace-pre">
                 You got 50 signups from Reddit.
               </p>
-              <div className="flex gap-[8px] items-center">
-                <VeltCommentBubble targetCommentElementId="panel-notification" />
-                <VeltCommentTool targetCommentElementId="panel-notification" />
-              </div>
             </div>
 
             {/* Add New Metric Section */}
-            <div id="panel-add-metric" data-velt-target-comment-element-id="panel-add-metric" className="border border-[rgba(217,217,217,0.16)] border-dashed h-[104px] rounded-[8px] flex items-center justify-center relative">
+            <div id="panel-add-metric" className="border border-[rgba(217,217,217,0.16)] border-dashed h-[104px] rounded-[8px] flex items-center justify-center relative">
               <div className="flex gap-[10px] items-center">
                 <div className="relative size-[18px]">
                   <Image
@@ -331,10 +328,6 @@ export default function DocumentCanvas() {
                 <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[18px] text-nowrap text-white whitespace-pre">
                   Add New Metric
                 </p>
-              </div>
-              <div className="absolute top-[24px] right-[24px] flex gap-[8px] items-center">
-                <VeltCommentBubble targetCommentElementId="panel-add-metric" />
-                <VeltCommentTool targetCommentElementId="panel-add-metric" />
               </div>
             </div>
           </div>

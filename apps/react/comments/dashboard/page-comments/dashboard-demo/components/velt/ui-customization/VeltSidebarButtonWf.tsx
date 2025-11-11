@@ -8,7 +8,6 @@ const VeltSidebarButtonWf = () => {
     <VeltSidebarButtonWireframe>
       <div
         style={{
-          background: '#141414',
           borderRadius: '24px',
           padding: '6px 7px 6px 12px',
           display: 'flex',

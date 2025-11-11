@@ -3,6 +3,7 @@
 import { VeltProvider } from "@veltdev/react";
 import { useVeltAuthProvider } from "@/components/velt/VeltInitializeUser";
 import { VeltCollaboration } from "@/components/velt/VeltCollaboration";
+import { CommentsSidebarProvider } from "@/components/velt/CommentsSidebarContext";
 import DocumentCanvas from '@/components/document/document-canvas'
 
 // [Velt] Replace with your own API key from https://console.velt.dev
@@ -13,13 +14,15 @@ export default function Home() {
   const { authProvider } = useVeltAuthProvider();
 
   return (
-    // [Velt] Wrap app with VeltProvider
+    // [Velt] Wrap app with VeltProvider and CommentsSidebarProvider
     <VeltProvider
       apiKey={NEXT_PUBLIC_VELT_API_KEY}
       authProvider={authProvider}
     >
-      <VeltCollaboration />
-      <DocumentCanvas />
+      <CommentsSidebarProvider>
+        <VeltCollaboration />
+        <DocumentCanvas />
+      </CommentsSidebarProvider>
     </VeltProvider>
   );
 }
