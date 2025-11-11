@@ -6,11 +6,10 @@ import Image from 'next/image'
 
 export default function DocumentCanvas() {
   return (
-    <div className="flex flex-col w-full h-full">
-      <Header />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <div className="flex-1 overflow-auto bg-black">
+    <div className="flex w-full h-screen overflow-hidden">
+      <Sidebar />
+      <div className="flex-1 overflow-auto bg-black relative">
+        <Header />
           <div className="p-6 max-w-[1440px] mx-auto" data-name="Dashboard">
             {/* Breadcrumb Navigation */}
             <div className="flex gap-[16px] items-center mb-[46px]">
@@ -302,7 +301,6 @@ export default function DocumentCanvas() {
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   )

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Urbanist, Poppins } from 'next/font/google'
 import '../styles/globals.css'
+import '../components/velt/ui-customization/styles.css'
+import { AppProviders } from "@/app/userAuth/AppProviders"
 
 const inter = Inter({
   subsets: ['latin'],
@@ -34,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${urbanist.variable} ${poppins.variable}`}>
-        {children}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   )

@@ -1,8 +1,20 @@
+"use client";
+
+import VeltTools from "@/components/velt/VeltTools";
+
 export default function Header() {
   return (
-    <div className="flex items-center gap-2 p-2 border-b bg-background">
-      <h1 className="text-lg font-semibold">dashboard-demo</h1>
-      {/* Add Velt components here: notifications, user presence, etc. */}
+    <div
+      className="absolute top-0 right-0 z-50"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: "8px",
+        padding: "16px",
+      }}
+    >
+      <VeltTools />
     </div>
-  )
+  );
 }
