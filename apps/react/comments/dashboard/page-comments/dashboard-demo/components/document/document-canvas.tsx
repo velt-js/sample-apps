@@ -3,6 +3,7 @@
 import Header from '@/components/header/header'
 import Sidebar from '@/components/sidebar/sidebar'
 import Image from 'next/image'
+import { VeltCommentBubble, VeltCommentTool } from '@veltdev/react'
 
 export default function DocumentCanvas() {
   return (
@@ -68,7 +69,7 @@ export default function DocumentCanvas() {
             {/* Metric Cards Row */}
             <div className="flex gap-[7px] items-center mb-[6px]">
               {/* Search Card */}
-              <div className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
+              <div id="panel-search" data-velt-target-comment-element-id="panel-search" className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
                 <div className="flex gap-[4px] items-end w-full">
                   <div className="flex-1 flex gap-[8px] items-center">
                     <div className="overflow-clip relative size-[16px]">
@@ -85,6 +86,10 @@ export default function DocumentCanvas() {
                     <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-nowrap text-white whitespace-pre">
                       Search
                     </p>
+                  </div>
+                  <div className="flex gap-[8px] items-center">
+                    <VeltCommentBubble targetCommentElementId="panel-search" />
+                    <VeltCommentTool targetCommentElementId="panel-search" />
                   </div>
                 </div>
                 <div className="flex gap-[8px] items-baseline w-full">
@@ -109,7 +114,7 @@ export default function DocumentCanvas() {
               </div>
 
               {/* Reddit Card */}
-              <div className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
+              <div id="panel-reddit" data-velt-target-comment-element-id="panel-reddit" className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
                 <div className="flex gap-[4px] items-end w-full">
                   <div className="flex-1 flex gap-[8px] items-center">
                     <div className="relative size-[16px]">
@@ -124,6 +129,10 @@ export default function DocumentCanvas() {
                     <p className="flex-1 font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-white">
                       Reddit
                     </p>
+                  </div>
+                  <div className="flex gap-[8px] items-center">
+                    <VeltCommentBubble targetCommentElementId="panel-reddit" />
+                    <VeltCommentTool targetCommentElementId="panel-reddit" />
                   </div>
                 </div>
                 <div className="flex gap-[8px] items-baseline w-full">
@@ -148,7 +157,7 @@ export default function DocumentCanvas() {
               </div>
 
               {/* Meta Card */}
-              <div className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
+              <div id="panel-meta" data-velt-target-comment-element-id="panel-meta" className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
                 <div className="flex gap-[4px] items-end w-full">
                   <div className="flex-1 flex gap-[8px] items-center">
                     <div className="overflow-clip relative size-[16px]">
@@ -165,6 +174,10 @@ export default function DocumentCanvas() {
                     <p className="flex-1 font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-white">
                       Meta
                     </p>
+                  </div>
+                  <div className="flex gap-[8px] items-center">
+                    <VeltCommentBubble targetCommentElementId="panel-meta" />
+                    <VeltCommentTool targetCommentElementId="panel-meta" />
                   </div>
                 </div>
                 <div className="flex gap-[8px] items-baseline w-full">
@@ -189,7 +202,7 @@ export default function DocumentCanvas() {
               </div>
 
               {/* Twitter/X Card */}
-              <div className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
+              <div id="panel-twitter" data-velt-target-comment-element-id="panel-twitter" className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]">
                 <div className="flex gap-[4px] items-end w-full">
                   <div className="flex-1 flex gap-[8px] items-center">
                     <div className="overflow-clip relative size-[16px]">
@@ -208,6 +221,10 @@ export default function DocumentCanvas() {
                     <p className="flex-1 font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-white">
                       Twitter / X
                     </p>
+                  </div>
+                  <div className="flex gap-[8px] items-center">
+                    <VeltCommentBubble targetCommentElementId="panel-twitter" />
+                    <VeltCommentTool targetCommentElementId="panel-twitter" />
                   </div>
                 </div>
                 <div className="flex gap-[8px] items-baseline w-full">
@@ -235,10 +252,16 @@ export default function DocumentCanvas() {
             {/* Chart Sections */}
             <div className="flex gap-[6px] items-center leading-[0] mb-[6px]">
               {/* First Chart */}
-              <div className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid h-[284px] rounded-[8px] p-[24px] relative">
-                <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-nowrap text-white whitespace-pre mb-[17px]">
-                  Visitors per Week
-                </p>
+              <div id="panel-chart-1" data-velt-target-comment-element-id="panel-chart-1" className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid h-[284px] rounded-[8px] p-[24px] relative">
+                <div className="flex gap-[4px] items-center justify-between w-full mb-[17px]">
+                  <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-nowrap text-white whitespace-pre">
+                    Visitors per Week
+                  </p>
+                  <div className="flex gap-[8px] items-center">
+                    <VeltCommentBubble targetCommentElementId="panel-chart-1" />
+                    <VeltCommentTool targetCommentElementId="panel-chart-1" />
+                  </div>
+                </div>
                 <div className="relative w-full h-[196px]">
                   <Image
                     alt="Visitors per Week Chart"
@@ -251,10 +274,16 @@ export default function DocumentCanvas() {
               </div>
 
               {/* Second Chart */}
-              <div className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid h-[284px] rounded-[8px] p-[24px] relative">
-                <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-nowrap text-white whitespace-pre mb-[17px]">
-                  Visitors per Week
-                </p>
+              <div id="panel-chart-2" data-velt-target-comment-element-id="panel-chart-2" className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid h-[284px] rounded-[8px] p-[24px] relative">
+                <div className="flex gap-[4px] items-center justify-between w-full mb-[17px]">
+                  <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-nowrap text-white whitespace-pre">
+                    Visitors per Week
+                  </p>
+                  <div className="flex gap-[8px] items-center">
+                    <VeltCommentBubble targetCommentElementId="panel-chart-2" />
+                    <VeltCommentTool targetCommentElementId="panel-chart-2" />
+                  </div>
+                </div>
                 <div className="relative w-full h-[196px]">
                   <Image
                     alt="Visitors per Week Chart"
@@ -268,7 +297,7 @@ export default function DocumentCanvas() {
             </div>
 
             {/* Notification Banner */}
-            <div className="bg-[rgba(245,93,103,0.12)] box-border flex gap-[18px] h-[56px] items-center p-[16px] rounded-[8px] mb-[6px]">
+            <div id="panel-notification" data-velt-target-comment-element-id="panel-notification" className="bg-[rgba(245,93,103,0.12)] box-border flex gap-[18px] h-[56px] items-center p-[16px] rounded-[8px] mb-[6px]">
               <div className="relative size-[24px]">
                 <Image
                   alt=""
@@ -278,13 +307,17 @@ export default function DocumentCanvas() {
                   height={24}
                 />
               </div>
-              <p className="font-['Urbanist',sans-serif] font-normal leading-none text-[15px] text-nowrap text-white whitespace-pre">
+              <p className="flex-1 font-['Urbanist',sans-serif] font-normal leading-none text-[15px] text-nowrap text-white whitespace-pre">
                 You got 50 signups from Reddit.
               </p>
+              <div className="flex gap-[8px] items-center">
+                <VeltCommentBubble targetCommentElementId="panel-notification" />
+                <VeltCommentTool targetCommentElementId="panel-notification" />
+              </div>
             </div>
 
             {/* Add New Metric Section */}
-            <div className="border border-[rgba(217,217,217,0.16)] border-dashed h-[104px] rounded-[8px] flex items-center justify-center">
+            <div id="panel-add-metric" data-velt-target-comment-element-id="panel-add-metric" className="border border-[rgba(217,217,217,0.16)] border-dashed h-[104px] rounded-[8px] flex items-center justify-center relative">
               <div className="flex gap-[10px] items-center">
                 <div className="relative size-[18px]">
                   <Image
@@ -298,6 +331,10 @@ export default function DocumentCanvas() {
                 <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[18px] text-nowrap text-white whitespace-pre">
                   Add New Metric
                 </p>
+              </div>
+              <div className="absolute top-[24px] right-[24px] flex gap-[8px] items-center">
+                <VeltCommentBubble targetCommentElementId="panel-add-metric" />
+                <VeltCommentTool targetCommentElementId="panel-add-metric" />
               </div>
             </div>
           </div>

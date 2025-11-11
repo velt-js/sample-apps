@@ -3,6 +3,7 @@ import {
   VeltPresence,
   VeltSidebarButton,
   VeltNotificationsTool,
+  VeltCommentTool,
 } from "@veltdev/react";
 
 function VeltTools() {
@@ -12,6 +13,8 @@ function VeltTools() {
       <VeltPresence />
       {/* [Velt] Toggle comments sidebar */}
       <VeltSidebarButton />
+      {/* [Velt] Add comment tool - click to target any panel with data-velt-target-comment-element-id */}
+      <VeltCommentTool />
       {/* [Velt] Notifications panel */}
       <VeltNotificationsTool
         settings={true}
