@@ -165,7 +165,7 @@ export default function DocumentCanvas() {
                         <Image
                           alt="Meta"
                           className="block max-w-none size-full"
-                          src="/assets/dashboard/artboard-outline.svg"
+                          src="/assets/dashboard/meta-logo-complete.svg"
                           width={16}
                           height={16}
                         />

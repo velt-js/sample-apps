@@ -199,14 +199,63 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/react/comments/dashboard/page-comments/dashboard-demo:
+    dependencies:
+      clsx:
+        specifier: ^2
+        version: 2.1.1
+      next:
+        specifier: ^15
+        version: 15.5.6(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react:
+        specifier: ^19
+        version: 19.2.0
+      react-dom:
+        specifier: ^19
+        version: 19.2.0(react@19.2.0)
+      tailwind-merge:
+        specifier: ^2
+        version: 2.6.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.18.13
+      '@types/react':
+        specifier: ^19
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.2(@types/react@19.2.2)
+      '@veltdev/types':
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
+      autoprefixer:
+        specifier: ^10
+        version: 10.4.21(postcss@8.5.6)
+      eslint:
+        specifier: ^9.39.1
+        version: 9.39.1(jiti@1.21.7)
+      eslint-config-next:
+        specifier: ^16.0.1
+        version: 16.0.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      postcss:
+        specifier: ^8
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^3.4.0
+        version: 3.4.18(tsx@4.20.6)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   apps/react/comments/tables/ag-grid/comment-aggregation:
     dependencies:
       '@tabler/icons-react':
         specifier: ^3.35.0
         version: 3.35.0(react@19.2.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       ag-grid-community:
         specifier: ^34.3.0
         version: 34.3.0
@@ -239,8 +288,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -266,8 +315,8 @@ importers:
         specifier: ^3.35.0
         version: 3.35.0(react@19.2.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       ag-grid-community:
         specifier: ^34.3.0
         version: 34.3.0
@@ -300,8 +349,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -327,8 +376,8 @@ importers:
         specifier: ^3.35.0
         version: 3.35.0(react@19.2.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       ag-grid-community:
         specifier: ^34.3.0
         version: 34.3.0
@@ -361,8 +410,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -391,8 +440,8 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -419,8 +468,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -449,8 +498,8 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -477,8 +526,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -507,8 +556,8 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -535,8 +584,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -596,7 +645,7 @@ importers:
         version: 2.26.4
       '@veltdev/blocknote-crdt-react':
         specifier: 4.5.0-beta.3
-        version: 4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -623,8 +672,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -662,14 +711,14 @@ importers:
         specifier: ^6.5.2
         version: 6.5.2
       '@veltdev/codemirror-crdt':
-        specifier: 4.5.0-beta.6
-        version: 4.5.0-beta.6
+        specifier: 4.5.8-beta.2
+        version: 4.5.8-beta.2
       '@veltdev/codemirror-crdt-react':
-        specifier: 4.5.0-beta.3
-        version: 4.5.0-beta.3(@veltdev/codemirror-crdt@4.5.0-beta.6)(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 4.5.8-beta.1
+        version: 4.5.8-beta.1(@veltdev/codemirror-crdt@4.5.8-beta.2)(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -705,8 +754,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -744,14 +793,14 @@ importers:
         specifier: ^0.19.0
         version: 0.19.0
       '@veltdev/client':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       '@veltdev/lexical-velt-comments':
         specifier: 4.5.2-beta.2
         version: 4.5.2-beta.2(lexical@0.19.0)
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -781,8 +830,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -805,11 +854,11 @@ importers:
   apps/react/comments/text-editors/slatejs/slatejs-comments-demo:
     dependencies:
       '@veltdev/client':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/slate-velt-comments':
         specifier: ^1.0.3
         version: 1.0.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(slate-react@0.110.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(slate@0.103.0))(slate@0.103.0)
@@ -848,8 +897,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -887,11 +936,11 @@ importers:
         specifier: ^2.26.4
         version: 2.26.4
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-velt-comments':
-        specifier: 4.5.0-beta.14
-        version: 4.5.0-beta.14(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
+        specifier: 4.5.8-beta.1
+        version: 4.5.8-beta.1(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -918,8 +967,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -942,11 +991,11 @@ importers:
   apps/react/crdt/canvas/reactflow/reactflow-demo:
     dependencies:
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/reactflow-crdt':
-        specifier: 4.5.0-beta.6
-        version: 4.5.0-beta.6(yjs@13.6.27)
+        specifier: 4.5.8-beta.1
+        version: 4.5.8-beta.1(yjs@13.6.27)
       '@xyflow/react':
         specifier: ^12.9.1
         version: 12.9.1(@types/react@19.2.2)(immer@10.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -985,8 +1034,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -1036,14 +1085,14 @@ importers:
         specifier: ^2.26.4
         version: 2.26.4
       '@veltdev/react':
-        specifier: ^4.5.7
-        version: 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-crdt-react':
-        specifier: 4.5.0-beta.3
-        version: 4.5.0-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-cursor@2.26.2(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.8-beta.2)(@veltdev/types@4.5.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 4.5.8-beta.3
+        version: 4.5.8-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-velt-comments':
-        specifier: 4.5.0-beta.14
-        version: 4.5.0-beta.14(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
+        specifier: 4.5.8-beta.1
+        version: 4.5.8-beta.1(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1079,8 +1128,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.5.7
-        version: 4.5.7
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -1419,8 +1468,16 @@ packages:
     resolution: {integrity: sha512-csZAzkNhsgwb0I/UAV6/RGFTbiakPCf0ZrGmrIxQpYvGZ00PhTkSnyKNolphgIvmnJeGw6rcGVEXfTzUnFuEvw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@eslint/config-helpers@0.4.2':
+    resolution: {integrity: sha512-gBrxN88gOIf3R7ja5K9slwNayVcZgK6SOUORm2uBzTeIEfeVaIhOpCtTox3P6R7o2jLFwLFTLnC7kU/RGcYEgw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@eslint/core@0.16.0':
     resolution: {integrity: sha512-nmC8/totwobIiFcGkDza3GIKfAw1+hLiYVrh3I1nIomQ8PEr5cxg34jnkmGawul/ep52wGRAcyeDCNtWKSOj4Q==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/core@0.17.0':
+    resolution: {integrity: sha512-yL/sLrpmtDaFEiUj1osRP4TI2MDz1AddJL+jZ7KSqvBuliN4xqYY54IfdN8qD8Toa6g1iloph1fxQNkjOxrrpQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/eslintrc@3.3.1':
@@ -1431,12 +1488,20 @@ packages:
     resolution: {integrity: sha512-UZ1VpFvXf9J06YG9xQBdnzU+kthors6KjhMAl6f4gH4usHyh31rUf2DLGInT8RFYIReYXNSydgPY0V2LuWgl7A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@eslint/js@9.39.1':
+    resolution: {integrity: sha512-S26Stp4zCy88tH94QbBv3XCuzRQiZ9yXofEILmglYTh/Ug/a9/umqvgFtYBAo3Lp0nsI/5/qH1CCrbdK3AP1Tw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@eslint/object-schema@2.1.7':
     resolution: {integrity: sha512-VtAOaymWVfZcmZbp6E2mympDIHvyjXs/12LqWYjVw6qjrfF+VK+fyG33kChz3nnK+SU5/NeHOqrTEHS8sXO3OA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/plugin-kit@0.4.0':
     resolution: {integrity: sha512-sB5uyeq+dwCWyPi31B2gQlVlo+j5brPlWx4yZBrEaRo/nhdDE8Xke1gsGgtiBdaBTxuTkceLVuVt/pclrasb0A==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/plugin-kit@0.4.1':
+    resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@floating-ui/core@1.7.3':
@@ -2823,6 +2888,13 @@ packages:
     peerDependencies:
       '@tiptap/core': ^3.9.0
 
+  '@tiptap/extension-collaboration-caret@3.10.7':
+    resolution: {integrity: sha512-iRlisNcbRwZkSrvmAACmJ2p5/9sZJ9RNfuwv1S4aQFex34dOL3Dj/d5wmb0elkYD6MjACdCZpSmXKf+Q7/2PPg==}
+    peerDependencies:
+      '@tiptap/core': ^3.10.7
+      '@tiptap/pm': ^3.10.7
+      '@tiptap/y-tiptap': ^3.0.0
+
   '@tiptap/extension-collaboration-cursor@2.26.2':
     resolution: {integrity: sha512-FdRb27mZ5Kr18hN6cbfBj1e9F0DOoHB1Gv3IYeic+g4h1C9BjDVMN0+JRBQc+4lamNA8TsHO0oKWRwaPe4sSlA==}
     peerDependencies:
@@ -3304,11 +3376,11 @@ packages:
   '@veltdev/blocknote-crdt@4.5.0-beta.5':
     resolution: {integrity: sha512-0R1P7BQ0sz3wsYoEiR55yf5oUTVkjy+VLFz3JPDR4Y8ulmx8+thRG4THEDd3Hr6w8h6xhFogNYKBNtEuntbFCA==}
 
-  '@veltdev/client@4.5.7':
-    resolution: {integrity: sha512-sYnVSo+a/LMwxAtr4fm7UB2JpQTGlirfKC2sPEi2GSdWE1qbnJEY6LAYufjZ30MGVjOg4M9vO/BJlgIjw2v1Ug==}
+  '@veltdev/client@4.5.8-beta.8':
+    resolution: {integrity: sha512-D2+AlxQYzdmblxnr0asiul/WieX1aSAM9c4Q5tSKnzgxYxcJ74d9cnRWDY8F4uyeTCpqYqB9wVpuh/RYSEPViQ==}
 
-  '@veltdev/codemirror-crdt-react@4.5.0-beta.3':
-    resolution: {integrity: sha512-5UbM37XbA84ZpbxhkZlGlXK+ixVzvBMBCXke8FjSEVI+2iPTXKQfqXmwkCaSU336rAjJfb465VD8sPFxvD+apQ==}
+  '@veltdev/codemirror-crdt-react@4.5.8-beta.1':
+    resolution: {integrity: sha512-P+uXf9QpyovKSaUm0NOPNNGqPqN95EpuzGBE+0cNSeIu1t9i9U5K5iZLy36fH9Oil1O8U2qoKLb8HcKJiTvnMg==}
     peerDependencies:
       '@veltdev/codemirror-crdt': '*'
       '@veltdev/react': '*'
@@ -3316,8 +3388,8 @@ packages:
       react: ^18.2.0 || ^19.0.0
       react-dom: ^18.2.0 || ^19.0.0
 
-  '@veltdev/codemirror-crdt@4.5.0-beta.6':
-    resolution: {integrity: sha512-AM8erER17bC16ND5nnVyzNwuke6DrsnYc1q8XiK+EBsaO3uX+BFzTvzGkpUD4XOcjAUw2n+/SAoMFlsMeTjMmg==}
+  '@veltdev/codemirror-crdt@4.5.8-beta.2':
+    resolution: {integrity: sha512-/be/uy1FZq933x9SVHzOmz74c8uMFr8h0r+FckUWWxPJbplu/Oxy3R51loTUn1Zz1gp9DWQa1/Ox3L9M3hvPwg==}
 
   '@veltdev/lexical-velt-comments@4.5.2-beta.2':
     resolution: {integrity: sha512-xMheY8fba9y54Hovc6dgl+PffljMB2PQRJpkYCfZ2lHSgrAb0Q+hdAun/Idvf1JRVwT91V9mP/GTNCx0FGTMHA==}
@@ -3330,8 +3402,14 @@ packages:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
 
-  '@veltdev/reactflow-crdt@4.5.0-beta.6':
-    resolution: {integrity: sha512-a0Hakanz5zJ0wisCStSMaixH8mX4n+P1fdQqvsh34Dhc//8pPQnqlXp1MG2tIotEMcEuSjPgh+9H4Egt0BBuuw==}
+  '@veltdev/react@4.5.8-beta.8':
+    resolution: {integrity: sha512-LEE73wDYeaB2oMkWcetuOzPpy4A6iKOc9e7AtU7zB1Lj0r460ZJ6KeqwYkAYIiepBCedt0rIrVv4FfvIefwJXw==}
+    peerDependencies:
+      react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
+      react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
+
+  '@veltdev/reactflow-crdt@4.5.8-beta.1':
+    resolution: {integrity: sha512-UH9bLByjB22LpU9jIZidEcykHz7xX8fGQglcOIXicwH5Qu3IftZp/fjBDwNSu0+eVLQtJXR4l7N9TkjqYCNEiw==}
     peerDependencies:
       yjs: ^13.6.20
 
@@ -3343,27 +3421,36 @@ packages:
       slate: ^0.112.0
       slate-react: ^0.112.1
 
-  '@veltdev/tiptap-crdt-react@4.5.0-beta.3':
-    resolution: {integrity: sha512-gmEdy874+AUEj5b+/+/81I+91XjyO2DKVRhOsrTAQp2CsaCR/Cpz3Zy7pBeJxeVw0N2ge89fqUIq0NQuJ+Q2ig==}
+  '@veltdev/tiptap-crdt-react@4.5.8-beta.3':
+    resolution: {integrity: sha512-KtGkHiSzCHRABCgvZUG4/cRMhNeBVgYkYi7pGf8v0RPYXJv3riGGu3LMUCmvTq3uoXvvFDrdn3l3ozDnYticvA==}
     peerDependencies:
-      '@tiptap/core': ^2.23.0
-      '@tiptap/extension-collaboration-cursor': ^2.23.0
+      '@tiptap/core': ^3.0.0
+      '@tiptap/extension-collaboration': ^3.0.0
+      '@tiptap/extension-collaboration-caret': ^3.0.0
+      '@tiptap/pm': ^3.0.0
+      '@tiptap/y-tiptap': ^3.0.0
       '@veltdev/react': '*'
       '@veltdev/tiptap-crdt': '*'
       '@veltdev/types': '*'
       react: ^18.2.0 || ^19.0.0
       react-dom: ^18.2.0 || ^19.0.0
 
-  '@veltdev/tiptap-crdt@4.5.8-beta.2':
-    resolution: {integrity: sha512-+CTGidWflFSIJlA12uQkhz1biNZYx1JumCt4yerjqVSfTSb3w65gLutoM3GhSLVUUg/RVI42h+b2QcC/HQDDZA==}
-
-  '@veltdev/tiptap-velt-comments@4.5.0-beta.14':
-    resolution: {integrity: sha512-Ai5JhbFc7O4ZTA6JIX4+QLkuEvZdcouekLeU7hWkNPLm2FGG4D/WSrBO2EgOLjdrTLqcD/AJogI+Yrh6F1HrXg==}
+  '@veltdev/tiptap-crdt@4.5.8-beta.5':
+    resolution: {integrity: sha512-LVJuf1QezT6BYis/yFj569kE2K/DOtCiNBAqR6bYBCl6bWU3KSEo6RgKkBKe1JltbGbGoz8RuWP2CqE5JSFTQQ==}
     peerDependencies:
-      '@tiptap/core': ^2.x.x
+      '@tiptap/core': ^3.0.0
+      '@tiptap/extension-collaboration': ^3.0.0
+      '@tiptap/extension-collaboration-caret': ^3.0.0
+      '@tiptap/pm': ^3.0.0
+      '@tiptap/y-tiptap': ^3.0.0
 
-  '@veltdev/types@4.5.7':
-    resolution: {integrity: sha512-YNzpI6RQ9oD6M8wG/UJ8vyfUndvkkf3p7HiJEQDWOEdkPUsRnd6SlENnkEVRt+z6F2/cQLtwP9nceE/KdalcHQ==}
+  '@veltdev/tiptap-velt-comments@4.5.8-beta.1':
+    resolution: {integrity: sha512-27aqTE03s3uydUDtKI+TWD0oUGpf19G+JrQQSGJzK2z1sy8H6nfFU0mV1XuPMbb1TOU0SIlHVYYL+5nGubva6Q==}
+    peerDependencies:
+      '@tiptap/core': ^3.x.x
+
+  '@veltdev/types@4.5.8-beta.8':
+    resolution: {integrity: sha512-oGF/9Iod8O5zJPrwh5vq8Lu0gQVK83Fa15ZaTLvbjKMlq4oM1xebC1w7Ki4FZWrWsrza0q9a0zTlYTJRAOnDng==}
 
   '@vercel/analytics@1.5.0':
     resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
@@ -4113,6 +4200,16 @@ packages:
 
   eslint@9.38.0:
     resolution: {integrity: sha512-t5aPOpmtJcZcz5UJyY2GbvpDlsK5E8JqRqoKtfiKE3cNh437KIqfJr3A3AKf5k64NPx6d0G3dno6XDY05PqPtw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    hasBin: true
+    peerDependencies:
+      jiti: '*'
+    peerDependenciesMeta:
+      jiti:
+        optional: true
+
+  eslint@9.39.1:
+    resolution: {integrity: sha512-BhHmn2yNOFA9H9JmmIVKJmd288g9hrVRDkdoIgRCRuSySRUHH7r/DI6aAXW9T1WwUuY3DFgrcaqB+deURBLR5g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
     peerDependencies:
@@ -6505,6 +6602,11 @@ snapshots:
       eslint: 9.38.0(jiti@1.21.7)
       eslint-visitor-keys: 3.4.3
 
+  '@eslint-community/eslint-utils@4.9.0(eslint@9.39.1(jiti@1.21.7))':
+    dependencies:
+      eslint: 9.39.1(jiti@1.21.7)
+      eslint-visitor-keys: 3.4.3
+
   '@eslint-community/regexpp@4.12.2': {}
 
   '@eslint/config-array@0.21.1':
@@ -6519,7 +6621,15 @@ snapshots:
     dependencies:
       '@eslint/core': 0.16.0
 
+  '@eslint/config-helpers@0.4.2':
+    dependencies:
+      '@eslint/core': 0.17.0
+
   '@eslint/core@0.16.0':
+    dependencies:
+      '@types/json-schema': 7.0.15
+
+  '@eslint/core@0.17.0':
     dependencies:
       '@types/json-schema': 7.0.15
 
@@ -6539,11 +6649,18 @@ snapshots:
 
   '@eslint/js@9.38.0': {}
 
+  '@eslint/js@9.39.1': {}
+
   '@eslint/object-schema@2.1.7': {}
 
   '@eslint/plugin-kit@0.4.0':
     dependencies:
       '@eslint/core': 0.16.0
+      levn: 0.4.1
+
+  '@eslint/plugin-kit@0.4.1':
+    dependencies:
+      '@eslint/core': 0.17.0
       levn: 0.4.1
 
   '@floating-ui/core@1.7.3':
@@ -7915,6 +8032,12 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.9.0(@tiptap/pm@3.9.0)
 
+  '@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))':
+    dependencies:
+      '@tiptap/core': 2.26.4(@tiptap/pm@2.26.4)
+      '@tiptap/pm': 2.26.4
+      '@tiptap/y-tiptap': 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
+
   '@tiptap/extension-collaboration-cursor@2.26.2(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))':
     dependencies:
       '@tiptap/core': 2.26.4(@tiptap/pm@2.26.4)
@@ -8285,6 +8408,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/eslint-plugin@8.46.2(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@eslint-community/regexpp': 4.12.2
+      '@typescript-eslint/parser': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/scope-manager': 8.46.2
+      '@typescript-eslint/type-utils': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.46.2
+      eslint: 9.39.1(jiti@1.21.7)
+      graphemer: 1.4.0
+      ignore: 7.0.5
+      natural-compare: 1.4.0
+      ts-api-utils: 2.1.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@1.21.7))(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.46.2
@@ -8293,6 +8433,18 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.46.2
       debug: 4.4.3
       eslint: 9.38.0(jiti@1.21.7)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.46.2
+      '@typescript-eslint/types': 8.46.2
+      '@typescript-eslint/typescript-estree': 8.46.2(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.46.2
+      debug: 4.4.3
+      eslint: 9.39.1(jiti@1.21.7)
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
@@ -8327,6 +8479,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/type-utils@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/types': 8.46.2
+      '@typescript-eslint/typescript-estree': 8.46.2(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      debug: 4.4.3
+      eslint: 9.39.1(jiti@1.21.7)
+      ts-api-utils: 2.1.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/types@8.46.2': {}
 
   '@typescript-eslint/typescript-estree@8.46.2(typescript@5.9.3)':
@@ -8352,6 +8516,17 @@ snapshots:
       '@typescript-eslint/types': 8.46.2
       '@typescript-eslint/typescript-estree': 8.46.2(typescript@5.9.3)
       eslint: 9.38.0(jiti@1.21.7)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/utils@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.0(eslint@9.39.1(jiti@1.21.7))
+      '@typescript-eslint/scope-manager': 8.46.2
+      '@typescript-eslint/types': 8.46.2
+      '@typescript-eslint/typescript-estree': 8.46.2(typescript@5.9.3)
+      eslint: 9.39.1(jiti@1.21.7)
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
@@ -8422,27 +8597,27 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@veltdev/blocknote-crdt-react@4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@veltdev/blocknote-crdt-react@4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@veltdev/blocknote-crdt': 4.5.0-beta.5
       '@veltdev/react': 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@veltdev/types': 4.5.7
+      '@veltdev/types': 4.5.8-beta.8
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
   '@veltdev/blocknote-crdt@4.5.0-beta.5': {}
 
-  '@veltdev/client@4.5.7': {}
+  '@veltdev/client@4.5.8-beta.8': {}
 
-  '@veltdev/codemirror-crdt-react@4.5.0-beta.3(@veltdev/codemirror-crdt@4.5.0-beta.6)(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@veltdev/codemirror-crdt-react@4.5.8-beta.1(@veltdev/codemirror-crdt@4.5.8-beta.2)(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
-      '@veltdev/codemirror-crdt': 4.5.0-beta.6
-      '@veltdev/react': 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@veltdev/types': 4.5.7
+      '@veltdev/codemirror-crdt': 4.5.8-beta.2
+      '@veltdev/react': 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/types': 4.5.8-beta.8
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@veltdev/codemirror-crdt@4.5.0-beta.6': {}
+  '@veltdev/codemirror-crdt@4.5.8-beta.2': {}
 
   '@veltdev/lexical-velt-comments@4.5.2-beta.2(lexical@0.19.0)':
     dependencies:
@@ -8453,7 +8628,12 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@veltdev/reactflow-crdt@4.5.0-beta.6(yjs@13.6.27)':
+  '@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
+  '@veltdev/reactflow-crdt@4.5.8-beta.1(yjs@13.6.27)':
     dependencies:
       yjs: 13.6.27
 
@@ -8464,23 +8644,32 @@ snapshots:
       slate: 0.103.0
       slate-react: 0.110.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(slate@0.103.0)
 
-  '@veltdev/tiptap-crdt-react@4.5.0-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-cursor@2.26.2(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/react@4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.8-beta.2)(@veltdev/types@4.5.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
-    dependencies:
+  ? '@veltdev/tiptap-crdt-react@4.5.8-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)'
+  : dependencies:
       '@tiptap/core': 2.26.4(@tiptap/pm@2.26.4)
-      '@tiptap/extension-collaboration-cursor': 2.26.2(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
-      '@veltdev/react': 4.5.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@veltdev/tiptap-crdt': 4.5.8-beta.2
-      '@veltdev/types': 4.5.7
+      '@tiptap/extension-collaboration': 3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27)
+      '@tiptap/extension-collaboration-caret': 3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
+      '@tiptap/pm': 2.26.4
+      '@tiptap/y-tiptap': 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
+      '@veltdev/react': 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/tiptap-crdt': 4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
+      '@veltdev/types': 4.5.8-beta.8
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@veltdev/tiptap-crdt@4.5.8-beta.2': {}
+  '@veltdev/tiptap-crdt@4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))':
+    dependencies:
+      '@tiptap/core': 2.26.4(@tiptap/pm@2.26.4)
+      '@tiptap/extension-collaboration': 3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27)
+      '@tiptap/extension-collaboration-caret': 3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
+      '@tiptap/pm': 2.26.4
+      '@tiptap/y-tiptap': 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
 
-  '@veltdev/tiptap-velt-comments@4.5.0-beta.14(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))':
+  '@veltdev/tiptap-velt-comments@4.5.8-beta.1(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))':
     dependencies:
       '@tiptap/core': 2.26.4(@tiptap/pm@2.26.4)
 
-  '@veltdev/types@4.5.7': {}
+  '@veltdev/types@4.5.8-beta.8': {}
 
   '@vercel/analytics@1.5.0(next@15.2.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)':
     optionalDependencies:
@@ -9275,6 +9464,26 @@ snapshots:
       - eslint-plugin-import-x
       - supports-color
 
+  eslint-config-next@16.0.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3):
+    dependencies:
+      '@next/eslint-plugin-next': 16.0.1
+      eslint: 9.39.1(jiti@1.21.7)
+      eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.1(jiti@1.21.7))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.1(jiti@1.21.7))
+      eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.1(jiti@1.21.7))
+      eslint-plugin-react: 7.37.5(eslint@9.39.1(jiti@1.21.7))
+      eslint-plugin-react-hooks: 7.0.1(eslint@9.39.1(jiti@1.21.7))
+      globals: 16.4.0
+      typescript-eslint: 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - '@typescript-eslint/parser'
+      - eslint-import-resolver-webpack
+      - eslint-plugin-import-x
+      - supports-color
+
   eslint-import-resolver-node@0.3.9:
     dependencies:
       debug: 3.2.7
@@ -9298,6 +9507,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.1(jiti@1.21.7)):
+    dependencies:
+      '@nolyfill/is-core-module': 1.0.39
+      debug: 4.4.3
+      eslint: 9.39.1(jiti@1.21.7)
+      get-tsconfig: 4.13.0
+      is-bun-module: 2.0.0
+      stable-hash: 0.0.5
+      tinyglobby: 0.2.15
+      unrs-resolver: 1.11.1
+    optionalDependencies:
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.1(jiti@1.21.7))
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.38.0(jiti@1.21.7)))(eslint@9.38.0(jiti@1.21.7)):
     dependencies:
       debug: 3.2.7
@@ -9306,6 +9530,17 @@ snapshots:
       eslint: 9.38.0(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.38.0(jiti@1.21.7))
+    transitivePeerDependencies:
+      - supports-color
+
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.1(jiti@1.21.7)))(eslint@9.39.1(jiti@1.21.7)):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      eslint: 9.39.1(jiti@1.21.7)
+      eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.1(jiti@1.21.7))
     transitivePeerDependencies:
       - supports-color
 
@@ -9338,6 +9573,35 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.1(jiti@1.21.7)):
+    dependencies:
+      '@rtsao/scc': 1.1.0
+      array-includes: 3.1.9
+      array.prototype.findlastindex: 1.2.6
+      array.prototype.flat: 1.3.3
+      array.prototype.flatmap: 1.3.3
+      debug: 3.2.7
+      doctrine: 2.1.0
+      eslint: 9.39.1(jiti@1.21.7)
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.1(jiti@1.21.7)))(eslint@9.39.1(jiti@1.21.7))
+      hasown: 2.0.2
+      is-core-module: 2.16.1
+      is-glob: 4.0.3
+      minimatch: 3.1.2
+      object.fromentries: 2.0.8
+      object.groupby: 1.0.3
+      object.values: 1.2.1
+      semver: 6.3.1
+      string.prototype.trimend: 1.0.9
+      tsconfig-paths: 3.15.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+
   eslint-plugin-jsx-a11y@6.10.2(eslint@9.38.0(jiti@1.21.7)):
     dependencies:
       aria-query: 5.3.2
@@ -9349,6 +9613,25 @@ snapshots:
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
       eslint: 9.38.0(jiti@1.21.7)
+      hasown: 2.0.2
+      jsx-ast-utils: 3.3.5
+      language-tags: 1.0.9
+      minimatch: 3.1.2
+      object.fromentries: 2.0.8
+      safe-regex-test: 1.1.0
+      string.prototype.includes: 2.0.1
+
+  eslint-plugin-jsx-a11y@6.10.2(eslint@9.39.1(jiti@1.21.7)):
+    dependencies:
+      aria-query: 5.3.2
+      array-includes: 3.1.9
+      array.prototype.flatmap: 1.3.3
+      ast-types-flow: 0.0.8
+      axe-core: 4.11.0
+      axobject-query: 4.1.0
+      damerau-levenshtein: 1.0.8
+      emoji-regex: 9.2.2
+      eslint: 9.39.1(jiti@1.21.7)
       hasown: 2.0.2
       jsx-ast-utils: 3.3.5
       language-tags: 1.0.9
@@ -9372,6 +9655,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  eslint-plugin-react-hooks@7.0.1(eslint@9.39.1(jiti@1.21.7)):
+    dependencies:
+      '@babel/core': 7.28.5
+      '@babel/parser': 7.28.5
+      eslint: 9.39.1(jiti@1.21.7)
+      hermes-parser: 0.25.1
+      zod: 3.25.67
+      zod-validation-error: 4.0.2(zod@3.25.67)
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-plugin-react@7.37.5(eslint@9.38.0(jiti@1.21.7)):
     dependencies:
       array-includes: 3.1.9
@@ -9381,6 +9675,28 @@ snapshots:
       doctrine: 2.1.0
       es-iterator-helpers: 1.2.1
       eslint: 9.38.0(jiti@1.21.7)
+      estraverse: 5.3.0
+      hasown: 2.0.2
+      jsx-ast-utils: 3.3.5
+      minimatch: 3.1.2
+      object.entries: 1.1.9
+      object.fromentries: 2.0.8
+      object.values: 1.2.1
+      prop-types: 15.8.1
+      resolve: 2.0.0-next.5
+      semver: 6.3.1
+      string.prototype.matchall: 4.0.12
+      string.prototype.repeat: 1.0.0
+
+  eslint-plugin-react@7.37.5(eslint@9.39.1(jiti@1.21.7)):
+    dependencies:
+      array-includes: 3.1.9
+      array.prototype.findlast: 1.2.5
+      array.prototype.flatmap: 1.3.3
+      array.prototype.tosorted: 1.1.4
+      doctrine: 2.1.0
+      es-iterator-helpers: 1.2.1
+      eslint: 9.39.1(jiti@1.21.7)
       estraverse: 5.3.0
       hasown: 2.0.2
       jsx-ast-utils: 3.3.5
@@ -9418,6 +9734,47 @@ snapshots:
       '@eslint/eslintrc': 3.3.1
       '@eslint/js': 9.38.0
       '@eslint/plugin-kit': 0.4.0
+      '@humanfs/node': 0.16.7
+      '@humanwhocodes/module-importer': 1.0.1
+      '@humanwhocodes/retry': 0.4.3
+      '@types/estree': 1.0.8
+      ajv: 6.12.6
+      chalk: 4.1.2
+      cross-spawn: 7.0.6
+      debug: 4.4.3
+      escape-string-regexp: 4.0.0
+      eslint-scope: 8.4.0
+      eslint-visitor-keys: 4.2.1
+      espree: 10.4.0
+      esquery: 1.6.0
+      esutils: 2.0.3
+      fast-deep-equal: 3.1.3
+      file-entry-cache: 8.0.0
+      find-up: 5.0.0
+      glob-parent: 6.0.2
+      ignore: 5.3.2
+      imurmurhash: 0.1.4
+      is-glob: 4.0.3
+      json-stable-stringify-without-jsonify: 1.0.1
+      lodash.merge: 4.6.2
+      minimatch: 3.1.2
+      natural-compare: 1.4.0
+      optionator: 0.9.4
+    optionalDependencies:
+      jiti: 1.21.7
+    transitivePeerDependencies:
+      - supports-color
+
+  eslint@9.39.1(jiti@1.21.7):
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.0(eslint@9.39.1(jiti@1.21.7))
+      '@eslint-community/regexpp': 4.12.2
+      '@eslint/config-array': 0.21.1
+      '@eslint/config-helpers': 0.4.2
+      '@eslint/core': 0.17.0
+      '@eslint/eslintrc': 3.3.1
+      '@eslint/js': 9.39.1
+      '@eslint/plugin-kit': 0.4.1
       '@humanfs/node': 0.16.7
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.3
@@ -11562,6 +11919,17 @@ snapshots:
       '@typescript-eslint/typescript-estree': 8.46.2(typescript@5.9.3)
       '@typescript-eslint/utils': 8.46.2(eslint@9.38.0(jiti@1.21.7))(typescript@5.9.3)
       eslint: 9.38.0(jiti@1.21.7)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
+  typescript-eslint@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.46.2(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/parser': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/typescript-estree': 8.46.2(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      eslint: 9.39.1(jiti@1.21.7)
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color

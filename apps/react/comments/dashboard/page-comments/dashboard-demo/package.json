@@ -11,6 +11,7 @@
   "dependencies": {
     "clsx": "^2",
     "next": "^15",
+    "@veltdev/react": "^4.5.8-beta.8",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^2"
