@@ -1,64 +1,27 @@
-'use client'
-
-import { useState } from 'react'
-
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(true)
 
   return (
-    <>
-      {/* Expand Button - shown when sidebar is collapsed */}
-      {isCollapsed && (
-        <div
-          className="fixed left-4 top-4 z-50 cursor-pointer flex items-center justify-center hover:bg-[#1a1a1a] transition-colors"
-          onClick={() => setIsCollapsed(false)}
-          style={{
-            width: "40px",
-            height: "40px",
-            backgroundColor: "rgb(14, 14, 14)",
-            borderRadius: "8px",
-          }}
-        >
-          <img
-            src="/assets/sidebar/icon-chevron-left-pipe.svg"
-            alt="Expand sidebar"
-            className="block max-w-none w-4 h-4"
-            style={{ transform: 'rotate(180deg)' }}
-          />
-        </div>
-      )}
-
-      {/* Sidebar - with smooth animation */}
-      <div
-        className="bg-[#0e0e0e] content-stretch flex flex-col items-start justify-between relative h-full transition-all duration-300"
-        style={{
-          width: isCollapsed ? "0px" : "251px",
-          overflow: "hidden",
-          opacity: isCollapsed ? 0 : 1,
-        }}
-      >
-        <div className="content-stretch flex flex-col items-start relative shrink-0 w-[251px]">
-          <div className="box-border content-stretch flex items-center justify-between pl-[16px] pr-[12px] py-[12px] relative shrink-0 w-full">
-            <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-              <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
-                <div className="[grid-area:1_/_1] bg-[#f55d67] ml-0 mt-0 rounded-[4px] size-[16px]" />
-                <p className="[grid-area:1_/_1] font-[var(--font-urbanist)] font-bold leading-none ml-[3px] mt-[3px] relative text-[11px] text-black text-nowrap whitespace-pre">
-                  W
-                </p>
-              </div>
-              <p className="font-[var(--font-urbanist)] font-normal leading-none relative shrink-0 text-[14px] text-nowrap text-white whitespace-pre">
-                Willow HQ
+    <div className="bg-[#0e0e0e] content-stretch flex flex-col items-start justify-between relative w-[251px] h-full">
+      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+        <div className="box-border content-stretch flex items-center justify-between pl-[16px] pr-[12px] py-[12px] relative shrink-0 w-full">
+          <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
+            <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
+              <div className="[grid-area:1_/_1] bg-[#f55d67] ml-0 mt-0 rounded-[4px] size-[16px]" />
+              <p className="[grid-area:1_/_1] font-[var(--font-urbanist)] font-bold leading-none ml-[3px] mt-[3px] relative text-[11px] text-black text-nowrap whitespace-pre">
+                W
               </p>
             </div>
-            <button
-              onClick={() => setIsCollapsed(true)}
-              className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0 hover:bg-white/5 rounded transition-colors cursor-pointer"
-            >
-              <div className="relative shrink-0 size-[16px]">
-                <img alt="Collapse sidebar" className="block max-w-none size-full" src="/assets/sidebar/icon-chevron-left-pipe.svg" />
-              </div>
-            </button>
+            <p className="font-[var(--font-urbanist)] font-normal leading-none relative shrink-0 text-[14px] text-nowrap text-white whitespace-pre">
+              Willow HQ
+            </p>
           </div>
+          <div className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0">
+            <div className="relative shrink-0 size-[16px]">
+              <img alt="Collapse sidebar" className="block max-w-none size-full" src="/assets/sidebar/icon-chevron-left-pipe.svg" />
+            </div>
+          </div>
+        </div>
         <div className="box-border content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full">
           <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full">
             <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full">
@@ -126,7 +89,7 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-      <div className="box-border content-stretch flex gap-[8px] items-start p-[16px] relative shrink-0 w-[251px]">
+      <div className="box-border content-stretch flex gap-[8px] items-start p-[16px] relative shrink-0 w-full">
         <div className="relative shrink-0 size-[16px]">
           <img alt="Settings" className="block max-w-none size-full" src="/assets/sidebar/icon-settings.svg" />
         </div>
@@ -135,6 +98,5 @@ export default function Sidebar() {
         </div>
       </div>
     </div>
-    </>
   )
 }
