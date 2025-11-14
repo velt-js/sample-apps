@@ -4,10 +4,10 @@ import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useVeltTiptapCrdtExtension } from '@veltdev/tiptap-crdt-react'
-import { useCommentAnnotations, useVeltEventCallback } from '@veltdev/react'
-import TiptapVeltComments, { addTiptapVeltComment } from '@veltdev/tiptap-velt-comments'
+import { useCommentAnnotations } from '@veltdev/react' // [Velt] Hook that listens to comment annotations and provides real-time updates when comments are added/removed
+import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments' // [Velt] TipTap extension and utilities for integrating Velt comments into the editor
 import { EditorToolbar } from './ui/EditorToolbar'
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { TipTapComponentProps } from './types'
@@ -17,21 +17,12 @@ import { InlineH1, InlineH2, InlineH3 } from './extensions'
 
 export default function TipTapComponent({ scrollContainerRef }: TipTapComponentProps) {
   const { documentId } = useCurrentDocument()
-  const veltUser = useVeltEventCallback('userUpdate')
 
-  // Initialize CRDT extension
-  const { VeltCrdt, store } = useVeltTiptapCrdtExtension({
+  // [Velt] Initialize CRDT extension for real-time collaborative editing
+  const { VeltCrdt } = useVeltTiptapCrdtExtension({
     editorId: documentId || 'default-editor',
     initialContent: initialContent,
   })
-
-  useEffect(() => {
-    console.log('VeltCrdt', VeltCrdt);
-  }, [VeltCrdt]);
-
-  useEffect(() => {
-    console.log('store', store);
-  }, [store]);
 
   // Initialize the editor
   const editor = useEditor({
@@ -47,18 +38,24 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
       InlineH1,
       InlineH2,
       InlineH3,
-      TiptapVeltComments,
-      ...(VeltCrdt ? [VeltCrdt] : []),
+      TiptapVeltComments, // [Velt] Registers TipTap extension that enables comment markers and selection tracking in the editor
+      ...(VeltCrdt ? [VeltCrdt] : []), // [Velt] Add CRDT extension for real-time collaboration when available
     ],
     content: initialContent,
+    immediatelyRender: false, // Prevents SSR hydration mismatches by only rendering on client
   }, [VeltCrdt])
 
-  // Comment annotations
-  const commentAnnotations = useCommentAnnotations()
+  const commentAnnotations = useCommentAnnotations() // [Velt] Subscribes to comment data changes and returns array of all active comment annotations
 
-  const addVeltComment = () => {
+  useEffect(() => {
+    if (editor && commentAnnotations?.length) {
+      renderComments({ editor, commentAnnotations }) // [Velt] Renders comment highlights and markers in the editor based on annotation positions
+    }
+  }, [editor, commentAnnotations])
+
+  const addTiptapVeltComment = () => {
     if (editor) {
-      addTiptapVeltComment(editor)
+      addComment({ editor }) // [Velt] Triggers comment creation flow on selected text in the editor
     }
   }
 
@@ -75,10 +72,9 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
                 />
               </div>
 
-              {/* Bubble Menu for Comments */}
               {editor && (
                 <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-                  <BubbleMenuToolbar editor={editor} onAddComment={addVeltComment} />
+                  <BubbleMenuToolbar editor={editor} onAddComment={addTiptapVeltComment} />
                 </BubbleMenu>
               )}
             </div>
