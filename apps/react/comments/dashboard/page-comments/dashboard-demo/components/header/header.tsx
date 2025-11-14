@@ -1,8 +1,17 @@
 "use client";
 
-import VeltTools from "@/components/velt/VeltTools";
+import {
+  VeltPresence,
+  VeltSidebarButton,
+  VeltCommentTool,
+  VeltNotificationsTool,
+} from "@veltdev/react";
 
-export default function Header() {
+interface HeaderProps {
+  toggleCommentsSidebar: () => void;
+}
+
+export default function Header({ toggleCommentsSidebar }: HeaderProps) {
   return (
     <div
       className="absolute top-0 right-0 z-50"
@@ -14,7 +23,24 @@ export default function Header() {
         padding: "16px",
       }}
     >
-      <VeltTools />
+      {/* [Velt] Show online users */}
+      <VeltPresence />
+      {/* [Velt] Toggle comments sidebar */}
+      <div onClick={toggleCommentsSidebar}>
+        <VeltSidebarButton />
+      </div>
+      {/* [Velt] Add comment tool - click to target any panel with data-velt-target-comment-element-id */}
+      <VeltCommentTool />
+      {/* [Velt] Notifications panel */}
+      <VeltNotificationsTool
+        settings={true}
+        shadowDom={false}
+        tabConfig={{
+          forYou: { name: "For You", enable: true },
+          documents: { name: "Documents", enable: true },
+          all: { name: "All", enable: true },
+        }}
+      />
     </div>
   );
 }
