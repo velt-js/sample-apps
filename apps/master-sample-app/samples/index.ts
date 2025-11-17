@@ -21,6 +21,8 @@ import slatejsCommentsDemoMeta from './slatejs-comments-demo/metadata'
 import { codeFiles as slatejsCommentsDemoCodeFiles } from './slatejs-comments-demo/code-files'
 import lexicalCommentsDemoMeta from './lexical-comments-demo/metadata'
 import { codeFiles as lexicalCommentsDemoCodeFiles } from './lexical-comments-demo/code-files'
+import dashboardDemoMeta from './dashboard-demo/metadata'
+import { codeFiles as dashboardDemoCodeFiles } from './dashboard-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -66,6 +68,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-lexical-lexical-comments-demo': {
     metadata: lexicalCommentsDemoMeta,
     codeFiles: lexicalCommentsDemoCodeFiles
+  },
+  'react-comments-dashboard-custom-dashboard-demo': {
+    metadata: dashboardDemoMeta,
+    codeFiles: dashboardDemoCodeFiles
   }
 }
 

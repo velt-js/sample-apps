@@ -26,6 +26,7 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-comments-text-editors-tiptap-tiptap-comments-demo': 'tiptap-comments-demo',
     'react-comments-text-editors-slatejs-slatejs-comments-demo': 'slatejs-comments-demo',
     'react-comments-text-editors-lexical-lexical-comments-demo': 'lexical-comments-demo',
+    'react-comments-dashboard-custom-dashboard-demo': 'dashboard-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -41,6 +42,7 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     tiptap: true,
     slatejs: true,
     lexical: true,
+    commentsDashboard: true,
     crdt: true,
     crdtCanvas: true,
     reactflow: true,
@@ -347,6 +349,31 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                               </button>
                             </div>
                           )}
+                        </div>
+                      )}
+
+                      {/* dashboard Section */}
+                      <button
+                        onClick={() => toggleSection("commentsDashboard")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>dashboard</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsDashboard && "rotate-90")} />
+                      </button>
+                      {expandedSections.commentsDashboard && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          <button
+                            onClick={() => {
+                              setSelectedItem("dashboard-demo")
+                              onSampleSelect?.("react-comments-dashboard-custom-dashboard-demo")
+                            }}
+                            className={cn(
+                              "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                              selectedItem === "dashboard-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                            )}
+                          >
+                            dashboard-demo
+                          </button>
                         </div>
                       )}
                     </div>

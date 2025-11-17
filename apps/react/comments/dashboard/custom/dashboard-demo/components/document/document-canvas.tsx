@@ -30,7 +30,7 @@ export default function DocumentCanvas({ toggleCommentsSidebar }: DocumentCanvas
             <div className="w-full h-[1px] bg-white opacity-[0.08] mb-[24px]" />
 
             {/* Metric Cards Row */}
-            <div className="flex gap-[7px] items-center mb-[6px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[7px] mb-[6px]">
               <MetricCard
                 id="panel-search"
                 targetId="panel-search"
