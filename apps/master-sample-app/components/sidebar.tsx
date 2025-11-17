@@ -27,6 +27,7 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-comments-text-editors-slatejs-slatejs-comments-demo': 'slatejs-comments-demo',
     'react-comments-text-editors-lexical-lexical-comments-demo': 'lexical-comments-demo',
     'react-comments-dashboard-custom-dashboard-demo': 'dashboard-demo',
+    'react-crdt-text-editors-tiptap-tiptap-crdt-demo': 'tiptap-crdt-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -46,6 +47,8 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     crdt: true,
     crdtCanvas: true,
     reactflow: true,
+    crdtTextEditors: true,
+    crdtTiptap: true,
   })
   const [selectedItem, setSelectedItem] = useState<string>(() => {
     // Initialize with current sample ID if available
@@ -422,6 +425,43 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 )}
                               >
                                 reactflow-demo
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* text-editors Section */}
+                      <button
+                        onClick={() => toggleSection("crdtTextEditors")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>text-editors</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtTextEditors && "rotate-90")} />
+                      </button>
+                      {expandedSections.crdtTextEditors && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          {/* tiptap Section */}
+                          <button
+                            onClick={() => toggleSection("crdtTiptap")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>tiptap</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtTiptap && "rotate-90")} />
+                          </button>
+                          {expandedSections.crdtTiptap && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("tiptap-crdt-demo")
+                                  onSampleSelect?.("react-crdt-text-editors-tiptap-tiptap-crdt-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "tiptap-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                tiptap-crdt-demo
                               </button>
                             </div>
                           )}

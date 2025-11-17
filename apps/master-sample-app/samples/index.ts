@@ -23,6 +23,8 @@ import lexicalCommentsDemoMeta from './lexical-comments-demo/metadata'
 import { codeFiles as lexicalCommentsDemoCodeFiles } from './lexical-comments-demo/code-files'
 import dashboardDemoMeta from './dashboard-demo/metadata'
 import { codeFiles as dashboardDemoCodeFiles } from './dashboard-demo/code-files'
+import tiptapCrdtDemoMeta from './tiptap-crdt-demo/metadata'
+import { codeFiles as tiptapCrdtDemoCodeFiles } from './tiptap-crdt-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -72,6 +74,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-dashboard-custom-dashboard-demo': {
     metadata: dashboardDemoMeta,
     codeFiles: dashboardDemoCodeFiles
+  },
+  'react-crdt-text-editors-tiptap-tiptap-crdt-demo': {
+    metadata: tiptapCrdtDemoMeta,
+    codeFiles: tiptapCrdtDemoCodeFiles
   }
 }
 
