@@ -10,7 +10,6 @@ import { createRoot, type Root } from 'react-dom/client'
 import { useVeltTiptapCrdtExtension } from '@veltdev/tiptap-crdt-react'
 import { useCommentAnnotations } from '@veltdev/react' // [Velt] Hook that listens to comment annotations and provides real-time updates when comments are added/removed
 import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments' // [Velt] TipTap extension and utilities for integrating Velt comments into the editor
-import { EditorToolbar } from './ui/EditorToolbar'
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { TipTapComponentProps } from './types'
 import { initialContent } from './constants'
@@ -107,7 +106,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   }, [])
 
   return (
-    <div className="bg-black relative size-full overflow-hidden" data-name="Tiptap / Expanded Toolbar">
+    <div className="bg-black relative size-full overflow-hidden" data-name="Tiptap / Bubble Menu">
       <div ref={scrollContainerRef} className="absolute inset-0 overflow-y-auto pb-20">
         <div className="flex justify-center pt-[51px] px-4">
           <div className="w-full max-w-[850px]">
@@ -122,8 +121,6 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
           </div>
         </div>
       </div>
-
-      {editor && <EditorToolbar editor={editor} />}
     </div>
   )
 }
