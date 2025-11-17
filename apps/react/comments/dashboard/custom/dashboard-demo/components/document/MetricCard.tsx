@@ -5,7 +5,6 @@ import { VeltCommentBubble, VeltCommentTool } from '@veltdev/react'
 
 interface MetricCardProps {
   id: string;
-  targetId: string;
   iconSrc: string;
   iconAlt: string;
   title: string;
@@ -17,7 +16,6 @@ interface MetricCardProps {
 
 export default function MetricCard({
   id,
-  targetId,
   iconSrc,
   iconAlt,
   title,
@@ -29,7 +27,6 @@ export default function MetricCard({
   return (
     <div
       id={id}
-      data-velt-target-comment-element-id={targetId}
       className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]"
     >
       <div className="flex gap-[4px] items-end w-full">
@@ -48,8 +45,8 @@ export default function MetricCard({
           </p>
         </div>
         <div className="flex gap-[8px] items-center">
-          <VeltCommentBubble targetCommentElementId={targetId} />
-          <VeltCommentTool targetCommentElementId={targetId} />
+          <VeltCommentBubble targetCommentElementId={id} />
+          <VeltCommentTool targetCommentElementId={id} />
         </div>
       </div>
       <div className="flex gap-[8px] items-baseline w-full">

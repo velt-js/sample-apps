@@ -4,14 +4,19 @@ import {
   VeltNotificationsTool,
   VeltCommentTool,
 } from "@veltdev/react";
+import { ReactNode } from "react";
 
-function VeltTools() {
+interface VeltToolsProps {
+  children?: ReactNode;
+}
+
+function VeltTools({ children }: VeltToolsProps) {
   return (
     <>
       {/* [Velt] Show online users */}
       <VeltPresence />
-      {/* [Velt] Add comment tool - click to target any panel with data-velt-target-comment-element-id */}
-      <VeltCommentTool />
+      {/* Slot for additional tools like VeltSidebarButton */}
+      {children}
       {/* [Velt] Notifications panel */}
       <VeltNotificationsTool
         settings={true}
