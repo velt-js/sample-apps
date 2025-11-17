@@ -25,7 +25,6 @@ export function VeltCollaboration() {
     <>
       <VeltInitializeDocument />
       <VeltComments
-        popoverTriangleComponent={true}
         popoverMode={true}
         shadowDom={false}
         textMode={false}

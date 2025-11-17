@@ -113,17 +113,6 @@
   outline: none;
 }
 
-/* Remove any default mark backgrounds */
-.tiptap-editor-content mark,
-.tiptap-editor-content .ProseMirror mark {
-  background: transparent !important;
-}
-
-/* Ensure no backgrounds on any inline elements */
-.tiptap-editor-content .ProseMirror span {
-  background: transparent !important;
-}
-
 /* Helper Text Animation */
 @keyframes pulse-subtle {
   0%, 100% {
@@ -139,7 +128,7 @@
 }
 
 /* Collaboration cursor styling - Dark theme adjustments */
-.collaboration-cursor__caret {
+.collaboration-cursor__caret, .collaboration-carets__caret {
   border-left: 1px solid #ffffff;
   border-right: 1px solid #ffffff;
   margin-left: -1px;
@@ -150,7 +139,7 @@
 }
 
 /* Render the username above the caret */
-.collaboration-cursor__label {
+.collaboration-cursor__label, .collaboration-carets__label {
   border-radius: 3px 3px 3px 0;
   color: #0d0d0d;
   font-size: 12px;

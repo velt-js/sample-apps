@@ -25,16 +25,8 @@ export function VeltCollaboration() {
     <>
       <VeltInitializeDocument />
       <VeltComments
-        popoverTriangleComponent={false}
-        popoverMode={true}
         shadowDom={false}
         textMode={false}
-        commentPinHighlighter={false}
-        dialogOnHover={false}
-        groupMatchedComments={true}
-        priority={true}
-        scrollToComment={false}
-        autoCategorize={false}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />

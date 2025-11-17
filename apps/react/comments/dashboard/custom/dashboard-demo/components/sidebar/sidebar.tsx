@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 export default function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(true)
+  const [isCollapsed, setIsCollapsed] = useState(false)
 
   return (
     <>
