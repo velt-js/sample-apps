@@ -199,8 +199,11 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  apps/react/comments/dashboard/page-comments/dashboard-demo:
+  apps/react/comments/dashboard/custom/dashboard-demo:
     dependencies:
+      '@veltdev/react':
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -237,7 +240,7 @@ importers:
         version: 9.39.1(jiti@1.21.7)
       eslint-config-next:
         specifier: ^16.0.1
-        version: 16.0.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+        version: 16.0.3(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
       postcss:
         specifier: ^8
         version: 8.5.6
@@ -1055,6 +1058,91 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/react/crdt/text-editors/tiptap/tiptap-crdt-demo:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^2.26.4
+        version: 2.26.4(@tiptap/pm@2.26.4)
+      '@tiptap/extension-text-align':
+        specifier: ^2.26.4
+        version: 2.26.4(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
+      '@tiptap/extension-underline':
+        specifier: ^2.26.4
+        version: 2.26.4(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
+      '@tiptap/react':
+        specifier: ^2.26.4
+        version: 2.26.4(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@tiptap/starter-kit':
+        specifier: ^2.26.4
+        version: 2.26.4
+      '@tiptap/y-tiptap':
+        specifier: ^2.0.0
+        version: 2.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
+      '@veltdev/react':
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/tiptap-crdt':
+        specifier: 1.0.1
+        version: 1.0.1
+      '@veltdev/tiptap-crdt-react':
+        specifier: 4.5.0-beta.3
+        version: 4.5.0-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-cursor@2.26.2(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@1.0.1)(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/tiptap-velt-comments':
+        specifier: 1.0.0
+        version: 1.0.0
+      clsx:
+        specifier: ^2
+        version: 2.1.1
+      next:
+        specifier: ^15
+        version: 15.5.6(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react:
+        specifier: ^19
+        version: 19.2.0
+      react-dom:
+        specifier: ^19
+        version: 19.2.0(react@19.2.0)
+      tailwind-merge:
+        specifier: ^2
+        version: 2.6.0
+      y-prosemirror:
+        specifier: ^1.2.12
+        version: 1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
+      yjs:
+        specifier: ^13.6.18
+        version: 13.6.27
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.18.13
+      '@types/react':
+        specifier: ^19
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.2(@types/react@19.2.2)
+      '@veltdev/types':
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
+      autoprefixer:
+        specifier: ^10
+        version: 10.4.21(postcss@8.5.6)
+      eslint:
+        specifier: ^9.39.1
+        version: 9.39.1(jiti@1.21.7)
+      eslint-config-next:
+        specifier: ^16.0.3
+        version: 16.0.3(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
+      postcss:
+        specifier: ^8
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^3.4.0
+        version: 3.4.18(tsx@4.20.6)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   apps/react/crdt/tiptap-crdt-demo:
     dependencies:
       '@tiptap/core':
@@ -1089,7 +1177,7 @@ importers:
         version: 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-crdt-react':
         specifier: 4.5.8-beta.3
-        version: 4.5.8-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 4.5.8-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@1.0.1)(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-velt-comments':
         specifier: 4.5.8-beta.1
         version: 4.5.8-beta.1(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
@@ -1926,6 +2014,9 @@ packages:
 
   '@next/eslint-plugin-next@16.0.1':
     resolution: {integrity: sha512-g4Cqmv/gyFEXNeVB2HkqDlYKfy+YrlM2k8AVIO/YQVEPfhVruH1VA99uT1zELLnPLIeOnx8IZ6Ddso0asfTIdw==}
+
+  '@next/eslint-plugin-next@16.0.3':
+    resolution: {integrity: sha512-6sPWmZetzFWMsz7Dhuxsdmbu3fK+/AxKRtj7OB0/3OZAI2MHB/v2FeYh271LZ9abvnM1WIwWc/5umYjx0jo5sQ==}
 
   '@next/swc-darwin-arm64@15.2.4':
     resolution: {integrity: sha512-1AnMfs655ipJEDC/FHkSr0r3lXBgpqKo4K1kiwfUf3iE68rDFXZ1TtHdMvf7D0hMItgDZ7Vuq3JgNMbt/+3bYw==}
@@ -3102,6 +3193,16 @@ packages:
   '@tiptap/starter-kit@2.26.4':
     resolution: {integrity: sha512-bcoBXGXKOhjBZK7M5cQ1LqYZsFsT7TwbOyM4FA71noptI9BWG10EeNo2i1EkvSEHVM0YKs8Z3HckdEqgL4XOEQ==}
 
+  '@tiptap/y-tiptap@2.0.0':
+    resolution: {integrity: sha512-s/b2Xfz7CHjQgr4T0EPutHuFbKUyzJV1n7NVIkAW6/BseFfe0RgVWyPghan6ivdGYWVAHIiCocJYHQN2nedNNg==}
+    engines: {node: '>=16.0.0', npm: '>=8.0.0'}
+    peerDependencies:
+      prosemirror-model: ^1.7.1
+      prosemirror-state: ^1.2.3
+      prosemirror-view: ^1.9.10
+      y-protocols: ^1.0.1
+      yjs: ^13.5.38
+
   '@tiptap/y-tiptap@3.0.0':
     resolution: {integrity: sha512-HIeJZCj+KYJde2x6fONzo4o6kd7gW7eonwhQsv2p2VQnUgwNXMVhN+D6Z3AH/2i541Sq33y1PO4U/1ThCPjqbA==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
@@ -3391,6 +3492,9 @@ packages:
   '@veltdev/codemirror-crdt@4.5.8-beta.2':
     resolution: {integrity: sha512-/be/uy1FZq933x9SVHzOmz74c8uMFr8h0r+FckUWWxPJbplu/Oxy3R51loTUn1Zz1gp9DWQa1/Ox3L9M3hvPwg==}
 
+  '@veltdev/crdt@1.0.2':
+    resolution: {integrity: sha512-QVJVgCjUU1DnAdbExDGo1aHSv4IxTAO0Li8UJtgKpT2cA0dNAM4GMh7k6Urf28xFZ51pYpkPpXpuDRE24m6bzw==}
+
   '@veltdev/lexical-velt-comments@4.5.2-beta.2':
     resolution: {integrity: sha512-xMheY8fba9y54Hovc6dgl+PffljMB2PQRJpkYCfZ2lHSgrAb0Q+hdAun/Idvf1JRVwT91V9mP/GTNCx0FGTMHA==}
     peerDependencies:
@@ -3421,6 +3525,17 @@ packages:
       slate: ^0.112.0
       slate-react: ^0.112.1
 
+  '@veltdev/tiptap-crdt-react@4.5.0-beta.3':
+    resolution: {integrity: sha512-gmEdy874+AUEj5b+/+/81I+91XjyO2DKVRhOsrTAQp2CsaCR/Cpz3Zy7pBeJxeVw0N2ge89fqUIq0NQuJ+Q2ig==}
+    peerDependencies:
+      '@tiptap/core': ^2.23.0
+      '@tiptap/extension-collaboration-cursor': ^2.23.0
+      '@veltdev/react': '*'
+      '@veltdev/tiptap-crdt': '*'
+      '@veltdev/types': '*'
+      react: ^18.2.0 || ^19.0.0
+      react-dom: ^18.2.0 || ^19.0.0
+
   '@veltdev/tiptap-crdt-react@4.5.8-beta.3':
     resolution: {integrity: sha512-KtGkHiSzCHRABCgvZUG4/cRMhNeBVgYkYi7pGf8v0RPYXJv3riGGu3LMUCmvTq3uoXvvFDrdn3l3ozDnYticvA==}
     peerDependencies:
@@ -3435,14 +3550,11 @@ packages:
       react: ^18.2.0 || ^19.0.0
       react-dom: ^18.2.0 || ^19.0.0
 
-  '@veltdev/tiptap-crdt@4.5.8-beta.5':
-    resolution: {integrity: sha512-LVJuf1QezT6BYis/yFj569kE2K/DOtCiNBAqR6bYBCl6bWU3KSEo6RgKkBKe1JltbGbGoz8RuWP2CqE5JSFTQQ==}
-    peerDependencies:
-      '@tiptap/core': ^3.0.0
-      '@tiptap/extension-collaboration': ^3.0.0
-      '@tiptap/extension-collaboration-caret': ^3.0.0
-      '@tiptap/pm': ^3.0.0
-      '@tiptap/y-tiptap': ^3.0.0
+  '@veltdev/tiptap-crdt@1.0.1':
+    resolution: {integrity: sha512-QS/eqw47/tllBfb41MubSKi0MBUKsOulmZ7jXbZwAo257ieYy6WLwezSeOqIDi4asrK6M6SPm7xEsDYfJAcK+Q==}
+
+  '@veltdev/tiptap-velt-comments@1.0.0':
+    resolution: {integrity: sha512-m7YOlf0KABQzlphx8qbz8JqtRUwEJXJOm1gW4RCxWdIg2Dl/Oc77OXT27QHFSq3qsYRwLNZO1h/XIkyWnOpUjQ==}
 
   '@veltdev/tiptap-velt-comments@4.5.8-beta.1':
     resolution: {integrity: sha512-27aqTE03s3uydUDtKI+TWD0oUGpf19G+JrQQSGJzK2z1sy8H6nfFU0mV1XuPMbb1TOU0SIlHVYYL+5nGubva6Q==}
@@ -4104,6 +4216,15 @@ packages:
 
   eslint-config-next@16.0.1:
     resolution: {integrity: sha512-wNuHw5gNOxwLUvpg0cu6IL0crrVC9hAwdS/7UwleNkwyaMiWIOAwf8yzXVqBBzL3c9A7jVRngJxjoSpPP1aEhg==}
+    peerDependencies:
+      eslint: '>=9.0.0'
+      typescript: '>=3.3.1'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  eslint-config-next@16.0.3:
+    resolution: {integrity: sha512-5F6qDjcZldf0Y0ZbqvWvap9xzYUxyDf7/of37aeyhvkrQokj/4bT1JYWZdlWUr283aeVa+s52mPq9ogmGg+5dw==}
     peerDependencies:
       eslint: '>=9.0.0'
       typescript: '>=3.3.1'
@@ -7120,6 +7241,10 @@ snapshots:
     dependencies:
       fast-glob: 3.3.1
 
+  '@next/eslint-plugin-next@16.0.3':
+    dependencies:
+      fast-glob: 3.3.1
+
   '@next/swc-darwin-arm64@15.2.4':
     optional: true
 
@@ -8283,6 +8408,15 @@ snapshots:
       '@tiptap/extension-text-style': 2.26.4(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))
       '@tiptap/pm': 2.26.4
 
+  '@tiptap/y-tiptap@2.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)':
+    dependencies:
+      lib0: 0.2.114
+      prosemirror-model: 1.25.4
+      prosemirror-state: 1.4.4
+      prosemirror-view: 1.41.3
+      y-protocols: 1.0.6(yjs@13.6.27)
+      yjs: 13.6.27
+
   '@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)':
     dependencies:
       lib0: 0.2.114
@@ -8619,6 +8753,8 @@ snapshots:
 
   '@veltdev/codemirror-crdt@4.5.8-beta.2': {}
 
+  '@veltdev/crdt@1.0.2': {}
+
   '@veltdev/lexical-velt-comments@4.5.2-beta.2(lexical@0.19.0)':
     dependencies:
       lexical: 0.19.0
@@ -8644,26 +8780,34 @@ snapshots:
       slate: 0.103.0
       slate-react: 0.110.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(slate@0.103.0)
 
-  ? '@veltdev/tiptap-crdt-react@4.5.8-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)'
-  : dependencies:
+  '@veltdev/tiptap-crdt-react@4.5.0-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-cursor@2.26.2(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@1.0.1)(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
       '@tiptap/core': 2.26.4(@tiptap/pm@2.26.4)
-      '@tiptap/extension-collaboration': 3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27)
-      '@tiptap/extension-collaboration-caret': 3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
-      '@tiptap/pm': 2.26.4
-      '@tiptap/y-tiptap': 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
+      '@tiptap/extension-collaboration-cursor': 2.26.2(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
       '@veltdev/react': 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@veltdev/tiptap-crdt': 4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
+      '@veltdev/tiptap-crdt': 1.0.1
       '@veltdev/types': 4.5.8-beta.8
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@veltdev/tiptap-crdt@4.5.8-beta.5(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))':
+  '@veltdev/tiptap-crdt-react@4.5.8-beta.3(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@1.0.1)(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@tiptap/core': 2.26.4(@tiptap/pm@2.26.4)
       '@tiptap/extension-collaboration': 3.9.0(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27)
       '@tiptap/extension-collaboration-caret': 3.10.7(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))(@tiptap/pm@2.26.4)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
       '@tiptap/pm': 2.26.4
       '@tiptap/y-tiptap': 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
+      '@veltdev/react': 4.5.8-beta.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/tiptap-crdt': 1.0.1
+      '@veltdev/types': 4.5.8-beta.8
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
+  '@veltdev/tiptap-crdt@1.0.1':
+    dependencies:
+      '@veltdev/crdt': 1.0.2
+
+  '@veltdev/tiptap-velt-comments@1.0.0': {}
 
   '@veltdev/tiptap-velt-comments@4.5.8-beta.1(@tiptap/core@2.26.4(@tiptap/pm@2.26.4))':
     dependencies:
@@ -9464,9 +9608,9 @@ snapshots:
       - eslint-plugin-import-x
       - supports-color
 
-  eslint-config-next@16.0.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3):
+  eslint-config-next@16.0.3(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3):
     dependencies:
-      '@next/eslint-plugin-next': 16.0.1
+      '@next/eslint-plugin-next': 16.0.3
       eslint: 9.39.1(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.1(jiti@1.21.7))

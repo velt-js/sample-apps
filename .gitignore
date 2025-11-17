@@ -1,9 +1,13 @@
 # Node
 node_modules
 npm-debug.log*
+package-lock.json
+yarn.lock
 # Builds
 .next
 dist
 build
 # Misc
 .DS_Store
+# Local .npmrc files (workspace root has the main config)
+apps/**/.npmrc
