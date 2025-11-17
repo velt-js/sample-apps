@@ -38,7 +38,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
     }
   }, [])
 
-  // Initialize the editor
+  // Initialize the editor - only when bubble menu element is ready
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -53,13 +53,13 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
       InlineH2,
       InlineH3,
       TiptapVeltComments, // [Velt] Registers TipTap extension that enables comment markers and selection tracking in the editor
-      BubbleMenu.configure({
+      ...(bubbleMenuElement ? [BubbleMenu.configure({
         element: bubbleMenuElement,
         options: {
           placement: 'top',
           offset: 8,
         },
-      }),
+      })] : []),
       ...(VeltCrdt ? [VeltCrdt] : []), // [Velt] Add CRDT extension for real-time collaboration when available
     ],
     // content: initialContent,
