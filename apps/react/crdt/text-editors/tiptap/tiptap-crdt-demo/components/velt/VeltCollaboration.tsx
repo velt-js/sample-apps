@@ -33,8 +33,6 @@ export function VeltCollaboration() {
         dialogOnHover={false}
         groupMatchedComments={true}
         priority={true}
-        scrollToComment={false}
-        autoCategorize={false}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />

@@ -26,8 +26,6 @@ export function VeltCollaboration() {
       <VeltInitializeDocument />
       <VeltComments
         textMode={false}
-        scrollToComment={false}
-        autoCategorize={false}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />
