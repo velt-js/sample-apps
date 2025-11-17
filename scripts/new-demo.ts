@@ -6,9 +6,9 @@ import { execSync } from 'child_process';
 
 interface DemoOptions {
   framework: string;
+  feature: string;
   document: string;
-  implementation: 'libraries' | 'custom-implementation';
-  libraryOrSolution: string;
+  library: string;
   demo: string;
 }
 
@@ -25,18 +25,14 @@ function parseArgs(): DemoOptions | null {
       case '--framework':
         options.framework = value;
         break;
+      case '--feature':
+        options.feature = value;
+        break;
       case '--document':
         options.document = value;
         break;
-      case '--implementation':
-        if (value !== 'libraries' && value !== 'custom-implementation') {
-          console.error('❌ --implementation must be "libraries" or "custom-implementation"');
-          return null;
-        }
-        options.implementation = value;
-        break;
-      case '--libraryOrSolution':
-        options.libraryOrSolution = value;
+      case '--library':
+        options.library = value;
         break;
       case '--demo':
         options.demo = value;
@@ -49,9 +45,9 @@ function parseArgs(): DemoOptions | null {
 
   const required: (keyof DemoOptions)[] = [
     'framework',
+    'feature',
     'document',
-    'implementation',
-    'libraryOrSolution',
+    'library',
     'demo',
   ];
 
@@ -66,16 +62,16 @@ function parseArgs(): DemoOptions | null {
 }
 
 function createDemoStructure(options: DemoOptions): void {
-  const { framework, document, implementation, libraryOrSolution, demo } = options;
+  const { framework, feature, document, library, demo } = options;
 
   // Construct the full path
   const demoPath = join(
     process.cwd(),
     'apps',
     framework,
+    feature,
     document,
-    implementation,
-    libraryOrSolution,
+    library,
     demo
   );
 
@@ -90,7 +86,7 @@ function createDemoStructure(options: DemoOptions): void {
   mkdirSync(demoPath, { recursive: true });
 
   // Generate package name
-  const packageName = `@apps/${framework}-${document}-${libraryOrSolution}-${demo}`;
+  const packageName = `@apps/${framework}-${feature}-${document}-${library}-${demo}`;
 
   // Create package.json
   const packageJson = {
@@ -128,17 +124,16 @@ function createDemoStructure(options: DemoOptions): void {
   );
 
   // Create README.md
-  const implType = implementation === 'libraries' ? 'Library' : 'Custom Implementation';
   const readme = `# ${demo}
 
 ## Overview
 
-This demo showcases **${libraryOrSolution}** (${implType}) for **${document}** in **${framework}**.
+This demo showcases **${library}** for **${feature}** (${document}) in **${framework}**.
 
 ## Path
 
 \`\`\`
-apps/${framework}/${document}/${implementation}/${libraryOrSolution}/${demo}/
+apps/${framework}/${feature}/${document}/${library}/${demo}/
 \`\`\`
 
 ## Package Name
@@ -180,13 +175,13 @@ ${demo}/
 From the monorepo root:
 
 \`\`\`bash
-pnpm -w install
+pnpm install
 \`\`\`
 
 ### Run Development Server
 
 \`\`\`bash
-cd apps/${framework}/${document}/${implementation}/${libraryOrSolution}/${demo}
+cd apps/${framework}/${feature}/${document}/${library}/${demo}
 pnpm dev
 \`\`\`
 
@@ -205,16 +200,16 @@ pnpm --filter ${packageName} build
 ## Structure
 
 - **Framework**: ${framework}
+- **Feature**: ${feature}
 - **Document**: ${document}
-- **Implementation**: ${implementation}
-- **Library/Solution**: ${libraryOrSolution}
+- **Library**: ${library}
 - **Demo**: ${demo}
 
 ## Component Organization
 
 - **\`components/header/\`** - Contains Velt components like notifications, presence indicators, header buttons
 - **\`components/sidebar/\`** - Contains sidebar-related components
-- **\`components/document/\`** - Contains the main application logic and ${libraryOrSolution} integration
+- **\`components/document/\`** - Contains the main application logic and ${library} integration
 - **\`hooks/\`** - Custom React hooks for state management and side effects
 - **\`lib/\`** - Utility functions and helpers
 
@@ -230,7 +225,7 @@ This demo includes a \`.npmrc\` file that prevents pnpm from hoisting Tailwind C
 
 ## Next Steps
 
-1. Add your ${libraryOrSolution} implementation in \`components/document/\`
+1. Add your ${library} implementation in \`components/document/\`
 2. Add Velt collaboration features in \`components/header/\`
 3. Update this README with specific usage instructions
 4. Add the demo to \`master-sample-app\` if it should be showcased
@@ -238,8 +233,8 @@ This demo includes a \`.npmrc\` file that prevents pnpm from hoisting Tailwind C
 
 ## Learn More
 
-- [Monorepo Structure Guide](../../../../README_MONOREPO.md)
-- [Structure Documentation](../../../../docs/structure.md)
+- [Monorepo Structure Guide](../../../../../README_MONOREPO.md)
+- [Structure Documentation](../../../../../docs/structure.md)
 - [Velt Documentation](https://docs.velt.dev)
 `;
 
@@ -354,7 +349,7 @@ import '../styles/globals.css'
 
 export const metadata: Metadata = {
   title: '${demo}',
-  description: '${implType} demo for ${libraryOrSolution}',
+  description: '${library} demo for ${feature}',
 }
 
 export default function RootLayout({
@@ -435,16 +430,16 @@ export default function DocumentCanvas() {
               <strong>Framework:</strong> ${framework}
             </p>
             <p className="text-muted-foreground mb-2">
+              <strong>Feature:</strong> ${feature}
+            </p>
+            <p className="text-muted-foreground mb-2">
               <strong>Document:</strong> ${document}
             </p>
             <p className="text-muted-foreground mb-2">
-              <strong>Implementation:</strong> ${implementation}
-            </p>
-            <p className="text-muted-foreground mb-2">
-              <strong>Library/Solution:</strong> ${libraryOrSolution}
+              <strong>Library:</strong> ${library}
             </p>
             <div className="mt-8 p-4 border rounded">
-              <p>Start building your ${libraryOrSolution} integration here!</p>
+              <p>Start building your ${library} integration here!</p>
             </div>
           </div>
         </div>
@@ -650,8 +645,8 @@ module.exports = {
   console.log('\n📋 Next steps:');
   console.log(`   1. Add pnpm override to root package.json:`);
   console.log(`      "${packageName}>tailwindcss": "3.4.18"`);
-  console.log(`   2. cd apps/${framework}/${document}/${implementation}/${libraryOrSolution}/${demo}`);
-  console.log(`   3. pnpm -w install`);
+  console.log(`   2. cd apps/${framework}/${feature}/${document}/${library}/${demo}`);
+  console.log(`   3. pnpm install`);
   console.log(`   4. pnpm --filter ${packageName} dev`);
   console.log('\n⚠️  IMPORTANT: Add the pnpm override to prevent Tailwind v4 hoisting!');
   console.log('\n🎉 Happy coding!');
@@ -663,24 +658,24 @@ Usage: pnpm new:demo -- [options]
 
 Required Options:
   --framework <name>           Framework to use (e.g., react, vue, angular)
-  --document <name>            Document/feature area (e.g., canvas, crdt, comments)
-  --implementation <type>      Either "libraries" or "custom-implementation"
-  --libraryOrSolution <name>   Library name (e.g., reactflow, tiptap) or solution name (e.g., basic)
+  --feature <name>             Feature area (e.g., canvas, crdt, comments, recording)
+  --document <name>            Document type (e.g., dashboard, editor, board)
+  --library <name>             Library name (e.g., reactflow, tiptap, page-comments)
   --demo <name>                Demo name (e.g., my-new-demo)
 
 Example:
   pnpm new:demo -- \\
     --framework react \\
-    --document canvas \\
-    --implementation libraries \\
-    --libraryOrSolution reactflow \\
-    --demo my-reactflow-demo
+    --feature comments \\
+    --document dashboard \\
+    --library page-comments \\
+    --demo dashboard-demo
 
 This will create:
-  apps/react/canvas/libraries/reactflow/my-reactflow-demo/
+  apps/react/comments/dashboard/page-comments/dashboard-demo/
 
 With package name:
-  @apps/react-canvas-reactflow-my-reactflow-demo
+  @apps/react-comments-dashboard-page-comments-dashboard-demo
 `);
 }
 
