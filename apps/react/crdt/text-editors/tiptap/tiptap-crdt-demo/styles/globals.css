@@ -113,17 +113,6 @@
   outline: none;
 }
 
-/* Remove any default mark backgrounds */
-.tiptap-editor-content mark,
-.tiptap-editor-content .ProseMirror mark {
-  background: transparent !important;
-}
-
-/* Ensure no backgrounds on any inline elements */
-.tiptap-editor-content .ProseMirror span {
-  background: transparent !important;
-}
-
 /* Helper Text Animation */
 @keyframes pulse-subtle {
   0%, 100% {
