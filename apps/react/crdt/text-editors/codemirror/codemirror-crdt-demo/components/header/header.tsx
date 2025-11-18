@@ -1,8 +1,9 @@
+import VeltTools from '../velt/VeltTools'
+
 export default function Header() {
   return (
-    <div className="flex items-center gap-2 p-2 border-b bg-background">
-      <h1 className="text-lg font-semibold">codemirror-crdt-demo</h1>
-      {/* Add Velt components here: notifications, user presence, etc. */}
+    <div className="absolute top-[6.5px] right-[8.22px] flex items-center gap-[6px] z-50">
+      <VeltTools />
     </div>
   )
 }

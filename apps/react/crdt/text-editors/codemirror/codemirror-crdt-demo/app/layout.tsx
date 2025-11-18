@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
+import { AppUserProvider } from './userAuth/AppUserContext'
 
 export const metadata: Metadata = {
   title: 'codemirror-crdt-demo',
@@ -13,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppUserProvider>
+          {children}
+        </AppUserProvider>
+      </body>
     </html>
   )
 }

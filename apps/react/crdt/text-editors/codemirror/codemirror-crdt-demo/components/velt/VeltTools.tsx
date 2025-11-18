@@ -3,6 +3,7 @@ import {
   VeltPresence,
   VeltSidebarButton,
   VeltNotificationsTool,
+  VeltHuddleTool,
 } from "@veltdev/react";
 
 function VeltTools() {
@@ -12,13 +13,15 @@ function VeltTools() {
       <VeltPresence />
       {/* [Velt] Toggle comments sidebar */}
       <VeltSidebarButton />
+      {/* [Velt] Video call tool */}
+      <VeltHuddleTool type='all' />
       {/* [Velt] Notifications panel */}
       <VeltNotificationsTool
         settings={true}
         shadowDom={false}
         tabConfig={{
           forYou: { name: "For You", enable: true },
-          documents: { name: "Documents", enable: true },
+          documents: { name: "Payrolls", enable: true },
           all: { name: "All", enable: true },
         }}
       />

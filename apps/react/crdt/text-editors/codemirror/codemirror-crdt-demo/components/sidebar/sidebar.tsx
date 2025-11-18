@@ -10,7 +10,7 @@ const imgTablerIconTerminal = "/figma-assets/icon-terminal.svg";
 const imgTablerIconSend = "/figma-assets/icon-send.svg";
 
 export default function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
 
   return (
     <>

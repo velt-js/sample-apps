@@ -1,6 +1,8 @@
 'use client'
 
 import Sidebar from '../sidebar/sidebar'
+import Header from '../header/header'
+import CodeMirrorComponent from './CodeMirrorComponent/CodeMirrorComponent'
 
 // File type icon components
 const FolderIcon = ({ color = '#dcb67a' }: { color?: string }) => (
@@ -31,6 +33,9 @@ const ChevronDown = () => (
 export default function DocumentCanvas() {
   return (
     <div className="w-full h-screen relative flex">
+      {/* Header with VeltTools */}
+      <Header />
+
       <div className="relative flex-1 overflow-hidden flex">
         {/* Sidebar */}
         <div className="h-full flex-shrink-0">
@@ -180,16 +185,10 @@ export default function DocumentCanvas() {
               </div>
 
               {/* Selected file: styles.scss */}
-              <div className="flex items-center gap-1 px-2 py-0.5 bg-[rgba(255,255,255,0.06)] border border-[#0070f3] rounded-[6px] mx-2 my-0.5 cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 bg-[rgba(255,255,255,0.06)] border border-[#0070f3] rounded-[6px] cursor-pointer">
                 <span className="w-[10px]"></span>
                 <FileIcon color="#c6538c" />
                 <span className="font-semibold">styles.scss</span>
-              </div>
-
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer opacity-50">
-                <span className="w-[10px]"></span>
-                <FileIcon color="#c6538c" />
-                <span className="opacity-80">styles.scss</span>
               </div>
             </div>
 
@@ -251,10 +250,10 @@ export default function DocumentCanvas() {
         </div>
 
         {/* Main Canvas Content */}
-        <div className="bg-black relative flex-1">
+        <div className="bg-black relative flex-1 px-[16px]">
       {/* Breadcrumb Section */}
-      <div className="absolute contents left-0 top-[14px]">
-        <div className="absolute content-stretch flex gap-[12px] items-center left-0 top-[14px]">
+      <div className="absolute contents left-[32px] top-[6.5px]">
+        <div className="absolute content-stretch flex gap-[12px] items-center left-[32px] top-[14px]">
           <p className="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
             Photographer website
           </p>
@@ -273,26 +272,15 @@ export default function DocumentCanvas() {
       </div>
 
       {/* Main Container Border */}
-      <div className="absolute border-2 border-[#121212] border-solid h-[720px] left-0 rounded-[12px] top-[56px] w-[1147px]" />
+      <div className="absolute border-2 border-[#121212] border-solid h-[720px] left-[16px] right-[16px] rounded-[12px] top-[56px]" />
 
-      {/* Code Editor Area */}
-      <div className="absolute h-[680px] left-0 overflow-clip top-[94px] w-[852px]">
-        <div className="absolute contents left-0 top-0">
-          <div className="absolute bg-[#0f0f10] h-[694px] right-[-1px] top-0 w-[203px]" />
-          <div className="absolute h-[725px] left-0 top-0 w-[750px]">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img
-                alt=""
-                className="absolute h-[119.03%] left-[-95.87%] max-w-none top-[-19.03%] w-[201.2%]"
-                src="/figma-assets/screenshot-code-editor.png"
-              />
-            </div>
-          </div>
-        </div>
+      {/* Code Editor Area - CodeMirror CRDT */}
+      <div className="absolute h-[680px] left-[16px] top-[94px] right-[16px] overflow-hidden">
+        <CodeMirrorComponent />
       </div>
 
       {/* File Path Breadcrumb */}
-      <div className="absolute content-stretch flex gap-[12px] items-center justify-center left-[16px] top-[68px]">
+      <div className="absolute content-stretch flex gap-[12px] items-center left-[32px] top-[68px]">
         <p className="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
           src
         </p>
@@ -305,7 +293,7 @@ export default function DocumentCanvas() {
       </div>
 
       {/* Code/Preview Toggle */}
-      <div className="absolute border border-[rgba(255,255,255,0.08)] border-solid box-border content-stretch flex gap-[2px] items-center left-[243px] p-[2px] rounded-[4px] top-[13px]">
+      <div className="absolute border border-[rgba(255,255,255,0.08)] border-solid box-border content-stretch flex gap-[2px] items-center left-1/2 -translate-x-1/2 p-[2px] rounded-[4px] top-[13px]">
         <div className="bg-[rgba(255,255,255,0.08)] box-border content-stretch flex gap-[10px] items-center p-[4px] relative rounded-[4px] shrink-0">
           <div className="relative shrink-0 size-[20px]">
             <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-code.svg" />
@@ -320,7 +308,7 @@ export default function DocumentCanvas() {
 
       {/* Vertical Line (rotated) */}
       <div
-        className="absolute flex h-[calc(1px*((var(--transform-inner-width)*1)+(var(--transform-inner-height)*0)))] items-center justify-center left-0 top-[56px] w-[calc(1px*((var(--transform-inner-height)*1)+(var(--transform-inner-width)*0)))]"
+        className="absolute flex h-[calc(1px*((var(--transform-inner-width)*1)+(var(--transform-inner-height)*0)))] items-center justify-center left-[16px] top-[56px] w-[calc(1px*((var(--transform-inner-height)*1)+(var(--transform-inner-width)*0)))] hidden"
         style={{ "--transform-inner-width": "0", "--transform-inner-height": "0" } as React.CSSProperties}
       >
         <div className="flex-none rotate-[90deg]">
@@ -333,14 +321,14 @@ export default function DocumentCanvas() {
       </div>
 
       {/* Horizontal Line */}
-      <div className="absolute h-0 left-0 top-[94px] w-[856px]">
+      <div className="absolute h-0 left-[16px] right-[16px] top-[94px]">
         <div className="absolute bottom-0 left-0 right-0 top-[-2px]">
           <img alt="" className="block max-w-none size-full" src="/figma-assets/line-9.svg" />
         </div>
       </div>
 
       {/* Copy/Download Actions */}
-      <div className="absolute content-stretch flex gap-[4px] items-center left-[799px] top-[63px]">
+      <div className="absolute content-stretch flex gap-[4px] items-center right-[16px] top-[63px]">
         <div className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0">
           <div className="relative shrink-0 size-[14px]">
             <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-copy.svg" />
