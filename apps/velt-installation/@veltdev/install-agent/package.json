@@ -1,33 +1,14 @@
 {
   "name": "@veltdev/install-agent",
   "version": "1.0.0",
-  "description": "Agent-powered installer for Velt - discovers, customizes, and validates Velt integrations in your codebase",
-  "main": "index.js",
+  "description": "Agentic installation system for Velt components in Next.js projects",
   "bin": {
     "velt-agent": "./bin/init.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests specified\""
   },
-  "keywords": [
-    "velt",
-    "installer",
-    "agent",
-    "ai-powered",
-    "collaboration"
-  ],
+  "keywords": ["velt", "agent", "installation", "nextjs"],
   "author": "Velt",
-  "license": "MIT",
-  "dependencies": {
-    "fs-extra": "^11.0.0",
-    "chalk": "^4.1.2",
-    "inquirer": "^8.2.5",
-    "ora": "^5.4.1"
-  },
-  "peerDependencies": {
-    "@veltdev/react": "^4.5.2"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  }
+  "license": "MIT"
 }

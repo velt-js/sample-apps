@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "Velt": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@veltdev/mcp-server"
+      ]
+    }
+  }
+}
