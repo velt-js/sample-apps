@@ -57,3 +57,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Responsive chart layout - 2x2 on smaller screens */
+@media (max-width: 768px) {
+  [data-name="Dashboard"] > div:has(> [id^="panel-"]) {
+    flex-wrap: wrap;
+  }
+
+  [id^="panel-"]:not([id^="panel-chart"]) {
+    flex: 0 0 calc(50% - 3.5px);
+    min-width: calc(50% - 3.5px);
+  }
+}

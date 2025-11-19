@@ -11,11 +11,7 @@ import ChartPanel from './ChartPanel'
 import NotificationBanner from './NotificationBanner'
 import AddMetricSection from './AddMetricSection'
 
-interface DocumentCanvasProps {
-  toggleCommentsSidebar?: () => void;
-}
-
-export default function DocumentCanvas({ toggleCommentsSidebar }: DocumentCanvasProps) {
+export default function DocumentCanvas() {
   // Host app manages sidebar state
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,5 +1,5 @@
 "use client";
-import { useVeltClient, VeltComments } from "@veltdev/react";
+import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
 import { useEffect } from "react";
@@ -17,19 +17,17 @@ export function VeltCollaboration() {
     }
   }, [isUserLoggedIn, client]);
 
+  const groupConfig = {
+    enable: false
+  };
+
   return (
     <>
       <VeltInitializeDocument />
       <VeltComments
-        popoverTriangleComponent={false}
-        popoverMode={true}
-        shadowDom={false}
         textMode={false}
-        commentPinHighlighter={false}
-        dialogOnHover={false}
-        priority={true}
       />
-
+      <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />
     </>
   );
