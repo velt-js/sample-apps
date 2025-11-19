@@ -25,8 +25,7 @@ export function VeltCollaboration() {
     <>
       <VeltInitializeDocument />
       <VeltComments
-        textMode={true}
-        commentPinHighlighter={false}
+        textMode={false}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />

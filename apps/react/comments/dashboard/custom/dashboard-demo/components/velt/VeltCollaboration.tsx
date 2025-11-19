@@ -27,7 +27,6 @@ export function VeltCollaboration() {
         textMode={false}
         commentPinHighlighter={false}
         dialogOnHover={false}
-        groupMatchedComments={true}
         priority={true}
       />
 

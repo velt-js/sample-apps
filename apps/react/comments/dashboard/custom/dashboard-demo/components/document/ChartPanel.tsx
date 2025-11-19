@@ -19,8 +19,10 @@ export default function ChartPanel({ id, title }: ChartPanelProps) {
           {title}
         </p>
         <div className="flex gap-[8px] items-center">
-          <VeltCommentBubble targetCommentElementId={id} />
-          <VeltCommentTool targetCommentElementId={id} />
+          {/* [Velt] Show comment count bubble for this chart panel */}
+          <VeltCommentBubble targetElementId={id} />
+          {/* [Velt] Add comment tool button for this chart panel */}
+          <VeltCommentTool targetElementId={id} />
         </div>
       </div>
       <div className="relative w-full h-[196px]">

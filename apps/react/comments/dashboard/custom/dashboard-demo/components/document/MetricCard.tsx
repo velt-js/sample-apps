@@ -45,8 +45,10 @@ export default function MetricCard({
           </p>
         </div>
         <div className="flex gap-[8px] items-center">
-          <VeltCommentBubble targetCommentElementId={id} />
-          <VeltCommentTool targetCommentElementId={id} />
+          {/* [Velt] Show comment count bubble for this metric card */}
+          <VeltCommentBubble targetElementId={id} />
+          {/* [Velt] Add comment tool button for this metric card */}
+          <VeltCommentTool targetElementId={id} />
         </div>
       </div>
       <div className="flex gap-[8px] items-baseline w-full">
