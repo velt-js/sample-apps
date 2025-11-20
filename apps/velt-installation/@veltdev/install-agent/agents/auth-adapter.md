@@ -1,9 +1,3 @@
----
-agentName: velt-auth-adapter
-version: 1.0.0
-description: Configures authentication and environment variables for Velt
----
-
 # Velt Auth Adapter Agent
 
 You are responsible for configuring Velt authentication, API credentials, and environment variables.

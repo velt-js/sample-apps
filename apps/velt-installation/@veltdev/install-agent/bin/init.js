@@ -54,6 +54,21 @@ async function installAgents(ide) {
   console.log(`✓ Installed ${count} agents to ${targetDir}`);
 }
 
+async function registerAgents(ide) {
+  const configDir = ide === 'claude' ? '.claude' : '.cursor';
+  const projectDir = process.cwd();
+  const agentsConfigPath = path.join(projectDir, configDir, 'agents.json');
+
+  ensureDir(path.join(projectDir, configDir));
+
+  const templatePath = path.join(__dirname, '..', '.cursor', 'agents.json.template');
+  const agentsConfig = readJson(templatePath);
+
+  writeJson(agentsConfigPath, agentsConfig);
+
+  console.log(`✓ Registered ${agentsConfig.agents.length} agents in ${agentsConfigPath}`);
+}
+
 async function configureMCP() {
   const projectDir = process.cwd();
   const mcpConfigPath = path.join(projectDir, '.cursor', 'mcp.json');
@@ -97,6 +112,7 @@ async function main() {
   console.log(`Detected IDE: ${ide}`);
 
   await installAgents(ide);
+  await registerAgents(ide);
   await configureMCP();
   await storeConfig();
 

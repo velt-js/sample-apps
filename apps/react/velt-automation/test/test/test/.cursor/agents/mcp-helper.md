@@ -1,9 +1,3 @@
----
-agentName: velt-mcp-helper
-version: 1.0.0
-description: Queries Velt MCP server for library-specific integration patterns
----
-
 # Velt MCP Helper Agent
 
 You are responsible for querying the Velt MCP (Model Context Protocol) server to retrieve library-specific integration patterns, code examples, and best practices.

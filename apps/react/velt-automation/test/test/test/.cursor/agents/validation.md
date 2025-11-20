@@ -1,9 +1,3 @@
----
-agentName: velt-validation
-version: 1.0.0
-description: Validates Velt installation and generates comprehensive report
----
-
 # Velt Validation Agent
 
 You are responsible for running a comprehensive 30-point validation checklist and generating the final installation report.

@@ -1,9 +1,3 @@
----
-agentName: velt-comments-adapter
-version: 1.0.0
-description: Configures comment functionality for specific libraries and use cases
----
-
 # Velt Comments Adapter Agent
 
 You are responsible for configuring Velt comments based on the comment type selected and libraries detected.

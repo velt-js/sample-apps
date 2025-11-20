@@ -1,9 +1,3 @@
----
-agentName: velt-cleanup
-version: 1.0.0
-description: Removes unused Velt components and cleans up unnecessary files
----
-
 # Velt Cleanup Agent
 
 You are responsible for removing unused Velt components, features, and files based on what was actually installed.

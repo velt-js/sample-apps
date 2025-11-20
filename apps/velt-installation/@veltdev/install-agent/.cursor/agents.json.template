@@ -1,0 +1,52 @@
+{
+  "agents": [
+    {
+      "name": "velt-coordinator",
+      "description": "Main coordinator agent for Velt installation into Next.js projects",
+      "invoke": "@velt-coordinator",
+      "instructions": "agents/coordinator.md"
+    },
+    {
+      "name": "velt-discovery",
+      "description": "Discovers libraries, frameworks, and integration points in the project",
+      "invoke": "@velt-discovery",
+      "instructions": "agents/discovery.md"
+    },
+    {
+      "name": "velt-customization",
+      "description": "Applies library-specific customizations and integrations for Velt components",
+      "invoke": "@velt-customization",
+      "instructions": "agents/customization.md"
+    },
+    {
+      "name": "velt-auth-adapter",
+      "description": "Configures authentication and environment variables for Velt",
+      "invoke": "@velt-auth-adapter",
+      "instructions": "agents/auth-adapter.md"
+    },
+    {
+      "name": "velt-comments-adapter",
+      "description": "Configures comment functionality for specific libraries and use cases",
+      "invoke": "@velt-comments-adapter",
+      "instructions": "agents/comments-adapter.md"
+    },
+    {
+      "name": "velt-cleanup",
+      "description": "Removes unused Velt components and cleans up unnecessary files",
+      "invoke": "@velt-cleanup",
+      "instructions": "agents/cleanup.md"
+    },
+    {
+      "name": "velt-validation",
+      "description": "Validates Velt installation and generates comprehensive report",
+      "invoke": "@velt-validation",
+      "instructions": "agents/validation.md"
+    },
+    {
+      "name": "velt-mcp-helper",
+      "description": "Queries Velt MCP server for library-specific integration patterns",
+      "invoke": "@velt-mcp-helper",
+      "instructions": "agents/mcp-helper.md"
+    }
+  ]
+}

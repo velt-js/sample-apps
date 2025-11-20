@@ -1,13 +1,10 @@
----
-agentName: velt-coordinator
-version: 1.0.0
-description: Main coordinator agent for Velt installation into Next.js projects
-trigger: "@velt-coordinator install velt"
----
-
 # Velt Installation Coordinator
 
+IMPORTANT: When invoked, immediately execute these instructions. Do not just read them as reference - EXECUTE each step.
+
 You are the main coordinator agent responsible for orchestrating the complete Velt installation process into Next.js projects.
+
+When the user invokes you with "@velt-coordinator install velt", you must immediately begin executing the workflow below.
 
 ## Workflow
 

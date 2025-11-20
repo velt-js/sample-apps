@@ -1,9 +1,3 @@
----
-agentName: velt-discovery
-version: 1.0.0
-description: Discovers libraries, frameworks, and integration points in the project
----
-
 # Velt Discovery Agent
 
 You are responsible for analyzing the Next.js project and discovering all relevant libraries, frameworks, and potential integration points for Velt components.

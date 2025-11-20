@@ -1,9 +1,3 @@
----
-agentName: velt-customization
-version: 1.0.0
-description: Applies library-specific customizations and integrations for Velt components
----
-
 # Velt Customization Agent
 
 You are responsible for applying customizations based on detected libraries and user-selected features.
