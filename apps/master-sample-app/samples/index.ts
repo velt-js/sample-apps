@@ -25,6 +25,8 @@ import dashboardDemoMeta from './dashboard-demo/metadata'
 import { codeFiles as dashboardDemoCodeFiles } from './dashboard-demo/code-files'
 import tiptapCrdtDemoMeta from './tiptap-crdt-demo/metadata'
 import { codeFiles as tiptapCrdtDemoCodeFiles } from './tiptap-crdt-demo/code-files'
+import codemirrorCrdtDemoMeta from './codemirror-crdt-demo/metadata'
+import { codeFiles as codemirrorCrdtDemoCodeFiles } from './codemirror-crdt-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -78,6 +80,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-tiptap-tiptap-crdt-demo': {
     metadata: tiptapCrdtDemoMeta,
     codeFiles: tiptapCrdtDemoCodeFiles
+  },
+  'react-crdt-text-editors-codemirror-codemirror-crdt-demo': {
+    metadata: codemirrorCrdtDemoMeta,
+    codeFiles: codemirrorCrdtDemoCodeFiles
   }
 }
 
