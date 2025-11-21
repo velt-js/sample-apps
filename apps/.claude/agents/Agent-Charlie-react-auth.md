@@ -38,7 +38,7 @@ You are the React Authentication & Document Initialization Specialist Agent (Age
 
 ## Scope
 
-**All 13 demos** - Every demo requires authentication and document initialization
+**All 14 demos** - Every demo requires authentication and document initialization
 
 ## Authentication Flow
 

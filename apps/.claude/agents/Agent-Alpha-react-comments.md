@@ -37,12 +37,13 @@ You are the React Comments Specialist Agent (Agent-Alpha). You focus exclusively
 
 ## Scope
 
-**Demos in Scope**: ALL 13 demos (every demo has comment features)
+**Demos in Scope**: ALL 14 demos (every demo has comment features)
 
 **Demo Types:**
 - **Tables** (6 demos): AG-Grid (3), TanStack (3)
 - **Text Editors** (5 demos): Tiptap, Lexical, BlockNote, CodeMirror, Slate.js
 - **Canvas** (2 demos): Tiptap CRDT, ReactFlow
+- **Dashboard** (1 demo): Dashboard Demo with panel-level comments
 
 ## Comment Implementation Patterns
 
@@ -223,6 +224,77 @@ export function ReactFlowComponent() {
 - [ ] ID format: `node-${nodeId}` or `edge-${edgeId}`
 - [ ] Comments visible on canvas
 - [ ] Positioning handles canvas zoom/pan
+
+### Pattern 4: Dashboard Panel Comments
+
+**Target**: Dashboard panels (metric cards, charts, notifications)
+
+**Location**: `comments/dashboard/custom/dashboard-demo`
+
+**Implementation**:
+```tsx
+// [Velt] MetricCard with comment targeting
+import { VeltCommentBubble, VeltCommentTool } from '@veltdev/react';
+
+export default function MetricCard({ id, title, value }: MetricCardProps) {
+  return (
+    <div id={id} className="metric-card">
+      <div className="flex gap-[8px] items-center">
+        {/* [Velt] Show comment count bubble for this metric card */}
+        <VeltCommentBubble targetElementId={id} />
+        {/* [Velt] Add comment tool button for this metric card */}
+        <VeltCommentTool targetElementId={id} />
+      </div>
+      {/* Card content */}
+    </div>
+  );
+}
+
+// [Velt] ChartPanel with comment targeting
+export default function ChartPanel({ id, title }: ChartPanelProps) {
+  return (
+    <div id={id} className="chart-panel">
+      <div className="flex gap-[8px] items-center">
+        {/* [Velt] Show comment count bubble for this chart panel */}
+        <VeltCommentBubble targetElementId={id} />
+        {/* [Velt] Add comment tool button for this chart panel */}
+        <VeltCommentTool targetElementId={id} />
+      </div>
+      {/* Chart content */}
+    </div>
+  );
+}
+
+// [Velt] DocumentCanvas with embedded VeltCommentsSidebar
+// [Velt] Import VeltCommentsSidebar for embedded comments panel
+import { VeltCommentsSidebar } from "@veltdev/react";
+
+export default function DocumentCanvas() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // [Velt] Configuration to disable comment grouping in sidebar
+  const groupConfig = { enable: false };
+
+  return (
+    <div>
+      {/* Dashboard content with commentable panels */}
+
+      {/* [Velt] Embedded Comments Sidebar - Managed by host app */}
+      <div style={{ width: isOpen ? '400px' : '0px' }}>
+        {/* [Velt] VeltCommentsSidebar with embedMode for inline rendering */}
+        <VeltCommentsSidebar embedMode={true} groupConfig={groupConfig} pageMode={true} />
+      </div>
+    </div>
+  );
+}
+```
+
+**Checklist**:
+- [ ] Each panel has unique `id` attribute
+- [ ] `VeltCommentBubble` with `targetElementId` for each panel
+- [ ] `VeltCommentTool` with `targetElementId` for each panel
+- [ ] `VeltCommentsSidebar` with `embedMode={true}` for inline rendering
+- [ ] `[Velt]` annotations on all Velt-related code
 
 ## VeltComments Component Integration
 

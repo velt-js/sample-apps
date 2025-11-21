@@ -40,8 +40,9 @@ You are the React Comment Aggregation Specialist Agent (Agent-Bravo). You focus 
 **Primary Demos**: Demos with explicit aggregation features
 - D03: AG-Grid Comment-Aggregation
 - D06: TanStack Comment-Aggregation
+- D14: Dashboard Demo (embedded VeltCommentsSidebar with custom toggle)
 
-**Secondary Demos**: All demos with VeltCommentsSidebar (all 13 demos)
+**Secondary Demos**: All demos with VeltCommentsSidebar (all 14 demos)
 
 ## VeltCommentsSidebar Implementation
 
@@ -76,6 +77,48 @@ export function VeltCollaboration() {
   width={400}       // [Velt] Sidebar width in pixels
 />
 ```
+
+### Embedded Sidebar Pattern (Dashboard Demo)
+
+**Location**: `components/document/document-canvas.tsx`
+
+For demos where the sidebar needs to be embedded within the host app's layout with custom toggle control:
+
+```tsx
+// [Velt] Import VeltCommentsSidebar for embedded comments panel
+import { VeltCommentsSidebar } from "@veltdev/react";
+
+export default function DocumentCanvas() {
+  // Host app manages sidebar state
+  const [isOpen, setIsOpen] = useState(false);
+
+  // [Velt] Configuration to disable comment grouping in sidebar
+  const groupConfig = { enable: false };
+
+  return (
+    <div className="flex">
+      {/* Main content */}
+      <div className="flex-1">...</div>
+
+      {/* [Velt] Embedded Comments Sidebar - Managed by host app */}
+      <div style={{ width: isOpen ? '400px' : '0px' }}>
+        {isOpen && (
+          <>
+            <button onClick={() => setIsOpen(false)}>Close</button>
+            {/* [Velt] VeltCommentsSidebar with embedMode for inline rendering */}
+            <VeltCommentsSidebar embedMode={true} groupConfig={groupConfig} pageMode={true} />
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+**Key Props for Embedded Mode**:
+- `embedMode={true}` - Renders sidebar inline instead of as overlay
+- `groupConfig={{ enable: false }}` - Disables comment grouping
+- `pageMode={true}` - Shows comments for entire page
 
 ### Verification Checklist
 
