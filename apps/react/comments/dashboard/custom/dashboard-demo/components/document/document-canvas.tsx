@@ -1,5 +1,6 @@
 'use client'
 
+// [Velt] Import VeltCommentsSidebar for embedded comments panel
 import { VeltCommentsSidebar } from "@veltdev/react";
 import { useState } from "react";
 import Header from '@/components/header/header'
@@ -23,6 +24,7 @@ export default function DocumentCanvas() {
     setIsOpen(false);
   };
 
+  // [Velt] Configuration to disable comment grouping in sidebar
   const groupConfig = {
     enable: false
   };
@@ -105,7 +107,7 @@ export default function DocumentCanvas() {
           </div>
       </div>
 
-      {/* Embedded Comments Sidebar - Managed by host app */}
+      {/* [Velt] Embedded Comments Sidebar - Managed by host app */}
       <div
         className="h-full bg-[#1a1a1a] shadow-xl transition-all duration-300 ease-in-out overflow-hidden flex flex-col"
         style={{
@@ -134,6 +136,7 @@ export default function DocumentCanvas() {
               <h2 className="text-white font-semibold">Comments</h2>
             </div>
             <div className="flex-1 overflow-hidden">
+              {/* [Velt] VeltCommentsSidebar with embedMode for inline rendering, groupConfig to disable grouping, pageMode for page-level comments */}
               <VeltCommentsSidebar embedMode={true} groupConfig={groupConfig} pageMode={true} />
             </div>
           </>

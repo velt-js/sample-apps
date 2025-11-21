@@ -46,9 +46,9 @@ This blueprint defines a **7-agent system** for automating the lifecycle of Velt
 
 ### Summary Statistics
 
-- **Total Demos**: 13
+- **Total Demos**: 14
 - **Demo Categories**: 2 (Comments, CRDT)
-- **Demo Types**: 3 (Tables, Text Editors, Canvas)
+- **Demo Types**: 4 (Tables, Text Editors, Canvas, Dashboard)
 - **Velt Features**: Comments, Presence, Notifications, CRDT
 - **Editor Integrations**: 7 (AG-Grid, TanStack, Tiptap, Lexical, BlockNote, CodeMirror, Slate.js, ReactFlow)
 
@@ -69,20 +69,22 @@ This blueprint defines a **7-agent system** for automating the lifecycle of Velt
 | D11 | Slate.js Comments | Text Editor | Comments | `comments/text-editors/slatejs/slatejs-comments-demo` | Comments, Presence, Notifications | No | @veltdev/slate-velt-comments |
 | D12 | Tiptap CRDT | Text Editor | CRDT | `crdt/tiptap-crdt-demo` | Comments, Presence, Notifications, Real-time Editing | Yes | @veltdev/tiptap-crdt-react |
 | D13 | ReactFlow Canvas | Canvas | CRDT | `crdt/canvas/reactflow/reactflow-demo` | Comments, Presence, Notifications, Real-time Canvas | Yes | @veltdev/reactflow-crdt |
+| D14 | Dashboard Demo | Dashboard | Comments | `comments/dashboard/custom/dashboard-demo` | Comments, Presence, Notifications | No | None |
 
 ### Demo Grouping by Agent Responsibility
 
 #### Agent-Alpha Scope (Comments & Annotations)
-- **All 13 demos** implement comment functionality
-- **Focus Areas**: Comment targeting, bubble UI, click-to-comment patterns
+- **All 14 demos** implement comment functionality
+- **Focus Areas**: Comment targeting, bubble UI, click-to-comment patterns, panel-level comments (Dashboard)
 
 #### Agent-Bravo Scope (Comment Aggregation)
 - D03: AG-Grid Aggregation
 - D06: TanStack Aggregation
+- D14: Dashboard Demo (embedded VeltCommentsSidebar)
 - **All demos with VeltCommentsSidebar**
 
 #### Agent-Charlie Scope (Auth & Document Setup)
-- **All 13 demos** require authentication and document initialization
+- **All 14 demos** require authentication and document initialization
 
 #### Agent-Delta Scope (UI Customization)
 - **All demos with custom wireframes** (most demos)
@@ -235,7 +237,7 @@ claude-code --agent agent-0 --stage discovery --output-dir .claude/reports/
 
 #### Scope
 
-- **All 13 demos** (every demo has comment features)
+- **All 14 demos** (every demo has comment features)
 - Focus on comment targeting, bubble UI, positioning, and annotation logic
 
 #### Responsibilities
@@ -381,7 +383,7 @@ const editor = useEditor({
 
 #### Scope
 
-- **All 13 demos** (every demo requires auth and document setup)
+- **All 14 demos** (every demo requires auth and document setup)
 
 #### Responsibilities
 
