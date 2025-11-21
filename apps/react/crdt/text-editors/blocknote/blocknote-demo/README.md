@@ -23,7 +23,7 @@ BlockNote offers a **Notion-like editing experience** with its intuitive block-b
 ## Path
 
 ```
-apps/react/comments/text-editors/blocknote/blocknote-demo/
+apps/react/crdt/text-editors/blocknote/blocknote-demo/
 ```
 
 ## Package Name
@@ -145,7 +145,7 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/comments/text-editors/blocknote/blocknote-demo
+cd apps/react/crdt/text-editors/blocknote/blocknote-demo
 pnpm dev
 ```
 

@@ -2,26 +2,9 @@
 
 ## Overview
 
-This demo showcases **inline text commenting** with **Lexical**, Facebook's modern extensible text editor framework, integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, creating threaded discussions on specific content sections.
+This demo showcases **inline text commenting** built using **Lexical** text editor integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, creating threaded discussions on specific content sections.
 
-Lexical is Meta's next-generation **editor framework** that powers Facebook, Messenger, and Workplace. It provides a **plugin-based architecture** with a powerful command system, making it highly extensible and performant for building rich text editing experiences. Unlike traditional editors, Lexical's **EditorState** is immutable and updates happen through atomic transformations, ensuring reliability and predictability.
-
-### Why Choose Lexical?
-
-- **Meta-Backed**: Battle-tested technology powering Facebook's editing experiences
-- **Command System**: Powerful command pattern for composable editing behaviors
-- **Immutable State**: EditorState is immutable, preventing accidental mutations
-- **Plugin Architecture**: True plugin system with clear separation of concerns
-- **TypeScript-First**: Built with TypeScript for excellent type safety
-- **Accessibility**: WCAG-compliant with comprehensive keyboard navigation and screen reader support
-- **Performance**: Optimized for large documents with efficient reconciliation
-
-**Compared to other editors:**
-- **vs TipTap**: More granular control with command system, steeper learning curve
-- **vs SlateJS**: Better performance, simpler mental model, Meta's active development
-- **vs BlockNote**: Lower-level framework (BlockNote is built on TipTap, not Lexical)
-- **vs CodeMirror**: Designed for rich text and documents, not code editing
-- **For complex editors**: Best choice when you need maximum control and extensibility
+Lexical is Meta's extensible text editor framework that powers Facebook, Messenger, and Workplace. It provides a plugin-based architecture that makes it highly extensible and performant for building rich text editing experiences.
 
 ## Path
 
@@ -47,25 +30,13 @@ apps/react/comments/text-editors/lexical/lexical-comments-demo/
 - **Presence Awareness**: See who's currently viewing the document
 - **Notifications**: Get notified of new comments and mentions
 
-### Lexical Editor Features
+### Editor Features
 - **Rich Text Editing**: Bold, italic, underline, strikethrough formatting
-- **Headings**: H1, H2, H3 with custom styling and data attributes
-- **Text Alignment**: Left, center, right alignment support
-- **Bubble Menu Toolbar**: Appears on text selection with formatting options
+- **Headings**: H1, H2, H3 support
+- **Text Alignment**: Left, center, right alignment
+- **Bubble Menu Toolbar**: Appears on text selection with formatting and comment options
 - **Sidebar Navigation**: Table of contents generated from document headings
-- **Scroll-to-Heading**: Click sidebar headings to jump to document sections
-- **Custom Nodes**: HeadingSpanNode for headings, CommentNode for Velt comments
-- **History Plugin**: Undo/redo functionality
-- **Formatting Plugin**: Rich text format commands
-- **Initial Content**: Pre-populated document content on load
-
-### Document Editing
-- **Immutable EditorState**: All updates happen through transformations
-- **Command Pattern**: Consistent interface for all editing operations
-- **Plugin System**: Modular architecture with composable plugins
-- **Node System**: Custom node types for specialized content
-- **Selection API**: Powerful selection manipulation capabilities
-- **Transform API**: Reliable content transformation methods
+- **History**: Undo/redo functionality
 
 ## Directory Structure
 
@@ -92,13 +63,13 @@ lexical-comments-demo/
 │   ├── sidebar/
 │   │   └── sidebar.tsx                 # Document outline sidebar with TOC
 │   ├── document/
-│   │   ├── document-canvas.tsx         # Main document wrapper with scroll
+│   │   ├── document-canvas.tsx         # Main document wrapper
 │   │   └── LexicalComponent/
-│   │       ├── LexicalComponent.tsx    # Main Lexical editor component
+│   │       ├── LexicalComponent.tsx    # Main Lexical editor with Velt integration
 │   │       ├── constants.ts            # Initial document content
 │   │       ├── types.ts                # TypeScript type definitions
 │   │       ├── nodes/
-│   │       │   └── HeadingSpanNode.ts  # Custom heading node with data attributes
+│   │       │   └── HeadingSpanNode.ts  # Custom heading node for TOC
 │   │       ├── plugins/
 │   │       │   ├── BubbleMenuPlugin.tsx    # Text selection toolbar plugin
 │   │       │   ├── FormattingPlugin.tsx    # Rich text formatting commands
@@ -180,6 +151,8 @@ pnpm --filter @apps/react-text-editors-lexical-lexical-comments-demo build
 
 ### Application Architecture
 
+The application is structured around several key areas:
+
 **User Authentication** (`app/userAuth/`)
 - `AppUserContext` provides user state across the application
 - `useAppUser` hook manages user selection and authentication
@@ -249,78 +222,6 @@ const addLexicalVeltComment = () => {
 - Velt annotations track the semantic position (node IDs and offsets)
 - Comments remain correctly positioned even as surrounding text is edited
 
-### Lexical Plugin Architecture
-
-**Core Plugins:**
-
-1. **RichTextPlugin** - Enables rich text editing functionality
-2. **HistoryPlugin** - Provides undo/redo capabilities
-3. **FormattingPlugin** - Registers formatting commands (bold, italic, etc.)
-4. **HeadingPlugin** - Handles heading styles and conversion
-5. **TextAlignPlugin** - Text alignment commands
-6. **InitialContentPlugin** - Loads pre-populated content on mount
-7. **BubbleMenuPlugin** - Text selection toolbar
-
-**Plugin Communication:**
-Plugins communicate via Lexical's command system:
-
-```tsx
-editor.registerCommand(
-  FORMAT_TEXT_COMMAND,
-  (payload) => {
-    // Handle formatting command
-  },
-  COMMAND_PRIORITY_LOW
-);
-```
-
-### Custom Nodes
-
-**HeadingSpanNode:**
-Custom inline node for headings with data attributes:
-
-```tsx
-export class HeadingSpanNode extends TextNode {
-  __heading: 'h1' | 'h2' | 'h3';
-
-  createDOM(config: EditorConfig): HTMLElement {
-    const element = super.createDOM(config);
-    element.setAttribute('data-heading', this.__heading);
-    element.className = /* heading styles */;
-    return element;
-  }
-}
-```
-
-Used for:
-- Sidebar table of contents generation
-- Scroll-to-heading functionality
-- Semantic heading structure
-
-### Sidebar Navigation
-
-The sidebar provides document navigation:
-
-**Features:**
-- Automatically generated from document headings
-- Scroll-to-heading on click
-- Visual hierarchy (H1, H2, H3)
-- Real-time updates as headings change
-
-**Implementation:**
-```tsx
-const scrollToHeading = useCallback((headingText: string) => {
-  const headings = scrollContainerRef.current.querySelectorAll('[data-heading]');
-  const targetHeading = Array.from(headings).find(
-    (heading) => heading.textContent === headingText
-  );
-
-  if (targetHeading) {
-    // Smooth scroll to heading
-  }
-}, []);
-```
-
 ### Velt Configuration
 
 **Comments Setup** (`components/velt/VeltCollaboration.tsx`)
@@ -340,18 +241,10 @@ const scrollToHeading = useCallback((headingText: string) => {
 
 ## Usage
 
-### Writing and Editing
-
-1. **Type content**: Click into the editor and start writing
-2. **Format text**: Select text to reveal the bubble menu toolbar
-3. **Add headings**: Click H1, H2, or H3 buttons in the toolbar
-4. **Align text**: Use alignment buttons (left, center, right)
-5. **Navigate**: Use sidebar headings to jump to document sections
-
 ### Adding Comments
 
 1. **Select text**: Highlight the passage you want to comment on
-2. **Click comment button**: In the bubble menu toolbar (💬 icon)
+2. **Click comment button**: In the bubble menu toolbar (comment icon)
 3. **Type comment**: Enter your comment in the popover
 4. **Submit**: Press Enter or click submit
 5. **View comments**: Click comment bubbles to read and reply
@@ -364,98 +257,21 @@ const scrollToHeading = useCallback((headingText: string) => {
 4. Click a comment to jump to that text section
 5. Reply to comments in the sidebar
 
-### Navigation Features
+### Text Editing
 
-1. **Sidebar TOC**: Click any heading in the left sidebar
-2. **Smooth scroll**: Page automatically scrolls to that heading
-3. **Hierarchy**: H1, H2, H3 show document structure
-4. **Auto-update**: TOC updates as you add/remove headings
+1. **Type content**: Click into the editor and start writing
+2. **Format text**: Select text to reveal the bubble menu toolbar
+3. **Add headings**: Click H1, H2, or H3 buttons in the toolbar
+4. **Align text**: Use alignment buttons (left, center, right)
+5. **Navigate**: Use sidebar headings to jump to document sections
 
-### Formatting Shortcuts
+### Keyboard Shortcuts
 
 - **Cmd/Ctrl + B** - Bold
 - **Cmd/Ctrl + I** - Italic
 - **Cmd/Ctrl + U** - Underline
 - **Cmd/Ctrl + Z** - Undo
 - **Cmd/Ctrl + Shift + Z** - Redo
-- **Select text** - Opens bubble menu with formatting options
-
-## Customization
-
-### Adding Custom Plugins
-
-Create a new plugin:
-
-```tsx
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect } from 'react';
-
-export function MyCustomPlugin() {
-  const [editor] = useLexicalComposerContext();
-
-  useEffect(() => {
-    // Register commands, listeners, etc.
-    return editor.registerCommand(
-      MY_CUSTOM_COMMAND,
-      (payload) => {
-        // Handle command
-        return false;
-      },
-      COMMAND_PRIORITY_NORMAL
-    );
-  }, [editor]);
-
-  return null;
-}
-```
-
-Add to LexicalComposer:
-```tsx
-<LexicalComposer initialConfig={initialConfig}>
-  <RichTextPlugin ... />
-  <MyCustomPlugin />
-</LexicalComposer>
-```
-
-### Creating Custom Nodes
-
-Define a custom node class:
-
-```tsx
-import { TextNode, SerializedTextNode } from 'lexical';
-
-export class MyCustomNode extends TextNode {
-  static getType(): string {
-    return 'my-custom-node';
-  }
-
-  createDOM(config: EditorConfig): HTMLElement {
-    const element = super.createDOM(config);
-    element.className = 'my-custom-node';
-    return element;
-  }
-
-  static importJSON(serializedNode: SerializedTextNode): MyCustomNode {
-    const node = new MyCustomNode(serializedNode.text);
-    return node;
-  }
-
-  exportJSON(): SerializedTextNode {
-    return {
-      ...super.exportJSON(),
-      type: 'my-custom-node',
-    };
-  }
-}
-```
-
-Register the node:
-```tsx
-const initialConfig = {
-  nodes: [MyCustomNode, CommentNode, HeadingSpanNode],
-  // ...
-};
-```
 
 ## Troubleshooting
 
@@ -491,27 +307,9 @@ Common Lexical issues:
 - Add custom node to `initialConfig.nodes` array
 - Ensure node class has `static getType()` method
 
-**"Invalid selection"**
-- Check that selection exists before operations
-- Use `$getSelection()` inside `editor.update()`
-
 **"Cannot update outside of editor.update"**
 - Wrap state modifications in `editor.update(() => {})`
 - Use `editor.getEditorState().read()` for read-only operations
-
-### Bubble Menu Not Showing
-If the formatting toolbar doesn't appear:
-1. Verify text is selected (not just cursor position)
-2. Check that `BubbleMenuPlugin` is rendered
-3. Ensure selection is not empty: `Editor.string(editor, selection) !== ''`
-4. Check CSS z-index and positioning
-
-### Sidebar Navigation Issues
-If scroll-to-heading doesn't work:
-1. Verify headings have `data-heading` attribute
-2. Check that `scrollContainerRef` is attached to scroll container
-3. Ensure heading text matches exactly (case-sensitive)
-4. Verify smooth scroll is supported in browser
 
 ## About Velt SDK
 
@@ -546,7 +344,6 @@ The SDK provides **fullstack components**:
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
 - 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
 - [Lexical Documentation](https://lexical.dev/)
-- [Lexical Playground](https://playground.lexical.dev/)
 - [Velt Text Comments Documentation](https://docs.velt.dev/comments/text-comments/overview)
 
 ## Important Configuration

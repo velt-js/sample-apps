@@ -13,7 +13,7 @@ Velt's CRDT extension is based on Yjs.
 ## Path
 
 ```
-apps/react/canvas/libraries/reactflow/reactflow-demo/
+apps/react/crdt/canvas/reactflow/reactflow-demo/
 ```
 
 ## Package Name
@@ -140,7 +140,7 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/canvas/libraries/reactflow/reactflow-demo
+cd apps/react/crdt/canvas/reactflow/reactflow-demo
 pnpm dev
 ```
 

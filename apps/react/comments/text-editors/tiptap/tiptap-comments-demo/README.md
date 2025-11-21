@@ -299,10 +299,10 @@ The SDK provides **fullstack components**:
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
 - 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
-- 🐦 [X/Twitter](https://x.velt.dev) - Updates and announcements
+- 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
 - 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
 - [Tiptap Documentation](https://tiptap.dev/)
-- [Velt Tiptap Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/text-editor/tiptap)
+- [Velt Tiptap Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/tiptap)
 
 ## Important Configuration
 
