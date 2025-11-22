@@ -3,7 +3,7 @@
 > **[🚀 View Live Demo](https://sample-apps-lexical-comments-demo.vercel.app)**
 
 
-Uploading lexical-tiptap-slatejs.mov…
+https://github.com/user-attachments/assets/1cb77742-17e1-4213-a28f-e1cecaf145fa
 
 
 ## Overview
