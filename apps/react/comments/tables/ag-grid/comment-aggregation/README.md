@@ -2,6 +2,11 @@
 
 > **[🚀 View Live Demo](https://sample-apps-ag-grid-comment-aggrega.vercel.app)**
 
+
+https://github.com/user-attachments/assets/b96205d4-61ff-4cfb-9f88-ad45bb486e44
+
+
+
 ## Overview
 
 This demo showcases **comment aggregation** in a **marketing spend analytics dashboard** built with **AG-Grid** and **Velt's commenting system**. The key innovation is **context-aware comment organization** that allows comments to "bubble up" through aggregation levels - comments on individual days automatically appear in weekly and monthly views.
