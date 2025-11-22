@@ -2,6 +2,10 @@
 
 > **[🚀 View Live Demo](https://sample-apps-tanstack-comment-aggreg.vercel.app)**
 
+
+https://github.com/user-attachments/assets/988642d5-7ad9-40e9-9db8-b8f114081cf7
+
+
 ## Overview
 
 This demo showcases **comment aggregation** in a **marketing spend analytics table** built with **TanStack Table** and **Velt's context-based commenting system**. The key innovation is **context-aware comment organization** that allows comments to "bubble up" through aggregation levels - comments on individual days automatically appear in weekly and monthly views. This demonstrates TanStack Table's headless architecture combined with Velt's powerful partial context matching.
