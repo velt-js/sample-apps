@@ -7,7 +7,7 @@ This demo showcases **contextual page comments** on a **marketing analytics dash
 ## Path
 
 ```
-apps/react/comments/dashboard/page-comments/dashboard-demo/
+apps/react/comments/dashboard/custom/dashboard-demo/
 ```
 
 ## Package Name
@@ -126,7 +126,7 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/comments/dashboard/page-comments/dashboard-demo
+cd apps/react/comments/dashboard/custom/dashboard-demo
 pnpm dev
 ```
 

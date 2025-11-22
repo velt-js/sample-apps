@@ -2,26 +2,9 @@
 
 ## Overview
 
-This demo showcases **inline text commenting** with **SlateJS**, a completely customizable framework for building rich text editors, integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document with full control over the editor's behavior and data model.
+This demo showcases **inline text commenting** with **SlateJS** integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, with real-time collaboration and threaded discussions.
 
-SlateJS provides an **unopinionated, low-level framework** for building rich text editors in React. Unlike other editors that provide pre-built components, Slate gives you complete control over your editor's rendering, serialization, and behavior. It treats your document as **immutable data structures** and uses React principles to update the view, making it predictable and debuggable.
-
-### Why Choose SlateJS?
-
-- **Complete Flexibility**: Full control over editor behavior, rendering, and data model
-- **Composable Primitives**: Build exactly the editor you need from basic building blocks
-- **React-First**: Uses React components and hooks throughout
-- **Nested Documents**: First-class support for nested structures (tables, callouts, etc.)
-- **Immutable Operations**: Predictable editor state based on immutable operations
-- **Plugin System**: True plugin architecture with no magic or hidden behaviors
-- **TypeScript Support**: Excellent type definitions for the entire API
-
-**Compared to other editors:**
-- **vs Lexical**: More flexibility but steeper learning curve, community-driven
-- **vs TipTap**: Lower-level with more control, no ProseMirror dependency
-- **vs BlockNote**: Framework vs opinionated library, Slate requires more setup
-- **vs CodeMirror**: Designed for rich documents, not code editing
-- **For maximum customization**: Best choice when you need complete control over editor behavior
+SlateJS is a customizable framework for building rich text editors in React, providing flexibility for implementing custom editor behaviors alongside Velt's collaboration features.
 
 ## Path
 
@@ -37,36 +20,22 @@ apps/react/comments/text-editors/slatejs/slatejs-comments-demo/
 
 ### Velt Commenting Features
 - **Text Selection Comments**: Highlight text passages and add inline comments
-- **Comment Nodes**: SlateJS native nodes for comment markers in document structure
-- **Inline Comment Rendering**: Custom SlateVeltComment component for comment display
-- **Comment Bubbles**: Clickable bubbles showing comment threads
+- **Comment Bubbles**: Clickable bubbles showing comment threads on selected text
 - **Threaded Discussions**: Reply to comments and maintain conversation context
-- **Comment Annotations**: Automatic position tracking as document changes
-- **Bubble Menu Integration**: Add comments via text selection toolbar
-- **Comments Sidebar**: Centralized view of all document comments
 - **Real-time Updates**: See new comments and replies instantly
+- **Comment Annotations**: Automatic position tracking as document changes
+- **Comments Sidebar**: Centralized view of all document comments
 - **Presence Awareness**: See who's currently viewing the document
 - **Notifications**: Get notified of new comments and mentions
+- **Bubble Menu Integration**: Add comments via text selection toolbar
 
-### SlateJS Editor Features
-- **Rich Text Formatting**: Bold, italic, underline, strikethrough with custom rendering
-- **Headings**: H1, H2, H3 with custom inline rendering and data attributes
-- **Text Alignment**: Left, center, right alignment support
-- **Bubble Menu Toolbar**: Context menu on text selection
-- **Sidebar Navigation**: Auto-generated table of contents from headings
-- **Scroll-to-Heading**: Click sidebar headings to navigate document
-- **Custom Element Rendering**: Full control over how elements render
-- **Custom Leaf Rendering**: Control over how text formatting renders
-- **History**: Undo/redo with slate-history plugin
-- **Pre-populated Content**: Initial document structure on load
-
-### SlateJS Architecture
-- **Immutable Documents**: Editor value is an immutable array of nodes
-- **Transforms API**: Composable operations for modifying editor content
-- **Editor Interface**: Query and manipulate the editor state
-- **Custom Rendering**: Complete control over element and text rendering
-- **Plugin Pattern**: Extend editor behavior by wrapping the editor object
-- **Descendant Nodes**: Recursive node structure for complex documents
+### Editor Features
+- **Rich Text Formatting**: Bold, italic, underline, strikethrough
+- **Headings**: H1, H2, H3 support with sidebar navigation
+- **Text Alignment**: Left, center, right alignment
+- **Bubble Menu Toolbar**: Formatting options on text selection
+- **Sidebar Navigation**: Auto-generated table of contents
+- **History**: Undo/redo functionality
 
 ## Directory Structure
 
@@ -170,6 +139,8 @@ pnpm --filter @apps/react-text-editors-slatejs-slatejs-comments-demo build
 
 ### Application Architecture
 
+The application is structured around several key areas:
+
 **User Authentication** (`app/userAuth/`)
 - `AppUserContext` provides user state across the application
 - `useAppUser` hook manages user selection and authentication
@@ -187,8 +158,8 @@ pnpm --filter @apps/react-text-editors-slatejs-slatejs-comments-demo build
 
 **SlateJS Editor** (`components/document/SlateJSComponent/`)
 - Main editor component with Velt comments integration
-- Custom element and leaf rendering
-- Bubble menu for text formatting
+- Custom element rendering for comment nodes
+- Bubble menu toolbar with comment button
 
 ### Velt Comments Integration
 
@@ -246,236 +217,33 @@ const Element = ({ attributes, children, element }: RenderElementProps) => {
 9. All users see comment bubbles immediately
 
 **Comment Position Tracking:**
-- Comments are Slate element nodes in the document tree
-- Slate's path system keeps track of node positions
-- Velt annotations map to Slate paths
-- As users edit, Slate updates paths automatically
-- Comments maintain correct positions relative to content
-
-### SlateJS Architecture
-
-**Immutable Document Structure:**
-```tsx
-const [value, setValue] = useState<Descendant[]>(initialContent);
-
-return (
-  <Slate editor={editor} initialValue={value} onChange={handleChange}>
-    <Editable
-      renderElement={Element}
-      renderLeaf={Leaf}
-      onKeyDown={handleKeyDown}
-    />
-  </Slate>
-);
-```
-
-**Custom Element Rendering:**
-```tsx
-const Element = ({ attributes, children, element }: RenderElementProps) => {
-  if (element.type === 'veltComment') {
-    return <SlateVeltComment {...{ attributes, children, element }} />;
-  }
-  // Default paragraph element
-  return <p {...attributes}>{children}</p>;
-};
-```
-
-**Custom Leaf Rendering:**
-```tsx
-const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
-  if (leaf.bold) {
-    children = <strong>{children}</strong>;
-  }
-  if (leaf.italic) {
-    children = <em>{children}</em>;
-  }
-  if (leaf.underline) {
-    children = <u>{children}</u>;
-  }
-  if (leaf.heading === 'h1') {
-    children = (
-      <span className="text-[40px] font-bold" data-heading="h1">
-        {children}
-      </span>
-    );
-  }
-  return <span {...attributes}>{children}</span>;
-};
-```
-
-**Transforms and Editor Operations:**
-```tsx
-// Apply formatting
-Editor.addMark(editor, 'bold', true);
-
-// Insert text
-Transforms.insertText(editor, 'Hello');
-
-// Delete selection
-Transforms.delete(editor);
-```
-
-### Bubble Menu Implementation
-
-The bubble menu appears when text is selected:
-
-```tsx
-const updateBubbleMenu = useCallback(() => {
-  const { selection } = editor;
-
-  if (!selection || Editor.string(editor, selection) === '') {
-    setShowBubbleMenu(false);
-    return;
-  }
-
-  const domSelection = window.getSelection();
-  const domRange = domSelection.getRangeAt(0);
-  const rect = domRange.getBoundingClientRect();
-
-  setBubbleMenuPosition({
-    top: rect.top - menuHeight - 10,
-    left: rect.left + rect.width / 2 - menuWidth / 2,
-  });
-
-  setShowBubbleMenu(true);
-}, [editor]);
-```
-
-**Features:**
-- Appears automatically on text selection
-- Positioned above selected text
-- Contains formatting buttons and comment tool
-- Hides when selection is cleared
-
-### History Plugin
-
-Undo/redo functionality via slate-history:
-
-```tsx
-import { withHistory } from 'slate-history';
-
-const editor = useMemo(() => {
-  return withHistory(withReact(createEditor()));
-}, []);
-```
-
-**Features:**
-- Cmd/Ctrl+Z for undo
-- Cmd/Ctrl+Shift+Z for redo
-- Operation batching for atomic undo steps
-
-### Sidebar Navigation
-
-**Table of contents generation:**
-- Scans document for elements with `data-heading` attribute
-- Displays hierarchical list (H1, H2, H3)
-- Smooth scrolls to heading on click
-- Updates automatically as headings change
+- Comments are SlateJS element nodes in the document tree
+- Velt annotations map to Slate paths for position tracking
+- As users edit the document, comment positions update automatically
+- Comments maintain correct positions relative to content changes
 
 ## Usage
 
-### Writing and Editing
-
-1. **Type content**: Click into the editor and start writing
-2. **Format text**: Select text to reveal the bubble menu
-3. **Add headings**: Select text and click H1, H2, or H3 in the bubble menu
-4. **Apply styles**: Use bold, italic, underline, strikethrough buttons
-5. **Navigate**: Click sidebar headings to jump to document sections
-
 ### Adding Comments
 
-1. **Select text**: Highlight the passage to comment on
-2. **Click comment button**: In the bubble menu toolbar (💬 icon)
+1. **Select text**: Highlight the passage you want to comment on
+2. **Click comment button**: Click the comment icon in the bubble menu toolbar
 3. **Type comment**: Enter your comment in the popover
 4. **Submit**: Press Enter or click submit
-5. **View comments**: Click comment bubbles to read and reply
+5. **View comments**: Click comment bubbles to read and reply to existing comments
 
 ### Viewing All Comments
 
 1. Click the sidebar button in the header
 2. Comments sidebar appears on the right
 3. View all comments organized by location
-4. Click a comment to jump to that text
-5. Reply to comments in threads
+4. Click a comment to jump to that text in the document
+5. Reply to comments in threaded discussions
 
-### Keyboard Shortcuts
-
-- **Cmd/Ctrl + B** - Toggle bold
-- **Cmd/Ctrl + I** - Toggle italic
-- **Cmd/Ctrl + U** - Toggle underline
-- **Cmd/Ctrl + Z** - Undo
-- **Cmd/Ctrl + Shift + Z** - Redo
-- **Select text** - Opens bubble menu
-
-## Customization
-
-### Creating Custom Elements
-
-Define a new element type:
-
-```tsx
-interface CustomElement {
-  type: 'callout';
-  variant: 'info' | 'warning' | 'error';
-  children: Descendant[];
-}
-
-const Element = ({ attributes, children, element }) => {
-  switch (element.type) {
-    case 'callout':
-      return (
-        <div {...attributes} className={`callout callout-${element.variant}`}>
-          {children}
-        </div>
-      );
-    case 'veltComment':
-      return <SlateVeltComment {...{ attributes, children, element }} />;
-    default:
-      return <p {...attributes}>{children}</p>;
-  }
-};
-```
-
-### Adding Custom Marks
-
-Extend text formatting:
-
-```tsx
-const Leaf = ({ attributes, children, leaf }) => {
-  if (leaf.code) {
-    children = <code>{children}</code>;
-  }
-  if (leaf.highlight) {
-    children = <mark className="bg-yellow-200">{children}</mark>;
-  }
-  return <span {...attributes}>{children}</span>;
-};
-
-// Apply the mark
-Editor.addMark(editor, 'highlight', true);
-```
-
-### Creating Editor Plugins
-
-Wrap the editor to extend functionality:
-
-```tsx
-const withCustomPlugin = (editor: Editor) => {
-  const { insertText } = editor;
-
-  editor.insertText = (text) => {
-    // Custom logic before insert
-    insertText(text);
-    // Custom logic after insert
-  };
-
-  return editor;
-};
-
-const editor = useMemo(() => {
-  return withCustomPlugin(withVeltComments(withHistory(withReact(createEditor()))));
-}, []);
-```
+### Collaboration Features
+- **See active users**: View avatars of online collaborators in the header
+- **Receive notifications**: Get notified of new comments and mentions
+- **Real-time updates**: See comments from other users instantly as they're added
 
 ## Troubleshooting
 
@@ -494,48 +262,18 @@ If Velt features don't appear:
 
 ### Comments Not Appearing
 If comments don't render:
-1. Verify `withVeltComments` wraps the editor
-2. Check that `SlateVeltComment` is rendered for 'veltComment' type
-3. Ensure `useCommentAnnotations()` returns data
-4. Verify `renderComments()` is called in useEffect
+1. Verify `withVeltComments` wraps the editor in the correct order
+2. Check that `SlateVeltComment` component renders for 'veltComment' type elements
+3. Ensure `useCommentAnnotations()` hook returns data
+4. Verify `renderComments()` is called when annotations change
 5. Check browser console for errors
 
-### SlateJS Errors
-
-**"Cannot resolve a Slate node from DOM node"**
-- Ensure all elements have `...attributes` spread
-- Check that custom elements are properly registered
-- Verify editor is wrapped with `withReact`
-
-**"Cannot get the leaf node at path"**
-- Ensure operations maintain valid document structure
-- Check that paths are valid when accessing nodes
-- Verify editor state is not corrupted
-
-**"Cannot apply operation on a value that does not have a selection"**
-- Ensure editor has focus before applying operations
-- Check that selection exists before text operations
-- Use `Transforms.select()` to set selection if needed
-
-**"A void node must contain a single spacer child"**
-- Void nodes require `children={children}` in render
-- Check that void nodes have `contentEditable={false}`
-- Ensure void elements are properly configured
-
-### Bubble Menu Issues
-If the formatting toolbar doesn't appear:
-1. Verify text is selected (not empty selection)
-2. Check that `showBubbleMenu` state updates correctly
-3. Ensure DOM selection exists: `window.getSelection()`
-4. Verify bubble menu positioning calculations
-5. Check CSS z-index and overflow properties
-
-### History Not Working
-If undo/redo doesn't work:
-1. Verify `withHistory` wraps the editor
-2. Ensure `HistoryEditor` is passed to `withVeltComments`
-3. Check that keyboard shortcuts are not prevented
-4. Verify operations are batched correctly
+### Comment Button Not Working
+If you can't add comments:
+1. Check that text is selected before clicking comment button
+2. Verify `addComment()` function is called correctly
+3. Ensure editor has focus when adding comments
+4. Check browser console for Velt SDK errors
 
 ## About Velt SDK
 
