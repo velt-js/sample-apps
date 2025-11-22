@@ -2,6 +2,10 @@
 
 > **[🚀 View Live Demo](https://sample-apps-slatejs-comments-demo.vercel.app)**
 
+https://github.com/user-attachments/assets/69ec01d8-e240-4820-8af3-fd5347e28f93
+
+
+
 ## Overview
 
 This demo showcases **inline text commenting** with **SlateJS** integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, with real-time collaboration and threaded discussions.
