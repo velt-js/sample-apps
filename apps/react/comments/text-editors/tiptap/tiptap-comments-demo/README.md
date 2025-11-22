@@ -2,7 +2,6 @@
 
 > **[🚀 View Live Demo](https://sample-apps-tiptap-comments-demo.vercel.app)**
 
-
 https://github.com/user-attachments/assets/c98a84e0-b083-4a3f-818b-d33768fcb15d
 
 
