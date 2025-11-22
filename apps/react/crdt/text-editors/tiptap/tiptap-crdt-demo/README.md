@@ -2,6 +2,10 @@
 
 > **[🚀 View Live Demo](https://sample-apps-tiptap-crdt-demo.vercel.app/)**
 
+
+https://github.com/user-attachments/assets/ba757155-087d-4c1f-9d80-47b72d29ca9b
+
+
 ## Overview
 
 This demo showcases **real-time collaborative text editing** built using **TipTap** with **Velt's CRDT extension**. Multiple users can simultaneously edit content with automatic conflict resolution, ensuring a smooth collaborative writing experience.
