@@ -2,6 +2,10 @@
 
 > **[🚀 View Live Demo](https://sample-apps-tiptap-comments-demo.vercel.app)**
 
+
+https://github.com/user-attachments/assets/c98a84e0-b083-4a3f-818b-d33768fcb15d
+
+
 ## Overview
 
 This demo showcases **contextual commenting on rich text** built using **Tiptap** with **Velt's commenting integration**. Users can select text, add comments with @mentions, and collaborate asynchronously on document feedback.
