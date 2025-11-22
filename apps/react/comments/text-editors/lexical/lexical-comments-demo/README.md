@@ -1,5 +1,7 @@
 # Lexical Comments Demo
 
+> **[🚀 View Live Demo](https://sample-apps-lexical-comments-demo.vercel.app)**
+
 ## Overview
 
 This demo showcases **inline text commenting** built using **Lexical** text editor integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, creating threaded discussions on specific content sections.
@@ -368,4 +370,5 @@ public-hoist-pattern[]=!@tailwindcss*
 
 For issues or questions:
 - Lexical: [Documentation](https://lexical.dev/) | [Discord](https://discord.gg/KmG4wQnnD9)
-- Velt: [Documentation](https://docs.velt.dev) | [Contact](https://velt.dev/contact)
+- Velt: [Documentation](https://docs.velt.dev)
+- Velt Support: [Contact](https://velt.dev/contact)

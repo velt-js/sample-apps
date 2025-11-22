@@ -344,3 +344,4 @@ public-hoist-pattern[]=!@tailwindcss*
 For issues or questions:
 - ReactFlow: [GitHub Issues](https://github.com/xyflow/xyflow/issues)
 - Velt: [Documentation](https://docs.velt.dev)
+- Velt Support: [Contact](https://velt.dev/contact)

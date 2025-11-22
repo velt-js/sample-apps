@@ -318,3 +318,4 @@ public-hoist-pattern[]=!@tailwindcss*
 For issues or questions:
 - CodeMirror: [Documentation](https://codemirror.net/)
 - Velt: [Documentation](https://docs.velt.dev)
+- Velt Support: [Contact](https://velt.dev/contact)

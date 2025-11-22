@@ -1,5 +1,7 @@
 # Tiptap Comments Demo
 
+> **[🚀 View Live Demo](https://sample-apps-tiptap-comments-demo.vercel.app)**
+
 ## Overview
 
 This demo showcases **contextual commenting on rich text** built using **Tiptap** with **Velt's commenting integration**. Users can select text, add comments with @mentions, and collaborate asynchronously on document feedback.
@@ -328,3 +330,4 @@ public-hoist-pattern[]=!@tailwindcss*
 For issues or questions:
 - Tiptap: [GitHub Issues](https://github.com/ueberdosis/tiptap/issues)
 - Velt: [Documentation](https://docs.velt.dev)
+- Velt Support: [Contact](https://velt.dev/contact)

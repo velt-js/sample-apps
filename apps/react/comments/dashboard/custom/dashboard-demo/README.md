@@ -1,5 +1,7 @@
 # Dashboard Page Comments Demo
 
+> **[🚀 View Live Demo](https://sample-apps-dashboard-demo.vercel.app)**
+
 ## Overview
 
 This demo showcases **contextual page comments** on a **marketing analytics dashboard** built with **Velt's commenting system**. Users can add comments directly on specific dashboard elements like metric cards, charts, and data panels, enabling targeted feedback and collaboration on data insights.

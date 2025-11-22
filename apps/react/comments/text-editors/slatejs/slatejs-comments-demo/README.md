@@ -1,5 +1,7 @@
 # SlateJS Comments Demo
 
+> **[🚀 View Live Demo](https://sample-apps-slatejs-comments-demo.vercel.app)**
+
 ## Overview
 
 This demo showcases **inline text commenting** with **SlateJS** integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, with real-time collaboration and threaded discussions.
@@ -333,4 +335,5 @@ public-hoist-pattern[]=!@tailwindcss*
 
 For issues or questions:
 - SlateJS: [Documentation](https://docs.slatejs.org/) | [Slack](https://slate-slack.herokuapp.com/)
-- Velt: [Documentation](https://docs.velt.dev) | [Contact](https://velt.dev/contact)
+- Velt: [Documentation](https://docs.velt.dev)
+- Velt Support: [Contact](https://velt.dev/contact)

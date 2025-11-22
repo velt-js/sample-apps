@@ -1,5 +1,7 @@
 # BlockNote Collaborative Editor Demo
 
+> **[🚀 View Live Demo](https://sample-apps-blocknote-demo.vercel.app)**
+
 ## Overview
 
 This demo showcases **real-time collaborative editing** with **BlockNote**, a modern block-based rich text editor built on TipTap, integrated with **Velt's CRDT extension**. Multiple users can simultaneously edit content with automatic conflict resolution and inline commenting capabilities.
@@ -409,4 +411,5 @@ public-hoist-pattern[]=!@tailwindcss*
 
 For issues or questions:
 - BlockNote: [Documentation](https://www.blocknotejs.org/) | [GitHub](https://github.com/TypeCellOS/BlockNote)
-- Velt: [Documentation](https://docs.velt.dev) | [Contact](https://velt.dev/contact)
+- Velt: [Documentation](https://docs.velt.dev)
+- Velt Support: [Contact](https://velt.dev/contact)
