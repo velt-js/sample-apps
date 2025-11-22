@@ -1,6 +1,9 @@
 # CodeMirror CRDT Demo
 
 > **[🚀 View Live Demo](https://sample-apps-codemirror-crdt-demo.vercel.app/)**
+> 
+https://github.com/user-attachments/assets/e5d6c998-a7eb-416c-889d-1a9f3029a4ce
+
 
 ## Overview
 
