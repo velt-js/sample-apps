@@ -2,6 +2,10 @@
 
 > **[🚀 View Live Demo](https://sample-apps-lexical-comments-demo.vercel.app)**
 
+
+Uploading lexical-tiptap-slatejs.mov…
+
+
 ## Overview
 
 This demo showcases **inline text commenting** built using **Lexical** text editor integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, creating threaded discussions on specific content sections.
