@@ -141,93 +141,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-text-editors-slatejs-slatejs-comments-demo build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**User Authentication** (`app/userAuth/`)
-- `AppUserContext` provides user state across the application
-- `useAppUser` hook manages user selection and authentication
-- `AppProviders` wraps the app with all necessary context providers
-- Mock user data simulates multi-user commenting scenarios
-
-**Document Management** (`app/document/`)
-- `DocumentContext` manages the current document state
-- `useCurrentDocument` hook provides document access
-- Documents represent separate editing and commenting contexts
-
-**JWT Token Generation** (`app/api/velt/token/`)
-- Backend route generates secure JWT tokens for Velt authentication
-- Integrates with Velt's Auth Provider approach
-
-**SlateJS Editor** (`components/document/SlateJSComponent/`)
-- Main editor component with Velt comments integration
-- Custom element rendering for comment nodes
-- Bubble menu toolbar with comment button
-
-### Velt Comments Integration
-
-The integration uses Velt's SlateJS package to add commenting capabilities:
-
-**Editor Setup with Velt Plugin:**
-```tsx
-const editor = useMemo(() => {
-  const baseEditor = createEditor();
-  return withVeltComments(withReact(withHistory(baseEditor)), {
-    HistoryEditor: HistoryEditor,
-  }) as CustomEditor;
-}, []);
-```
-
-**Comment Rendering:**
-```tsx
-const commentAnnotations = useCommentAnnotations(); // [Velt] Subscribe to comment updates
-
-useEffect(() => {
-  if (editor && commentAnnotations?.length) {
-    renderComments({ editor, commentAnnotations }); // [Velt] Render comment nodes
-  }
-}, [editor, commentAnnotations]);
-```
-
-**Adding Comments:**
-```tsx
-const handleAddComment = useCallback(() => {
-  if (editor) {
-    addComment({ editor }); // [Velt] Trigger comment on selection
-  }
-}, [editor]);
-```
-
-**Comment Element Rendering:**
-```tsx
-const Element = ({ attributes, children, element }: RenderElementProps) => {
-  if (element.type === 'veltComment') {
-    return <SlateVeltComment {...{ attributes, children, element }} />;
-  }
-  return <p {...attributes}>{children}</p>;
-};
-```
-
-**How it works:**
-1. `withVeltComments` plugin wraps the editor to intercept operations
-2. User selects text and clicks comment button in bubble menu
-3. `addComment()` creates a Velt annotation for the selection
-4. Comment popover appears for user input
-5. Velt inserts a 'veltComment' element node into the Slate document
-6. `useCommentAnnotations()` hook detects the new comment
-7. `renderComments()` updates comment nodes in the document
-8. Custom `Element` renderer displays `SlateVeltComment` component
-9. All users see comment bubbles immediately
-
-**Comment Position Tracking:**
-- Comments are SlateJS element nodes in the document tree
-- Velt annotations map to Slate paths for position tracking
-- As users edit the document, comment positions update automatically
-- Comments maintain correct positions relative to content changes
-
 ## Usage
 
 ### Adding Comments
@@ -312,7 +225,6 @@ The SDK provides **fullstack components**:
 - 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
 - [SlateJS Documentation](https://docs.slatejs.org/)
 - [SlateJS Examples](https://www.slatejs.org/examples/richtext)
 - [Velt Text Comments Documentation](https://docs.velt.dev/comments/text-comments/overview)
@@ -335,9 +247,3 @@ public-hoist-pattern[]=!@tailwindcss*
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
 
-## Support
-
-For issues or questions:
-- SlateJS: [Documentation](https://docs.slatejs.org/) | [Slack](https://slate-slack.herokuapp.com/)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)

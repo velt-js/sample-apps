@@ -130,99 +130,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-text-editors-tiptap-tiptap-comments-demo build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**Editor Component** (`components/document/TipTapComponent/`)
-- **TipTapComponent** orchestrates the Tiptap editor with Velt commenting integration
-- **BubbleMenuToolbar** provides text formatting controls and comment button on text selection
-- **Custom extensions** (InlineH1, InlineH2, InlineH3) create styled inline headings
-- **Comment annotations** are rendered dynamically based on Velt's real-time updates
-
-**Navigation** (`components/sidebar/`)
-- **Sidebar** provides table of contents navigation with section jumping
-- Collapsible design to maximize editor space
-- Active section highlighting for visual orientation
-
-### Velt Comments Integration
-
-The core integration uses the `TiptapVeltComments` extension and related utilities:
-
-```tsx
-import { useCommentAnnotations } from '@veltdev/react'
-import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments'
-
-const editor = useEditor({
-  extensions: [
-    StarterKit,
-    TextAlign,
-    Underline,
-    TiptapVeltComments, // Enables comment markers in editor
-  ],
-  content: initialContent,
-})
-
-const commentAnnotations = useCommentAnnotations() // Real-time comment data
-
-useEffect(() => {
-  if (editor && commentAnnotations?.length) {
-    renderComments({ editor, commentAnnotations }) // Render comment highlights
-  }
-}, [editor, commentAnnotations])
-```
-
-### Adding Comments
-
-Comments are added through the bubble menu that appears on text selection:
-
-```tsx
-const addTiptapVeltComment = () => {
-  if (editor) {
-    addComment({ editor }) // Triggers Velt comment dialog
-  }
-}
-```
-
-The `addComment` function:
-- Captures the current text selection in the editor
-- Opens the Velt comment dialog
-- Creates a comment annotation at the selected range
-- Highlights the commented text with a visual marker
-
-### Custom Extensions
-
-Three custom inline heading extensions are implemented:
-
-```tsx
-const InlineH1 = Mark.create({
-  name: 'inlineH1',
-  // Custom heading styles that flow inline with text
-})
-```
-
-These provide styled headings without breaking the text flow, ideal for document-style editing.
-
-## Customization
-
-### UI Customization
-
-Velt components are customized using wireframes in `components/velt/ui-customization/`:
-- Custom comment tool styling to match editor theme
-- Branded notification panel
-- Styled sidebar button for comment access
-- Dark theme matching for all Velt UI components
-
-### Editor Styling
-
-The editor uses custom Tailwind classes and CSS for:
-- Dark theme matching the overall application
-- Prose styles for readable typography
-- Comment highlight colors and hover states
-- Bubble menu styling and positioning
-
 ## Usage
 
 ### Adding Comments
@@ -305,7 +212,6 @@ The SDK provides **fullstack components**:
 - 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
 - [Tiptap Documentation](https://tiptap.dev/)
 - [Velt Tiptap Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/tiptap)
 
@@ -327,10 +233,3 @@ public-hoist-pattern[]=!@tailwindcss*
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
 
-
-## Support
-
-For issues or questions:
-- Tiptap: [GitHub Issues](https://github.com/ueberdosis/tiptap/issues)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)

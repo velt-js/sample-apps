@@ -150,112 +150,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-comments-dashboard-page-comments-dashboard-demo build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**User Authentication** (`app/userAuth/`)
-- `AppUserContext` provides user state across the application
-- `useAppUser` hook manages user selection and authentication
-- `LoginPanel` allows switching between mock users for testing collaboration
-- Mock user data simulates multi-user scenarios
-
-**Document Management** (`app/document/`)
-- `DocumentContext` manages the current document state
-- Represents the current dashboard being viewed/commented on
-
-**JWT Token Generation** (`app/api/velt/token/`)
-- Backend route generates secure JWT tokens for Velt authentication
-- Integrates with Velt's Auth Provider approach
-
-**Host App Container** (`app/page.tsx`)
-- Manages comments sidebar state (open/close)
-- Renders `VeltCommentsSidebar` at the application root level
-- Passes sidebar toggle function down to components
-- Maintains separation between Velt components and host app logic
-
-**Dashboard Components** (`components/document/`)
-- **document-canvas.tsx**: Main dashboard wrapper with layout structure
-- **Breadcrumb**: Navigation breadcrumb component
-- **DashboardHeader**: Page title and description
-- **MetricCard**: Reusable card component for marketing metrics with integrated Velt comments
-- **ChartPanel**: Reusable chart container with Velt comments
-- **NotificationBanner**: Alert/notification display
-- **AddMetricSection**: Placeholder for adding new metrics
-
-### Velt Comments Integration
-
-The core commenting functionality uses Velt's page comments with targeted element IDs:
-
-**Comments on Dashboard Elements**
-
-Each commentable element includes:
-```tsx
-<div
-  id="panel-search"
-  data-velt-target-comment-element-id="panel-search"
->
-  {/* Element content */}
-  <VeltCommentBubble targetCommentElementId="panel-search" />
-  <VeltCommentTool targetCommentElementId="panel-search" />
-</div>
-```
-
-This pattern is used across:
-- Metric cards (Search, Reddit, Meta, Twitter/X)
-- Chart panels (2 chart sections)
-- Any other commentable dashboard elements
-
-**Comments Configuration** (`components/velt/VeltCollaboration.tsx`)
-
-```tsx
-<VeltComments
-  popoverTriangleComponent={false}
-  popoverMode={true}
-  shadowDom={false}
-  textMode={false}
-  commentPinHighlighter={false}
-  dialogOnHover={false}
-  groupMatchedComments={true}
-  priority={true}
-/>
-```
-
-**Comments Sidebar**
-
-The `VeltCommentsSidebar` is rendered at the root level in `app/page.tsx`:
-- Host app controls open/close state
-- Header contains toggle button using `VeltSidebarButton`
-- Fixed 400px width
-- Dark theme styling matching dashboard aesthetic
-
-### Component Architecture
-
-**MetricCard Component**
-Reusable component for displaying marketing metrics with:
-- Icon and platform name
-- Current spend value
-- Percentage change with trend indicator
-- Integrated comment bubble and tool
-- Unique element ID for targeted comments
-
-**ChartPanel Component**
-Reusable component for chart displays with:
-- Chart title
-- Chart image placeholder
-- Integrated comment bubble and tool
-- Unique element ID for targeted comments
-
-### Header Integration
-
-The header (`components/header/header.tsx`) contains all Velt tools in this order:
-1. **VeltPresence** - Show online users
-2. **VeltSidebarButton** - Toggle comments sidebar
-3. **VeltCommentTool** - Global comment tool
-4. **VeltNotificationsTool** - Notifications with tabs (For You, Documents, All)
-
 ## Usage
 
 ### Adding Comments
@@ -278,35 +172,6 @@ The header (`components/header/header.tsx`) contains all Velt tools in this orde
 - **See active users**: View avatars of online collaborators in the header
 - **Receive notifications**: Bell icon shows comment activity and mentions
 - **Real-time updates**: All comments appear instantly for all users
-
-## Customization
-
-### UI Customization
-
-Velt components can be customized in `components/velt/ui-customization/`:
-- Custom styling via `VeltCustomization` component
-- Theme matching with dashboard's dark aesthetic
-- Custom CSS for Velt components
-
-### Adding New Commentable Elements
-
-To add comments to a new dashboard element:
-
-1. Add a unique `id` and `data-velt-target-comment-element-id` attribute:
-```tsx
-<div
-  id="panel-new-element"
-  data-velt-target-comment-element-id="panel-new-element"
->
-  {/* Your content */}
-</div>
-```
-
-2. Add comment tools:
-```tsx
-<VeltCommentBubble targetCommentElementId="panel-new-element" />
-<VeltCommentTool targetCommentElementId="panel-new-element" />
-```
 
 ## Troubleshooting
 
@@ -360,9 +225,6 @@ The SDK provides **fullstack components**:
 - 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
-- [Velt Page Comments Documentation](https://docs.velt.dev/comments/page-comments/overview)
-- [Velt React SDK Documentation](https://docs.velt.dev/get-started/setup/install-react-sdk)
 
 ## Important Configuration
 
@@ -381,9 +243,3 @@ public-hoist-pattern[]=!@tailwindcss*
 - Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
-
-## Support
-
-For issues or questions:
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)
