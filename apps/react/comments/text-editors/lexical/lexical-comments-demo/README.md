@@ -10,8 +10,6 @@ https://github.com/user-attachments/assets/1cb77742-17e1-4213-a28f-e1cecaf145fa
 
 This demo showcases **inline text commenting** built using **Lexical** text editor integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, creating threaded discussions on specific content sections.
 
-Lexical is Meta's extensible text editor framework that powers Facebook, Messenger, and Workplace. It provides a plugin-based architecture that makes it highly extensible and performant for building rich text editing experiences.
-
 ## Path
 
 ```
@@ -30,7 +28,6 @@ apps/react/comments/text-editors/lexical/lexical-comments-demo/
 - **Comment Bubbles**: Clickable bubbles displaying comment threads
 - **Threaded Discussions**: Reply to comments and maintain conversation context
 - **Comment Annotations**: Automatic tracking of comment positions as text changes
-- **Bubble Menu Integration**: Add comments via the text selection toolbar
 - **Comments Sidebar**: Centralized view of all document comments
 - **Real-time Updates**: See new comments and replies instantly
 - **Presence Awareness**: See who's currently viewing the document
@@ -38,8 +35,6 @@ apps/react/comments/text-editors/lexical/lexical-comments-demo/
 
 ### Editor Features
 - **Rich Text Editing**: Bold, italic, underline, strikethrough formatting
-- **Headings**: H1, H2, H3 support
-- **Text Alignment**: Left, center, right alignment
 - **Bubble Menu Toolbar**: Appears on text selection with formatting and comment options
 - **Sidebar Navigation**: Table of contents generated from document headings
 - **History**: Undo/redo functionality
@@ -175,9 +170,7 @@ pnpm --filter @apps/react-text-editors-lexical-lexical-comments-demo build
 
 1. **Type content**: Click into the editor and start writing
 2. **Format text**: Select text to reveal the bubble menu toolbar
-3. **Add headings**: Click H1, H2, or H3 buttons in the toolbar
-4. **Align text**: Use alignment buttons (left, center, right)
-5. **Navigate**: Use sidebar headings to jump to document sections
+3. **Navigate**: Use sidebar headings to jump to document sections
 
 ### Keyboard Shortcuts
 
@@ -253,11 +246,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- [Lexical Documentation](https://lexical.dev/)
-- [Velt Text Comments Documentation](https://docs.velt.dev/comments/text-comments/overview)
 
 ## Important Configuration
 

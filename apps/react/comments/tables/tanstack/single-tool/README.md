@@ -181,15 +181,6 @@ pnpm --filter @apps/react-tables-TanStack-marketing-spend-demo-single-comment bu
 2. **Click bubble**: Click to read and reply to existing comments
 3. **Sidebar view**: Use sidebar button to see all comments in one panel
 
-### Formatting Text
-
-1. Select a cell by clicking it
-2. Use toolbar buttons to apply formatting:
-   - **B** - Bold
-   - **I** - Italic
-   - **U** - Underline
-   - **S** - Strikethrough
-
 ### Sorting Data
 
 1. Click any column header to sort
@@ -235,14 +226,6 @@ If the table doesn't appear:
 1. Check browser console for TanStack Table errors
 2. Verify data is being generated correctly
 3. Ensure column definitions are valid
-4. Check that `useReactTable` hook is called correctly
-
-### Sorting Not Working
-If sorting doesn't work:
-1. Verify `getSortedRowModel()` is included in table options
-2. Check that sorting state is being managed correctly
-3. Ensure custom sort functions (like `dateSortFn`) are working
-4. Look for console errors
 
 ## About Velt SDK
 
@@ -272,11 +255,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- [Velt Click-to-Target Documentation](https://docs.velt.dev/comments/customize-behavior/click-to-target)
-- [TanStack Table Documentation](https://tanstack.com/table/latest)
 
 ## Important Configuration
 

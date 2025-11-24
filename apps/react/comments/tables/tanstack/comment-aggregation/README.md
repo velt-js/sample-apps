@@ -193,15 +193,6 @@ pnpm --filter @apps/react-tables-TanStack-marketing-spend-demo-comment-aggregati
 3. **Press Enter**: Save changes
 4. **Press Escape**: Cancel editing
 
-### Formatting Text
-
-1. Select a cell by clicking it
-2. Use toolbar buttons to apply formatting:
-   - **B** - Bold
-   - **I** - Italic
-   - **U** - Underline
-   - **S** - Strikethrough
-
 ### Viewing All Comments
 
 1. Click the sidebar button in the header
@@ -278,11 +269,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- [Velt Comment Aggregation Documentation](https://docs.velt.dev/comments/customize-behavior/group-matched-comments)
-- [TanStack Table Documentation](https://tanstack.com/table/latest)
 
 ## Important Configuration
 

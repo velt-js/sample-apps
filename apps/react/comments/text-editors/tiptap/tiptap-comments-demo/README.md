@@ -32,8 +32,6 @@ apps/react/comments/text-editors/tiptap/tiptap-comments-demo/
 ### Editor Features
 - **Rich Text Editing**: Powered by Tiptap with StarterKit extensions
 - **Text Formatting**: Bold, italic, and underline styling
-- **Text Alignment**: Left, center, and right alignment options
-- **Custom Inline Headings**: Styled H1, H2, H3 headings that flow inline with text
 - **Table of Contents**: Sidebar navigation to quickly jump between sections
 - **Collapsible Sidebar**: Toggle document navigation panel
 
@@ -156,8 +154,6 @@ pnpm --filter @apps/react-text-editors-tiptap-tiptap-comments-demo build
 
 1. **Select text**: Highlight text you want to format
 2. **Use bubble menu**: Choose bold, italic, underline, or comment from the popup
-3. **Headings**: Apply H1, H2, H3 styles to create section headings
-4. **Alignment**: Use alignment buttons to adjust text positioning
 
 ## Troubleshooting
 
@@ -209,11 +205,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- [Tiptap Documentation](https://tiptap.dev/)
-- [Velt Tiptap Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/tiptap)
 
 ## Important Configuration
 

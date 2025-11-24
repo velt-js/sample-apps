@@ -165,15 +165,6 @@ pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo-single-comment buil
 2. **Click bubble**: Click to read and reply to existing comments
 3. **Sidebar view**: Use sidebar button to see all comments in one panel
 
-### Formatting Text
-
-1. Select a cell by clicking it
-2. Use toolbar buttons to apply formatting:
-   - **B** - Bold
-   - **I** - Italic
-   - **U** - Underline
-   - **S** - Strikethrough
-
 ### Sorting Data
 
 1. Click any column header to sort
@@ -248,11 +239,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- [Velt Click-to-Target Documentation](https://docs.velt.dev/comments/customize-behavior/click-to-target)
-- [AG-Grid Documentation](https://www.ag-grid.com/react-data-grid/)
 
 ## Important Configuration
 

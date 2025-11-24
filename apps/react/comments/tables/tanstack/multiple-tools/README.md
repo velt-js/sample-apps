@@ -182,15 +182,6 @@ pnpm --filter @apps/react-tables-TanStack-marketing-spend-demo-multiple-comments
 2. **Click bubble**: Click to read and reply to existing comments
 3. **Sidebar view**: Use sidebar button to see all comments in one panel
 
-### Formatting Text
-
-1. Select a cell by clicking it
-2. Use toolbar buttons to apply formatting:
-   - **B** - Bold
-   - **I** - Italic
-   - **U** - Underline
-   - **S** - Strikethrough
-
 ### Sorting Data
 
 1. Click any column header to sort
@@ -273,12 +264,10 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
-- [Velt Comments Documentation](https://docs.velt.dev/comments/overview)
-- [TanStack Table Documentation](https://tanstack.com/table/latest)
+
 
 ## Important Configuration
 
@@ -297,10 +286,3 @@ public-hoist-pattern[]=!@tailwindcss*
 - Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
-
-## Support
-
-For issues or questions:
-- TanStack Table: [Documentation](https://tanstack.com/table/latest)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)

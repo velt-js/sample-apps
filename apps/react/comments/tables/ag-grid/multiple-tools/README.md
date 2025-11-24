@@ -169,47 +169,12 @@ pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo-multiple-comments b
 3. View all comments organized by cell
 4. Click comment threads to navigate to specific cells
 
-### Formatting Text
-
-1. Select a cell by clicking it
-2. Use toolbar buttons to apply formatting:
-   - **B** - Bold
-   - **I** - Italic
-   - **U** - Underline
-   - **S** - Strikethrough
-
 ### Collaboration Features
 
 - **See active users**: View avatars of online collaborators in the header
 - **Receive notifications**: Bell icon shows comment activity
 - **Real-time updates**: All comments appear instantly for all users
 - **Hover discovery**: Natural interaction pattern - hover to find comment tools
-
-## Comparison with Other Patterns
-
-### vs. Comment Aggregation Demo
-- **Aggregation**: Uses context-based grouping across view levels
-- **Multiple Tools**: Uses simple element targeting with no aggregation
-- **Aggregation**: Shows comment bubbles with counts
-- **Multiple Tools**: No comment bubbles, cleaner visual appearance
-
-### vs. Single Tool Demo
-- **Single Tool**: One global VeltCommentTool in header, click-to-target pattern
-- **Multiple Tools**: Individual tools per cell, hover-based discovery
-- **Single Tool**: Two-step interaction (click tool → click cell)
-- **Multiple Tools**: One-step interaction (hover → click)
-
-### When to Use Multiple Tools
-✅ **Good For:**
-- Tables with moderate cell count (< 1000 visible cells)
-- Desktop-first applications
-- Users familiar with hover interactions
-- Quick, contextual commenting workflows
-
-❌ **Not Ideal For:**
-- Mobile devices (hover not available)
-- Very large tables (performance impact)
-- Users who need persistent comment visibility
 
 ## Troubleshooting
 
@@ -266,11 +231,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- [Velt Table Comments Documentation](https://docs.velt.dev/comments/customize-behavior/targeted-commenting)
-- [AG-Grid Documentation](https://www.ag-grid.com/react-data-grid/)
 
 ## Important Configuration
 
