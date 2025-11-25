@@ -132,84 +132,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-CRDT-text-editors-codemirror-codemirror-crdt-demo build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**User Authentication** (`app/userAuth/`)
-- `AppUserContext` provides user state across the application
-- `useAppUser` hook manages user selection and authentication
-- `LoginPanel` allows switching between mock users for testing collaboration
-- Mock user data simulates multi-user scenarios
-
-**Document Management** (`app/document/`)
-- `DocumentContext` manages the current document state
-- `useCurrentDocument` hook provides document access and switching capabilities
-- Documents represent separate collaborative editing sessions
-
-**JWT Token Generation** (`app/api/velt/token/`)
-- Backend route generates secure JWT tokens for Velt authentication
-- Integrates with Velt's Auth Provider approach
-
-**CodeMirror Editor** (`components/document/CodeMirrorComponent/`)
-- Main editor component with Velt CRDT integration
-- Real-time synchronization across all users
-
-### Velt CRDT Integration
-
-The core integration uses the `useVeltCodeMirrorCrdtExtension` hook:
-
-```tsx
-const { collaborationConfig, isLoading } = useVeltCodeMirrorCrdtExtension({
-  editorId: 'codemirror-crdt-demo-editor',
-  initialContent: '// Start coding...\n'
-});
-
-const editor = useCodeMirror({
-  container: editorRef.current,
-  extensions: [
-    javascript(),
-    collaborationConfig.extension,
-    collaborationConfig.cursorExtension,
-  ],
-  value: collaborationConfig.initialContent,
-}, [collaborationConfig]);
-```
-
-This hook provides:
-- Real-time synchronized editor state across all connected users
-- Automatic conflict resolution when multiple users edit simultaneously
-- CRDT-based state management for collaborative editing
-- Awareness protocol for showing collaborator cursors and selections
-- Undo/redo functionality that respects collaborative changes
-
-### Collaborative Editing Flow
-
-**How it works:**
-1. The `useVeltCodeMirrorCrdtExtension` hook initializes a Yjs document for CRDT synchronization
-2. It connects to Velt's WebSocket backend for real-time updates
-3. CodeMirror extensions are configured with Yjs bindings
-4. All editor changes are synced via the CRDT network
-5. Conflicts are resolved automatically using Yjs's operational transformation
-6. Collaborator cursors and selections are shared in real-time
-
-**Key Features:**
-- **Live Updates**: Code changes appear instantly for all users
-- **Cursor Tracking**: See where each collaborator is editing
-- **Selection Sharing**: View code selections of other users
-- **Conflict-Free**: Yjs CRDT ensures all users converge to the same state
-
-## Customization
-
-### UI Customization
-
-Velt components are customized using wireframes in `components/velt/ui-customization/`:
-- Custom notification panel styling
-- Theme-matched Velt components
-- Custom CSS for collaboration UI
-
 ## Usage
 
 ### Basic Editing
@@ -288,10 +210,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
 - [CodeMirror Documentation](https://codemirror.net/)
 - [Velt CodeMirror CRDT Guide](https://docs.velt.dev/live-co-editing/text-editors/codemirror)
 
@@ -313,9 +234,3 @@ public-hoist-pattern[]=!@tailwindcss*
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
 
-## Support
-
-For issues or questions:
-- CodeMirror: [Documentation](https://codemirror.net/)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)

@@ -157,230 +157,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-tables-TanStack-marketing-spend-demo-single-comment build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**User Authentication** (`app/userAuth/`)
-- `AppUserContext` provides user state across the application
-- `useAppUser` hook manages user selection and authentication
-- `LoginPanel` allows switching between mock users for testing collaboration
-- Mock user data simulates multi-user scenarios
-
-**Document Management** (`app/document/`)
-- `DocumentContext` manages the current document state
-- Document ID tracked via URL parameter and localStorage
-- Each document is an independent Velt collaboration scope
-
-**JWT Token Generation** (`app/api/velt/token/`)
-- Backend route generates secure JWT tokens for Velt authentication
-- Integrates with Velt's Auth Provider approach
-
-**Table Component** (`components/document/day-view-table-component.tsx`)
-- Main orchestrator using TanStack Table's `useReactTable` hook
-- Manages table data, sorting, and cell selection state
-- Renders custom table structure with full control over HTML/CSS
-- Integrates custom cell renderer with click-to-target comment pattern
-
-### Single Comment Tool Pattern
-
-The key differentiator of this demo is the **click-to-target commenting pattern** using a global comment tool.
-
-**How It Works**:
-
-1. **Global Comment Tool**: One `VeltCommentTool` component in the header (no `targetElementId` prop)
-2. **Cell Setup**: Each cell has both `id` and `data-velt-target-comment-element-id` attributes with matching values
-3. **User Flow**: Click comment tool → Click cell → Add comment
-
-**Cell Renderer Implementation** (`VeltCellRenderer.tsx`):
-
-```tsx
-useEffect(() => {
-  if (cellRef.current) {
-    const parentCell = cellRef.current.closest('td');
-    if (parentCell) {
-      // [Velt] Set the element ID
-      parentCell.id = cellId;
-      // [Velt] For single-tool pattern: both attributes must match
-      parentCell.setAttribute('data-velt-target-comment-element-id', cellId);
-    }
-  }
-}, [cellId]);
-```
-
-**Benefits**:
-- **Cleaner UI**: No comment tool buttons in every cell
-- **Fewer DOM Elements**: Better performance with large tables
-- **Consistent UX**: Familiar click-to-target interaction pattern
-- **Less Visual Clutter**: Focus remains on data, not tools
-
-**Tradeoffs**:
-- **Two Clicks Required**: Must click tool first, then cell (vs. one-click in multiple-tools pattern)
-- **Less Discoverable**: Users must notice the header tool
-- **Mode-Based Interaction**: Users enter "comment mode" temporarily
-
-### TanStack Table Integration
-
-**Headless Table Approach**:
-
-TanStack Table is a headless library, meaning it provides table logic without enforcing any UI. This gives complete control over rendering:
-
-```tsx
-const table = useReactTable({
-  data: rowData,
-  columns,
-  state: { sorting },
-  onSortingChange: setSorting,
-  getCoreRowModel: getCoreRowModel(),
-  getSortedRowModel: getSortedRowModel(),
-  sortingFns: {
-    dateSortFn,
-  },
-});
-```
-
-**Custom Table Rendering**:
-
-Unlike AG-Grid which renders its own DOM, TanStack Table requires manual table rendering:
-
-```tsx
-<table className="tanstack-table">
-  <thead>
-    {table.getHeaderGroups().map(headerGroup => (
-      <tr key={headerGroup.id}>
-        {headerGroup.headers.map(header => (
-          <th key={header.id}>
-            {flexRender(header.column.columnDef.header, header.getContext())}
-          </th>
-        ))}
-      </tr>
-    ))}
-  </thead>
-  <tbody>
-    {table.getRowModel().rows.map(row => (
-      <tr key={row.id}>
-        {row.getVisibleCells().map(cell => (
-          <td key={cell.id}>
-            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-          </td>
-        ))}
-      </tr>
-    ))}
-  </tbody>
-</table>
-```
-
-**Column Definitions**:
-
-Columns are defined with full TypeScript typing:
-
-```tsx
-const columns = useMemo<ColumnDef<TableData>[]>(() => [
-  {
-    id: 'rowNumber',
-    header: () => <div>#</div>,
-    cell: (info) => <RowNumberRenderer rowIndex={info.row.index} />,
-    size: 60,
-  },
-  {
-    accessorKey: 'date',
-    header: (info) => <CustomHeaderComponent {...info} />,
-    cell: (info) => <VeltCellRenderer {...info} />,
-    sortingFn: dateSortFn,
-  },
-  // ... more columns
-], []);
-```
-
-**Custom Cell Renderer** (`VeltCellRenderer.tsx`):
-
-The cell renderer handles click-to-target setup, inline editing, and text formatting:
-
-```tsx
-export const VeltCellRenderer: React.FC<VeltCellRendererProps> = ({
-  data,
-  value,
-  columnId,
-  cellFormatting,
-  onCellClick,
-}) => {
-  // Set id and data-velt-target-comment-element-id on parent <td>
-  // Handle double-click for inline editing
-  // Apply text formatting styles
-  // Render cell content
-};
-```
-
-**Inline Editing**:
-
-Cells support inline editing via `contentEditable`:
-
-```tsx
-const handleDoubleClick = () => {
-  if (contentRef.current) {
-    contentRef.current.contentEditable = 'true';
-    setIsEditing(true);
-    // Focus and select text
-  }
-};
-```
-
-### TanStack Table vs AG-Grid
-
-**Key Differences**:
-
-| Feature | TanStack Table | AG-Grid |
-|---------|----------------|---------|
-| **Rendering** | Manual (you control HTML) | Automatic (AG-Grid controls DOM) |
-| **Bundle Size** | ~15KB | ~500KB+ |
-| **Styling** | Complete freedom | Theme-based with customization |
-| **Cell Setup** | `closest('td')` | `closest('.ag-cell')` |
-| **Sorting** | `getSortedRowModel()` | Built-in with `sortable: true` |
-| **Learning Curve** | Lower (simpler API) | Higher (enterprise features) |
-| **Use Case** | Custom tables, full control | Enterprise grids, advanced features |
-
-**When to Use TanStack Table**:
-- Need complete styling control
-- Want minimal bundle size
-- Building custom table UX
-- Prefer headless architecture
-
-**When to Use AG-Grid**:
-- Need advanced features (filtering, grouping, pivoting)
-- Want out-of-the-box functionality
-- Building enterprise data grids
-- Prefer opinionated solutions
-
-### Velt Comments Configuration
-
-In `VeltCollaboration.tsx`:
-
-```tsx
-<VeltComments
-  popoverMode={true}
-  commentPinHighlighter={false}
-  textMode={false}
-  shadowDom={false}
-/>
-
-<VeltCommentsSidebar />
-```
-
-Key configurations:
-- `popoverMode={true}`: Comments appear in popovers, not inline
-- `shadowDom={false}`: Allows custom CSS styling
-- No `groupMatchedComments` (not using context-based grouping in this demo)
-
-### Header Integration
-
-The header (`components/header/header.tsx`) contains Velt tools in this order:
-1. **VeltPresence** - Show online users
-2. **VeltCommentTool** - Global click-to-target comment tool (no `targetElementId`)
-3. **VeltSidebarButton** - Toggle comments sidebar
-4. **VeltNotificationsTool** - Notifications with tabs
-
 ## Usage
 
 ### Adding Comments (Click-to-Target)
@@ -405,15 +181,6 @@ The header (`components/header/header.tsx`) contains Velt tools in this order:
 2. **Click bubble**: Click to read and reply to existing comments
 3. **Sidebar view**: Use sidebar button to see all comments in one panel
 
-### Formatting Text
-
-1. Select a cell by clicking it
-2. Use toolbar buttons to apply formatting:
-   - **B** - Bold
-   - **I** - Italic
-   - **U** - Underline
-   - **S** - Strikethrough
-
 ### Sorting Data
 
 1. Click any column header to sort
@@ -432,52 +199,6 @@ The header (`components/header/header.tsx`) contains Velt tools in this order:
 - **See active users**: View avatars of online collaborators in the header
 - **Receive notifications**: Bell icon shows comment activity
 - **Real-time updates**: All comments appear instantly for all users
-
-## Customization
-
-### UI Customization
-
-Velt components can be customized in `components/velt/ui-customization/`:
-- Custom styling via `VeltCustomization` component
-- Theme matching with table's dark aesthetic
-- Custom CSS for Velt components
-
-### Styling the Table
-
-TanStack Table gives complete control over table styling. All styles are in:
-- **`day-view-table-component.css`**: Main table styles
-- **`styles.ts`**: Inline style definitions
-- **Custom components**: Full control over header/cell rendering
-
-Example custom styling:
-
-```css
-.tanstack-table {
-  background: #090909;
-  color: white;
-}
-
-.tanstack-table td {
-  border: 1px solid #1a1a1a;
-  padding: 12px;
-}
-
-.tanstack-header-cell.header-selected {
-  background: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Switching to Multiple-Tools Pattern
-
-To switch from single-tool to multiple-tools pattern:
-
-1. **Remove global tool**: Remove `<VeltCommentTool />` from header
-2. **Add per-cell tools**: Import `VeltCommentTool` in `VeltCellRenderer.tsx`
-3. **Update cell renderer**: Add `<VeltCommentTool targetElementId={cellId} />` to each cell
-4. **Remove target attribute**: Remove `data-velt-target-comment-element-id` from cells (keep `id`)
-5. **Add hover state**: Show/hide comment tool based on cell hover
-
-See the `multiple-tools` demo for reference implementation.
 
 ## Troubleshooting
 
@@ -505,14 +226,6 @@ If the table doesn't appear:
 1. Check browser console for TanStack Table errors
 2. Verify data is being generated correctly
 3. Ensure column definitions are valid
-4. Check that `useReactTable` hook is called correctly
-
-### Sorting Not Working
-If sorting doesn't work:
-1. Verify `getSortedRowModel()` is included in table options
-2. Check that sorting state is being managed correctly
-3. Ensure custom sort functions (like `dateSortFn`) are working
-4. Look for console errors
 
 ## About Velt SDK
 
@@ -542,12 +255,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
-- [Velt Click-to-Target Documentation](https://docs.velt.dev/comments/customize-behavior/click-to-target)
-- [TanStack Table Documentation](https://tanstack.com/table/latest)
 
 ## Important Configuration
 
@@ -567,9 +277,3 @@ public-hoist-pattern[]=!@tailwindcss*
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
 
-## Support
-
-For issues or questions:
-- TanStack Table: [Documentation](https://tanstack.com/table/latest)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)

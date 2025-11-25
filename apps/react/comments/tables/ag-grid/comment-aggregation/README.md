@@ -156,170 +156,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-tables-AgGrid-marketing-spend-demo-comment-aggregation build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**User Authentication** (`app/userAuth/`)
-- `AppUserContext` provides user state across the application
-- `useAppUser` hook manages user selection and authentication
-- `LoginPanel` allows switching between mock users for testing collaboration
-- Mock user data simulates multi-user scenarios
-
-**Document Management** (`app/document/`)
-- `DocumentContext` manages the current document state
-- Document ID tracked via URL parameter and localStorage
-- Each document is an independent Velt collaboration scope
-
-**JWT Token Generation** (`app/api/velt/token/`)
-- Backend route generates secure JWT tokens for Velt authentication
-- Integrates with Velt's Auth Provider approach
-
-**Table Component** (`components/document/day-view-table-component.tsx`)
-- Main orchestrator managing AG-Grid instance, data, and Velt integration
-- Handles view switching (day/week/month) with data aggregation
-- Manages cell selection, formatting, and sorting state
-- Integrates custom cell renderer with Velt comment tools
-
-### Comment Aggregation System
-
-The core innovation of this demo is **context-aware comment aggregation** using Velt's partial context matching.
-
-**Comment Context Structure**:
-
-```typescript
-interface CommentContext {
-  channel: string;     // "linkedin" | "facebook" | "instagram" | "x"
-  day?: number;        // Only in day view (1-31)
-  week?: number;       // In day & week views (1-53)
-  month: number;       // Always included (1-12)
-  year: number;        // Always included (2025)
-}
-```
-
-**How Aggregation Works**:
-
-1. **Day View**: Comments scoped to specific day + channel + month + year
-   ```typescript
-   { channel: "linkedin", day: 15, week: 3, month: 4, year: 2025 }
-   ```
-
-2. **Week View**: Comments scoped to week + channel (day removed)
-   ```typescript
-   { channel: "linkedin", week: 3, month: 4, year: 2025 }
-   ```
-
-3. **Month View**: Comments scoped to channel + month + year only
-   ```typescript
-   { channel: "linkedin", month: 4, year: 2025 }
-   ```
-
-**Partial Context Matching**:
-
-The `VeltCommentTool` and `VeltCommentBubble` components use `contextOptions={{ partialMatch: true }}`, which enables comments to appear when context partially matches:
-
-```tsx
-<VeltCommentTool
-  targetCommentElementId={cellId}
-  context={commentContext}
-  contextOptions={{ partialMatch: true }}
-/>
-```
-
-**Example Workflow**:
-- User adds comment to Day 15, LinkedIn cell: "Budget needs adjustment"
-- Switches to Week View → Same comment appears on Week 3, LinkedIn
-- Switches to Month View → Same comment appears on April, LinkedIn
-- The comment "bubbles up" through the aggregation hierarchy
-
-### AG-Grid Integration
-
-**Custom Cell Renderer** (`VeltCellRenderer.tsx`):
-
-The key component combining AG-Grid cells with Velt comments:
-
-```tsx
-<div className="velt-cell-content">
-  <span style={textStyle}>{params.value}</span>
-
-  <VeltCommentTool
-    targetCommentElementId={cellId}
-    context={commentContext}
-    contextOptions={{ partialMatch: true }}
-  />
-
-  <VeltCommentBubble
-    targetCommentElementId={cellId}
-    context={commentContext}
-    contextOptions={{ partialMatch: true }}
-  />
-</div>
-```
-
-**Dark Theme Configuration**:
-
-Custom AG-Grid theme using `themeQuartz.withParams()`:
-
-```javascript
-{
-  backgroundColor: '#090909',
-  headerBackgroundColor: '#090909',
-  rowHoverColor: 'rgba(255, 255, 255, 0.05)',
-  rowHeight: 54,
-  headerHeight: 54,
-  fontFamily: 'Urbanist, sans-serif'
-}
-```
-
-**Grid Features**:
-- Pinned row number column
-- Resizable columns
-- Sortable columns with custom comparator for dates
-- Editable cells
-- Custom header component with sort indicators
-
-### Data Generation & Aggregation
-
-**Daily Data Generation** (`generateTableData()`):
-- Creates 100 rows with deterministic seeded random values
-- Each row includes date metadata (day, week, month, year)
-- Spend values within channel-specific ranges
-
-**Weekly Aggregation** (`aggregateDataByWeek()`):
-- Groups daily data into 52 weeks
-- Sums spend values for each channel
-- Maintains week/month/year context
-
-**Monthly Aggregation** (`aggregateDataByMonth()`):
-- Groups daily data into 12 months
-- Sums spend values for each channel
-- Maintains month/year context
-
-### Velt Comments Configuration
-
-In `VeltCollaboration.tsx`:
-
-```tsx
-<VeltComments
-  popoverMode={true}
-  groupMatchedComments={true}
-  commentPinHighlighter={false}
-  textMode={false}
-  shadowDom={false}
-/>
-
-<VeltCommentsSidebar
-  groupConfig={{ enable: false }}
-/>
-```
-
-Key configurations:
-- `popoverMode={true}`: Comments appear in popovers, not inline
-- `groupMatchedComments={true}`: Comments are grouped across contexts
-- `shadowDom={false}`: Allows custom CSS styling
-
 ## Usage
 
 ### Adding Comments
@@ -342,15 +178,6 @@ Key configurations:
 - **Weekly View**: Shows 52 weeks with aggregated spend totals
 - **Monthly View**: Shows 12 months with aggregated spend totals
 
-### Formatting Text
-
-1. Select a cell by clicking it
-2. Use toolbar buttons to apply formatting:
-   - **B** - Bold
-   - **I** - Italic
-   - **U** - Underline
-   - **S** - Strikethrough
-
 ### Viewing All Comments
 
 1. Click the sidebar button in the header
@@ -363,25 +190,6 @@ Key configurations:
 - **See active users**: View avatars of online collaborators in the header
 - **Receive notifications**: Bell icon shows comment activity
 - **Real-time updates**: All comments appear instantly for all users
-
-## Customization
-
-### UI Customization
-
-Velt components are customized using wireframes in `components/velt/ui-customization/`:
-- Custom comment tool styling (dark pill button)
-- Custom comment bubble styling (count display)
-- Branded notification panel
-- Theme-matched sidebar button
-
-### Adding New Columns
-
-To add a new marketing channel column:
-
-1. Update `TableData` interface in `day-view-table-component.tsx`
-2. Add column definition to `columnDefs` array
-3. Update `generateTableData()` to include new channel data
-4. The comment system will automatically work with the new column
 
 ## Troubleshooting
 
@@ -438,12 +246,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
-- [Velt Comment Aggregation Documentation](https://docs.velt.dev/comments/customize-behavior/group-matched-comments)
-- [AG-Grid Documentation](https://www.ag-grid.com/react-data-grid/)
 
 ## Important Configuration
 
@@ -462,10 +267,3 @@ public-hoist-pattern[]=!@tailwindcss*
 - Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
-
-## Support
-
-For issues or questions:
-- AG-Grid: [Documentation](https://www.ag-grid.com/react-data-grid/)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)

@@ -10,8 +10,6 @@ https://github.com/user-attachments/assets/1cb77742-17e1-4213-a28f-e1cecaf145fa
 
 This demo showcases **inline text commenting** built using **Lexical** text editor integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the document, creating threaded discussions on specific content sections.
 
-Lexical is Meta's extensible text editor framework that powers Facebook, Messenger, and Workplace. It provides a plugin-based architecture that makes it highly extensible and performant for building rich text editing experiences.
-
 ## Path
 
 ```
@@ -30,7 +28,6 @@ apps/react/comments/text-editors/lexical/lexical-comments-demo/
 - **Comment Bubbles**: Clickable bubbles displaying comment threads
 - **Threaded Discussions**: Reply to comments and maintain conversation context
 - **Comment Annotations**: Automatic tracking of comment positions as text changes
-- **Bubble Menu Integration**: Add comments via the text selection toolbar
 - **Comments Sidebar**: Centralized view of all document comments
 - **Real-time Updates**: See new comments and replies instantly
 - **Presence Awareness**: See who's currently viewing the document
@@ -38,8 +35,6 @@ apps/react/comments/text-editors/lexical/lexical-comments-demo/
 
 ### Editor Features
 - **Rich Text Editing**: Bold, italic, underline, strikethrough formatting
-- **Headings**: H1, H2, H3 support
-- **Text Alignment**: Left, center, right alignment
 - **Bubble Menu Toolbar**: Appears on text selection with formatting and comment options
 - **Sidebar Navigation**: Table of contents generated from document headings
 - **History**: Undo/redo functionality
@@ -153,98 +148,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-text-editors-lexical-lexical-comments-demo build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**User Authentication** (`app/userAuth/`)
-- `AppUserContext` provides user state across the application
-- `useAppUser` hook manages user selection and authentication
-- `AppProviders` wraps the app with all necessary context providers
-- Mock user data simulates multi-user commenting scenarios
-
-**Document Management** (`app/document/`)
-- `DocumentContext` manages the current document state
-- `useCurrentDocument` hook provides document access
-- Documents represent separate commenting contexts
-
-**JWT Token Generation** (`app/api/velt/token/`)
-- Backend route generates secure JWT tokens for Velt authentication
-- Integrates with Velt's Auth Provider approach
-
-**Lexical Editor** (`components/document/LexicalComponent/`)
-- Main editor component with Velt comments integration
-- Plugin-based architecture for extensibility
-- Custom nodes for specialized content rendering
-
-### Velt Comments Integration
-
-The integration uses Velt's Lexical package to add commenting capabilities:
-
-**CommentNode Registration:**
-```tsx
-const initialConfig = {
-  namespace: 'VeltLexicalEditor',
-  nodes: [CommentNode, HeadingSpanNode], // [Velt] CommentNode enables comment markers
-  onError: (error: Error) => console.error(error),
-};
-```
-
-**Comment Rendering:**
-```tsx
-const commentAnnotations = useCommentAnnotations(); // [Velt] Subscribe to comment updates
-
-useEffect(() => {
-  if (editor && commentAnnotations?.length) {
-    renderComments({ editor, commentAnnotations }); // [Velt] Render comment highlights
-  }
-}, [editor, commentAnnotations]);
-```
-
-**Adding Comments:**
-```tsx
-const addLexicalVeltComment = () => {
-  if (editor) {
-    addComment({ editor }); // [Velt] Trigger comment creation on selection
-  }
-};
-```
-
-**How it works:**
-1. User selects text in the editor
-2. Clicks comment button in bubble menu toolbar
-3. `addComment()` captures the selection and creates a Velt annotation
-4. Comment popover appears for user to type their comment
-5. `CommentNode` is inserted into the editor to mark the commented range
-6. `useCommentAnnotations()` detects the new comment and triggers re-render
-7. `renderComments()` highlights the commented text
-8. All users see the comment bubble instantly
-
-**Comment Position Tracking:**
-- Comments are stored as Lexical nodes in the EditorState
-- As text changes, Lexical automatically adjusts node positions
-- Velt annotations track the semantic position (node IDs and offsets)
-- Comments remain correctly positioned even as surrounding text is edited
-
-### Velt Configuration
-
-**Comments Setup** (`components/velt/VeltCollaboration.tsx`)
-
-```tsx
-<VeltComments
-  popoverMode={true}
-  textMode={true}              // Enable text-based commenting
-  commentPinHighlighter={false}
-  dialogOnHover={false}
-  popoverTriangleComponent={false}
-/>
-<VeltCommentsSidebar />
-<VeltPresence />
-<VeltCursor />
-```
-
 ## Usage
 
 ### Adding Comments
@@ -267,9 +170,7 @@ const addLexicalVeltComment = () => {
 
 1. **Type content**: Click into the editor and start writing
 2. **Format text**: Select text to reveal the bubble menu toolbar
-3. **Add headings**: Click H1, H2, or H3 buttons in the toolbar
-4. **Align text**: Use alignment buttons (left, center, right)
-5. **Navigate**: Use sidebar headings to jump to document sections
+3. **Navigate**: Use sidebar headings to jump to document sections
 
 ### Keyboard Shortcuts
 
@@ -345,12 +246,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
-- [Lexical Documentation](https://lexical.dev/)
-- [Velt Text Comments Documentation](https://docs.velt.dev/comments/text-comments/overview)
 
 ## Important Configuration
 
@@ -369,10 +267,3 @@ public-hoist-pattern[]=!@tailwindcss*
 - Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
-
-## Support
-
-For issues or questions:
-- Lexical: [Documentation](https://lexical.dev/) | [Discord](https://discord.gg/KmG4wQnnD9)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)

@@ -158,86 +158,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 pnpm --filter @apps/react-canvas-reactflow-reactflow-demo build
 ```
 
-## Implementation Details
-
-### Application Architecture
-
-The application is structured around several key areas:
-
-**User Authentication** (`app/userAuth/`)
-- `AppUserContext` provides user state across the application
-- `useAppUser` hook manages user selection and authentication
-- `LoginPanel` allows switching between mock users for testing collaboration
-- Mock user data simulates multi-user scenarios
-
-**Document Management** (`app/document/`)
-- `DocumentContext` manages the current document state
-- `useCurrentDocument` hook provides document access and switching capabilities
-- Documents represent separate collaborative canvases
-
-**JWT Token Generation** (`app/api/velt/token/`)
-- Backend route generates secure JWT tokens for Velt authentication
-- Integrates with Velt's Auth Provider approach
-
-**ReactFlow Canvas** (`components/document/ReactFlowComponent/`)
-- **Main component** orchestrates the entire ReactFlow canvas with Velt integration
-- **Nodes** (CustomNode, SimpleNode) render individual flowchart elements with Velt commenting
-- **UI components** (BottomToolbar, SidePanel, ZoomControls) provide canvas controls
-- **AddNodeOnEdgeDrop** handles drag-and-drop node creation on edges
-
-### Velt CRDT Integration
-
-The core integration uses the `useVeltReactFlowCrdtExtension` hook in `ReactFlowComponent.tsx`:
-
-```tsx
-const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useVeltReactFlowCrdtExtension({
-    editorId: 'react-flow-crdt-2025-10-10',
-    initialEdges,
-    initialNodes,
-});
-```
-
-This hook provides:
-- Real-time synchronized nodes and edges across all connected users
-- Automatic conflict resolution when multiple users edit simultaneously
-- Change handlers that broadcast updates to all connected users
-- CRDT-based state management for collaborative editing
-
-### Custom Node Components
-
-Two node types are implemented:
-- **CustomNode**: Full-featured nodes with comment tools
-- **SimpleNode**: Simplified version for specific use cases
-
-Both include:
-- Custom styling matching design specifications
-- Inline comment bubble and comment tool
-- Connection handles for edge creation
-- Selection state visualization
-
-### Comments on Nodes
-
-Each node includes Velt commenting capabilities:
-
-```tsx
-<VeltCommentBubble targetElementId={nodeId} />
-<VeltCommentTool targetElementId={nodeId} />
-```
-
-- `VeltCommentTool` provides the interface to add new comments
-- `VeltCommentBubble` renders existing comments as interactive bubbles
-- The `data-velt-target-comment-element-id` attribute on the node label enables targeted commenting
-
-## Customization
-
-### UI Customization
-
-Velt components are customized using wireframes in `components/velt/ui-customization/`:
-- Custom comment bubble styling
-- Branded notification panel
-- Styled sidebar button
-- Theme-matched comment tools
-
 ## Usage
 
 ### Adding Nodes
@@ -312,13 +232,9 @@ The SDK provides **fullstack components**:
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
 - 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
 - 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/) - Latest changes
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- 📦 [GitHub](https://github.com/velt-js/docs) - Velt documentation repository
-- [ReactFlow Documentation](https://reactflow.dev/)
-- [Velt Documentation](https://docs.velt.dev)
-- [Velt ReactFlow CRDT Guide](https://docs.velt.dev/live-co-editing/canvas/reactflow)
 
 ## Important Configuration
 
@@ -338,10 +254,3 @@ public-hoist-pattern[]=!@tailwindcss*
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
 
-
-## Support
-
-For issues or questions:
-- ReactFlow: [GitHub Issues](https://github.com/xyflow/xyflow/issues)
-- Velt: [Documentation](https://docs.velt.dev)
-- Velt Support: [Contact](https://velt.dev/contact)
