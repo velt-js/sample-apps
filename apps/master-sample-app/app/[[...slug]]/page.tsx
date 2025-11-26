@@ -56,9 +56,9 @@ export default function Page() {
       const currentPath = window.location.pathname
       const allSamples = getAllSamples()
       const sampleFromPath = allSamples.find(s => s.metadata.routePath === currentPath)
-      
+
       let targetSampleId = getDefaultSample().metadata.id
-      
+
       // Priority order: URL path > localStorage > default
       if (sampleFromPath) {
         targetSampleId = sampleFromPath.metadata.id
@@ -72,36 +72,37 @@ export default function Page() {
           }
         }
       }
-      
-      // Update the sample ID if different from default
-      if (targetSampleId !== currentSampleId) {
-        setCurrentSampleId(targetSampleId)
-      }
-      
+
       // Store the selection for persistence
       localStorage.setItem('last-selected-sample-id', targetSampleId)
 
       // 2. Check URL for documentId parameter
       const urlParams = new URLSearchParams(window.location.search)
       let docId = urlParams.get('documentId')
-      
+
       if (docId) {
         // Use document ID from URL (shareable link)
-        setDocumentId(docId)
         localStorage.setItem(`demo-${targetSampleId}-document-id`, docId)
       } else {
         // Get or generate document ID for this specific demo
         docId = getDocumentIdForDemo(targetSampleId)
-        setDocumentId(docId)
       }
-      
+
+      // Mark as initialized BEFORE setting state to prevent sample change effect from running
       isInitialized.current = true
+
+      // Update state atomically - both sampleId and documentId together
+      // This ensures the iframe never renders with mismatched sample/document
+      if (targetSampleId !== currentSampleId) {
+        setCurrentSampleId(targetSampleId)
+      }
+      setDocumentId(docId)
       setIsMounted(true)
     } catch (error) {
       console.error('Error initializing:', error)
       setIsMounted(true)
     }
-  }, [currentSampleId, getDocumentIdForDemo])
+  }, [])
 
   // Handle sample change: get document ID for the new demo
   useEffect(() => {
