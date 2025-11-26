@@ -11,7 +11,7 @@ const metadata: SampleMetadata = {
   githubUrl: 'https://github.com/velt-js/sample-apps/tree/main/apps/react/crdt/canvas/reactflow/reactflow-demo',
   githubRepoPath: 'velt-js/sample-apps',
   displayMode: 'dual',
-  isDefault: false,
+  isDefault: true,
   routePath: '/react/crdt/canvas/reactflow/reactflow-demo'
 }
 
