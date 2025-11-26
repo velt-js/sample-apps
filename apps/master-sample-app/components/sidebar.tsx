@@ -35,22 +35,22 @@ const sampleIdToItemName = (sampleId: string): string => {
 
 export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    cursors: false,
-    comments: false,
-    commentsTables: false,
-    agGrid: false,
-    tanstack: false,
-    commentsTextEditors: false,
-    tiptap: false,
-    slatejs: false,
-    lexical: false,
-    commentsDashboard: false,
+    cursors: true,
+    comments: true,
+    commentsTables: true,
+    agGrid: true,
+    tanstack: true,
+    commentsTextEditors: true,
+    tiptap: true,
+    slatejs: true,
+    lexical: true,
+    commentsDashboard: true,
     crdt: true,
     crdtCanvas: true,
     reactflow: true,
-    crdtTextEditors: false,
-    crdtTiptap: false,
-    crdtCodemirror: false,
+    crdtTextEditors: true,
+    crdtTiptap: true,
+    crdtCodemirror: true,
   })
   const [selectedItem, setSelectedItem] = useState<string>(() => {
     // Initialize with current sample ID if available

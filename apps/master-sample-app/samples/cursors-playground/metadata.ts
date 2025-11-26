@@ -8,7 +8,7 @@ const metadata: SampleMetadata = {
   iframeUrl: 'https://demo-examples.vercel.app/realtime/cursors/playground',
   githubUrl: 'https://github.com/velt-js/velt-js',
   displayMode: 'single',
-  isDefault: false,
+  isDefault: true,
   routePath: '/cursors/playground'
 }
 

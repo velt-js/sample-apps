@@ -32,9 +32,6 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
     return url.toString()
   }, [sample.metadata.iframeUrl2, documentId])
 
-  // Don't render iframes until documentId is ready
-  const isReady = !!documentId
-
   return (
     <div
       className="flex flex-1 flex-col transition-all duration-150 ease-in-out"
@@ -58,17 +55,12 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
 
       {/* Content Area */}
       <main className="flex-1 overflow-hidden p-4">
-        {!isReady ? (
-          <div className="flex h-full items-center justify-center">
-            <div className="text-muted-foreground">Loading demo...</div>
-          </div>
-        ) : mode === "demo" ? (
+        {mode === "demo" ? (
           <IframePair
             url={iframeUrl}
             secondUrl={iframeUrl2}
             height="calc(100vh - 88px)"
             displayMode={sample.metadata.displayMode || 'dual'}
-            key={documentId}
           />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
@@ -84,7 +76,6 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
               secondUrl={iframeUrl2}
               height="100%"
               displayMode={sample.metadata.displayMode || 'dual'}
-              key={documentId}
             />
           </div>
         )}
