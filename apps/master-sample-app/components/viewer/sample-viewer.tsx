@@ -19,21 +19,23 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
 
   // Dynamically append documentId to iframe URLs
   const iframeUrl = useMemo(() => {
-    if (!documentId || !sample.metadata.iframeUrl) return sample.metadata.iframeUrl
+    // IMPORTANT: Never return a URL without documentId - this prevents race conditions
+    // where the iframe loads before the documentId is set
+    if (!documentId || !sample.metadata.iframeUrl) return undefined
     const url = new URL(sample.metadata.iframeUrl)
     url.searchParams.set('documentId', documentId)
     return url.toString()
   }, [sample.metadata.iframeUrl, documentId])
 
   const iframeUrl2 = useMemo(() => {
-    if (!documentId || !sample.metadata.iframeUrl2) return sample.metadata.iframeUrl2
+    if (!documentId || !sample.metadata.iframeUrl2) return undefined
     const url = new URL(sample.metadata.iframeUrl2)
     url.searchParams.set('documentId', documentId)
     return url.toString()
   }, [sample.metadata.iframeUrl2, documentId])
 
-  // Don't render iframes until documentId is ready
-  const isReady = !!documentId
+  // Don't render iframes until documentId is ready AND URLs are computed
+  const isReady = !!documentId && !!iframeUrl
 
   return (
     <div
@@ -73,13 +75,13 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
             {/* Left: Code View */}
-            <CodeDisplay 
+            <CodeDisplay
               codeFiles={sample.codeFiles}
               githubRepoPath={sample.metadata.githubRepoPath}
             />
 
             {/* Right: IframePair */}
-            <IframePair 
+            <IframePair
               url={iframeUrl}
               secondUrl={iframeUrl2}
               height="100%"

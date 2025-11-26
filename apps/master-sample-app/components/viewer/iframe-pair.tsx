@@ -8,11 +8,20 @@ interface IframePairProps {
 }
 
 export function IframePair({
-  url = "https://demo-examples.vercel.app/realtime/cursors",
+  url,
   secondUrl,
   height = "982px",
   displayMode = 'dual'
 }: IframePairProps) {
+  // Safety check: don't render if URL is not provided
+  if (!url) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        <div className="text-muted-foreground">Preparing demo...</div>
+      </div>
+    )
+  }
+
   const finalSecondUrl = secondUrl || url
 
   // Single iframe mode

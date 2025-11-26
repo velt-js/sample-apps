@@ -34,7 +34,8 @@ const sampleIdToItemName = (sampleId: string): string => {
 }
 
 export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+  // Default expanded sections - only reactflow-demo path is expanded
+  const defaultExpandedSections = {
     cursors: false,
     comments: false,
     commentsTables: false,
@@ -51,10 +52,26 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     crdtTextEditors: false,
     crdtTiptap: false,
     crdtCodemirror: false,
+  }
+
+  // Initialize expandedSections from localStorage or use defaults
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(() => {
+    if (typeof window === 'undefined') return defaultExpandedSections
+    
+    try {
+      const saved = localStorage.getItem('sidebar-expanded-sections')
+      if (saved) {
+        return JSON.parse(saved)
+      }
+    } catch (error) {
+      console.error('Error loading sidebar state:', error)
+    }
+    return defaultExpandedSections
   })
+
   const [selectedItem, setSelectedItem] = useState<string>(() => {
     // Initialize with current sample ID if available
-    return currentSampleId ? sampleIdToItemName(currentSampleId) : 'playground'
+    return currentSampleId ? sampleIdToItemName(currentSampleId) : 'reactflow-demo'
   })
   const [activePill, setActivePill] = useState<"app-type" | "feature">("feature")
 
@@ -64,6 +81,17 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
       setSelectedItem(sampleIdToItemName(currentSampleId))
     }
   }, [currentSampleId])
+
+  // Save expandedSections to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    
+    try {
+      localStorage.setItem('sidebar-expanded-sections', JSON.stringify(expandedSections))
+    } catch (error) {
+      console.error('Error saving sidebar state:', error)
+    }
+  }, [expandedSections])
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => ({
