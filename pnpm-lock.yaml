@@ -1076,7 +1076,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
       '@veltdev/react':
-        specifier: ^4.6.0-beta.7
+        specifier: ^4.6.1
         version: 4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-crdt':
         specifier: ^4.5.9-beta.2
