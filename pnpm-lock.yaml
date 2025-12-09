@@ -928,7 +928,7 @@ importers:
         version: 2.26.4
       '@veltdev/blocknote-crdt-react':
         specifier: 4.5.0-beta.3
-        version: 4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1076,14 +1076,14 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
       '@veltdev/react':
-        specifier: ^4.5.9
-        version: 4.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^4.6.0-beta.7
+        version: 4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-crdt':
         specifier: ^4.5.9-beta.2
         version: 4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
       '@veltdev/tiptap-crdt-react':
         specifier: ^4.5.9-beta.2
-        version: 4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-velt-comments':
         specifier: 4.5.8-beta.1
         version: 4.5.8-beta.1(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))
@@ -3454,6 +3454,12 @@ packages:
 
   '@veltdev/react@4.5.9':
     resolution: {integrity: sha512-BVANXf9xKWDtamvj1ADSJ/fcaqxJZPTTAF3GHfmvNwNkbWNMoaOrfDpCqKokRmFl8uuEcGDz7im218CG98YqgQ==}
+    peerDependencies:
+      react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
+      react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
+
+  '@veltdev/react@4.6.1':
+    resolution: {integrity: sha512-aO+UTKIbtpoqHe/OtajI24zXcQFCCwPFRixLzDdqsMFADIM802SPtmJ2YJLp/EK+sr5/4+PQ/5MnsogCG0wjlA==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -8742,10 +8748,10 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@veltdev/blocknote-crdt-react@4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@veltdev/blocknote-crdt-react@4.5.0-beta.3(@veltdev/blocknote-crdt@4.5.0-beta.5)(@veltdev/react@4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@veltdev/blocknote-crdt': 4.5.0-beta.5
-      '@veltdev/react': 4.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/react': 4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/types': 4.5.8-beta.8
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
@@ -8778,6 +8784,11 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
+  '@veltdev/react@4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
   '@veltdev/reactflow-crdt@4.5.8-beta.1(yjs@13.6.27)':
     dependencies:
       yjs: 13.6.27
@@ -8789,14 +8800,14 @@ snapshots:
       slate: 0.103.0
       slate-react: 0.110.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(slate@0.103.0)
 
-  ? '@veltdev/tiptap-crdt-react@4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)'
+  ? '@veltdev/tiptap-crdt-react@4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@veltdev/react@4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/tiptap-crdt@4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@veltdev/types@4.5.8-beta.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)'
   : dependencies:
       '@tiptap/core': 3.10.7(@tiptap/pm@3.10.7)
       '@tiptap/extension-collaboration': 3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27)
       '@tiptap/extension-collaboration-caret': 3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
       '@tiptap/pm': 3.10.7
       '@tiptap/y-tiptap': 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)
-      '@veltdev/react': 4.5.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/react': 4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-crdt': 4.5.9-beta.2(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/extension-collaboration-caret@3.10.7(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/extension-collaboration@3.9.0(@tiptap/core@3.10.7(@tiptap/pm@3.10.7))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/pm@3.10.7)(@tiptap/y-tiptap@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.3)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
       '@veltdev/types': 4.5.8-beta.8
       react: 19.2.0
