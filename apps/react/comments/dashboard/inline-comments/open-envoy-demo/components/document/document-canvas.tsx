@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Header from '@/components/header/header'
 import Sidebar from '@/components/sidebar/sidebar'
-import { VeltCommentBubble, VeltCommentTool, VeltInlineCommentsSection } from '@veltdev/react'
+import { VeltCommentBubble, VeltInlineCommentsSection } from '@veltdev/react'
 import JobDetailModal from './JobDetailModal'
 
 // Types
@@ -486,8 +486,10 @@ export default function DocumentCanvas() {
                           className="flex items-center justify-center min-w-[64px] relative overflow-visible"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <VeltCommentTool targetElementId={`job-${job.id}`} />
-                          <VeltCommentBubble targetElementId={`job-${job.id}`} shadowDom={false} />
+                          <VeltCommentBubble
+                            targetElementId={`job-${job.id}`}
+                            shadowDom={false}
+                          />
                         </div>
                       </td>
                       <td className="py-3 px-3">

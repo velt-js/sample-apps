@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { VeltNotificationsPanel } from '@veltdev/react';
+import { VeltNotificationsTool, useNotificationUtils } from '@veltdev/react';
 
 // Sidebar icon assets
 const imgOpenEnvoyWordmarkSmallUsePositive1 = "/icons/sidebar/open-envoy-logo.svg";
@@ -82,10 +81,10 @@ function SectionHeader({ label }: SectionHeaderProps) {
 }
 
 export default function Sidebar() {
-  const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
+  const notificationUtils = useNotificationUtils();
 
-  const toggleNotificationsPanel = () => {
-    setIsNotificationsPanelOpen(!isNotificationsPanelOpen);
+  const handleNotificationsClick = () => {
+    notificationUtils?.openNotificationsPanel();
   };
 
   return (
@@ -130,13 +129,20 @@ export default function Sidebar() {
             icon={imgSearch}
             label="Search"
           />
-          <NavItem
-            icon={imgNotifications}
-            label="Notifications"
-            badge={2}
-            isActive={isNotificationsPanelOpen}
-            onClick={toggleNotificationsPanel}
-          />
+          {/* Notifications - entire row clickable */}
+          <button
+            onClick={handleNotificationsClick}
+            className="w-full h-8 flex items-center gap-3 px-2 py-1 rounded-[3px] hover:bg-[#F2F4FF]/40 transition-colors duration-150"
+          >
+            <img src={imgNotifications} alt="" className="w-4 h-4 flex-shrink-0 block" />
+            <span
+              className="flex-1 text-left text-sm leading-[21px] text-[#4A4947] tracking-[-0.105px]"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Notifications
+            </span>
+            <VeltNotificationsTool shadowDom={false} />
+          </button>
           <NavItem
             icon={imgHome}
             label="Home"
@@ -207,20 +213,6 @@ export default function Sidebar() {
         </nav>
       </div>
       </aside>
-
-      {/* Velt Notifications Panel - Embedded beside sidebar */}
-      {isNotificationsPanelOpen && (
-        <div className="h-full border-r border-[#E5E5E5] bg-white">
-          <VeltNotificationsPanel
-            shadowDom={false}
-            tabConfig={{
-              forYou: { name: "For You", enable: true },
-              documents: { name: "Documents", enable: true },
-              all: { name: "All", enable: true },
-            }}
-          />
-        </div>
-      )}
     </div>
   );
 }
