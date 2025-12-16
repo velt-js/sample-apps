@@ -3,24 +3,24 @@
 import { useState } from 'react';
 import { VeltNotificationsPanel } from '@veltdev/react';
 
-// Figma asset URLs
-const imgOpenEnvoyWordmarkSmallUsePositive1 = "http://localhost:3845/assets/4db59bc8f8b7390f5a397ddcb346d679768cd93b.svg";
-const imgHelp = "http://localhost:3845/assets/cca801e9734692c0f61ffd1a12f1cc18c63126da.svg";
-const imgActivity = "http://localhost:3845/assets/7f353972bce7310debc62bdf8305c750f42160de.svg";
-const imgCopy = "http://localhost:3845/assets/6c23016d6889d24eeab6e3e3f67208e5cf3176cf.svg";
-const imgAccountsPayable = "http://localhost:3845/assets/8e97679ba6bf3fa20883a6d7a80f2a7622afbb60.svg";
-const imgFolder = "http://localhost:3845/assets/4f22e1097dbb109bfacc00cf3d79fe27ce86c18e.svg";
-const imgSearch = "http://localhost:3845/assets/0868e7842bca8868cab1b3f2a987fd97f46dfb49.svg";
-const imgNotifications = "http://localhost:3845/assets/546ca7d85f6caa1763811140dd044f5bd70f9011.svg";
-const imgHome = "http://localhost:3845/assets/488f22887338f92a5399bcb5286bb31a82c56d06.svg";
-const imgInvoiceMatch = "http://localhost:3845/assets/7ccac0d17ba06cfd950632c0b0b4d0ca5e2264ea.svg";
-const imgBasicExpense = "http://localhost:3845/assets/30a8816e2995f7cdd98328a198bd9555e751f340.svg";
-const imgAll = "http://localhost:3845/assets/eada38a2f1aa4d02c54c372c415e429ae296c7a8.svg";
-const imgInbox = "http://localhost:3845/assets/49070ea41b48ba84a5eae736a5fd294afe3f7543.svg";
-const imgDocuments = "http://localhost:3845/assets/42ead957efa73b9d8992f23f7975a586d7b1d4e0.svg";
-const imgAutomation = "http://localhost:3845/assets/a97fc97dcc1b862a5edbeae06fdc9c331cf9f994.svg";
-const imgSettings = "http://localhost:3845/assets/3442077240aea20dd440c084ae881b4001ff950f.svg";
-const imgDivider = "http://localhost:3845/assets/369d836e879c24468e297c2d79b92d70da965fca.svg";
+// Sidebar icon assets
+const imgOpenEnvoyWordmarkSmallUsePositive1 = "/icons/sidebar/open-envoy-logo.svg";
+const imgHelp = "/icons/sidebar/help.svg";
+const imgActivity = "/icons/sidebar/activity.svg";
+const imgCopy = "/icons/sidebar/copy.svg";
+const imgAccountsPayable = "/icons/sidebar/accounts-payable.svg";
+const imgFolder = "/icons/sidebar/folder.svg";
+const imgSearch = "/icons/sidebar/search.svg";
+const imgNotifications = "/icons/sidebar/notifications.svg";
+const imgHome = "/icons/sidebar/home.svg";
+const imgInvoiceMatch = "/icons/sidebar/invoice-match.svg";
+const imgBasicExpense = "/icons/sidebar/basic-expense.svg";
+const imgAll = "/icons/sidebar/all.svg";
+const imgInbox = "/icons/sidebar/inbox.svg";
+const imgDocuments = "/icons/sidebar/documents.svg";
+const imgAutomation = "/icons/sidebar/automation.svg";
+const imgSettings = "/icons/sidebar/settings.svg";
+const imgDivider = "/icons/sidebar/divider.svg";
 
 interface NavItemProps {
   icon: string;
