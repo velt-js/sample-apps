@@ -256,6 +256,9 @@ importers:
       '@veltdev/react':
         specifier: ^4.5.9
         version: 4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/types':
+        specifier: ^4.5.8-beta.8
+        version: 4.5.8-beta.8
       '@xyflow/react':
         specifier: ^12.3.0
         version: 12.9.1(@types/react@19.2.2)(immer@10.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
