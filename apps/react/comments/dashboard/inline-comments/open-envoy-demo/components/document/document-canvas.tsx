@@ -30,25 +30,6 @@ export interface Job {
   lineItems: JobLineItem[]
 }
 
-// Comment type for sidebar
-interface Comment {
-  id: string
-  author: string
-  initials: string
-  color: string
-  timestamp: string
-  content: string
-  context?: {
-    type: 'field' | 'line' | 'expense'
-    label: string
-    value: string
-  }
-  replies?: number
-  lastReply?: string
-  reactions?: { emoji: string; count: number }[]
-  isOnline?: boolean
-}
-
 // Sample data for the table with line items
 const jobsData: Job[] = [
   { id: 'OE0001', cost: '', comments: 0, ownership: { color: '#10B981', initials: 'E', name: 'Ocean Freight - ...' }, due: '...', approver: null, policy: 'AP Eur Matched Appr...', status: 'Matching', statusType: 'default', lineItems: [
@@ -118,59 +99,6 @@ const jobsData: Job[] = [
     { id: 'li-1', description: 'Software licenses', quantity: 10, unitPrice: 450, total: 4500 },
     { id: 'li-2', description: 'Support contract', quantity: 1, unitPrice: 2526.34, total: 2526.34 },
   ]},
-]
-
-// Sample comments data for sidebar
-const commentsData: Comment[] = [
-  {
-    id: 'c1',
-    author: 'Austin Miley',
-    initials: 'AM',
-    color: '#6366F1',
-    timestamp: '2 hours ago',
-    content: 'Can we verify this amount?',
-    isOnline: true,
-    replies: 1,
-    lastReply: 'Last reply 11 min ago'
-  },
-  {
-    id: 'c2',
-    author: 'Rachel Green',
-    initials: 'RG',
-    color: '#EC4899',
-    timestamp: '4 hours ago',
-    content: 'Please update the due date. The current timeline doesn\'t align with our quarterly reporting schedule.',
-    context: {
-      type: 'field',
-      label: 'Due date',
-      value: '2025-08-17'
-    },
-    isOnline: true,
-    replies: 4,
-    lastReply: 'Last reply 4 hours ago',
-    reactions: [{ emoji: '👀', count: 2 }]
-  },
-  {
-    id: 'c3',
-    author: 'Michael Chen',
-    initials: 'MC',
-    color: '#10B981',
-    timestamp: '1 day ago',
-    content: 'Approved. This looks good to proceed.'
-  },
-  {
-    id: 'c4',
-    author: 'Sarah Williams',
-    initials: 'SW',
-    color: '#F59E0B',
-    timestamp: '2 days ago',
-    content: 'Please review the line item amounts.',
-    context: {
-      type: 'line',
-      label: 'Apr-Jun 2025',
-      value: 'Project Managem... Apr-Jun 2025 - $57,600.00'
-    }
-  },
 ]
 
 // Icon components
@@ -282,60 +210,6 @@ const ChevronLeftIcon = () => (
   </svg>
 )
 
-const TextOptionsIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2.667 4h10.666M2.667 8h6.666M2.667 12h8" stroke="#9CA3AF" strokeWidth="1.25" strokeLinecap="round"/>
-  </svg>
-)
-
-const LineIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 8h12" stroke="#9CA3AF" strokeWidth="1.25" strokeLinecap="round"/>
-    <path d="M6 4v8M10 4v8" stroke="#9CA3AF" strokeWidth="1.25" strokeLinecap="round"/>
-  </svg>
-)
-
-const AttachIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14.167 7.367l-6.6 6.6a3.667 3.667 0 11-5.184-5.184l6.6-6.6a2.444 2.444 0 113.456 3.457l-6.606 6.593a1.222 1.222 0 01-1.728-1.728l6.1-6.095" stroke="#9CA3AF" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-
-const EmojiIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="8" cy="8" r="6.5" stroke="#9CA3AF" strokeWidth="1.25"/>
-    <path d="M5.5 9.5s1 1.5 2.5 1.5 2.5-1.5 2.5-1.5" stroke="#9CA3AF" strokeWidth="1.25" strokeLinecap="round"/>
-    <circle cx="6" cy="6.5" r="0.75" fill="#9CA3AF"/>
-    <circle cx="10" cy="6.5" r="0.75" fill="#9CA3AF"/>
-  </svg>
-)
-
-const SendIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M18.333 1.667L9.167 10.833M18.333 1.667l-6.666 16.666-3.334-7.5-7.5-3.333 16.667-5.833z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-
-const MoreIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="8" cy="8" r="1" fill="#6B7280"/>
-    <circle cx="12" cy="8" r="1" fill="#6B7280"/>
-    <circle cx="4" cy="8" r="1" fill="#6B7280"/>
-  </svg>
-)
-
-const ResolveIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13.333 4L6 11.333 2.667 8" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-
-const EditIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M11.333 2a1.414 1.414 0 112 2L4.667 12.667 2 14l1.333-2.667L11.333 2z" stroke="#6B7280" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-
 // Status badge component
 const StatusBadge = ({ status, type }: { status: string; type: string }) => {
   const getStatusStyles = () => {
@@ -422,84 +296,6 @@ const Avatar = ({ initials, color, size = 24, hasIndicator = false }: { initials
     )}
   </div>
 )
-
-// Comment Item Component
-const CommentItem = ({ comment }: { comment: Comment }) => {
-  return (
-    <div className="px-8 py-5 border-b border-gray-100 hover:bg-gray-50">
-      {/* Comment Header */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className="relative">
-            <Avatar initials={comment.initials} color={comment.color} size={24} />
-            {comment.isOnline && (
-              <span className="absolute -bottom-0.5 -right-0.5 w-[6px] h-[6px] bg-green-500 rounded-full border border-white"></span>
-            )}
-          </div>
-          <span className="text-sm font-medium text-gray-900">{comment.author}</span>
-          <span className="text-sm text-gray-500">{comment.timestamp}</span>
-        </div>
-        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100">
-          <button className="p-1.5 hover:bg-gray-100 rounded">
-            <ResolveIcon />
-          </button>
-          <button className="p-1.5 hover:bg-gray-100 rounded">
-            <EditIcon />
-          </button>
-          <button className="p-1.5 hover:bg-gray-100 rounded">
-            <MoreIcon />
-          </button>
-        </div>
-      </div>
-
-      {/* Context Banner */}
-      {comment.context && (
-        <div className="ml-8 mb-2 px-2 py-1.5 bg-gray-50 rounded-md flex items-center gap-2">
-          {comment.context.type === 'field' && <TextOptionsIcon />}
-          {comment.context.type === 'line' && <LineIcon />}
-          <span className="text-sm text-gray-600">
-            <span className="font-medium">{comment.context.type === 'field' ? 'Field:' : 'Line:'}</span>{' '}
-            {comment.context.label} - {comment.context.value}
-          </span>
-        </div>
-      )}
-
-      {/* Comment Content */}
-      <div className="ml-8 text-sm text-gray-700 leading-relaxed">
-        {comment.content}
-      </div>
-
-      {/* Replies and Reactions */}
-      {(comment.replies || comment.reactions) && (
-        <div className="ml-8 mt-3 flex items-center gap-3">
-          {comment.replies && comment.replies > 0 && (
-            <div className="flex items-center gap-2 px-2 py-1 bg-gray-50 rounded">
-              <div className="flex -space-x-1">
-                <div className="w-5 h-5 rounded-full bg-violet-500 flex items-center justify-center text-[10px] text-white font-medium border border-white">A</div>
-                {comment.replies > 1 && (
-                  <div className="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-[10px] text-white font-medium border border-white">R</div>
-                )}
-              </div>
-              <span className="text-sm text-gray-600">{comment.replies} replies</span>
-              {comment.lastReply && (
-                <span className="text-sm text-gray-400">{comment.lastReply}</span>
-              )}
-            </div>
-          )}
-          {comment.reactions && comment.reactions.map((reaction, idx) => (
-            <div key={idx} className="flex items-center gap-1 px-2 py-1 bg-gray-50 rounded">
-              <span>{reaction.emoji}</span>
-              <span className="text-sm text-gray-600">{reaction.count}</span>
-            </div>
-          ))}
-          <button className="p-1.5 hover:bg-gray-100 rounded">
-            <EmojiIcon />
-          </button>
-        </div>
-      )}
-    </div>
-  )
-}
 
 // Comments Sidebar Component - Per-row thread using VeltInlineCommentsSection
 const CommentsSidebar = ({

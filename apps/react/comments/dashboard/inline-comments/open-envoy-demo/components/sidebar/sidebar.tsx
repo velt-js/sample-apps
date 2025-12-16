@@ -1,28 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  ChevronDown,
-  ChevronRight,
-  Search,
-  Bell,
-  Home,
-  Inbox,
-  FileText,
-  Settings,
-  HelpCircle,
-  Activity
-} from 'lucide-react';
 import { VeltNotificationsPanel } from '@veltdev/react';
 
 // Figma asset URLs
 const imgOpenEnvoyWordmarkSmallUsePositive1 = "http://localhost:3845/assets/4db59bc8f8b7390f5a397ddcb346d679768cd93b.svg";
 const imgHelp = "http://localhost:3845/assets/cca801e9734692c0f61ffd1a12f1cc18c63126da.svg";
 const imgActivity = "http://localhost:3845/assets/7f353972bce7310debc62bdf8305c750f42160de.svg";
-const imgChevron = "http://localhost:3845/assets/b4a728af80346863ec1045b114046a95bb630e3f.svg";
 const imgCopy = "http://localhost:3845/assets/6c23016d6889d24eeab6e3e3f67208e5cf3176cf.svg";
 const imgAccountsPayable = "http://localhost:3845/assets/8e97679ba6bf3fa20883a6d7a80f2a7622afbb60.svg";
-const imgChevronDown = "http://localhost:3845/assets/fa2eead75170c4fb327e3de855aaad0f1302e763.svg";
 const imgFolder = "http://localhost:3845/assets/4f22e1097dbb109bfacc00cf3d79fe27ce86c18e.svg";
 const imgSearch = "http://localhost:3845/assets/0868e7842bca8868cab1b3f2a987fd97f46dfb49.svg";
 const imgNotifications = "http://localhost:3845/assets/546ca7d85f6caa1763811140dd044f5bd70f9011.svg";
@@ -42,17 +28,13 @@ interface NavItemProps {
   isActive?: boolean;
   isBold?: boolean;
   badge?: number;
-  expandable?: boolean;
   onClick?: () => void;
 }
 
-function NavItem({ icon, label, isActive = false, isBold = false, badge, expandable = false, onClick }: NavItemProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+function NavItem({ icon, label, isActive = false, isBold = false, badge, onClick }: NavItemProps) {
   return (
     <button
       onClick={() => {
-        if (expandable) setIsExpanded(!isExpanded);
         if (onClick) onClick();
       }}
       className={`
@@ -79,13 +61,6 @@ function NavItem({ icon, label, isActive = false, isBold = false, badge, expanda
         >
           {badge}
         </span>
-      )}
-      {expandable && (
-        <img
-          src={imgChevronDown}
-          alt=""
-          className={`w-4 h-4 transition-transform ${isExpanded ? '' : '-rotate-90'}`}
-        />
       )}
     </button>
   );
@@ -146,12 +121,10 @@ export default function Sidebar() {
             icon={imgAccountsPayable}
             label="Accounts Payable"
             isBold
-            expandable
           />
           <NavItem
             icon={imgFolder}
             label="Nexaform - AP"
-            expandable
           />
           <NavItem
             icon={imgSearch}
@@ -201,12 +174,10 @@ export default function Sidebar() {
           <NavItem
             icon={imgAutomation}
             label="Automation"
-            expandable
           />
           <NavItem
             icon={imgSettings}
             label="Settings"
-            expandable
           />
 
           {/* Secondary Navigation - Bottom */}
@@ -231,11 +202,6 @@ export default function Sidebar() {
               >
                 Linda Wang
               </span>
-              <img
-                src={imgChevronDown}
-                alt=""
-                className="w-4 h-4 -rotate-90"
-              />
             </button>
           </div>
         </nav>

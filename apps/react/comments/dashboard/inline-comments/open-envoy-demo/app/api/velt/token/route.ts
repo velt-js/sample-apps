@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // [Velt] API key and auth token from environment variables
-const NEXT_PUBLIC_VELT_API_KEY = process.env.NEXT_PUBLIC_VELT_API_KEY || process.env.VELT_API_KEY;
+const NEXT_PUBLIC_VELT_API_KEY = process.env.NEXT_PUBLIC_VELT_API_KEY || process.env.VELT_API_KEY || '';
 const VELT_AUTH_TOKEN = process.env.VELT_AUTH_TOKEN;
 
 export async function POST(req: NextRequest) {
