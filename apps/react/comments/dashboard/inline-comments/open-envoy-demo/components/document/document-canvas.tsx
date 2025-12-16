@@ -687,11 +687,11 @@ export default function DocumentCanvas() {
                       </td>
                       <td className="py-3 px-3">
                         <div
-                          className="flex items-center justify-center min-w-[64px]"
+                          className="flex items-center justify-center min-w-[64px] relative overflow-visible"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <VeltCommentTool targetElementId={`job-${job.id}`} />
-                          <VeltCommentBubble targetElementId={`job-${job.id}`} />
+                          <VeltCommentBubble targetElementId={`job-${job.id}`} shadowDom={false} />
                         </div>
                       </td>
                       <td className="py-3 px-3">
