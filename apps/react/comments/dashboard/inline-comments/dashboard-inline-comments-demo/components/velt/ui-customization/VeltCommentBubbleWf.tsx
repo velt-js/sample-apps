@@ -1,3 +1,4 @@
+"use client";
 import { VeltCommentBubbleWireframe } from '@veltdev/react';
 import { MessageSquare } from 'lucide-react';
 

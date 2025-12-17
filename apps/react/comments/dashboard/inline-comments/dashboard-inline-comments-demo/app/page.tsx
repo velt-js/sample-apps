@@ -1,33 +1,25 @@
-'use client'
-
+"use client";
+// [Velt] Provider + collaboration
+import { VeltProvider } from "@veltdev/react";
+import { useVeltAuthProvider } from "@/components/velt/VeltInitializeUser";
+import { VeltCollaboration } from "@/components/velt/VeltCollaboration";
 import DocumentCanvas from '@/components/document/document-canvas'
-import { VeltProvider } from '@veltdev/react'
-import { VeltCollaboration } from '@/components/velt/VeltCollaboration'
-import { AppProviders } from './userAuth/AppProviders'
-import { useVeltAuthProvider } from '@/components/velt/VeltInitializeUser'
 
-function VeltWrapper({ children }: { children: React.ReactNode }) {
-  const { authProvider } = useVeltAuthProvider()
+// [Velt] Replace with your own API key from https://console.velt.dev
+const NEXT_PUBLIC_VELT_API_KEY = "6xTcUFtlYAlCdh11zrKB";
+
+export default function Home() {
+  // [Velt] Auth provider (reads from app/userAuth/useAppUser)
+  const { authProvider } = useVeltAuthProvider();
 
   return (
+    // [Velt] Wrap app with VeltProvider
     <VeltProvider
-      apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY || '6xTcUFtlYAlCdh11zrKB'}
+      apiKey={NEXT_PUBLIC_VELT_API_KEY}
       authProvider={authProvider}
     >
       <VeltCollaboration />
-      {children}
+      <DocumentCanvas />
     </VeltProvider>
-  )
-}
-
-export default function Home() {
-  return (
-    <AppProviders>
-      <VeltWrapper>
-        <main className="flex h-screen w-screen">
-          <DocumentCanvas />
-        </main>
-      </VeltWrapper>
-    </AppProviders>
-  )
+  );
 }

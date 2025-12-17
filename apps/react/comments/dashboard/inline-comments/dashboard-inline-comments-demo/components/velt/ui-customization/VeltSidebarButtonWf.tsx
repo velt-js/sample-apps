@@ -1,3 +1,4 @@
+"use client";
 import { VeltSidebarButtonWireframe } from '@veltdev/react';
 import { MessageSquare } from 'lucide-react';
 

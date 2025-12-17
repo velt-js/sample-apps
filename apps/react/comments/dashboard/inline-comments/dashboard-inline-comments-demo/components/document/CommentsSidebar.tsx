@@ -14,7 +14,7 @@ export const CommentsSidebar = ({ isOpen, onClose, selectedJob }: CommentsSideba
   return (
     <div className="w-[400px] h-full flex flex-col bg-white border-l border-gray-200">
       {/* Header */}
-      <div className="h-[56px] px-4 flex items-center justify-between border-b border-gray-200">
+      <div className="h-[56px] px-4 flex items-center justify-between border-b border-gray-200 flex-shrink-0">
         <div className="flex items-center gap-3">
           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded">
             <ChevronLeftIcon />
@@ -26,12 +26,13 @@ export const CommentsSidebar = ({ isOpen, onClose, selectedJob }: CommentsSideba
         </div>
       </div>
 
-      {/* VeltInlineCommentsSection for per-row thread */}
-      <div className="flex-1 overflow-y-auto" data-id={`job-${selectedJob.id}`}>
+      {/* VeltInlineCommentsSection for each line item */}
+      <div className="flex-1 overflow-y-auto px-6 py-6" id={`job-${selectedJob.id}`}>
         <VeltInlineCommentsSection
-          multiThread={false}
+          context={{jobId: `job-${selectedJob.id}`, jobStatus: selectedJob.status}}
           targetElementId={`job-${selectedJob.id}`}
           shadowDom={false}
+          composerPosition="bottom"
         />
       </div>
     </div>

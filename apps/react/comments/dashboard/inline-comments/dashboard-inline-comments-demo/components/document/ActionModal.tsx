@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { VeltCommentTool } from '@veltdev/react'
 
 interface ActionModalProps {
   jobId: string
@@ -188,11 +187,6 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
               {config.required && !comment.trim() && (
                 <p className="mt-1 text-xs text-gray-500">A comment is required for this action.</p>
               )}
-            </div>
-
-            {/* Hidden Velt comment tool for creating the action comment */}
-            <div className="hidden">
-              <VeltCommentTool targetElementId={actionTargetId} />
             </div>
 
             {/* Info about action comments */}

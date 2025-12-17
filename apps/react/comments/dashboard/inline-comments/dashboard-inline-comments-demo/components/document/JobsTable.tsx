@@ -72,7 +72,7 @@ export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
                   className="flex items-center justify-center min-w-[64px] relative overflow-visible"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <VeltCommentTool targetElementId={`job-${job.id}`} />
+                  <VeltCommentTool targetElementId={`job-${job.id}`} context={{jobId: `job-${job.id}`, jobStatus: job.status}} />
                   <VeltCommentBubble
                     targetElementId={`job-${job.id}`}
                     shadowDom={false}
