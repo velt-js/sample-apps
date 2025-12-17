@@ -42,9 +42,9 @@ export default function DocumentCanvas() {
   }
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-screen">
       <Header />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden h-[calc(100vh-45px)]">
         <Sidebar />
         <div className="flex-1 flex overflow-hidden">
           {/* Main Content Area */}

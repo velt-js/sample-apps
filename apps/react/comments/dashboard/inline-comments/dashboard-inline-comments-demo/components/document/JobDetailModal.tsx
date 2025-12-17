@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { VeltCommentTool, VeltCommentBubble, VeltInlineCommentsSection } from '@veltdev/react'
+import { VeltInlineCommentsSection } from '@veltdev/react'
 import type { Job, JobLineItem } from './document-canvas'
 import ActionModal from './ActionModal'
 
@@ -39,25 +39,7 @@ function LineItemRow({ lineItem, jobId }: { lineItem: JobLineItem; jobId: string
         <div className="w-28 text-right">
           <span className="text-sm font-medium text-gray-900">${lineItem.total.toFixed(2)}</span>
         </div>
-        <div className="w-24 flex items-center justify-end" id={targetId} data-id={targetId}>
-          <div className="flex items-center justify-center min-w-[64px]">
-            <VeltCommentTool targetElementId={targetId} />
-            <VeltCommentBubble targetElementId={targetId} />
-          </div>
-        </div>
       </div>
-
-      {/* Inline comments section for this line item */}
-      {showComments && (
-        <div className="px-4 py-3 bg-gray-50 border-t border-gray-100">
-          <div className="text-xs text-gray-500 mb-2">Comments for: {lineItem.description}</div>
-          <VeltInlineCommentsSection
-            targetElementId={targetId}
-            multiThread={false}
-            shadowDom={false}
-          />
-        </div>
-      )}
     </div>
   )
 }
@@ -66,8 +48,6 @@ export default function JobDetailModal({ job, isOpen, onClose }: JobDetailModalP
   const [actionModal, setActionModal] = useState<{ type: string; label: string } | null>(null)
 
   if (!isOpen) return null
-
-  const jobTargetId = `job-${job.id}`
 
   // Calculate totals
   const subtotal = job.lineItems.reduce((sum, item) => sum + item.total, 0)
@@ -174,18 +154,13 @@ export default function JobDetailModal({ job, isOpen, onClose }: JobDetailModalP
             <div className="mb-6">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-semibold text-gray-900">Job Comments</h3>
-                <div className="flex items-center gap-2" id={jobTargetId} data-id={jobTargetId}>
-                  <div className="flex items-center justify-center min-w-[64px]">
-                    <VeltCommentTool targetElementId={jobTargetId} />
-                    <VeltCommentBubble targetElementId={jobTargetId} />
-                  </div>
-                </div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-lg p-4" id={`job-${job.id}`}>
                 <VeltInlineCommentsSection
-                  targetElementId={jobTargetId}
-                  multiThread={false}
+                  context={{jobId: `job-${job.id}`, jobStatus: job.status}}
+                  targetElementId={`job-${job.id}`}
                   shadowDom={false}
+                  composerPosition='bottom'
                 />
               </div>
             </div>
@@ -200,7 +175,6 @@ export default function JobDetailModal({ job, isOpen, onClose }: JobDetailModalP
                   <div className="w-20 text-right text-xs font-medium text-gray-500">Qty</div>
                   <div className="w-28 text-right text-xs font-medium text-gray-500">Unit Price</div>
                   <div className="w-28 text-right text-xs font-medium text-gray-500">Total</div>
-                  <div className="w-24 text-right text-xs font-medium text-gray-500">Comments</div>
                 </div>
 
                 {/* Line Items */}

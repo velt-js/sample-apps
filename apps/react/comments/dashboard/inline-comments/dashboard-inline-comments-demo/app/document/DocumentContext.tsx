@@ -48,13 +48,13 @@ export function useCurrentDocument(): CurrentDocument {
       localStorage.setItem('velt-demo-document-id', docId);
     } else {
       // 2. Check localStorage for existing document
-      const stored = localStorage.getItem('velt-demo-document-id');
+      const stored = localStorage.getItem('velt-inline-comments-demo-doc-id');
       if (stored) {
         docId = stored;
       } else {
         // 3. Generate new document ID
         docId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-        localStorage.setItem('velt-demo-document-id', docId);
+        localStorage.setItem('velt-inline-comments-demo-doc-id', docId);
       }
 
       // Update URL with document ID for shareability
