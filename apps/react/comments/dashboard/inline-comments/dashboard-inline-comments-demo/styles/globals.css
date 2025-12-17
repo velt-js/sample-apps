@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+
+    /* Velt Theme Configuration - Copied from example repo */
+
+    /* Border Radius */
+    --velt-border-radius-2xs: 1.5px;
+    --velt-border-radius-xs: 3px;
+    --velt-border-radius-sm: 6px;
+    --velt-border-radius-md: 9px;
+    --velt-border-radius-lg: 12px;
+    --velt-border-radius-xl: 15px;
+    --velt-border-radius-2xl: 18px;
+    --velt-border-radius-3xl: 24px;
+    --velt-border-radius-full: 60px;
+
+    /* Light Mode */
+    /* Accent Colors */
+    --velt-light-mode-accent: #1e2195;
+    --velt-light-mode-accent-text: #1e2195;
+    --velt-light-mode-accent-hover: #000062;
+    --velt-light-mode-accent-foreground: #FFFFFF;
+    --velt-light-mode-accent-light: #f4f4fa;
+    --velt-light-mode-accent-transparent: rgba(30, 33, 149, 0.08);
+
+    /* Background Shades */
+    --velt-light-mode-background-0: #FFFFFF;
+    --velt-light-mode-background-1: #fcfcfc;
+    --velt-light-mode-background-2: #fafafa;
+    --velt-light-mode-background-3: #f7f7f7;
+    --velt-light-mode-background-4: #f5f5f5;
+    --velt-light-mode-background-5: #f2f2f2;
+    --velt-light-mode-background-6: #f0f0f0;
+    --velt-light-mode-background-7: #ededed;
+    --velt-light-mode-background-8: #ebebeb;
+    --velt-light-mode-background-9: #e8e8e8;
+    --velt-light-mode-background-10: #e6e6e6;
+
+    /* Text Shades */
+    --velt-light-mode-text-0: #0a0a0a;
+    --velt-light-mode-text-1: #171717;
+    --velt-light-mode-text-2: #242424;
+    --velt-light-mode-text-3: #303030;
+    --velt-light-mode-text-4: #3d3d3d;
+    --velt-light-mode-text-5: #4a4a4a;
+    --velt-light-mode-text-6: #575757;
+    --velt-light-mode-text-7: #636363;
+    --velt-light-mode-text-8: #707070;
+    --velt-light-mode-text-9: #7d7d7d;
+    --velt-light-mode-text-10: #898989;
+    --velt-light-mode-text-11: #969696;
+    --velt-light-mode-text-12: #a3a3a3;
+
+    /* Border Shades */
+    --velt-light-mode-border-0: #FFFFFF;
+    --velt-light-mode-border-1: #FAFAFA;
+    --velt-light-mode-border-2: #F5F5F5;
+    --velt-light-mode-border-3: #F0F0F0;
+    --velt-light-mode-border-4: #EBEBEB;
+    --velt-light-mode-border-5: #E5E5E5;
+    --velt-light-mode-border-6: #E0E0E0;
+    --velt-light-mode-border-7: #DBDBDB;
+    --velt-light-mode-border-8: #D6D6D6;
+    --velt-light-mode-border-9: #D1D1D1;
+    --velt-light-mode-border-10: #CCCCCC;
+
+    /* Semantic Colors */
+    --velt-light-mode-error: #FF7162;
+    --velt-light-mode-error-hover: #DE5041;
+    --velt-light-mode-error-foreground: #FFFFFF;
+    --velt-light-mode-error-light: #FFF4F2;
+    --velt-light-mode-warning: #FFCD2E;
+    --velt-light-mode-warning-hover: #C69400;
+    --velt-light-mode-warning-foreground: #474747;
+    --velt-light-mode-warning-light: #FFFBEE;
+    --velt-light-mode-success: #198F65;
+    --velt-light-mode-success-hover: #006B41;
+    --velt-light-mode-success-foreground: #FFFFFF;
+    --velt-light-mode-success-light: #EDF6F3;
+
+    /* Dark Mode */
+    /* Accent Colors */
+    --velt-dark-mode-accent: #1e2195;
+    --velt-dark-mode-accent-text: #3e42ce;
+    --velt-dark-mode-accent-hover: #000062;
+    --velt-dark-mode-accent-foreground: #FFFFFF;
+    --velt-dark-mode-accent-light: #f4f4fa;
+    --velt-dark-mode-accent-transparent: rgba(30, 33, 149, 0.08);
+
+    /* Background Shades */
+    --velt-dark-mode-background-0: #000000;
+    --velt-dark-mode-background-1: #030303;
+    --velt-dark-mode-background-2: #050505;
+    --velt-dark-mode-background-3: #080808;
+    --velt-dark-mode-background-4: #0a0a0a;
+    --velt-dark-mode-background-5: #0d0d0d;
+    --velt-dark-mode-background-6: #0f0f0f;
+    --velt-dark-mode-background-7: #121212;
+    --velt-dark-mode-background-8: #141414;
+    --velt-dark-mode-background-9: #171717;
+    --velt-dark-mode-background-10: #1a1a1a;
+
+    /* Text Shades */
+    --velt-dark-mode-text-0: #ffffff;
+    --velt-dark-mode-text-1: #f2f2f2;
+    --velt-dark-mode-text-2: #e6e6e6;
+    --velt-dark-mode-text-3: #d9d9d9;
+    --velt-dark-mode-text-4: #cccccc;
+    --velt-dark-mode-text-5: #bfbfbf;
+    --velt-dark-mode-text-6: #b3b3b3;
+    --velt-dark-mode-text-7: #a6a6a6;
+    --velt-dark-mode-text-8: #999999;
+    --velt-dark-mode-text-9: #8c8c8c;
+    --velt-dark-mode-text-10: #808080;
+    --velt-dark-mode-text-11: #737373;
+    --velt-dark-mode-text-12: #666666;
+
+    /* Border Shades */
+    --velt-dark-mode-border-0: #0F0F0F;
+    --velt-dark-mode-border-1: #1A1A1A;
+    --velt-dark-mode-border-2: #1F1F1F;
+    --velt-dark-mode-border-3: #242424;
+    --velt-dark-mode-border-4: #292929;
+    --velt-dark-mode-border-5: #2E2E2E;
+    --velt-dark-mode-border-6: #333333;
+    --velt-dark-mode-border-7: #383838;
+    --velt-dark-mode-border-8: #3D3D3D;
+    --velt-dark-mode-border-9: #424242;
+    --velt-dark-mode-border-10: #474747;
+
+    /* Semantic Colors */
+    --velt-dark-mode-error: #FF7162;
+    --velt-dark-mode-error-hover: #DE5041;
+    --velt-dark-mode-error-foreground: #FFFFFF;
+    --velt-dark-mode-error-light: #FFF4F2;
+    --velt-dark-mode-warning: #FFCD2E;
+    --velt-dark-mode-warning-hover: #C69400;
+    --velt-dark-mode-warning-foreground: #474747;
+    --velt-dark-mode-warning-light: #FFFBEE;
+    --velt-dark-mode-success: #198F65;
+    --velt-dark-mode-success-hover: #006B41;
+    --velt-dark-mode-success-foreground: #FFFFFF;
+    --velt-dark-mode-success-light: #EDF6F3;
+
+    /* Spacing */
+    --velt-spacing-2xs: 0.09375rem;
+    --velt-spacing-xs: 0.1875rem;
+    --velt-spacing-sm: 0.375rem;
+    --velt-spacing-md: 0.5625rem;
+    --velt-spacing-lg: 0.75rem;
+    --velt-spacing-xl: 0.9375rem;
+    --velt-spacing-2xl: 1.125rem;
+
+    /* Font Size */
+    --velt-font-size-2xs: 0.625rem;
+    --velt-font-size-xs: 0.75rem;
+    --velt-font-size-sm: 0.875rem;
+    --velt-font-size-md: 1rem;
+    --velt-font-size-lg: 1.5rem;
+    --velt-font-size-xl: 1.75rem;
+    --velt-font-size-2xl: 2rem;
+  }
+}
+
+/* Velt Inline Comments Section Styling - from example repo */
+.velt-inline-comments-section {
+  padding: 0px !important;
+}
+
+.velt-comment-dialog--inline-comment-section-mode {
+  border-radius: 0px !important;
+}
