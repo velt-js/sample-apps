@@ -35,7 +35,7 @@ export function VeltCollaboration() {
         groupMatchedComments={true}
         priority={true}
       />
-      <VeltCommentsSidebar groupConfig={groupConfig} />
+      <VeltCommentsSidebar groupConfig={groupConfig} pageMode={true} />
     </>
   );
 }
