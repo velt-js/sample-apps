@@ -1,4 +1,4 @@
-import { VeltCommentBubble } from '@veltdev/react'
+import { VeltCommentBubble, VeltCommentTool } from '@veltdev/react'
 import { ChevronDownIcon, GearIcon } from './icons'
 import { Avatar } from './Avatar'
 import { StatusBadge } from './StatusBadge'
@@ -72,6 +72,7 @@ export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
                   className="flex items-center justify-center min-w-[64px] relative overflow-visible"
                   onClick={(e) => e.stopPropagation()}
                 >
+                  <VeltCommentTool targetElementId={`job-${job.id}`} />
                   <VeltCommentBubble
                     targetElementId={`job-${job.id}`}
                     shadowDom={false}

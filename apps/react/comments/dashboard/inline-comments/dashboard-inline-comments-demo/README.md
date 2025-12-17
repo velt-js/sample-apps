@@ -1,4 +1,4 @@
-# open-envoy-demo
+# Dashboard Inline Demo
 
 ## Overview
 
@@ -7,17 +7,17 @@ This demo showcases **inline-comments** for **comments** (dashboard) in **react*
 ## Path
 
 ```
-apps/react/comments/dashboard/inline-comments/open-envoy-demo/
+apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo/
 ```
 
 ## Package Name
 
-`@apps/react-comments-dashboard-inline-comments-open-envoy-demo`
+`@apps/react-comments-dashboard-inline-comments-demo`
 
 ## Directory Structure
 
 ```
-open-envoy-demo/
+dashboard-inline-comments-demo/
 ├── app/
 │   ├── layout.tsx          # Root layout
 │   └── page.tsx            # Main page
@@ -55,20 +55,20 @@ pnpm install
 ### Run Development Server
 
 ```bash
-cd apps/react/comments/dashboard/inline-comments/open-envoy-demo
+cd apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo
 pnpm dev
 ```
 
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-comments-dashboard-inline-comments-open-envoy-demo dev
+pnpm --filter @apps/react-comments-dashboard-inline-comments-demo dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-comments-dashboard-inline-comments-open-envoy-demo build
+pnpm --filter @apps/react-comments-dashboard-inline-comments-demo build
 ```
 
 ## Structure
@@ -77,7 +77,7 @@ pnpm --filter @apps/react-comments-dashboard-inline-comments-open-envoy-demo bui
 - **Feature**: comments
 - **Document**: dashboard
 - **Library**: inline-comments
-- **Demo**: open-envoy-demo
+- **Demo**: dashboard-inline-comments-demo
 
 ## Component Organization
 

@@ -3,7 +3,7 @@
 import { VeltNotificationsTool, useNotificationUtils, useUnreadNotificationsCount } from '@veltdev/react';
 
 // Sidebar icon assets
-const imgOpenEnvoyWordmarkSmallUsePositive1 = "/icons/sidebar/open-envoy-logo.svg";
+const imgLogo = "/icons/sidebar/open-envoy-logo.svg";
 const imgHelp = "/icons/sidebar/help.svg";
 const imgActivity = "/icons/sidebar/activity.svg";
 const imgCopy = "/icons/sidebar/copy.svg";
@@ -109,8 +109,8 @@ export default function Sidebar() {
         {/* Header Section */}
         <div className="flex items-center gap-2 mb-6">
           <img
-            src={imgOpenEnvoyWordmarkSmallUsePositive1}
-            alt="OpenEnvoy"
+            src={imgLogo}
+            alt="Dashboard Inline Demo"
             className="w-[113px] h-7"
           />
           <button className="ml-auto">

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
-  title: 'open-envoy-demo',
+  title: 'Dashboard Inline Demo',
   description: 'inline-comments demo for comments',
 }
 
