@@ -4,12 +4,15 @@ import { saveComments } from '../store';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { commentAnnotation } = body;
+    const { commentAnnotation, metadata } = body;
 
-    console.log('[Velt API] SAVE comments:', commentAnnotation);
+    console.log('[Velt API] SAVE comments:', { commentAnnotation, metadata });
 
     if (commentAnnotation) {
-      saveComments(commentAnnotation);
+      // Extract documentId and organizationId from metadata
+      const documentId = metadata?.documentId;
+      const organizationId = metadata?.organizationId;
+      await saveComments(commentAnnotation, { documentId, organizationId });
     }
 
     return NextResponse.json({ success: true });

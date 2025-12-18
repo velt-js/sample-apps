@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     console.log('[Velt API] DELETE comment:', commentAnnotationId);
 
     if (commentAnnotationId) {
-      deleteComment(commentAnnotationId);
+      await deleteComment(commentAnnotationId);
     }
 
     return NextResponse.json({ success: true });

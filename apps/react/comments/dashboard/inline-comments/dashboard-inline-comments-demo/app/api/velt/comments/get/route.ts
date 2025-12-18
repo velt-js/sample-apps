@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
 
     console.log('[Velt API] GET comments:', { organizationId, commentAnnotationIds, documentIds });
 
-    const result = getComments({
+    const result = await getComments({
       organizationId,
       commentAnnotationIds,
       documentIds,
