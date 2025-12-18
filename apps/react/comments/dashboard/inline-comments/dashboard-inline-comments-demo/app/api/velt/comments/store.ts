@@ -11,28 +11,37 @@ export type CommentAnnotation = {
   comments: Record<string, { commentId: string | number; commentHtml?: string; commentText?: string }>;
 };
 
-// MongoDB connection string - replace with your own
+// MongoDB connection string
+// Local: mongodb://localhost:27017
+// Production: Set MONGODB_URI env var (e.g., MongoDB Atlas connection string)
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+
+if (!process.env.MONGODB_URI && process.env.NODE_ENV === 'production') {
+  console.warn('[MongoDB] WARNING: MONGODB_URI not set. Using localhost which will fail in production.');
+}
 const DB_NAME = 'velt_comments';
 const COLLECTION_NAME = 'comment_annotations';
 
-let client: MongoClient | null = null;
-let db: Db | null = null;
+// Cache connection promise for serverless environments
+let clientPromise: Promise<MongoClient> | null = null;
 
 async function getDb(): Promise<Db> {
-  if (db) return db;
+  if (!clientPromise) {
+    const client = new MongoClient(MONGODB_URI);
+    clientPromise = client.connect();
 
-  client = new MongoClient(MONGODB_URI);
-  await client.connect();
-  db = client.db(DB_NAME);
+    // Create indexes on first connection
+    clientPromise.then(async (connectedClient) => {
+      const db = connectedClient.db(DB_NAME);
+      await db.collection(COLLECTION_NAME).createIndex({ annotationId: 1 }, { unique: true }).catch(() => {});
+      await db.collection(COLLECTION_NAME).createIndex({ documentId: 1 }).catch(() => {});
+      await db.collection(COLLECTION_NAME).createIndex({ organizationId: 1 }).catch(() => {});
+      console.log('[MongoDB] Connected to database:', DB_NAME);
+    });
+  }
 
-  // Create indexes for faster lookups
-  await db.collection(COLLECTION_NAME).createIndex({ annotationId: 1 }, { unique: true });
-  await db.collection(COLLECTION_NAME).createIndex({ documentId: 1 });
-  await db.collection(COLLECTION_NAME).createIndex({ organizationId: 1 });
-
-  console.log('[MongoDB] Connected to database:', DB_NAME);
-  return db;
+  const client = await clientPromise;
+  return client.db(DB_NAME);
 }
 
 export async function getComments(filters: {
