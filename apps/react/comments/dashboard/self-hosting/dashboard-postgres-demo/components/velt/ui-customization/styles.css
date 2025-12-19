@@ -1,0 +1,70 @@
+/* Custom Comment Tool & Bubble Styling */
+.custom-bubble-tool {
+    position: relative;
+    display: flex;
+    color: white !important;
+    cursor: pointer;
+}
+
+.unread-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 1px;
+    width: 6px;
+    height: 6px;
+    background-color: #FF7162;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.has-comments {
+    position: absolute;
+    bottom: 0px;
+    right: 1px;
+    width: 6px;
+    height: 6px;
+    background-color: #625DF5;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+velt-comment-tool {
+    display: flex !important;
+}
+
+velt-comment-bubble {
+    display: flex !important;
+}
+
+/* Handle empty VeltIf components */
+velt-if:empty {
+    display: none !important;
+}
+
+/* Keep icons white by default - only purple on hover */
+velt-comment-tool .custom-bubble-tool,
+velt-comment-bubble .custom-bubble-tool {
+    color: white !important;
+}
+
+/* Purple on hover only */
+velt-comment-tool:hover .custom-bubble-tool,
+velt-comment-bubble:hover .custom-bubble-tool {
+    color: #625DF5 !important;
+}
+
+/* Prevent active/open states from changing color */
+velt-comment-tool.velt-comment-tool-active .custom-bubble-tool,
+velt-comment-bubble.velt-comment-bubble-open .custom-bubble-tool {
+    color: white !important;
+}
+
+/* But still allow hover on active states */
+velt-comment-tool.velt-comment-tool-active:hover .custom-bubble-tool,
+velt-comment-bubble.velt-comment-bubble-open:hover .custom-bubble-tool {
+    color: #625DF5 !important;
+}
+
+.velt-notifications-tool {
+    width: 100% !important;
+}
