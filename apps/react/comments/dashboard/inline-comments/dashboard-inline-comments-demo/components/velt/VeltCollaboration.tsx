@@ -33,7 +33,7 @@ export function VeltCollaboration() {
         dialogOnHover={false}
         groupMatchedComments={true}
       />
-      <VeltCommentsSidebar groupConfig={groupConfig} pageMode={true} />
+      <VeltCommentsSidebar shadowDom={false} groupConfig={groupConfig} pageMode={true} sortData="asc" />
 
       <VeltCustomization />
     </>
