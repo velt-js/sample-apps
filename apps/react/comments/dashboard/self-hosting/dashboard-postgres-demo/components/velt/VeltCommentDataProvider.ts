@@ -58,14 +58,14 @@ const saveCommentsToDB = async (request: {
       body: JSON.stringify(request)
     });
     if (!response.ok) {
-      console.warn('[Velt Self-Host] SAVE endpoint returned', response.status);
-      return { success: true, statusCode: 200 }; // Graceful fallback
+      console.error('[Velt Self-Host] SAVE endpoint returned', response.status);
+      return { success: false, statusCode: response.status };
     }
     await response.json();
     return { success: true, statusCode: 200 };
   } catch (error) {
     console.error('[Velt Self-Host] Error saving comments:', error);
-    return { success: true, statusCode: 200 }; // Graceful fallback
+    return { success: false, statusCode: 500 };
   }
 };
 
@@ -82,14 +82,14 @@ const deleteCommentsFromDB = async (request: {
       body: JSON.stringify(request)
     });
     if (!response.ok) {
-      console.warn('[Velt Self-Host] DELETE endpoint returned', response.status);
-      return { success: true, statusCode: 200 }; // Graceful fallback
+      console.error('[Velt Self-Host] DELETE endpoint returned', response.status);
+      return { success: false, statusCode: response.status };
     }
     await response.json();
     return { success: true, statusCode: 200 };
   } catch (error) {
     console.error('[Velt Self-Host] Error deleting comments:', error);
-    return { success: true, statusCode: 200 }; // Graceful fallback
+    return { success: false, statusCode: 500 };
   }
 };
 
