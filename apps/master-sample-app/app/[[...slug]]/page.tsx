@@ -31,21 +31,6 @@ export default function Page() {
     return newDocId
   }, [])
 
-  // Update URL when sample or documentId changes
-  useEffect(() => {
-    if (typeof window === 'undefined' || !documentId) return
-
-    const sample = getSampleById(currentSampleId)
-    if (!sample) return
-
-    const routePath = sample.metadata.routePath || ''
-    const newUrl = `${routePath}?documentId=${documentId}`
-    
-    if (window.location.pathname + window.location.search !== newUrl) {
-      window.history.pushState({}, '', newUrl)
-    }
-  }, [currentSampleId, documentId])
-
   // Initialize: determine sample from URL path and get/set document ID
   useEffect(() => {
     if (isInitialized.current) return
@@ -104,6 +89,16 @@ export default function Page() {
     }
   }, [])
 
+  // Handle sample selection: clear documentId first to prevent race condition
+  // where iframe renders with new sample URL but old documentId
+  const handleSampleSelect = useCallback((newSampleId: string) => {
+    if (newSampleId === currentSampleId) return
+    // Clear documentId FIRST to ensure iframe doesn't render with mismatched sample/document
+    // This triggers "Loading demo..." state until the effect sets the correct documentId
+    setDocumentId('')
+    setCurrentSampleId(newSampleId)
+  }, [currentSampleId])
+
   // Handle sample change: get document ID for the new demo
   useEffect(() => {
     if (!isInitialized.current) return
@@ -123,7 +118,7 @@ export default function Page() {
       // Update URL
       const routePath = sample.metadata.routePath || ''
       const newUrl = `${routePath}?documentId=${docId}`
-      
+
       if (window.location.pathname + window.location.search !== newUrl) {
         window.history.pushState({}, '', newUrl)
       }
@@ -169,11 +164,11 @@ export default function Page() {
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       {/* Sidebar */}
-      <Sidebar 
-        isOpen={sidebarOpen} 
+      <Sidebar
+        isOpen={sidebarOpen}
         onToggle={() => setSidebarOpen(!sidebarOpen)}
         currentSampleId={currentSampleId}
-        onSampleSelect={setCurrentSampleId}
+        onSampleSelect={handleSampleSelect}
       />
 
       {/* Main Content */}
