@@ -1,5 +1,5 @@
 {
-  "name": "@apps/react-comments-dashboard-inline-comments-demo",
+  "name": "@apps/react-comments-dashboard-self-hosting-mongo-db-demo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
