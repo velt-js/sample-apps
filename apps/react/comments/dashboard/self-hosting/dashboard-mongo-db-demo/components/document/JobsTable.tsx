@@ -75,6 +75,7 @@ export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
                   <VeltCommentTool targetElementId={`job-${job.id}`} context={{jobId: `job-${job.id}`, jobStatus: job.status}} />
                   <VeltCommentBubble
                     targetElementId={`job-${job.id}`}
+                    openDialog={false}
                     shadowDom={false}
                   />
                 </div>
