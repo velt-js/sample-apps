@@ -251,6 +251,58 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo:
+    dependencies:
+      '@veltdev/react':
+        specifier: ^4.6.7-beta.1
+        version: 4.6.7-beta.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      clsx:
+        specifier: ^2
+        version: 2.1.1
+      lucide-react:
+        specifier: ^0.454.0
+        version: 0.454.0(react@19.2.0)
+      next:
+        specifier: ^15
+        version: 15.5.7(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react:
+        specifier: ^19
+        version: 19.2.0
+      react-dom:
+        specifier: ^19
+        version: 19.2.0(react@19.2.0)
+      tailwind-merge:
+        specifier: ^2
+        version: 2.6.0
+      yjs:
+        specifier: ^13.6.0
+        version: 13.6.27
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.18.13
+      '@types/react':
+        specifier: ^19
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.2(@types/react@19.2.2)
+      '@veltdev/types':
+        specifier: ^4.6.7-beta.1
+        version: 4.6.7-beta.1
+      autoprefixer:
+        specifier: ^10
+        version: 10.4.21(postcss@8.5.6)
+      postcss:
+        specifier: ^8
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^3.4.0
+        version: 3.4.18(tsx@4.20.6)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   apps/react/comments/dashboard/self-hosting/dashboard-mongo-db-demo:
     dependencies:
       '@veltdev/react':
@@ -3534,6 +3586,12 @@ packages:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
 
+  '@veltdev/react@4.6.7-beta.1':
+    resolution: {integrity: sha512-raUp+Z9s9BKeA+IXvDeQSTdIWqkjqHERXP8aPFKuY/UkEo7LorXcj/qE2SrwmH4pTm0FzR1WZ5xOHqCoe0kzbw==}
+    peerDependencies:
+      react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
+      react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
+
   '@veltdev/reactflow-crdt@4.5.8-beta.1':
     resolution: {integrity: sha512-UH9bLByjB22LpU9jIZidEcykHz7xX8fGQglcOIXicwH5Qu3IftZp/fjBDwNSu0+eVLQtJXR4l7N9TkjqYCNEiw==}
     peerDependencies:
@@ -3580,6 +3638,9 @@ packages:
 
   '@veltdev/types@4.6.5':
     resolution: {integrity: sha512-SO1hQ9xzYD02AqoASSLx8qc9jhszut3BpIu72C7eB+VSIe2hSoiLAIhEfIMyOZEaJ7hSXkEtD+RGuzB2IYK+5g==}
+
+  '@veltdev/types@4.6.7-beta.1':
+    resolution: {integrity: sha512-QFLW6OWmCum9GUIJrh0kxp2oijHy9alO7WS4jOZWFXf0+4ssj4BvIVop9UyAbawgZPlwIJ2h8zx1wc6ZgansuA==}
 
   '@vercel/analytics@1.5.0':
     resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
@@ -8931,6 +8992,11 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
+  '@veltdev/react@4.6.7-beta.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
   '@veltdev/reactflow-crdt@4.5.8-beta.1(yjs@13.6.27)':
     dependencies:
       yjs: 13.6.27
@@ -8974,6 +9040,8 @@ snapshots:
   '@veltdev/types@4.5.8-beta.8': {}
 
   '@veltdev/types@4.6.5': {}
+
+  '@veltdev/types@4.6.7-beta.1': {}
 
   '@vercel/analytics@1.5.0(next@15.2.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)':
     optionalDependencies:
