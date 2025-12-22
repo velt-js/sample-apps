@@ -11,12 +11,8 @@ export type CommentAnnotation = {
   comments: Record<string, { commentId: string | number; commentHtml?: string; commentText?: string }>;
 };
 
-// PostgreSQL connection string
-const DATABASE_URL = process.env.DATABASE_URL;
-
-if (!DATABASE_URL && process.env.NODE_ENV === 'production') {
-  console.warn('[PostgreSQL] WARNING: DATABASE_URL not set. Database operations will fail.');
-}
+// Neon PostgreSQL connection string
+const DATABASE_URL = 'postgresql://neondb_owner:npg_ytNISs3UM0hl@ep-delicate-scene-a4k5mjyr-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
 
 const TABLE_NAME = 'comment_annotations';
 
