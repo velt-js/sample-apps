@@ -8,6 +8,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'ibm-plex-mono': ['"IBM Plex Mono"', 'monospace'],
+        'urbanist': ['"Urbanist"', 'sans-serif'],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
