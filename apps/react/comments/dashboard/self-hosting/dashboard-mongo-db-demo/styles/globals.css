@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 @layer utilities {
@@ -249,6 +249,9 @@ body {
     --velt-font-size-lg: 1.5rem;
     --velt-font-size-xl: 1.75rem;
     --velt-font-size-2xl: 2rem;
+
+    /* Font Family */
+    --velt-default-font-family: 'Inter', sans-serif;
   }
 }
 

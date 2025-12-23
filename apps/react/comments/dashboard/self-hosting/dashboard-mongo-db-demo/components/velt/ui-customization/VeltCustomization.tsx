@@ -6,6 +6,10 @@ import VeltCommentsSidebarHeaderWf from "./VeltCommentsSidebarHeaderWf";
 import VeltNotificationsToolWf from "./VeltNotificationsToolWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
 import "./styles.css";
+import VeltCommentDialogWf from './VeltCommentDialogWf';
+import VeltReactionToolWf from './VeltReactionToolWf';
+import VeltInlineCommentsSectionWf from './VeltInlineCommentsSectionWf';
+import VeltCommentsSidebarFocusedThreadWf from './VeltCommentsSidebarFocusedThreadWf';
 
 export function VeltCustomization() {
 
@@ -16,6 +20,11 @@ export function VeltCustomization() {
       <VeltCommentBubbleWf />
       <VeltNotificationsToolWf />
       <VeltCommentsSidebarHeaderWf />
+
+      <VeltCommentDialogWf />
+      <VeltReactionToolWf />
+      <VeltInlineCommentsSectionWf />
+      <VeltCommentsSidebarFocusedThreadWf />
     </VeltWireframe>
   );
 }

@@ -1,70 +1,686 @@
 /* Custom Comment Tool & Bubble Styling */
 .custom-bubble-tool {
-    position: relative;
-    display: flex;
-    color: white !important;
-    cursor: pointer;
+  position: relative;
+  display: flex;
+  color: white !important;
+  cursor: pointer;
 }
 
 .unread-icon {
-    position: absolute;
-    bottom: 0px;
-    right: 1px;
-    width: 6px;
-    height: 6px;
-    background-color: #FF7162;
-    border-radius: 50%;
-    border: 1px solid white;
+  position: absolute;
+  bottom: 0px;
+  right: 1px;
+  width: 6px;
+  height: 6px;
+  background-color: #ff7162;
+  border-radius: 50%;
+  border: 1px solid white;
 }
 
 .has-comments {
-    position: absolute;
-    bottom: 0px;
-    right: 1px;
-    width: 6px;
-    height: 6px;
-    background-color: #625DF5;
-    border-radius: 50%;
-    border: 1px solid white;
+  position: absolute;
+  bottom: 0px;
+  right: 1px;
+  width: 6px;
+  height: 6px;
+  background-color: #625df5;
+  border-radius: 50%;
+  border: 1px solid white;
 }
 
 velt-comment-tool {
-    display: flex !important;
+  display: flex !important;
 }
 
 velt-comment-bubble {
-    display: flex !important;
+  display: flex !important;
 }
 
 /* Handle empty VeltIf components */
 velt-if:empty {
-    display: none !important;
+  display: none !important;
 }
 
 /* Keep icons white by default - only purple on hover */
 velt-comment-tool .custom-bubble-tool,
 velt-comment-bubble .custom-bubble-tool {
-    color: white !important;
+  color: white !important;
 }
 
 /* Purple on hover only */
 velt-comment-tool:hover .custom-bubble-tool,
 velt-comment-bubble:hover .custom-bubble-tool {
-    color: #625DF5 !important;
+  color: #625df5 !important;
 }
 
 /* Prevent active/open states from changing color */
 velt-comment-tool.velt-comment-tool-active .custom-bubble-tool,
 velt-comment-bubble.velt-comment-bubble-open .custom-bubble-tool {
-    color: white !important;
+  color: white !important;
 }
 
 /* But still allow hover on active states */
 velt-comment-tool.velt-comment-tool-active:hover .custom-bubble-tool,
 velt-comment-bubble.velt-comment-bubble-open:hover .custom-bubble-tool {
-    color: #625DF5 !important;
+  color: #625df5 !important;
 }
 
 .velt-notifications-tool {
-    width: 100% !important;
+  width: 100% !important;
+}
+
+app-comment-dialog-thread-card-avatar {
+  snippyly-user-avatar {
+    --legacy-velt-user-avatar-height: 24px !important;
+    --legacy-velt-user-avatar-width: 24px !important;
+  }
+}
+
+.velt-thread-card--name {
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  color: #0e0e0e !important;
+}
+
+.velt-thread-card--time {
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  color: #777572 !important;
+  display: contents !important;
+}
+
+.oe--icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7.25px;
+  color: #777572;
+  cursor: pointer;
+  border-radius: 4px !important;
+
+  &:hover {
+    background-color: rgb(247, 247, 247) !important;
+  }
+}
+
+.velt-tooltip-button:hover {
+  background-color: transparent !important;
+}
+
+.velt-comment-dialog-options-dropdown:hover,
+.velt-comment-dialog-options-dropdown:focus {
+  background-color: transparent !important;
+}
+
+.velt-comment-dialog-options-dropdown {
+  width: auto !important;
+  height: auto !important;
+}
+
+.velt-thread-card--message {
+  padding: 0 !important;
+  margin: 0 !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  letter-spacing: -0.75% !important;
+  vertical-align: middle !important;
+  color: #0e0e0e !important;
+}
+
+app-comment-dialog-thread-card-reactions {
+  .s-emoji-block {
+    padding-left: 0px !important;
+    margin-block: 0px !important;
+  }
+}
+
+.s-emoji-block .velt-reaction-pin--default {
+  height: 32px !important;
+  gap: 8px !important;
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+  border-radius: 6px !important;
+  border: none !important;
+  margin: 0 !important;
+  background-color: #f7f7f7 !important;
+}
+
+.s-emoji-block .velt-reaction-pin--default .velt-reaction-pin--emoji svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.s-emoji-block .velt-reaction-pin--default .velt-reaction-pin--count {
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  letter-spacing: 0.25px !important;
+  color: #4a4947 !important;
+}
+
+.velt-thread-card--container[velt-reactions="0"] {
+  app-comment-dialog-thread-card-reactions {
+    display: none !important;
+  }
+}
+
+.velt-thread-card--container:not([velt-reactions="0"]) {
+  app-comment-dialog-thread-card-reaction-tool {
+    display: none !important;
+  }
+
+  app-comment-dialog-thread-card-reactions {
+    app-comment-dialog-thread-card-reaction-tool {
+      display: flex !important;
+    }
+  }
+}
+
+.action-btn:hover {
+  border-radius: none !important;
+  border: none !important;
+  background-color: transparent !important;
+  color: initial !important;
+}
+
+.velt-thread-card--name--unread {
+  width: 6px !important;
+  height: 6px !important;
+  background-color: #bd323c !important;
+}
+
+.s-user-avatar-initial {
+  font-weight: 600 !important;
+  font-size: 9px !important;
+  line-height: 18px !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  color: #ffffff !important;
+}
+
+.s-user-avatar-initial-container {
+  background-color: #3649b9 !important;
+}
+
+app-comment-dialog-reply-avatars-remaining-count {
+  margin-left: 0px !important;
+}
+
+app-comment-dialog-reply-avatars-list-item {
+  margin-left: 0px !important;
+}
+
+.velt-comment-dialog-reply-avatars-list {
+  gap: 2px !important;
+}
+
+.velt-comment-dialog-reply-avatars {
+  gap: 2px !important;
+}
+
+.velt-body {
+  gap: 8px !important;
+}
+
+app-comment-dialog-toggle-reply-icon {
+  display: none !important;
+}
+
+app-comment-dialog-toggle-reply-count,
+app-comment-dialog-toggle-reply-text {
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  letter-spacing: 0.25px !important;
+  color: #4a4947 !important;
+}
+
+.velt-toggle-reply .velt-toggle-reply--button, .velt-toggle-reply--button-inline-mode {
+  padding-inline: 8px !important;
+  gap: 4px !important;
+}
+
+.velt-thread-card--container {
+  app-comment-dialog-thread-card-options,
+  app-copy-link,
+  app-resolve-button,
+  app-unresolve-button,
+  app-comment-dialog-thread-card-reaction-tool,
+  app-comment-dialog-resolve-button,
+  app-comment-dialog-unresolve-button {
+    opacity: 0;
+    transition: 0.5s;
+  }
+
+  &:hover {
+    app-comment-dialog-thread-card-options,
+    app-copy-link,
+    app-resolve-button,
+    app-unresolve-button,
+    app-comment-dialog-thread-card-reaction-tool,
+    app-comment-dialog-resolve-button,
+    app-comment-dialog-unresolve-button {
+      opacity: 1;
+    }
+  }
+}
+
+.velt-thread-card--show-actions {
+  app-comment-dialog-thread-card-options,
+  app-copy-link,
+  app-resolve-button,
+  app-unresolve-button,
+  app-comment-dialog-thread-card-reaction-tool,
+  app-comment-dialog-resolve-button,
+  app-comment-dialog-unresolve-button {
+    opacity: 1;
+  }
+}
+
+.oe-thread-card--metadata {
+  height: 32px;
+  gap: 8px;
+  padding-left: 8px;
+  padding-right: 2px;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* Prevent the container itself from expanding beyond its parent */
+  width: 100%;
+  overflow: hidden;
+}
+
+.oe-thread-card--metadata span {
+  /* This is the magic combo for ellipsis */
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* We must stop the hyphens from shrinking or growing */
+/* This targets the 3rd, 5th, and 7th elements (the dashes) */
+.oe-thread-card--metadata .oe-thread-card--metadata-separator {
+  flex: none;
+  overflow: visible;
+}
+
+/* Keep the icon and "Line:" label from shrinking */
+.oe-thread-card--metadata svg,
+.oe-thread-card--metadata .oe-thread-card--metadata-label {
+  flex: none;
+}
+
+.oe-thread-card--metadata svg {
+  color: #777572;
+}
+
+.oe-thread-card--metadata span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.25px;
+  color: #777572;
+}
+
+.velt-comment-dialog {
+  padding: 20px 32px !important;
+  border: none !important;
+  border-radius: 0px !important;
+  width: auto !important;
+
+  &:hover {
+    background-color: #fafafa !important;
+  }
+
+  &.velt-comment-dialog--page-mode-composer {
+    background-color: transparent !important;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.velt-sidebar-container {
+  width: 552px !important;
+  padding: 0px !important;
+  border-radius: 0px !important;
+
+  .velt-sidebar {
+    border-radius: 0px !important;
+  }
+}
+
+app-comment-sidebar-list {
+  padding-inline: 0px !important;
+}
+
+.velt-sidebar--comments-block {
+  margin-bottom: 0px !important;
+}
+
+.velt-sidebar--comments-hr {
+  display: none !important;
+}
+
+.velt-comment-dialog.velt-comment-dialog--page-mode-composer {
+  padding: 0px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px 32px 32px 32px !important;
+}
+
+.velt-sidebar-page-mode-composer {
+  padding-bottom: 0px !important;
+
+  .oe-composer--content {
+    background: #fafafa;
+  }
+}
+
+.oe-composer--content {
+  width: 486px;
+  gap: 10px;
+  padding-top: 10px;
+  padding-right: 12px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  border-radius: 3px;
+  border: 1px solid #ededed;
+  background-color: #fff;
+}
+
+.velt-composer-input--message {
+  padding: 0px 12px !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  letter-spacing: -0.75% !important;
+  color: #777572 !important;
+}
+
+button.action__button.velt-action-button {
+  width: auto !important;
+  height: auto !important;
+
+  &:hover {
+    background-color: transparent !important;
+  }
+}
+
+.oe-composer--icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7.25px;
+  color: #9a9894;
+  cursor: pointer;
+  border-radius: 4px !important;
+
+  &:hover {
+    background-color: rgb(239, 239, 239) !important;
+  }
+}
+
+.velt-composer--submit-button {
+  .oe-composer--icon-button {
+    padding: 5px !important;
+    border-radius: 32px !important;
+    background-color: #475ee5;
+    color: #ffffff;
+  }
+
+  &:disabled {
+    .oe-composer--icon-button {
+      background-color: rgb(239, 239, 239) !important;
+      color: #9a9894;
+    }
+  }
+
+  &:hover {
+    .oe-composer--icon-button {
+      background-color: #475ee5 !important;
+      color: #ffffff !important;
+    }
+  }
+}
+
+.velt-comment-dialog-options-dropdown-container {
+  border-radius: 3px !important;
+  border: 1px solid #f7f7f7 !important;
+  box-shadow: 0px 3px 6px 0px #0e0e0e1a !important;
+
+  .mat-mdc-menu-content {
+    border-radius: 0px !important;
+    border: none !important;
+    background-color: #fff !important;
+    box-shadow: none !important;
+  }
+}
+
+.oe-thread-card--options-content {
+  padding: 8px;
+  .oe-thread-card--options-content-item {
+    width: 137px;
+    height: 32px;
+    border-radius: 3px;
+    padding: 8px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.75%;
+    vertical-align: middle;
+    color: #4a4947;
+
+    &:hover {
+      background-color: #f2f4ffa6;
+      color: #1e2195;
+    }
+  }
+}
+
+.velt-comment-dialog--focused-thread-mode {
+  &:hover {
+    background-color: transparent !important;
+  }
+
+  app-comment-dialog-body {
+    display: flex !important;
+    flex: 1 !important;
+    min-height: 0px !important;
+
+    app-comment-dialog-threads {
+      max-height: none !important;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+}
+
+app-comment-sidebar-header {
+  padding: 0px !important;
+}
+
+.velt-comment-sidebar-panel {
+  gap: 0px !important;
+}
+
+.oe-comment-sidebar-header--title {
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: -1.5%;
+  vertical-align: middle;
+  color: #0e0e0e;
+}
+
+.oe-comment-sidebar-header--id {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.25px;
+  vertical-align: middle;
+  color: #777572;
+  display: contents;
+}
+
+.oe-comment-sidebar-header--unread-count {
+  border-radius: 3px;
+  padding: 3px 4px;
+  background-color: #bd323c;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+  letter-spacing: 0.25px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.oe-comment-sidebar-header--status-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5px 16.5px;
+  gap: 4px;
+  border-radius: 3px;
+  background: #ffffff;
+  border: 1px solid #ededed;
+  box-shadow: 0px 1px 2px 0px #0e0e0e0f;
+
+  app-comment-sidebar-status-dropdown-trigger-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #0e0e0e;
+  }
+}
+
+.velt-status-dropdown--content {
+  border-radius: 3px !important;
+  top: 42px !important;
+}
+
+.velt-sidebar-header-status--dropdown-icon {
+  color: #777572;
+}
+
+.velt-comment-sidebar-minimal-actions-dropdown--content {
+  width: auto !important;
+  border-radius: 3px !important;
+  top: 42px !important;
+}
+
+
+.oe-comment-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    padding-right: 24px;
+}
+
+.oe-comment-sidebar-inline {
+    width: 552px;
+    height: 100%;   
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #0E0E0E14;
+}
+
+.velt-button {
+    cursor: pointer;
+}
+
+
+velt-inline-comments-section {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    height: 100% !important;
+
+    app-inline-comments-section-panel {
+        flex: 1 !important;
+        display: flex !important;
+        min-height: 0px !important;
+
+        .velt-inline-comments-section--panel {
+            flex: 1 !important;
+            display: flex !important;
+
+            app-inline-comments-section-list {
+                display: flex !important;
+
+                .velt-inline-comments-section--comments {
+                    margin-top: 0px !important;
+
+                    .velt-inline-comments-section--comment {
+                        display: flex !important;
+                        flex: 1 !important;
+                        min-height: 0px !important;
+
+                        snippyly-comment-dialog {
+                            display: flex !important;
+
+                            app-comment-dialog-body {
+                                display: flex !important;
+                                flex: 1 !important;
+                                min-height: 0px !important;
+
+                                .velt-body.velt-comment-dialog-body--inline-comment-section-mode {
+                                    width: 100% !important;
+
+                                    app-comment-dialog-threads {
+                                        -ms-overflow-style: none; /* IE and Edge */
+                                        scrollbar-width: none; /* Firefox */
+                                      }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    app-comment-dialog-threads {
+        max-height: none !important;
+
+    }
+}
+
+app-comment-sidebar-focused-thread {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.oe-comment-sidebar-header--metadata {
+    padding-inline: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #0E0E0E14;
+}
+
+app-sidebar-button-unread-icon {
+    top: 0px !important;
+    right: 0px !important;
 }
