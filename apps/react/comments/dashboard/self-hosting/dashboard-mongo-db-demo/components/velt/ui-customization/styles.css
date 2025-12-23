@@ -237,7 +237,8 @@ app-comment-dialog-toggle-reply-text {
   color: #4a4947 !important;
 }
 
-.velt-toggle-reply .velt-toggle-reply--button, .velt-toggle-reply--button-inline-mode {
+.velt-toggle-reply .velt-toggle-reply--button,
+.velt-toggle-reply--button-inline-mode {
   padding-inline: 8px !important;
   gap: 4px !important;
 }
@@ -342,6 +343,14 @@ app-comment-dialog-toggle-reply-text {
   &.velt-comment-dialog--page-mode-composer {
     background-color: transparent !important;
 
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.velt-inline-comments-section--comment {
+  .velt-comment-dialog {
     &:hover {
       background-color: transparent !important;
     }
@@ -588,99 +597,135 @@ app-comment-sidebar-header {
   top: 42px !important;
 }
 
-
 .oe-comment-sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 12px;
-    padding-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 12px;
+  padding-right: 24px;
 }
 
 .oe-comment-sidebar-inline {
-    width: 552px;
-    height: 100%;   
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border: 1px solid #0E0E0E14;
+  width: 552px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #0e0e0e14;
 }
 
 .velt-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-
 velt-inline-comments-section {
-    display: flex !important;
-    flex-direction: column !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  height: 100% !important;
+
+  app-inline-comments-section-panel {
     flex: 1 !important;
-    height: 100% !important;
+    display: flex !important;
+    min-height: 0px !important;
 
-    app-inline-comments-section-panel {
-        flex: 1 !important;
+    .velt-inline-comments-section--panel {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+
+      app-if {
         display: flex !important;
+        flex: 1 !important;
         min-height: 0px !important;
+        align-items: flex-start !important;
 
-        .velt-inline-comments-section--panel {
-            flex: 1 !important;
-            display: flex !important;
-
-            app-inline-comments-section-list {
-                display: flex !important;
-
-                .velt-inline-comments-section--comments {
-                    margin-top: 0px !important;
-
-                    .velt-inline-comments-section--comment {
-                        display: flex !important;
-                        flex: 1 !important;
-                        min-height: 0px !important;
-
-                        snippyly-comment-dialog {
-                            display: flex !important;
-
-                            app-comment-dialog-body {
-                                display: flex !important;
-                                flex: 1 !important;
-                                min-height: 0px !important;
-
-                                .velt-body.velt-comment-dialog-body--inline-comment-section-mode {
-                                    width: 100% !important;
-
-                                    app-comment-dialog-threads {
-                                        -ms-overflow-style: none; /* IE and Edge */
-                                        scrollbar-width: none; /* Firefox */
-                                      }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        &:empty {
+          display: none !important;
         }
-    }
+      }
 
-    app-comment-dialog-threads {
-        max-height: none !important;
+      app-inline-comments-section-list {
+        display: flex !important;
+        flex: 1 !important;
 
+        &:empty {
+          display: none !important;
+        }
+
+        .velt-inline-comments-section--comments {
+          margin-top: 0px !important;
+
+          .velt-inline-comments-section--comment {
+            display: flex !important;
+            flex: 1 !important;
+            min-height: 0px !important;
+
+            snippyly-comment-dialog {
+              display: flex !important;
+
+              app-comment-dialog-body {
+                display: flex !important;
+                flex: 1 !important;
+                min-height: 0px !important;
+
+                .velt-body.velt-comment-dialog-body--inline-comment-section-mode {
+                  width: 100% !important;
+
+                  app-comment-dialog-threads {
+                    -ms-overflow-style: none; /* IE and Edge */
+                    scrollbar-width: none; /* Firefox */
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
+
+  app-comment-dialog-threads {
+    max-height: none !important;
+  }
 }
 
 app-comment-sidebar-focused-thread {
-    display: flex !important;
-    flex-direction: column !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .oe-comment-sidebar-header--metadata {
-    padding-inline: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #0E0E0E14;
+  padding-inline: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #0e0e0e14;
 }
 
 app-sidebar-button-unread-icon {
-    top: 0px !important;
-    right: 0px !important;
+  top: 0px !important;
+  right: 0px !important;
+}
+
+.oe-comment-sidebar-empty-placeholder--title {
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.91px;
+  text-align: center;
+  color: #3649b9;
+}
+
+.oe-comment-sidebar-empty-placeholder--description {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -1.25%;
+  text-align: center;
+  color: #777572;
+}
+
+.velt-sidebar--no-comments-container {
+  align-items: flex-start !important;
 }

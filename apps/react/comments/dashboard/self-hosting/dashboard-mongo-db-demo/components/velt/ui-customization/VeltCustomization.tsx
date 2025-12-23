@@ -10,6 +10,7 @@ import VeltCommentDialogWf from './VeltCommentDialogWf';
 import VeltReactionToolWf from './VeltReactionToolWf';
 import VeltInlineCommentsSectionWf from './VeltInlineCommentsSectionWf';
 import VeltCommentsSidebarFocusedThreadWf from './VeltCommentsSidebarFocusedThreadWf';
+import VeltCommentsSidebarEmptyPlaceholderWf from './VeltCommentsSidebarEmptyPlaceholderWf';
 
 export function VeltCustomization() {
 
@@ -25,6 +26,7 @@ export function VeltCustomization() {
       <VeltReactionToolWf />
       <VeltInlineCommentsSectionWf />
       <VeltCommentsSidebarFocusedThreadWf />
+      <VeltCommentsSidebarEmptyPlaceholderWf />
     </VeltWireframe>
   );
 }

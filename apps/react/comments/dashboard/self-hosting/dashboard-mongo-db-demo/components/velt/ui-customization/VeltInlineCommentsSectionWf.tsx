@@ -1,4 +1,4 @@
-import { VeltButtonWireframe, VeltData, VeltInlineCommentsSectionWireframe } from "@veltdev/react";
+import { VeltButtonWireframe, VeltData, VeltIf, VeltInlineCommentsSectionWireframe } from "@veltdev/react";
 import { ArrowheadRight, Close, MarkRead } from "./Icons";
 
 const VeltInlineCommentsSectionWf = () => {
@@ -39,6 +39,16 @@ const VeltInlineCommentsSectionWf = () => {
 
             <VeltInlineCommentsSectionWireframe.Panel>
                 <VeltInlineCommentsSectionWireframe.List />
+                <VeltIf condition="{annotations.length} == 0">
+                    <div className="flex flex-col flex-1 items-center justify-start pt-[140px]">
+                        <div className="oe-comment-sidebar-empty-placeholder--title">
+                            No comments
+                        </div>
+                        <div className="oe-comment-sidebar-empty-placeholder--description">
+                            Add a comment below.
+                        </div>
+                    </div>
+                </VeltIf>
                 <VeltInlineCommentsSectionWireframe.ComposerContainer />
             </VeltInlineCommentsSectionWireframe.Panel>
             <VeltInlineCommentsSectionWireframe.Skeleton />
