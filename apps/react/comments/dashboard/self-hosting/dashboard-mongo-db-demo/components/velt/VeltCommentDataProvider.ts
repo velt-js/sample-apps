@@ -23,7 +23,7 @@ const fetchCommentsFromDB = async (request: {
   folderId?: string;
   allDocuments?: boolean;
 }) => {
-  console.log('[Velt Self-Host] GET called:', request);
+  console.log('Info: Comments GET called:', request);
   try {
     const response = await fetch(`${DATA_PROVIDER_URL}/get`, {
       method: 'POST',
@@ -31,14 +31,14 @@ const fetchCommentsFromDB = async (request: {
       body: JSON.stringify(request)
     });
     if (!response.ok) {
-      console.warn('[Velt Self-Host] GET endpoint returned', response.status);
-      return { data: {}, success: true, statusCode: 200 }; // Return empty data on 404
+      console.warn('Error: Comments GET endpoint returned', response.status);
+      return { data: {}, success: false, statusCode: response.status };
     }
     const data = await response.json();
-    return { data: data.result || {}, success: true, statusCode: 200 };
+    return { data: data.result || {}, success: data.success, statusCode: response.status };
   } catch (error) {
-    console.error('[Velt Self-Host] Error fetching comments:', error);
-    return { data: {}, success: true, statusCode: 200 }; // Graceful fallback
+    console.warn('Error: Comments GET endpoint returned', error);
+    return { data: {}, success: false, statusCode: 500 };
   }
 };
 
@@ -50,7 +50,7 @@ const saveCommentsToDB = async (request: {
     comments: Record<string, { commentId: string | number; commentHtml?: string; commentText?: string }>;
   }>;
 }) => {
-  console.log('[Velt Self-Host] SAVE called:', request);
+  console.log('Info: Comments SAVE called:', request);
   try {
     const response = await fetch(`${DATA_PROVIDER_URL}/save`, {
       method: 'POST',
@@ -58,14 +58,14 @@ const saveCommentsToDB = async (request: {
       body: JSON.stringify(request)
     });
     if (!response.ok) {
-      console.warn('[Velt Self-Host] SAVE endpoint returned', response.status);
-      return { success: true, statusCode: 200 }; // Graceful fallback
+      console.warn('Error: Comments SAVE endpoint returned', response.status);
+      return { success: false, statusCode: response.status };
     }
-    await response.json();
-    return { success: true, statusCode: 200 };
+    const data = await response.json();
+    return { success: data.success ?? true, statusCode: response.status };
   } catch (error) {
-    console.error('[Velt Self-Host] Error saving comments:', error);
-    return { success: true, statusCode: 200 }; // Graceful fallback
+    console.warn('Error: Comments SAVE endpoint returned', error);
+    return { success: false, statusCode: 500 };
   }
 };
 
@@ -74,7 +74,7 @@ const deleteCommentsFromDB = async (request: {
   commentAnnotationId: string;
   metadata?: unknown;
 }) => {
-  console.log('[Velt Self-Host] DELETE called:', request);
+  console.log('Info: Comments DELETE called:', request);
   try {
     const response = await fetch(`${DATA_PROVIDER_URL}/delete`, {
       method: 'POST',
@@ -82,14 +82,14 @@ const deleteCommentsFromDB = async (request: {
       body: JSON.stringify(request)
     });
     if (!response.ok) {
-      console.warn('[Velt Self-Host] DELETE endpoint returned', response.status);
-      return { success: true, statusCode: 200 }; // Graceful fallback
+      console.warn('Error: Comments DELETE endpoint returned', response.status);
+      return { success: false, statusCode: response.status };
     }
-    await response.json();
-    return { success: true, statusCode: 200 };
+    const data = await response.json();
+    return { success: data.success ?? true, statusCode: response.status };
   } catch (error) {
-    console.error('[Velt Self-Host] Error deleting comments:', error);
-    return { success: true, statusCode: 200 }; // Graceful fallback
+    console.warn('Error: Comments DELETE endpoint returned', error);
+    return { success: false, statusCode: 500 };
   }
 };
 

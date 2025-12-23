@@ -1,46 +1,18 @@
-# Dashboard Inline Demo
+# Dashboard MongoDB Self-Hosting Demo
 
 ## Overview
 
-This demo showcases **inline-comments** for **comments** (dashboard) in **react**.
+This demo showcases a self-hosted comments feature using **MongoDB Atlas** as the database backend.
 
 ## Path
 
 ```
-apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo/
+apps/react/comments/dashboard/self-hosting/dashboard-mongo-db-demo/
 ```
 
 ## Package Name
 
-`@apps/react-comments-dashboard-inline-comments-demo`
-
-## Directory Structure
-
-```
-dashboard-inline-comments-demo/
-├── app/
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Main page
-├── components/
-│   ├── header/             # Header components (Velt notifications, etc.)
-│   │   └── header.tsx
-│   ├── sidebar/            # Sidebar components
-│   │   └── sidebar.tsx
-│   └── document/           # Main document/canvas logic
-│       └── document-canvas.tsx
-├── hooks/                  # Custom React hooks
-├── lib/                    # Utility functions
-│   └── utils.ts
-├── public/                 # Static assets
-├── styles/                 # Global styles
-│   └── globals.css
-├── .npmrc                  # pnpm config to prevent Tailwind v4 hoisting
-├── next.config.js
-├── tailwind.config.js
-├── tsconfig.json
-├── components.json         # shadcn/ui configuration
-└── package.json
-```
+`@apps/react-comments-dashboard-mongo-db-demo`
 
 ## Getting Started
 
@@ -55,58 +27,66 @@ pnpm install
 ### Run Development Server
 
 ```bash
-cd apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo
+cd apps/react/comments/dashboard/self-hosting/dashboard-mongo-db-demo
 pnpm dev
 ```
 
 Or from the root:
 
 ```bash
-pnpm --filter @apps/react-comments-dashboard-inline-comments-demo dev
+pnpm --filter @apps/react-comments-dashboard-mongo-db-demo dev
 ```
 
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-comments-dashboard-inline-comments-demo build
+pnpm --filter @apps/react-comments-dashboard-mongo-db-demo build
 ```
 
-## Structure
+## Database Access
 
-- **Framework**: react
-- **Feature**: comments
-- **Document**: dashboard
-- **Library**: inline-comments
-- **Demo**: dashboard-inline-comments-demo
+### Viewing the MongoDB Database
 
-## Component Organization
+To view and manage the MongoDB database, log in to MongoDB Atlas:
 
-- **`components/header/`** - Contains Velt components like notifications, presence indicators, header buttons
-- **`components/sidebar/`** - Contains sidebar-related components
-- **`components/document/`** - Contains the main application logic and inline-comments integration
-- **`hooks/`** - Custom React hooks for state management and side effects
-- **`lib/`** - Utility functions and helpers
+1. Go to [MongoDB Atlas](https://cloud.mongodb.com/)
+2. Sign in with the following credentials:
+   - **Username:** eng@velt.dev
+   - **Password:** engmongodb
+3. Navigate to the cluster to browse collections and documents
 
-## Important Configuration
+### Connection String
 
-### .npmrc File
-This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS v4 from other workspace packages. This is necessary because:
-- This demo uses Tailwind CSS v3.4.x with traditional PostCSS configuration
-- Other apps in the monorepo may use Tailwind CSS v4
-- Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS errors
+The application uses the following MongoDB Atlas connection string (hardcoded in `app/api/velt/comments/store.ts`):
 
-**Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
+```
+mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/?appName=Cluster0
+```
 
-## Next Steps
+## Directory Structure
 
-1. Add your inline-comments implementation in `components/document/`
-2. Add Velt collaboration features in `components/header/`
-3. Update this README with specific usage instructions
-4. Add the demo to `master-sample-app` if it should be showcased
-5. Update deployment configs (Vercel, GitHub Actions) if needed
+```
+dashboard-mongo-db-demo/
+├── app/
+│   ├── api/velt/          # Velt API routes (comments, token)
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Main page
+├── components/
+│   ├── header/            # Header components
+│   ├── sidebar/           # Sidebar components
+│   └── document/          # Main document/canvas logic
+├── hooks/                 # Custom React hooks
+├── lib/                   # Utility functions
+├── public/                # Static assets
+├── styles/                # Global styles
+├── next.config.js
+├── tailwind.config.js
+├── tsconfig.json
+├── components.json        # shadcn/ui configuration
+└── package.json
+```
 
 ## Learn More
 
-- [Monorepo Structure Guide](../../../../../README_MONOREPO.md)
-- [Structure Documentation](../../../../../docs/structure.md)
 - [Velt Documentation](https://docs.velt.dev)
+- [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/)

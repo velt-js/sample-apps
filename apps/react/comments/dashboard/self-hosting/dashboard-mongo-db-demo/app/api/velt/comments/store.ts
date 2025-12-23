@@ -11,14 +11,8 @@ export type CommentAnnotation = {
   comments: Record<string, { commentId: string | number; commentHtml?: string; commentText?: string }>;
 };
 
-// MongoDB connection string
-// Local: mongodb://localhost:27017
-// Production: Set MONGODB_URI env var (e.g., MongoDB Atlas connection string)
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
-
-if (!process.env.MONGODB_URI && process.env.NODE_ENV === 'production') {
-  console.warn('[MongoDB] WARNING: MONGODB_URI not set. Using localhost which will fail in production.');
-}
+// MongoDB Atlas connection string
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/?appName=Cluster0&retryWrites=true&w=majority';
 const DB_NAME = 'velt_comments';
 const COLLECTION_NAME = 'comment_annotations';
 

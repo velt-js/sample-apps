@@ -17,6 +17,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ result, success: true });
   } catch (error) {
     console.error('[Velt API] Error getting comments:', error);
-    return NextResponse.json({ result: {}, success: true }, { status: 200 });
+    return NextResponse.json({ result: {}, success: false }, { status: 500 });
   }
 }
