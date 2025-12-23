@@ -1,0 +1,20 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { deleteReaction } from '../../comments/store';
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { reactionAnnotationId } = body;
+
+    console.log('[Velt API] DELETE reaction:', reactionAnnotationId);
+
+    if (reactionAnnotationId) {
+      await deleteReaction(reactionAnnotationId);
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('[Velt API] Error deleting reaction:', error);
+    return NextResponse.json({ success: false, error: 'Failed to delete' }, { status: 500 });
+  }
+}

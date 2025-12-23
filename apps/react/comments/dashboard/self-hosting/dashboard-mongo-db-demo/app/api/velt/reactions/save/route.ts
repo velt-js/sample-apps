@@ -1,0 +1,22 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { saveReactions } from '../../comments/store';
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { reactionAnnotation, metadata } = body;
+
+    console.log('[Velt API] SAVE reactions:', { reactionAnnotation, metadata });
+
+    if (reactionAnnotation) {
+      const documentId = metadata?.documentId;
+      const organizationId = metadata?.organizationId;
+      await saveReactions(reactionAnnotation, { documentId, organizationId });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('[Velt API] Error saving reactions:', error);
+    return NextResponse.json({ success: false, error: 'Failed to save' }, { status: 500 });
+  }
+}
