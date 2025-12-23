@@ -38,7 +38,7 @@ export function useVeltAuthProvider() {
   // [Velt Self-Host] Save user to database for self-hosted user PII
   useEffect(() => {
     if (user) {
-      saveCurrentUserToDB(user);
+      saveCurrentUserToDB({ ...user });
     }
   }, [user]);
 
