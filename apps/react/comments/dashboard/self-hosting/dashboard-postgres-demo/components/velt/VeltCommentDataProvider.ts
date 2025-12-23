@@ -35,13 +35,13 @@ const fetchCommentsFromDB = async (request: {
     });
     if (!response.ok) {
       console.warn('[Velt Self-Host] Comments GET endpoint returned', response.status);
-      return { data: {}, success: true, statusCode: 200 }; // Return empty data on 404
+      return { data: {}, success: false, statusCode: response.status };
     }
     const data = await response.json();
-    return { data: data.result || {}, success: true, statusCode: 200 };
+    return { data: data.result || {}, success: data.success, statusCode: response.status };
   } catch (error) {
     console.error('[Velt Self-Host] Error fetching comments:', error);
-    return { data: {}, success: true, statusCode: 200 }; // Graceful fallback
+    return { data: {}, success: false, statusCode: 500 };
   }
 };
 
@@ -264,13 +264,13 @@ const fetchReactionsFromDB = async (request: {
     });
     if (!response.ok) {
       console.warn('[Velt Self-Host] Reactions GET endpoint returned', response.status);
-      return { data: {}, success: true, statusCode: 200 };
+      return { data: {}, success: false, statusCode: response.status };
     }
     const data = await response.json();
-    return { data: data.result || {}, success: true, statusCode: 200 };
+    return { data: data.result || {}, success: data.success, statusCode: response.status };
   } catch (error) {
     console.error('[Velt Self-Host] Error fetching reactions:', error);
-    return { data: {}, success: true, statusCode: 200 };
+    return { data: {}, success: false, statusCode: 500 };
   }
 };
 

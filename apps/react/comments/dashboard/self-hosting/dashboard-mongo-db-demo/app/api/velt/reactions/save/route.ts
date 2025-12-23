@@ -8,11 +8,13 @@ export async function POST(request: NextRequest) {
 
     console.log('[Velt API] SAVE reactions:', { reactionAnnotation, metadata });
 
-    if (reactionAnnotation) {
-      const documentId = metadata?.documentId;
-      const organizationId = metadata?.organizationId;
-      await saveReactions(reactionAnnotation, { documentId, organizationId });
+    if (!reactionAnnotation) {
+      return NextResponse.json({ success: false, error: 'No reaction annotation provided' }, { status: 400 });
     }
+
+    const documentId = metadata?.documentId;
+    const organizationId = metadata?.organizationId;
+    await saveReactions(reactionAnnotation, { documentId, organizationId });
 
     return NextResponse.json({ success: true });
   } catch (error) {

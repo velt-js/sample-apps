@@ -17,6 +17,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ result, success: true });
   } catch (error) {
     console.error('[Velt API] Error getting reactions:', error);
-    return NextResponse.json({ result: {}, success: true }, { status: 200 });
+    return NextResponse.json({ result: {}, success: false, error: 'Failed to get reactions' }, { status: 500 });
   }
 }

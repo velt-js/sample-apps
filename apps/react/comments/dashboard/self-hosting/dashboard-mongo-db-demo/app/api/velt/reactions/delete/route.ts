@@ -8,10 +8,11 @@ export async function POST(request: NextRequest) {
 
     console.log('[Velt API] DELETE reaction:', reactionAnnotationId);
 
-    if (reactionAnnotationId) {
-      await deleteReaction(reactionAnnotationId);
+    if (!reactionAnnotationId) {
+      return NextResponse.json({ success: false, error: 'No reaction annotation ID provided' }, { status: 400 });
     }
 
+    await deleteReaction(reactionAnnotationId);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('[Velt API] Error deleting reaction:', error);

@@ -8,10 +8,11 @@ export async function POST(request: NextRequest) {
 
     console.log('[Velt API] DELETE attachment:', attachmentId);
 
-    if (attachmentId !== undefined) {
-      await deleteAttachment(attachmentId);
+    if (attachmentId === undefined || attachmentId === null) {
+      return NextResponse.json({ success: false, error: 'No attachment ID provided' }, { status: 400 });
     }
 
+    await deleteAttachment(attachmentId);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('[Velt API] Error deleting attachment:', error);
