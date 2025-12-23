@@ -1,11 +1,10 @@
-import { useCommentEventCallback, useGetCommentAnnotations, VeltCommentBubble, VeltCommentTool } from '@veltdev/react'
+import { useCurrentUser, useGetCommentAnnotations } from '@veltdev/react'
 import { ChevronDownIcon, GearIcon, CommentIcon } from './icons'
 import { Avatar } from './Avatar'
 import { StatusBadge } from './StatusBadge'
 import { DueBadge } from './DueBadge'
 import { Job } from './types'
 import { useMemo } from 'react'
-import { useAppUser } from '@/app/userAuth/AppUserContext'
 
 interface JobsTableProps {
   jobs: Job[]
@@ -14,7 +13,7 @@ interface JobsTableProps {
 }
 
 export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
-  const { user } = useAppUser();
+  const veltUser = useCurrentUser();
   const commentAnnotations = useGetCommentAnnotations();
 
   // Create a map of targetElementId -> { count, hasUnread }
@@ -26,25 +25,29 @@ export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
         annotations.forEach((annotation) => {
           const targetId = annotation.targetElementId;
           if (targetId) {
-            // Check if current user has viewed this annotation
-            const isViewedByCurrentUser = annotation.viewedBy?.some(
-              (viewer: any) => viewer.userId === user?.userId
-            ) ?? false;
-
             if (!dataMap[targetId]) {
               dataMap[targetId] = { count: 0, hasUnread: false };
             }
             dataMap[targetId].count += 1;
-            // If any annotation is unread, mark hasUnread as true
-            if (!isViewedByCurrentUser) {
-              dataMap[targetId].hasUnread = true;
+            
+            // Only compute unread status if user is available AND viewedBy data is loaded
+            // Without user or viewedBy data, we can't determine unread state, so default to false (read)
+            if (veltUser?.userId && annotation.viewedBy !== undefined) {
+              const isViewedByCurrentUser = annotation.viewedBy.some(
+                (viewer: any) => viewer.userId === veltUser.userId
+              );
+              
+              // If any annotation is unread, mark hasUnread as true
+              if (!isViewedByCurrentUser) {
+                dataMap[targetId].hasUnread = true;
+              }
             }
           }
         });
       });
     }
     return dataMap;
-  }, [commentAnnotations, user?.userId]);
+  }, [commentAnnotations, veltUser?.userId]);
 
 
   return (
