@@ -12,7 +12,7 @@ export type CommentAnnotation = {
 };
 
 // MongoDB Atlas connection string
-const MONGODB_URI = 'mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/?appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/?appName=Cluster0&retryWrites=true&w=majority';
 const DB_NAME = 'velt_comments';
 const COLLECTION_NAME = 'comment_annotations';
 

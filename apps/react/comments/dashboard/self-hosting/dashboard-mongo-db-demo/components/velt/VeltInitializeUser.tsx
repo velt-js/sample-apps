@@ -26,6 +26,7 @@ async function getVeltJwtFromBackend(user: {
     throw new Error(`Token API failed: ${err?.error || resp.statusText}`);
   }
   const { token } = await resp.json();
+  console.log('Info: Velt JWT token:', token);
   if (!token) throw new Error("No token in response");
   return token as string;
 }

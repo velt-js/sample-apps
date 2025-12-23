@@ -88,7 +88,7 @@ function generateRandomUser(): User {
     userId: userId,
     name: fullName,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
-    organizationId: "sample-apps-demo-org",
+    organizationId: "sample-apps-inline-comments-demo-org",
     photoUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=${avatarColor.substring(1)}&color=fff&size=128`,
   };
 }
