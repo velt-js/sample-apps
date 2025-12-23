@@ -105,3 +105,31 @@ export const ChevronLeftIcon = () => (
     <path d="M15 18l-6-6 6-6" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 )
+
+interface CommentIconProps {
+  count?: number
+  hasUnread?: boolean
+  className?: string
+}
+
+export const CommentIcon = ({ count = 0, hasUnread = false, className = '' }: CommentIconProps) => (
+  <div className={`flex items-center gap-0.5 ${className}`}>
+    <div className="relative">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path 
+          d="M14 10.5c0 .398-.158.78-.44 1.06-.28.282-.662.44-1.06.44H4.5L2 14.5V4c0-.398.158-.78.44-1.06.28-.282.662-.44 1.06-.44h9c.398 0 .78.158 1.06.44.282.28.44.662.44 1.06v6.5z" 
+          stroke="#777572" 
+          strokeWidth="1.25" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+        />
+      </svg>
+      {hasUnread && (
+        <span className="absolute -top-0.5 -right-0.5 w-[6px] h-[6px] bg-[#BD323C] rounded-full" />
+      )}
+    </div>
+    {count > 0 && (
+      <span className="text-xs font-medium text-[#777572] tracking-[0.25px]">{count}</span>
+    )}
+  </div>
+)

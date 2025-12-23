@@ -1,9 +1,11 @@
-import { VeltCommentBubble, VeltCommentTool } from '@veltdev/react'
-import { ChevronDownIcon, GearIcon } from './icons'
+import { useCommentEventCallback, useGetCommentAnnotations, VeltCommentBubble, VeltCommentTool } from '@veltdev/react'
+import { ChevronDownIcon, GearIcon, CommentIcon } from './icons'
 import { Avatar } from './Avatar'
 import { StatusBadge } from './StatusBadge'
 import { DueBadge } from './DueBadge'
 import { Job } from './types'
+import { useMemo } from 'react'
+import { useAppUser } from '@/app/userAuth/AppUserContext'
 
 interface JobsTableProps {
   jobs: Job[]
@@ -12,6 +14,39 @@ interface JobsTableProps {
 }
 
 export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
+  const { user } = useAppUser();
+  const commentAnnotations = useGetCommentAnnotations();
+
+  // Create a map of targetElementId -> { count, hasUnread }
+  const annotationDataByTargetId = useMemo(() => {
+    const dataMap: Record<string, { count: number; hasUnread: boolean }> = {};
+    if (commentAnnotations?.data) {
+      // Iterate through all document arrays
+      Object.values(commentAnnotations.data).forEach((annotations: any[]) => {
+        annotations.forEach((annotation) => {
+          const targetId = annotation.targetElementId;
+          if (targetId) {
+            // Check if current user has viewed this annotation
+            const isViewedByCurrentUser = annotation.viewedBy?.some(
+              (viewer: any) => viewer.userId === user?.userId
+            ) ?? false;
+
+            if (!dataMap[targetId]) {
+              dataMap[targetId] = { count: 0, hasUnread: false };
+            }
+            dataMap[targetId].count += 1;
+            // If any annotation is unread, mark hasUnread as true
+            if (!isViewedByCurrentUser) {
+              dataMap[targetId].hasUnread = true;
+            }
+          }
+        });
+      });
+    }
+    return dataMap;
+  }, [commentAnnotations, user?.userId]);
+
+
   return (
     <div className="flex-1 overflow-auto px-8">
       <table className="w-full min-w-[1200px]">
@@ -44,7 +79,6 @@ export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
               className="hover:bg-gray-50 cursor-pointer"
               id={`job-${job.id}`}
               data-id={`job-${job.id}`}
-              onClick={() => onRowClick(job)}
             >
               <td className="py-3 px-3">
                 <input
@@ -72,12 +106,26 @@ export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
                   className="flex items-center justify-center min-w-[64px] relative overflow-visible"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <VeltCommentTool targetElementId={`job-${job.id}`} context={{jobId: `job-${job.id}`, jobStatus: job.status}} />
+                  {/* <VeltCommentTool targetElementId={`job-${job.id}`} context={{jobId: `job-${job.id}`, jobStatus: job.status}} />
                   <VeltCommentBubble
                     targetElementId={`job-${job.id}`}
                     openDialog={false}
                     shadowDom={false}
-                  />
+                  /> */}
+                  {(() => {
+                    const data = annotationDataByTargetId[`job-${job.id}`];
+                    const count = data?.count || 0;
+                    const hasUnread = data?.hasUnread || false;
+                    return (
+                      <button 
+                        onClick={() => onRowClick(job)}
+                        className="flex items-center justify-center px-1 py-1.5 hover:bg-gray-100 rounded transition-colors"
+                        aria-label="View comments"
+                      >
+                        <CommentIcon count={count} hasUnread={hasUnread} />
+                      </button>
+                    );
+                  })()}
                 </div>
               </td>
               <td className="py-3 px-3">
