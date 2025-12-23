@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useVeltEventCallback } from '@veltdev/react'
 import Header from '@/components/header/header'
 import Sidebar from '@/components/sidebar/sidebar'
 import JobDetailModal from './JobDetailModal'
@@ -10,7 +11,7 @@ import { FileIcon, ChevronDownIcon, PlusIcon, FilterIcon, SearchIcon, SettingsIc
 import { SummaryCards } from './SummaryCards'
 import { JobsTable } from './JobsTable'
 import { Pagination } from './Pagination'
-import { CommentsSidebar } from './CommentsSidebar'
+import { LineCommentsSidebar } from './LineCommentsSidebar'
 
 // Re-export types for backwards compatibility
 export type { Job, JobLineItem } from './types'
@@ -20,6 +21,17 @@ export default function DocumentCanvas() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedJobForComments, setSelectedJobForComments] = useState<Job | null>(null)
   const [isCommentSidebarOpen, setIsCommentSidebarOpen] = useState(false)
+
+  // Velt button click listener - moved to parent to avoid stale event issues
+  const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
+
+  // Handle close button click from Velt component
+  useEffect(() => {
+    if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'close-sidebar') {
+      setIsCommentSidebarOpen(false);
+      setSelectedJobForComments(null);
+    }
+  }, [veltButtonClickEventData]);
 
   const handleJobClick = (job: Job) => {
     setSelectedJob(job)
@@ -34,11 +46,6 @@ export default function DocumentCanvas() {
   const handleOpenCommentsForRow = (job: Job) => {
     setSelectedJobForComments(job)
     setIsCommentSidebarOpen(true)
-  }
-
-  const handleCloseCommentSidebar = () => {
-    setIsCommentSidebarOpen(false)
-    setSelectedJobForComments(null)
   }
 
   return (
@@ -93,9 +100,8 @@ export default function DocumentCanvas() {
           </div>
 
           {/* Comments Sidebar - Per-row thread */}
-          <CommentsSidebar
+          <LineCommentsSidebar
             isOpen={isCommentSidebarOpen}
-            onClose={handleCloseCommentSidebar}
             selectedJob={selectedJobForComments}
           />
         </div>
