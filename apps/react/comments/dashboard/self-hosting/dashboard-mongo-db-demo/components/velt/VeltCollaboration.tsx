@@ -1,9 +1,9 @@
 "use client";
-import { useUnreadNotificationsCount, useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
+import { useAppUser } from "@/app/userAuth/AppUserContext";
+import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
+import { useEffect } from "react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
-import { useEffect } from "react";
-import { useAppUser } from "@/app/userAuth/AppUserContext";
 
 export function VeltCollaboration() {
     const { isUserLoggedIn } = useAppUser();
@@ -21,19 +21,6 @@ export function VeltCollaboration() {
         enable: false
     };
 
-    const unreadCount = useUnreadNotificationsCount();
-
-    useEffect(() => {
-        if(client) {
-            client.setUiState({
-                notificationsPanel: {
-                    unreadCount: unreadCount
-                }
-            })
-        }
-    }, [unreadCount, client])
-
-
     return (
         <>
             <VeltInitializeDocument />
@@ -45,7 +32,7 @@ export function VeltCollaboration() {
                 commentPinHighlighter={false}
                 dialogOnHover={false}
                 groupMatchedComments={true}
-                // readOnly={true}
+            // readOnly={true}
             />
             <VeltCommentsSidebar
                 context={{ jobId: `job-page-mode`, jobStatus: 'page comment', commentType: 'action' }}
@@ -54,7 +41,7 @@ export function VeltCollaboration() {
                 pageMode={true}
                 sortData="asc"
                 focusedThreadMode={true}
-                // readOnly={true}
+            // readOnly={true}
             />
 
             <VeltCustomization />

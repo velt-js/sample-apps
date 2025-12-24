@@ -3,7 +3,6 @@ import { VeltWireframe } from '@veltdev/react';
 import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
 import VeltCommentToolWf from "./VeltCommentToolWf";
 import VeltCommentsSidebarHeaderWf from "./VeltCommentsSidebarHeaderWf";
-import VeltNotificationsToolWf from "./VeltNotificationsToolWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
 import "./styles.css";
 import VeltCommentDialogWf from './VeltCommentDialogWf';
@@ -21,7 +20,6 @@ export function VeltCustomization() {
       <VeltSidebarButtonWf />
       <VeltCommentToolWf />
       <VeltCommentBubbleWf />
-      <VeltNotificationsToolWf />
       <VeltCommentsSidebarHeaderWf />
 
       <VeltCommentDialogWf />
