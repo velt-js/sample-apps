@@ -76,7 +76,7 @@ app-comment-dialog-thread-card-avatar {
   }
 }
 
-.velt-thread-card--name {
+.oe-thread-card--name {
   font-weight: 500 !important;
   font-size: 14px !important;
   color: #0e0e0e !important;
@@ -237,7 +237,8 @@ app-comment-dialog-toggle-reply-text {
   color: #4a4947 !important;
 }
 
-.velt-toggle-reply .velt-toggle-reply--button, .velt-toggle-reply--button-inline-mode {
+.velt-toggle-reply .velt-toggle-reply--button,
+.velt-toggle-reply--button-inline-mode {
   padding-inline: 8px !important;
   gap: 4px !important;
 }
@@ -279,7 +280,7 @@ app-comment-dialog-toggle-reply-text {
   }
 }
 
-.oe-thread-card--metadata {
+.oe-comment--metadata {
   height: 32px;
   gap: 8px;
   padding-left: 8px;
@@ -295,7 +296,7 @@ app-comment-dialog-toggle-reply-text {
   overflow: hidden;
 }
 
-.oe-thread-card--metadata span {
+.oe-comment--metadata span {
   /* This is the magic combo for ellipsis */
   flex: 1;
   min-width: 0;
@@ -306,22 +307,22 @@ app-comment-dialog-toggle-reply-text {
 
 /* We must stop the hyphens from shrinking or growing */
 /* This targets the 3rd, 5th, and 7th elements (the dashes) */
-.oe-thread-card--metadata .oe-thread-card--metadata-separator {
+.oe-comment--metadata .oe-comment--metadata-separator {
   flex: none;
   overflow: visible;
 }
 
 /* Keep the icon and "Line:" label from shrinking */
-.oe-thread-card--metadata svg,
-.oe-thread-card--metadata .oe-thread-card--metadata-label {
+.oe-comment--metadata svg,
+.oe-comment--metadata .oe-comment--metadata-label {
   flex: none;
 }
 
-.oe-thread-card--metadata svg {
+.oe-comment--metadata svg {
   color: #777572;
 }
 
-.oe-thread-card--metadata span {
+.oe-comment--metadata span {
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
@@ -342,6 +343,14 @@ app-comment-dialog-toggle-reply-text {
   &.velt-comment-dialog--page-mode-composer {
     background-color: transparent !important;
 
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.velt-inline-comments-section--comment {
+  .velt-comment-dialog {
     &:hover {
       background-color: transparent !important;
     }
@@ -404,6 +413,7 @@ app-comment-sidebar-list {
   line-height: 21px !important;
   letter-spacing: -0.75% !important;
   color: #777572 !important;
+  color: #0E0E0E !important;
 }
 
 button.action__button.velt-action-button {
@@ -472,7 +482,7 @@ button.action__button.velt-action-button {
     height: 32px;
     border-radius: 3px;
     padding: 8px;
-    gap: 10px;
+    gap: 4px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -482,6 +492,12 @@ button.action__button.velt-action-button {
     letter-spacing: -0.75%;
     vertical-align: middle;
     color: #4a4947;
+
+    app-if {
+      &:empty {
+        display: none !important;
+      }
+    }
 
     &:hover {
       background-color: #f2f4ffa6;
@@ -499,6 +515,7 @@ button.action__button.velt-action-button {
     display: flex !important;
     flex: 1 !important;
     min-height: 0px !important;
+    width: 552px !important;
 
     app-comment-dialog-threads {
       max-height: none !important;
@@ -565,17 +582,19 @@ app-comment-sidebar-header {
   border: 1px solid #ededed;
   box-shadow: 0px 1px 2px 0px #0e0e0e0f;
 
-  app-comment-sidebar-status-dropdown-trigger-name {
+  .oe-comment-sidebar-header--status-trigger-name {
     font-weight: 500;
     font-size: 14px;
     line-height: 21px;
     color: #0e0e0e;
+    text-transform: capitalize;
   }
 }
 
 .velt-status-dropdown--content {
   border-radius: 3px !important;
   top: 42px !important;
+  padding: 8px !important;
 }
 
 .velt-sidebar-header-status--dropdown-icon {
@@ -588,99 +607,521 @@ app-comment-sidebar-header {
   top: 42px !important;
 }
 
-
 .oe-comment-sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 12px;
-    padding-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 12px;
+  padding-right: 24px;
 }
 
 .oe-comment-sidebar-inline {
-    width: 552px;
-    height: 100%;   
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border: 1px solid #0E0E0E14;
+  width: 552px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #0e0e0e14;
 }
 
 .velt-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-
 velt-inline-comments-section {
-    display: flex !important;
-    flex-direction: column !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  height: 100% !important;
+
+  app-inline-comments-section-panel {
     flex: 1 !important;
-    height: 100% !important;
+    display: flex !important;
+    min-height: 0px !important;
 
-    app-inline-comments-section-panel {
-        flex: 1 !important;
+    &:empty {
+      display: none !important;
+    }
+
+    .velt-inline-comments-section--panel {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+
+      app-if {
         display: flex !important;
+        flex: 1 !important;
         min-height: 0px !important;
+        align-items: flex-start !important;
 
-        .velt-inline-comments-section--panel {
-            flex: 1 !important;
-            display: flex !important;
-
-            app-inline-comments-section-list {
-                display: flex !important;
-
-                .velt-inline-comments-section--comments {
-                    margin-top: 0px !important;
-
-                    .velt-inline-comments-section--comment {
-                        display: flex !important;
-                        flex: 1 !important;
-                        min-height: 0px !important;
-
-                        snippyly-comment-dialog {
-                            display: flex !important;
-
-                            app-comment-dialog-body {
-                                display: flex !important;
-                                flex: 1 !important;
-                                min-height: 0px !important;
-
-                                .velt-body.velt-comment-dialog-body--inline-comment-section-mode {
-                                    width: 100% !important;
-
-                                    app-comment-dialog-threads {
-                                        -ms-overflow-style: none; /* IE and Edge */
-                                        scrollbar-width: none; /* Firefox */
-                                      }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        &:empty {
+          display: none !important;
         }
-    }
+      }
 
-    app-comment-dialog-threads {
-        max-height: none !important;
+      app-inline-comments-section-list {
+        display: flex !important;
+        flex: 1 !important;
 
+        &:empty {
+          display: none !important;
+        }
+
+        .velt-inline-comments-section--comments {
+          margin-top: 0px !important;
+
+          .velt-inline-comments-section--comment {
+            display: flex !important;
+            flex: 1 !important;
+            min-height: 0px !important;
+
+            snippyly-comment-dialog {
+              display: flex !important;
+
+              app-comment-dialog-body {
+                display: flex !important;
+                flex: 1 !important;
+                min-height: 0px !important;
+
+                .velt-body.velt-comment-dialog-body--inline-comment-section-mode {
+                  width: 100% !important;
+
+                  app-comment-dialog-threads {
+                    -ms-overflow-style: none; /* IE and Edge */
+                    scrollbar-width: none; /* Firefox */
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
+
+  app-comment-dialog-threads {
+    max-height: none !important;
+  }
 }
 
 app-comment-sidebar-focused-thread {
-    display: flex !important;
-    flex-direction: column !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-.oe-comment-sidebar-header--metadata {
-    padding-inline: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #0E0E0E14;
+.oe-comment--metadata-container {
+  padding-inline: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #0e0e0e14;
 }
 
 app-sidebar-button-unread-icon {
-    top: 0px !important;
-    right: 0px !important;
+  top: 0px !important;
+  right: 0px !important;
+}
+
+.oe-comment-sidebar-empty-placeholder--title {
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.91px;
+  text-align: center;
+  color: #3649b9;
+}
+
+.oe-comment-sidebar-empty-placeholder--description {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -1.25%;
+  text-align: center;
+  color: #777572;
+}
+
+.velt-sidebar--no-comments-container {
+  align-items: flex-start !important;
+}
+
+.oe-comment-sidebar-header--status-content-name {
+  width: 96;
+  border-radius: 3px;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.75%;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #4a4947;
+
+  &:hover {
+    background: #f2f4ffa6;
+    color: #3649b9;
+  }
+}
+
+app-comment-sidebar-reset-filter-button {
+  width: 100% !important;
+}
+
+.velt-comment-sidebar-minimal-filter-content-item--selected {
+  .oe-comment-sidebar-header--status-content-name {
+    background: #f2f4ffa6;
+    color: #3649b9;
+  }
+}
+
+.oe-composer--metadata {
+  width: 100%;
+
+  &:has(app-if:empty + app-if:empty) {
+    display: none;
+  }
+
+  app-if {
+    &:empty {
+      display: none !important;
+    }
+  }
+
+  .oe-composer--focused-thread-metadata-item,
+  .oe-composer--page-mode-metadata-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.3%;
+    color: #0e0e0e;
+  }
+
+  .oe-composer--page-mode-metadata-item {
+    padding-bottom: 8px;
+  }
+}
+
+.oe-composer--focused-thread-metadata-item {
+  width: 100%;
+  border-top: 1px solid #0e0e0e14 !important;
+  padding-top: 12px;
+  padding-inline: 32px !important;
+}
+.velt-comment-dialog.velt-comment-dialog--page-mode-composer {
+  border-top: 1px solid #0e0e0e14 !important;
+}
+
+.velt-comment-dialog--focused-thread-mode {
+  padding-inline: 0px !important;
+  app-comment-dialog-body {
+    padding-inline: 32px !important;
+  }
+
+  app-comment-dialog-composer {
+    padding-inline: 32px !important;
+
+    .oe-composer--content {
+      background-color: #fafafa !important;
+    }
+  }
+}
+
+.velt-inline-comments-section--comment {
+  .velt-comment-dialog {
+    padding-inline: 0px !important;
+    app-comment-dialog-body {
+      padding-inline: 32px !important;
+    }
+
+    app-comment-dialog-composer {
+      padding-inline: 32px !important;
+
+      .oe-composer--content {
+        background-color: #fafafa !important;
+      }
+    }
+  }
+}
+
+.velt-comment-sidebar--read-only {
+  app-comment-sidebar-page-mode-composer {
+    display: none !important;
+  }
+}
+
+.velt-comment-dialog--read-only {
+  .oe--actions-container,
+  .oe-composer--metadata,
+  app-comment-dialog-composer {
+    display: none !important;
+  }
+}
+
+.oe-disabled {
+  app-resolve-button,
+  app-comment-dialog-thread-card-reaction-tool,
+  app-comment-dialog-options-dropdown {
+    pointer-events: none !important;
+  }
+
+  .velt-thread-card--show-actions {
+    app-resolve-button,
+    app-comment-dialog-thread-card-reaction-tool,
+    app-comment-dialog-options-dropdown {
+      opacity: 0.6 !important;
+    }
+  }
+
+  app-comment-dialog-thread-card-reactions {
+    pointer-events: none !important;
+  }
+
+  .oe--actions-container {
+    cursor: not-allowed !important;
+  }
+}
+
+.velt-notifications-panel {
+  width: 392px !important;
+  border: 1px solid #0e0e0e14 !important;
+  border-radius: 0px !important;
+  padding: 0px !important;
+  height: 100% !important;
+  min-height: auto !important;
+  max-height: none !important;
+
+  .oe-notifications-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    .oe-notifications-panel-header {
+      padding: 20px 24px 16px 24px !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      border-bottom: 1px solid #0e0e0e14 !important;
+
+      .oe-notifications-panel-header-info {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 8px !important;
+
+        .oe-notifications-panel-header-info-title {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 27px;
+          letter-spacing: -1.5%;
+          vertical-align: middle;
+          color: #0e0e0e;
+        }
+
+        .oe-notifications-panel-header-info-unread {
+          border-radius: 3px;
+          padding: 3px 4px;
+          background-color: #bd323c;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 10px;
+          letter-spacing: 0.25px;
+          text-align: center;
+          vertical-align: middle;
+
+          app-if,
+          app-data {
+            &:empty {
+              display: none !important;
+            }
+          }
+        }
+      }
+
+      .oe-notifications-panel-header-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+
+        .oe-notifications-panel-header-actions-button {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 32px !important;
+          height: 32px !important;
+          border-radius: 4px !important;
+          cursor: pointer !important;
+          color: #777572 !important;
+
+          &:hover {
+            background-color: #f7f7f7 !important;
+          }
+        }
+      }
+    }
+
+    .oe-notifications-panel-tab-header {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 8px 24px !important;
+      border-bottom: 1px solid #0e0e0e14 !important;
+
+      .velt-notifications-panel--tab {
+        border-radius: 4px !important;
+      }
+    }
+  }
+}
+
+.oe-notifications-panel-list-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  width: 100% !important;
+
+  .oe-notifications-panel-list-item-content {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+
+    .oe-notifications-panel-list-item-content-headline {
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      line-height: 21px !important;
+      color: #0e0e0e !important;
+      display: block !important;
+      padding-top: 1.5px !important;
+
+      app-notifications-panel-content-list-item-headline {
+        display: inline !important;
+
+        .velt-notifications-panel--list-item-headline {
+          font-weight: 400 !important;
+          font-size: 14px !important;
+          line-height: 21px !important;
+          color: #0e0e0e !important;
+          display: inline !important;
+
+          b {
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            line-height: 21px !important;
+          }
+        }
+      }
+
+      span {
+        display: inline !important;
+        margin-inline: 4px !important;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
+        color: #0e0e0e !important;
+        display: inline !important;
+      }
+
+      app-data {
+        display: inline !important;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
+      }
+    }
+  }
+}
+
+.velt-notifications-panel--list-item {
+  padding: 16px 16px 16px 24px !important;
+}
+
+.velt-notifications-panel--list-item-timestamp {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  text-align: right;
+  vertical-align: middle;
+  color: #777572;
+  padding-top: 5px;
+}
+
+.velt-notifications-panel--list-item-unread {
+  width: 6px !important;
+  height: 6px !important;
+  color: #bd323c !important;
+  padding-top: 6px !important;
+
+  circle {
+    fill: #bd323c !important;
+  }
+}
+
+.oe-notification--metadata {
+  margin-left: 32px !important;
+  width: calc(100% - 32px) !important;
+}
+
+app-notifications-panel-content-list-item-body {
+  margin-left: 32px !important;
+
+  .velt-notifications-panel--list-item-body {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    vertical-align: middle !important;
+    color: #777572 !important;
+    font-style: normal !important;
+  }
+}
+
+app-notifications-panel-content {
+  flex: 1 !important;
+  min-height: 0 !important;
+
+  /* hide scrollbar */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
+
+.velt-notifications-panel-content {
+  max-height: none !important;
+}
+
+.velt-composer-input-focused {
+    outline: 2px solid #5577ff59 !important;
+    border-radius: 3px !important;
+    .oe-composer--content {
+      border: 1px solid #5577ff !important;
+    }
+}
+
+
+.velt-comment-attachments {
+    padding-left: 0px !important;
+}
+
+.oe--unresolve-button {
+    color: #2A9D8F !important;
+
+    &:hover {
+        background-color: #2A9D8F !important;
+        color: #ffffff !important;
+    }
 }

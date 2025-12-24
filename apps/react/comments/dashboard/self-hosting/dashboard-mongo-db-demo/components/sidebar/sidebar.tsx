@@ -1,6 +1,7 @@
 'use client';
 
-import { VeltNotificationsTool } from '@veltdev/react';
+import { useUnreadNotificationsCount, useVeltClient } from "@veltdev/react";
+import { useEffect, useState } from "react";
 
 // Sidebar icon assets
 const imgLogo = "/icons/sidebar/open-envoy-logo.svg";
@@ -80,7 +81,27 @@ function SectionHeader({ label }: SectionHeaderProps) {
   );
 }
 
-export default function Sidebar() {
+interface SidebarProps {
+  onNotificationsClick?: () => void;
+}
+
+export default function Sidebar({ onNotificationsClick }: SidebarProps) {
+    const [unreadCount, setUnreadCount] = useState<{ forYou: number | null, all: number | null }>({ forYou: null, all: null });
+    const { client } = useVeltClient();
+
+    const unreadCountValue = useUnreadNotificationsCount();
+
+    useEffect(() => {
+        setUnreadCount({ forYou: unreadCountValue.forYou, all: unreadCountValue.all });
+        if (client) {
+            client.setUiState({
+                notificationsPanel: {
+                    unreadCount: unreadCountValue
+                }
+            })
+        }
+    }, [unreadCountValue, client])
+
   return (
     <div className="flex h-full">
       <aside
@@ -123,10 +144,26 @@ export default function Sidebar() {
             icon={imgSearch}
             label="Search"
           />
-          <div className="relative w-100">
-            {/* [Velt] Notifications Tool */}
-            <VeltNotificationsTool shadowDom={false} />  
-          </div>
+            <div className="relative w-100">
+                <button
+                    onClick={onNotificationsClick}
+                    className="w-full h-8 flex items-center gap-3 px-2 py-1 rounded-[3px] hover:bg-[#F2F4FF]/40 transition-colors duration-150"
+                >
+                    <img src={imgNotifications} alt="" className="w-4 h-4 flex-shrink-0 block" />
+                    <span
+                        className="flex-1 text-left text-sm leading-[21px] text-[#4A4947] tracking-[-0.105px]"
+                        style={{ fontFamily: 'Inter, sans-serif' }}
+                    >
+                        Notifications
+                    </span>
+                    <span
+                        className="flex items-center justify-center min-w-[18px] h-[18px] px-[5px] bg-[#BD323C] rounded-[5px] text-white text-xs font-medium leading-[18px] tracking-[0.25px]"
+                        style={{ fontFamily: 'Inter, sans-serif' }}
+                    >
+                        {unreadCount.forYou !== null ? unreadCount.forYou : "..."}
+                    </span>
+                </button>
+            </div>
           <NavItem
             icon={imgHome}
             label="Home"
