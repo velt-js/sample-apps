@@ -68,12 +68,12 @@ const VeltCommentDialogWf = () => {
                                 </div>
                                 <div className="flex flex-col gap-[8px]">
                                     <VeltIf condition="!{commentDialogSelected}">
-                                        <div className="oe-thread-card--metadata">
+                                        <div className="oe-comment--metadata">
                                             <MarkRead width={16} height={16} />
-                                            <span className="oe-thread-card--metadata-label">Field:</span>
-                                            <span className="oe-thread-card--metadata-label">Status</span>
-                                            <span className="oe-thread-card--metadata-separator">-</span>
-                                            <span className="oe-thread-card--metadata-label"><VeltData field="annotation.context.jobStatus" /></span>
+                                            <span className="oe-comment--metadata-label">Field:</span>
+                                            <span className="oe-comment--metadata-label">Status</span>
+                                            <span className="oe-comment--metadata-separator">-</span>
+                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.jobStatus" /></span>
                                         </div>
                                     </VeltIf>
                                     <VeltCommentDialogWireframe.ThreadCard.Message />

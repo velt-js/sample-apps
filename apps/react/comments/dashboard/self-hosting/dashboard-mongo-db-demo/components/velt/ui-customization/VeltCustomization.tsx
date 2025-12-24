@@ -12,6 +12,7 @@ import VeltInlineCommentsSectionWf from './VeltInlineCommentsSectionWf';
 import VeltCommentsSidebarFocusedThreadWf from './VeltCommentsSidebarFocusedThreadWf';
 import VeltCommentsSidebarEmptyPlaceholderWf from './VeltCommentsSidebarEmptyPlaceholderWf';
 import VeltNotificationWf from './VeltNotificationWf';
+import VeltNotificationListItemWf from './VeltNotificationListItemWf';
 
 export function VeltCustomization() {
 
@@ -29,6 +30,7 @@ export function VeltCustomization() {
       <VeltCommentsSidebarFocusedThreadWf />
       <VeltCommentsSidebarEmptyPlaceholderWf />
       <VeltNotificationWf />
+      <VeltNotificationListItemWf />
     </VeltWireframe>
   );
 }

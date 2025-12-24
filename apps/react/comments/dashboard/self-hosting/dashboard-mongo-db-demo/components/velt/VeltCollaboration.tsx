@@ -1,5 +1,5 @@
 "use client";
-import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
+import { useUnreadNotificationsCount, useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
 import { useEffect } from "react";
@@ -20,6 +20,19 @@ export function VeltCollaboration() {
     const groupConfig = {
         enable: false
     };
+
+    const unreadCount = useUnreadNotificationsCount();
+
+    useEffect(() => {
+        if(client) {
+            client.setUiState({
+                notificationsPanel: {
+                    unreadCount: unreadCount
+                }
+            })
+        }
+    }, [unreadCount, client])
+
 
     return (
         <>

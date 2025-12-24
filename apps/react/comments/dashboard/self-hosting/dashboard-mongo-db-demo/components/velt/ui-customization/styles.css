@@ -280,7 +280,7 @@ app-comment-dialog-toggle-reply-text {
   }
 }
 
-.oe-thread-card--metadata {
+.oe-comment--metadata {
   height: 32px;
   gap: 8px;
   padding-left: 8px;
@@ -296,7 +296,7 @@ app-comment-dialog-toggle-reply-text {
   overflow: hidden;
 }
 
-.oe-thread-card--metadata span {
+.oe-comment--metadata span {
   /* This is the magic combo for ellipsis */
   flex: 1;
   min-width: 0;
@@ -307,22 +307,22 @@ app-comment-dialog-toggle-reply-text {
 
 /* We must stop the hyphens from shrinking or growing */
 /* This targets the 3rd, 5th, and 7th elements (the dashes) */
-.oe-thread-card--metadata .oe-thread-card--metadata-separator {
+.oe-comment--metadata .oe-comment--metadata-separator {
   flex: none;
   overflow: visible;
 }
 
 /* Keep the icon and "Line:" label from shrinking */
-.oe-thread-card--metadata svg,
-.oe-thread-card--metadata .oe-thread-card--metadata-label {
+.oe-comment--metadata svg,
+.oe-comment--metadata .oe-comment--metadata-label {
   flex: none;
 }
 
-.oe-thread-card--metadata svg {
+.oe-comment--metadata svg {
   color: #777572;
 }
 
-.oe-thread-card--metadata span {
+.oe-comment--metadata span {
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
@@ -710,7 +710,7 @@ app-comment-sidebar-focused-thread {
   flex-direction: column !important;
 }
 
-.oe-comment-sidebar-header--metadata {
+.oe-comment--metadata-container {
   padding-inline: 24px;
   padding-bottom: 16px;
   border-bottom: 1px solid #0e0e0e14;
@@ -928,6 +928,12 @@ app-comment-sidebar-reset-filter-button {
           letter-spacing: 0.25px;
           text-align: center;
           vertical-align: middle;
+
+          app-if, app-data {
+            &:empty {
+              display: none !important;
+            }
+          }
         }
       }
 
@@ -970,19 +976,17 @@ app-comment-sidebar-reset-filter-button {
 
 .oe-notifications-panel-list-item {
   display: flex !important;
-  flex-direction: row !important;
+  flex-direction: column !important;
   align-items: flex-start !important;
   gap: 8px !important;
   width: 100% !important;
 
   .oe-notifications-panel-list-item-content {
     display: flex !important;
-    flex-direction: column !important;
-    gap: 4px !important;
+    flex-direction: row !important;
+    gap: 8px !important;
     flex: 1 !important;
     min-width: 0 !important;
-
-    
 
     .oe-notifications-panel-list-item-content-headline {
       font-weight: 500 !important;
@@ -990,26 +994,41 @@ app-comment-sidebar-reset-filter-button {
       line-height: 21px !important;
       color: #0e0e0e !important;
       display: block !important;
+      padding-top: 1.5px !important;
 
       app-notifications-panel-content-list-item-headline {
         display: inline !important;
 
         .velt-notifications-panel--list-item-headline {
+          font-weight: 400 !important;
+          font-size: 14px !important;
+          line-height: 21px !important;
+          color: #0e0e0e !important;
+          display: inline !important;
+
+          b {
             font-weight: 500 !important;
             font-size: 14px !important;
             line-height: 21px !important;
-            color: #0e0e0e !important;
-            display: inline !important;
           }
+        }
       }
 
       span {
         display: inline !important;
         margin-inline: 4px !important;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
+        color: #0e0e0e !important;
+        display: inline !important;
       }
 
       app-data {
         display: inline !important;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
       }
     }
   }
@@ -1017,4 +1036,44 @@ app-comment-sidebar-reset-filter-button {
 
 .velt-notifications-panel--list-item {
   padding: 16px 16px 16px 24px !important;
+}
+
+.velt-notifications-panel--list-item-timestamp {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  text-align: right;
+  vertical-align: middle;
+  color: #777572;
+  padding-top: 5px;
+}
+
+.velt-notifications-panel--list-item-unread {
+  width: 6px !important;
+  height: 6px !important;
+  color: #bd323c !important;
+  padding-top: 6px !important;
+
+  circle {
+    fill: #bd323c !important;
+  }
+}
+
+.oe-notification--metadata {
+  margin-left: 32px !important;
+  width: calc(100% - 32px) !important;
+}
+
+app-notifications-panel-content-list-item-body {
+  margin-left: 32px !important;
+
+  .velt-notifications-panel--list-item-body {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    vertical-align: middle !important;
+    color: #777572 !important;
+    font-style: normal !important;
+  }
 }
