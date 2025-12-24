@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAttachment } from '../../../comments/store';
 
+// Sanitize filename to prevent header injection
+function sanitizeFilename(filename: string): string {
+  return filename
+    .replace(/[\x00-\x1f\x7f]/g, '') // Remove control characters
+    .replace(/[\\"/]/g, '_') // Replace backslash, double quote, and forward slash
+    .trim() || 'attachment';
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ attachmentId: string }> }
@@ -35,12 +43,15 @@ export async function GET(
 
     const binaryData = Buffer.from(base64Content, 'base64');
 
+    // Sanitize filename to prevent header injection
+    const safeFilename = sanitizeFilename(attachment.name || 'attachment');
+
     // Return the file with appropriate headers
     return new NextResponse(binaryData, {
       status: 200,
       headers: {
         'Content-Type': attachment.mimeType || 'application/octet-stream',
-        'Content-Disposition': `inline; filename="${attachment.name || 'attachment'}"`,
+        'Content-Disposition': `inline; filename="${safeFilename}"`,
         'Content-Length': binaryData.length.toString(),
         'Cache-Control': 'public, max-age=31536000',
       },
