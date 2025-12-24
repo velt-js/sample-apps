@@ -2,7 +2,8 @@
 
 import { useAppUser } from "@/app/userAuth/useAppUser";
 import type { VeltAuthProvider } from "@veltdev/types";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
+import { saveCurrentUserToDB } from "./VeltCommentDataProvider";
 
 // [Velt] Call your backend API to generate a JWT token for the user
 async function getVeltJwtFromBackend(user: {
@@ -33,6 +34,13 @@ async function getVeltJwtFromBackend(user: {
 export function useVeltAuthProvider() {
   // [Velt] Get your app's current authenticated user to authenticate with Velt.
   const { user } = useAppUser();
+
+  // [Velt Self-Host] Save user to database for self-hosted user PII
+  useEffect(() => {
+    if (user) {
+      saveCurrentUserToDB({ ...user });
+    }
+  }, [user]);
 
   // [Velt] Create auth provider object to pass to VeltProvider
   const authProvider: VeltAuthProvider | undefined = useMemo(() => {

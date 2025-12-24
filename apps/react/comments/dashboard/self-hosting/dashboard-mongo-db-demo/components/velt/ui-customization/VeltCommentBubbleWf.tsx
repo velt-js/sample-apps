@@ -12,7 +12,6 @@ const VeltCommentBubbleWf = () => {
                 <div className="flex items-center gap-1">
                     <div className='relative'>
                         <MessageSquare className="w-5 h-5" />
-                        <VeltCommentBubbleWireframe.UnreadIcon />
                     </div>
                     <VeltCommentBubbleWireframe.CommentsCount />
                 </div>
