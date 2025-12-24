@@ -77,4 +77,34 @@ const Close = ({ width = 24, height = 24 }) => {
     )
 }
 
-export { Reactions, Checkmark, MoreHorizontal, MarkRead, Attach1, At, ArrowUp, ArrowheadRight, Close };
+const ChevronDown = ({ width = 24, height = 24 }) => {
+    return (
+        <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15.0002C11.744 15.0002 11.488 14.9022 11.293 14.7072L7.29301 10.7072C6.90201 10.3162 6.90201 9.68425 7.29301 9.29325C7.68401 8.90225 8.31601 8.90225 8.70701 9.29325L12.012 12.5982L15.305 9.41825C15.704 9.03525 16.335 9.04625 16.719 9.44325C17.103 9.84025 17.092 10.4743 16.695 10.8573L12.695 14.7192C12.5 14.9072 12.25 15.0002 12 15.0002Z" fill="currentColor" />
+        </svg>
+
+    )
+}
+
+const Funnel = ({ width = 24, height = 24 }) => {
+    return (
+        <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.877 16.457L12.903 17.99V13.437C12.903 13.271 12.945 13.108 13.023 12.962L17.323 5H6.64298L10.765 12.978C10.839 13.12 10.877 13.278 10.877 13.437V16.457ZM13.903 21C13.69 21 13.477 20.932 13.3 20.797L9.27398 17.752C9.02398 17.563 8.87698 17.268 8.87698 16.955V13.681L4.11198 4.459C3.95098 4.149 3.96398 3.778 4.14598 3.48C4.32698 3.182 4.65098 3 4.99998 3H19C19.352 3 19.678 3.185 19.859 3.488C20.039 3.79 20.047 4.165 19.88 4.475L14.903 13.69V20C14.903 20.379 14.689 20.726 14.349 20.895C14.208 20.965 14.055 21 13.903 21Z" fill="currentColor" />
+        </svg>
+
+    )
+}
+
+export {
+    Reactions,
+    Checkmark,
+    MoreHorizontal,
+    MarkRead,
+    Attach1,
+    At,
+    ArrowUp,
+    ArrowheadRight,
+    Close,
+    ChevronDown,
+    Funnel
+};

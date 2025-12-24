@@ -19,13 +19,13 @@ const VeltCommentsSidebarFocusedThreadWf = () => {
                     </div>
                 </div>
             </div>
-            <div className="oe-comment-sidebar-header--metadata">
-                <div className="oe-thread-card--metadata">
+            <div className="oe-comment--metadata-container">
+                <div className="oe-comment--metadata">
                     <MarkRead width={16} height={16} />
-                    <span className="oe-thread-card--metadata-label">Field:</span>
-                    <span className="oe-thread-card--metadata-label">Status</span>
-                    <span className="oe-thread-card--metadata-separator">-</span>
-                    <span className="oe-thread-card--metadata-label"><VeltData field="focusedAnnotation.context.jobStatus" /></span>
+                    <span className="oe-comment--metadata-label">Field:</span>
+                    <span className="oe-comment--metadata-label">Status</span>
+                    <span className="oe-comment--metadata-separator">-</span>
+                    <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.jobStatus" /></span>
                     <div className="ml-auto pl-[2px] border-l border-gray-400">
                         <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
                             <div className="p-[4px]">
