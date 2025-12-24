@@ -29,7 +29,7 @@ const VeltNotificationWf = () => {
                         </VeltNotificationsPanelWireframe.ReadAllButton>
                     </div>
                 </div>
-                <VeltNotificationsPanelWireframe.Header>
+                <VeltNotificationsPanelWireframe.Header veltIf="{user.isAdmin}">
                     <div className="oe-notifications-panel-tab-header">
                         <VeltNotificationsPanelWireframe.Header.TabForYou />
                         <VeltNotificationsPanelWireframe.Header.TabAll />
