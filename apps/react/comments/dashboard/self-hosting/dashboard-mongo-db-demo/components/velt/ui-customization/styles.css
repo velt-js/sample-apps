@@ -76,7 +76,7 @@ app-comment-dialog-thread-card-avatar {
   }
 }
 
-.velt-thread-card--name {
+.oe-thread-card--name {
   font-weight: 500 !important;
   font-size: 14px !important;
   color: #0e0e0e !important;
@@ -481,7 +481,7 @@ button.action__button.velt-action-button {
     height: 32px;
     border-radius: 3px;
     padding: 8px;
-    gap: 10px;
+    gap: 4px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -491,6 +491,12 @@ button.action__button.velt-action-button {
     letter-spacing: -0.75%;
     vertical-align: middle;
     color: #4a4947;
+
+    app-if {
+      &:empty {
+        display: none !important;
+      }
+    }
 
     &:hover {
       background-color: #f2f4ffa6;
@@ -508,6 +514,7 @@ button.action__button.velt-action-button {
     display: flex !important;
     flex: 1 !important;
     min-height: 0px !important;
+    width: 552px !important;
 
     app-comment-dialog-threads {
       max-height: none !important;
@@ -574,17 +581,19 @@ app-comment-sidebar-header {
   border: 1px solid #ededed;
   box-shadow: 0px 1px 2px 0px #0e0e0e0f;
 
-  app-comment-sidebar-status-dropdown-trigger-name {
+  .oe-comment-sidebar-header--status-trigger-name {
     font-weight: 500;
     font-size: 14px;
     line-height: 21px;
     color: #0e0e0e;
+    text-transform: capitalize;
   }
 }
 
 .velt-status-dropdown--content {
   border-radius: 3px !important;
   top: 42px !important;
+  padding: 8px !important;
 }
 
 .velt-sidebar-header-status--dropdown-icon {
@@ -630,6 +639,10 @@ velt-inline-comments-section {
     flex: 1 !important;
     display: flex !important;
     min-height: 0px !important;
+
+    &:empty {
+      display: none !important;
+    }
 
     .velt-inline-comments-section--panel {
       flex: 1 !important;
@@ -728,4 +741,280 @@ app-sidebar-button-unread-icon {
 
 .velt-sidebar--no-comments-container {
   align-items: flex-start !important;
+}
+
+.oe-comment-sidebar-header--status-content-name {
+  width: 96;
+  border-radius: 3px;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.75%;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #4a4947;
+
+  &:hover {
+    background: #f2f4ffa6;
+    color: #3649b9;
+  }
+}
+
+app-comment-sidebar-reset-filter-button {
+  width: 100% !important;
+}
+
+.velt-comment-sidebar-minimal-filter-content-item--selected {
+  .oe-comment-sidebar-header--status-content-name {
+    background: #f2f4ffa6;
+    color: #3649b9;
+  }
+}
+
+.oe-composer--metadata {
+  width: 100%;
+
+  &:has(app-if:empty + app-if:empty) {
+    display: none;
+  }
+
+  app-if {
+    &:empty {
+      display: none !important;
+    }
+  }
+
+  .oe-composer--focused-thread-metadata-item,
+  .oe-composer--page-mode-metadata-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.3%;
+    color: #0e0e0e;
+  }
+
+  .oe-composer--page-mode-metadata-item {
+    padding-bottom: 8px;
+  }
+}
+
+.oe-composer--focused-thread-metadata-item {
+  width: 100%;
+  border-top: 1px solid #0e0e0e14 !important;
+  padding-top: 12px;
+  padding-inline: 32px !important;
+}
+.velt-comment-dialog.velt-comment-dialog--page-mode-composer {
+  border-top: 1px solid #0e0e0e14 !important;
+}
+
+.velt-comment-dialog--focused-thread-mode {
+  padding-inline: 0px !important;
+  app-comment-dialog-body {
+    padding-inline: 32px !important;
+  }
+
+  app-comment-dialog-composer {
+    padding-inline: 32px !important;
+
+    .oe-composer--content {
+      background-color: #fafafa !important;
+    }
+  }
+}
+
+.velt-inline-comments-section--comment {
+  .velt-comment-dialog {
+    padding-inline: 0px !important;
+    app-comment-dialog-body {
+      padding-inline: 32px !important;
+    }
+
+    app-comment-dialog-composer {
+      padding-inline: 32px !important;
+
+      .oe-composer--content {
+        background-color: #fafafa !important;
+      }
+    }
+  }
+}
+
+.velt-comment-sidebar--read-only {
+  app-comment-sidebar-page-mode-composer {
+    display: none !important;
+  }
+}
+
+.velt-comment-dialog--read-only {
+  .oe--actions-container,
+  .oe-composer--metadata,
+  app-comment-dialog-composer {
+    display: none !important;
+  }
+}
+
+.oe-disabled {
+  app-resolve-button,
+  app-comment-dialog-thread-card-reaction-tool,
+  app-comment-dialog-options-dropdown {
+    pointer-events: none !important;
+  }
+
+  .velt-thread-card--show-actions {
+    app-resolve-button,
+    app-comment-dialog-thread-card-reaction-tool,
+    app-comment-dialog-options-dropdown {
+      opacity: 0.6 !important;
+    }
+  }
+
+  app-comment-dialog-thread-card-reactions {
+    pointer-events: none !important;
+  }
+}
+
+.velt-notifications-panel {
+  width: 392px !important;
+  border: 1px solid #0e0e0e14 !important;
+  border-radius: 4px !important;
+  padding: 0px !important;
+
+  .oe-notifications-panel {
+    display: flex !important;
+    flex-direction: column !important;
+
+    .oe-notifications-panel-header {
+      padding: 20px 24px 16px 24px !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      border-bottom: 1px solid #0e0e0e14 !important;
+
+      .oe-notifications-panel-header-info {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 8px !important;
+
+        .oe-notifications-panel-header-info-title {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 27px;
+          letter-spacing: -1.5%;
+          vertical-align: middle;
+          color: #0e0e0e;
+        }
+
+        .oe-notifications-panel-header-info-unread {
+          border-radius: 3px;
+          padding: 3px 4px;
+          background-color: #bd323c;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 10px;
+          letter-spacing: 0.25px;
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+
+      .oe-notifications-panel-header-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+
+        .oe-notifications-panel-header-actions-button {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 32px !important;
+          height: 32px !important;
+          border-radius: 4px !important;
+          cursor: pointer !important;
+          color: #777572 !important;
+
+          &:hover {
+            background-color: #f7f7f7 !important;
+          }
+        }
+      }
+    }
+
+    .oe-notifications-panel-tab-header {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 8px 24px !important;
+      border-bottom: 1px solid #0e0e0e14 !important;
+
+      .velt-notifications-panel--tab {
+        border-radius: 4px !important;
+      }
+    }
+  }
+}
+
+.oe-notifications-panel-list-item {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  width: 100% !important;
+
+  .oe-notifications-panel-list-item-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+
+    
+
+    .oe-notifications-panel-list-item-content-headline {
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      line-height: 21px !important;
+      color: #0e0e0e !important;
+      display: block !important;
+
+      app-notifications-panel-content-list-item-headline {
+        display: inline !important;
+
+        .velt-notifications-panel--list-item-headline {
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            line-height: 21px !important;
+            color: #0e0e0e !important;
+            display: inline !important;
+          }
+      }
+
+      span {
+        display: inline !important;
+        margin-inline: 4px !important;
+      }
+
+      app-data {
+        display: inline !important;
+      }
+    }
+  }
+}
+
+.velt-notifications-panel--list-item {
+  padding: 16px 16px 16px 24px !important;
 }

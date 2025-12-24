@@ -1,6 +1,6 @@
 "use client";
 import { VeltCommentsSidebarWireframe, VeltData, VeltIf } from '@veltdev/react';
-import { ArrowheadRight, MoreHorizontal } from './Icons';
+import { ArrowheadRight, ChevronDown, MoreHorizontal } from './Icons';
 
 const VeltCommentsSidebarHeaderWf = () => {
     return (
@@ -26,15 +26,35 @@ const VeltCommentsSidebarHeaderWf = () => {
                     </VeltIf>
                 </div>
                 <div className="flex items-center gap-2">
-                    <VeltCommentsSidebarWireframe.Status>
-                        <VeltCommentsSidebarWireframe.Status.Trigger>
+                    <VeltCommentsSidebarWireframe.MinimalFilterDropdown>
+                        <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Trigger>
                             <div className='oe-comment-sidebar-header--status-trigger'>
-                                <VeltCommentsSidebarWireframe.Status.Trigger.Name />
-                                <VeltCommentsSidebarWireframe.Status.Trigger.Arrow />
+                                <span className='oe-comment-sidebar-header--status-trigger-name'>
+                                    <VeltIf condition="{selectedMinimalFilterDropdownOption.filter} != 'reset'">
+                                        <VeltData field="selectedMinimalFilterDropdownOption.filter" />
+                                    </VeltIf>
+                                    <VeltIf condition="{selectedMinimalFilterDropdownOption.filter} == 'reset'">
+                                        <span>All</span>
+                                    </VeltIf>
+                                </span>
+                                <ChevronDown width={16} height={16} />
                             </div>
-                        </VeltCommentsSidebarWireframe.Status.Trigger>
-                        <VeltCommentsSidebarWireframe.Status.Content />
-                    </VeltCommentsSidebarWireframe.Status>
+                        </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Trigger>
+                        <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content>
+                            <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterOpen>
+                                <div className='oe-comment-sidebar-header--status-content-name'>Open</div>
+                            </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterOpen>
+                            <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterUnread>
+                                <div className='oe-comment-sidebar-header--status-content-name'>Unread</div>
+                            </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterUnread>
+                            <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterResolved>
+                                <div className='oe-comment-sidebar-header--status-content-name'>Resolved</div>
+                            </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterResolved>
+                            <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterReset>
+                                <div className='oe-comment-sidebar-header--status-content-name'>All</div>
+                            </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterReset>
+                        </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content>
+                    </VeltCommentsSidebarWireframe.MinimalFilterDropdown>
                     <VeltCommentsSidebarWireframe.MinimalActionsDropdown>
                         <VeltCommentsSidebarWireframe.MinimalActionsDropdown.Trigger>
                             <div className="oe--icon-button">

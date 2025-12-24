@@ -125,7 +125,7 @@ export default function Sidebar() {
           />
           <div className="relative w-100">
             {/* [Velt] Notifications Tool */}
-            <VeltNotificationsTool shadowDom={false} />  
+            <VeltNotificationsTool shadowDom={false} panelShadowDom={false} />  
           </div>
           <NavItem
             icon={imgHome}
