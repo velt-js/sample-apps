@@ -8,7 +8,6 @@ const VeltSidebarButtonWf = () => {
             <div className="flex items-center gap-2 ">
                 <div className='relative'>
                     <MessageSquare className="w-5 h-5" />
-                    <VeltSidebarButtonWireframe.UnreadIcon />
                 </div>
                 <span><VeltSidebarButtonWireframe.CommentsCount /></span>
             </div>

@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
+import { Inter } from 'next/font/google'
 import { AppProviders } from "@/app/userAuth/AppProviders"
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Dashboard Inline Demo',
@@ -13,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <body>
         <AppProviders>{children}</AppProviders>
       </body>
