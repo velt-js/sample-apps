@@ -413,6 +413,7 @@ app-comment-sidebar-list {
   line-height: 21px !important;
   letter-spacing: -0.75% !important;
   color: #777572 !important;
+  color: #0E0E0E !important;
 }
 
 button.action__button.velt-action-button {
@@ -878,6 +879,10 @@ app-comment-sidebar-reset-filter-button {
   app-comment-dialog-thread-card-reactions {
     pointer-events: none !important;
   }
+
+  .oe--actions-container {
+    cursor: not-allowed !important;
+  }
 }
 
 .velt-notifications-panel {
@@ -932,7 +937,8 @@ app-comment-sidebar-reset-filter-button {
           text-align: center;
           vertical-align: middle;
 
-          app-if, app-data {
+          app-if,
+          app-data {
             &:empty {
               display: none !important;
             }
@@ -1082,18 +1088,40 @@ app-notifications-panel-content-list-item-body {
 }
 
 app-notifications-panel-content {
-    flex: 1 !important;
-    min-height: 0 !important;
+  flex: 1 !important;
+  min-height: 0 !important;
 
-    /* hide scrollbar */
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  /* hide scrollbar */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 
-    &::-webkit-scrollbar {
-        display: none; /* Chrome, Safari and Opera */
-    }
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 }
 
 .velt-notifications-panel-content {
-    max-height: none !important;
+  max-height: none !important;
+}
+
+.velt-composer-input-focused {
+    outline: 2px solid #5577ff59 !important;
+    border-radius: 3px !important;
+    .oe-composer--content {
+      border: 1px solid #5577ff !important;
+    }
+}
+
+
+.velt-comment-attachments {
+    padding-left: 0px !important;
+}
+
+.oe--unresolve-button {
+    color: #2A9D8F !important;
+
+    &:hover {
+        background-color: #2A9D8F !important;
+        color: #ffffff !important;
+    }
 }

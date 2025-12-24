@@ -24,11 +24,16 @@ const VeltCommentDialogWf = () => {
                                     </div>
                                     <div className="flex items-center oe--actions-container">
                                         <VeltCommentDialogWireframe.ThreadCard.ReactionTool />
-                                        <VeltCommentDialogWireframe.ResolveButton veltIf="{i} === 0">
+                                        <VeltCommentDialogWireframe.ResolveButton>
                                             <div className="oe--icon-button">
                                                 <Checkmark width={17.5} height={17.5} />
                                             </div>
                                         </VeltCommentDialogWireframe.ResolveButton>
+                                        <VeltCommentDialogWireframe.UnresolveButton>
+                                            <div className="oe--icon-button oe--unresolve-button">
+                                                <Checkmark width={17.5} height={17.5} />
+                                            </div>
+                                        </VeltCommentDialogWireframe.UnresolveButton>
                                         <VeltCommentDialogWireframe.ThreadCard.Options>
                                             <VeltCommentDialogWireframe.ThreadCard.Options.Trigger>
                                                 <div className="oe--icon-button">
