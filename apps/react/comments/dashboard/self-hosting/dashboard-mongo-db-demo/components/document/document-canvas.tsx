@@ -12,6 +12,7 @@ import { SummaryCards } from './SummaryCards'
 import { JobsTable } from './JobsTable'
 import { Pagination } from './Pagination'
 import { LineCommentsSidebar } from './LineCommentsSidebar'
+import { NotificationsPanel } from './NotificationsPanel'
 
 // Re-export types for backwards compatibility
 export type { Job, JobLineItem } from './types'
@@ -21,6 +22,7 @@ export default function DocumentCanvas() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedJobForComments, setSelectedJobForComments] = useState<Job | null>(null)
   const [isCommentSidebarOpen, setIsCommentSidebarOpen] = useState(false)
+  const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
 
   // Velt button click listener - moved to parent to avoid stale event issues
   const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
@@ -48,11 +50,24 @@ export default function DocumentCanvas() {
     setIsCommentSidebarOpen(true)
   }
 
+  const toggleNotificationsPanel = () => {
+    setIsNotificationsPanelOpen((prev) => !prev)
+  }
+
+  const handleCloseNotificationsPanel = () => {
+    setIsNotificationsPanelOpen(false)
+  }
+
   return (
     <div className="flex flex-col w-full h-screen">
       <Header />
       <div className="flex flex-1 overflow-hidden h-[calc(100vh-45px)]">
-        <Sidebar />
+        <Sidebar onNotificationsClick={toggleNotificationsPanel} />
+        {/* Notifications Panel - Opens from left */}
+        <NotificationsPanel
+          isOpen={isNotificationsPanelOpen}
+          onClose={handleCloseNotificationsPanel}
+        />
         <div className="flex-1 flex overflow-hidden">
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col bg-white overflow-hidden">
