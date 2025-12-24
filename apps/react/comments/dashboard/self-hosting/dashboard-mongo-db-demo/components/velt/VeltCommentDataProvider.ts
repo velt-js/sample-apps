@@ -172,6 +172,19 @@ const attachmentResolverConfig = {
   }
 };
 
+// Helper function to convert File to base64
+const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result); // This includes the data URL prefix (data:mime/type;base64,...)
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+};
+
 const saveAttachmentToDB = async (request: {
   attachment: {
     attachmentId?: number;
@@ -180,15 +193,35 @@ const saveAttachmentToDB = async (request: {
     mimeType?: string;
     size?: number;
     base64Data?: string;
+    file?: File; // Velt sends the file as a File object
   };
   metadata?: unknown;
 }) => {
   console.log('[Velt Self-Host] Attachment SAVE called:', request);
   try {
+    // Extract the file and convert to base64 if present
+    const { file, ...attachmentWithoutFile } = request.attachment;
+    let base64Data = request.attachment.base64Data;
+
+    // If we have a File object, convert it to base64
+    if (file && file instanceof File) {
+      console.log('[Velt Self-Host] Converting file to base64:', file.name, file.size, 'bytes');
+      base64Data = await fileToBase64(file);
+    }
+
+    // Create the payload with base64Data instead of file
+    const payload = {
+      attachment: {
+        ...attachmentWithoutFile,
+        base64Data,
+      },
+      metadata: request.metadata,
+    };
+
     const response = await fetch(`${ATTACHMENTS_URL}/save`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(request)
+      body: JSON.stringify(payload)
     });
     if (!response.ok) {
       console.error('[Velt Self-Host] Attachment SAVE endpoint returned', response.status);

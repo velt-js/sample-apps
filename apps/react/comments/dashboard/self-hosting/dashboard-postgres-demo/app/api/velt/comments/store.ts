@@ -27,6 +27,7 @@ export type Attachment = {
   size?: number;
   documentId?: string;
   organizationId?: string;
+  base64Data?: string;
   data?: unknown;
 };
 
@@ -305,6 +306,7 @@ export async function saveAttachment(
     const documentId = context?.documentId || attachment.documentId || null;
     const organizationId = context?.organizationId || attachment.organizationId || null;
 
+    // Store the full attachment data including base64Data
     const attachmentData = {
       ...attachment,
       documentId,
@@ -323,8 +325,28 @@ export async function saveAttachment(
       [attachment.attachmentId, documentId, organizationId, JSON.stringify(attachmentData)]
     );
 
-    // Return the URL (in a real implementation, this would be a cloud storage URL)
-    return { url: attachment.url || `/api/velt/attachments/${attachment.attachmentId}` };
+    // Return a URL that points to our GET endpoint to serve the file
+    const url = `/api/velt/attachments/get/${attachment.attachmentId}`;
+    return { url };
+  } finally {
+    client.release();
+  }
+}
+
+export async function getAttachment(attachmentId: number): Promise<Attachment | null> {
+  await ensureInitialized();
+  const client = await getPool().connect();
+  try {
+    const result = await client.query(
+      `SELECT data FROM ${ATTACHMENTS_TABLE} WHERE attachment_id = $1`,
+      [attachmentId]
+    );
+
+    if (result.rows.length === 0) {
+      return null;
+    }
+
+    return result.rows[0].data as Attachment;
   } finally {
     client.release();
   }

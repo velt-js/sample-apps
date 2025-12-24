@@ -9,12 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tiptap/core": "^3.10.7",
-    "@tiptap/extension-bubble-menu": "^3.10.7",
-    "@tiptap/extension-text-align": "^3.10.7",
-    "@tiptap/extension-underline": "^3.10.7",
-    "@tiptap/react": "^3.10.7",
-    "@tiptap/starter-kit": "^3.10.7",
+    "@tiptap/core": "^3.14.0",
+    "@tiptap/extension-bubble-menu": "^3.14.0",
+    "@tiptap/extension-text-align": "^3.14.0",
+    "@tiptap/extension-underline": "^3.14.0",
+    "@tiptap/react": "^3.14.0",
+    "@tiptap/starter-kit": "^3.14.0",
     "@tiptap/y-tiptap": "^3.0.0",
     "@veltdev/react": "^4.6.1",
     "@veltdev/tiptap-crdt": "^4.5.9-beta.2",
