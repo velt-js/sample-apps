@@ -7,7 +7,7 @@ interface ActionModalProps {
   actionType: string
   actionLabel: string
   onClose: () => void
-  onSubmit: () => void
+  onSubmit: (comment: string) => void
 }
 
 const CloseIcon = () => (
@@ -112,7 +112,7 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
 
     // Show success for a moment then close
     setTimeout(() => {
-      onSubmit()
+      onSubmit(comment)
     }, 1500)
   }
 

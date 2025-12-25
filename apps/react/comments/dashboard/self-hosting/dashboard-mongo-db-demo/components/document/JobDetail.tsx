@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import { useVeltEventCallback, useCurrentUser, useGetCommentAnnotations } from '@veltdev/react'
+import { useVeltEventCallback, useGetCommentAnnotations, useAddCommentAnnotation } from '@veltdev/react'
+import type { AddCommentAnnotationRequest, CommentAnnotation } from '@veltdev/types'
 import ActionModal from './ActionModal'
 import { LineItemCommentsSidebar } from './LineItemCommentsSidebar'
 import { BackIcon, GLIcon, TagIcon, CommentIcon, EditIcon } from './icons'
@@ -112,8 +113,8 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
   const [isCommentSidebarOpen, setIsCommentSidebarOpen] = useState(false)
 
   // Velt hooks for comment annotations
-  const veltUser = useCurrentUser();
   const commentAnnotations = useGetCommentAnnotations();
+  const { addCommentAnnotation } = useAddCommentAnnotation();
 
   // Create a map of targetElementId -> { count, hasUnread }
   const annotationDataByTargetId = useMemo(() => {
@@ -197,9 +198,32 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
     setActionModal(null)
   }
 
-  const handleActionSubmit = () => {
+  const handleActionSubmit = (comment: string) => {
+    console.log('Action submitted with comment:', comment)
+    // TODO: Handle the comment (e.g., save to API, update job record)
+    const commentAnnotation = {
+      comments: [
+        {
+          commentText: comment,
+          commentHtml: `<p>${comment}</p>`,
+        }
+      ],
+      context: {
+        commentType: 'action',
+        jobStatus: job.status,
+        jobId: job.id,
+        jobName: job.jobName,
+      }
+    };
+    const addCommentAnnotationRequest: AddCommentAnnotationRequest = {
+      annotation: commentAnnotation as CommentAnnotation
+    };
+
+    addCommentAnnotation(addCommentAnnotationRequest);
+
     setActionModal(null)
   }
+  
 
   return (
     <>
