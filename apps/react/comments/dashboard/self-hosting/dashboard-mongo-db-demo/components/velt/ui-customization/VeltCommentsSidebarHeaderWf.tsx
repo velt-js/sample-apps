@@ -16,7 +16,7 @@ const VeltCommentsSidebarHeaderWf = () => {
                         Comments
                     </div>
                     <div className="oe-comment-sidebar-header--id">
-                        OE0001163
+                        <VeltData field="context.jobId" />
                     </div>
                     <VeltIf condition="{unreadCommentAnnotationCount} > 0">
                         <div className="oe-comment-sidebar-header--unread-count">
