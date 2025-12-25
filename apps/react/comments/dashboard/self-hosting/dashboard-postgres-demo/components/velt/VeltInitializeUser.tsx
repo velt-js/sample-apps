@@ -3,7 +3,7 @@
 import { useAppUser } from "@/app/userAuth/useAppUser";
 import type { VeltAuthProvider } from "@veltdev/types";
 import { useMemo, useEffect } from "react";
-import { saveCurrentUserToDB } from "./VeltCommentDataProvider";
+import { saveCurrentUserToDB } from "./VeltDataProvider";
 
 // [Velt] Call your backend API to generate a JWT token for the user
 async function getVeltJwtFromBackend(user: {
