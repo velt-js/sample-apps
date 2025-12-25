@@ -118,6 +118,10 @@ export default function DocumentCanvas() {
           <LineCommentsSidebar
             isOpen={isCommentSidebarOpen}
             selectedJob={selectedJobForComments}
+            onClose={() => {
+              setIsCommentSidebarOpen(false)
+              setSelectedJobForComments(null)
+            }}
           />
         </div>
       </div>

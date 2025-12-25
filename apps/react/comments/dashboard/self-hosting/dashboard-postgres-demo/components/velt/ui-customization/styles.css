@@ -619,11 +619,12 @@ app-comment-sidebar-header {
 
 .oe-comment-sidebar-inline {
   width: 552px;
-  height: 100%;
+  height: calc(100vh - 45px);
   display: flex;
   flex-direction: column;
   background-color: #fff;
   border: 1px solid #0e0e0e14;
+  overflow: hidden;
 }
 
 .velt-button {
@@ -1045,6 +1046,7 @@ app-comment-sidebar-reset-filter-button {
 
 .velt-notifications-panel--list-item {
   padding: 16px 16px 16px 24px !important;
+  border-radius: 0px !important;
 }
 
 .velt-notifications-panel--list-item-timestamp {
