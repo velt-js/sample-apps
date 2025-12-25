@@ -72,13 +72,21 @@ const VeltCommentDialogWf = () => {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-[8px]">
-                                    <VeltIf condition="!{commentDialogSelected}">
+                                    <VeltIf condition="!{commentDialogSelected} && {annotation.context.commentType} === 'jobLevel'">
                                         <div className="oe-comment--metadata">
                                             <MarkRead width={16} height={16} />
-                                            <span className="oe-comment--metadata-label">Field:</span>
-                                            <span className="oe-comment--metadata-label">Status</span>
-                                            <span className="oe-comment--metadata-separator">-</span>
+                                            <span className="oe-comment--metadata-label">Status:</span>
                                             <span className="oe-comment--metadata-label"><VeltData field="annotation.context.jobStatus" /></span>
+                                        </div>
+                                    </VeltIf>
+                                    <VeltIf condition="!{commentDialogSelected} && {annotation.context.commentType} === 'lineItem'">
+                                        <div className="oe-comment--metadata">
+                                            <MarkRead width={16} height={16} />
+                                            <span className="oe-comment--metadata-label">Line:</span>
+                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemDescription" /></span>
+                                            <span className="oe-comment--metadata-label">-</span>
+                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemCurrency" /></span>
+                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemAmount" /></span>
                                         </div>
                                     </VeltIf>
                                     <VeltCommentDialogWireframe.ThreadCard.Message />

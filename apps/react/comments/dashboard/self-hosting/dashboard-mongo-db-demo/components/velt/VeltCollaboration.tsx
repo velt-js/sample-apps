@@ -4,11 +4,14 @@ import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react
 import { useEffect } from "react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
+import { useSelectedJob } from "@/app/document/JobsContext";
 
 export function VeltCollaboration() {
     const { isUserLoggedIn } = useAppUser();
     // [Velt] Get Velt client instance
     const { client } = useVeltClient();
+
+    const selectedJob = useSelectedJob();
 
     // [Velt] Sign out user when user logs out, getting user login state from host app
     useEffect(() => {
@@ -35,7 +38,7 @@ export function VeltCollaboration() {
             // readOnly={true}
             />
             <VeltCommentsSidebar
-                context={{ jobId: `job-page-mode`, jobStatus: 'page comment', commentType: 'action' }}
+                context={{ jobId: selectedJob?.id, jobName: selectedJob?.jobName, jobStatus: selectedJob?.status, commentType: 'jobLevel' }}
                 shadowDom={false}
                 groupConfig={groupConfig}
                 pageMode={true}

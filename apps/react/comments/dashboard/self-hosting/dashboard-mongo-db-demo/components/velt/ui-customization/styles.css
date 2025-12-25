@@ -1127,3 +1127,9 @@ app-notifications-panel-content {
         color: #ffffff !important;
     }
 }
+
+app-if {
+  &:empty {
+    display: none !important;
+  }
+}

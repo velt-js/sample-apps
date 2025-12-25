@@ -49,15 +49,33 @@ const USERS_COLLECTION = 'users';
 
 // Cache connection promise for serverless environments
 let clientPromise: Promise<MongoClient> | null = null;
+let connectionAttempts = 0;
+const MAX_RETRY_ATTEMPTS = 3;
 
 async function getDb(): Promise<Db> {
   if (!clientPromise) {
-    const client = new MongoClient(MONGODB_URI);
-    clientPromise = client.connect();
+    // Limit connection pool to prevent "80% connection limit" warnings on MongoDB Atlas
+    // Default is 100 connections per MongoClient, which can exhaust free/shared tier limits
+    const client = new MongoClient(MONGODB_URI, {
+      maxPoolSize: 5,             // Reduced to 5 for free tier (default: 100)
+      minPoolSize: 1,             // Min connections to keep alive
+      maxIdleTimeMS: 30000,       // Close idle connections after 30 seconds
+      serverSelectionTimeoutMS: 10000, // Timeout for server selection (increased for stability)
+      socketTimeoutMS: 45000,     // Socket timeout
+      retryWrites: true,          // Enable retry writes
+      retryReads: true,           // Enable retry reads
+    });
+    
+    clientPromise = client.connect().catch((err) => {
+      console.error('[MongoDB] Connection failed:', err.message);
+      clientPromise = null; // Reset so next request can retry
+      throw err;
+    });
 
     // Create indexes on first connection
     clientPromise.then(async (connectedClient) => {
       const db = connectedClient.db(DB_NAME);
+      connectionAttempts = 0; // Reset on successful connection
       // Comments indexes
       await db.collection(COMMENTS_COLLECTION).createIndex({ annotationId: 1 }, { unique: true }).catch(() => {});
       await db.collection(COMMENTS_COLLECTION).createIndex({ documentId: 1 }).catch(() => {});
@@ -72,11 +90,24 @@ async function getDb(): Promise<Db> {
       // Users indexes
       await db.collection(USERS_COLLECTION).createIndex({ userId: 1 }, { unique: true }).catch(() => {});
       console.log('[MongoDB] Connected to database:', DB_NAME);
+    }).catch(() => {
+      // Connection failed, will retry on next request
     });
   }
 
-  const client = await clientPromise;
-  return client.db(DB_NAME);
+  try {
+    const client = await clientPromise;
+    return client.db(DB_NAME);
+  } catch (error) {
+    // Reset connection promise on error so next request can retry
+    clientPromise = null;
+    connectionAttempts++;
+    if (connectionAttempts < MAX_RETRY_ATTEMPTS) {
+      console.log(`[MongoDB] Retrying connection (attempt ${connectionAttempts + 1}/${MAX_RETRY_ATTEMPTS})...`);
+      return getDb(); // Retry
+    }
+    throw error;
+  }
 }
 
 export async function getComments(filters: {
