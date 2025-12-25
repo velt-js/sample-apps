@@ -1,41 +1,53 @@
 "use client";
+import { useAppUser } from "@/app/userAuth/AppUserContext";
 import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
+import { useEffect } from "react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
-import { useEffect } from "react";
-import { useAppUser } from "@/app/userAuth/AppUserContext";
+import { useSelectedJob } from "@/app/document/JobsContext";
 
 export function VeltCollaboration() {
-  const { isUserLoggedIn } = useAppUser();
-  // [Velt] Get Velt client instance
-  const { client } = useVeltClient();
+    const { isUserLoggedIn } = useAppUser();
+    // [Velt] Get Velt client instance
+    const { client } = useVeltClient();
 
-  // [Velt] Sign out user when user logs out, getting user login state from host app
-  useEffect(() => {
-    if (isUserLoggedIn === false && client) {
-      client.signOutUser();
-    }
-  }, [isUserLoggedIn, client]);
+    const selectedJob = useSelectedJob();
 
-  const groupConfig = {
-    enable: false
-  };
+    // [Velt] Sign out user when user logs out, getting user login state from host app
+    useEffect(() => {
+        if (isUserLoggedIn === false && client) {
+            client.signOutUser();
+        }
+    }, [isUserLoggedIn, client]);
 
-  return (
-    <>
-      <VeltInitializeDocument />
-      <VeltComments
-        popoverTriangleComponent={false}
-        popoverMode={true}
-        shadowDom={false}
-        textMode={false}
-        commentPinHighlighter={false}
-        dialogOnHover={false}
-        groupMatchedComments={true}
-      />
-      <VeltCommentsSidebar shadowDom={false} groupConfig={groupConfig} pageMode={true} sortData="asc" focusedThreadMode={true} />
+    const groupConfig = {
+        enable: false
+    };
 
-      <VeltCustomization />
-    </>
-  );
+    return (
+        <>
+            <VeltInitializeDocument />
+            <VeltComments
+                popoverTriangleComponent={false}
+                popoverMode={true}
+                shadowDom={false}
+                textMode={false}
+                commentPinHighlighter={false}
+                dialogOnHover={false}
+                groupMatchedComments={true}
+            // readOnly={true}
+            />
+            <VeltCommentsSidebar
+                context={{ jobId: selectedJob?.id, jobName: selectedJob?.jobName, jobStatus: selectedJob?.status, commentType: 'jobLevel' }}
+                shadowDom={false}
+                groupConfig={groupConfig}
+                pageMode={true}
+                sortData="asc"
+                focusedThreadMode={true}
+            // readOnly={true}
+            />
+
+            <VeltCustomization />
+        </>
+    );
 }

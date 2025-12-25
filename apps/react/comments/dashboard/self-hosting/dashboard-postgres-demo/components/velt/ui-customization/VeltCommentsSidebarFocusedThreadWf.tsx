@@ -20,20 +20,37 @@ const VeltCommentsSidebarFocusedThreadWf = () => {
                 </div>
             </div>
             <div className="oe-comment--metadata-container">
-                <div className="oe-comment--metadata">
-                    <MarkRead width={16} height={16} />
-                    <span className="oe-comment--metadata-label">Field:</span>
-                    <span className="oe-comment--metadata-label">Status</span>
-                    <span className="oe-comment--metadata-separator">-</span>
-                    <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.jobStatus" /></span>
-                    <div className="ml-auto pl-[2px] border-l border-gray-400">
-                        <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
-                            <div className="p-[4px]">
-                                <Close width={16} height={16} />
-                            </div>
-                        </VeltCommentsSidebarWireframe.FocusedThread.BackButton>
+                <VeltIf condition="!{commentDialogSelected} && {focusedAnnotation.context.commentType} === 'jobLevel'">
+                    <div className="oe-comment--metadata">
+                        <MarkRead width={16} height={16} />
+                        <span className="oe-comment--metadata-label">Status:</span>
+                        <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.jobStatus" /></span>
+                        <div className="ml-auto pl-[2px] border-l border-gray-400">
+                            <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
+                                <div className="p-[4px]">
+                                    <Close width={16} height={16} />
+                                </div>
+                            </VeltCommentsSidebarWireframe.FocusedThread.BackButton>
+                        </div>
                     </div>
-                </div>
+                </VeltIf>
+                <VeltIf condition="!{commentDialogSelected} && {focusedAnnotation.context.commentType} === 'lineItem'">
+                    <div className="oe-comment--metadata">
+                        <MarkRead width={16} height={16} />
+                        <span className="oe-comment--metadata-label">Line:</span>
+                        <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.lineItemDescription" /></span>
+                        <span className="oe-comment--metadata-label">-</span>
+                        <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.lineItemCurrency" /></span>
+                        <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.lineItemAmount" /></span>
+                        <div className="ml-auto pl-[2px] border-l border-gray-400">
+                            <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
+                                <div className="p-[4px]">
+                                    <Close width={16} height={16} />
+                                </div>
+                            </VeltCommentsSidebarWireframe.FocusedThread.BackButton>
+                        </div>
+                    </div>
+                </VeltIf>
             </div>
 
             <VeltCommentsSidebarWireframe.FocusedThread.DialogContainer />

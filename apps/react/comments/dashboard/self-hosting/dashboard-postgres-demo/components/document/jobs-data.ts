@@ -3,21 +3,26 @@ import { Job } from './types'
 export const jobsData: Job[] = [
   {
     id: 'OE0001',
-    cost: '',
+    jobName: 'Ocean Freight PM Kit Order',
+    cost: '€3,479.08',
     comments: 0,
-    ownership: { color: '#10B981', initials: 'E', name: 'Ocean Freight - ...' },
-    due: '...',
+    ownership: { color: '#10B981', initials: 'E', name: 'Ocean Freight' },
+    due: '15 days',
     approver: null,
     policy: 'AP Eur Matched Appr...',
     status: 'Matching',
     statusType: 'default',
     lineItems: [
-      { id: 'li-1', description: 'Container shipping fee', quantity: 1, unitPrice: 1200, total: 1200 },
-      { id: 'li-2', description: 'Port handling charges', quantity: 2, unitPrice: 150, total: 300 },
+      { id: 'li-1', description: 'MQC PM Kit', quantity: 1, currency: 'EUR', unit: 'Each', unitPrice: 79.73, discountPercent: 0, amtPreTax: 79.73, taxPercent: 0, amount: 79.73 },
+      { id: 'li-2', description: 'PROX SLS 6100 PM KIT', quantity: 1, currency: 'EUR', unit: 'Each', unitPrice: 2174.35, discountPercent: 0, amtPreTax: 2174.35, taxPercent: 0, amount: 2174.35 },
+      { id: 'li-3', description: 'Container Seal Assembly', quantity: 4, currency: 'EUR', unit: 'Each', unitPrice: 125.00, discountPercent: 5, amtPreTax: 475.00, taxPercent: 0, amount: 475.00 },
+      { id: 'li-4', description: 'Cargo Documentation Set', quantity: 1, currency: 'EUR', unit: 'Each', unitPrice: 450.00, discountPercent: 0, amtPreTax: 450.00, taxPercent: 0, amount: 450.00 },
+      { id: 'li-5', description: 'Terminal Service Fee', quantity: 2, currency: 'EUR', unit: 'Each', unitPrice: 150.00, discountPercent: 0, amtPreTax: 300.00, taxPercent: 0, amount: 300.00 },
     ]
   },
   {
     id: 'OE0002',
+    jobName: 'Marketing Materials Q4',
     cost: '$2,875.93',
     comments: 32,
     ownership: { color: '#EC4899', initials: 'R', name: 'Commercial' },
@@ -29,13 +34,16 @@ export const jobsData: Job[] = [
     status: 'Review & approve',
     statusType: 'review',
     lineItems: [
-      { id: 'li-1', description: 'Marketing materials', quantity: 500, unitPrice: 2.5, total: 1250 },
-      { id: 'li-2', description: 'Printing services', quantity: 1, unitPrice: 875.93, total: 875.93 },
-      { id: 'li-3', description: 'Design consultation', quantity: 3, unitPrice: 250, total: 750 },
+      { id: 'li-1', description: 'Marketing Display Stand', quantity: 10, currency: 'USD', unit: 'Each', unitPrice: 125.00, discountPercent: 10, amtPreTax: 1125.00, taxPercent: 8, poNumber: 'PO-2024-001', amount: 1215.00 },
+      { id: 'li-2', description: 'Premium Brochure Pack', quantity: 500, currency: 'USD', unit: 'Each', unitPrice: 2.50, discountPercent: 0, amtPreTax: 1250.00, taxPercent: 8, poNumber: 'PO-2024-001', amount: 1350.00 },
+      { id: 'li-3', description: 'Corporate Gift Set', quantity: 25, currency: 'USD', unit: 'Each', unitPrice: 45.00, discountPercent: 5, amtPreTax: 1068.75, taxPercent: 8, poNumber: 'PO-2024-002', amount: 1154.25 },
+      { id: 'li-4', description: 'Event Banner Large', quantity: 3, currency: 'USD', unit: 'Each', unitPrice: 250.00, discountPercent: 0, amtPreTax: 750.00, taxPercent: 8, amount: 810.00 },
+      { id: 'li-5', description: 'Digital Asset License', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 875.93, discountPercent: 0, amtPreTax: 875.93, taxPercent: 0, amount: 875.93 },
     ]
   },
   {
     id: 'OE0003',
+    jobName: 'Office Furniture Upgrade',
     cost: '$1,729.18',
     comments: 2,
     ownership: { color: '#8B5CF6', initials: 'WW', name: 'General AP' },
@@ -45,12 +53,15 @@ export const jobsData: Job[] = [
     status: 'Pending',
     statusType: 'pending',
     lineItems: [
-      { id: 'li-1', description: 'Office supplies', quantity: 10, unitPrice: 89.50, total: 895 },
-      { id: 'li-2', description: 'Equipment maintenance', quantity: 1, unitPrice: 834.18, total: 834.18 },
+      { id: 'li-1', description: 'Office Chair Ergonomic', quantity: 5, currency: 'USD', unit: 'Each', unitPrice: 289.00, discountPercent: 15, amtPreTax: 1228.25, taxPercent: 7, poNumber: 'PO-OFF-101', amount: 1314.23 },
+      { id: 'li-2', description: 'Desk Lamp LED', quantity: 10, currency: 'USD', unit: 'Each', unitPrice: 42.00, discountPercent: 0, amtPreTax: 420.00, taxPercent: 7, poNumber: 'PO-OFF-101', amount: 449.40 },
+      { id: 'li-3', description: 'Monitor Stand Adjustable', quantity: 8, currency: 'USD', unit: 'Each', unitPrice: 65.00, discountPercent: 10, amtPreTax: 468.00, taxPercent: 7, amount: 500.76 },
+      { id: 'li-4', description: 'Wireless Keyboard Set', quantity: 12, currency: 'USD', unit: 'Set', unitPrice: 85.00, discountPercent: 0, amtPreTax: 1020.00, taxPercent: 7, poNumber: 'PO-OFF-102', amount: 1091.40 },
     ]
   },
   {
     id: 'OE0004',
+    jobName: 'Packaging Supplies Restock',
     cost: '$2,432.82',
     comments: 0,
     ownership: { color: '#F59E0B', initials: 'RS', name: 'Packaged Goods' },
@@ -62,13 +73,16 @@ export const jobsData: Job[] = [
     status: 'Review & approve',
     statusType: 'review',
     lineItems: [
-      { id: 'li-1', description: 'Packaging materials', quantity: 1000, unitPrice: 1.25, total: 1250 },
-      { id: 'li-2', description: 'Label printing', quantity: 5000, unitPrice: 0.15, total: 750 },
-      { id: 'li-3', description: 'Shipping boxes', quantity: 100, unitPrice: 4.33, total: 432.82 },
+      { id: 'li-1', description: 'Corrugated Box Small', quantity: 500, currency: 'USD', unit: 'Box', unitPrice: 1.25, discountPercent: 0, amtPreTax: 625.00, taxPercent: 0, poNumber: 'PO-PKG-200', amount: 625.00 },
+      { id: 'li-2', description: 'Corrugated Box Medium', quantity: 300, currency: 'USD', unit: 'Box', unitPrice: 2.15, discountPercent: 5, amtPreTax: 612.75, taxPercent: 0, poNumber: 'PO-PKG-200', amount: 612.75 },
+      { id: 'li-3', description: 'Bubble Wrap Roll 100m', quantity: 25, currency: 'USD', unit: 'Roll', unitPrice: 28.00, discountPercent: 0, amtPreTax: 700.00, taxPercent: 0, poNumber: 'PO-PKG-201', amount: 700.00 },
+      { id: 'li-4', description: 'Packing Tape Industrial', quantity: 48, currency: 'USD', unit: 'Roll', unitPrice: 8.50, discountPercent: 10, amtPreTax: 367.20, taxPercent: 0, amount: 367.20 },
+      { id: 'li-5', description: 'Custom Label Printing', quantity: 5000, currency: 'USD', unit: 'Each', unitPrice: 0.15, discountPercent: 0, amtPreTax: 750.00, taxPercent: 0, poNumber: 'PO-PKG-202', amount: 750.00 },
     ]
   },
   {
     id: 'OE0005',
+    jobName: 'Steel Beam Import Shipment',
     cost: '$16,431.76',
     comments: 0,
     ownership: { color: '#8B5CF6', initials: 'MJ', name: 'Ocean Freight - ...' },
@@ -80,13 +94,15 @@ export const jobsData: Job[] = [
     status: 'Review & approve',
     statusType: 'review',
     lineItems: [
-      { id: 'li-1', description: 'Steel beams shipment', quantity: 50, unitPrice: 250, total: 12500 },
-      { id: 'li-2', description: 'Insurance premium', quantity: 1, unitPrice: 2431.76, total: 2431.76 },
-      { id: 'li-3', description: 'Customs clearance', quantity: 1, unitPrice: 1500, total: 1500 },
+      { id: 'li-1', description: 'Steel Beam H-Section', quantity: 50, currency: 'USD', unit: 'Ton', unitPrice: 250.00, discountPercent: 0, amtPreTax: 12500.00, taxPercent: 5, poNumber: 'PO-STL-500', amount: 13125.00 },
+      { id: 'li-2', description: 'Marine Insurance Premium', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 2431.76, discountPercent: 0, amtPreTax: 2431.76, taxPercent: 0, amount: 2431.76 },
+      { id: 'li-3', description: 'Customs Clearance Fee', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 1500.00, discountPercent: 0, amtPreTax: 1500.00, taxPercent: 0, poNumber: 'PO-STL-500', amount: 1500.00 },
+      { id: 'li-4', description: 'Heavy Lift Crane Service', quantity: 2, currency: 'USD', unit: 'Hour', unitPrice: 1800.00, discountPercent: 0, amtPreTax: 3600.00, taxPercent: 5, amount: 3780.00 },
     ]
   },
   {
     id: 'OE0006',
+    jobName: 'Organic Protein Bulk Order',
     cost: '$115,472.51',
     comments: 5,
     ownership: { color: '#10B981', initials: 'SC', name: '3rd Party Suppli...' },
@@ -97,13 +113,14 @@ export const jobsData: Job[] = [
     status: 'Conflict',
     statusType: 'conflict',
     lineItems: [
-      { id: 'li-1', description: 'Bulk protein powder', quantity: 10000, unitPrice: 8.50, total: 85000 },
-      { id: 'li-2', description: 'Quality testing', quantity: 1, unitPrice: 5472.51, total: 5472.51 },
-      { id: 'li-3', description: 'Expedited shipping', quantity: 1, unitPrice: 25000, total: 25000 },
+      { id: 'li-1', description: 'Organic Protein Powder', quantity: 10000, currency: 'USD', unit: 'Kg', unitPrice: 8.50, discountPercent: 0, amtPreTax: 85000.00, taxPercent: 0, poNumber: 'PO-VEG-001', amount: 85000.00 },
+      { id: 'li-2', description: 'Quality Lab Testing', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 5472.51, discountPercent: 0, amtPreTax: 5472.51, taxPercent: 0, poNumber: 'PO-VEG-001', amount: 5472.51 },
+      { id: 'li-3', description: 'Expedited Cold Shipping', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 25000.00, discountPercent: 0, amtPreTax: 25000.00, taxPercent: 0, amount: 25000.00 },
     ]
   },
   {
     id: 'OE0007',
+    jobName: 'Trade Show Booth Setup',
     cost: '$5,820.91',
     comments: 0,
     ownership: { color: '#3B82F6', initials: 'JK', name: 'Commercial' },
@@ -113,12 +130,15 @@ export const jobsData: Job[] = [
     status: 'Conflict',
     statusType: 'conflict',
     lineItems: [
-      { id: 'li-1', description: 'Trade show booth rental', quantity: 1, unitPrice: 3500, total: 3500 },
-      { id: 'li-2', description: 'Display materials', quantity: 1, unitPrice: 2320.91, total: 2320.91 },
+      { id: 'li-1', description: 'Trade Show Booth Rental', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 3500.00, discountPercent: 0, amtPreTax: 3500.00, taxPercent: 8, poNumber: 'PO-EVT-100', amount: 3780.00 },
+      { id: 'li-2', description: 'Custom Display Materials', quantity: 1, currency: 'USD', unit: 'Set', unitPrice: 2320.91, discountPercent: 0, amtPreTax: 2320.91, taxPercent: 8, poNumber: 'PO-EVT-100', amount: 2506.58 },
+      { id: 'li-3', description: 'Premium WiFi Package', quantity: 4, currency: 'USD', unit: 'Day', unitPrice: 185.00, discountPercent: 0, amtPreTax: 740.00, taxPercent: 8, amount: 799.20 },
+      { id: 'li-4', description: 'Lead Scanner Device', quantity: 2, currency: 'USD', unit: 'Each', unitPrice: 295.00, discountPercent: 0, amtPreTax: 590.00, taxPercent: 8, amount: 637.20 },
     ]
   },
   {
     id: 'OE0008',
+    jobName: 'Timber Processing Services',
     cost: '$3,711.83',
     comments: 0,
     ownership: { color: '#6366F1', initials: 'EL', name: 'General AP' },
@@ -130,13 +150,15 @@ export const jobsData: Job[] = [
     status: 'Submit for approval',
     statusType: 'submit',
     lineItems: [
-      { id: 'li-1', description: 'Timber processing fee', quantity: 1, unitPrice: 2500, total: 2500 },
-      { id: 'li-2', description: 'Quality inspection', quantity: 1, unitPrice: 711.83, total: 711.83 },
-      { id: 'li-3', description: 'Documentation fee', quantity: 1, unitPrice: 500, total: 500 },
+      { id: 'li-1', description: 'Timber Processing Service', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 2500.00, discountPercent: 0, amtPreTax: 2500.00, taxPercent: 5, poNumber: 'PO-TIM-300', amount: 2625.00 },
+      { id: 'li-2', description: 'Quality Inspection Report', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 711.83, discountPercent: 0, amtPreTax: 711.83, taxPercent: 5, poNumber: 'PO-TIM-300', amount: 747.42 },
+      { id: 'li-3', description: 'Kiln Drying Service', quantity: 1, currency: 'USD', unit: 'Lot', unitPrice: 1800.00, discountPercent: 10, amtPreTax: 1620.00, taxPercent: 5, amount: 1701.00 },
+      { id: 'li-4', description: 'Wood Treatment Chemical', quantity: 50, currency: 'USD', unit: 'Liter', unitPrice: 19.00, discountPercent: 0, amtPreTax: 950.00, taxPercent: 5, amount: 997.50 },
     ]
   },
   {
     id: 'OE0009',
+    jobName: 'Ground Transport Contract',
     cost: '$8,348.07',
     comments: 0,
     ownership: { color: '#3B82F6', initials: 'JK', name: 'N. American Over...' },
@@ -147,12 +169,15 @@ export const jobsData: Job[] = [
     status: 'Dispute',
     statusType: 'dispute',
     lineItems: [
-      { id: 'li-1', description: 'Ground transportation', quantity: 15, unitPrice: 450, total: 6750 },
-      { id: 'li-2', description: 'Fuel surcharge', quantity: 1, unitPrice: 1598.07, total: 1598.07 },
+      { id: 'li-1', description: 'Ground Transport Service', quantity: 15, currency: 'USD', unit: 'Trip', unitPrice: 450.00, discountPercent: 0, amtPreTax: 6750.00, taxPercent: 0, poNumber: 'PO-TRK-400', amount: 6750.00 },
+      { id: 'li-2', description: 'Fuel Surcharge Q4', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 1598.07, discountPercent: 0, amtPreTax: 1598.07, taxPercent: 0, poNumber: 'PO-TRK-400', amount: 1598.07 },
+      { id: 'li-3', description: 'Border Crossing Fee', quantity: 2, currency: 'USD', unit: 'Each', unitPrice: 275.00, discountPercent: 0, amtPreTax: 550.00, taxPercent: 0, amount: 550.00 },
+      { id: 'li-4', description: 'GPS Tracking Monthly', quantity: 3, currency: 'USD', unit: 'Month', unitPrice: 125.00, discountPercent: 20, amtPreTax: 300.00, taxPercent: 0, amount: 300.00 },
     ]
   },
   {
     id: 'OE0010',
+    jobName: 'Long Haul Trucking Route',
     cost: '$11,096.22',
     comments: 3,
     ownership: { color: '#8B5CF6', initials: 'WW', name: 'Trucking' },
@@ -162,12 +187,15 @@ export const jobsData: Job[] = [
     status: 'Verifying',
     statusType: 'default',
     lineItems: [
-      { id: 'li-1', description: 'Long haul trucking', quantity: 3, unitPrice: 3200, total: 9600 },
-      { id: 'li-2', description: 'Loading/unloading', quantity: 6, unitPrice: 249.37, total: 1496.22 },
+      { id: 'li-1', description: 'Long Haul Route A-B', quantity: 3, currency: 'USD', unit: 'Trip', unitPrice: 3200.00, discountPercent: 0, amtPreTax: 9600.00, taxPercent: 0, poNumber: 'PO-HAL-600', amount: 9600.00 },
+      { id: 'li-2', description: 'Loading/Unloading Crew', quantity: 6, currency: 'USD', unit: 'Hour', unitPrice: 249.37, discountPercent: 0, amtPreTax: 1496.22, taxPercent: 0, poNumber: 'PO-HAL-600', amount: 1496.22 },
+      { id: 'li-3', description: 'Driver Per Diem', quantity: 12, currency: 'USD', unit: 'Day', unitPrice: 75.00, discountPercent: 0, amtPreTax: 900.00, taxPercent: 0, amount: 900.00 },
+      { id: 'li-4', description: 'Route Permit Fee', quantity: 3, currency: 'USD', unit: 'Each', unitPrice: 145.00, discountPercent: 0, amtPreTax: 435.00, taxPercent: 0, amount: 435.00 },
     ]
   },
   {
     id: 'OE0011',
+    jobName: 'Q4 Journal Entries',
     cost: '$85,682.06',
     comments: 0,
     ownership: { color: '#3B82F6', initials: 'JK', name: 'Journal entries' },
@@ -179,13 +207,14 @@ export const jobsData: Job[] = [
     status: 'Approvals',
     statusType: 'default',
     lineItems: [
-      { id: 'li-1', description: 'Q4 inventory adjustment', quantity: 1, unitPrice: 45000, total: 45000 },
-      { id: 'li-2', description: 'Depreciation entries', quantity: 1, unitPrice: 25682.06, total: 25682.06 },
-      { id: 'li-3', description: 'Accrual reversal', quantity: 1, unitPrice: 15000, total: 15000 },
+      { id: 'li-1', description: 'Q4 Inventory Adjustment', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 45000.00, discountPercent: 0, amtPreTax: 45000.00, taxPercent: 0, poNumber: 'JE-Q4-001', amount: 45000.00 },
+      { id: 'li-2', description: 'Depreciation Entry Dec', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 25682.06, discountPercent: 0, amtPreTax: 25682.06, taxPercent: 0, poNumber: 'JE-Q4-001', amount: 25682.06 },
+      { id: 'li-3', description: 'Accrual Reversal Entry', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 15000.00, discountPercent: 0, amtPreTax: 15000.00, taxPercent: 0, poNumber: 'JE-Q4-002', amount: 15000.00 },
     ]
   },
   {
     id: 'OE0012',
+    jobName: 'Client Entertainment Event',
     cost: '$7,026.34',
     comments: 0,
     ownership: { color: '#10B981', initials: 'GB', name: 'Commercial' },
@@ -196,13 +225,14 @@ export const jobsData: Job[] = [
     status: 'Approvals',
     statusType: 'default',
     lineItems: [
-      { id: 'li-1', description: 'Client entertainment', quantity: 1, unitPrice: 3500, total: 3500 },
-      { id: 'li-2', description: 'Travel expenses', quantity: 1, unitPrice: 2526.34, total: 2526.34 },
-      { id: 'li-3', description: 'Conference registration', quantity: 2, unitPrice: 500, total: 1000 },
+      { id: 'li-1', description: 'Client Entertainment Event', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 3500.00, discountPercent: 0, amtPreTax: 3500.00, taxPercent: 8, poNumber: 'PO-ENT-700', amount: 3780.00 },
+      { id: 'li-2', description: 'Business Travel Package', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 2526.34, discountPercent: 0, amtPreTax: 2526.34, taxPercent: 8, poNumber: 'PO-ENT-700', amount: 2728.45 },
+      { id: 'li-3', description: 'Conference Registration', quantity: 2, currency: 'USD', unit: 'Person', unitPrice: 500.00, discountPercent: 0, amtPreTax: 1000.00, taxPercent: 0, amount: 1000.00 },
     ]
   },
   {
     id: 'OE0013',
+    jobName: 'Digital Advertising Campaign',
     cost: '$7,026.34',
     comments: 27,
     ownership: { color: '#10B981', initials: 'GB', name: 'Commercial' },
@@ -213,12 +243,15 @@ export const jobsData: Job[] = [
     status: 'Review & approve',
     statusType: 'review',
     lineItems: [
-      { id: 'li-1', description: 'Advertising spend', quantity: 1, unitPrice: 5000, total: 5000 },
-      { id: 'li-2', description: 'Media placement', quantity: 1, unitPrice: 2026.34, total: 2026.34 },
+      { id: 'li-1', description: 'Google Ads Campaign', quantity: 1, currency: 'USD', unit: 'Month', unitPrice: 3500.00, discountPercent: 0, amtPreTax: 3500.00, taxPercent: 0, poNumber: 'PO-MKT-800', amount: 3500.00 },
+      { id: 'li-2', description: 'LinkedIn Sponsored Ads', quantity: 1, currency: 'USD', unit: 'Month', unitPrice: 2200.00, discountPercent: 0, amtPreTax: 2200.00, taxPercent: 0, poNumber: 'PO-MKT-800', amount: 2200.00 },
+      { id: 'li-3', description: 'Media Placement Fee', quantity: 1, currency: 'USD', unit: 'Each', unitPrice: 2026.34, discountPercent: 10, amtPreTax: 1823.71, taxPercent: 0, amount: 1823.71 },
+      { id: 'li-4', description: 'Influencer Partnership', quantity: 2, currency: 'USD', unit: 'Each', unitPrice: 1500.00, discountPercent: 0, amtPreTax: 3000.00, taxPercent: 0, amount: 3000.00 },
     ]
   },
   {
     id: 'OE0014',
+    jobName: 'Strategy Consulting Engagement',
     cost: '$7,026.34',
     comments: 9,
     ownership: { color: '#10B981', initials: 'GB', name: 'Commercial' },
@@ -229,12 +262,14 @@ export const jobsData: Job[] = [
     status: 'Approvals',
     statusType: 'default',
     lineItems: [
-      { id: 'li-1', description: 'Consulting services', quantity: 20, unitPrice: 275, total: 5500 },
-      { id: 'li-2', description: 'Project expenses', quantity: 1, unitPrice: 1526.34, total: 1526.34 },
+      { id: 'li-1', description: 'Strategy Workshop Full', quantity: 2, currency: 'GBP', unit: 'Day', unitPrice: 4500.00, discountPercent: 0, amtPreTax: 9000.00, taxPercent: 20, poNumber: 'PO-CON-900', amount: 10800.00 },
+      { id: 'li-2', description: 'Market Research Report', quantity: 1, currency: 'GBP', unit: 'Each', unitPrice: 6500.00, discountPercent: 5, amtPreTax: 6175.00, taxPercent: 20, poNumber: 'PO-CON-900', amount: 7410.00 },
+      { id: 'li-3', description: 'Process Optimization', quantity: 40, currency: 'GBP', unit: 'Hour', unitPrice: 185.00, discountPercent: 0, amtPreTax: 7400.00, taxPercent: 20, amount: 8880.00 },
     ]
   },
   {
     id: 'OE0015',
+    jobName: 'Enterprise Software Licenses',
     cost: '$7,026.34',
     comments: 0,
     ownership: { color: '#10B981', initials: 'GB', name: 'Commercial' },
@@ -245,8 +280,10 @@ export const jobsData: Job[] = [
     status: 'Approvals',
     statusType: 'default',
     lineItems: [
-      { id: 'li-1', description: 'Software licenses', quantity: 10, unitPrice: 450, total: 4500 },
-      { id: 'li-2', description: 'Support contract', quantity: 1, unitPrice: 2526.34, total: 2526.34 },
+      { id: 'li-1', description: 'Enterprise License Annual', quantity: 10, currency: 'USD', unit: 'User', unitPrice: 450.00, discountPercent: 15, amtPreTax: 3825.00, taxPercent: 0, poNumber: 'PO-SFT-050', amount: 3825.00 },
+      { id: 'li-2', description: 'Cloud Hosting Premium', quantity: 1, currency: 'USD', unit: 'Year', unitPrice: 8400.00, discountPercent: 0, amtPreTax: 8400.00, taxPercent: 0, poNumber: 'PO-SFT-050', amount: 8400.00 },
+      { id: 'li-3', description: 'Support Contract Gold', quantity: 1, currency: 'USD', unit: 'Year', unitPrice: 2526.34, discountPercent: 0, amtPreTax: 2526.34, taxPercent: 0, poNumber: 'PO-SFT-051', amount: 2526.34 },
+      { id: 'li-4', description: 'Security Suite License', quantity: 50, currency: 'USD', unit: 'User', unitPrice: 85.00, discountPercent: 10, amtPreTax: 3825.00, taxPercent: 0, amount: 3825.00 },
     ]
   },
 ]

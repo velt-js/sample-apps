@@ -133,3 +133,33 @@ export const CommentIcon = ({ count = 0, hasUnread = false, className = '' }: Co
     )}
   </div>
 )
+
+// JobDetail icons
+export const BackIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.5 15L7.5 10L12.5 5" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+export const GLIcon = () => (
+  <span className="text-[11px] font-medium text-gray-400">GL</span>
+)
+
+export const TagIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13.3 8.5L8.5 13.3C8.1 13.7 7.5 13.7 7.1 13.3L2 8.2V2H8.2L13.3 7.1C13.7 7.5 13.7 8.1 13.3 8.5Z" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="5" cy="5" r="1" fill="#9CA3AF"/>
+  </svg>
+)
+
+export const LineCommentIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 10.67C14 11.03 13.86 11.38 13.61 11.64C13.36 11.9 13.01 12.03 12.67 12.03H4.67L2 14.67V3.33C2 2.97 2.14 2.62 2.39 2.36C2.64 2.1 2.99 1.97 3.33 1.97H12.67C13.01 1.97 13.36 2.1 13.61 2.36C13.86 2.62 14 2.97 14 3.33V10.67Z" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+export const EditIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.33 2C11.51 1.82 11.72 1.68 11.96 1.58C12.2 1.48 12.45 1.43 12.71 1.43C12.97 1.43 13.23 1.48 13.46 1.58C13.7 1.68 13.91 1.82 14.09 2C14.27 2.18 14.41 2.39 14.51 2.63C14.61 2.87 14.66 3.12 14.66 3.38C14.66 3.64 14.61 3.89 14.51 4.13C14.41 4.37 14.27 4.58 14.09 4.76L5.05 13.8L1.33 14.67L2.2 10.95L11.33 2Z" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)

@@ -1,54 +1,30 @@
-import { useCurrentUser, useGetCommentAnnotations } from '@veltdev/react'
+import { useCurrentUser, useGetCommentAnnotations, useCommentAnnotationsCount } from '@veltdev/react'
 import { ChevronDownIcon, GearIcon, CommentIcon } from './icons'
 import { Avatar } from './Avatar'
 import { StatusBadge } from './StatusBadge'
 import { DueBadge } from './DueBadge'
 import { Job } from './types'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 interface JobsTableProps {
   jobs: Job[]
   onJobClick: (job: Job) => void
-  onRowClick: (job: Job) => void
 }
 
-export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
-  const veltUser = useCurrentUser();
-  const commentAnnotations = useGetCommentAnnotations();
+export const JobsTable = ({ jobs, onJobClick }: JobsTableProps) => {
 
-  // Create a map of targetElementId -> { count, hasUnread }
-  const annotationDataByTargetId = useMemo(() => {
-    const dataMap: Record<string, { count: number; hasUnread: boolean }> = {};
-    if (commentAnnotations?.data) {
-      // Iterate through all document arrays
-      Object.values(commentAnnotations.data).forEach((annotations: any[]) => {
-        annotations.forEach((annotation) => {
-          const targetId = annotation.targetElementId;
-          if (targetId) {
-            if (!dataMap[targetId]) {
-              dataMap[targetId] = { count: 0, hasUnread: false };
-            }
-            dataMap[targetId].count += 1;
-            
-            // Only compute unread status if user is available AND viewedBy data is loaded
-            // Without user or viewedBy data, we can't determine unread state, so default to false (read)
-            if (veltUser?.userId && annotation.viewedBy !== undefined) {
-              const isViewedByCurrentUser = annotation.viewedBy.some(
-                (viewer: any) => viewer.userId === veltUser.userId
-              );
-              
-              // If any annotation is unread, mark hasUnread as true
-              if (!isViewedByCurrentUser) {
-                dataMap[targetId].hasUnread = true;
-              }
-            }
-          }
-        });
-      });
+  // Get document IDs from the current page's jobs (max 30)
+  const jobDocumentIds = useMemo(() => jobs.slice(0, 30).map(job => job.id), [jobs]);
+
+  const { data: commentAnnotationsCount } = useCommentAnnotationsCount({
+    documentIds: jobDocumentIds
+  });
+  
+  useEffect(() => {
+    if (commentAnnotationsCount) {
+      console.log('Comment annotations count for multiple documents:', commentAnnotationsCount);
     }
-    return dataMap;
-  }, [commentAnnotations, veltUser?.userId]);
-
+  }, [commentAnnotationsCount]);
 
   return (
     <div className="flex-1 overflow-auto px-8">
@@ -116,12 +92,11 @@ export const JobsTable = ({ jobs, onJobClick, onRowClick }: JobsTableProps) => {
                     shadowDom={false}
                   /> */}
                   {(() => {
-                    const data = annotationDataByTargetId[`job-${job.id}`];
-                    const count = data?.count || 0;
-                    const hasUnread = data?.hasUnread || false;
+                    const data = commentAnnotationsCount?.[job.id];
+                    const count = data?.total || 0;
+                    const hasUnread = (data?.unread || 0) > 0;
                     return (
                       <button 
-                        onClick={() => onRowClick(job)}
                         className="flex items-center justify-center px-1 py-1.5 hover:bg-gray-100 rounded transition-colors"
                         aria-label="View comments"
                       >

@@ -1,4 +1,4 @@
-import { VeltNotificationsPanelWireframe, VeltData } from "@veltdev/react";
+import { VeltNotificationsPanelWireframe, VeltData, VeltIf } from "@veltdev/react";
 import { MarkRead } from "./Icons";
 
 
@@ -17,12 +17,26 @@ const VeltNotificationListItemWf = () => {
                     <VeltNotificationsPanelWireframe.Content.List.Item.Unread />
 
                 </div>
-                <div className="oe-comment--metadata oe-notification--metadata">
-                    <MarkRead width={16} height={16} />
-                    <span className="oe-comment--metadata-label">Field:</span>
-                    <span className="oe-comment--metadata-label">Status</span>
-                    <span className="oe-comment--metadata-separator">-</span>
-                    <span className="oe-comment--metadata-label"><VeltData field="notification.notificationSourceData.context.jobStatus" /></span>
+
+
+            <div className="flex flex-col gap-[8px] w-full">
+                <VeltIf condition="!{commentDialogSelected} && {notification.notificationSourceData.context.commentType} === 'jobLevel'">
+                    <div className="oe-comment--metadata oe-notification--metadata">
+                        <MarkRead width={16} height={16} />
+                        <span className="oe-comment--metadata-label">Status:</span>
+                        <span className="oe-comment--metadata-label"><VeltData field="notification.notificationSourceData.context.jobStatus" /></span>
+                    </div>
+                </VeltIf>
+                <VeltIf condition="!{commentDialogSelected} && {notification.notificationSourceData.context.commentType} === 'lineItem'">
+                    <div className="oe-comment--metadata oe-notification--metadata">
+                        <MarkRead width={16} height={16} />
+                        <span className="oe-comment--metadata-label">Line:</span>
+                        <span className="oe-comment--metadata-label"><VeltData field="notification.notificationSourceData.context.lineItemDescription" /></span>
+                        <span className="oe-comment--metadata-label">-</span>
+                        <span className="oe-comment--metadata-label"><VeltData field="notification.notificationSourceData.context.lineItemCurrency" /></span>
+                        <span className="oe-comment--metadata-label"><VeltData field="notification.notificationSourceData.context.lineItemAmount" /></span>
+                    </div>
+                </VeltIf>
                 </div>
                 <VeltNotificationsPanelWireframe.Content.List.Item.Body />
             </div>
