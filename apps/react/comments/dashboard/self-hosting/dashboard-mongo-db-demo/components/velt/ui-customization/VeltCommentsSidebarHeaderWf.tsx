@@ -16,9 +16,7 @@ const VeltCommentsSidebarHeaderWf = () => {
                         Comments
                     </div>
                     <div className="oe-comment-sidebar-header--id">
-                        OE0001163 <VeltData field="documentId" />
-                        <VeltData field="document.metadata.documentName" />
-                        <VeltData field="document.metadata.documentId" />
+                        OE0001163
                     </div>
                     <VeltIf condition="{unreadCommentAnnotationCount} > 0">
                         <div className="oe-comment-sidebar-header--unread-count">

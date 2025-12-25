@@ -129,24 +129,16 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
             }
             dataMap[targetId].count += 1;
             
-            // Only compute unread status if user is available AND viewedBy data is loaded
-            // Without user or viewedBy data, we can't determine unread state, so default to false (read)
-            if (veltUser?.userId && annotation.viewedBy !== undefined) {
-              const isViewedByCurrentUser = annotation.viewedBy.some(
-                (viewer: any) => viewer.userId === veltUser.userId
-              );
-              
-              // If any annotation is unread, mark hasUnread as true
-              if (!isViewedByCurrentUser) {
-                dataMap[targetId].hasUnread = true;
-              }
+            // Use the pre-computed unread property from the annotation
+            if (annotation.unread) {
+              dataMap[targetId].hasUnread = true;
             }
           }
         });
       });
     }
     return dataMap;
-  }, [commentAnnotations, veltUser?.userId]);
+  }, [commentAnnotations]);
 
   // Velt button click listener
   const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');

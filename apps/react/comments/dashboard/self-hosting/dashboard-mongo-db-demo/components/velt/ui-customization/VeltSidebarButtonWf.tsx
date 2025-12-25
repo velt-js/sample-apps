@@ -1,15 +1,25 @@
 "use client";
-import { VeltSidebarButtonWireframe } from '@veltdev/react';
-import { MessageSquare } from 'lucide-react';
+import { VeltSidebarButtonWireframe,  } from '@veltdev/react';
 
 const VeltSidebarButtonWf = () => {
     return (
         <VeltSidebarButtonWireframe>
-            <div className="flex items-center gap-2 ">
+            <div className="flex items-center gap-0.5">
                 <div className='relative'>
-                    <MessageSquare className="w-5 h-5" />
-                </div>
-                <span><VeltSidebarButtonWireframe.CommentsCount /></span>
+                    <VeltSidebarButtonWireframe.Icon>
+                        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path 
+                                d="M14 10.5c0 .398-.158.78-.44 1.06-.28.282-.662.44-1.06.44H4.5L2 14.5V4c0-.398.158-.78.44-1.06.28-.282.662-.44 1.06-.44h9c.398 0 .78.158 1.06.44.282.28.44.662.44 1.06v6.5z" 
+                                stroke="#777572" 
+                                strokeWidth="1.25" 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                    </VeltSidebarButtonWireframe.Icon>
+                    <VeltSidebarButtonWireframe.UnreadIcon />
+               </div>
+            <span className="text-[#777572] text-sm font-medium"><VeltSidebarButtonWireframe.CommentsCount /></span>
             </div>
         </VeltSidebarButtonWireframe>
     );
