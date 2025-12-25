@@ -32,7 +32,7 @@
     "@types/node": "^22.18.13",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@veltdev/types": "^4.5.8-beta.8",
+    "@veltdev/types": "^4.6.10",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.38.0",
     "eslint-config-next": "^16.0.1",

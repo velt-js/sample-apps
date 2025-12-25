@@ -66,8 +66,6 @@ function hashString(str: string): string {
 
 // Generate a random user with deterministic ID based on name
 function generateRandomUser(): User {
-  const avatarColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
-
   const firstNames = ['Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Riley', 'Avery'];
   const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis'];
 
@@ -80,16 +78,12 @@ function generateRandomUser(): User {
   // This ensures "Alex Smith" always gets the same ID
   const userId = `user-${hashString(fullName)}`;
 
-  // Use deterministic color based on userId for consistent photoUrl
-  const colorIndex = hashStringToIndex(userId, avatarColors.length);
-  const avatarColor = avatarColors[colorIndex];
-
   return {
     userId: userId,
     name: fullName,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
-    organizationId: "sample-apps-demo-org",
-    photoUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=${avatarColor.substring(1)}&color=fff&size=128`,
+    organizationId: "self-hosting-postgres-demo-org",
+    color: "#3649B9",
   };
 }
 

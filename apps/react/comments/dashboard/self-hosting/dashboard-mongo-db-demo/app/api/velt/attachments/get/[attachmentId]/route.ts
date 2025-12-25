@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAttachment } from '../../../comments/store';
+import { getAttachment } from '../../../store';
 
 // Sanitize filename to prevent header injection
 function sanitizeFilename(filename: string): string {
@@ -21,7 +21,7 @@ export async function GET(
       return NextResponse.json({ success: false, error: 'Invalid attachment ID' }, { status: 400 });
     }
 
-    console.log('[Velt API] GET attachment:', attachmentIdNum);
+    console.log('[Velt Self-hosting BE API] GET attachment:', attachmentIdNum);
 
     const attachment = await getAttachment(attachmentIdNum);
 
@@ -57,7 +57,7 @@ export async function GET(
       },
     });
   } catch (error) {
-    console.error('[Velt API] Error getting attachment:', error);
+    console.error('[Velt Self-hosting BE API] Error getting attachment:', error);
     return NextResponse.json({ success: false, error: 'Failed to get attachment' }, { status: 500 });
   }
 }
