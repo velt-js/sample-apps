@@ -202,7 +202,7 @@ importers:
   apps/react/comments/dashboard/custom/dashboard-demo:
     dependencies:
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       clsx:
         specifier: ^2
@@ -230,7 +230,7 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10
@@ -254,7 +254,7 @@ importers:
   apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo:
     dependencies:
       '@veltdev/react':
-        specifier: ^4.6.7-beta.1
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       clsx:
         specifier: ^2
@@ -288,7 +288,7 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.6.7-beta.1
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10
@@ -422,7 +422,7 @@ importers:
         specifier: ^3.35.0
         version: 3.35.0(react@19.2.3)
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       ag-grid-community:
         specifier: ^34.3.0
@@ -456,7 +456,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -483,7 +483,7 @@ importers:
         specifier: ^3.35.0
         version: 3.35.0(react@19.2.3)
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       ag-grid-community:
         specifier: ^34.3.0
@@ -517,7 +517,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -544,7 +544,7 @@ importers:
         specifier: ^3.35.0
         version: 3.35.0(react@19.2.3)
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       ag-grid-community:
         specifier: ^34.3.0
@@ -578,7 +578,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -608,7 +608,7 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       clsx:
         specifier: ^2.1.1
@@ -636,7 +636,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -666,7 +666,7 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       clsx:
         specifier: ^2.1.1
@@ -694,7 +694,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -724,7 +724,7 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       clsx:
         specifier: ^2.1.1
@@ -752,7 +752,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -797,7 +797,7 @@ importers:
         specifier: 4.5.2-beta.2
         version: 4.5.2-beta.2(lexical@0.19.0)
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       clsx:
         specifier: ^2.1.1
@@ -828,7 +828,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -855,7 +855,7 @@ importers:
         specifier: ^4.5.8-beta.8
         version: 4.6.10
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/slate-velt-comments':
         specifier: ^1.0.3
@@ -895,7 +895,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -934,7 +934,7 @@ importers:
         specifier: ^2.26.4
         version: 2.27.1
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/tiptap-velt-comments':
         specifier: 4.5.8-beta.1
@@ -965,7 +965,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -989,7 +989,7 @@ importers:
   apps/react/crdt/canvas/reactflow/reactflow-demo:
     dependencies:
       '@veltdev/react':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/reactflow-crdt':
         specifier: 4.5.8-beta.1
@@ -1032,7 +1032,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -1120,7 +1120,7 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10.4.21
@@ -1165,10 +1165,10 @@ importers:
         specifier: 4.5.8
         version: 4.5.8(@veltdev/codemirror-crdt@4.5.8)(@veltdev/react@4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@veltdev/types@4.6.10)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/react':
-        specifier: ^4.5.9
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       clsx:
         specifier: ^2
@@ -1241,7 +1241,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.7(yjs@13.6.28))(yjs@13.6.28)
       '@veltdev/react':
-        specifier: ^4.6.1
+        specifier: ^4.6.10
         version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@veltdev/tiptap-crdt':
         specifier: ^4.5.9-beta.2
@@ -1284,7 +1284,7 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.7)
       '@veltdev/types':
-        specifier: ^4.5.8-beta.8
+        specifier: ^4.6.10
         version: 4.6.10
       autoprefixer:
         specifier: ^10
