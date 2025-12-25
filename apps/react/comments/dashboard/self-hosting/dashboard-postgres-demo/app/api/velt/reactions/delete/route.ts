@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { reactionAnnotationId } = body;
 
-    console.log('[Velt API] DELETE reaction:', reactionAnnotationId);
+    console.log('[Velt Selfhosting] DELETE reaction:', reactionAnnotationId);
 
     if (!reactionAnnotationId) {
       return NextResponse.json({ success: false, error: 'No reaction annotation ID provided' }, { status: 400 });
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     await deleteReaction(reactionAnnotationId);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('[Velt API] Error deleting reaction:', error);
+    console.error('[Velt Selfhosting] Error deleting reaction:', error);
     return NextResponse.json({ success: false, error: 'Failed to delete' }, { status: 500 });
   }
 }

@@ -3,15 +3,21 @@
 
 import { MongoClient, Db } from 'mongodb';
 
-export type CommentAnnotation = {
+export type PartialCommentAnnotation = {
   annotationId: string;
   documentId?: string;
   organizationId?: string;
   metadata?: unknown;
-  comments: Record<string, { commentId: string | number; commentHtml?: string; commentText?: string }>;
+  comments: Record<string, PartialComment>;
 };
 
-export type ReactionAnnotation = {
+export type PartialComment = {
+  commentId: string | number;
+  commentHtml?: string;
+  commentText?: string;
+};
+
+export type PartialReactionAnnotation = {
   annotationId: string;
   documentId?: string;
   organizationId?: string;
@@ -19,7 +25,7 @@ export type ReactionAnnotation = {
   icon?: string;
 };
 
-export type Attachment = {
+export type PartialAttachment = {
   attachmentId: number;
   name?: string;
   url?: string;
@@ -39,7 +45,7 @@ export type User = {
 };
 
 // MongoDB Atlas connection string
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/?appName=Cluster0&retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/?appName=Cluster0&retryWrites=true&w=majority';
 const DB_NAME = 'velt_comments';
 const COMMENTS_COLLECTION = 'comment_annotations';
 const REACTIONS_COLLECTION = 'reaction_annotations';
@@ -54,22 +60,24 @@ async function getDb(): Promise<Db> {
     const client = new MongoClient(MONGODB_URI);
     clientPromise = client.connect();
 
-    // Create indexes on first connection
+    // Create indexes on first connection (all in parallel)
     clientPromise.then(async (connectedClient) => {
       const db = connectedClient.db(DB_NAME);
-      // Comments indexes
-      await db.collection(COMMENTS_COLLECTION).createIndex({ annotationId: 1 }, { unique: true }).catch(() => {});
-      await db.collection(COMMENTS_COLLECTION).createIndex({ documentId: 1 }).catch(() => {});
-      await db.collection(COMMENTS_COLLECTION).createIndex({ organizationId: 1 }).catch(() => {});
-      // Reactions indexes
-      await db.collection(REACTIONS_COLLECTION).createIndex({ annotationId: 1 }, { unique: true }).catch(() => {});
-      await db.collection(REACTIONS_COLLECTION).createIndex({ documentId: 1 }).catch(() => {});
-      await db.collection(REACTIONS_COLLECTION).createIndex({ organizationId: 1 }).catch(() => {});
-      // Attachments indexes
-      await db.collection(ATTACHMENTS_COLLECTION).createIndex({ attachmentId: 1 }, { unique: true }).catch(() => {});
-      await db.collection(ATTACHMENTS_COLLECTION).createIndex({ documentId: 1 }).catch(() => {});
-      // Users indexes
-      await db.collection(USERS_COLLECTION).createIndex({ userId: 1 }, { unique: true }).catch(() => {});
+      await Promise.all([
+        // Comments indexes
+        db.collection(COMMENTS_COLLECTION).createIndex({ annotationId: 1 }, { unique: true }),
+        db.collection(COMMENTS_COLLECTION).createIndex({ documentId: 1 }),
+        db.collection(COMMENTS_COLLECTION).createIndex({ organizationId: 1 }),
+        // Reactions indexes
+        db.collection(REACTIONS_COLLECTION).createIndex({ annotationId: 1 }, { unique: true }),
+        db.collection(REACTIONS_COLLECTION).createIndex({ documentId: 1 }),
+        db.collection(REACTIONS_COLLECTION).createIndex({ organizationId: 1 }),
+        // Attachments indexes
+        db.collection(ATTACHMENTS_COLLECTION).createIndex({ attachmentId: 1 }, { unique: true }),
+        db.collection(ATTACHMENTS_COLLECTION).createIndex({ documentId: 1 }),
+        // Users indexes
+        db.collection(USERS_COLLECTION).createIndex({ userId: 1 }, { unique: true }),
+      ]).catch(() => {}); // Silently ignore if indexes already exist
       console.log('[MongoDB] Connected to database:', DB_NAME);
     });
   }
@@ -82,9 +90,9 @@ export async function getComments(filters: {
   organizationId?: string;
   commentAnnotationIds?: string[];
   documentIds?: string[];
-}): Promise<Record<string, CommentAnnotation>> {
+}): Promise<Record<string, PartialCommentAnnotation>> {
   const database = await getDb();
-  const collection = database.collection<CommentAnnotation>(COMMENTS_COLLECTION);
+  const collection = database.collection<PartialCommentAnnotation>(COMMENTS_COLLECTION);
 
   // Build query
   const query: Record<string, unknown> = {};
@@ -102,7 +110,7 @@ export async function getComments(filters: {
   const annotations = await collection.find(query).toArray();
 
   // Convert to Record format expected by Velt
-  const result: Record<string, CommentAnnotation> = {};
+  const result: Record<string, PartialCommentAnnotation> = {};
   for (const annotation of annotations) {
     result[annotation.annotationId] = annotation;
   }
@@ -111,11 +119,11 @@ export async function getComments(filters: {
 }
 
 export async function saveComments(
-  annotations: Record<string, CommentAnnotation>,
+  annotations: Record<string, PartialCommentAnnotation>,
   context?: { documentId?: string; organizationId?: string }
 ): Promise<void> {
   const database = await getDb();
-  const collection = database.collection<CommentAnnotation>(COMMENTS_COLLECTION);
+  const collection = database.collection<PartialCommentAnnotation>(COMMENTS_COLLECTION);
 
   const operations = Object.entries(annotations).map(([id, annotation]) => ({
     updateOne: {
@@ -140,7 +148,7 @@ export async function saveComments(
 
 export async function deleteComment(annotationId: string): Promise<boolean> {
   const database = await getDb();
-  const collection = database.collection<CommentAnnotation>(COMMENTS_COLLECTION);
+  const collection = database.collection<PartialCommentAnnotation>(COMMENTS_COLLECTION);
 
   const result = await collection.deleteOne({ annotationId });
   return result.deletedCount > 0;
@@ -182,11 +190,11 @@ export async function saveUser(user: User): Promise<void> {
 // ============================================================
 
 export async function saveAttachment(
-  attachment: Attachment,
+  attachment: PartialAttachment,
   context?: { documentId?: string; organizationId?: string }
 ): Promise<{ url: string }> {
   const database = await getDb();
-  const collection = database.collection<Attachment>(ATTACHMENTS_COLLECTION);
+  const collection = database.collection<PartialAttachment>(ATTACHMENTS_COLLECTION);
 
   const attachmentData = {
     ...attachment,
@@ -206,7 +214,7 @@ export async function saveAttachment(
 
 export async function deleteAttachment(attachmentId: number): Promise<boolean> {
   const database = await getDb();
-  const collection = database.collection<Attachment>(ATTACHMENTS_COLLECTION);
+  const collection = database.collection<PartialAttachment>(ATTACHMENTS_COLLECTION);
 
   const result = await collection.deleteOne({ attachmentId });
   return result.deletedCount > 0;
@@ -220,9 +228,9 @@ export async function getReactions(filters: {
   organizationId?: string;
   reactionAnnotationIds?: string[];
   documentIds?: string[];
-}): Promise<Record<string, ReactionAnnotation>> {
+}): Promise<Record<string, PartialReactionAnnotation>> {
   const database = await getDb();
-  const collection = database.collection<ReactionAnnotation>(REACTIONS_COLLECTION);
+  const collection = database.collection<PartialReactionAnnotation>(REACTIONS_COLLECTION);
 
   const query: Record<string, unknown> = {};
 
@@ -238,7 +246,7 @@ export async function getReactions(filters: {
 
   const annotations = await collection.find(query).toArray();
 
-  const result: Record<string, ReactionAnnotation> = {};
+  const result: Record<string, PartialReactionAnnotation> = {};
   for (const annotation of annotations) {
     result[annotation.annotationId] = annotation;
   }
@@ -247,11 +255,11 @@ export async function getReactions(filters: {
 }
 
 export async function saveReactions(
-  annotations: Record<string, ReactionAnnotation>,
+  annotations: Record<string, PartialReactionAnnotation>,
   context?: { documentId?: string; organizationId?: string }
 ): Promise<void> {
   const database = await getDb();
-  const collection = database.collection<ReactionAnnotation>(REACTIONS_COLLECTION);
+  const collection = database.collection<PartialReactionAnnotation>(REACTIONS_COLLECTION);
 
   const operations = Object.entries(annotations).map(([id, annotation]) => ({
     updateOne: {
@@ -275,7 +283,7 @@ export async function saveReactions(
 
 export async function deleteReaction(annotationId: string): Promise<boolean> {
   const database = await getDb();
-  const collection = database.collection<ReactionAnnotation>(REACTIONS_COLLECTION);
+  const collection = database.collection<PartialReactionAnnotation>(REACTIONS_COLLECTION);
 
   const result = await collection.deleteOne({ annotationId });
   return result.deletedCount > 0;

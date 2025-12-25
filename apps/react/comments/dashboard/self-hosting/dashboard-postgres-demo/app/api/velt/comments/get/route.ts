@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { organizationId, commentAnnotationIds, documentIds } = body;
 
-    console.log('[Velt API] GET comments:', { organizationId, commentAnnotationIds, documentIds });
+    console.log('[Velt Selfhosting] GET comments:', { organizationId, commentAnnotationIds, documentIds });
 
     const result = await getComments({
       organizationId,
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ result, success: true });
   } catch (error) {
-    console.error('[Velt API] Error getting comments:', error);
+    console.error('[Velt Selfhosting] Error getting comments:', error);
     return NextResponse.json({ result: {}, success: true }, { status: 200 });
   }
 }

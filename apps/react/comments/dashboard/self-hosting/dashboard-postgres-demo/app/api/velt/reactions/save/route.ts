@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { reactionAnnotation, metadata } = body;
 
-    console.log('[Velt API] SAVE reactions:', { reactionAnnotation, metadata });
+    console.log('[Velt Selfhosting] SAVE reactions:', { reactionAnnotation, metadata });
 
     if (!reactionAnnotation) {
       return NextResponse.json({ success: false, error: 'No reaction annotation provided' }, { status: 400 });
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('[Velt API] Error saving reactions:', error);
+    console.error('[Velt Selfhosting] Error saving reactions:', error);
     return NextResponse.json({ success: false, error: 'Failed to save' }, { status: 500 });
   }
 }

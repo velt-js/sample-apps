@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { commentAnnotationId } = body;
 
-    console.log('[Velt API] DELETE comment:', commentAnnotationId);
+    console.log('[Velt Selfhosting] DELETE comment:', commentAnnotationId);
 
     if (commentAnnotationId) {
       await deleteComment(commentAnnotationId);
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('[Velt API] Error deleting comment:', error);
+    console.error('[Velt Selfhosting] Error deleting comment:', error);
     return NextResponse.json({ success: false, error: 'Failed to delete' }, { status: 500 });
   }
 }

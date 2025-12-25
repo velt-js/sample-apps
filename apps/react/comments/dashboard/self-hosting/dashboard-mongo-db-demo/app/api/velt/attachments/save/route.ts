@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { saveAttachment } from '../../comments/store';
+import { saveAttachment } from '../../store';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { attachment, metadata } = body;
 
-    console.log('[Velt API] SAVE attachment:', { attachment, metadata });
+    console.log('[Velt Selfhosting] SAVE attachment:', { attachment, metadata });
 
     if (!attachment) {
       return NextResponse.json({ success: false, error: 'No attachment provided' }, { status: 400 });
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     const result = await saveAttachment(attachment, { documentId, organizationId });
     return NextResponse.json({ result, success: true });
   } catch (error) {
-    console.error('[Velt API] Error saving attachment:', error);
+    console.error('[Velt Selfhosting] Error saving attachment:', error);
     return NextResponse.json({ success: false, error: 'Failed to save' }, { status: 500 });
   }
 }
