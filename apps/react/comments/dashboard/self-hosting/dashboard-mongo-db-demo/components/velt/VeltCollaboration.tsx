@@ -35,7 +35,7 @@ export function VeltCollaboration() {
                 commentPinHighlighter={false}
                 dialogOnHover={false}
                 groupMatchedComments={true}
-            // readOnly={true}
+            // readOnly={true} // Uncomment this to make the comments read-only for certain users
             />
             <VeltCommentsSidebar
                 context={{ jobId: selectedJob?.id, jobName: selectedJob?.jobName, jobStatus: selectedJob?.status, commentType: 'jobLevel' }}

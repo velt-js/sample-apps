@@ -18,7 +18,7 @@ async function getVeltJwtFromBackend(user: {
       userId: user.userId,
       organizationId: user.organizationId,
       email: user.email,
-      isAdmin: false,
+      isAdmin: true, // Use this to assign admin privileges to the user
     }),
     cache: "no-store",
   });
