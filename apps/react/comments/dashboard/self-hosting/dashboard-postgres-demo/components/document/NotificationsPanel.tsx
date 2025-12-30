@@ -17,6 +17,7 @@ export const NotificationsPanel = ({ isOpen, onClose }: NotificationsPanelProps)
     if (commentElement) {
       commentElement.openCommentSidebar();
       commentElement.selectCommentByAnnotationId(notification.targetAnnotationId);
+      onClose();
     }
   }
 
@@ -24,18 +25,13 @@ export const NotificationsPanel = ({ isOpen, onClose }: NotificationsPanelProps)
     <>
       {/* Invisible backdrop for click-outside-to-close */}
       <div 
-        className="fixed inset-0 z-40"
-        style={{ left: '240px' }}
+        className="oe-notifications-backdrop"
         onClick={onClose}
       />
       {/* Panel overlay */}
-      <div 
-        className="fixed top-[45px] bottom-0 w-[392px] bg-white z-50 border-r border-gray-200"
-        style={{ left: '240px' }}
-      >
+      <div className="oe-notifications-panel-container">
         <VeltNotificationsPanel shadowDom={false} readNotificationsOnForYouTab={true} onNotificationClick={onNotificationClick} />
       </div>
     </>
   )
 }
-

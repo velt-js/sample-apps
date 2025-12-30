@@ -1333,3 +1333,22 @@ app-if {
   background-color: #fff;
   overflow: hidden;
 }
+
+/* Notifications Panel */
+.oe-notifications-backdrop {
+  position: fixed;
+  inset: 0;
+  left: 240px;
+  z-index: 40;
+}
+
+.oe-notifications-panel-container {
+  position: fixed;
+  top: 45px;
+  bottom: 0;
+  left: 240px;
+  width: 392px;
+  background-color: #fff;
+  z-index: 50;
+  border-right: 1px solid #e5e7eb;
+}
