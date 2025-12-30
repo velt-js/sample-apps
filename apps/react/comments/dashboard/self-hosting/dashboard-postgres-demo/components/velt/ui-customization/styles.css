@@ -1352,3 +1352,7 @@ app-if {
   z-index: 50;
   border-right: 1px solid #e5e7eb;
 }
+
+app-notifications-panel-view-all-button {
+  display: none !important;
+}
