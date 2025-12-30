@@ -28,20 +28,20 @@ export default function DocumentCanvas() {
   // Show minimal layout while initializing to prevent hydration mismatch
   if (!isInitialized) {
     return (
-      <div className="flex flex-col w-full h-screen">
+      <div className="oe-document-canvas">
         <Header />
-        <div className="flex flex-1 overflow-hidden h-[calc(100vh-45px)]">
+        <div className="oe-document-canvas-body">
           <Sidebar onNotificationsClick={toggleNotificationsPanel} />
-          <div className="flex-1 flex flex-col bg-white overflow-hidden" />
+          <div className="oe-document-canvas-content" />
         </div>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div className="oe-document-canvas">
       <Header />
-      <div className="flex flex-1 overflow-hidden h-[calc(100vh-45px)]">
+      <div className="oe-document-canvas-body">
         <Sidebar onNotificationsClick={toggleNotificationsPanel} />
         <NotificationsPanel
           isOpen={isNotificationsPanelOpen}

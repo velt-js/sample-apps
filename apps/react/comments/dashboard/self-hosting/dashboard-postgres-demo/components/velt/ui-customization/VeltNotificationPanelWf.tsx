@@ -11,15 +11,17 @@ const VeltNotificationWf = () => {
                         <div className="oe-notifications-panel-header-info-title">
                             Notifications
                         </div>
-                        <div className="oe-notifications-panel-header-info-unread">
-                            <VeltIf condition="{selectedTab} === 'forYou'">
-                                <VeltData field="notificationsPanel.unreadCount.forYou" />
-                            </VeltIf>
-                            <VeltIf condition="{selectedTab} === 'all'">
-                                <VeltData field="notificationsPanel.unreadCount.all" />
-                            </VeltIf>
-                            new
-                        </div>
+                        <VeltIf condition="{notificationsPanel.unreadCount.forYou} > 0 || ({user.isAdmin} && {notificationsPanel.unreadCount.all} > 0)">
+                            <div className="oe-notifications-panel-header-info-unread">
+                                <VeltIf condition="{selectedTab} === 'forYou'">
+                                    <VeltData field="notificationsPanel.unreadCount.forYou" />
+                                </VeltIf>
+                                <VeltIf condition="{selectedTab} === 'all'">
+                                    <VeltData field="notificationsPanel.unreadCount.all" />
+                                </VeltIf>
+                                new
+                            </div>
+                        </VeltIf>
                     </div>
                     <div className="oe-notifications-panel-header-actions">
                         <VeltNotificationsPanelWireframe.ReadAllButton>

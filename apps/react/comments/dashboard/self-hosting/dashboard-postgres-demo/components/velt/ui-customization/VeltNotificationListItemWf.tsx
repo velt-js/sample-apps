@@ -19,7 +19,7 @@ const VeltNotificationListItemWf = () => {
                 </div>
 
 
-            <div className="flex flex-col gap-[8px] w-full">
+            <div className="oe-notification-item-meta-wrapper">
                 <VeltIf condition="!{commentDialogSelected} && {notification.notificationSourceData.context.commentType} === 'jobLevel'">
                     <div className="oe-comment--metadata oe-notification--metadata">
                         <MarkRead width={16} height={16} />

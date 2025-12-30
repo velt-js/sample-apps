@@ -14,7 +14,7 @@ export const LineItemCommentsSidebar = ({ isOpen, selectedLineItem, onClose }: L
 
     return (
         <div 
-            className="fixed top-[45px] right-0 w-[552px] h-[calc(100vh-45px)] bg-white z-50 border-l border-gray-200 oe-comment-sidebar-inline overflow-hidden"
+            className="oe-comment-sidebar-inline"
             id={targetId}
         >
             <VeltInlineCommentsSection
@@ -34,4 +34,3 @@ export const LineItemCommentsSidebar = ({ isOpen, selectedLineItem, onClose }: L
         </div>
     )
 }
-

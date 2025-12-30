@@ -21,7 +21,7 @@ export const NotificationsPanel = ({ isOpen, onClose }: NotificationsPanelProps)
         className="fixed top-[45px] bottom-0 w-[392px] bg-white z-50 border-r border-gray-200"
         style={{ left: '240px' }}
       >
-        <VeltNotificationsPanel shadowDom={false}/>
+        <VeltNotificationsPanel shadowDom={false} readNotificationsOnForYouTab={true} />
       </div>
     </>
   )

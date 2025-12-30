@@ -5,9 +5,9 @@ const VeltInlineCommentsSectionWf = () => {
     return (
         <VeltInlineCommentsSectionWireframe>
             <div className="oe-comment-sidebar-header">
-                <div className="flex items-center gap-2 px-[4px]">
+                <div className="oe-sidebar-header-left">
                     <VeltButtonWireframe id="close-sidebar" type="button">
-                        <div className="p-[4px]">
+                        <div className="oe-btn-padding-sm">
                             <ArrowheadRight width={16} height={16} />
                         </div>
                     </VeltButtonWireframe>
@@ -28,9 +28,9 @@ const VeltInlineCommentsSectionWf = () => {
                     <span className="oe-comment--metadata-label">-</span>
                     <span className="oe-comment--metadata-label"><VeltData field="context.lineItemCurrency" /></span>
                     <span className="oe-comment--metadata-label"><VeltData field="context.lineItemAmount" /></span>
-                    <div className="ml-auto pl-[2px] border-l border-gray-400">
+                    <div className="oe-metadata-close">
                         <VeltButtonWireframe id="close-sidebar" type="button">
-                            <div className="p-[4px]">
+                            <div className="oe-btn-padding-sm">
                                 <Close width={16} height={16} />
                             </div>
                         </VeltButtonWireframe>
@@ -41,7 +41,7 @@ const VeltInlineCommentsSectionWf = () => {
             <VeltInlineCommentsSectionWireframe.Panel>
                 <VeltInlineCommentsSectionWireframe.List />
                 <VeltIf condition="{annotations.length} == 0">
-                    <div className="flex flex-col flex-1 items-center justify-start pt-[140px]">
+                    <div className="oe-inline-empty-placeholder">
                         <div className="oe-comment-sidebar-empty-placeholder--title">
                             No comments
                         </div>

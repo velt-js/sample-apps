@@ -9,20 +9,20 @@ const VeltCommentDialogWf = () => {
             <VeltCommentDialogWireframe.Body veltClass="'oe-disabled': {annotation.context.commentType} === 'action'">
                 <VeltCommentDialogWireframe.Threads>
                     <VeltCommentDialogWireframe.ThreadCard>
-                        <div className="flex gap-2">
-                            <div className="mt-[4px]">
+                        <div className="oe-thread-card-wrapper">
+                            <div className="oe-thread-card-avatar">
                                 <VeltCommentDialogWireframe.ThreadCard.Avatar />
                             </div>
-                            <div className="flex flex-col flex-1 min-w-0 gap-[8px]">
-                                <div className="flex justify-between items-center">
-                                    <div className="flex items-center gap-2">
+                            <div className="oe-thread-card-content">
+                                <div className="oe-thread-card-header">
+                                    <div className="oe-thread-card-info">
                                         <div className="oe-thread-card--name">
                                             <VeltData field="commentObj.from.name" />
                                         </div>
                                         <VeltCommentDialogWireframe.ThreadCard.Time />
                                         <VeltCommentDialogWireframe.ThreadCard.Unread />
                                     </div>
-                                    <div className="flex items-center oe--actions-container">
+                                    <div className="oe-thread-card-info oe--actions-container">
                                         <VeltCommentDialogWireframe.ThreadCard.ReactionTool />
                                         <VeltCommentDialogWireframe.ResolveButton>
                                             <div className="oe--icon-button">
@@ -71,7 +71,7 @@ const VeltCommentDialogWf = () => {
                                         </VeltCommentDialogWireframe.ThreadCard.Options>
                                     </div>
                                 </div>
-                                <div className="flex flex-col gap-[8px]">
+                                <div className="oe-thread-card-body">
                                     <VeltIf condition="!{commentDialogSelected} && {annotation.context.commentType} === 'jobLevel'">
                                         <div className="oe-comment--metadata">
                                             <MarkRead width={16} height={16} />
@@ -98,7 +98,7 @@ const VeltCommentDialogWf = () => {
                     </VeltCommentDialogWireframe.ThreadCard>
                 </VeltCommentDialogWireframe.Threads>
                 <VeltIf condition="!{commentDialogSelected} && {annotation.comments.length} > 1">
-                    <div className="flex items-center h-[32px] ml-[32px]">
+                    <div className="oe-reply-section">
                         <VeltCommentDialogWireframe.ReplyAvatars veltIf="!{commentDialogSelected}" />
                         <VeltCommentDialogWireframe.ToggleReply />
                     </div>
@@ -118,13 +118,13 @@ const VeltCommentDialogWf = () => {
                 </VeltIf>
             </div>
             <VeltCommentDialogWireframe.Composer veltClass="'oe-disabled': {annotation.context.commentType} === 'action'">
-                <div className="oe-composer--content flex flex-col">
-                    <div className="flex flex-col gap-[4px]">
+                <div className="oe-composer--content oe-composer-wrapper">
+                    <div className="oe-composer-input-section">
                         <VeltCommentDialogWireframe.Composer.Attachments />
                         <VeltCommentDialogWireframe.Composer.Input />
                     </div>
-                    <div className="flex flex-row items-center justify-between">
-                        <div className="flex flex-row items-center">
+                    <div className="oe-composer-actions">
+                        <div className="oe-composer-actions-group">
                             <VeltCommentDialogWireframe.Composer.ActionButton type="attachments">
                                 <div className="oe-composer--icon-button">
                                     <Attach1 width={18} height={18} />
@@ -136,7 +136,7 @@ const VeltCommentDialogWf = () => {
                                 </div>
                             </VeltCommentDialogWireframe.Composer.ActionButton>
                         </div>
-                        <div className="flex flex-row items-center">
+                        <div className="oe-composer-actions-group">
                             <VeltCommentDialogWireframe.Composer.ActionButton type="submit">
                                 <div className="oe-composer--icon-button">
                                     <ArrowUp width={18} height={18} />

@@ -5,9 +5,9 @@ const VeltCommentsSidebarFocusedThreadWf = () => {
     return (
         <VeltCommentsSidebarWireframe.FocusedThread>
             <div className="oe-comment-sidebar-header">
-                <div className="flex items-center gap-2 px-[4px]">
+                <div className="oe-sidebar-header-left">
                     <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
-                        <div className="p-[4px]">
+                        <div className="oe-btn-padding-sm">
                             <ArrowheadRight width={16} height={16} />
                         </div>
                     </VeltCommentsSidebarWireframe.FocusedThread.BackButton>
@@ -25,9 +25,9 @@ const VeltCommentsSidebarFocusedThreadWf = () => {
                         <MarkRead width={16} height={16} />
                         <span className="oe-comment--metadata-label">Status:</span>
                         <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.jobStatus" /></span>
-                        <div className="ml-auto pl-[2px] border-l border-gray-400">
+                        <div className="oe-metadata-close">
                             <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
-                                <div className="p-[4px]">
+                                <div className="oe-btn-padding-sm">
                                     <Close width={16} height={16} />
                                 </div>
                             </VeltCommentsSidebarWireframe.FocusedThread.BackButton>
@@ -42,9 +42,9 @@ const VeltCommentsSidebarFocusedThreadWf = () => {
                         <span className="oe-comment--metadata-label">-</span>
                         <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.lineItemCurrency" /></span>
                         <span className="oe-comment--metadata-label"><VeltData field="focusedAnnotation.context.lineItemAmount" /></span>
-                        <div className="ml-auto pl-[2px] border-l border-gray-400">
+                        <div className="oe-metadata-close">
                             <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
-                                <div className="p-[4px]">
+                                <div className="oe-btn-padding-sm">
                                     <Close width={16} height={16} />
                                 </div>
                             </VeltCommentsSidebarWireframe.FocusedThread.BackButton>

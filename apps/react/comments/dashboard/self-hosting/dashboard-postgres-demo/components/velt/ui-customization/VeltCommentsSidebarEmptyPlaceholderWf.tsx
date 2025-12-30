@@ -3,7 +3,7 @@ import { VeltCommentsSidebarWireframe } from "@veltdev/react";
 const VeltCommentsSidebarEmptyPlaceholderWf = () => {
     return (
         <VeltCommentsSidebarWireframe.EmptyPlaceholder>
-            <div className="flex flex-col items-center justify-start pt-[140px]">
+            <div className="oe-empty-placeholder-container">
                 <div className="oe-comment-sidebar-empty-placeholder--title">
                     No comments
                 </div>

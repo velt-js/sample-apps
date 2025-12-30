@@ -4,8 +4,8 @@ import { VeltSidebarButtonWireframe,  } from '@veltdev/react';
 const VeltSidebarButtonWf = () => {
     return (
         <VeltSidebarButtonWireframe>
-            <div className="flex items-center gap-0.5">
-                <div className='relative'>
+            <div className="oe-sidebar-button-wrapper">
+                <div className='oe-relative'>
                     <VeltSidebarButtonWireframe.Icon>
                         <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path 
@@ -19,7 +19,7 @@ const VeltSidebarButtonWf = () => {
                     </VeltSidebarButtonWireframe.Icon>
                     <VeltSidebarButtonWireframe.UnreadIcon />
                </div>
-            <span className="text-[#777572] text-sm font-medium"><VeltSidebarButtonWireframe.CommentsCount /></span>
+            <span className="oe-sidebar-button-count"><VeltSidebarButtonWireframe.CommentsCount /></span>
             </div>
         </VeltSidebarButtonWireframe>
     );

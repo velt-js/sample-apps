@@ -6,9 +6,9 @@ const VeltCommentsSidebarHeaderWf = () => {
     return (
         <VeltCommentsSidebarWireframe.Header>
             <div className="oe-comment-sidebar-header">
-                <div className="flex items-center gap-2 px-[4px]">
+                <div className="oe-sidebar-header-left">
                     <VeltCommentsSidebarWireframe.CloseButton>
-                        <div className="p-[4px]">
+                        <div className="oe-btn-padding-sm">
                             <ArrowheadRight width={16} height={16} />
                         </div>
                     </VeltCommentsSidebarWireframe.CloseButton>
@@ -25,7 +25,7 @@ const VeltCommentsSidebarHeaderWf = () => {
                         </div>
                     </VeltIf>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="oe-sidebar-header-right">
                     <VeltCommentsSidebarWireframe.MinimalFilterDropdown>
                         <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Trigger>
                             <div className='oe-comment-sidebar-header--status-trigger'>
@@ -78,4 +78,3 @@ const VeltCommentsSidebarHeaderWf = () => {
 };
 
 export default VeltCommentsSidebarHeaderWf;
-
