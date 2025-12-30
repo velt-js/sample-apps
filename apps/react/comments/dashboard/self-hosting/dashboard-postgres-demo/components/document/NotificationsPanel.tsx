@@ -3,7 +3,6 @@ import { useVeltClient, VeltNotificationsPanel } from "@veltdev/react"
 interface NotificationsPanelProps {
   isOpen: boolean
   onClose: () => void
-  onNotificationClick: (notification: any) => void
 }
 
 export const NotificationsPanel = ({ isOpen, onClose }: NotificationsPanelProps) => {
