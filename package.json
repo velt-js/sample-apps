@@ -12,7 +12,8 @@
     "new:demo": "tsx scripts/new-demo.ts",
     "velt:update": "node scripts/update-velt-versions.js",
     "velt:check": "node scripts/update-velt-versions.js --check",
-    "velt:dry-run": "node scripts/update-velt-versions.js --dry-run"
+    "velt:dry-run": "node scripts/update-velt-versions.js --dry-run",
+    "vercel:config": "node scripts/add-vercel-config.js"
   },
   "repository": {
     "type": "git",
