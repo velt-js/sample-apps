@@ -1,7 +1,7 @@
 'use client'
 
 import { EditorContent, useEditor } from '@tiptap/react'
-import { BubbleMenu } from '@tiptap/extension-bubble-menu'
+import { BubbleMenu } from '@tiptap/extension-bubble-menu/react'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
