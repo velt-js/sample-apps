@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tiptap/core": "^2.26.4",
-    "@tiptap/extension-text-align": "^2.26.4",
-    "@tiptap/extension-underline": "^2.26.4",
-    "@tiptap/react": "^2.26.4",
-    "@tiptap/starter-kit": "^2.26.4",
+    "@tiptap/core": "^3.14.0",
+    "@tiptap/extension-bubble-menu": "^3.14.0",
+    "@tiptap/extension-text-align": "^3.14.0",
+    "@tiptap/extension-underline": "^3.14.0",
+    "@tiptap/pm": "^3.14.0",
+    "@tiptap/react": "^3.14.0",
+    "@tiptap/starter-kit": "^3.14.0",
     "@veltdev/react": "^4.6.10",
     "@veltdev/tiptap-velt-comments": "4.5.8-beta.1",
     "clsx": "^2.1.1",
