@@ -1,6 +1,7 @@
 {
   "buildCommand": "pnpm run build",
   "installCommand": "cd ../.. && pnpm install",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "ignoreBuildStep": "npx turbo-ignore"
 }
 
