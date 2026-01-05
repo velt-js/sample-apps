@@ -47,7 +47,9 @@
       "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
       "@veltdev/codemirror-crdt-react": "4.5.8",
       "@veltdev/reactflow-crdt": "4.5.8",
-      "@veltdev/react": "^4.6.10"
+      "@veltdev/react": "^4.6.10",
+      "yjs": "^13.6.18",
+      "y-prosemirror": "^1.2.12"
     }
   }
 }

@@ -12,6 +12,8 @@ overrides:
   '@veltdev/codemirror-crdt-react': 4.5.8
   '@veltdev/reactflow-crdt': 4.5.8
   '@veltdev/react': ^4.6.10
+  yjs: ^13.6.18
+  y-prosemirror: ^1.2.12
 
 importers:
 
@@ -284,7 +286,7 @@ importers:
         specifier: ^2
         version: 2.6.0
       yjs:
-        specifier: ^13.6.0
+        specifier: ^13.6.18
         version: 13.6.29
     devDependencies:
       '@types/node':
@@ -339,7 +341,7 @@ importers:
         specifier: ^2
         version: 2.6.0
       yjs:
-        specifier: ^13.6.0
+        specifier: ^13.6.18
         version: 13.6.29
     devDependencies:
       '@types/node':
@@ -394,7 +396,7 @@ importers:
         specifier: ^2
         version: 2.6.0
       yjs:
-        specifier: ^13.6.0
+        specifier: ^13.6.18
         version: 13.6.29
     devDependencies:
       '@types/node':
@@ -1031,7 +1033,7 @@ importers:
         specifier: ^2.6.0
         version: 2.6.0
       yjs:
-        specifier: ^13.6.27
+        specifier: ^13.6.18
         version: 13.6.29
       zustand:
         specifier: ^5.0.8
@@ -2037,7 +2039,7 @@ packages:
   '@lexical/yjs@0.19.0':
     resolution: {integrity: sha512-6xUgnbeyHboVguueGhVoWVE+gdy4udAbLx7exhNAyB+Znspg8oPVI9LPKJBdTMVWacl5Q622WeAghzd0ncXQ/g==}
     peerDependencies:
-      yjs: '>=13.5.22'
+      yjs: ^13.6.18
 
   '@lezer/common@1.5.0':
     resolution: {integrity: sha512-PNGcolp9hr4PJdXR4ix7XtixDrClScvtSCYW3rQG106oVMOOI+jFb+0+J3mbeL/53g1Zd6s0kJzaw6Ri68GmAA==}
@@ -3046,7 +3048,7 @@ packages:
       '@tiptap/core': ^3.14.0
       '@tiptap/pm': ^3.14.0
       '@tiptap/y-tiptap': ^3.0.0
-      yjs: ^13
+      yjs: ^13.6.18
 
   '@tiptap/extension-color@3.14.0':
     resolution: {integrity: sha512-jrHc4HQmAQlU1PlPu0St2T+abKAjs67FV6kpdPUXdlPjXVqm1g3AzSll2QcNoTXNQyH2cZhVTEC6rYqJDwcq5w==}
@@ -3208,7 +3210,7 @@ packages:
       prosemirror-state: ^1.2.3
       prosemirror-view: ^1.9.10
       y-protocols: ^1.0.1
-      yjs: ^13.5.38
+      yjs: ^13.6.18
 
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
@@ -3512,7 +3514,7 @@ packages:
   '@veltdev/reactflow-crdt@4.5.8':
     resolution: {integrity: sha512-uTC7dHIr/pJYr+mdBUvkXFMB+CorFaKV8ufwfZJh/z/W9sbsxbGywxaqcFnokrrltEdIpKUfKy9tmjelyd1q9A==}
     peerDependencies:
-      yjs: ^13.6.20
+      yjs: ^13.6.18
 
   '@veltdev/slate-velt-comments@1.0.3':
     resolution: {integrity: sha512-4xYO2q81NC6p5frk2EojzLOx1NOH+3xEy6LyAfeNEn7YtzbJH7UctKxEOhMPd0jzi84yYict9U+QT8YisIajKQ==}
@@ -6262,7 +6264,7 @@ packages:
     peerDependencies:
       '@codemirror/state': ^6.0.0
       '@codemirror/view': ^6.0.0
-      yjs: ^13.5.6
+      yjs: ^13.6.18
 
   y-prosemirror@1.3.7:
     resolution: {integrity: sha512-NpM99WSdD4Fx4if5xOMDpPtU3oAmTSjlzh5U4353ABbRHl1HtAFUx6HlebLZfyFxXN9jzKMDkVbcRjqOZVkYQg==}
@@ -6272,13 +6274,13 @@ packages:
       prosemirror-state: ^1.2.3
       prosemirror-view: ^1.9.10
       y-protocols: ^1.0.1
-      yjs: ^13.5.38
+      yjs: ^13.6.18
 
   y-protocols@1.0.7:
     resolution: {integrity: sha512-YSVsLoXxO67J6eE/nV4AtFtT3QEotZf5sK5BHxFBXso7VDUT3Tx07IfA6hsu5Q5OmBdMkQVmFZ9QOA7fikWvnw==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
-      yjs: ^13.0.0
+      yjs: ^13.6.18
 
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
