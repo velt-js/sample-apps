@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "cd ../../../../.. && npm install",
+  "framework": "nextjs",
+  "ignoreCommand": "cd ../../../../.. && bash scripts/ignore-build.sh apps/react/comments/dashboard/self-hosting/dashboard-postgres-demo"
+}

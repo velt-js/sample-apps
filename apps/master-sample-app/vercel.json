@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build",
   "installCommand": "cd ../.. && npm install",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "ignoreCommand": "cd ../.. && bash scripts/ignore-build.sh apps/master-sample-app"
 }
 
