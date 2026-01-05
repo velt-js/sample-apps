@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
 
 // List of domains allowed to embed this app in an iframe
 const allowList = [
@@ -12,6 +13,16 @@ const EMBED_CSP = `frame-ancestors ${allowList}`;
 
 const nextConfig = {
   transpilePackages: ['@veltdev/react', '@veltdev/codemirror-crdt-react', '@veltdev/codemirror-crdt'],
+  webpack: (config) => {
+    // Resolve @veltdev/react for peer dependencies when using npm
+    // Get the package directory, not just the entry file
+    const veltReactPath = path.dirname(require.resolve('@veltdev/react/package.json'));
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@veltdev/react': veltReactPath,
+    };
+    return config;
+  },
   async headers() {
     return [
       {
