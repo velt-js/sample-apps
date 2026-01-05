@@ -105,44 +105,25 @@ export default function Page() {
       // Get or generate document ID for this demo BEFORE updating state
       const docId = getDocumentIdForDemo(newSampleId)
 
-      // Update URL
-      const routePath = sample.metadata.routePath || ''
-      const newUrl = `${routePath}?documentId=${docId}`
-      
-      if (window.location.pathname + window.location.search !== newUrl) {
-        window.history.pushState({}, '', newUrl)
-      }
-
       // ATOMIC UPDATE: Set both sample and document ID together
       // This prevents the iframe from rendering with mismatched data
       setCurrentSampleId(newSampleId)
       setDocumentId(docId)
+
+      // Update URL after state update
+      const routePath = sample.metadata.routePath || window.location.pathname
+      const newUrl = `${routePath}?documentId=${docId}`
+      
+      if (window.location.href !== window.location.origin + newUrl) {
+        window.history.pushState({}, '', newUrl)
+      }
     } catch (error) {
       console.error('Error changing sample:', error)
     }
   }, [currentSampleId, getDocumentIdForDemo])
 
-  // Handle sample change: only update URL if sample changed externally
-  useEffect(() => {
-    if (!isInitialized.current) return
-    if (typeof window === 'undefined') return
-    if (!documentId) return // Skip if document ID hasn't been set yet
-
-    try {
-      const sample = getSampleById(currentSampleId)
-      if (!sample) return
-
-      // Update URL if it doesn't match current state
-      const routePath = sample.metadata.routePath || ''
-      const expectedUrl = `${routePath}?documentId=${documentId}`
-
-      if (window.location.pathname + window.location.search !== expectedUrl) {
-        window.history.pushState({}, '', expectedUrl)
-      }
-    } catch (error) {
-      console.error('Error syncing URL:', error)
-    }
-  }, [currentSampleId, documentId])
+  // Note: URL updates are now handled directly in handleSampleSelect and handleReset
+  // This effect is removed to prevent duplicate history entries
 
   // Handle reset: generate new document ID for current demo
   const handleReset = useCallback(() => {
@@ -158,12 +139,16 @@ export default function Page() {
       // Update localStorage for this demo
       localStorage.setItem(`demo-${currentSampleId}-document-id`, newDocId)
       
-      // Update state and URL atomically
+      // Update state
       setDocumentId(newDocId)
-      const routePath = sample.metadata.routePath || ''
+      
+      // Update URL
+      const routePath = sample.metadata.routePath || window.location.pathname
       const newUrl = `${routePath}?documentId=${newDocId}`
       
-      window.history.pushState({}, '', newUrl)
+      if (window.location.href !== window.location.origin + newUrl) {
+        window.history.pushState({}, '', newUrl)
+      }
     } catch (error) {
       console.error('Error resetting document:', error)
     }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { Sample } from "@/types/sample"
 import { TopBar } from "./top-bar"
 import { IframePair } from "./iframe-pair"
@@ -16,7 +16,6 @@ interface SampleViewerProps {
 
 export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId, onReset }: SampleViewerProps) {
   const [mode, setMode] = useState<"code" | "demo">("demo")
-  const [isIframeReady, setIsIframeReady] = useState(false)
 
   // Dynamically append documentId to iframe URLs
   const iframeUrl = useMemo(() => {
@@ -37,12 +36,6 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
 
   // Don't render iframes until documentId is ready AND URLs are computed
   const isReady = !!documentId && !!iframeUrl
-
-  // Reset iframe ready state when sample or documentId changes
-  // This prevents showing stale iframe during transitions
-  useEffect(() => {
-    setIsIframeReady(false)
-  }, [sample.metadata.id, documentId])
 
   return (
     <div
