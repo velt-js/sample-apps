@@ -89,46 +89,63 @@ export default function Page() {
     }
   }, [])
 
-  // Handle sample selection: clear documentId first to prevent race condition
-  // where iframe renders with new sample URL but old documentId
+  // Handle sample selection: atomically update both sample and document ID
+  // to prevent race conditions where iframe renders with mismatched data
   const handleSampleSelect = useCallback((newSampleId: string) => {
     if (newSampleId === currentSampleId) return
-    // Clear documentId FIRST to ensure iframe doesn't render with mismatched sample/document
-    // This triggers "Loading demo..." state until the effect sets the correct documentId
-    setDocumentId('')
-    setCurrentSampleId(newSampleId)
-  }, [currentSampleId])
-
-  // Handle sample change: get document ID for the new demo
-  useEffect(() => {
-    if (!isInitialized.current) return
     if (typeof window === 'undefined') return
 
     try {
-      const sample = getSampleById(currentSampleId)
+      const sample = getSampleById(newSampleId)
       if (!sample) return
 
       // Store the current selection for persistence
-      localStorage.setItem('last-selected-sample-id', currentSampleId)
+      localStorage.setItem('last-selected-sample-id', newSampleId)
 
-      // Get or generate document ID for this demo
-      const docId = getDocumentIdForDemo(currentSampleId)
-      setDocumentId(docId)
+      // Get or generate document ID for this demo BEFORE updating state
+      const docId = getDocumentIdForDemo(newSampleId)
 
       // Update URL
       const routePath = sample.metadata.routePath || ''
       const newUrl = `${routePath}?documentId=${docId}`
-
+      
       if (window.location.pathname + window.location.search !== newUrl) {
         window.history.pushState({}, '', newUrl)
       }
+
+      // ATOMIC UPDATE: Set both sample and document ID together
+      // This prevents the iframe from rendering with mismatched data
+      setCurrentSampleId(newSampleId)
+      setDocumentId(docId)
     } catch (error) {
       console.error('Error changing sample:', error)
     }
   }, [currentSampleId, getDocumentIdForDemo])
 
+  // Handle sample change: only update URL if sample changed externally
+  useEffect(() => {
+    if (!isInitialized.current) return
+    if (typeof window === 'undefined') return
+    if (!documentId) return // Skip if document ID hasn't been set yet
+
+    try {
+      const sample = getSampleById(currentSampleId)
+      if (!sample) return
+
+      // Update URL if it doesn't match current state
+      const routePath = sample.metadata.routePath || ''
+      const expectedUrl = `${routePath}?documentId=${documentId}`
+
+      if (window.location.pathname + window.location.search !== expectedUrl) {
+        window.history.pushState({}, '', expectedUrl)
+      }
+    } catch (error) {
+      console.error('Error syncing URL:', error)
+    }
+  }, [currentSampleId, documentId])
+
   // Handle reset: generate new document ID for current demo
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     if (typeof window === 'undefined') return
 
     try {
@@ -141,7 +158,7 @@ export default function Page() {
       // Update localStorage for this demo
       localStorage.setItem(`demo-${currentSampleId}-document-id`, newDocId)
       
-      // Update state and URL
+      // Update state and URL atomically
       setDocumentId(newDocId)
       const routePath = sample.metadata.routePath || ''
       const newUrl = `${routePath}?documentId=${newDocId}`
@@ -150,7 +167,7 @@ export default function Page() {
     } catch (error) {
       console.error('Error resetting document:', error)
     }
-  }
+  }, [currentSampleId])
 
   // Show loading state during hydration to prevent flash
   if (!isMounted) {
