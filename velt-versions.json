@@ -13,7 +13,7 @@
     "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
     "@veltdev/tiptap-velt-comments": "4.5.8-beta.1",
     "@veltdev/lexical-velt-comments": "4.5.2-beta.2",
-    "@veltdev/slate-velt-comments": "^1.0.4",
+    "@veltdev/slate-velt-comments": "1.0.3",
     "@veltdev/crdt": "4.5.8",
     "@veltdev/crdt-react": "4.5.8"
   }
