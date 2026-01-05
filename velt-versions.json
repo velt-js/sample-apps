@@ -1,0 +1,20 @@
+{
+  "$schema": "./velt-versions.schema.json",
+  "description": "Centralized Velt package versions for all sample apps. Update versions here and run the update script or let CI/CD handle it.",
+  "versions": {
+    "@veltdev/react": "^4.6.10",
+    "@veltdev/types": "^4.6.10",
+    "@veltdev/client": "^4.6.10",
+    "@veltdev/codemirror-crdt": "4.5.8",
+    "@veltdev/codemirror-crdt-react": "4.5.8",
+    "@veltdev/reactflow-crdt": "4.5.8",
+    "@veltdev/tiptap-crdt": "^4.5.9-beta.4",
+    "@veltdev/tiptap-crdt-react": "^4.5.9-beta.4",
+    "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
+    "@veltdev/tiptap-velt-comments": "4.5.8-beta.1",
+    "@veltdev/lexical-velt-comments": "4.5.2-beta.2",
+    "@veltdev/slate-velt-comments": "^1.0.4",
+    "@veltdev/crdt": "4.5.8",
+    "@veltdev/crdt-react": "4.5.8"
+  }
+}
