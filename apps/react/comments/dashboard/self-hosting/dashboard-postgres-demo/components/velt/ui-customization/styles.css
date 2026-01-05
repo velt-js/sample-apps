@@ -1356,3 +1356,98 @@ app-if {
 app-notifications-panel-view-all-button {
   display: none !important;
 }
+
+
+.velt-confirm-dialog {
+    padding: 32px !important;
+    width: 552px !important;
+    position: relative !important;
+  }
+  
+  .velt-mat-dialog-container
+    mat-dialog-container
+    .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
+    border-radius: 4px !important;
+  }
+  
+  .oe-confirm-dialog-close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: #6b758a;
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  }
+  
+  .oe-confirm-dialog-title {
+    font-weight: 500;
+    font-size: 24px;
+    leading-trim: NONE;
+    line-height: 36px;
+    letter-spacing: 0.15px;
+    color: #00102e;
+  }
+  
+  .velt-confirm-dialog-message {
+    font-weight: 300 !important;
+    font-size: 16px !important;
+    leading-trim: NONE !important;
+    line-height: 24px !important;
+    letter-spacing: 0.3px !important;
+    color: #6b758a !important;
+    padding: 0px !important;
+    margin: 16px 0px 32px 0px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+  
+  .oe-confirm-dialog-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+  
+    .oe-confirm-dialog-cancel-button {
+      cursor: pointer !important;
+      height: 40px !important;
+      border-radius: 3px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border: 1px solid #e6e8ed !important;
+      box-shadow: 0px 1px 2px 0px #00102e0f !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      leading-trim: NONE !important;
+      line-height: 21px !important;
+      letter-spacing: 0.25px !important;
+      text-align: center !important;
+      vertical-align: middle !important;
+      color: #3c475c !important;
+    }
+  
+    .oe-confirm-dialog-delete-button {
+      cursor: pointer !important;
+      height: 40px !important;
+      border-radius: 3px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background-color: #F75452 !important;
+      border: 1px solid #CA3D3D !important;
+      box-shadow: 0px 1px 2px 0px #00102E0F !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      leading-trim: NONE !important;
+      line-height: 21px !important;
+      letter-spacing: 0.25px !important;
+      text-align: center !important;
+      vertical-align: middle !important;
+      color: #ffffff !important;
+    }
+  }
