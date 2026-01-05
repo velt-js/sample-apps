@@ -49,12 +49,7 @@
       "@veltdev/codemirror-crdt-react": "4.5.8",
       "@veltdev/reactflow-crdt": "4.5.8",
       "@veltdev/react": "^4.6.10",
-      "@codemirror/state": "^6.5.2",
-      "@tiptap/core": "^2.27.1",
-      "@tiptap/react": "^2.27.1",
-      "@tiptap/starter-kit": "^2.27.1",
-      "@tiptap/extension-text-align": "^2.27.1",
-      "@tiptap/extension-underline": "^2.27.1"
+      "@codemirror/state": "^6.5.2"
     }
   }
 }
