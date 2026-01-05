@@ -35,7 +35,7 @@
     "apps/*/*/*/*/*",
     "packages/*"
   ],
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.0.0",
   "overrides": {
     "@veltdev/crdt": "4.5.8",
     "@veltdev/crdt-react": "4.5.8",
