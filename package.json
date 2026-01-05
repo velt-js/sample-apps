@@ -39,13 +39,23 @@
     "packages/*"
   ],
   "packageManager": "pnpm@10.0.0",
-  "overrides": {
-    "@veltdev/crdt": "4.5.8",
-    "@veltdev/crdt-react": "4.5.8",
-    "@veltdev/tiptap-crdt-react": "^4.5.9-beta.4",
-    "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
-    "@veltdev/codemirror-crdt-react": "4.5.8",
-    "@veltdev/reactflow-crdt": "4.5.8",
-    "@veltdev/react": "^4.6.10"
+  "pnpm": {
+    "overrides": {
+      "@veltdev/crdt": "4.5.8",
+      "@veltdev/crdt-react": "4.5.8",
+      "@veltdev/tiptap-crdt-react": "^4.5.9-beta.4",
+      "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
+      "@veltdev/codemirror-crdt-react": "4.5.8",
+      "@veltdev/reactflow-crdt": "4.5.8",
+      "@veltdev/react": "^4.6.10",
+      "@tiptap/core": "2.11.5",
+      "@tiptap/pm": "2.11.5",
+      "@tiptap/react": "2.11.5",
+      "@tiptap/starter-kit": "2.11.5",
+      "@tiptap/extension-collaboration": "2.11.5",
+      "@tiptap/extension-collaboration-cursor": "2.11.5",
+      "@tiptap/extension-placeholder": "2.11.5",
+      "@codemirror/state": "6.5.2"
+    }
   }
 }
