@@ -1,6 +1,0 @@
-{
-  "buildCommand": "pnpm run build",
-  "installCommand": "pnpm install",
-  "ignoreCommand": "npx turbo-ignore",
-  "framework": "nextjs"
-}
