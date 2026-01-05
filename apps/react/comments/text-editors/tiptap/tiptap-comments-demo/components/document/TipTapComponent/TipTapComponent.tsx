@@ -17,7 +17,6 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        history: false,
         heading: false,
       }),
       TextAlign.configure({
