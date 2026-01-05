@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.6.0",
     "@tiptap/core": "^3.14.0",
-    "@tiptap/extension-bubble-menu": "^3.14.0",
     "@tiptap/extension-text-align": "^3.14.0",
     "@tiptap/extension-underline": "^3.14.0",
     "@tiptap/pm": "^3.14.0",
