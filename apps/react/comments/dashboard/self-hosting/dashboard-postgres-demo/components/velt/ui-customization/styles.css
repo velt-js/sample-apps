@@ -1356,3 +1356,102 @@ app-if {
 app-notifications-panel-view-all-button {
   display: none !important;
 }
+
+body {
+  --velt-spacing-2xs: 4px;
+  --velt-spacing-xs: 8px;
+  --velt-spacing-sm: 12px;
+  --velt-spacing-md: 16px;
+  --velt-spacing-lg: 24px;
+  --velt-spacing-xl: 32px;
+  --velt-spacing-2xl: 64px;
+  --velt-spacing-3xl: 80px;
+}
+
+/* ========================================
+   Action Comments Section Styling
+   ======================================== */
+
+.oe-action-composer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.oe-action-composer-input-wrapper {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  min-height: 100px;
+  padding: 12px;
+  background-color: #ffffff;
+}
+
+.oe-action-composer-input-wrapper .velt-composer-input--message {
+  padding: 0 !important;
+  min-height: 76px !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  color: #0e0e0e !important;
+}
+
+.oe-action-composer-input-wrapper .velt-composer-input--message::placeholder {
+  color: #9ca3af !important;
+}
+
+.oe-action-composer-input-wrapper:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.oe-action-composer-note {
+  background-color: #fefce8;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.oe-action-composer-note-text {
+  font-size: 12px;
+  line-height: 18px;
+  color: #92400e;
+  margin: 0;
+}
+
+.oe-action-composer-note-text strong {
+  color: #b45309;
+}
+
+.oe-action-composer-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.oe-action-btn-approve {
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #ffffff;
+  background-color: #22c55e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.oe-action-btn-approve:hover {
+  background-color: #16a34a;
+}
+
+.oe-action-btn-approve:disabled {
+  background-color: #86efac;
+  cursor: not-allowed;
+}
+
+.velt-composer-input-focused {
+  
+}

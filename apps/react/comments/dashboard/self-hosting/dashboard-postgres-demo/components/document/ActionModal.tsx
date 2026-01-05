@@ -1,5 +1,6 @@
 'use client'
 
+import { VeltInlineCommentsSection } from '@veltdev/react'
 import { useState } from 'react'
 
 interface ActionModalProps {
@@ -173,46 +174,8 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Comment {config.required && <span className="text-red-500">*</span>}
               </label>
-              <div className="relative">
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder={`Add your ${actionType} comment here...`}
-                  rows={4}
-                  className={`w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${
-                    config.required && !comment.trim() ? 'border-gray-300' : 'border-gray-300'
-                  }`}
-                />
-              </div>
-              {config.required && !comment.trim() && (
-                <p className="mt-1 text-xs text-gray-500">A comment is required for this action.</p>
-              )}
+            <VeltInlineCommentsSection variant="action-comment-section" context={{ jobId: jobId, commentType: 'action' }} targetElementId={actionTargetId} shadowDom={false} composerPosition="bottom" />
             </div>
-
-            {/* Info about action comments */}
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <p className="text-xs text-amber-800">
-                <strong>Note:</strong> Action comments are recorded for audit purposes and cannot be deleted.
-                They will appear in the job&apos;s comment history.
-              </p>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting || (config.required && !comment.trim())}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${config.buttonClass}`}
-            >
-              {isSubmitting ? 'Submitting...' : config.buttonText}
-            </button>
           </div>
         </div>
       </div>
