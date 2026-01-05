@@ -12,8 +12,7 @@
     "new:demo": "tsx scripts/new-demo.ts",
     "velt:update": "node scripts/update-velt-versions.js",
     "velt:check": "node scripts/update-velt-versions.js --check",
-    "velt:dry-run": "node scripts/update-velt-versions.js --dry-run",
-    "vercel:config": "node scripts/add-vercel-config.js"
+    "velt:dry-run": "node scripts/update-velt-versions.js --dry-run"
   },
   "repository": {
     "type": "git",
@@ -40,16 +39,13 @@
     "packages/*"
   ],
   "packageManager": "pnpm@10.0.0",
-  "pnpm": {
-    "overrides": {
-      "@veltdev/crdt": "4.5.8",
-      "@veltdev/crdt-react": "4.5.8",
-      "@veltdev/tiptap-crdt-react": "^4.5.9-beta.4",
-      "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
-      "@veltdev/codemirror-crdt-react": "4.5.8",
-      "@veltdev/reactflow-crdt": "4.5.8",
-      "@veltdev/react": "^4.6.10",
-      "@codemirror/state": "^6.5.2"
-    }
+  "overrides": {
+    "@veltdev/crdt": "4.5.8",
+    "@veltdev/crdt-react": "4.5.8",
+    "@veltdev/tiptap-crdt-react": "^4.5.9-beta.4",
+    "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
+    "@veltdev/codemirror-crdt-react": "4.5.8",
+    "@veltdev/reactflow-crdt": "4.5.8",
+    "@veltdev/react": "^4.6.10"
   }
 }

@@ -27,46 +27,7 @@ on:
       - '**/package.json'
 
 jobs:
-  check-updates:
-    runs-on: ubuntu-latest
-    outputs:
-      has_changes: ${{ steps.check.outputs.has_changes }}
-      mode: ${{ steps.mode.outputs.mode }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Determine run mode
-        id: mode
-        run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            echo "mode=check" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "mode=${{ inputs.mode }}" >> $GITHUB_OUTPUT
-          else
-            echo "mode=update" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Check for version updates
-        id: check
-        run: |
-          # Run dry-run and capture output
-          output=$(node scripts/update-velt-versions.js --dry-run 2>&1)
-          echo "$output"
-
-          # Check if any files would be modified
-          if echo "$output" | grep -q "Files would be modified: 0"; then
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-            echo "✅ No version updates needed - skipping pipeline"
-          else
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "📦 Version updates detected - continuing pipeline"
-          fi
-
   update-versions:
-    needs: check-updates
-    if: needs.check-updates.outputs.has_changes == 'true' || needs.check-updates.outputs.mode == 'check'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -86,25 +47,44 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Determine run mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "mode=check" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> $GITHUB_OUTPUT
+          else
+            echo "mode=update" >> $GITHUB_OUTPUT
+          fi
 
       - name: Run version check (PR)
-        if: needs.check-updates.outputs.mode == 'check'
+        if: steps.mode.outputs.mode == 'check'
         run: node scripts/update-velt-versions.js --check
 
       - name: Run version update (dry-run)
-        if: needs.check-updates.outputs.mode == 'dry-run'
+        if: steps.mode.outputs.mode == 'dry-run'
         run: node scripts/update-velt-versions.js --dry-run
 
       - name: Run version update
-        if: needs.check-updates.outputs.mode == 'update'
+        if: steps.mode.outputs.mode == 'update'
         run: |
           node scripts/update-velt-versions.js
+
+          # Check if there are changes
+          if git diff --quiet; then
+            echo "No version changes needed"
+            exit 0
+          fi
 
           # Install dependencies to update lockfile
           pnpm install --no-frozen-lockfile
 
       - name: Commit and push changes
-        if: needs.check-updates.outputs.mode == 'update' && github.event_name == 'push'
+        if: steps.mode.outputs.mode == 'update' && github.event_name == 'push'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -115,7 +95,7 @@ jobs:
           fi
 
       - name: Create Pull Request (manual trigger)
-        if: needs.check-updates.outputs.mode == 'update' && github.event_name == 'workflow_dispatch'
+        if: steps.mode.outputs.mode == 'update' && github.event_name == 'workflow_dispatch'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
