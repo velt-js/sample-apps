@@ -2,9 +2,6 @@
 
 import { useState, useRef, useEffect } from "react"
 
-// Enable debug logging
-const DEBUG = true
-
 // Time to wait for Velt SDK auth to complete before refreshing
 // validateclient takes ~7-8 seconds, add buffer
 const VELT_AUTH_WAIT_MS = 8000
@@ -26,9 +23,6 @@ function markDemoInitialized(url: string): void {
     const origin = new URL(url).origin
     const key = `velt-initialized-${origin}`
     localStorage.setItem(key, 'true')
-    if (DEBUG) {
-      console.log('[IframePair] Marked demo as initialized:', origin)
-    }
   } catch {
     // ignore
   }
@@ -60,53 +54,19 @@ export function IframePair({
 
   const iframe1Ref = useRef<HTMLIFrameElement>(null)
   const iframe2Ref = useRef<HTMLIFrameElement>(null)
-  const mountTime = useRef(Date.now())
-  const loadCount1 = useRef(0)
-  const loadCount2 = useRef(0)
   const refreshTimer1 = useRef<NodeJS.Timeout | null>(null)
   const refreshTimer2 = useRef<NodeJS.Timeout | null>(null)
 
-  // Debug: Log on mount
+  // Cleanup timers on unmount
   useEffect(() => {
-    if (DEBUG) {
-      const alreadyInit1 = url ? isDemoInitialized(url) : false
-      const alreadyInit2 = (secondUrl || url) ? isDemoInitialized(secondUrl || url!) : false
-      console.log('[IframePair] Mounted with URLs:', {
-        url,
-        secondUrl,
-        displayMode,
-        mountTime: new Date().toISOString(),
-        alreadyInitialized1: alreadyInit1,
-        alreadyInitialized2: alreadyInit2,
-        skipDelay: alreadyInit1 || alreadyInit2,
-      })
-    }
-
     return () => {
-      if (DEBUG) {
-        console.log('[IframePair] Unmounting after', Date.now() - mountTime.current, 'ms')
-      }
-      // Clear any pending refresh timers on unmount
       if (refreshTimer1.current) clearTimeout(refreshTimer1.current)
       if (refreshTimer2.current) clearTimeout(refreshTimer2.current)
     }
   }, [])
 
-  // Debug: Log when URLs change
-  useEffect(() => {
-    if (DEBUG) {
-      console.log('[IframePair] URL prop changed:', {
-        url,
-        secondUrl,
-      })
-    }
-  }, [url, secondUrl])
-
   // Safety check: don't render if URL is not provided
   if (!url) {
-    if (DEBUG) {
-      console.log('[IframePair] No URL provided, showing placeholder')
-    }
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-muted-foreground">Preparing demo...</div>
@@ -117,28 +77,13 @@ export function IframePair({
   const finalSecondUrl = secondUrl || url
 
   const handleIframeLoad = (iframeNum: number) => {
-    const elapsed = Date.now() - mountTime.current
-
     if (iframeNum === 1) {
-      loadCount1.current++
-      if (DEBUG) {
-        console.log(`[IframePair] iframe1 onLoad #${loadCount1.current} after ${elapsed}ms`, {
-          currentSrc: iframe1Ref.current?.src,
-          hasRefreshed: hasRefreshed1,
-        })
-      }
       setError1(false)
 
       if (!hasRefreshed1) {
         // First load: wait for Velt auth to complete, then refresh
-        if (DEBUG) {
-          console.log(`[IframePair] iframe1 first load - waiting ${VELT_AUTH_WAIT_MS}ms for Velt auth before refresh`)
-        }
         refreshTimer1.current = setTimeout(() => {
           if (iframe1Ref.current && url) {
-            if (DEBUG) {
-              console.log('[IframePair] iframe1 refreshing after Velt auth wait')
-            }
             setHasRefreshed1(true)
             // Force refresh by resetting src
             iframe1Ref.current.src = url
@@ -146,35 +91,19 @@ export function IframePair({
         }, VELT_AUTH_WAIT_MS)
       } else {
         // Second load (after refresh): Velt auth should be cached, ready to show
-        if (DEBUG) {
-          console.log('[IframePair] iframe1 loaded after refresh - ready')
-        }
         setIsLoading1(false)
         // Mark this demo origin as initialized for future visits
         if (url) markDemoInitialized(url)
       }
     } else {
-      loadCount2.current++
-      if (DEBUG) {
-        console.log(`[IframePair] iframe2 onLoad #${loadCount2.current} after ${elapsed}ms`, {
-          currentSrc: iframe2Ref.current?.src,
-          hasRefreshed: hasRefreshed2,
-        })
-      }
       setError2(false)
 
       if (!hasRefreshed2) {
         // First load: wait for Velt auth to complete, then refresh
-        if (DEBUG) {
-          console.log(`[IframePair] iframe2 first load - waiting ${VELT_AUTH_WAIT_MS}ms for Velt auth before refresh`)
-        }
         refreshTimer2.current = setTimeout(() => {
           if (iframe2Ref.current) {
             const refreshUrl = secondUrl || url
             if (refreshUrl) {
-              if (DEBUG) {
-                console.log('[IframePair] iframe2 refreshing after Velt auth wait')
-              }
               setHasRefreshed2(true)
               // Force refresh by resetting src
               iframe2Ref.current.src = refreshUrl
@@ -183,9 +112,6 @@ export function IframePair({
         }, VELT_AUTH_WAIT_MS)
       } else {
         // Second load (after refresh): Velt auth should be cached, ready to show
-        if (DEBUG) {
-          console.log('[IframePair] iframe2 loaded after refresh - ready')
-        }
         setIsLoading2(false)
         // Mark this demo origin as initialized for future visits
         const targetUrl = secondUrl || url
@@ -195,9 +121,6 @@ export function IframePair({
   }
 
   const handleIframeError = (iframeNum: number) => {
-    if (DEBUG) {
-      console.log(`[IframePair] iframe${iframeNum} onError`)
-    }
     if (iframeNum === 1) {
       setIsLoading1(false)
       setError1(true)
@@ -209,9 +132,6 @@ export function IframePair({
 
   // Single iframe mode
   if (displayMode === 'single') {
-    if (DEBUG) {
-      console.log('[IframePair] Rendering single mode with URL:', url)
-    }
     return (
       <div className="h-full relative">
         <div className="rounded-lg border border-border bg-card overflow-hidden h-full">
@@ -241,9 +161,6 @@ export function IframePair({
   }
 
   // Dual iframe mode (default)
-  if (DEBUG) {
-    console.log('[IframePair] Rendering dual mode with URLs:', { url, finalSecondUrl })
-  }
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
       <div className="rounded-lg border border-border bg-card overflow-hidden relative">
