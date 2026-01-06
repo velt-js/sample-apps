@@ -70,7 +70,7 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
             secondUrl={iframeUrl2}
             height="calc(100vh - 88px)"
             displayMode={sample.metadata.displayMode || 'dual'}
-            key={documentId}
+            key={`${sample.metadata.id}-${documentId}`}
           />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
@@ -86,7 +86,7 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
               secondUrl={iframeUrl2}
               height="100%"
               displayMode={sample.metadata.displayMode || 'dual'}
-              key={documentId}
+              key={`${sample.metadata.id}-${documentId}`}
             />
           </div>
         )}

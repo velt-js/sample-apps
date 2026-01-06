@@ -89,37 +89,32 @@ export default function Page() {
     }
   }, [])
 
-  // Handle sample selection: clear documentId first to prevent race condition
-  // where iframe renders with new sample URL but old documentId
+  // Handle sample selection: atomically update both sample and document ID
+  // to prevent race conditions where iframe renders with mismatched data
   const handleSampleSelect = useCallback((newSampleId: string) => {
     if (newSampleId === currentSampleId) return
-    // Clear documentId FIRST to ensure iframe doesn't render with mismatched sample/document
-    // This triggers "Loading demo..." state until the effect sets the correct documentId
-    setDocumentId('')
-    setCurrentSampleId(newSampleId)
-  }, [currentSampleId])
-
-  // Handle sample change: get document ID for the new demo
-  useEffect(() => {
-    if (!isInitialized.current) return
     if (typeof window === 'undefined') return
 
     try {
-      const sample = getSampleById(currentSampleId)
+      const sample = getSampleById(newSampleId)
       if (!sample) return
 
       // Store the current selection for persistence
-      localStorage.setItem('last-selected-sample-id', currentSampleId)
+      localStorage.setItem('last-selected-sample-id', newSampleId)
 
-      // Get or generate document ID for this demo
-      const docId = getDocumentIdForDemo(currentSampleId)
+      // Get or generate document ID for this demo BEFORE updating state
+      const docId = getDocumentIdForDemo(newSampleId)
+
+      // ATOMIC UPDATE: Set both sample and document ID together
+      // This prevents the iframe from rendering with mismatched data
+      setCurrentSampleId(newSampleId)
       setDocumentId(docId)
 
-      // Update URL
-      const routePath = sample.metadata.routePath || ''
+      // Update URL after state update
+      const routePath = sample.metadata.routePath || window.location.pathname
       const newUrl = `${routePath}?documentId=${docId}`
-
-      if (window.location.pathname + window.location.search !== newUrl) {
+      
+      if (window.location.href !== window.location.origin + newUrl) {
         window.history.pushState({}, '', newUrl)
       }
     } catch (error) {
@@ -127,8 +122,11 @@ export default function Page() {
     }
   }, [currentSampleId, getDocumentIdForDemo])
 
+  // Note: URL updates are now handled directly in handleSampleSelect and handleReset
+  // This effect is removed to prevent duplicate history entries
+
   // Handle reset: generate new document ID for current demo
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     if (typeof window === 'undefined') return
 
     try {
@@ -141,16 +139,20 @@ export default function Page() {
       // Update localStorage for this demo
       localStorage.setItem(`demo-${currentSampleId}-document-id`, newDocId)
       
-      // Update state and URL
+      // Update state
       setDocumentId(newDocId)
-      const routePath = sample.metadata.routePath || ''
+      
+      // Update URL
+      const routePath = sample.metadata.routePath || window.location.pathname
       const newUrl = `${routePath}?documentId=${newDocId}`
       
-      window.history.pushState({}, '', newUrl)
+      if (window.location.href !== window.location.origin + newUrl) {
+        window.history.pushState({}, '', newUrl)
+      }
     } catch (error) {
       console.error('Error resetting document:', error)
     }
-  }
+  }, [currentSampleId])
 
   // Show loading state during hydration to prevent flash
   if (!isMounted) {

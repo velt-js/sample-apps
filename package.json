@@ -9,7 +9,10 @@
     "lint": "turbo run lint --continue",
     "lint:fix": "turbo run lint:fix --continue || turbo run lint --continue -- --fix || true",
     "list": "node scripts/list-apps.js",
-    "new:demo": "tsx scripts/new-demo.ts"
+    "new:demo": "tsx scripts/new-demo.ts",
+    "velt:update": "node scripts/update-velt-versions.js",
+    "velt:check": "node scripts/update-velt-versions.js --check",
+    "velt:dry-run": "node scripts/update-velt-versions.js --dry-run"
   },
   "repository": {
     "type": "git",
@@ -35,7 +38,7 @@
     "apps/*/*/*/*/*",
     "packages/*"
   ],
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.0.0",
   "overrides": {
     "@veltdev/crdt": "4.5.8",
     "@veltdev/crdt-react": "4.5.8",

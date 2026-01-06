@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@veltdev/client": "^4.5.8-beta.8",
+    "@veltdev/client": "^4.6.10",
     "@veltdev/react": "^4.6.10",
-    "@veltdev/slate-velt-comments": "^1.0.3",
+    "@veltdev/slate-velt-comments": "1.0.3",
     "clsx": "^2.1.1",
     "next": "^15.5.7",
     "react": "^19.2.0",

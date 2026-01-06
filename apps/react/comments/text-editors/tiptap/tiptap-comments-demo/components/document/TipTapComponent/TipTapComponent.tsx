@@ -1,6 +1,7 @@
 'use client'
 
-import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, useEditor } from '@tiptap/react'
+import { BubbleMenu } from '@tiptap/react/menus'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
@@ -16,7 +17,6 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        history: false,
         heading: false,
       }),
       TextAlign.configure({
@@ -60,7 +60,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
               </div>
 
               {editor && (
-                <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+                <BubbleMenu editor={editor} options={{ placement: 'top', offset: 8 }}>
                   <BubbleMenuToolbar editor={editor} onAddComment={addTiptapVeltComment} />
                 </BubbleMenu>
               )}
