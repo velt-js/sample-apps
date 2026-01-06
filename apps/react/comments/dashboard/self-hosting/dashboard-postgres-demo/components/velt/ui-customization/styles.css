@@ -298,7 +298,7 @@ app-comment-dialog-toggle-reply-text {
 
 .oe-comment--metadata span {
   /* This is the magic combo for ellipsis */
-  flex: 1;
+  flex: 0 1 auto;
   min-width: 0;
   white-space: nowrap;
   overflow: hidden;

@@ -24,10 +24,10 @@ const VeltInlineCommentsSectionWf = () => {
                 <div className="oe-comment--metadata">
                     <MarkRead width={16} height={16} />
                     <span className="oe-comment--metadata-label">Line:</span>
-                    <span className="oe-comment--metadata-label"><VeltData field="context.lineItemDescription" /></span>
+                    <span><VeltData field="context.lineItemDescription" /></span>
                     <span className="oe-comment--metadata-label">-</span>
-                    <span className="oe-comment--metadata-label"><VeltData field="context.lineItemCurrency" /></span>
-                    <span className="oe-comment--metadata-label"><VeltData field="context.lineItemAmount" /></span>
+                    <span><VeltData field="context.lineItemCurrency" /></span>
+                    <span><VeltData field="context.lineItemAmount" /></span>
                     <div className="oe-metadata-close">
                         <VeltButtonWireframe id="close-sidebar" type="button">
                             <div className="oe-btn-padding-sm">

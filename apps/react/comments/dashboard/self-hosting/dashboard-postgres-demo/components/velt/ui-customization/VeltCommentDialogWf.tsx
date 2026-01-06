@@ -83,10 +83,10 @@ const VeltCommentDialogWf = () => {
                                         <div className="oe-comment--metadata">
                                             <MarkRead width={16} height={16} />
                                             <span className="oe-comment--metadata-label">Line:</span>
-                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemDescription" /></span>
+                                            <span><VeltData field="annotation.context.lineItemDescription" /></span>
                                             <span className="oe-comment--metadata-label">-</span>
-                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemCurrency" /></span>
-                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemAmount" /></span>
+                                            <span><VeltData field="annotation.context.lineItemCurrency" /></span>
+                                            <span><VeltData field="annotation.context.lineItemAmount" /></span>
                                         </div>
                                     </VeltIf>
                                     <VeltCommentDialogWireframe.ThreadCard.Message />
