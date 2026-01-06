@@ -44,6 +44,7 @@ export function VeltCollaboration() {
                 pageMode={true}
                 sortData="asc"
                 focusedThreadMode={true}
+                openAnnotationInFocusMode={true}
             // readOnly={true}
             />
 
