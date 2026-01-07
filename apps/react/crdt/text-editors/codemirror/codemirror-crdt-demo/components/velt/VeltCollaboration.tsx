@@ -1,5 +1,5 @@
 "use client";
-import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
+import { useVeltClient, useVeltInitState, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
 import { useEffect } from "react";
@@ -9,6 +9,8 @@ export function VeltCollaboration() {
   const { isUserLoggedIn } = useAppUser();
   // [Velt] Get Velt client instance
   const { client } = useVeltClient();
+  // [Velt] Check if Velt is fully initialized (user authenticated + document set)
+  const veltInitialized = useVeltInitState();
 
   // [Velt] Sign out user when user logs out, getting user login state from host app
   useEffect(() => {
@@ -24,10 +26,14 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
-      <VeltComments
-        textMode={false}
-      />
-      <VeltCommentsSidebar groupConfig={groupConfig} />
+      {veltInitialized && (
+        <>
+          <VeltComments
+            textMode={false}
+          />
+          <VeltCommentsSidebar groupConfig={groupConfig} />
+        </>
+      )}
       <VeltCustomization />
     </>
   );
