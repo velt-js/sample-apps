@@ -2,7 +2,7 @@ import { VeltButtonWireframe, VeltCommentComposerWireframe, VeltCommentDialogWir
 
 const VeltActionCommentsComposerWf = () => {
     return (
-        <VeltCommentComposerWireframe variant="action-comment-section"  className="oe-action-comment-composer-wrapper">
+        <VeltCommentComposerWireframe variant="action-comment-section" className="oe-action-comment-composer-wrapper">
             <VeltCommentDialogWireframe.Composer>
                 <div className="oe-action-composer">
                     {/* Textarea Input */}
@@ -20,9 +20,14 @@ const VeltActionCommentsComposerWf = () => {
 
                     {/* Approve Button */}
                     <div className="oe-action-composer-buttons">
+                        <div className="oe-action-composer-buttons-cancel">
+                            <VeltButtonWireframe id="action-comment-cancel-button" type="button">
+                                Cancel
+                            </VeltButtonWireframe>
+                        </div>
                         <VeltCommentDialogWireframe.Composer.ActionButton type="submit">
                             <VeltButtonWireframe id="action-comment-approve-button" type="button">
-                                        Approve
+                                Approve
                             </VeltButtonWireframe>
                         </VeltCommentDialogWireframe.Composer.ActionButton>
                     </div>

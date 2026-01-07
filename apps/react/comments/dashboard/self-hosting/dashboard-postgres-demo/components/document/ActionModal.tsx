@@ -121,11 +121,8 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
     const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
 
     useEffect(() => {
-      if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'action-comment-approve-button') {
-        console.log('action comment approve button clicked');
-        setTimeout(() => {
+      if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'action-comment-approve-button' || veltButtonClickEventData?.buttonContext?.clickedButtonId === 'action-comment-cancel-button') {
           onClose();
-        }, 500)
       }
     }, [veltButtonClickEventData]);
 
@@ -174,16 +171,16 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
           </div>
 
           {/* Content */}
-          <div className="p-6">
-            <p className="text-sm text-gray-600 mb-4">{config.description}</p>
+          <div>
+            <p className="text-sm text-gray-600 p-6 pb-4">{config.description}</p>
 
             {/* Comment input - action comments are stored but not deletable */}
             <div
               id={actionTargetId}
               data-id={actionTargetId}
-              className="mb-4 oe-action-comment-composer-wrapper"
+              className="oe-action-comment-composer-wrapper"
             >
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2 px-6">
                 Comment {config.required && <span className="text-red-500">*</span>}
               </label>
               <VeltCommentComposer variant="action-comment-section" context={{ jobId: jobId, commentType: 'action' }} shadowDom={false} />

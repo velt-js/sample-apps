@@ -417,7 +417,7 @@ app-comment-sidebar-list {
   line-height: 21px !important;
   letter-spacing: -0.75% !important;
   color: #777572 !important;
-  color: #0E0E0E !important;
+  color: #0e0e0e !important;
 }
 
 button.action__button.velt-action-button {
@@ -1125,25 +1125,24 @@ app-notifications-panel-content {
 }
 
 .velt-composer-input-focused {
-    outline: 2px solid #5577ff59 !important;
-    border-radius: 3px !important;
-    .oe-composer--content {
-      border: 1px solid #5577ff !important;
-    }
+  outline: 2px solid #5577ff59 !important;
+  border-radius: 3px !important;
+  .oe-composer--content {
+    border: 1px solid #5577ff !important;
+  }
 }
 
-
 .velt-comment-attachments {
-    padding-left: 0px !important;
+  padding-left: 0px !important;
 }
 
 .oe--unresolve-button {
-    color: #2A9D8F !important;
+  color: #2a9d8f !important;
 
-    &:hover {
-        background-color: #2A9D8F !important;
-        color: #ffffff !important;
-    }
+  &:hover {
+    background-color: #2a9d8f !important;
+    color: #ffffff !important;
+  }
 }
 
 app-if {
@@ -1419,6 +1418,7 @@ body {
   border: 1px solid #fcd34d;
   border-radius: 8px;
   padding: 12px;
+  margin-inline: 24px !important;
 }
 
 .oe-action-composer-note-text {
@@ -1438,12 +1438,27 @@ body {
   align-items: center;
   justify-content: center;
   padding-top: 8px;
+  justify-content: flex-end !important;
 }
 
 .oe-action-comment-composer-wrapper {
   .velt-composer-input-focused {
     outline: none !important;
     border-radius: 0px !important;
+  }
+
+  .oe-action-composer-input-wrapper {
+    margin-inline: 24px !important;
+  }
+
+  .oe-action-composer-buttons {
+    padding-inline: 24px !important;
+    padding-block: 16px !important;
+    background-color: rgb(249, 250, 251);
+    border-radius: 0px 0px 12px 12px;
+    border-top: 1px solid rgb(229, 231, 235);
+    gap: .75rem;
+    margin-top: 8px;
   }
 
   .velt-comment-dialog {
@@ -1455,25 +1470,41 @@ body {
     background-color: transparent !important;
   }
 
-  .oe-action-composer-buttons {
-    justify-content: flex-end !important;
+  .oe-action-composer-buttons-cancel {
+    color: rgb(55 65 81);
+    font-weight: 500;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: rgb(255 255 255);
+    border-color: rgb(209 213 219);
+    border-width: 1px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(249 250 251);
+    }
   }
 
   .velt-composer--submit-button {
-    padding: 8px 16px;
+    color: #ffffff !important;
     font-weight: 500;
+    padding: 8px 16px;
     font-size: 14px;
     line-height: 21px;
-    color: #ffffff !important;
-    background-color: #22c55e !important;
+    background-color: rgb(22, 163, 74) !important;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.15s ease;
-  }
-  
-  .velt-composer--submit-button:hover {
-    background-color: #16a34a !important;
+
+    &:hover {
+        background-color: rgb(21 128 61) !important;
+    }
   }
 
   .velt-composer--submit-button:disabled {
@@ -1482,7 +1513,6 @@ body {
     color: #bdbdbd !important;
     cursor: not-allowed !important;
   }
-
 }
 
 /* ========================================
@@ -1565,9 +1595,9 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background-color: #F75452 !important;
-    border: 1px solid #CA3D3D !important;
-    box-shadow: 0px 1px 2px 0px #00102E0F !important;
+    background-color: #f75452 !important;
+    border: 1px solid #ca3d3d !important;
+    box-shadow: 0px 1px 2px 0px #00102e0f !important;
     font-weight: 500 !important;
     font-size: 14px !important;
     line-height: 21px !important;
