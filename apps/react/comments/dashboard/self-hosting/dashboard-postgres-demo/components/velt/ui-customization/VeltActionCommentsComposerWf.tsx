@@ -1,11 +1,9 @@
-import { VeltCommentDialogWireframe, VeltInlineCommentsSectionWireframe } from "@veltdev/react";
+import { VeltButtonWireframe, VeltCommentComposerWireframe, VeltCommentDialogWireframe, VeltInlineCommentsSectionWireframe } from "@veltdev/react";
 
-const VeltInlineCommentsSectionActionCommentsWf = () => {
+const VeltActionCommentsComposerWf = () => {
     return (
-        <VeltInlineCommentsSectionWireframe variant="action-comment-section">
-            <VeltInlineCommentsSectionWireframe.Panel>
-            <VeltInlineCommentsSectionWireframe.ComposerContainer>
-            <VeltCommentDialogWireframe.Composer veltClass="'oe-disabled': {annotation.context.commentType} === 'action'">
+        <VeltCommentComposerWireframe variant="action-comment-section"  className="oe-action-comment-composer-wrapper">
+            <VeltCommentDialogWireframe.Composer>
                 <div className="oe-action-composer">
                     {/* Textarea Input */}
                     <div className="oe-action-composer-input-wrapper">
@@ -23,17 +21,15 @@ const VeltInlineCommentsSectionActionCommentsWf = () => {
                     {/* Approve Button */}
                     <div className="oe-action-composer-buttons">
                         <VeltCommentDialogWireframe.Composer.ActionButton type="submit">
-                            <button type="button" className="oe-action-btn-approve">
-                                Approve
-                            </button>
+                            <VeltButtonWireframe id="action-comment-approve-button" type="button">
+                                        Approve
+                            </VeltButtonWireframe>
                         </VeltCommentDialogWireframe.Composer.ActionButton>
                     </div>
                 </div>
             </VeltCommentDialogWireframe.Composer>
-            </VeltInlineCommentsSectionWireframe.ComposerContainer>
-            </VeltInlineCommentsSectionWireframe.Panel>
-        </VeltInlineCommentsSectionWireframe>
+        </VeltCommentComposerWireframe>
     )
 }
 
-export default VeltInlineCommentsSectionActionCommentsWf;
+export default VeltActionCommentsComposerWf;

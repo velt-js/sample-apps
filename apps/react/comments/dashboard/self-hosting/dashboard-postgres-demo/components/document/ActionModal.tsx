@@ -1,7 +1,7 @@
 'use client'
 
-import { VeltInlineCommentsSection } from '@veltdev/react'
-import { useState } from 'react'
+import { useVeltEventCallback, VeltCommentComposer } from '@veltdev/react'
+import { useEffect, useState } from 'react'
 
 interface ActionModalProps {
   jobId: string
@@ -117,6 +117,18 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
     }, 1500)
   }
 
+    // Velt button click listener
+    const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
+
+    useEffect(() => {
+      if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'action-comment-approve-button') {
+        console.log('action comment approve button clicked');
+        setTimeout(() => {
+          onClose();
+        }, 500)
+      }
+    }, [veltButtonClickEventData]);
+
   if (showSuccess) {
     return (
       <>
@@ -169,12 +181,12 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
             <div
               id={actionTargetId}
               data-id={actionTargetId}
-              className="mb-4"
+              className="mb-4 oe-action-comment-composer-wrapper"
             >
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Comment {config.required && <span className="text-red-500">*</span>}
               </label>
-            <VeltInlineCommentsSection variant="action-comment-section" context={{ jobId: jobId, commentType: 'action' }} targetElementId={actionTargetId} shadowDom={false} composerPosition="bottom" />
+              <VeltCommentComposer variant="action-comment-section" context={{ jobId: jobId, commentType: 'action' }} shadowDom={false} />
             </div>
           </div>
         </div>

@@ -724,6 +724,16 @@ app-comment-sidebar-focused-thread {
   padding-inline: 24px;
   padding-bottom: 16px;
   border-bottom: 1px solid #0e0e0e14;
+
+  &:has(app-if:empty + app-if:empty) {
+    display: none;
+  }
+
+  app-if {
+    &:empty {
+      display: none !important;
+    }
+  }
 }
 
 app-sidebar-button-unread-icon {
@@ -1430,25 +1440,140 @@ body {
   padding-top: 8px;
 }
 
-.oe-action-btn-approve {
-  padding: 8px 16px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 21px;
-  color: #ffffff;
-  background-color: #22c55e;
-  border: none;
-  border-radius: 6px;
+.oe-action-comment-composer-wrapper {
+  .velt-composer-input-focused {
+    outline: none !important;
+    border-radius: 0px !important;
+  }
+
+  .velt-comment-dialog {
+    padding: 0px !important;
+    box-shadow: none !important;
+  }
+
+  .velt-comment-dialog--selected {
+    background-color: transparent !important;
+  }
+
+  .oe-action-composer-buttons {
+    justify-content: flex-end !important;
+  }
+
+  .velt-composer--submit-button {
+    padding: 8px 16px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #ffffff !important;
+    background-color: #22c55e !important;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  
+  .velt-composer--submit-button:hover {
+    background-color: #16a34a !important;
+  }
+
+  .velt-composer--submit-button:disabled {
+    pointer-events: none !important;
+    background-color: #e5e7eb !important; /* Use a neutral disabled color */
+    color: #bdbdbd !important;
+    cursor: not-allowed !important;
+  }
+
+}
+
+/* ========================================
+   Delete Confirm Dialog Styling
+   ======================================== */
+.velt-confirm-dialog {
+  padding: 32px !important;
+  width: 552px !important;
+  position: relative !important;
+}
+
+.velt-mat-dialog-container
+  mat-dialog-container
+  .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
+  border-radius: 4px !important;
+}
+
+.oe-confirm-dialog-close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #6b758a;
+  border-radius: 4px;
+  padding: 4px;
   cursor: pointer;
-  transition: all 0.15s ease;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
 }
 
-.oe-action-btn-approve:hover {
-  background-color: #16a34a;
+.oe-confirm-dialog-title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0.15px;
+  color: #00102e;
 }
 
-.oe-action-btn-approve:disabled {
-  background-color: #86efac;
-  cursor: not-allowed;
+.velt-confirm-dialog-message {
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  letter-spacing: 0.3px !important;
+  color: #6b758a !important;
+  padding: 0px !important;
+  margin: 16px 0px 32px 0px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
 }
 
+.oe-confirm-dialog-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 16px !important;
+
+  .oe-confirm-dialog-cancel-button {
+    cursor: pointer !important;
+    height: 40px !important;
+    border-radius: 3px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #e6e8ed !important;
+    box-shadow: 0px 1px 2px 0px #00102e0f !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    letter-spacing: 0.25px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    color: #3c475c !important;
+  }
+
+  .oe-confirm-dialog-delete-button {
+    cursor: pointer !important;
+    height: 40px !important;
+    border-radius: 3px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #F75452 !important;
+    border: 1px solid #CA3D3D !important;
+    box-shadow: 0px 1px 2px 0px #00102E0F !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    letter-spacing: 0.25px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    color: #ffffff !important;
+  }
+}

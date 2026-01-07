@@ -12,7 +12,7 @@ import VeltCommentsSidebarFocusedThreadWf from './VeltCommentsSidebarFocusedThre
 import VeltCommentsSidebarEmptyPlaceholderWf from './VeltCommentsSidebarEmptyPlaceholderWf';
 import VeltNotificationWf from './VeltNotificationPanelWf';
 import VeltNotificationListItemWf from './VeltNotificationListItemWf';
-import VeltInlineCommentsSectionActionCommentsWf from './VeltInlineCommentsSectionActionCommentsWf';
+import VeltActionCommentsComposerWf from './VeltActionCommentsComposerWf';
 import VeltConfirmDialogWf from './VeltConfirmDialogWf';
 
 export function VeltCustomization() {
@@ -27,7 +27,7 @@ export function VeltCustomization() {
       <VeltCommentDialogWf />
       <VeltReactionToolWf />
       <VeltInlineCommentsSectionWf />
-      <VeltInlineCommentsSectionActionCommentsWf />
+      <VeltActionCommentsComposerWf />
       <VeltCommentsSidebarFocusedThreadWf />
       <VeltCommentsSidebarEmptyPlaceholderWf />
       <VeltNotificationWf />
