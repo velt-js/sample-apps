@@ -4,7 +4,7 @@ import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
 import VeltCommentToolWf from "./VeltCommentToolWf";
 import VeltCommentsSidebarHeaderWf from "./VeltCommentsSidebarHeaderWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
-import "./styles.css";
+import "./styles.scss";
 import VeltCommentDialogWf from './VeltCommentDialogWf';
 import VeltReactionToolWf from './VeltReactionToolWf';
 import VeltInlineCommentsSectionWf from './VeltInlineCommentsSectionWf';

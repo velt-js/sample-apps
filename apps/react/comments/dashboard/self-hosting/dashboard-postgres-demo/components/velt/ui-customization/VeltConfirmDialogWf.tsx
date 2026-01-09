@@ -13,7 +13,7 @@ const VeltConfirmDialogWf = () => {
         </VeltConfirmDialogWireframe.Title>
         <VeltConfirmDialogWireframe.Message>
             <div>This action cannot be undone.</div>
-            <div>Documents uploaded while commenting will not be deleted when the comment is deleted. Go to the job Details tab, Documents section to manage documents.</div>
+            {/* <div>Documents uploaded while commenting will not be deleted when the comment is deleted. Go to the job Details tab, Documents section to manage documents.</div> */}
         </VeltConfirmDialogWireframe.Message>
         <div className="oe-confirm-dialog-buttons">
             <VeltConfirmDialogWireframe.RejectButton>

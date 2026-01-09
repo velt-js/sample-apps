@@ -1,0 +1,130 @@
+// Spacing Variables
+$spacing-base: 8px;
+$spacing-base1: 20px;
+$spacing-base2: 48px;
+$spacing-base3: 56px;
+
+$spacing-xxs: 4px;
+$spacing-xs: 8px;
+$spacing-sm: 12px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 64px;
+$spacing-xxxl: 80px;
+
+// Font Variables Map
+$fonts-hero: (
+  font-family: 'Inter',
+  font-size: 48px,
+  font-weight: 600,
+  letter-spacing: -2.4px,
+  line-height: 48px,
+);
+
+$fonts-header1: (
+  font-family: 'Inter',
+  font-size: 32px,
+  font-weight: 600,
+  letter-spacing: -0.96px,
+  line-height: 40px,
+);
+
+$fonts-header2: (
+  font-family: 'Inter',
+  font-size: 24px,
+  font-weight: 600,
+  letter-spacing: -0.36px,
+  line-height: 36px,
+);
+
+$fonts-header3: (
+  font-family: 'Inter',
+  font-size: 18px,
+  font-weight: 600,
+  letter-spacing: -0.27px,
+  line-height: 27px,
+//   font-style: italic,
+);
+
+$fonts-header4: (
+  font-family: 'Inter',
+  font-size: 16px,
+  font-weight: 500,
+  letter-spacing: -0.16px,
+  line-height: 24px,
+);
+
+$fonts-header5: (
+  font-family: 'Inter',
+  font-size: 11px,
+  font-weight: 700,
+  letter-spacing: 1.76px,
+  line-height: 18px,
+  text-transform: uppercase,
+);
+
+$fonts-paragraph: (
+  font-family: 'Inter',
+  font-size: 16px,
+  font-weight: 300,
+  letter-spacing: -0.2px,
+  line-height: 24px,
+);
+
+$fonts-input: (
+  font-family: 'Inter',
+  font-size: 14px,
+  font-weight: 400,
+  letter-spacing: -0.105px,
+  line-height: 21px,
+);
+
+$fonts-button: (
+  font-family: 'Inter',
+  font-size: 14px,
+  font-weight: 500,
+  letter-spacing: -0.042px,
+  line-height: 21px,
+);
+
+$fonts-subtext: (
+  font-family: 'Inter',
+  font-size: 12px,
+  font-weight: 400,
+  letter-spacing: 0.1px,
+  line-height: 18px,
+);
+
+$fonts-label: (
+  font-family: 'Inter',
+  font-size: 12px,
+  font-weight: 500,
+  letter-spacing: 0.25px,
+  line-height: 18px,
+);
+
+$fonts-font10: (
+  font-family: 'Inter',
+  font-size: 10px,
+  font-weight: 500,
+  letter-spacing: 0.1px,
+  line-height: 18px,
+);
+
+$fonts-bigNumber: (
+  font-family: 'Inter',
+  font-size: 36px,
+  font-weight: 300,
+  letter-spacing: -1.8px,
+  line-height: 40px,
+);
+
+$fonts-mediumNumber: (
+  font-family: 'Inter',
+  font-size: 26px,
+  font-weight: 400,
+  letter-spacing: -0.39px,
+  line-height: 32px,
+);
+

@@ -1,7 +1,20 @@
 "use client";
 
 import { VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
-import { Reactions, Checkmark, MoreHorizontal, MarkRead, Attach1, At, ArrowUp } from "./Icons";
+import {
+    Reactions,
+    Checkmark,
+    MoreHorizontal,
+    MarkRead,
+    Attach1,
+    At,
+    ArrowUp,
+    IconOutlineCheckmarkCircle,
+    IconOutlineRepeat,
+    IconOutlineCloseCircle,
+    IconFillEdit2Fill,
+    IconOutlineMessageSquare
+} from "./Icons";
 
 const VeltCommentDialogWf = () => {
     return (
@@ -87,6 +100,33 @@ const VeltCommentDialogWf = () => {
                                             <span className="oe-comment--metadata-label">-</span>
                                             <span><VeltData field="annotation.context.lineItemCurrency" /></span>
                                             <span><VeltData field="annotation.context.lineItemAmount" /></span>
+                                        </div>
+                                    </VeltIf>
+
+                                    {/* Highlight component corrosponding wireframe logic */}
+                                    <VeltIf condition="{annotation.context.highlightData.type} && {annotation.context.highlightData.label}">
+                                        <div className="oe-comment--metadata">
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'ApproverComment'">
+                                                <IconOutlineCheckmarkCircle width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'SubmitToApprove'">
+                                                <IconOutlineCheckmarkCircle width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'DisputeDiscrepancyComment'">
+                                                <IconOutlineRepeat width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'RejectApprovalComment'">
+                                                <IconOutlineCloseCircle width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'ApproveForDifferentAmount'">
+                                                <IconFillEdit2Fill width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'LineItemComment'">
+                                                <IconOutlineMessageSquare width={16} height={16} />
+                                            </VeltIf>
+                                            <div className="oe-comment--metadata-label">
+                                                <VeltData field="annotation.context.highlightData.label" />
+                                            </div>
                                         </div>
                                     </VeltIf>
                                     <VeltCommentDialogWireframe.ThreadCard.Message />
