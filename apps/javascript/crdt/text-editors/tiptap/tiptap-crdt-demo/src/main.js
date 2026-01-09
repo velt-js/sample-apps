@@ -7,6 +7,7 @@
 
 // Import styles
 import '../styles/globals.css';
+import '../styles/tiptap.css';
 import './components/velt/ui-customization/styles.css';
 
 // Import modules
@@ -20,7 +21,7 @@ import {
 } from './lib/velt.js';
 import { createDocumentCanvas } from './components/document/document-canvas.js';
 import { configureNotificationsTool } from './components/velt/velt-tools.js';
-import { createTipTapEditor } from './components/document/tiptap.js';
+import { createTipTapEditor } from './components/document/tiptap/index.js';
 import { createVeltCollaboration } from './components/velt/velt-collaboration.js';
 
 // App state
