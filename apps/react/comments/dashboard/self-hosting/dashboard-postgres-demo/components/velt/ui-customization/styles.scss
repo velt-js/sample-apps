@@ -1329,7 +1329,7 @@ body {
   border: 1px solid #d1d5db;
   border-radius: 8px;
   min-height: 100px;
-  padding: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
   background-color: #ffffff;
 }
 
@@ -1359,7 +1359,7 @@ body {
 
 .oe-action-composer-note-text {
   @include subtext;
-  color: #92400e;
+  color: rgb(146, 64, 14);
   margin: 0;
 }
 
