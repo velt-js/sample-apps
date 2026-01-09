@@ -67,7 +67,7 @@ const VeltCommentDialogWf = () => {
                                                             Edit comment
                                                         </div>
                                                     </VeltCommentDialogWireframe.ThreadCard.Options.Content.Edit>
-                                                    <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete>
+                                                    <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete veltIf="{annotation.from.userId} === {user.userId} || {commentObj.from.userId} === {user.userId}">
                                                         <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete.Comment>
                                                             <div className="oe-thread-card--options-content-item">
                                                                 Delete comment
