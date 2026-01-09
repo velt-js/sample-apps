@@ -49,7 +49,7 @@ const VeltNotificationWf = () => {
                     <VeltNotificationsPanelWireframe.Content.All />
                 </VeltNotificationsPanelWireframe.Content>
 
-                <VeltNotificationsPanelWireframe.Settings>
+                {/* <VeltNotificationsPanelWireframe.Settings>
                     <div className="oe-notifications-panel-settings">
                         <div className="oe-notifications-panel-settings-header">
                             <div className="oe-notifications-panel-settings-bell-icon">
@@ -79,7 +79,7 @@ const VeltNotificationWf = () => {
                             </VeltNotificationsPanelWireframe.Settings.List.Accordion>
                         </VeltNotificationsPanelWireframe.Settings.List>
                     </div>
-                </VeltNotificationsPanelWireframe.Settings>
+                </VeltNotificationsPanelWireframe.Settings> */}
             </div>
         </VeltNotificationsPanelWireframe>
     );
