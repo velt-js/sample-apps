@@ -53,7 +53,7 @@ export const jobsData: Job[] = [
     status: 'Pending',
     statusType: 'pending',
     lineItems: [
-      { id: 'li-1', description: 'Office Chair Ergonomic', quantity: 5, currency: 'USD', unit: 'Each', unitPrice: 289.00, discountPercent: 15, amtPreTax: 1228.25, taxPercent: 7, poNumber: 'PO-OFF-101', amount: 1314.23 },
+      { id: 'li-1', description: 'Office Chair Ergonomic Updated 2', quantity: 5, currency: 'USD', unit: 'Each', unitPrice: 289.00, discountPercent: 15, amtPreTax: 1228.25, taxPercent: 7, poNumber: 'PO-OFF-101', amount: 1314.23 },
       { id: 'li-2', description: 'Desk Lamp LED', quantity: 10, currency: 'USD', unit: 'Each', unitPrice: 42.00, discountPercent: 0, amtPreTax: 420.00, taxPercent: 7, poNumber: 'PO-OFF-101', amount: 449.40 },
       { id: 'li-3', description: 'Monitor Stand Adjustable', quantity: 8, currency: 'USD', unit: 'Each', unitPrice: 65.00, discountPercent: 10, amtPreTax: 468.00, taxPercent: 7, amount: 500.76 },
       { id: 'li-4', description: 'Wireless Keyboard Set', quantity: 12, currency: 'USD', unit: 'Set', unitPrice: 85.00, discountPercent: 0, amtPreTax: 1020.00, taxPercent: 7, poNumber: 'PO-OFF-102', amount: 1091.40 },

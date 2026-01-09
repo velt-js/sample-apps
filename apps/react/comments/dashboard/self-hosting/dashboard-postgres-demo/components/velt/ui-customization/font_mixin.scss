@@ -1,0 +1,116 @@
+@import "./variables";
+
+// Font Mixins
+@mixin hero {
+  font-family: map-get($fonts-hero, font-family) !important;
+  font-size: map-get($fonts-hero, font-size) !important;
+  font-weight: map-get($fonts-hero, font-weight) !important;
+  letter-spacing: map-get($fonts-hero, letter-spacing) !important;
+  line-height: map-get($fonts-hero, line-height) !important;
+}
+
+@mixin header1 {
+  font-family: map-get($fonts-header1, font-family) !important;
+  font-size: map-get($fonts-header1, font-size) !important;
+  font-weight: map-get($fonts-header1, font-weight) !important;
+  letter-spacing: map-get($fonts-header1, letter-spacing) !important;
+  line-height: map-get($fonts-header1, line-height) !important;
+}
+
+@mixin header2 {
+  font-family: map-get($fonts-header2, font-family) !important;
+  font-size: map-get($fonts-header2, font-size) !important;
+  font-weight: map-get($fonts-header2, font-weight) !important;
+  letter-spacing: map-get($fonts-header2, letter-spacing) !important;
+  line-height: map-get($fonts-header2, line-height) !important;
+}
+
+@mixin header3 {
+  font-family: map-get($fonts-header3, font-family) !important;
+  font-size: map-get($fonts-header3, font-size) !important;
+  font-weight: map-get($fonts-header3, font-weight) !important;
+  letter-spacing: map-get($fonts-header3, letter-spacing) !important;
+  line-height: map-get($fonts-header3, line-height) !important;
+  font-style: map-get($fonts-header3, font-style) !important;
+}
+
+@mixin header4 {
+  font-family: map-get($fonts-header4, font-family) !important;
+  font-size: map-get($fonts-header4, font-size) !important;
+  font-weight: map-get($fonts-header4, font-weight) !important;
+  letter-spacing: map-get($fonts-header4, letter-spacing) !important;
+  line-height: map-get($fonts-header4, line-height) !important;
+}
+
+@mixin header5 {
+  font-family: map-get($fonts-header5, font-family) !important;
+  font-size: map-get($fonts-header5, font-size) !important;
+  font-weight: map-get($fonts-header5, font-weight) !important;
+  letter-spacing: map-get($fonts-header5, letter-spacing) !important;
+  line-height: map-get($fonts-header5, line-height) !important;
+  text-transform: map-get($fonts-header5, text-transform) !important;
+}
+
+@mixin paragraph {
+  font-family: map-get($fonts-paragraph, font-family) !important;
+  font-size: map-get($fonts-paragraph, font-size) !important;
+  font-weight: map-get($fonts-paragraph, font-weight) !important;
+  letter-spacing: map-get($fonts-paragraph, letter-spacing) !important;
+  line-height: map-get($fonts-paragraph, line-height) !important;
+}
+
+@mixin input {
+  font-family: map-get($fonts-input, font-family) !important;
+  font-size: map-get($fonts-input, font-size) !important;
+  font-weight: map-get($fonts-input, font-weight) !important;
+  letter-spacing: map-get($fonts-input, letter-spacing) !important;
+  line-height: map-get($fonts-input, line-height) !important;
+}
+
+@mixin button {
+  font-family: map-get($fonts-button, font-family) !important;
+  font-size: map-get($fonts-button, font-size) !important;
+  font-weight: map-get($fonts-button, font-weight) !important;
+  letter-spacing: map-get($fonts-button, letter-spacing) !important;
+  line-height: map-get($fonts-button, line-height) !important;
+}
+
+@mixin subtext {
+  font-family: map-get($fonts-subtext, font-family) !important;
+  font-size: map-get($fonts-subtext, font-size) !important;
+  font-weight: map-get($fonts-subtext, font-weight) !important;
+  letter-spacing: map-get($fonts-subtext, letter-spacing) !important;
+  line-height: map-get($fonts-subtext, line-height) !important;
+}
+
+@mixin label {
+  font-family: map-get($fonts-label, font-family) !important;
+  font-size: map-get($fonts-label, font-size) !important;
+  font-weight: map-get($fonts-label, font-weight) !important;
+  letter-spacing: map-get($fonts-label, letter-spacing) !important;
+  line-height: map-get($fonts-label, line-height) !important;
+}
+
+@mixin font10 {
+  font-family: map-get($fonts-font10, font-family) !important;
+  font-size: map-get($fonts-font10, font-size) !important;
+  font-weight: map-get($fonts-font10, font-weight) !important;
+  letter-spacing: map-get($fonts-font10, letter-spacing) !important;
+  line-height: map-get($fonts-font10, line-height) !important;
+}
+
+@mixin bigNumber {
+  font-family: map-get($fonts-bigNumber, font-family) !important;
+  font-size: map-get($fonts-bigNumber, font-size) !important;
+  font-weight: map-get($fonts-bigNumber, font-weight) !important;
+  letter-spacing: map-get($fonts-bigNumber, letter-spacing) !important;
+  line-height: map-get($fonts-bigNumber, line-height) !important;
+}
+
+@mixin mediumNumber {
+  font-family: map-get($fonts-mediumNumber, font-family) !important;
+  font-size: map-get($fonts-mediumNumber, font-size) !important;
+  font-weight: map-get($fonts-mediumNumber, font-weight) !important;
+  letter-spacing: map-get($fonts-mediumNumber, letter-spacing) !important;
+  line-height: map-get($fonts-mediumNumber, line-height) !important;
+}
