@@ -9,6 +9,7 @@ import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
 import Underline from '@tiptap/extension-underline';
 import BubbleMenu from '@tiptap/extension-bubble-menu';
+import CollaborationCaret from '@tiptap/extension-collaboration-caret';
 import { Mark, mergeAttributes } from '@tiptap/core';
 import { createVeltTipTapStore } from '@veltdev/tiptap-crdt';
 
@@ -356,6 +357,14 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
       }),
       // [Velt] Get the collaboration extension from the store
       store.getCollabExtension(),
+      // [Velt] Add collaboration caret to show other users' cursors
+      CollaborationCaret.configure({
+        provider: store.getStore().getProvider(),
+        user: {
+          name: user?.name || 'Anonymous',
+          color: user?.color || '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'),
+        },
+      }),
     ];
 
     // Debug: Check what's in the Yjs document
