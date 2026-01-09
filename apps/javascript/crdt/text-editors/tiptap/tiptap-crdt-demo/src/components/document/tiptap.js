@@ -12,6 +12,8 @@ import BubbleMenu from '@tiptap/extension-bubble-menu';
 import CollaborationCaret from '@tiptap/extension-collaboration-caret';
 import { Mark, mergeAttributes } from '@tiptap/core';
 import { createVeltTipTapStore } from '@veltdev/tiptap-crdt';
+import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments';
+import { getVeltClient } from '../../lib/velt.js';
 
 // Initial content for the editor - same as React version
 const initialContent = `
@@ -248,13 +250,20 @@ function createBubbleMenuToolbar(editor) {
         />
       </svg>
     `;
-    commentButton.addEventListener('click', (e) => {
+    // Use mousedown instead of click to preserve selection (per Velt docs)
+    commentButton.addEventListener('mousedown', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      // Trigger Velt comment if available
-      const veltCommentTool = document.querySelector('velt-comment-tool');
-      if (veltCommentTool) {
-        veltCommentTool.click();
+      // [Velt] Trigger comment creation on selected text using Velt TipTap Comments
+      console.log('[TipTap] Comment button clicked, selection:', editor.state.selection);
+      console.log('[TipTap] Selection empty?', editor.state.selection.empty);
+      // Store editorId reference for use in click handler
+      const currentEditorId = window.__veltEditorId;
+      try {
+        addComment({ editor, editorId: currentEditorId });
+        console.log('[TipTap] addComment called successfully with editorId:', currentEditorId);
+      } catch (err) {
+        console.error('[TipTap] Error calling addComment:', err);
       }
     });
 
@@ -321,6 +330,9 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
 
     console.log('[TipTap] Store created, initializing editor...');
 
+    // Store editorId globally for comment handler access
+    window.__veltEditorId = editorId;
+
     // Remove loading spinner
     container.removeChild(loadingSpinner);
 
@@ -343,6 +355,8 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
       InlineH1,
       InlineH2,
       InlineH3,
+      // [Velt] TipTap extension for Velt comments - enables comment markers and selection tracking
+      TiptapVeltComments,
       // BubbleMenu extension - must be configured before editor creation
       BubbleMenu.configure({
         element: bubbleMenuElement,
@@ -401,6 +415,22 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
         editor.commands.setContent(initialContent);
       }
     }, 1000);
+
+    // [Velt] Subscribe to comment annotations and render them in the editor
+    const client = getVeltClient();
+    if (client) {
+      const commentElement = client.getCommentElement();
+      commentElement.getAllCommentAnnotations().subscribe((annotations) => {
+        if (editor && annotations?.length) {
+          console.log('[TipTap] Rendering', annotations.length, 'comment annotations');
+          renderComments({
+            editor,
+            editorId: editorId,
+            commentAnnotations: annotations,
+          });
+        }
+      });
+    }
 
   } catch (error) {
     console.error('[TipTap] Failed to initialize:', error);
