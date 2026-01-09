@@ -37,6 +37,10 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
   // Don't render iframes until documentId is ready AND URLs are computed
   const isReady = !!documentId && !!iframeUrl
 
+  // IMPORTANT: Key should NOT include documentId to prevent remounts
+  // Only remount when sample changes, not when documentId changes
+  const iframeKey = sample.metadata.id
+
   return (
     <div
       className="flex flex-1 flex-col transition-all duration-150 ease-in-out"
@@ -45,18 +49,18 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
       }}
     >
       {/* Top Bar */}
-              <TopBar
-                mode={mode}
-                onModeChange={setMode}
-                sidebarOpen={sidebarOpen}
-                onSidebarToggle={onSidebarToggle}
-                title={sample.metadata.title}
-                githubUrl={sample.metadata.githubUrl}
-                routePath={sample.metadata.routePath}
-                documentId={documentId}
-                onReset={onReset}
-                iframeUrl={iframeUrl}
-              />
+      <TopBar
+        mode={mode}
+        onModeChange={setMode}
+        sidebarOpen={sidebarOpen}
+        onSidebarToggle={onSidebarToggle}
+        title={sample.metadata.title}
+        githubUrl={sample.metadata.githubUrl}
+        routePath={sample.metadata.routePath}
+        documentId={documentId}
+        onReset={onReset}
+        iframeUrl={iframeUrl}
+      />
 
       {/* Content Area */}
       <main className="flex-1 overflow-hidden p-4">
@@ -70,7 +74,7 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
             secondUrl={iframeUrl2}
             height="calc(100vh - 88px)"
             displayMode={sample.metadata.displayMode || 'dual'}
-            key={`${sample.metadata.id}-${documentId}`}
+            key={iframeKey}
           />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
@@ -86,7 +90,7 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
               secondUrl={iframeUrl2}
               height="100%"
               displayMode={sample.metadata.displayMode || 'dual'}
-              key={`${sample.metadata.id}-${documentId}`}
+              key={`${iframeKey}-code`}
             />
           </div>
         )}
@@ -94,4 +98,3 @@ export function SampleViewer({ sample, sidebarOpen, onSidebarToggle, documentId,
     </div>
   )
 }
-
