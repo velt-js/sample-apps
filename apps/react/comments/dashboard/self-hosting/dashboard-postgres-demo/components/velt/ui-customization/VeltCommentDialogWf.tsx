@@ -1,6 +1,6 @@
 "use client";
 
-import { VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
+import { VeltButtonWireframe, VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
 import {
     Reactions,
     Checkmark,
@@ -67,6 +67,13 @@ const VeltCommentDialogWf = () => {
                                                             Edit comment
                                                         </div>
                                                     </VeltCommentDialogWireframe.ThreadCard.Options.Content.Edit>
+                                                    <VeltIf condition="!{commentDialogSelected}">
+                                                        <VeltButtonWireframe id="reply-in-thread-button" type="button">
+                                                            <div className="oe-thread-card--options-content-item">
+                                                                Reply in thread
+                                                            </div>
+                                                        </VeltButtonWireframe>
+                                                    </VeltIf>
                                                     <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete veltIf="{annotation.from.userId} === {user.userId} || {commentObj.from.userId} === {user.userId}">
                                                         <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete.Comment>
                                                             <div className="oe-thread-card--options-content-item">

@@ -161,6 +161,7 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
 
     // Velt button click listener
     const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
+    const { client } = useVeltClient();
 
     // Handle close button click from Velt component
     useEffect(() => {
@@ -168,7 +169,13 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
             setIsCommentSidebarOpen(false);
             setSelectedLineItem(null);
         }
-    }, [veltButtonClickEventData]);
+        if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'reply-in-thread-button') {
+            if(client) {
+                const commentElement = client.getCommentElement();
+                commentElement?.selectCommentByAnnotationId(veltButtonClickEventData?.commentAnnotation?.annotationId)
+            }
+        }
+    }, [veltButtonClickEventData, client]);
 
     const handleLineItemCommentClick = (lineItem: JobLineItem) => {
         setSelectedLineItem({ lineItem, jobId: job.id })
