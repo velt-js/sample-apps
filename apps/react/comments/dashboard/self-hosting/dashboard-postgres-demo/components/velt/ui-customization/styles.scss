@@ -325,6 +325,7 @@ app-comment-dialog-toggle-reply-text {
   border: none !important;
   border-radius: 0px !important;
   width: auto !important;
+  gap: 8px !important;
 
   &:hover {
     background-color: #fafafa !important;
@@ -337,10 +338,6 @@ app-comment-dialog-toggle-reply-text {
       background-color: transparent !important;
     }
   }
-}
-
-.velt-comment-dialog--selected {
-  background-color: #fafafa !important;
 }
 
 .velt-inline-comments-section--comment {
@@ -714,7 +711,10 @@ app-sidebar-button-unread-icon {
 }
 
 .oe-comment-sidebar-empty-placeholder--title {
-  @include header1;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.91px;
   text-align: center;
   color: #3649b9;
 }
@@ -757,10 +757,6 @@ app-comment-sidebar-reset-filter-button {
 
 .oe-composer--metadata {
   width: 100%;
-
-  &:has(app-if:empty + app-if:empty) {
-    display: none;
-  }
 
   app-if {
     &:empty {
@@ -1687,8 +1683,8 @@ velt-autocomplete-option-description-internal {
   padding: $spacing-xs !important;
   background-color: #ffffff !important;
   margin-top: 4px !important;
-  border: 1px solid rgba(242, 244, 255, .4) !important;
-  box-shadow: 0 3px 6px 0 rgba(14, 14, 14, .08) !important;
+  border: 1px solid rgba(242, 244, 255, 0.4) !important;
+  box-shadow: 0 3px 6px 0 rgba(14, 14, 14, 0.08) !important;
 
   .mat-mdc-option {
     margin: 0 !important;
@@ -1726,4 +1722,40 @@ velt-autocomplete-option-description-internal {
       color: #475ee5 !important;
     }
   }
+}
+
+.velt-comment-dialog--no-comments {
+  gap: 8px !important;
+}
+
+.velt-inline-comments-section--composer-container {
+  .velt-comment-dialog {
+    padding-inline: 0px !important;
+    background-color: #ffffff !important;
+
+    app-comment-dialog-composer {
+      width: auto !important;
+      margin-inline: $spacing-xl !important;
+      background-color: #fafafa !important;
+    }
+  }
+}
+
+.velt-comment-dialog--focused-thread-mode app-comment-dialog-body {
+  padding-inline: 0px !important;
+
+  app-comment-dialog-threads {
+    gap: 0px !important;
+  }
+
+  app-comment-dialog-thread-card {
+    padding: $spacing-base1 $spacing-xl !important;
+    &:hover {
+      background-color: #fafafa !important;
+    }
+  }
+}
+
+.velt-comment-dialog--focused-thread-mode {
+  padding-top: 0px !important;
 }

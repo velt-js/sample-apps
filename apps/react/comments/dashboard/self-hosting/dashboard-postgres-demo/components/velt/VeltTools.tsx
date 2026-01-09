@@ -10,7 +10,7 @@ function VeltTools() {
       {/* [Velt] Show online users */}
       <VeltPresence />
       {/* [Velt] Toggle comments sidebar */}
-      <VeltSidebarButton />
+      <VeltSidebarButton commentCountType="unread"/>
     </>
   );
 }

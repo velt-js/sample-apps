@@ -145,7 +145,7 @@ const VeltCommentDialogWf = () => {
                 </VeltIf>
             </VeltCommentDialogWireframe.Body>
             <div className="oe-composer--metadata">
-                <VeltIf condition="{commentDialogSelected} && !{pageModeComposer} && {annotation.from.name}">
+                <VeltIf condition="{commentDialogSelected} && !{pageModeComposer} && {annotation.from.name} && {annotation.from.name} !== {user.name}">
                     <div className="oe-composer--focused-thread-metadata-item">
                         <div>Replying to</div>
                         <VeltData field="annotation.from.name" />
@@ -154,6 +154,17 @@ const VeltCommentDialogWf = () => {
                 <VeltIf condition="{pageModeComposer}">
                     <div className="oe-composer--page-mode-metadata-item">
                         <div>Comment</div>
+                    </div>
+                </VeltIf>
+                <VeltIf condition="{commentDialogSelected} && !{pageModeComposer} && (!{annotation.from.name} || {annotation.from.name} === {user.name})">
+                    <div className="oe-composer--focused-thread-metadata-item">
+                        <div>Comment on line</div>
+                        "
+                        <VeltData field="context.lineItemDescription" />
+                        -
+                        <VeltData field="context.lineItemCurrency" />
+                        <VeltData field="context.lineItemAmount" />
+                        "
                     </div>
                 </VeltIf>
             </div>
