@@ -35,6 +35,9 @@ export function VeltCollaboration() {
                 commentPinHighlighter={false}
                 dialogOnHover={false}
                 groupMatchedComments={true}
+                autoCompleteScrollConfig={{
+                    itemSize: 28,
+                }}
             // readOnly={true} // Uncomment this to make the comments read-only for certain users
             />
             <VeltCommentsSidebar
@@ -42,9 +45,12 @@ export function VeltCollaboration() {
                 shadowDom={false}
                 groupConfig={groupConfig}
                 pageMode={true}
-                sortData="asc"
+                sortOrder="asc"
+                sortBy="createdAt"
                 focusedThreadMode={true}
                 openAnnotationInFocusMode={true}
+                defaultMinimalFilter="reset"
+                forceClose={true}
             // readOnly={true}
             />
 

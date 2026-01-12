@@ -91,6 +91,7 @@ export const NotificationsPanel = ({ isOpen, onClose }: NotificationsPanelProps)
                     readNotificationsOnForYouTab={true}
                     onNotificationClick={onNotificationClick}
                     settings={true}
+                    pageSize={5}
                     tabConfig={{
                         forYou: {
                             enable: true,

@@ -361,8 +361,8 @@ importers:
   apps/react/comments/dashboard/self-hosting/dashboard-postgres-demo:
     dependencies:
       '@veltdev/react':
-        specifier: ^4.7.0-beta.2
-        version: 4.7.0-beta.2(react-dom@19.2.0)(react@19.2.0)
+        specifier: ^4.7.1-beta.1
+        version: 4.7.1-beta.1(react-dom@19.2.0)(react@19.2.0)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -401,8 +401,8 @@ importers:
         specifier: ^19
         version: 19.2.2(@types/react@19.2.2)
       '@veltdev/types':
-        specifier: ^4.7.0-beta.2
-        version: 4.7.0
+        specifier: ^4.7.1-beta.1
+        version: 4.7.1-beta.1
       autoprefixer:
         specifier: ^10
         version: 10.4.21(postcss@8.5.6)
@@ -5846,8 +5846,8 @@ packages:
       react-dom: 19.2.0(react@19.2.0)
     dev: false
 
-  /@veltdev/react@4.7.0-beta.2(react-dom@19.2.0)(react@19.2.0):
-    resolution: {integrity: sha512-0QXkQtA3ouYyCPblWUZmoAe9v986jr8H+iFc3YYZD+Vtxy+4ZJ4w5juT7MAt0wPhL10R3xThmj9UuKYAW2ag4w==}
+  /@veltdev/react@4.7.1-beta.1(react-dom@19.2.0)(react@19.2.0):
+    resolution: {integrity: sha512-rxJZOzgtpcR3WNr2ulEHNCtpUHxkZAeL1dI4P30GdKK0IoFcN7z+WKXVvP5aQ3/n74QhxBA9Eud64uBHwtdPyA==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -5931,8 +5931,8 @@ packages:
   /@veltdev/types@4.6.10:
     resolution: {integrity: sha512-BAXEaV3EGzxE2UO4PVx/h3S6/dM/f48S6HSdnGwmN/Sa4BcJj4+rhCzWmg6N+3RJOu1hgHDDSe7jmuir34fSDQ==}
 
-  /@veltdev/types@4.7.0:
-    resolution: {integrity: sha512-pYzp7KD5Hpr+LHx32hXc0aajejIm7XYuAx4ZVl1HIbf7qBUg76kGrhmES0Ne/krWqgkRieBv7BovoY1EZG1ZMQ==}
+  /@veltdev/types@4.7.1-beta.1:
+    resolution: {integrity: sha512-JSqobiHdGOchgV1+Y25pjx+Coc1JWLqZd9hbVjux5m9XQUU6LesVl50lAGgHtxZ/B6s4XP2bMUcE8WeMq28FrA==}
     dev: true
 
   /@vercel/analytics@1.6.1(next@15.2.6)(react@19.2.0):

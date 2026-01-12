@@ -1,10 +1,9 @@
-"use client";
+'use client';
 import { VeltWireframe } from '@veltdev/react';
-import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
-import VeltCommentToolWf from "./VeltCommentToolWf";
-import VeltCommentsSidebarHeaderWf from "./VeltCommentsSidebarHeaderWf";
-import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
-import "./styles.scss";
+import VeltCommentBubbleWf from './VeltCommentBubbleWf';
+import VeltCommentToolWf from './VeltCommentToolWf';
+import VeltCommentsSidebarHeaderWf from './VeltCommentsSidebarHeaderWf';
+import VeltSidebarButtonWf from './VeltSidebarButtonWf';
 import VeltCommentDialogWf from './VeltCommentDialogWf';
 import VeltReactionToolWf from './VeltReactionToolWf';
 import VeltInlineCommentsSectionWf from './VeltInlineCommentsSectionWf';
@@ -14,9 +13,9 @@ import VeltNotificationWf from './VeltNotificationPanelWf';
 import VeltNotificationListItemWf from './VeltNotificationListItemWf';
 import VeltActionCommentsComposerWf from './VeltActionCommentsComposerWf';
 import VeltConfirmDialogWf from './VeltConfirmDialogWf';
+import './styles.scss';
 
 export function VeltCustomization() {
-
   return (
     <VeltWireframe>
       <VeltSidebarButtonWf />

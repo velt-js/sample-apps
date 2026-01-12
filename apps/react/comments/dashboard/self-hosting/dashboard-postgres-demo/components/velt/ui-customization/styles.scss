@@ -1,6 +1,21 @@
-@import "./variables";
-@import "./font_mixin";
+@import './colors.css';
+@import './variables';
+@import './font_mixin';
 
+/* Velt variables overrides */
+body {
+  --velt-default-font-family: 'Inter', sans-serif
+  --velt-spacing-2xs: 4px;
+  --velt-spacing-xs: 8px;
+  --velt-spacing-sm: 12px;
+  --velt-spacing-md: 16px;
+  --velt-spacing-lg: 24px;
+  --velt-spacing-xl: 32px;
+  --velt-spacing-2xl: 64px;
+  --velt-spacing-3xl: 80px;
+}
+
+/* Velt custom styles */
 /* Custom Comment Tool & Bubble Styling */
 .custom-bubble-tool {
   position: relative;
@@ -15,7 +30,7 @@
   right: 1px;
   width: 6px;
   height: 6px;
-  background-color: #ff7162;
+  background-color: var(--v2-red-medium);
   border-radius: 50%;
   border: 1px solid white;
 }
@@ -26,7 +41,7 @@
   right: 1px;
   width: 6px;
   height: 6px;
-  background-color: #625df5;
+  background-color: var(--v2-primary-medium);
   border-radius: 50%;
   border: 1px solid white;
 }
@@ -53,7 +68,7 @@ velt-comment-bubble .custom-bubble-tool {
 /* Purple on hover only */
 velt-comment-tool:hover .custom-bubble-tool,
 velt-comment-bubble:hover .custom-bubble-tool {
-  color: #625df5 !important;
+  color: var(--v2-primary-medium) !important;
 }
 
 /* Prevent active/open states from changing color */
@@ -65,7 +80,7 @@ velt-comment-bubble.velt-comment-bubble-open .custom-bubble-tool {
 /* But still allow hover on active states */
 velt-comment-tool.velt-comment-tool-active:hover .custom-bubble-tool,
 velt-comment-bubble.velt-comment-bubble-open:hover .custom-bubble-tool {
-  color: #625df5 !important;
+  color: var(--v2-primary-medium) !important;
 }
 
 .velt-notifications-tool {
@@ -81,12 +96,18 @@ app-comment-dialog-thread-card-avatar {
 
 .oe-thread-card--name {
   @include button;
-  color: #0e0e0e !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  color: var(--v2-black) !important;
 }
 
 .velt-thread-card--time {
   @include subtext;
-  color: #777572 !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  color: var(--v2-grey-dark) !important;
   display: contents !important;
 }
 
@@ -94,13 +115,13 @@ app-comment-dialog-thread-card-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 7.25px;
-  color: #777572;
+  padding: $spacing-xs;
+  color: var(--v2-grey-dark);
   cursor: pointer;
   border-radius: 4px !important;
 
   &:hover {
-    background-color: rgb(247, 247, 247) !important;
+    background-color: var(--v2-grey-extra-light) !important;
   }
 }
 
@@ -122,8 +143,12 @@ app-comment-dialog-thread-card-avatar {
   padding: 0 !important;
   margin: 0 !important;
   @include input;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  letter-spacing: -0.75% !important;
   vertical-align: middle !important;
-  color: #0e0e0e !important;
+  color: var(--v2-black) !important;
 }
 
 app-comment-dialog-thread-card-reactions {
@@ -141,7 +166,7 @@ app-comment-dialog-thread-card-reactions {
   border-radius: 6px !important;
   border: none !important;
   margin: 0 !important;
-  background-color: #f7f7f7 !important;
+  background-color: var(--v2-grey-extra-light) !important;
 }
 
 .s-emoji-block .velt-reaction-pin--default .velt-reaction-pin--emoji svg {
@@ -151,16 +176,20 @@ app-comment-dialog-thread-card-reactions {
 
 .s-emoji-block .velt-reaction-pin--default .velt-reaction-pin--count {
   @include label;
-  color: #4a4947 !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  letter-spacing: 0.25px !important;
+  color: var(--v2-grey-extra-dark) !important;
 }
 
-.velt-thread-card--container[velt-reactions="0"] {
+.velt-thread-card--container[velt-reactions='0'] {
   app-comment-dialog-thread-card-reactions {
     display: none !important;
   }
 }
 
-.velt-thread-card--container:not([velt-reactions="0"]) {
+.velt-thread-card--container:not([velt-reactions='0']) {
   app-comment-dialog-thread-card-reaction-tool {
     display: none !important;
   }
@@ -182,22 +211,21 @@ app-comment-dialog-thread-card-reactions {
 .velt-thread-card--name--unread {
   width: 6px !important;
   height: 6px !important;
-  background-color: #bd323c !important;
+  background-color: var(--v2-red-medium) !important;
 }
 
 .s-user-avatar-initial {
-  @include font10;
   font-weight: 600 !important;
   font-size: 9px !important;
   line-height: 18px !important;
   letter-spacing: 0% !important;
   text-align: center !important;
   vertical-align: middle !important;
-  color: #ffffff !important;
+  color: var(--v2-white) !important;
 }
 
 .s-user-avatar-initial-container {
-  background-color: #3649b9 !important;
+  background-color: var(--v2-primary-medium) !important;
 }
 
 app-comment-dialog-reply-avatars-remaining-count {
@@ -227,7 +255,11 @@ app-comment-dialog-toggle-reply-icon {
 app-comment-dialog-toggle-reply-count,
 app-comment-dialog-toggle-reply-text {
   @include label;
-  color: #4a4947 !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  letter-spacing: 0.25px !important;
+  color: var(--v2-grey-extra-dark) !important;
 }
 
 .velt-toggle-reply .velt-toggle-reply--button,
@@ -279,8 +311,8 @@ app-comment-dialog-toggle-reply-text {
   padding-left: $spacing-xs;
   padding-right: 2px;
   border-radius: 3px;
-  border: 1px solid #e0e0e0;
-  background: #fafafa;
+  border: 1px solid var(--v2-black-transparent);
+  background: var(--v2-grey-lightest);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -312,23 +344,22 @@ app-comment-dialog-toggle-reply-text {
 }
 
 .oe-comment--metadata svg {
-  color: #777572;
+  color: var(--v2-grey-dark);
 }
 
 .oe-comment--metadata span {
   @include label;
-  color: #777572;
+  color: var(--v2-grey-dark);
 }
 
 .velt-comment-dialog {
-  padding: $spacing-base1 $spacing-xl !important;
+  padding: 20px 32px !important;
   border: none !important;
   border-radius: 0px !important;
   width: auto !important;
-  gap: 8px !important;
 
   &:hover {
-    background-color: #fafafa !important;
+    background-color: var(--v2-grey-lightest) !important;
   }
 
   &.velt-comment-dialog--page-mode-composer {
@@ -381,7 +412,7 @@ app-comment-sidebar-list {
   padding-bottom: 0px !important;
 
   .oe-composer--content {
-    background: #fafafa;
+    background: var(--v2-grey-lightest);
   }
 }
 
@@ -393,15 +424,19 @@ app-comment-sidebar-list {
   padding-bottom: 10px;
   padding-left: $spacing-sm;
   border-radius: 3px;
-  border: 1px solid #ededed;
-  background-color: #fff;
+  border: 1px solid var(--v2-grey-light);
+  background-color: var(--v2-white);
 }
 
 .velt-composer-input--message {
   padding: 0px $spacing-sm !important;
   @include input;
-  color: #777572 !important;
-  color: #0e0e0e !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  letter-spacing: -0.75% !important;
+  color: var(--v2-grey-dark) !important;
+  color: var(--v2-black) !important;
 }
 
 button.action__button.velt-action-button {
@@ -417,8 +452,8 @@ button.action__button.velt-action-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 7.25px;
-  color: #9a9894;
+  padding: $spacing-xs;
+  color: var(--v2-grey-medium);
   cursor: pointer;
   border-radius: 4px !important;
 
@@ -428,37 +463,39 @@ button.action__button.velt-action-button {
 }
 
 .velt-composer--submit-button {
+  height: 28px;
+  padding: 0;
   .oe-composer--icon-button {
     padding: 5px !important;
     border-radius: 32px !important;
-    background-color: #475ee5;
-    color: #ffffff;
+    background-color: var(--v2-primary-oe-brand);
+    color: var(--v2-white);
   }
 
   &:disabled {
     .oe-composer--icon-button {
       background-color: rgb(239, 239, 239) !important;
-      color: #9a9894;
+      color: var(--v2-grey-medium);
     }
   }
 
   &:hover {
     .oe-composer--icon-button {
-      background-color: #475ee5 !important;
-      color: #ffffff !important;
+      background-color: var(--v2-primary-oe-brand) !important;
+      color: var(--v2-white) !important;
     }
   }
 }
 
 .velt-comment-dialog-options-dropdown-container {
   border-radius: 3px !important;
-  border: 1px solid #f7f7f7 !important;
+  border: 1px solid var(--v2-grey-extra-light) !important;
   box-shadow: 0px 3px 6px 0px #0e0e0e1a !important;
 
   .mat-mdc-menu-content {
     border-radius: 0px !important;
     border: none !important;
-    background-color: #fff !important;
+    background-color: var(--v2-white) !important;
     box-shadow: none !important;
   }
 }
@@ -475,8 +512,9 @@ button.action__button.velt-action-button {
     align-items: center;
     cursor: pointer;
     @include input;
+    letter-spacing: -0.75%;
     vertical-align: middle;
-    color: #4a4947;
+    color: var(--v2-grey-extra-dark);
 
     app-if {
       &:empty {
@@ -485,13 +523,14 @@ button.action__button.velt-action-button {
     }
 
     &:hover {
-      background-color: #f2f4ffa6;
-      color: #1e2195;
+      background-color: var(--v2-primary-lightest);
+      color: var(--v2-primary-medium);
     }
   }
 }
 
 .velt-comment-dialog--focused-thread-mode {
+  gap: 0 !important;
   &:hover {
     background-color: transparent !important;
   }
@@ -520,22 +559,24 @@ app-comment-sidebar-header {
 
 .oe-comment-sidebar-header--title {
   @include header3;
+  font-style: Semi Bold;
+  letter-spacing: -1.5%;
   vertical-align: middle;
-  color: #0e0e0e;
+  color: var(--v2-black);
 }
 
 .oe-comment-sidebar-header--id {
   @include label;
   vertical-align: middle;
-  color: #777572;
+  color: var(--v2-grey-dark);
   display: contents;
 }
 
 .oe-comment-sidebar-header--unread-count {
   border-radius: 3px;
   padding: 3px $spacing-xxs;
-  background-color: #bd323c;
-  color: #fff;
+  background-color: var(--v2-red-medium);
+  color: var(--v2-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -544,22 +585,26 @@ app-comment-sidebar-header {
   line-height: 10px;
   text-align: center;
   vertical-align: middle;
+  height: 16px;
+  > div {
+    @include font10;
+  }
 }
 
 .oe-comment-sidebar-header--status-trigger {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4.5px $spacing-md;
+  padding: $spacing-xxs $spacing-md;
   gap: $spacing-xxs;
   border-radius: 3px;
-  background: #ffffff;
-  border: 1px solid #ededed;
+  background: var(--v2-white);
+  border: 1px solid var(--v2-grey-light);
   box-shadow: 0px 1px 2px 0px #0e0e0e0f;
 
   .oe-comment-sidebar-header--status-trigger-name {
     @include button;
-    color: #0e0e0e;
+    color: var(--v2-black);
     text-transform: capitalize;
   }
 }
@@ -571,7 +616,7 @@ app-comment-sidebar-header {
 }
 
 .velt-sidebar-header-status--dropdown-icon {
-  color: #777572;
+  color: var(--v2-grey-dark);
 }
 
 .velt-comment-sidebar-minimal-actions-dropdown--content {
@@ -586,8 +631,12 @@ app-comment-sidebar-header {
   justify-content: space-between;
   width: 100%;
   padding-top: $spacing-base1;
-  padding-bottom: $spacing-sm;
+  padding-bottom: $spacing-md;
   padding-right: $spacing-lg;
+  border-bottom: 1px solid var(--v2-black-transparent);
+  &.thread-header {
+    border-bottom: none !important;
+  }
 }
 
 .oe-comment-sidebar-inline {
@@ -598,8 +647,8 @@ app-comment-sidebar-header {
   height: calc(100vh - 45px);
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  border-left: 1px solid #e5e7eb;
+  background-color: var(--v2-white);
+  border-left: 1px solid var(--v2-black-transparent);
   z-index: 50;
   overflow: hidden;
 }
@@ -613,7 +662,9 @@ velt-inline-comments-section {
   flex-direction: column !important;
   flex: 1 !important;
   height: 100% !important;
-
+.oe-comment-sidebar-header {
+  border: unset !important;
+}
   app-inline-comments-section-panel {
     flex: 1 !important;
     display: flex !important;
@@ -627,6 +678,7 @@ velt-inline-comments-section {
       flex: 1 !important;
       display: flex !important;
       flex-direction: column !important;
+      width: 100% !important;
 
       app-if {
         display: flex !important;
@@ -649,6 +701,7 @@ velt-inline-comments-section {
 
         .velt-inline-comments-section--comments {
           margin-top: 0px !important;
+          width: 100% !important;
 
           .velt-inline-comments-section--comment {
             display: flex !important;
@@ -657,6 +710,7 @@ velt-inline-comments-section {
 
             snippyly-comment-dialog {
               display: flex !important;
+              width: 100% !important;
 
               app-comment-dialog-body {
                 display: flex !important;
@@ -692,12 +746,15 @@ app-comment-sidebar-focused-thread {
 .oe-comment--metadata-container {
   padding-inline: $spacing-lg;
   padding-bottom: $spacing-md;
-  border-bottom: 1px solid #0e0e0e14;
+  border-bottom: 1px solid var(--v2-black-transparent);
 
   &:has(app-if:empty + app-if:empty) {
-    display: none;
+    display: none !important;
   }
 
+  &:has(app-if:empty) {
+    padding: 2px;
+  }
   app-if {
     &:empty {
       display: none !important;
@@ -711,18 +768,17 @@ app-sidebar-button-unread-icon {
 }
 
 .oe-comment-sidebar-empty-placeholder--title {
-  font-weight: 300;
-  font-size: 32px;
-  line-height: 40px;
+  @include header1;
   letter-spacing: -0.91px;
   text-align: center;
-  color: #3649b9;
+  color: var(--v2-primary-medium);
 }
 
 .oe-comment-sidebar-empty-placeholder--description {
   @include paragraph;
+  letter-spacing: -1.25%;
   text-align: center;
-  color: #777572;
+  color: var(--v2-grey-dark);
 }
 
 .velt-sidebar--no-comments-container {
@@ -734,13 +790,14 @@ app-sidebar-button-unread-icon {
   border-radius: 3px;
   padding: $spacing-xs;
   @include input;
+  letter-spacing: -0.75%;
   vertical-align: middle;
   cursor: pointer;
-  color: #4a4947;
+  color: var(--v2-grey-extra-dark);
 
   &:hover {
-    background: #f2f4ffa6;
-    color: #3649b9;
+    background: var(--v2-primary-lightest);
+    color: var(--v2-primary-medium);
   }
 }
 
@@ -750,14 +807,13 @@ app-comment-sidebar-reset-filter-button {
 
 .velt-comment-sidebar-minimal-filter-content-item--selected {
   .oe-comment-sidebar-header--status-content-name {
-    background: #f2f4ffa6;
-    color: #3649b9;
+    background: var(--v2-primary-lightest);
+    color: var(--v2-primary-medium);
   }
 }
 
 .oe-composer--metadata {
-  width: 100%;
-
+  width: 100% !important;
   app-if {
     &:empty {
       display: none !important;
@@ -770,8 +826,14 @@ app-comment-sidebar-reset-filter-button {
     flex-direction: row;
     align-items: center;
     gap: $spacing-xxs;
+    app-data {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
     @include button;
-    color: #0e0e0e;
+    letter-spacing: -0.3%;
+    color: var(--v2-black);
   }
 
   .oe-composer--page-mode-metadata-item {
@@ -781,16 +843,28 @@ app-comment-sidebar-reset-filter-button {
 
 .oe-composer--focused-thread-metadata-item {
   width: 100%;
-  border-top: 1px solid #0e0e0e14 !important;
-  padding-top: $spacing-sm;
+  border-top: 1px solid var(--v2-black-transparent) !important;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-xs;
   padding-inline: $spacing-xl !important;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xxs;
+  > div {
+    white-space: nowrap;
+  }
 }
 .velt-comment-dialog.velt-comment-dialog--page-mode-composer {
-  border-top: 1px solid #0e0e0e14 !important;
+  border-top: 1px solid var(--v2-black-transparent) !important;
+}
+
+.velt-comment-dialog.velt-comment-dialog--sidebar-mode {
+  gap: 0 !important;
 }
 
 .velt-comment-dialog--focused-thread-mode {
   padding-inline: 0px !important;
+  width: 100% !important;
   app-comment-dialog-body {
     padding-inline: $spacing-xl !important;
   }
@@ -799,7 +873,8 @@ app-comment-sidebar-reset-filter-button {
     padding-inline: $spacing-xl !important;
 
     .oe-composer--content {
-      background-color: #fafafa !important;
+      background-color: var(--v2-grey-lightest) !important;
+      width: 100% !important;
     }
   }
 }
@@ -807,6 +882,8 @@ app-comment-sidebar-reset-filter-button {
 .velt-inline-comments-section--comment {
   .velt-comment-dialog {
     padding-inline: 0px !important;
+    width: 100% !important;
+    gap: 0 !important;
     app-comment-dialog-body {
       padding-inline: $spacing-xl !important;
     }
@@ -815,7 +892,7 @@ app-comment-sidebar-reset-filter-button {
       padding-inline: $spacing-xl !important;
 
       .oe-composer--content {
-        background-color: #fafafa !important;
+        background-color: var(--v2-grey-lightest) !important;
       }
     }
   }
@@ -861,12 +938,13 @@ app-comment-sidebar-reset-filter-button {
 
 .velt-notifications-panel {
   width: 392px !important;
-  border: 1px solid #0e0e0e14 !important;
+  border: 1px solid var(--v2-black-transparent) !important;
   border-radius: 0px !important;
   padding: 0px !important;
   height: 100% !important;
   min-height: auto !important;
   max-height: none !important;
+  box-shadow: none !important;
 
   .oe-notifications-panel {
     display: flex !important;
@@ -878,7 +956,7 @@ app-comment-sidebar-reset-filter-button {
       flex-direction: row !important;
       align-items: center !important;
       justify-content: space-between !important;
-      border-bottom: 1px solid #0e0e0e14 !important;
+      border-bottom: 1px solid var(--v2-black-transparent) !important;
 
       .oe-notifications-panel-header-info {
         display: flex !important;
@@ -888,15 +966,16 @@ app-comment-sidebar-reset-filter-button {
 
         .oe-notifications-panel-header-info-title {
           @include header3;
+          letter-spacing: -1.5%;
           vertical-align: middle;
-          color: #0e0e0e;
+          color: var(--v2-black);
         }
 
         .oe-notifications-panel-header-info-unread {
           border-radius: 3px;
           padding: 3px $spacing-xxs;
-          background-color: #bd323c;
-          color: #fff;
+          background-color: var(--v2-red-medium);
+          color: var(--v2-white);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -928,10 +1007,10 @@ app-comment-sidebar-reset-filter-button {
           height: 32px !important;
           border-radius: 4px !important;
           cursor: pointer !important;
-          color: #777572 !important;
+          color: var(--v2-grey-dark) !important;
 
           &:hover {
-            background-color: #f7f7f7 !important;
+            background-color: var(--v2-grey-extra-light) !important;
           }
         }
       }
@@ -943,7 +1022,7 @@ app-comment-sidebar-reset-filter-button {
       align-items: center !important;
       gap: $spacing-xs !important;
       padding: $spacing-xs $spacing-lg !important;
-      border-bottom: 1px solid #0e0e0e14 !important;
+      border-bottom: 1px solid var(--v2-black-transparent) !important;
 
       .velt-notifications-panel--tab {
         border-radius: 4px !important;
@@ -968,20 +1047,29 @@ app-comment-sidebar-reset-filter-button {
 
     .oe-notifications-panel-list-item-content-headline {
       @include button;
-      color: #0e0e0e !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      line-height: 21px !important;
+      color: var(--v2-black) !important;
       display: block !important;
-      padding-top: 1.5px !important;
+      padding-top: $spacing-xxs !important;
 
       app-notifications-panel-content-list-item-headline {
         display: inline !important;
 
         .velt-notifications-panel--list-item-headline {
           @include input;
-          color: #0e0e0e !important;
+          font-weight: 400 !important;
+          font-size: 14px !important;
+          line-height: 21px !important;
+          color: var(--v2-black) !important;
           display: inline !important;
 
           b {
             @include button;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            line-height: 21px !important;
           }
         }
       }
@@ -990,13 +1078,19 @@ app-comment-sidebar-reset-filter-button {
         display: inline !important;
         margin-inline: $spacing-xxs !important;
         @include input;
-        color: #0e0e0e !important;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
+        color: var(--v2-black) !important;
         display: inline !important;
       }
 
       app-data {
         display: inline !important;
         @include button;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
       }
     }
   }
@@ -1011,18 +1105,18 @@ app-comment-sidebar-reset-filter-button {
   @include subtext;
   text-align: right;
   vertical-align: middle;
-  color: #777572;
+  color: var(--v2-grey-dark);
   padding-top: 5px;
 }
 
 .velt-notifications-panel--list-item-unread {
   width: 6px !important;
   height: 6px !important;
-  color: #bd323c !important;
-  padding-top: 7px !important;
+  color: var(--v2-red-medium) !important;
+  padding-top: 6px !important;
 
   circle {
-    fill: #bd323c !important;
+    fill: var(--v2-red-medium) !important;
   }
 }
 
@@ -1036,8 +1130,11 @@ app-notifications-panel-content-list-item-body {
 
   .velt-notifications-panel--list-item-body {
     @include input;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
     vertical-align: middle !important;
-    color: #777572 !important;
+    color: var(--v2-grey-dark) !important;
     font-style: normal !important;
   }
 }
@@ -1060,10 +1157,10 @@ app-notifications-panel-content {
 }
 
 .velt-composer-input-focused {
-  outline: 2px solid #5577ff59 !important;
+  outline: 2px solid var(--v2-primary-transparent) !important;
   border-radius: 3px !important;
   .oe-composer--content {
-    border: 1px solid #5577ff !important;
+    border: 1px solid var(--v2-primary) !important;
   }
 }
 
@@ -1072,11 +1169,11 @@ app-notifications-panel-content {
 }
 
 .oe--unresolve-button {
-  color: #2a9d8f !important;
+  color: var(--v2-green-medium) !important;
 
   &:hover {
-    background-color: #2a9d8f !important;
-    color: #ffffff !important;
+    background-color: var(--v2-green-medium) !important;
+    color: var(--v2-white) !important;
   }
 }
 
@@ -1087,8 +1184,8 @@ app-if {
 }
 
 /* ========================================
-   Tailwind Replacement Classes
-   ======================================== */
+     Tailwind Replacement Classes
+     ======================================== */
 
 /* Common utility classes */
 .oe-relative {
@@ -1115,7 +1212,7 @@ app-if {
 }
 
 .oe-comment-bubble-button:hover {
-  background-color: #f3f4f6;
+  background-color: var(--v2-primary-lightest);
 }
 
 .oe-comment-bubble-content {
@@ -1221,7 +1318,7 @@ app-if {
 .oe-metadata-close {
   margin-left: auto;
   padding-left: 2px;
-  border-left: 1px solid #9ca3af;
+  border-left: 1px solid var(--v2-black-transparent);
 }
 
 /* Inline Empty Placeholder */
@@ -1250,8 +1347,9 @@ app-if {
 }
 
 .oe-sidebar-button-count {
-  @include button;
-  color: #777572;
+  color: var(--v2-grey-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 /* Document Canvas Layout */
@@ -1273,7 +1371,7 @@ app-if {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: var(--v2-white);
   overflow: hidden;
 }
 
@@ -1287,28 +1385,26 @@ app-if {
 
 .oe-notifications-panel-container {
   position: fixed;
-  top: 45px;
+  top: 0px;
   bottom: 0;
   left: 240px;
   width: 392px;
-  background-color: #fff;
+  background-color: var(--v2-white);
   z-index: 50;
-  border-right: 1px solid #e5e7eb;
+  border-right: 1px solid var(--v2-black-transparent);
 }
 
 app-notifications-panel-view-all-button {
   display: none !important;
 }
-
-body {
-  --velt-spacing-2xs: #{$spacing-xxs};
-  --velt-spacing-xs: #{$spacing-xs};
-  --velt-spacing-sm: #{$spacing-sm};
-  --velt-spacing-md: #{$spacing-md};
-  --velt-spacing-lg: #{$spacing-lg};
-  --velt-spacing-xl: #{$spacing-xl};
-  --velt-spacing-2xl: #{$spacing-xxl};
-  --velt-spacing-3xl: #{$spacing-xxxl};
+.velt-comment-dialog button {
+  box-shadow: none !important;
+}
+.velt-comment-dialog button:disabled {
+  box-shadow: none !important;
+}
+.velt-user-avatar--initial {
+  font-size: 11px !important;
 }
 
 /* ========================================
@@ -1428,6 +1524,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.15s ease;
+    height: auto !important;
 
     &:hover {
       background-color: rgb(21 128 61) !important;
@@ -1443,86 +1540,103 @@ body {
 }
 
 /* ========================================
-   Delete Confirm Dialog Styling
-   ======================================== */
+     Delete Confirmation Dialog Styling
+     ======================================== */
+
 .velt-confirm-dialog {
-  padding: $spacing-xl !important;
-  width: 552px !important;
-  position: relative !important;
-}
-
-.velt-mat-dialog-container
-  mat-dialog-container
-  .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
-  border-radius: 4px !important;
-}
-
-.oe-confirm-dialog-close-button {
-  position: absolute;
-  top: $spacing-md;
-  right: $spacing-md;
-  color: #6b758a;
-  border-radius: 4px;
-  padding: $spacing-xxs;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f3f4f6;
+    padding: 32px !important;
+    width: 552px !important;
+    position: relative !important;
   }
-}
-
-.oe-confirm-dialog-title {
-  @include header2;
-  font-weight: 500;
-  letter-spacing: 0.15px;
-  color: #00102e;
-}
-
-.velt-confirm-dialog-message {
-  @include paragraph;
-  padding: 0px !important;
-  margin: $spacing-md 0px $spacing-xl 0px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: $spacing-lg !important;
-}
-
-.oe-confirm-dialog-buttons {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: $spacing-md !important;
-
-  .oe-confirm-dialog-cancel-button {
-    cursor: pointer !important;
-    height: 40px !important;
-    border-radius: 3px !important;
+  
+  .velt-mat-dialog-container
+    mat-dialog-container
+    .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
+    border-radius: 4px !important;
+  }
+  
+  .oe-confirm-dialog-close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: #6b758a;
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  }
+  
+  .oe-confirm-dialog-title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.15px;
+    color: #00102e;
+  }
+  
+  .velt-confirm-dialog-message {
+    font-weight: 300 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    letter-spacing: 0.3px !important;
+    color: #6b758a !important;
+    padding: 0px !important;
+    margin: 16px 0px 32px 0px !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border: 1px solid #e6e8ed !important;
-    box-shadow: 0px 1px 2px 0px #00102e0f !important;
-    @include button;
-    text-align: center !important;
-    vertical-align: middle !important;
-    color: #3c475c !important;
+    flex-direction: column !important;
+    gap: 24px !important;
   }
-
-  .oe-confirm-dialog-delete-button {
-    cursor: pointer !important;
-    height: 40px !important;
-    border-radius: 3px !important;
+  
+  .oe-confirm-dialog-buttons {
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background-color: #f75452 !important;
-    border: 1px solid #ca3d3d !important;
-    box-shadow: 0px 1px 2px 0px #00102e0f !important;
-    @include button;
-    text-align: center !important;
-    vertical-align: middle !important;
-    color: #ffffff !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+  
+    .oe-confirm-dialog-cancel-button {
+      cursor: pointer !important;
+      height: 40px !important;
+      border-radius: 3px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border: 1px solid #e6e8ed !important;
+      box-shadow: 0px 1px 2px 0px #00102e0f !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      line-height: 21px !important;
+      letter-spacing: 0.25px !important;
+      text-align: center !important;
+      vertical-align: middle !important;
+      color: #3c475c !important;
+    }
+  
+    .oe-confirm-dialog-delete-button {
+      cursor: pointer !important;
+      height: 40px !important;
+      border-radius: 3px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background-color: #F75452 !important;
+      border: 1px solid #CA3D3D !important;
+      box-shadow: 0px 1px 2px 0px #00102E0F !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      line-height: 21px !important;
+      letter-spacing: 0.25px !important;
+      text-align: center !important;
+      vertical-align: middle !important;
+      color: #ffffff !important;
+    }
   }
-}
+  app-comment-sidebar-focused-thread-dialog-container {
+    snippyly-comment-dialog {
+      width: 100% !important;
+    }
+  }
 
 .velt-notifications-panel--tab {
   display: flex !important;
