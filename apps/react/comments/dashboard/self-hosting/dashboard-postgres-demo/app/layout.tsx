@@ -5,6 +5,7 @@ import { AppProviders } from "@/app/userAuth/AppProviders"
 
 const inter = Inter({
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-inter',
   display: 'swap',
 })
@@ -21,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body>
+      <body className={inter.className}>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

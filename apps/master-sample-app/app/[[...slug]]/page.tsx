@@ -12,22 +12,24 @@ export default function Page() {
   const [documentId, setDocumentId] = useState<string>('')
   const [isMounted, setIsMounted] = useState(false)
   const isInitialized = useRef(false)
-  
+
   const currentSample = getSampleById(currentSampleId) || getDefaultSample()
 
   // Helper function to get document ID for a specific demo
   const getDocumentIdForDemo = useCallback((demoId: string): string => {
     if (typeof window === 'undefined') return ''
-    
-    // Check if there's a stored document ID for this demo
-    const stored = localStorage.getItem(`demo-${demoId}-document-id`)
+
+    const storageKey = `demo-${demoId}-document-id`
+    const stored = localStorage.getItem(storageKey)
+
     if (stored) {
       return stored
     }
-    
+
     // Generate a new document ID for this demo
     const newDocId = `doc-${demoId}-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
-    localStorage.setItem(`demo-${demoId}-document-id`, newDocId)
+    localStorage.setItem(storageKey, newDocId)
+
     return newDocId
   }, [])
 
@@ -113,7 +115,7 @@ export default function Page() {
       // Update URL after state update
       const routePath = sample.metadata.routePath || window.location.pathname
       const newUrl = `${routePath}?documentId=${docId}`
-      
+
       if (window.location.href !== window.location.origin + newUrl) {
         window.history.pushState({}, '', newUrl)
       }
@@ -121,9 +123,6 @@ export default function Page() {
       console.error('Error changing sample:', error)
     }
   }, [currentSampleId, getDocumentIdForDemo])
-
-  // Note: URL updates are now handled directly in handleSampleSelect and handleReset
-  // This effect is removed to prevent duplicate history entries
 
   // Handle reset: generate new document ID for current demo
   const handleReset = useCallback(() => {
@@ -135,17 +134,17 @@ export default function Page() {
 
       // Generate a new document ID for this specific demo
       const newDocId = `doc-${currentSampleId}-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
-      
+
       // Update localStorage for this demo
       localStorage.setItem(`demo-${currentSampleId}-document-id`, newDocId)
-      
+
       // Update state
       setDocumentId(newDocId)
-      
+
       // Update URL
       const routePath = sample.metadata.routePath || window.location.pathname
       const newUrl = `${routePath}?documentId=${newDocId}`
-      
+
       if (window.location.href !== window.location.origin + newUrl) {
         window.history.pushState({}, '', newUrl)
       }
@@ -174,7 +173,7 @@ export default function Page() {
       />
 
       {/* Main Content */}
-      <SampleViewer 
+      <SampleViewer
         sample={currentSample}
         sidebarOpen={sidebarOpen}
         onSidebarToggle={() => setSidebarOpen(!sidebarOpen)}
@@ -184,4 +183,3 @@ export default function Page() {
     </div>
   )
 }
-

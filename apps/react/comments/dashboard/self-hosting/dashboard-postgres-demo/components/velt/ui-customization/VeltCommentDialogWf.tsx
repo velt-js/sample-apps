@@ -1,7 +1,20 @@
 "use client";
 
-import { VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
-import { Reactions, Checkmark, MoreHorizontal, MarkRead, Attach1, At, ArrowUp } from "./Icons";
+import { VeltButtonWireframe, VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
+import {
+    Reactions,
+    Checkmark,
+    MoreHorizontal,
+    MarkRead,
+    Attach1,
+    At,
+    ArrowUp,
+    IconOutlineCheckmarkCircle,
+    IconOutlineRepeat,
+    IconOutlineCloseCircle,
+    IconFillEdit2Fill,
+    IconOutlineMessageSquare
+} from "./Icons";
 
 const VeltCommentDialogWf = () => {
     return (
@@ -54,7 +67,14 @@ const VeltCommentDialogWf = () => {
                                                             Edit comment
                                                         </div>
                                                     </VeltCommentDialogWireframe.ThreadCard.Options.Content.Edit>
-                                                    <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete>
+                                                    <VeltIf condition="!{commentDialogSelected}">
+                                                        <VeltButtonWireframe id="reply-in-thread-button" type="button">
+                                                            <div className="oe-thread-card--options-content-item">
+                                                                Reply in thread
+                                                            </div>
+                                                        </VeltButtonWireframe>
+                                                    </VeltIf>
+                                                    <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete veltIf="{annotation.from.userId} === {user.userId} || {commentObj.from.userId} === {user.userId}">
                                                         <VeltCommentDialogWireframe.ThreadCard.Options.Content.Delete.Comment>
                                                             <div className="oe-thread-card--options-content-item">
                                                                 Delete comment
@@ -83,10 +103,37 @@ const VeltCommentDialogWf = () => {
                                         <div className="oe-comment--metadata">
                                             <MarkRead width={16} height={16} />
                                             <span className="oe-comment--metadata-label">Line:</span>
-                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemDescription" /></span>
+                                            <span><VeltData field="annotation.context.lineItemDescription" /></span>
                                             <span className="oe-comment--metadata-label">-</span>
-                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemCurrency" /></span>
-                                            <span className="oe-comment--metadata-label"><VeltData field="annotation.context.lineItemAmount" /></span>
+                                            <span><VeltData field="annotation.context.lineItemCurrency" /></span>
+                                            <span><VeltData field="annotation.context.lineItemAmount" /></span>
+                                        </div>
+                                    </VeltIf>
+
+                                    {/* Highlight component corrosponding wireframe logic */}
+                                    <VeltIf condition="{annotation.context.highlightData.type} && {annotation.context.highlightData.label}">
+                                        <div className="oe-comment--metadata">
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'ApproverComment'">
+                                                <IconOutlineCheckmarkCircle width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'SubmitToApprove'">
+                                                <IconOutlineCheckmarkCircle width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'DisputeDiscrepancyComment'">
+                                                <IconOutlineRepeat width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'RejectApprovalComment'">
+                                                <IconOutlineCloseCircle width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'ApproveForDifferentAmount'">
+                                                <IconFillEdit2Fill width={16} height={16} />
+                                            </VeltIf>
+                                            <VeltIf condition="{annotation.context.highlightData.type} === 'LineItemComment'">
+                                                <IconOutlineMessageSquare width={16} height={16} />
+                                            </VeltIf>
+                                            <div className="oe-comment--metadata-label">
+                                                <VeltData field="annotation.context.highlightData.label" />
+                                            </div>
                                         </div>
                                     </VeltIf>
                                     <VeltCommentDialogWireframe.ThreadCard.Message />
@@ -105,7 +152,7 @@ const VeltCommentDialogWf = () => {
                 </VeltIf>
             </VeltCommentDialogWireframe.Body>
             <div className="oe-composer--metadata">
-                <VeltIf condition="{commentDialogSelected} && !{pageModeComposer} && {annotation.from.name}">
+                <VeltIf condition="{commentDialogSelected} && !{pageModeComposer} && {annotation.from.name} && {annotation.from.name} !== {user.name}">
                     <div className="oe-composer--focused-thread-metadata-item">
                         <div>Replying to</div>
                         <VeltData field="annotation.from.name" />
@@ -114,6 +161,17 @@ const VeltCommentDialogWf = () => {
                 <VeltIf condition="{pageModeComposer}">
                     <div className="oe-composer--page-mode-metadata-item">
                         <div>Comment</div>
+                    </div>
+                </VeltIf>
+                <VeltIf condition="{commentDialogSelected} && !{pageModeComposer} && (!{annotation.from.name} || {annotation.from.name} === {user.name})">
+                    <div className="oe-composer--focused-thread-metadata-item">
+                        <div>Comment on line</div>
+                        "
+                        <VeltData field="context.lineItemDescription" />
+                        -
+                        <VeltData field="context.lineItemCurrency" />
+                        <VeltData field="context.lineItemAmount" />
+                        "
                     </div>
                 </VeltIf>
             </div>
