@@ -47,11 +47,14 @@ const VeltNotificationWf = () => {
           <VeltNotificationsPanelWireframe.Content.All />
         </VeltNotificationsPanelWireframe.Content>
         <VeltNotificationsPanelWireframe.Settings>
+            
           <div className="oe-notifications-panel-settings">
             <div className="oe-notifications-panel-settings-header">
-              <div className="oe-notifications-panel-settings-bell-icon">
-                <Bell width={20} height={20} />
-              </div>
+              <VeltNotificationsPanelWireframe.Settings.BackButton>
+                <div className="oe-notifications-panel-settings-bell-icon">
+                    <Bell width={20} height={20} />
+                </div>
+              </VeltNotificationsPanelWireframe.Settings.BackButton>
               <div className="oe-notifications-panel-settings-right-icon">
                 <ChevronRight width={20} height={20} />
               </div>
