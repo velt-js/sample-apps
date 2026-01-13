@@ -14,6 +14,8 @@
     "@codemirror/lang-html": "^6",
     "@codemirror/lang-javascript": "^6",
     "@codemirror/state": "^6",
+    "@codemirror/view": "^6",
+    "@codemirror/language": "^6",
     "@codemirror/theme-one-dark": "^6",
     "@veltdev/client": "^4.6.10",
     "@veltdev/codemirror-crdt": "4.5.8",

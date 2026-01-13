@@ -26,6 +26,8 @@ export default defineConfig({
       '@veltdev/codemirror-crdt',
       'codemirror',
       '@codemirror/state',
+      '@codemirror/view',
+      '@codemirror/language',
       '@codemirror/lang-javascript',
       '@codemirror/lang-css',
       '@codemirror/lang-html',
