@@ -6,6 +6,7 @@ const allowList = [
   "http://localhost:*",
   "https://*.vercel.app",
   "https://*.velt.dev",
+  "https://*.mintlify.app",
 ].join(' ');
 
 const EMBED_CSP = `frame-ancestors ${allowList}`;

@@ -19,6 +19,17 @@ const getPackageDir = (packageName) => {
   }
 };
 
+// List of domains allowed to embed this app in an iframe
+const allowList = [
+  "'self'",
+  "http://localhost:*",
+  "https://*.vercel.app",
+  "https://*.velt.dev",
+  "https://*.mintlify.app",
+].join(' ');
+
+const EMBED_CSP = `frame-ancestors ${allowList}`;
+
 const nextConfig = {
   transpilePackages: ['@veltdev/react', '@veltdev/tiptap-crdt-react', '@veltdev/tiptap-crdt'],
   webpack: (config) => {
@@ -31,6 +42,19 @@ const nextConfig = {
       'lib0': getPackageDir('lib0'),
     };
     return config;
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: EMBED_CSP,
+          },
+        ],
+      },
+    ]
   },
 }
 
