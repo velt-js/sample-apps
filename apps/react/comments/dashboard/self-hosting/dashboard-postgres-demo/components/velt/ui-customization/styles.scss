@@ -417,7 +417,7 @@ app-comment-sidebar-list {
 }
 
 .oe-composer--content {
-  width: 486px;
+//   width: 486px;
   gap: 10px;
   padding-top: 10px;
   padding-right: $spacing-sm;
@@ -425,7 +425,7 @@ app-comment-sidebar-list {
   padding-left: $spacing-sm;
   border-radius: 3px;
   border: 1px solid var(--v2-grey-light);
-  background-color: var(--v2-white);
+  background-color: var(--v2-grey-lightest);
 }
 
 .velt-composer-input--message {
@@ -474,8 +474,16 @@ button.action__button.velt-action-button {
 
   &:disabled {
     .oe-composer--icon-button {
+      cursor: not-allowed !important;
       background-color: rgb(239, 239, 239) !important;
-      color: var(--v2-grey-medium);
+      color: var(--v2-grey-medium) !important;
+    }
+
+    &:hover {
+        .oe-composer--icon-button {
+            background-color: rgb(239, 239, 239) !important;
+            color: var(--v2-grey-medium) !important;
+        }
     }
   }
 
@@ -525,26 +533,6 @@ button.action__button.velt-action-button {
     &:hover {
       background-color: var(--v2-primary-lightest);
       color: var(--v2-primary-medium);
-    }
-  }
-}
-
-.velt-comment-dialog--focused-thread-mode {
-  gap: 0 !important;
-  &:hover {
-    background-color: transparent !important;
-  }
-
-  app-comment-dialog-body {
-    display: flex !important;
-    flex: 1 !important;
-    min-height: 0px !important;
-    width: 552px !important;
-
-    app-comment-dialog-threads {
-      max-height: none !important;
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
     }
   }
 }
@@ -862,23 +850,6 @@ app-comment-sidebar-reset-filter-button {
   gap: 0 !important;
 }
 
-.velt-comment-dialog--focused-thread-mode {
-  padding-inline: 0px !important;
-  width: 100% !important;
-  app-comment-dialog-body {
-    padding-inline: $spacing-xl !important;
-  }
-
-  app-comment-dialog-composer {
-    padding-inline: $spacing-xl !important;
-
-    .oe-composer--content {
-      background-color: var(--v2-grey-lightest) !important;
-      width: 100% !important;
-    }
-  }
-}
-
 .velt-inline-comments-section--comment {
   .velt-comment-dialog {
     padding-inline: 0px !important;
@@ -894,6 +865,14 @@ app-comment-sidebar-reset-filter-button {
       .oe-composer--content {
         background-color: var(--v2-grey-lightest) !important;
       }
+    }
+  }
+}
+
+.velt-inline-comments-section--comment {
+  .velt-thread-card--edit-mode {
+    app-comment-dialog-composer {
+      padding-inline: 0px !important;
     }
   }
 }
@@ -1839,10 +1818,6 @@ velt-autocomplete-option-description-internal {
   }
 }
 
-.velt-comment-dialog--no-comments {
-  gap: 8px !important;
-}
-
 .velt-inline-comments-section--composer-container {
   .velt-comment-dialog {
     padding-inline: 0px !important;
@@ -1856,21 +1831,58 @@ velt-autocomplete-option-description-internal {
   }
 }
 
-.velt-comment-dialog--focused-thread-mode app-comment-dialog-body {
+.velt-comment-dialog--focused-thread-mode {
   padding-inline: 0px !important;
+  width: 100% !important;
+  gap: 0 !important;
+  padding-top: 0px !important;
 
-  app-comment-dialog-threads {
-    gap: 0px !important;
+  &:hover {
+    background-color: transparent !important;
   }
 
-  app-comment-dialog-thread-card {
-    padding: $spacing-base1 $spacing-xl !important;
-    &:hover {
-      background-color: #fafafa !important;
+  app-comment-dialog-body {
+    display: flex !important;
+    flex: 1 !important;
+    min-height: 0px !important;
+    width: 552px !important;
+    padding-inline: 0px !important;
+
+    app-comment-dialog-threads {
+      max-height: none !important;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+      gap: 0px !important;
+
+      app-comment-dialog-thread-card {
+        padding: $spacing-base1 $spacing-xl !important;
+        &:hover {
+          background-color: #fafafa !important;
+        }
+      }
     }
   }
-}
 
-.velt-comment-dialog--focused-thread-mode {
-  padding-top: 0px !important;
+  .oe-composer--page-mode-metadata-item {
+    padding-top: $spacing-md !important;
+    padding-inline: $spacing-xl !important;
+    border-top: 1px solid var(--v2-black-transparent) !important;
+    width: 100% !important;
+  }
+
+  app-comment-dialog-composer {
+    padding-inline: $spacing-xl !important;
+    padding-bottom: $spacing-sm !important;
+
+    .oe-composer--content {
+      background-color: var(--v2-grey-lightest) !important;
+      width: 100% !important;
+    }
+  }
+
+  .velt-thread-card--edit-mode {
+    app-comment-dialog-composer {
+        padding: 0px !important;
+    }
+  }
 }
