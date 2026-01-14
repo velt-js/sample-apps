@@ -1,11 +1,22 @@
 /* Place Velt UI customization styles here */
 
-/* Custom Annotation Dropdown - Make wider to fit content */
-.velt-comment-dialog--custom-annotation-dropdown-trigger {
-  min-width: 100px !important;
-  max-width: 150px !important;
+/* Custom Annotation Dropdown - Force wider width to show full text + badge */
+.velt-comment-dialog--custom-annotation-dropdown-trigger,
+app-comment-dialog-custom-annotation-dropdown-trigger,
+[data-testid="velt-comment-dialog-custom-annotation-dropdown-trigger-container"] {
+  min-width: 250px !important;
+  max-width: 400px !important;
+  width: auto !important;
 }
 
+/* Remove any width constraints on all child elements */
+.velt-comment-dialog--custom-annotation-dropdown-trigger *,
+app-comment-dialog-custom-annotation-dropdown-trigger * {
+  max-width: none !important;
+}
+
+/* Ensure text is fully visible */
+.velt-comment-dialog--custom-annotation-dropdown-trigger-list-item,
 .velt-comment-dialog--custom-annotation-dropdown-trigger-placeholder {
   overflow: visible !important;
   text-overflow: clip !important;

@@ -46,6 +46,7 @@ export function VeltCollaboration() {
         shadowDom={false}
         textMode={true}
         priority={true}
+        status={false}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />

@@ -1043,6 +1043,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.2.3(@types/react@19.2.7)
+      '@veltdev/types':
+        specifier: ^4.6.10
+        version: 4.6.10
       autoprefixer:
         specifier: ^10
         version: 10.4.23(postcss@8.5.6)
