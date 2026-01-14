@@ -12,7 +12,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Velt",
     author_email="support@velt.dev",
-    url="https://github.com/samarth-velt/velt-integration-python",
+    url="https://github.com/snippyly/velt-py-sdk",
     packages=find_packages(),
     install_requires=[
         "pymongo[tls,srv]==4.6.3",

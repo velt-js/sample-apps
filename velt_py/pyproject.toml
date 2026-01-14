@@ -13,7 +13,7 @@ authors = [
     {name = "Velt", email = "support@velt.dev"}
 ]
 keywords = ["velt", "comments", "collaboration", "django", "mongodb"]
-urls = {Homepage = "https://github.com/samarth-velt/velt-integration-python", Repository = "https://github.com/samarth-velt/velt-integration-python"}
+urls = {Homepage = "https://github.com/snippyly/velt-py-sdk", Repository = "https://github.com/snippyly/velt-py-sdk"}
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
