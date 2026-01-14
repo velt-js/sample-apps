@@ -39,7 +39,6 @@ const sampleIdToItemName = (sampleId: string): string => {
 export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
   // Default expanded sections - only reactflow-demo path is expanded
   const defaultExpandedSections = {
-    react: true,
     cursors: false,
     comments: false,
     commentsTables: false,
@@ -105,8 +104,8 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
-    }));
-  };
+    }))
+  }
 
   return (
     <>
@@ -158,73 +157,62 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
           <nav className="flex-1 overflow-y-auto px-3">
             {activePill === "feature" ? (
               <>
-                {/* react Section */}
+                {/* cursors Section */}
                 <div className="mb-1">
                   <button
-                    onClick={() => toggleSection("react")}
+                    onClick={() => toggleSection("cursors")}
                     className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
                   >
-                    <span>react</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.react && "rotate-90")} />
+                    <span>cursors</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.cursors && "rotate-90")} />
                   </button>
-                  {expandedSections.react && (
-                    <div className="mt-2 ml-2 space-y-1">
-                      {/* cursors Section */}
-                      <div className="mb-1">
-                        <button
-                          onClick={() => toggleSection("cursors")}
-                          className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
-                        >
-                          <span>cursors</span>
-                          <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.cursors && "rotate-90")} />
-                        </button>
-                        {expandedSections.cursors && (
-                          <div className="mt-2 ml-2 space-y-1">
-                            <button
-                              onClick={() => {
-                                setSelectedItem("playground")
-                                onSampleSelect?.("cursors-playground")
-                              }}
-                              className={cn(
-                                "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                selectedItem === "playground" ? "bg-secondary" : "hover:bg-secondary/50",
-                              )}
-                            >
-                              playground
-                            </button>
-                          </div>
+                  {expandedSections.cursors && (
+                    <div className="mt-2 space-y-1">
+                      <button
+                        onClick={() => {
+                          setSelectedItem("playground")
+                          onSampleSelect?.("cursors-playground")
+                        }}
+                        className={cn(
+                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                          selectedItem === "playground" ? "bg-secondary" : "hover:bg-secondary/50",
                         )}
-                      </div>
+                      >
+                        playground
+                      </button>
+                    </div>
+                  )}
+                </div>
 
-                      {/* comments Section */}
-                      <div className="mb-1">
-                        <button
-                          onClick={() => toggleSection("comments")}
-                          className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
-                        >
-                          <span>comments</span>
-                          <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.comments && "rotate-90")} />
-                        </button>
-                        {expandedSections.comments && (
-                          <div className="mt-2 ml-2 space-y-1">
-                            {/* tables Section */}
-                            <button
-                              onClick={() => toggleSection("commentsTables")}
-                              className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                            >
-                              <span>tables</span>
-                              <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTables && "rotate-90")} />
-                            </button>
-                            {expandedSections.commentsTables && (
-                              <div className="mt-2 ml-2 space-y-1">
-                                {/* ag-grid Section */}
-                                <button
-                                  onClick={() => toggleSection("agGrid")}
-                                  className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
-                                >
-                                  <span>ag-grid</span>
-                                  <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.agGrid && "rotate-90")} />
-                                </button>
+                {/* comments Section */}
+                <div className="mb-1">
+                  <button
+                    onClick={() => toggleSection("comments")}
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
+                  >
+                    <span>comments</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.comments && "rotate-90")} />
+                  </button>
+                  {expandedSections.comments && (
+                    <div className="mt-2 ml-2 space-y-1">
+                      {/* tables Section */}
+                      <button
+                        onClick={() => toggleSection("commentsTables")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>tables</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTables && "rotate-90")} />
+                      </button>
+                      {expandedSections.commentsTables && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          {/* ag-grid Section */}
+                          <button
+                            onClick={() => toggleSection("agGrid")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>ag-grid</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.agGrid && "rotate-90")} />
+                          </button>
                           {expandedSections.agGrid && (
                             <div className="mt-2 ml-2 space-y-1">
                               <button
@@ -264,16 +252,16 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 single-tool
                               </button>
                             </div>
-                                )}
+                          )}
 
-                                {/* tanstack Section */}
-                                <button
-                                  onClick={() => toggleSection("tanstack")}
-                                  className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
-                                >
-                                  <span>tanstack</span>
-                                  <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tanstack && "rotate-90")} />
-                                </button>
+                          {/* tanstack Section */}
+                          <button
+                            onClick={() => toggleSection("tanstack")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>tanstack</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.tanstack && "rotate-90")} />
+                          </button>
                           {expandedSections.tanstack && (
                             <div className="mt-2 ml-2 space-y-1">
                               <button
@@ -317,14 +305,14 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                         </div>
                       )}
 
-                            {/* text-editors Section */}
-                            <button
-                              onClick={() => toggleSection("commentsTextEditors")}
-                              className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                            >
-                              <span>text-editors</span>
-                              <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTextEditors && "rotate-90")} />
-                            </button>
+                      {/* text-editors Section */}
+                      <button
+                        onClick={() => toggleSection("commentsTextEditors")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>text-editors</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsTextEditors && "rotate-90")} />
+                      </button>
                       {expandedSections.commentsTextEditors && (
                         <div className="mt-2 ml-2 space-y-1">
                           {/* tiptap Section */}
@@ -404,14 +392,14 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                         </div>
                       )}
 
-                            {/* dashboard Section */}
-                            <button
-                              onClick={() => toggleSection("commentsDashboard")}
-                              className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                            >
-                              <span>dashboard</span>
-                              <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsDashboard && "rotate-90")} />
-                            </button>
+                      {/* dashboard Section */}
+                      <button
+                        onClick={() => toggleSection("commentsDashboard")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>dashboard</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsDashboard && "rotate-90")} />
+                      </button>
                       {expandedSections.commentsDashboard && (
                         <div className="mt-2 ml-2 space-y-1">
                           <button
@@ -439,106 +427,106 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                             inline-comments-demo
                           </button>
                         </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* self-hosting Section */}
+                <div className="mb-1">
+                  <button
+                    onClick={() => toggleSection("selfHosting")}
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
+                  >
+                    <span>self-hosting</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHosting && "rotate-90")} />
+                  </button>
+                  {expandedSections.selfHosting && (
+                    <div className="mt-2 ml-2 space-y-1">
+                      {/* dashboard Section */}
+                      <button
+                        onClick={() => toggleSection("selfHostingDashboard")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>dashboard</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHostingDashboard && "rotate-90")} />
+                      </button>
+                      {expandedSections.selfHostingDashboard && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          {/* mongo-db Section */}
+                          <button
+                            onClick={() => toggleSection("selfHostingMongoDB")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>mongo-db</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHostingMongoDB && "rotate-90")} />
+                          </button>
+                          {expandedSections.selfHostingMongoDB && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("dashboard-mongo-db-demo")
+                                  onSampleSelect?.("react-self-hosting-dashboard-mongo-db-dashboard-mongo-db-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "dashboard-mongo-db-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                dashboard-mongo-db-demo
+                              </button>
+                            </div>
+                          )}
+
+                          {/* postgres Section */}
+                          <button
+                            onClick={() => toggleSection("selfHostingPostgres")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>postgres</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHostingPostgres && "rotate-90")} />
+                          </button>
+                          {expandedSections.selfHostingPostgres && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("dashboard-postgres-demo")
+                                  onSampleSelect?.("react-self-hosting-dashboard-postgres-dashboard-postgres-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "dashboard-postgres-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                dashboard-postgres-demo
+                              </button>
+                            </div>
                           )}
                         </div>
                       )}
-                      </div>
+                    </div>
+                  )}
+                </div>
 
-                      {/* self-hosting Section */}
-                      <div className="mb-1">
-                        <button
-                          onClick={() => toggleSection("selfHosting")}
-                          className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
-                        >
-                          <span>self-hosting</span>
-                          <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHosting && "rotate-90")} />
-                        </button>
-                        {expandedSections.selfHosting && (
-                          <div className="mt-2 ml-2 space-y-1">
-                            {/* dashboard Section */}
-                            <button
-                              onClick={() => toggleSection("selfHostingDashboard")}
-                              className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                            >
-                              <span>dashboard</span>
-                              <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHostingDashboard && "rotate-90")} />
-                            </button>
-                            {expandedSections.selfHostingDashboard && (
-                              <div className="mt-2 ml-2 space-y-1">
-                                {/* mongo-db Section */}
-                                <button
-                                  onClick={() => toggleSection("selfHostingMongoDB")}
-                                  className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
-                                >
-                                  <span>mongo-db</span>
-                                  <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHostingMongoDB && "rotate-90")} />
-                                </button>
-                                {expandedSections.selfHostingMongoDB && (
-                                  <div className="mt-2 ml-2 space-y-1">
-                                    <button
-                                      onClick={() => {
-                                        setSelectedItem("dashboard-mongo-db-demo")
-                                        onSampleSelect?.("react-self-hosting-dashboard-mongo-db-dashboard-mongo-db-demo")
-                                      }}
-                                      className={cn(
-                                        "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                        selectedItem === "dashboard-mongo-db-demo" ? "bg-secondary" : "hover:bg-secondary/50",
-                                      )}
-                                    >
-                                      dashboard-mongo-db-demo
-                                    </button>
-                                  </div>
-                                )}
-
-                                {/* postgres Section */}
-                                <button
-                                  onClick={() => toggleSection("selfHostingPostgres")}
-                                  className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
-                                >
-                                  <span>postgres</span>
-                                  <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHostingPostgres && "rotate-90")} />
-                                </button>
-                                {expandedSections.selfHostingPostgres && (
-                                  <div className="mt-2 ml-2 space-y-1">
-                                    <button
-                                      onClick={() => {
-                                        setSelectedItem("dashboard-postgres-demo")
-                                        onSampleSelect?.("react-self-hosting-dashboard-postgres-dashboard-postgres-demo")
-                                      }}
-                                      className={cn(
-                                        "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                        selectedItem === "dashboard-postgres-demo" ? "bg-secondary" : "hover:bg-secondary/50",
-                                      )}
-                                    >
-                                      dashboard-postgres-demo
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* crdt Section */}
-                      <div className="mb-1">
-                        <button
-                          onClick={() => toggleSection("crdt")}
-                          className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
-                        >
-                          <span>crdt</span>
-                          <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdt && "rotate-90")} />
-                        </button>
-                        {expandedSections.crdt && (
-                          <div className="mt-2 ml-2 space-y-1">
-                            {/* canvas Section */}
-                            <button
-                              onClick={() => toggleSection("crdtCanvas")}
-                              className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                            >
-                              <span>canvas</span>
-                              <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtCanvas && "rotate-90")} />
-                            </button>
+                {/* crdt Section */}
+                <div className="mb-1">
+                  <button
+                    onClick={() => toggleSection("crdt")}
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
+                  >
+                    <span>crdt</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdt && "rotate-90")} />
+                  </button>
+                  {expandedSections.crdt && (
+                    <div className="mt-2 ml-2 space-y-1">
+                      {/* canvas Section */}
+                      <button
+                        onClick={() => toggleSection("crdtCanvas")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>canvas</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtCanvas && "rotate-90")} />
+                      </button>
                       {expandedSections.crdtCanvas && (
                         <div className="mt-2 ml-2 space-y-1">
                           {/* reactflow Section */}
@@ -568,14 +556,14 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                         </div>
                       )}
 
-                            {/* text-editors Section */}
-                            <button
-                              onClick={() => toggleSection("crdtTextEditors")}
-                              className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
-                            >
-                              <span>text-editors</span>
-                              <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtTextEditors && "rotate-90")} />
-                            </button>
+                      {/* text-editors Section */}
+                      <button
+                        onClick={() => toggleSection("crdtTextEditors")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>text-editors</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtTextEditors && "rotate-90")} />
+                      </button>
                       {expandedSections.crdtTextEditors && (
                         <div className="mt-2 ml-2 space-y-1">
                           {/* tiptap Section */}
@@ -625,12 +613,10 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                               >
                                 codemirror-crdt-demo
                               </button>
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    )}
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
