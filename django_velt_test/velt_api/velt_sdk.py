@@ -2,7 +2,7 @@
 Velt SDK initialization for Django app
 """
 from django.conf import settings
-from velt_integration import VeltSDK
+from velt_py import VeltSDK
 
 # Initialize SDK once at module level
 _velt_sdk = None

@@ -2,7 +2,7 @@
 Pytest fixtures for Velt SDK tests
 """
 import pytest
-from velt_integration.tests.test_utils import get_mock_database, get_mock_config, cleanup
+from velt_py.tests.test_utils import get_mock_database, get_mock_config, cleanup
 
 
 @pytest.fixture

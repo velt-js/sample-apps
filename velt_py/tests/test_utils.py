@@ -3,8 +3,8 @@ Test utilities and mongomock setup
 """
 import mongomock
 from pymongo.database import Database
-from velt_integration.config import Config
-from velt_integration.database import reset_connection
+from velt_py.config import Config
+from velt_py.database import reset_connection
 
 
 def get_mock_database() -> Database:

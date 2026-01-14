@@ -2,10 +2,10 @@
 Tests for CommentService
 """
 import unittest
-from velt_integration.services.self_hosting.comment_service import CommentService
-from velt_integration.tests.test_utils import get_mock_database
-from velt_integration.exceptions import VeltValidationError, VeltDatabaseError
-from velt_integration.models import GetCommentResolverRequest, DeleteCommentResolverRequest
+from velt_py.services.self_hosting.comment_service import CommentService
+from velt_py.tests.test_utils import get_mock_database
+from velt_py.exceptions import VeltValidationError, VeltDatabaseError
+from velt_py.models import GetCommentResolverRequest, DeleteCommentResolverRequest
 
 
 class CommentServiceTest(unittest.TestCase):
@@ -148,7 +148,7 @@ class CommentServiceTest(unittest.TestCase):
     
     def test_getComments_with_apiKey(self):
         """Test getting comments filtered by apiKey when config is provided"""
-        from velt_integration.config import Config
+        from velt_py.config import Config
         
         # Create service with config that has apiKey
         config = Config({

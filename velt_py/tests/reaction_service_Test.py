@@ -2,9 +2,9 @@
 Tests for ReactionService
 """
 import unittest
-from velt_integration.services.self_hosting.reaction_service import ReactionService
-from velt_integration.tests.test_utils import get_mock_database
-from velt_integration.exceptions import VeltValidationError
+from velt_py.services.self_hosting.reaction_service import ReactionService
+from velt_py.tests.test_utils import get_mock_database
+from velt_py.exceptions import VeltValidationError
 
 
 class ReactionServiceTest(unittest.TestCase):

@@ -3,9 +3,9 @@ Tests for VeltSDK initialization and service access
 """
 import unittest
 from unittest.mock import patch
-from velt_integration import VeltSDK
-from velt_integration.exceptions import VeltSDKError
-from velt_integration.tests.test_utils import get_mock_database
+from velt_py import VeltSDK
+from velt_py.exceptions import VeltSDKError
+from velt_py.tests.test_utils import get_mock_database
 
 
 class SDKTest(unittest.TestCase):
@@ -25,7 +25,7 @@ class SDKTest(unittest.TestCase):
             'authToken': 'test-auth-token'
         }
     
-    @patch('velt_integration.database.get_database')
+    @patch('velt_py.database.get_database')
     def test_initialize_success(self, mock_get_database):
         """Test SDK initialization"""
         mock_get_database.return_value = get_mock_database()
@@ -46,7 +46,7 @@ class SDKTest(unittest.TestCase):
         with self.assertRaises(VeltSDKError):
             VeltSDK.initialize(invalid_config)
     
-    @patch('velt_integration.database.get_database')
+    @patch('velt_py.database.get_database')
     def test_service_properties(self, mock_get_database):
         """Test that service properties return service instances"""
         mock_get_database.return_value = get_mock_database()
@@ -63,7 +63,7 @@ class SDKTest(unittest.TestCase):
         self.assertIsNotNone(sdk.selfHosting.users)
         self.assertIsNotNone(sdk.selfHosting.token)
     
-    @patch('velt_integration.database.get_database')
+    @patch('velt_py.database.get_database')
     def test_service_properties_lazy_initialization(self, mock_get_database):
         """Test that services are lazily initialized"""
         mock_get_database.return_value = get_mock_database()
@@ -78,7 +78,7 @@ class SDKTest(unittest.TestCase):
         reactions = sdk.selfHosting.reactions
         self.assertIsNotNone(reactions)
     
-    @patch('velt_integration.database.get_database')
+    @patch('velt_py.database.get_database')
     def test_close(self, mock_get_database):
         """Test closing SDK connections"""
         mock_get_database.return_value = get_mock_database()
@@ -106,7 +106,7 @@ class SDKTest(unittest.TestCase):
         with self.assertRaises(VeltSDKError):
             VeltSDK.initialize(invalid_config)
     
-    @patch('velt_integration.database.get_database')
+    @patch('velt_py.database.get_database')
     def test_environment_variables(self, mock_get_database):
         """Test that API keys can come from environment variables"""
         import os

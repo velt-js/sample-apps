@@ -2,9 +2,9 @@
 Tests for AttachmentService
 """
 import unittest
-from velt_integration.services.self_hosting.attachment_service import AttachmentService
-from velt_integration.tests.test_utils import get_mock_database
-from velt_integration.exceptions import VeltValidationError
+from velt_py.services.self_hosting.attachment_service import AttachmentService
+from velt_py.tests.test_utils import get_mock_database
+from velt_py.exceptions import VeltValidationError
 
 
 class AttachmentServiceTest(unittest.TestCase):

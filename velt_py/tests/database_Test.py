@@ -2,9 +2,9 @@
 Tests for database connection and index creation
 """
 import unittest
-from velt_integration.database import get_database, reset_connection
-from velt_integration.config import Config
-from velt_integration.tests.test_utils import get_mock_database
+from velt_py.database import get_database, reset_connection
+from velt_py.config import Config
+from velt_py.tests.test_utils import get_mock_database
 
 
 class DatabaseTest(unittest.TestCase):
@@ -33,7 +33,7 @@ class DatabaseTest(unittest.TestCase):
         import mongomock
         from unittest.mock import patch
         
-        with patch('velt_integration.database.MongoClient') as mock_client_class:
+        with patch('velt_py.database.MongoClient') as mock_client_class:
             mock_client = mongomock.MongoClient()
             mock_client_class.return_value = mock_client
             

@@ -55,17 +55,17 @@ Or edit `velt_test_project/settings.py` directly to set MongoDB connection detai
 
 ### 3. Ensure Velt SDK is Available
 
-The app expects `velt_integration` to be in the parent directory. Make sure the SDK is accessible:
+The app expects `velt_py` to be in the parent directory. Make sure the SDK is accessible:
 
 ```bash
 # From django_velt_test directory
-ls ../velt_integration  # Should show the SDK files
+ls ../velt_py  # Should show the SDK files
 ```
 
 If needed, you can install the SDK in development mode:
 
 ```bash
-cd ../velt_integration
+cd ../velt_py
 pip install -e .
 ```
 

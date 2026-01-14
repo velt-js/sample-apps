@@ -2,9 +2,9 @@
 Tests for UserService
 """
 import unittest
-from velt_integration.services.self_hosting.user_service import UserService
-from velt_integration.tests.test_utils import get_mock_database
-from velt_integration.exceptions import VeltValidationError
+from velt_py.services.self_hosting.user_service import UserService
+from velt_py.tests.test_utils import get_mock_database
+from velt_py.exceptions import VeltValidationError
 
 
 class UserServiceTest(unittest.TestCase):

@@ -5,12 +5,12 @@ blinker==1.8.2
 python-dateutil==2.8.2
 requests>=2.25.0
 django-cors-headers==4.3.1
-# Velt Integration SDK
+# Velt Python SDK
 # Option 1: Install from GitHub (until published to PyPI)
 # git+https://github.com/samarth-velt/velt-integration-python.git
 # Option 2: Local development
-# pip install -e ../velt_integration
+# pip install -e ../velt_py
 # Option 3: After PyPI publication
-# velt-integration>=0.1.0
+# velt-py>=0.1.0
 git+https://github.com/samarth-velt/velt-integration-python.git
 

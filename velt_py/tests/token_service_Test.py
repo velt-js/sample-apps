@@ -3,9 +3,9 @@ Tests for TokenService
 """
 import unittest
 from unittest.mock import patch, Mock
-from velt_integration.services.api.token_service import TokenService
-from velt_integration.tests.test_utils import get_mock_database
-from velt_integration.exceptions import VeltValidationError, VeltTokenError
+from velt_py.services.api.token_service import TokenService
+from velt_py.tests.test_utils import get_mock_database
+from velt_py.exceptions import VeltValidationError, VeltTokenError
 
 
 class TokenServiceTest(unittest.TestCase):
@@ -19,7 +19,7 @@ class TokenServiceTest(unittest.TestCase):
         self.service = TokenService(self.database, self.api_key, self.auth_token)
         self.organization_id = 'org-123'
     
-    @patch('velt_integration.services.token_service.requests.post')
+    @patch('velt_py.services.api.token_service.requests.post')
     def test_getToken_success(self, mock_post):
         """Test getting token successfully"""
         mock_response = Mock()
@@ -50,7 +50,7 @@ class TokenServiceTest(unittest.TestCase):
         self.assertIn('x-velt-api-key', call_args[1]['headers'])
         self.assertIn('x-velt-auth-token', call_args[1]['headers'])
     
-    @patch('velt_integration.services.token_service.requests.post')
+    @patch('velt_py.services.api.token_service.requests.post')
     def test_getToken_without_email_and_admin(self, mock_post):
         """Test getting token without optional parameters"""
         mock_response = Mock()
@@ -73,7 +73,7 @@ class TokenServiceTest(unittest.TestCase):
         self.assertNotIn('email', body['data']['userProperties'])
         self.assertNotIn('isAdmin', body['data']['userProperties'])
     
-    @patch('velt_integration.services.token_service.requests.post')
+    @patch('velt_py.services.api.token_service.requests.post')
     def test_getToken_api_error(self, mock_post):
         """Test handling API error response"""
         mock_response = Mock()
@@ -90,7 +90,7 @@ class TokenServiceTest(unittest.TestCase):
         self.assertEqual(result['errorCode'], 'VELT_API_ERROR')
         self.assertIn('Invalid credentials', result['error'])
     
-    @patch('velt_integration.services.token_service.requests.post')
+    @patch('velt_py.services.api.token_service.requests.post')
     def test_getToken_no_token_in_response(self, mock_post):
         """Test handling response without token"""
         mock_response = Mock()
@@ -126,7 +126,7 @@ class TokenServiceTest(unittest.TestCase):
         self.assertFalse(result['success'])
         self.assertEqual(result['errorCode'], 'CONFIG_ERROR')
     
-    @patch('velt_integration.services.token_service.requests.post')
+    @patch('velt_py.services.api.token_service.requests.post')
     def test_getToken_network_error(self, mock_post):
         """Test handling network error"""
         import requests
