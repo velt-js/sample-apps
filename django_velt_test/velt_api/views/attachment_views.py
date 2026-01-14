@@ -2,16 +2,9 @@
 Attachment-related API views
 """
 import json
-import sys
-from pathlib import Path
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-
-# Add parent directory to path to import velt_py
-parent_dir = Path(__file__).resolve().parent.parent.parent.parent
-if str(parent_dir) not in sys.path:
-    sys.path.insert(0, str(parent_dir))
 
 from velt_py import (
     SaveAttachmentResolverRequest,

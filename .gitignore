@@ -11,3 +11,4 @@ build
 .DS_Store
 # Local .npmrc files (workspace root has the main config)
 apps/**/.npmrc
+velt_py/
