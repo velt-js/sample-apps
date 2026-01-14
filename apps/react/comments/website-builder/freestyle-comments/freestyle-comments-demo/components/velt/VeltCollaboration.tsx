@@ -17,6 +17,23 @@ export function VeltCollaboration() {
     }
   }, [isUserLoggedIn, client]);
 
+  // [Velt] Configure custom annotation dropdown for tagging comments
+  useEffect(() => {
+    if (client) {
+      const commentElement = client.getCommentElement();
+      commentElement.createCustomListDataOnAnnotation({
+        type: 'multi',
+        placeholder: 'Select tags',
+        data: [
+          { id: 'design', label: 'Design' },
+          { id: 'content', label: 'Content' },
+          { id: 'bug', label: 'Bug' },
+          { id: 'enhancement', label: 'Enhancement' },
+        ]
+      });
+    }
+  }, [client]);
+
   const groupConfig = {
     enable: false
   };
@@ -24,14 +41,10 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
+      {/* [Velt] Freestyle comments - click anywhere to pin comments */}
       <VeltComments
-        popoverTriangleComponent={false}
-        popoverMode={true}
         shadowDom={false}
-        textMode={false}
-        commentPinHighlighter={false}
-        dialogOnHover={false}
-        groupMatchedComments={true}
+        textMode={true}
         priority={true}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} />

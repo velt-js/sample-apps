@@ -1,5 +1,18 @@
 /* Place Velt UI customization styles here */
 
+/* Custom Annotation Dropdown - Make wider to fit content */
+.velt-comment-dialog--custom-annotation-dropdown-trigger {
+  min-width: 100px !important;
+  max-width: 150px !important;
+}
+
+.velt-comment-dialog--custom-annotation-dropdown-trigger-placeholder {
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+}
+
+:root {
 /* Theme Configuration - Based on Figma Design */
 
 /* Typography */
@@ -161,3 +174,4 @@
 --velt-font-size-lg: 1.167rem; /* 18.667px - icon container */
 --velt-font-size-xl: 1.75rem; /* 28px - component height */
 --velt-font-size-2xl: 2rem; /* 32px */
+}

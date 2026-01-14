@@ -1,13 +1,19 @@
 'use client'
 
 import Sidebar from '@/components/sidebar/sidebar'
+import VeltTools from '@/components/velt/VeltTools'
 
 export default function DocumentCanvas() {
   return (
     <div className="relative w-full h-full overflow-auto">
       <FreestyleCanvas />
+      {/* Sidebar - positioned on left, overlays canvas */}
       <div className="absolute top-0 left-0 h-full z-10">
         <Sidebar />
+      </div>
+      {/* Velt Toolbar - positioned top-right */}
+      <div className="absolute top-2 right-6 flex items-center gap-[6px] z-50">
+        <VeltTools />
       </div>
     </div>
   )
