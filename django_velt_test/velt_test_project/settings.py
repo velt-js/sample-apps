@@ -85,20 +85,16 @@ CORS_ALLOW_CREDENTIALS = True
 VELT_SDK_CONFIG = {
     'database': {
         # Use connection_string for MongoDB Atlas (easiest)
-        # Username: samarth_new
-        # Password: samarth_new
         'connection_string': os.getenv(
-            'VELT_MONGODB_CONNECTION_STRING',
-            'mongodb+srv://samarth_new:samarth_new@cluster0.0uziymu.mongodb.net/velt-integration?appName=Cluster0&retryWrites=true&w=majority'
-        ),
+            'VELT_MONGODB_CONNECTION_STRING'),
         # OR use individual components (for local MongoDB or if connection_string not set)
         # For MongoDB Atlas SRV: use cluster hostname (fallback if connection_string not set)
         # The SDK will automatically detect .mongodb.net domains and use SRV connection
-        'host': os.getenv('VELT_MONGODB_HOST', 'cluster0.0uziymu.mongodb.net'),
-        'username': os.getenv('VELT_MONGODB_USERNAME', 'samarth_new'),
-        'password': os.getenv('VELT_MONGODB_PASSWORD', 'samarth_new'),
-        'auth_database': os.getenv('VELT_MONGODB_AUTH_DB', 'admin'),
-        'database_name': os.getenv('VELT_MONGODB_DATABASE', 'velt-integration')
+        'host': os.getenv('VELT_MONGODB_HOST'),
+        'username': os.getenv('VELT_MONGODB_USERNAME'),
+        'password': os.getenv('VELT_MONGODB_PASSWORD'),
+        'auth_database': os.getenv('VELT_MONGODB_AUTH_DB'),
+        'database_name': os.getenv('VELT_MONGODB_DATABASE')
     },
     'user_schema': {
         'userId': ['userId', 'id', 'user_id'],
