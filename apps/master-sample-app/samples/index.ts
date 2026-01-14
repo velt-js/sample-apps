@@ -27,6 +27,12 @@ import tiptapCrdtDemoMeta from './tiptap-crdt-demo/metadata'
 import { codeFiles as tiptapCrdtDemoCodeFiles } from './tiptap-crdt-demo/code-files'
 import codemirrorCrdtDemoMeta from './codemirror-crdt-demo/metadata'
 import { codeFiles as codemirrorCrdtDemoCodeFiles } from './codemirror-crdt-demo/code-files'
+import dashboardMongoDbDemoMeta from './dashboard-mongo-db-demo/metadata'
+import { codeFiles as dashboardMongoDbDemoCodeFiles } from './dashboard-mongo-db-demo/code-files'
+import dashboardPostgresDemoMeta from './dashboard-postgres-demo/metadata'
+import { codeFiles as dashboardPostgresDemoCodeFiles } from './dashboard-postgres-demo/code-files'
+import dashboardInlineCommentsDemoMeta from './dashboard-inline-comments-demo/metadata'
+import { codeFiles as dashboardInlineCommentsDemoCodeFiles } from './dashboard-inline-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -84,6 +90,18 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-codemirror-codemirror-crdt-demo': {
     metadata: codemirrorCrdtDemoMeta,
     codeFiles: codemirrorCrdtDemoCodeFiles
+  },
+  'react-self-hosting-dashboard-mongo-db-dashboard-mongo-db-demo': {
+    metadata: dashboardMongoDbDemoMeta,
+    codeFiles: dashboardMongoDbDemoCodeFiles
+  },
+  'react-self-hosting-dashboard-postgres-dashboard-postgres-demo': {
+    metadata: dashboardPostgresDemoMeta,
+    codeFiles: dashboardPostgresDemoCodeFiles
+  },
+  'react-comments-dashboard-inline-comments-dashboard-inline-comments-demo': {
+    metadata: dashboardInlineCommentsDemoMeta,
+    codeFiles: dashboardInlineCommentsDemoCodeFiles
   }
 }
 

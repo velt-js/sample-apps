@@ -27,6 +27,9 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-comments-text-editors-slatejs-slatejs-comments-demo': 'slatejs-comments-demo',
     'react-comments-text-editors-lexical-lexical-comments-demo': 'lexical-comments-demo',
     'react-comments-dashboard-custom-dashboard-demo': 'dashboard-demo',
+    'react-comments-dashboard-inline-comments-dashboard-inline-comments-demo': 'dashboard-inline-comments-demo',
+    'react-self-hosting-dashboard-mongo-db-dashboard-mongo-db-demo': 'dashboard-mongo-db-demo',
+    'react-self-hosting-dashboard-postgres-dashboard-postgres-demo': 'dashboard-postgres-demo',
     'react-crdt-text-editors-tiptap-tiptap-crdt-demo': 'tiptap-crdt-demo',
     'react-crdt-text-editors-codemirror-codemirror-crdt-demo': 'codemirror-crdt-demo',
   }
@@ -406,6 +409,42 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                             )}
                           >
                             dashboard-demo
+                          </button>
+                          <button
+                            onClick={() => {
+                              setSelectedItem("dashboard-inline-comments-demo")
+                              onSampleSelect?.("react-comments-dashboard-inline-comments-dashboard-inline-comments-demo")
+                            }}
+                            className={cn(
+                              "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                              selectedItem === "dashboard-inline-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                            )}
+                          >
+                            inline-comments-demo
+                          </button>
+                          <button
+                            onClick={() => {
+                              setSelectedItem("dashboard-mongo-db-demo")
+                              onSampleSelect?.("react-self-hosting-dashboard-mongo-db-dashboard-mongo-db-demo")
+                            }}
+                            className={cn(
+                              "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                              selectedItem === "dashboard-mongo-db-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                            )}
+                          >
+                            mongo-db-demo
+                          </button>
+                          <button
+                            onClick={() => {
+                              setSelectedItem("dashboard-postgres-demo")
+                              onSampleSelect?.("react-self-hosting-dashboard-postgres-dashboard-postgres-demo")
+                            }}
+                            className={cn(
+                              "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                              selectedItem === "dashboard-postgres-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                            )}
+                          >
+                            postgres-demo
                           </button>
                         </div>
                       )}
