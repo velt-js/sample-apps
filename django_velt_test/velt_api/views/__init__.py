@@ -6,7 +6,7 @@ Exports all view functions for easy importing in urls.py
 from .comment_views import get_comments, save_comments, delete_comment
 from .reaction_views import get_reactions, save_reactions, delete_reaction
 from .attachment_views import save_attachment, delete_attachment
-from .user_views import get_users, save_user
+from .user_views import get_users
 from .token_views import get_token
 
 __all__ = [
@@ -23,7 +23,6 @@ __all__ = [
     'delete_attachment',
     # User views
     'get_users',
-    'save_user',
     # Token views
     'get_token',
 ]

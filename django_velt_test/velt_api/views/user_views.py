@@ -5,6 +5,10 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+
+from velt_py import (
+    GetUserResolverRequest,
+)
 from ..velt_sdk import get_velt_sdk
 
 
@@ -14,57 +18,20 @@ def get_users(request):
     """Get users endpoint"""
     try:
         data = json.loads(request.body)
-        organization_id = data.get('organizationId')
-        user_ids = data.get('userIds', [])
-        
-        if not organization_id:
-            return JsonResponse({
-                'success': False,
-                'error': 'organizationId is required',
-                'errorCode': 'INVALID_INPUT',
-                'statusCode': 400
-            }, status=400)
+        user_request = GetUserResolverRequest.from_dict(data)
         
         sdk = get_velt_sdk()
-        result = sdk.selfHosting.users.getUsers(
-            organizationId=organization_id,
-            userIds=user_ids
-        )
+        result = sdk.selfHosting.users.getUsers(user_request)
         
-        return JsonResponse(result)
-    except Exception as e:
+        # SDK returns proper format with success, statusCode, error, errorCode
+        return JsonResponse(result, status=result.get('statusCode', 200))
+    except json.JSONDecodeError:
         return JsonResponse({
             'success': False,
-            'error': str(e),
-            'errorCode': 'INTERNAL_ERROR',
-            'statusCode': 500
-        }, status=500)
-
-
-@csrf_exempt
-@require_http_methods(["POST"])
-def save_user(request):
-    """Save user endpoint"""
-    try:
-        data = json.loads(request.body)
-        organization_id = data.get('organizationId')
-        user = data.get('user')
-        
-        if not organization_id or not user:
-            return JsonResponse({
-                'success': False,
-                'error': 'organizationId and user are required',
-                'errorCode': 'INVALID_INPUT',
-                'statusCode': 400
-            }, status=400)
-        
-        sdk = get_velt_sdk()
-        result = sdk.selfHosting.users.saveUser(
-            organizationId=organization_id,
-            user=user
-        )
-        
-        return JsonResponse(result)
+            'error': 'Invalid JSON',
+            'errorCode': 'INVALID_INPUT',
+            'statusCode': 400
+        }, status=400)
     except Exception as e:
         return JsonResponse({
             'success': False,

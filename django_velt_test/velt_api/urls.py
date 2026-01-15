@@ -12,7 +12,6 @@ from .views import (
     save_attachment,
     delete_attachment,
     get_users,
-    save_user,
     get_token,
 )
 
@@ -33,7 +32,6 @@ urlpatterns = [
     
     # Users endpoints
     path('users/get', get_users, name='get_users'),
-    path('users/save', save_user, name='save_user'),
     
     # Token endpoint
     path('token', get_token, name='get_token'),

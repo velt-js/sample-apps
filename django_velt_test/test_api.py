@@ -44,22 +44,6 @@ def test_save_comment():
     print(f"Response: {json.dumps(response.json(), indent=2)}")
     return response.json()
 
-def test_save_user():
-    """Test saving a user"""
-    print("\n=== Testing SAVE User ===")
-    response = requests.post(f'{BASE_URL}/users/save', json={
-        'organizationId': 'org-123',
-        'user': {
-            'userId': 'user-1',
-            'name': 'Test User',
-            'email': 'test@example.com',
-            'photoUrl': 'https://example.com/photo.jpg'
-        }
-    })
-    print(f"Status: {response.status_code}")
-    print(f"Response: {json.dumps(response.json(), indent=2)}")
-    return response.json()
-
 def test_get_users():
     """Test getting users"""
     print("\n=== Testing GET Users ===")
@@ -79,7 +63,6 @@ if __name__ == '__main__':
     
     try:
         # Test user operations first
-        test_save_user()
         test_get_users()
         
         # Test comment operations
