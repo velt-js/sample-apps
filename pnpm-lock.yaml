@@ -376,6 +376,58 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  apps/react/comments/dashboard/embedded-comments/privado-demo:
+    dependencies:
+      '@veltdev/react':
+        specifier: ^4.5.2-beta.2
+        version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@veltdev/reactflow-crdt':
+        specifier: 4.5.0-beta.6
+        version: 4.5.0-beta.6(yjs@13.6.29)
+      '@xyflow/react':
+        specifier: ^12.3.0
+        version: 12.10.0(@types/react@19.2.7)(immer@10.2.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      clsx:
+        specifier: ^2
+        version: 2.1.1
+      next:
+        specifier: ^15
+        version: 15.5.9(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.2)
+      react:
+        specifier: ^19
+        version: 19.2.3
+      react-dom:
+        specifier: ^19
+        version: 19.2.3(react@19.2.3)
+      tailwind-merge:
+        specifier: ^2
+        version: 2.6.0
+      yjs:
+        specifier: ^13.6.29
+        version: 13.6.29
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.19.3
+      '@types/react':
+        specifier: ^19
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.7)
+      autoprefixer:
+        specifier: ^10
+        version: 10.4.23(postcss@8.5.6)
+      postcss:
+        specifier: ^8
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^3.4.0
+        version: 3.4.19(tsx@4.21.0)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo:
     dependencies:
       '@veltdev/react':
@@ -1002,61 +1054,6 @@ importers:
         version: 3.4.19(tsx@4.21.0)
       typescript:
         specifier: ^5.9.3
-        version: 5.9.3
-
-  apps/react/comments/website-builder/freestyle-comments/freestyle-comments-demo:
-    dependencies:
-      '@veltdev/react':
-        specifier: ^4.5.2-beta.2
-        version: 4.6.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@veltdev/reactflow-crdt':
-        specifier: 4.5.0-beta.6
-        version: 4.5.0-beta.6(yjs@13.6.29)
-      '@xyflow/react':
-        specifier: ^12.3.0
-        version: 12.10.0(@types/react@19.2.7)(immer@10.2.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      clsx:
-        specifier: ^2
-        version: 2.1.1
-      next:
-        specifier: ^15
-        version: 15.5.9(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.2)
-      react:
-        specifier: ^19
-        version: 19.2.3
-      react-dom:
-        specifier: ^19
-        version: 19.2.3(react@19.2.3)
-      tailwind-merge:
-        specifier: ^2
-        version: 2.6.0
-      yjs:
-        specifier: ^13.6.29
-        version: 13.6.29
-    devDependencies:
-      '@types/node':
-        specifier: ^22
-        version: 22.19.3
-      '@types/react':
-        specifier: ^19
-        version: 19.2.7
-      '@types/react-dom':
-        specifier: ^19
-        version: 19.2.3(@types/react@19.2.7)
-      '@veltdev/types':
-        specifier: ^4.6.10
-        version: 4.6.10
-      autoprefixer:
-        specifier: ^10
-        version: 10.4.23(postcss@8.5.6)
-      postcss:
-        specifier: ^8
-        version: 8.5.6
-      tailwindcss:
-        specifier: ^3.4.0
-        version: 3.4.19(tsx@4.21.0)
-      typescript:
-        specifier: ^5
         version: 5.9.3
 
   apps/react/crdt/canvas/reactflow/reactflow-demo:
