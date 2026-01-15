@@ -8,36 +8,35 @@ const VeltCommentToolWf = () => {
         style={{
           background: '#141414',
           border: 'none',
-          padding: '4.667px 6.32px 4.667px 6.222px',
+          padding: '5px',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           width: '28px',
           height: '28px',
-          borderRadius: '18.667px',
+          borderRadius: '18px',
           boxSizing: 'border-box'
         }}
       >
         <div
           style={{
-            width: '15.556px',
-            height: '15.556px',
+            width: '18px',
+            height: '18px',
             position: 'relative',
-            overflow: 'clip',
             flexShrink: 0
           }}
         >
           <div
             style={{
               position: 'absolute',
-              left: 'calc(50% + 0.492px)',
+              left: '50%',
               top: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '11px',
-              height: '11px',
-              border: '0.972px solid white',
-              borderRadius: '6px 6px 6px 1px',
+              width: '14px',
+              height: '14px',
+              border: '1.5px solid white',
+              borderRadius: '7px 7px 7px 2px',
               boxSizing: 'border-box'
             }}
           />

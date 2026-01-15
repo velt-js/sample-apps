@@ -5,16 +5,65 @@ import VeltTools from '@/components/velt/VeltTools'
 
 export default function DocumentCanvas() {
   return (
-    <div className="relative w-full h-full overflow-hidden">
-      <FreestyleCanvas />
-      {/* Sidebar - positioned on left, overlays canvas */}
-      <div className="absolute top-0 left-0 h-full z-10">
-        <Sidebar />
+    <div className="fixed inset-0 flex flex-col bg-black">
+      {/* Main canvas area - fills available space */}
+      <div className="relative flex-1 min-h-0">
+        <FreestyleCanvas />
+
+        {/* Sidebar - positioned on left, overlays canvas */}
+        <div className="absolute top-0 left-0 h-full z-10">
+          <Sidebar />
+        </div>
+
+        {/* Velt Toolbar - positioned top-right */}
+        <div className="absolute top-2 right-6 flex items-center gap-[6px] z-50">
+          <VeltTools />
+        </div>
       </div>
-      {/* Velt Toolbar - positioned top-right */}
-      <div className="absolute top-2 right-6 flex items-center gap-[6px] z-50">
-        <VeltTools />
-      </div>
+    </div>
+  )
+}
+
+// Logo component - inline SVG for the "M" logo
+function Logo() {
+  return (
+    <div
+      className="flex items-center justify-center rounded-full"
+      style={{
+        width: '38px',
+        height: '38px',
+        backgroundColor: '#1D1D1D',
+        border: '1px solid #3D3D3D'
+      }}
+    >
+      <span
+        style={{
+          fontFamily: 'Public Sans, sans-serif',
+          fontSize: '18px',
+          fontWeight: '600',
+          color: '#FFFFFF'
+        }}
+      >
+        M
+      </span>
+    </div>
+  )
+}
+
+// Play button icon
+function PlayIcon() {
+  return (
+    <div
+      className="flex items-center justify-center rounded-full"
+      style={{
+        width: '23px',
+        height: '23px',
+        backgroundColor: '#1D1D1D'
+      }}
+    >
+      <svg width="8" height="10" viewBox="0 0 8 10" fill="none">
+        <path d="M8 5L0.5 9.33V0.67L8 5Z" fill="white" />
+      </svg>
     </div>
   )
 }
@@ -22,13 +71,13 @@ export default function DocumentCanvas() {
 function FreestyleCanvas() {
   return (
     <div
-      className="relative w-full min-h-full"
+      className="absolute inset-0 select-text"
       style={{ backgroundColor: 'rgb(0, 0, 0)' }}
       data-name="freestyle"
     >
       {/* Desktop label */}
       <p
-        className="absolute left-1/2 -translate-x-1/2 font-mono text-xs text-white opacity-50 uppercase tracking-tight"
+        className="absolute left-1/2 -translate-x-1/2 font-mono text-xs text-white opacity-50 uppercase tracking-tight select-text"
         style={{
           fontFamily: 'Geist Mono, monospace',
           top: '53px',
@@ -40,7 +89,7 @@ function FreestyleCanvas() {
 
       {/* Main Waitlist Container */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 overflow-hidden"
+        className="absolute left-1/2 -translate-x-1/2 overflow-hidden select-text"
         style={{
           width: '864px',
           height: '872px',
@@ -50,7 +99,7 @@ function FreestyleCanvas() {
         data-name="Waitlist"
       >
         {/* Grid pattern background - horizontal lines */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none select-none">
           <svg className="absolute" style={{ left: '-77px', top: '0', width: '888px', height: '834px' }}>
             {Array.from({ length: 30 }, (_, i) => (
               <line
@@ -68,7 +117,7 @@ function FreestyleCanvas() {
         </div>
 
         {/* Grid pattern background - vertical lines */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none select-none">
           <svg className="absolute" style={{ left: '-77px', top: '0', width: '888px', height: '888px' }}>
             {Array.from({ length: 30 }, (_, i) => (
               <line
@@ -87,7 +136,7 @@ function FreestyleCanvas() {
 
         {/* Top gradient fade */}
         <div
-          className="absolute left-1/2 -translate-x-1/2"
+          className="absolute left-1/2 -translate-x-1/2 pointer-events-none select-none"
           style={{
             width: '864px',
             height: '168px',
@@ -100,16 +149,7 @@ function FreestyleCanvas() {
         {/* Navigation Header */}
         <nav className="absolute left-0 right-0 flex items-center justify-between px-[115px] top-[17px]">
           {/* Logo */}
-          <div
-            className="flex items-center justify-center"
-            style={{ width: '26px', height: '26px' }}
-          >
-            <img
-              src="/assets/group-1171275132.svg"
-              alt="Logo"
-              className="w-full h-full"
-            />
-          </div>
+          <Logo />
 
           {/* Nav Links */}
           <div className="flex items-center gap-[6px]">
@@ -118,7 +158,7 @@ function FreestyleCanvas() {
               style={{ backgroundColor: 'rgb(255, 239, 57)' }}
             >
               <span
-                className="text-[12px] font-medium tracking-tight"
+                className="text-[12px] font-medium tracking-tight select-text"
                 style={{
                   fontFamily: 'Public Sans, sans-serif',
                   color: 'rgb(29, 29, 29)',
@@ -130,7 +170,7 @@ function FreestyleCanvas() {
             </button>
             <button className="flex items-center justify-center px-[10px] py-[4px] rounded-[6px]">
               <span
-                className="text-[12px] font-medium tracking-tight"
+                className="text-[12px] font-medium tracking-tight select-text"
                 style={{
                   fontFamily: 'Public Sans, sans-serif',
                   color: 'rgb(29, 29, 29)',
@@ -142,7 +182,7 @@ function FreestyleCanvas() {
             </button>
             <button className="flex items-center justify-center px-[10px] py-[4px] rounded-[6px]">
               <span
-                className="text-[12px] font-medium tracking-tight"
+                className="text-[12px] font-medium tracking-tight select-text"
                 style={{
                   fontFamily: 'Public Sans, sans-serif',
                   color: 'rgb(29, 29, 29)',
@@ -154,7 +194,7 @@ function FreestyleCanvas() {
             </button>
             <button className="flex items-center justify-center px-[10px] py-[4px] rounded-[6px]">
               <span
-                className="text-[12px] font-medium tracking-tight"
+                className="text-[12px] font-medium tracking-tight select-text"
                 style={{
                   fontFamily: 'Public Sans, sans-serif',
                   color: 'rgb(29, 29, 29)',
@@ -172,7 +212,7 @@ function FreestyleCanvas() {
             style={{ backgroundColor: 'rgb(14, 15, 14)' }}
           >
             <span
-              className="text-[12px] font-medium tracking-tight"
+              className="text-[12px] font-medium tracking-tight select-text"
               style={{
                 fontFamily: 'Public Sans, sans-serif',
                 color: 'rgb(241, 240, 240)',
@@ -195,7 +235,7 @@ function FreestyleCanvas() {
             }}
           >
             <h1
-              className="font-semibold"
+              className="font-semibold select-text"
               style={{
                 fontFamily: 'Public Sans, sans-serif',
                 fontSize: '69px',
@@ -204,13 +244,13 @@ function FreestyleCanvas() {
                 lineHeight: '1.5'
               }}
             >
-              It's worth the wait...
+              It&apos;s worth the wait...
             </h1>
           </div>
 
           {/* Description */}
           <p
-            className="text-center mt-[5px] opacity-80"
+            className="text-center mt-[5px] opacity-80 select-text"
             style={{
               fontFamily: 'Public Sans, sans-serif',
               fontSize: '18px',
@@ -242,7 +282,7 @@ function FreestyleCanvas() {
             }}
           >
             <span
-              className="opacity-30"
+              className="opacity-30 select-text"
               style={{
                 fontFamily: 'Public Sans, sans-serif',
                 fontSize: '16px',
@@ -268,7 +308,7 @@ function FreestyleCanvas() {
               letterSpacing: '-0.41px'
             }}
           >
-            Join Waitlist
+            <span className="select-text">Join Waitlist</span>
           </button>
         </div>
 
@@ -286,85 +326,210 @@ function FreestyleCanvas() {
             className="relative"
             style={{ width: '370px', height: '749px' }}
           >
-            {/* iPhone Frame SVGs */}
-            <img
-              src="/assets/g1506.svg"
-              alt=""
-              className="absolute"
-              style={{ left: '0', top: '150px', width: '10px', height: '182px' }}
+            {/* iPhone Frame - using CSS instead of SVG images */}
+            <div
+              className="absolute rounded-[55px]"
+              style={{
+                left: '2px',
+                top: '0',
+                width: '366px',
+                height: '749px',
+                backgroundColor: '#1a1a1a',
+                border: '1px solid #333'
+              }}
             />
-            <img
-              src="/assets/rect2172.svg"
-              alt=""
-              className="absolute"
-              style={{ inset: '0', width: '366px', height: '749px', left: '2px' }}
+            <div
+              className="absolute rounded-[52px]"
+              style={{
+                left: '5px',
+                top: '3px',
+                width: '360px',
+                height: '743px',
+                backgroundColor: '#0a0a0a',
+                border: '1px solid #222'
+              }}
             />
-            <img
-              src="/assets/rect2163.svg"
-              alt=""
-              className="absolute"
-              style={{ left: '3px', top: '1px', width: '365px', height: '748px' }}
+
+            {/* Side buttons */}
+            <div
+              className="absolute rounded-l-sm"
+              style={{
+                left: '0',
+                top: '150px',
+                width: '3px',
+                height: '30px',
+                backgroundColor: '#333'
+              }}
             />
-            <img
-              src="/assets/rect21631.svg"
-              alt=""
-              className="absolute"
-              style={{ left: '5px', top: '3px', width: '361px', height: '744px' }}
+            <div
+              className="absolute rounded-l-sm"
+              style={{
+                left: '0',
+                top: '200px',
+                width: '3px',
+                height: '60px',
+                backgroundColor: '#333'
+              }}
             />
-            <img
-              src="/assets/rect3540.svg"
-              alt=""
-              className="absolute"
-              style={{ left: '7px', top: '5px', width: '357px', height: '739px' }}
+            <div
+              className="absolute rounded-l-sm"
+              style={{
+                left: '0',
+                top: '280px',
+                width: '3px',
+                height: '60px',
+                backgroundColor: '#333'
+              }}
             />
 
             {/* Screen Content */}
             <div
-              className="absolute overflow-hidden"
+              className="absolute overflow-hidden rounded-[39px] select-text"
               style={{
                 left: '21px',
                 top: '17px',
                 width: '330px',
                 height: '715px',
-                borderRadius: '39px'
+                backgroundColor: '#f5f5f5'
               }}
             >
-              <img
-                src="/assets/image-34.png"
-                alt="App Preview"
-                className="w-full h-full object-cover"
-              />
+              {/* Phone screen content - recreated as components */}
+              <div className="w-full h-full flex flex-col">
+                {/* Status bar */}
+                <div className="flex items-center justify-between px-6 py-3">
+                  <span className="text-[14px] font-medium select-text" style={{ fontFamily: 'system-ui', color: '#000' }}>
+                    12:30
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="black">
+                      <rect x="0" y="3" width="3" height="9" rx="1" />
+                      <rect x="5" y="2" width="3" height="10" rx="1" />
+                      <rect x="10" y="0" width="3" height="12" rx="1" />
+                      <rect x="15" y="0" width="3" height="12" rx="1" fillOpacity="0.3" />
+                    </svg>
+                    <svg width="15" height="11" viewBox="0 0 15 11" fill="black">
+                      <path d="M7.5 2.5C9.5 2.5 11.3 3.3 12.6 4.6L14 3.2C12.3 1.5 10 0.5 7.5 0.5C5 0.5 2.7 1.5 1 3.2L2.4 4.6C3.7 3.3 5.5 2.5 7.5 2.5Z" />
+                      <path d="M7.5 5.5C8.6 5.5 9.6 5.9 10.4 6.6L11.8 5.2C10.6 4.1 9.1 3.5 7.5 3.5C5.9 3.5 4.4 4.1 3.2 5.2L4.6 6.6C5.4 5.9 6.4 5.5 7.5 5.5Z" />
+                      <circle cx="7.5" cy="9" r="2" />
+                    </svg>
+                    <svg width="25" height="12" viewBox="0 0 25 12" fill="black">
+                      <rect x="0" y="1" width="21" height="10" rx="2" stroke="black" strokeWidth="1" fill="none" />
+                      <rect x="2" y="3" width="17" height="6" rx="1" fill="black" />
+                      <path d="M22 4v4a2 2 0 0 0 2-2v0a2 2 0 0 0-2-2z" fill="black" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Phone content */}
+                <div className="flex-1 px-5 py-4">
+                  <h2
+                    className="font-bold select-text"
+                    style={{
+                      fontFamily: 'Public Sans, sans-serif',
+                      fontSize: '24px',
+                      color: '#1D1D1D',
+                      lineHeight: '1.3'
+                    }}
+                  >
+                    We&apos;ve some cool Framer waitlist template
+                  </h2>
+                  <p
+                    className="mt-3 select-text"
+                    style={{
+                      fontFamily: 'Public Sans, sans-serif',
+                      fontSize: '13px',
+                      color: '#666',
+                      lineHeight: '1.5'
+                    }}
+                  >
+                    Discover an Array of Incredible Waitlist Framer Templates, Sign up to our waitlist to be notified when we launch!
+                  </p>
+
+                  {/* Mini preview card */}
+                  <div
+                    className="mt-5 rounded-lg overflow-hidden"
+                    style={{
+                      backgroundColor: '#fff',
+                      border: '1px solid #e0e0e0'
+                    }}
+                  >
+                    <div className="p-3 flex items-center justify-between" style={{ borderBottom: '1px solid #e0e0e0' }}>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 rounded bg-yellow-400" />
+                        <span className="text-[10px] text-gray-400 select-text">site.com</span>
+                      </div>
+                      <span className="text-[10px] text-gray-400 select-text">design</span>
+                    </div>
+                    <div className="p-4 text-center">
+                      <p className="text-[14px] font-medium select-text" style={{ fontFamily: 'Public Sans, sans-serif' }}>
+                        It&apos;s worth the wait...
+                      </p>
+                      <p className="text-[8px] text-gray-400 mt-1 select-text">
+                        Discover an Array of Incredible Waitlist Framer Templates Sign
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom toolbar */}
+                <div className="flex items-center justify-center gap-2 py-4">
+                  <div className="p-2 rounded-lg bg-gray-200">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+                      <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+                    </svg>
+                  </div>
+                  <div className="p-2 rounded-lg bg-gray-200">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+                      <path d="M18 11V6a2 2 0 0 0-4 0" />
+                      <path d="M14 10V4a2 2 0 0 0-4 0v2" />
+                      <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+                      <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+                    </svg>
+                  </div>
+                  <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgb(5, 108, 236)' }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Home indicator */}
+                <div className="flex justify-center pb-2">
+                  <div className="w-[134px] h-[5px] bg-black rounded-full" />
+                </div>
+              </div>
             </div>
 
             {/* Notch */}
-            <img
-              src="/assets/subtract.svg"
-              alt=""
-              className="absolute"
-              style={{ left: '109px', top: '17px', width: '152px', height: '27px' }}
-            />
-
-            {/* Camera */}
-            <img
-              src="/assets/g2170.svg"
-              alt=""
-              className="absolute"
-              style={{ left: '227px', top: '21px', width: '12px', height: '12px' }}
-            />
-
-            {/* Home indicator */}
-            <img
-              src="/assets/rect1093.svg"
-              alt=""
-              className="absolute"
-              style={{ left: '152px', top: '5px', width: '65px', height: '5px' }}
-            />
+            <div
+              className="absolute flex items-center justify-center rounded-b-[20px]"
+              style={{
+                left: '109px',
+                top: '17px',
+                width: '152px',
+                height: '27px',
+                backgroundColor: '#000'
+              }}
+            >
+              {/* Camera */}
+              <div
+                className="absolute rounded-full"
+                style={{
+                  right: '35px',
+                  top: '8px',
+                  width: '12px',
+                  height: '12px',
+                  backgroundColor: '#1a1a1a',
+                  border: '2px solid #333'
+                }}
+              />
+            </div>
           </div>
         </div>
 
         {/* Bottom blur gradient */}
         <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none"
           style={{
             width: '865px',
             height: '85px',
@@ -387,7 +552,7 @@ function FreestyleCanvas() {
           }}
         >
           <span
-            className="uppercase opacity-80"
+            className="uppercase opacity-80 select-text"
             style={{
               fontFamily: 'Public Sans, sans-serif',
               fontSize: '9px',
@@ -397,61 +562,10 @@ function FreestyleCanvas() {
           >
             View Launch Video
           </span>
-          <div className="relative" style={{ width: '23px', height: '23px' }}>
-            <img
-              src="/assets/group-1171275136.svg"
-              alt="Play"
-              className="w-full h-full"
-            />
-          </div>
+          <PlayIcon />
         </div>
       </div>
 
-      {/* Bottom Toolbar */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2 flex items-center gap-[2px] p-[2px] rounded-[7px]"
-        style={{
-          bottom: '10px',
-          backgroundColor: 'rgb(47, 47, 47)'
-        }}
-      >
-        {/* Pointer Tool */}
-        <div className="flex items-center p-[6px] rounded-[6px]">
-          <div style={{ width: '18px', height: '18px' }}>
-            <img
-              src="/assets/tabler-icon-pointer.svg"
-              alt="Pointer"
-              className="w-full h-full"
-            />
-          </div>
-        </div>
-
-        {/* Hand Tool */}
-        <div className="flex items-center p-[6px] rounded-[6px]">
-          <div style={{ width: '18px', height: '18px' }}>
-            <img
-              src="/assets/tabler-icon-hand-three-fingers.svg"
-              alt="Hand"
-              className="w-full h-full"
-            />
-          </div>
-        </div>
-
-        {/* Comment Tool (Active) */}
-        <div
-          className="flex items-center p-[6px] rounded-[6px]"
-          style={{ backgroundColor: 'rgb(5, 108, 236)' }}
-        >
-          <div
-            className="rounded-tl-[7.5px] rounded-tr-[7.5px] rounded-br-[7.5px] rounded-bl-[1.5px]"
-            style={{
-              width: '14px',
-              height: '14px',
-              border: '1.5px solid white'
-            }}
-          />
-        </div>
-      </div>
     </div>
   )
 }

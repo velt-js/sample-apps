@@ -23,8 +23,8 @@ const VeltSidebarButtonWf = () => {
       >
         <div
           style={{
-            width: '19.444px',
-            height: '19.444px',
+            width: '18px',
+            height: '18px',
             position: 'relative',
             flexShrink: 0
           }}
