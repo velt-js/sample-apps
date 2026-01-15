@@ -45,16 +45,16 @@ export function useCurrentDocument(): CurrentDocument {
     if (docId) {
       // Use document ID from URL (shareable link)
       setDocumentId(docId);
-      localStorage.setItem('velt-demo-document-id', docId);
+      localStorage.setItem('velt-free-style-comments-demo-document-id', docId);
     } else {
       // 2. Check localStorage for existing document
-      const stored = localStorage.getItem('velt-demo-document-id');
+      const stored = localStorage.getItem('velt-free-style-comments-demo-document-id');
       if (stored) {
         docId = stored;
       } else {
         // 3. Generate new document ID
         docId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-        localStorage.setItem('velt-demo-document-id', docId);
+        localStorage.setItem('velt-free-style-comments-demo-document-id', docId);
       }
 
       // Update URL with document ID for shareability
