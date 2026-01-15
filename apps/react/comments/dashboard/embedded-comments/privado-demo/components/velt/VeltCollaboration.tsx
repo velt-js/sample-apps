@@ -34,6 +34,3 @@ export function VeltCollaboration() {
     </>
   );
 }
-
-// Export VeltPresence and VeltCommentsSidebar for use in layout
-export { VeltPresence, VeltCommentsSidebar };

@@ -19,9 +19,7 @@ export default function Home() {
       authProvider={authProvider}
     >
       <VeltCollaboration />
-      <main className="flex h-screen w-screen">
-        <DocumentCanvas />
-      </main>
+      <DocumentCanvas />
     </VeltProvider>
-  )
+  );
 }

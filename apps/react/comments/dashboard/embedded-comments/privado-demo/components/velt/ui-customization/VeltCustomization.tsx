@@ -2,7 +2,6 @@
 import { useVeltClient, VeltWireframe } from "@veltdev/react";
 import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
 import VeltCommentToolWf from "./VeltCommentToolWf";
-import VeltNotificationsToolWf from "./VeltNotificationsToolWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
 import VeltCommentsSidebarHeaderWf from "./VeltCommentsSidebarHeaderWf";
 import VeltCommentsSidebarFocusedThreadWf from "./VeltCommentsSidebarFocusedThreadWf";
@@ -24,7 +23,6 @@ export function VeltCustomization() {
     <VeltWireframe>
       <VeltCommentBubbleWf />
       <VeltCommentToolWf />
-      <VeltNotificationsToolWf />
       <VeltSidebarButtonWf />
       <VeltCommentsSidebarHeaderWf />
       <VeltCommentsSidebarFocusedThreadWf />

@@ -22,12 +22,13 @@ privado-demo/
 │   ├── layout.tsx          # Root layout
 │   └── page.tsx            # Main page
 ├── components/
-│   ├── header/             # Header components (Velt notifications, etc.)
+│   ├── header/             # Header components (Velt presence, etc.)
 │   │   └── header.tsx
 │   ├── sidebar/            # Sidebar components
 │   │   └── sidebar.tsx
 │   └── document/           # Main document/canvas logic
-│       └── document-canvas.tsx
+│       ├── document-canvas.tsx
+│       └── CommentsSidebar.tsx
 ├── hooks/                  # Custom React hooks
 ├── lib/                    # Utility functions
 │   └── utils.ts
@@ -81,7 +82,7 @@ pnpm --filter @apps/react-comments-dashboard-embedded-comments-privado-demo buil
 
 ## Component Organization
 
-- **`components/header/`** - Contains Velt components like notifications, presence indicators, header buttons
+- **`components/header/`** - Contains Velt components like presence indicators, header buttons
 - **`components/sidebar/`** - Contains sidebar-related components
 - **`components/document/`** - Contains the main application logic and embedded-comments integration
 - **`hooks/`** - Custom React hooks for state management and side effects
@@ -96,6 +97,13 @@ This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS
 - Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS errors
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
+
+## Features
+
+- **Embedded Comments**: Comments sidebar with focused thread mode for contextual discussions
+- **VeltInlineCommentsSection**: Focused comment threads per question/row
+- **Presence Awareness**: See who's currently viewing the document
+- **Light Mode**: Custom theme to match Privado's design system
 
 ## Next Steps
 
