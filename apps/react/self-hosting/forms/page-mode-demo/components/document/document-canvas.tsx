@@ -341,7 +341,6 @@ const QuestionSection = ({ question, sectionRef, value, onChange, onOpenComments
         >
           <VeltCommentBubble
             targetElementId={targetElementId}
-            context={{ questionId: question.id, questionNumber: question.number }}
           />
           <VeltCommentTool
             targetElementId={targetElementId}
