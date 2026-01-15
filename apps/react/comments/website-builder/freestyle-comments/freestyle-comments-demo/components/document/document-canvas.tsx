@@ -5,7 +5,7 @@ import VeltTools from '@/components/velt/VeltTools'
 
 export default function DocumentCanvas() {
   return (
-    <div className="relative w-full h-full overflow-auto">
+    <div className="relative w-full h-full overflow-hidden">
       <FreestyleCanvas />
       {/* Sidebar - positioned on left, overlays canvas */}
       <div className="absolute top-0 left-0 h-full z-10">
