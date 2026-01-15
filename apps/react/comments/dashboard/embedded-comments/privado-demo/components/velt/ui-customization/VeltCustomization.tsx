@@ -4,6 +4,8 @@ import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
 import VeltCommentToolWf from "./VeltCommentToolWf";
 import VeltNotificationsToolWf from "./VeltNotificationsToolWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
+import VeltCommentsSidebarHeaderWf from "./VeltCommentsSidebarHeaderWf";
+import VeltCommentsSidebarFocusedThreadWf from "./VeltCommentsSidebarFocusedThreadWf";
 import "./styles.css";
 import { useEffect } from "react";
 
@@ -11,10 +13,10 @@ export function VeltCustomization() {
   // [Velt] Get Velt client instance
   const { client } = useVeltClient();
 
-  // [Velt] Enable dark mode
+  // [Velt] Use light mode to match Privado design
   useEffect(() => {
     if (client) {
-      client.setDarkMode(true);
+      client.setDarkMode(false);
     }
   }, [client]);
 
@@ -24,6 +26,8 @@ export function VeltCustomization() {
       <VeltCommentToolWf />
       <VeltNotificationsToolWf />
       <VeltSidebarButtonWf />
+      <VeltCommentsSidebarHeaderWf />
+      <VeltCommentsSidebarFocusedThreadWf />
     </VeltWireframe>
   );
 }

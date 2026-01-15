@@ -3,45 +3,37 @@ import { VeltCommentToolWireframe } from '@veltdev/react';
 
 const VeltCommentToolWf = () => {
   return (
+    // [Velt] Custom wireframe for comment tool - add new comment button
     <VeltCommentToolWireframe>
       <div
         style={{
-          background: '#141414',
-          border: 'none',
-          padding: '4.667px 6.32px 4.667px 6.222px',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '28px',
-          height: '28px',
-          borderRadius: '18.667px',
-          boxSizing: 'border-box'
+          color: '#9ca3af',
+          transition: 'color 0.2s',
+          padding: '4px',
+          borderRadius: '4px',
         }}
+        className="comment-tool-icon hover:bg-gray-100"
       >
-        <div
-          style={{
-            width: '15.556px',
-            height: '15.556px',
-            position: 'relative',
-            overflow: 'clip',
-            flexShrink: 0
-          }}
+        {/* Comment outline icon for adding new comment */}
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <div
-            style={{
-              position: 'absolute',
-              left: 'calc(50% + 0.492px)',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '11px',
-              height: '11px',
-              border: '0.972px solid white',
-              borderRadius: '6px 6px 6px 1px',
-              boxSizing: 'border-box'
-            }}
-          />
-        </div>
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          {/* Plus sign in the middle */}
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="10" y1="10" x2="14" y2="10" />
+        </svg>
       </div>
     </VeltCommentToolWireframe>
   );

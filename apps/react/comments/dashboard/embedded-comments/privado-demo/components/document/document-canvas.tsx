@@ -1,6 +1,8 @@
 'use client'
 
 import { useRef, useState, useCallback } from 'react'
+import { VeltPresence, VeltCommentTool, VeltCommentBubble, VeltCommentsSidebar } from '@veltdev/react'
+import { CommentsSidebar } from './CommentsSidebar'
 
 // Question data structure
 interface Question {
@@ -292,52 +294,81 @@ interface QuestionSectionProps {
   sectionRef: React.RefObject<HTMLDivElement | null>
   value: string
   onChange: (value: string) => void
+  onOpenComments: () => void
 }
 
-const QuestionSection = ({ question, sectionRef, value, onChange }: QuestionSectionProps) => (
-  <div
-    ref={sectionRef}
-    className="flex flex-col gap-[24px] items-start px-[48px] py-[32px] w-[856px]"
-    style={{
-      backgroundColor: 'rgb(255, 255, 255)',
-      borderTop: '1px solid rgb(237, 240, 248)'
-    }}
-  >
-    {/* Question Title */}
-    <div className="flex flex-col gap-[4px] items-start w-full">
-      <p
-        className="text-[18px] leading-[24px] w-full"
-        style={{ fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif" }}
-      >
-        <span style={{ color: '#5c6c8a' }}>{question.number}.</span>{' '}
-        <span style={{ color: '#172026', fontWeight: 500 }}>{question.title}</span>
-      </p>
-      <p
-        className="text-[13px] leading-[20px] w-full"
-        style={{
-          fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
-          color: '#5c6c8a'
-        }}
-      >
-        {question.description}
-      </p>
+const QuestionSection = ({ question, sectionRef, value, onChange, onOpenComments }: QuestionSectionProps) => {
+  const targetElementId = `question-${question.id}`
+
+  return (
+    <div
+      ref={sectionRef}
+      id={targetElementId}
+      className="flex flex-col gap-[24px] items-start px-[48px] py-[32px] w-full relative group"
+      style={{
+        backgroundColor: 'rgb(255, 255, 255)',
+        borderTop: '1px solid rgb(237, 240, 248)'
+      }}
+    >
+      {/* Question Title with Comment Tools */}
+      <div className="flex justify-between items-start w-full">
+        <div className="flex flex-col gap-[4px] items-start flex-1">
+          <p
+            className="text-[18px] leading-[24px] w-full"
+            style={{ fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif" }}
+          >
+            <span style={{ color: '#5c6c8a' }}>{question.number}.</span>{' '}
+            <span style={{ color: '#172026', fontWeight: 500 }}>{question.title}</span>
+          </p>
+          <p
+            className="text-[13px] leading-[20px] w-full"
+            style={{
+              fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
+              color: '#5c6c8a'
+            }}
+          >
+            {question.description}
+          </p>
+        </div>
+
+        {/* [Velt] Comment tools for each question row */}
+        <div
+          className="flex items-center gap-1 ml-4 opacity-60 group-hover:opacity-100 transition-opacity"
+          onClick={(e) => {
+            e.stopPropagation()
+            onOpenComments()
+          }}
+        >
+          <VeltCommentBubble
+            targetElementId={targetElementId}
+            context={{ questionId: question.id, questionNumber: question.number }}
+          />
+          <VeltCommentTool
+            targetElementId={targetElementId}
+            context={{ questionId: question.id, questionNumber: question.number }}
+          />
+        </div>
+      </div>
+
+      {/* Dropdown Input */}
+      <DropdownInput
+        value={value || question.defaultValue}
+        options={question.options}
+        onChange={onChange}
+      />
+
+      {/* Privado Agent Badge */}
+      <PrivadoAgentBadge />
     </div>
-
-    {/* Dropdown Input */}
-    <DropdownInput
-      value={value || question.defaultValue}
-      options={question.options}
-      onChange={onChange}
-    />
-
-    {/* Privado Agent Badge */}
-    <PrivadoAgentBadge />
-  </div>
-)
+  )
+}
 
 export default function DocumentCanvas() {
   const [currentStep, setCurrentStep] = useState(1)
   const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null)
+  const [isCommentSidebarOpen, setIsCommentSidebarOpen] = useState(false)
+  const [isGlobalSidebarOpen, setIsGlobalSidebarOpen] = useState(false)
   const questionRefs = useRef<Record<string, React.RefObject<HTMLDivElement | null>>>({})
   const contentRef = useRef<HTMLDivElement>(null)
 
@@ -363,21 +394,39 @@ export default function DocumentCanvas() {
     setAnswers(prev => ({ ...prev, [questionId]: value }))
   }, [])
 
+  // Handler for opening comments sidebar for a specific question
+  const handleOpenComments = useCallback((question: Question) => {
+    setSelectedQuestion(question)
+    setIsCommentSidebarOpen(true)
+  }, [])
+
+  // Handler for closing comments sidebar
+  const handleCloseCommentSidebar = useCallback(() => {
+    setIsCommentSidebarOpen(false)
+    setSelectedQuestion(null)
+  }, [])
+
+  // Handler for toggling global comments sidebar
+  const toggleGlobalSidebar = useCallback(() => {
+    setIsGlobalSidebarOpen(prev => !prev)
+    // Close per-question sidebar when opening global sidebar
+    if (!isGlobalSidebarOpen) {
+      setIsCommentSidebarOpen(false)
+      setSelectedQuestion(null)
+    }
+  }, [isGlobalSidebarOpen])
+
   const progress = Math.round(((currentStep) / 7) * 100)
 
   return (
-    <div
-      className="relative w-full h-full overflow-hidden rounded-[8px]"
-      style={{ backgroundColor: 'var(--pia-bg, rgb(248, 250, 255))' }}
-    >
+    <div className="flex flex-col w-full h-screen">
       {/* Top Header Bar */}
       <div
-        className="absolute top-0 left-0 w-[1336px] flex items-center justify-between pl-[12px] pr-[20px] py-[8px]"
+        className="flex items-center justify-between pl-[12px] pr-[20px] py-[8px] flex-shrink-0"
         style={{
           backgroundColor: 'var(--pia-canvas-bg, rgba(255, 255, 255, 0.6))',
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid var(--pia-border-medium, rgb(221, 227, 238))',
-          zIndex: 20
         }}
       >
         <div className="flex items-center gap-[8px]">
@@ -405,16 +454,54 @@ export default function DocumentCanvas() {
             </div>
           </div>
         </div>
+
+        {/* [Velt] Header tools: Presence and Comments Sidebar Button */}
+        <div className="flex items-center gap-[12px]">
+          {/* [Velt] Show online users/collaborators */}
+          <VeltPresence />
+          {/* Custom button to toggle embedded comments sidebar */}
+          <button
+            onClick={toggleGlobalSidebar}
+            className="flex items-center justify-center gap-[6px] px-[12px] py-[6px] rounded-[8px] transition-colors"
+            style={{
+              backgroundColor: isGlobalSidebarOpen ? '#5a34d9' : '#754cff',
+              boxShadow: '0px 0px 0px 1px #5a34d9, 0px 1px 2px rgba(23, 32, 38, 0.24), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)'
+            }}
+            aria-label={isGlobalSidebarOpen ? 'Close comments' : 'Open comments'}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <span
+              style={{
+                fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
+                fontWeight: 500,
+                fontSize: '14px',
+                color: 'white'
+              }}
+            >
+              Comments
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* Second Header Bar */}
       <div
-        className="absolute top-[44px] left-0 w-[1336px] flex items-center justify-between pl-[24px] pr-[20px] py-[12px]"
+        className="flex items-center justify-between pl-[24px] pr-[20px] py-[12px] flex-shrink-0"
         style={{
           backgroundColor: 'var(--pia-canvas-bg, rgba(255, 255, 255, 0.6))',
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid var(--pia-border-medium, rgb(221, 227, 238))',
-          zIndex: 20
         }}
       >
         <div className="flex items-center">
@@ -522,60 +609,88 @@ export default function DocumentCanvas() {
         </div>
       </div>
 
-      {/* Left Sidebar - Section Outline */}
-      <div
-        className="absolute left-[24px] top-[154px] flex flex-col gap-[16px] items-start w-[24px]"
-        style={{ zIndex: 10 }}
-      >
-        {[1, 2, 3, 4, 5, 6, 7].map((num) => (
-          <SectionOutline
-            key={num}
-            number={num.toString()}
-            isActive={currentStep === num}
-            onClick={() => scrollToQuestion(num - 1)}
-          />
-        ))}
-      </div>
-
-      {/* Main Content Card */}
-      <div
-        ref={contentRef}
-        className="absolute left-[76px] top-[130px] w-[856px] flex flex-col items-start rounded-[12px] overflow-auto"
-        style={{
-          backgroundColor: 'rgb(255, 255, 255)',
-          boxShadow: 'var(--pia-shadow-xs, 0px 2px 4px rgba(70, 81, 105, 0.08), 0px 1px 1px rgba(92, 108, 138, 0.12))',
-          maxHeight: 'calc(100vh - 150px)'
-        }}
-      >
-        {/* Panel Tabs Header */}
-        <div
-          className="flex items-center justify-center px-[24px] py-[14px] w-full overflow-hidden"
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.6)',
-            backdropFilter: 'blur(20px)'
-          }}
-        >
-          <p
-            className="flex-1 text-[11px] leading-[16px] font-semibold uppercase tracking-[0.22px] whitespace-pre-wrap"
-            style={{
-              fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
-              color: '#172026'
-            }}
+      {/* Main content area with sidebar */}
+      <div className="flex flex-1 overflow-hidden" style={{ backgroundColor: 'var(--pia-bg, rgb(248, 250, 255))' }}>
+        {/* Left side: Section outline + Main content */}
+        <div className="flex-1 flex overflow-hidden relative">
+          {/* Left Sidebar - Section Outline */}
+          <div
+            className="flex flex-col gap-[16px] items-start w-[52px] pt-[24px] pl-[24px] flex-shrink-0"
           >
-            Risk assessment
-          </p>
+            {[1, 2, 3, 4, 5, 6, 7].map((num) => (
+              <SectionOutline
+                key={num}
+                number={num.toString()}
+                isActive={currentStep === num}
+                onClick={() => scrollToQuestion(num - 1)}
+              />
+            ))}
+          </div>
+
+          {/* Main Content Card */}
+          <div className="flex-1 overflow-auto py-[24px] pr-[24px]">
+            <div
+              ref={contentRef}
+              className="flex flex-col items-start rounded-[12px] overflow-hidden"
+              style={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                boxShadow: 'var(--pia-shadow-xs, 0px 2px 4px rgba(70, 81, 105, 0.08), 0px 1px 1px rgba(92, 108, 138, 0.12))',
+                maxWidth: '856px'
+              }}
+            >
+              {/* Panel Tabs Header */}
+              <div
+                className="flex items-center justify-center px-[24px] py-[14px] w-full overflow-hidden"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                  backdropFilter: 'blur(20px)'
+                }}
+              >
+                <p
+                  className="flex-1 text-[11px] leading-[16px] font-semibold uppercase tracking-[0.22px] whitespace-pre-wrap"
+                  style={{
+                    fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
+                    color: '#172026'
+                  }}
+                >
+                  Risk assessment
+                </p>
+              </div>
+
+              {/* Questions */}
+              {questions.map((question, index) => (
+                <QuestionSection
+                  key={question.id}
+                  question={question}
+                  sectionRef={questionRefs.current[question.id]}
+                  value={answers[question.id] || ''}
+                  onChange={(value) => handleAnswerChange(question.id, value)}
+                  onOpenComments={() => handleOpenComments(question)}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Questions */}
-        {questions.map((question, index) => (
-          <QuestionSection
-            key={question.id}
-            question={question}
-            sectionRef={questionRefs.current[question.id]}
-            value={answers[question.id] || ''}
-            onChange={(value) => handleAnswerChange(question.id, value)}
-          />
-        ))}
+        {/* [Velt] Embedded Comments Sidebar - for focused threads per question */}
+        <CommentsSidebar
+          isOpen={isCommentSidebarOpen}
+          onClose={handleCloseCommentSidebar}
+          selectedQuestion={selectedQuestion}
+        />
+
+        {/* [Velt] Global Comments Sidebar - embedded panel for all comments */}
+        {isGlobalSidebarOpen && (
+          <div className="velt-sidebar-container h-full flex-shrink-0">
+            <VeltCommentsSidebar
+              shadowDom={false}
+              pageMode={true}
+              sortData="asc"
+              embedMode={true}
+              focusedThreadMode={true}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

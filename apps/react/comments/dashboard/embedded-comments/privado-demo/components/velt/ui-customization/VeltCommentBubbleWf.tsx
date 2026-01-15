@@ -3,69 +3,44 @@ import { VeltCommentBubbleWireframe } from '@veltdev/react';
 
 const VeltCommentBubbleWf = () => {
   return (
-    // [Velt] Custom wireframe for comment bubble UI
+    // [Velt] Custom wireframe for comment bubble UI - shows when comments exist
     <VeltCommentBubbleWireframe>
-        <div
+      <div
+        style={{
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          color: '#754cff',
+          transition: 'color 0.2s',
+        }}
+        className="comment-bubble-icon"
+      >
+        {/* Comment icon with fill when has comments */}
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="#754cff"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <span
           style={{
-            position: 'relative',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center'
+            fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
+            fontWeight: 600,
+            fontSize: '13px',
+            color: '#754cff',
+            marginLeft: '4px'
           }}
         >
-          <div
-            style={{
-              background: 'rgba(255, 255, 255, 0.08)',
-              borderRadius: '18.667px',
-              padding: '4.667px 8px 4.667px 6.222px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '3.111px',
-              height: '28px',
-              flexShrink: 0,
-              boxSizing: 'border-box'
-            }}
-          >
-            <div
-              style={{
-                width: '15.556px',
-                height: '15.556px',
-                position: 'relative',
-                overflow: 'clip',
-                flexShrink: 0
-              }}
-            >
-              <div
-                style={{
-                  position: 'absolute',
-                  left: 'calc(50% + 0.492px)',
-                  top: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '11px',
-                  height: '11px',
-                  border: '1.5px solid white',
-                  borderRadius: '6px 6px 6px 1px',
-                  boxSizing: 'border-box'
-                }}
-              />
-            </div>
-            <p
-              style={{
-                fontFamily: 'Urbanist, sans-serif',
-                fontWeight: 700,
-                fontSize: '14px',
-                lineHeight: '1.3',
-                color: 'white',
-                margin: 0,
-                whiteSpace: 'pre',
-                flexShrink: 0
-              }}
-            >
-              <VeltCommentBubbleWireframe.CommentsCount />
-            </p>
-          </div>
-        </div>
+          <VeltCommentBubbleWireframe.CommentsCount />
+        </span>
+      </div>
     </VeltCommentBubbleWireframe>
   );
 };

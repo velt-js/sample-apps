@@ -1,9 +1,41 @@
 /* Place Velt UI customization styles here */
 
-/* Theme Configuration - Based on Figma Design */
+/* Animation for Comments Sidebar */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-/* Typography */
---velt-default-font-family: Poppins;
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Comment tool hover effects */
+.comment-tool-icon:hover {
+  color: #754cff !important;
+}
+
+.comment-bubble-icon:hover {
+  opacity: 0.8;
+}
+
+/* Theme Configuration - Based on Figma Design */
+:root {
+  /* Typography */
+  --velt-default-font-family: 'TT Interphases Pro Variable', Inter, system-ui, sans-serif;
 
 /* Border Radius */
 --velt-border-radius-2xs: 0.061rem; /* 0.972px */
@@ -154,10 +186,20 @@
 --velt-spacing-2xl: 1rem; /* 16px */
 
 /* Font Size - Based on Figma */
---velt-font-size-2xs: 0.625rem; /* 10px */
---velt-font-size-xs: 0.681rem; /* 10.89px - badge text */
---velt-font-size-sm: 0.875rem; /* 14px */
---velt-font-size-md: 0.972rem; /* 15.556px - icon size */
---velt-font-size-lg: 1.167rem; /* 18.667px - icon container */
---velt-font-size-xl: 1.75rem; /* 28px - component height */
---velt-font-size-2xl: 2rem; /* 32px */
+  --velt-font-size-2xs: 0.625rem; /* 10px */
+  --velt-font-size-xs: 0.681rem; /* 10.89px - badge text */
+  --velt-font-size-sm: 0.875rem; /* 14px */
+  --velt-font-size-md: 0.972rem; /* 15.556px - icon size */
+  --velt-font-size-lg: 1.167rem; /* 18.667px - icon container */
+  --velt-font-size-xl: 1.75rem; /* 28px - component height */
+  --velt-font-size-2xl: 2rem; /* 32px */
+}
+
+/* Override accent colors to match Privado purple theme */
+:root {
+  --velt-light-mode-accent: #754cff;
+  --velt-light-mode-accent-hover: #5a34d9;
+  --velt-light-mode-accent-light: #d3c5fc;
+  --velt-dark-mode-accent: #754cff;
+  --velt-dark-mode-accent-hover: #5a34d9;
+}

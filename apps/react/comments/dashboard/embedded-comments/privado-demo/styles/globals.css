@@ -88,3 +88,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Velt Comments Sidebar Container - Embedded mode */
+.velt-sidebar-container {
+  width: 400px;
+  border-left: 1px solid var(--pia-border-medium);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Velt Comments Sidebar - Embedded mode styling */
+/* With embedMode={true}, sidebar renders inline in container */
+.velt-sidebar-container velt-comments-sidebar {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Velt Inline Comments Section styling */
+.velt-inline-comments-section {
+  padding: 0px !important;
+}
+
+.velt-comment-dialog--inline-comment-section-mode {
+  border-radius: 0px !important;
+}
