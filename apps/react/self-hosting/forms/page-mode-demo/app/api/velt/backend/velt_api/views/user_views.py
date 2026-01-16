@@ -9,13 +9,13 @@ from django.views.decorators.http import require_http_methods
 from velt_py import (
     GetUserResolverRequest,
 )
-from ..sdk import get_velt_sdk
+from ..velt_sdk import get_velt_sdk
 
 
 @csrf_exempt
 @require_http_methods(["POST"])
 def get_users(request):
-    """Get users endpoint - uses SDK"""
+    """Get users endpoint"""
     try:
         data = json.loads(request.body)
         user_request = GetUserResolverRequest.from_dict(data)

@@ -11,7 +11,7 @@ from velt_py import (
     SaveReactionResolverRequest,
     DeleteReactionResolverRequest
 )
-from ..sdk import get_velt_sdk
+from ..velt_sdk import get_velt_sdk
 
 
 @csrf_exempt

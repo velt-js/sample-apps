@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@veltdev/react": "^4.6.10",
+    "@veltdev/react": "4.7.1-beta.5",
     "@veltdev/reactflow-crdt": "4.5.0-beta.6",
     "@xyflow/react": "^12.3.0",
     "clsx": "^2",
@@ -25,7 +25,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@veltdev/types": "^4.6.10",
+    "@veltdev/types": "4.7.1-beta.5",
     "autoprefixer": "^10",
     "concurrently": "^8.2.2",
     "postcss": "^8",
