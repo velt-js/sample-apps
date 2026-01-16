@@ -48,18 +48,23 @@ def get_db() -> Database:
         )
 
     # Create client with connection pool settings suitable for Django
-    # tlsAllowInvalidCertificates=True is for development only - fixes macOS SSL issues
-    _mongo_client = MongoClient(
-        uri,
-        maxPoolSize=10,
-        minPoolSize=1,
-        maxIdleTimeMS=30000,
-        serverSelectionTimeoutMS=10000,
-        socketTimeoutMS=45000,
-        retryWrites=True,
-        retryReads=True,
-        tlsAllowInvalidCertificates=True,  # Dev only - fixes SSL cert issues on macOS
-    )
+    client_options = {
+        'maxPoolSize': 10,
+        'minPoolSize': 1,
+        'maxIdleTimeMS': 30000,
+        'serverSelectionTimeoutMS': 10000,
+        'socketTimeoutMS': 45000,
+        'retryWrites': True,
+        'retryReads': True,
+    }
+
+    # Only allow invalid certificates in development (DEBUG=True)
+    # This fixes SSL cert issues on macOS during development
+    # NEVER enable this in production as it's vulnerable to MITM attacks
+    if getattr(settings, 'DEBUG', False):
+        client_options['tlsAllowInvalidCertificates'] = True
+
+    _mongo_client = MongoClient(uri, **client_options)
 
     db_name = get_database_name()
     _mongo_db = _mongo_client[db_name]

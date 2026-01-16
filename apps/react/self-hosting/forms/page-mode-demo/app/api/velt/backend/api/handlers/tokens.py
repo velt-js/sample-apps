@@ -36,6 +36,13 @@ def get_token(request):
         )
         
         return JsonResponse(result)
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'error': 'Invalid JSON',
+            'errorCode': 'INVALID_INPUT',
+            'statusCode': 400
+        }, status=400)
     except Exception as e:
         return JsonResponse({
             'success': False,
