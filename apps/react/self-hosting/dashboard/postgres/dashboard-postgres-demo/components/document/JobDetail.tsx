@@ -35,8 +35,8 @@ function LineItemRow({
         const updatedContext = { lineItemDescription: 'Office Chair Ergonomic Updated 3' };
         const updateContextConfig = { merge: true };
         const commentElement = client?.getCommentElement();
-        commentElement?.getAllCommentAnnotations().subscribe((commentAnnotations: CommentAnnotation[]) => {
-            commentAnnotations.forEach((commentAnnotation) => {
+        commentElement?.getAllCommentAnnotations().subscribe((commentAnnotations: CommentAnnotation[] | null) => {
+            commentAnnotations?.forEach((commentAnnotation) => {
                 if (commentAnnotation.context?.lineItemDescription === oldTitle) {
                     commentElement?.updateContext(commentAnnotation.annotationId, updatedContext, updateContextConfig);
                 }
