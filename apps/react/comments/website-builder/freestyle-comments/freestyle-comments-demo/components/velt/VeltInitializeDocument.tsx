@@ -18,7 +18,7 @@ export default function VeltInitializeDocument() {
   useEffect(() => {
     if (!veltUser || !user || !documentId || !documentName) return;
     setDocuments([
-      { id: documentId, metadata: { documentName: documentName || 'Untitled' } },
+      { id: documentId, metadata: { documentName: documentName } },
     ]);
   }, [veltUser, user, setDocuments, documentId, documentName]);
 

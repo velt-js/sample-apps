@@ -32,9 +32,6 @@ export function VeltCollaboration() {
         ]
       });
       
-      // [Velt] Restrict commenting to only the document canvas area
-      // This allows text and freestyle comments only within elements with data-name="Waitlist"
-      commentElement.allowedElementQuerySelectors(['[data-name="Waitlist"]']);
     }
   }, [client]);
 
@@ -49,8 +46,9 @@ export function VeltCollaboration() {
       <VeltComments
         shadowDom={false}
         textMode={true}
-        priority={true}
-        status={false}
+        priority={false}
+        status={true}
+        allowedElementQuerySelectors={['[data-name="Waitlist"]']}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} />
       <VeltCustomization />
