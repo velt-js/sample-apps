@@ -12,6 +12,7 @@ const allowList = [
 const EMBED_CSP = `frame-ancestors ${allowList}`;
 
 const nextConfig = {
+  serverExternalPackages: ['mongodb'],
   async headers() {
     return [
       {
