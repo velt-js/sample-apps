@@ -86,18 +86,20 @@ VELT_SDK_CONFIG = {
     'database': {
         # Use connection_string for MongoDB Atlas (easiest)
         'connection_string': os.getenv(
-            'VELT_MONGODB_CONNECTION_STRING'),
+            'VELT_MONGODB_CONNECTION_STRING',
+            ''
+        ),
         # OR use individual components (for local MongoDB or if connection_string not set)
         # For MongoDB Atlas SRV: use cluster hostname (fallback if connection_string not set)
         # The SDK will automatically detect .mongodb.net domains and use SRV connection
-        'host': os.getenv('VELT_MONGODB_HOST'),
-        'username': os.getenv('VELT_MONGODB_USERNAME'),
-        'password': os.getenv('VELT_MONGODB_PASSWORD'),
-        'auth_database': os.getenv('VELT_MONGODB_AUTH_DB'),
-        'database_name': os.getenv('VELT_MONGODB_DATABASE')
+        'host': os.getenv('VELT_MONGODB_HOST', ''),
+        'username': os.getenv('VELT_MONGODB_USERNAME', ''),
+        'password': os.getenv('VELT_MONGODB_PASSWORD', ''),
+        'auth_database': os.getenv('VELT_MONGODB_AUTH_DB', ''),
+        'database_name': os.getenv('VELT_MONGODB_DATABASE', '')
     },
     'user_schema': {
-        'userId': ['userId', 'id', 'user_id'],
+        'userId': ['userId', 'user_id'],
         'name': 'full_name',
         'photoUrl': 'photo_url',
         'email': 'email_address',
@@ -111,6 +113,13 @@ VELT_SDK_CONFIG = {
         'reactions': 'my_reactions',
         'attachments': 'my_attachments',
         'users': 'my_users'
+    },
+    'aws': {
+        'access_key_id': os.getenv('AWS_ACCESS_KEY_ID', ''),
+        'secret_access_key': os.getenv('AWS_SECRET_ACCESS_KEY', ''),
+        'region': os.getenv('AWS_REGION', ''),
+        'bucket_name': os.getenv('AWS_S3_BUCKET_NAME', ''),
+        # 'endpoint_url': os.getenv('AWS_S3_ENDPOINT_URL', ''),  # Optional for S3-compatible services
     },
     'apiKey': os.getenv('VELT_API_KEY', ''),
     'authToken': os.getenv('VELT_AUTH_TOKEN', '')
