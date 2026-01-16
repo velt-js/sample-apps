@@ -1,8 +1,8 @@
 """
-URL configuration for velt_api app
+URL configuration for api app
 """
 from django.urls import path
-from .views import (
+from .handlers import (
     get_comments,
     save_comments,
     delete_comment,

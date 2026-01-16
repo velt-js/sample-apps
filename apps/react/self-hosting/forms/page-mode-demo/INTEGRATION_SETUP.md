@@ -3,8 +3,8 @@
 ## What Was Done
 
 ### 1. Django Backend Copied
-- **Source**: `/Users/yoenzhang/Downloads/sample-apps/django_velt_test/`
-- **Destination**: `app/api/velt/django_velt_test/`
+- **Source**: `/Users/yoenzhang/Downloads/sample-apps/backend/`
+- **Destination**: `app/api/velt/backend/`
 - The backend includes all your recent changes with MongoDB integration
 
 ### 2. Dependencies Installed
@@ -12,12 +12,12 @@
 - ✅ Node package `concurrently` added for running both servers together
 
 ### 3. Environment Variables Configured
-- ✅ Backend `.env` file: `app/api/velt/django_velt_test/.env` (MongoDB + Velt credentials)
+- ✅ Backend `.env` file: `app/api/velt/backend/.env` (MongoDB + Velt credentials)
 - ✅ Frontend `.env.local` file: Root directory (Velt API key + backend URL)
 
 ### 4. NPM Scripts Added
 ```json
-"dev:backend": "cd app/api/velt/django_velt_test && python3 manage.py runserver"
+"dev:backend": "cd app/api/velt/backend && python3 manage.py runserver"
 "dev:all": "concurrently \"npm run dev\" \"npm run dev:backend\""
 ```
 
@@ -57,7 +57,7 @@ VELT_AUTH_TOKEN=bd4d5226050470b6c658054fcdf1092a
 ```
 
 ### Backend (.env)
-Located at: `app/api/velt/django_velt_test/.env`
+Located at: `app/api/velt/backend/.env`
 ```
 MONGODB_URI=mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/...
 MONGODB_DATABASE=velt_comments
@@ -69,7 +69,7 @@ VELT_AUTH_TOKEN=bd4d5226050470b6c658054fcdf1092a
 
 1. **Test Django Backend Health**:
    ```bash
-   cd app/api/velt/django_velt_test
+   cd app/api/velt/backend
    python3 manage.py check
    ```
    Expected: "System check identified no issues (0 silenced)."
@@ -100,15 +100,15 @@ The Django backend provides these endpoints at `http://localhost:8000/api/velt/`
 - `POST /users/save` - Save users
 - `POST /token` - Generate Velt auth tokens
 
-See `app/api/velt/django_velt_test/README.md` for detailed API documentation.
+See `app/api/velt/backend/README.md` for detailed API documentation.
 
 ## Next Steps
 
 1. **Test the integration**: Run `pnpm run dev:all` and verify everything works
-2. **Restore original django_velt_test**: Once confirmed working, we can restore the original folder to its clean state
+2. **Restore original backend**: Once confirmed working, we can restore the original folder to its clean state
 
 ## Notes
 
-- The original `django_velt_test` folder still has unstaged changes
+- The original `backend` folder still has unstaged changes
 - After confirming the integration works, we'll restore it to a clean state
-- All the changes are preserved in `app/api/velt/django_velt_test/`
+- All the changes are preserved in `app/api/velt/backend/`

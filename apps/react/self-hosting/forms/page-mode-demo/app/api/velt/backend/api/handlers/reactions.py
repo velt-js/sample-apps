@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-from .. import mongodb_client
+from .. import store
 
 
 @csrf_exempt
@@ -34,7 +34,7 @@ def get_reactions(request):
         }
 
         # Get reactions from MongoDB
-        result = mongodb_client.get_reactions(filters)
+        result = store.get_reactions(filters)
 
         return JsonResponse({
             'success': True,
@@ -77,7 +77,7 @@ def save_reactions(request):
             }, status=400)
 
         # Save to MongoDB with proper structure
-        mongodb_client.save_reactions(reaction_annotation, metadata)
+        store.save_reactions(reaction_annotation, metadata)
 
         return JsonResponse({
             'success': True,
@@ -117,7 +117,7 @@ def delete_reaction(request):
             }, status=400)
 
         # Delete from MongoDB
-        deleted = mongodb_client.delete_reaction(annotation_id)
+        deleted = store.delete_reaction(annotation_id)
 
         return JsonResponse({
             'success': True,

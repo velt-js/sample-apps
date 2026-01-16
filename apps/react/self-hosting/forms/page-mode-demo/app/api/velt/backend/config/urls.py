@@ -5,6 +5,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('api/velt/', include('velt_api.urls')),
+    path('api/velt/', include('api.urls')),
 ]
 

@@ -8,7 +8,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-from ..mongodb_client import (
+from ..store import (
     save_attachment as db_save_attachment,
     get_attachment as db_get_attachment,
     delete_attachment as db_delete_attachment,

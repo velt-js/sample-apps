@@ -1,8 +1,8 @@
-# Page Mode Demo (Self-Hosted)
+# Page Mode Forms Demo - Django Backend (Self-Hosted)
 
 ## Overview
 
-This demo showcases **self-hosted Velt comments** with **page mode** for **forms/documents** in **React**. It includes a full Django backend for MongoDB persistence and demonstrates how to implement Velt's self-hosting data providers.
+This demo showcases a self-hosted comments feature using **Django** as the backend framework and **MongoDB Atlas** as the database. This full-stack implementation demonstrates how to self-host Velt's collaboration features with Python/Django handling all data operations.
 
 ## Path
 
@@ -14,173 +14,310 @@ apps/react/self-hosting/forms/page-mode-demo/
 
 `@apps/react-self-hosting-forms-page-mode-demo`
 
-## Directory Structure
-
-```
-privado-demo/
-├── app/
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Main page
-├── components/
-│   ├── header/             # Header components (Velt presence, etc.)
-│   │   └── header.tsx
-│   ├── sidebar/            # Sidebar components
-│   │   └── sidebar.tsx
-│   └── document/           # Main document/canvas logic
-│       ├── document-canvas.tsx
-│       └── CommentsSidebar.tsx
-├── hooks/                  # Custom React hooks
-├── lib/                    # Utility functions
-│   └── utils.ts
-├── public/                 # Static assets
-├── styles/                 # Global styles
-│   └── globals.css
-├── .npmrc                  # pnpm config to prevent Tailwind v4 hoisting
-├── next.config.js
-├── tailwind.config.js
-├── tsconfig.json
-├── components.json         # shadcn/ui configuration
-└── package.json
-```
-
 ## Getting Started
 
-This demo requires both a **Next.js frontend** and a **Django backend** to be running.
+### Install Dependencies
 
-### 1. Install Dependencies
+**Frontend:**
 
-**Frontend (Node.js/pnpm):**
-
-From this directory:
+From the monorepo root:
 
 ```bash
 pnpm install
 ```
 
-**Backend (Python):**
+**Backend (Django):**
 
-Python dependencies are already installed in the `app/api/velt/django_velt_test/` folder.
-
-### 2. Configure Environment Variables
-
-**Frontend (.env.local):**
-
-Copy `.env.local.example` to `.env.local` and configure:
+Python dependencies are already installed. If you need to reinstall:
 
 ```bash
-cp .env.local.example .env.local
+cd apps/react/self-hosting/forms/page-mode-demo/app/api/velt/backend
+pip3 install -r requirements.txt --user
 ```
 
-Edit `.env.local` with your Velt credentials:
+### Run Development Servers
 
-```env
-NEXT_PUBLIC_VELT_API_KEY=your_velt_api_key_here
-NEXT_PUBLIC_SELF_HOSTING_BASE_URL=http://localhost:8000/api/velt
-VELT_AUTH_TOKEN=your_velt_auth_token_here
-```
+This demo requires both frontend and backend to run.
 
-**Backend (.env):**
-
-The Django backend is already configured in `app/api/velt/django_velt_test/.env` with MongoDB connection and Velt credentials.
-
-### 3. Run Development Servers
-
-**Option A: Run Both Servers Together (Recommended):**
+**Option 1: Run Both Servers Together (Recommended)**
 
 ```bash
+cd apps/react/self-hosting/forms/page-mode-demo
 pnpm run dev:all
 ```
 
-This runs both the Next.js frontend (port 3000) and Django backend (port 8000) concurrently.
+This runs both Next.js (port 3000) and Django (port 8000) concurrently.
 
-**Option B: Run Servers Separately:**
+**Option 2: Run Separately**
 
-Terminal 1 (Frontend):
+Terminal 1 - Frontend:
 ```bash
+cd apps/react/self-hosting/forms/page-mode-demo
 pnpm dev
 ```
 
-Terminal 2 (Backend):
+Terminal 2 - Backend:
 ```bash
+cd apps/react/self-hosting/forms/page-mode-demo
 pnpm run dev:backend
 ```
 
-The application will be available at `http://localhost:3000`
+**Or from the root:**
+
+```bash
+# Both servers
+pnpm --filter @apps/react-self-hosting-forms-page-mode-demo run dev:all
+
+# Frontend only
+pnpm --filter @apps/react-self-hosting-forms-page-mode-demo dev
+
+# Backend only
+pnpm --filter @apps/react-self-hosting-forms-page-mode-demo run dev:backend
+```
 
 ### Build for Production
 
 ```bash
-pnpm build
+pnpm --filter @apps/react-self-hosting-forms-page-mode-demo build
 ```
 
-## Structure
+## Django Backend
 
-- **Framework**: react
-- **Feature**: comments
-- **Document**: dashboard
-- **Library**: embedded-comments
-- **Demo**: privado-demo
+### Backend Structure
 
-## Component Organization
+The Django backend is located in `app/api/velt/backend/`:
 
-- **`components/header/`** - Contains Velt components like presence indicators, header buttons
-- **`components/sidebar/`** - Contains sidebar-related components
-- **`components/document/`** - Contains the main application logic and embedded-comments integration
-- **`hooks/`** - Custom React hooks for state management and side effects
-- **`lib/`** - Utility functions and helpers
+```
+backend/
+├── manage.py              # Django management script
+├── requirements.txt       # Python dependencies
+├── .env                   # Environment variables (MongoDB, Velt credentials)
+├── config/                # Django project settings
+│   ├── settings.py        # Django configuration
+│   ├── urls.py            # URL routing
+│   └── wsgi.py            # WSGI config
+└── api/                   # API application
+    ├── urls.py            # API routes
+    ├── store.py           # MongoDB operations
+    ├── sdk.py             # Velt SDK wrapper
+    ├── handlers/          # Request handlers
+    │   ├── comments.py
+    │   ├── reactions.py
+    │   ├── users.py
+    │   ├── attachments.py
+    │   └── tokens.py
+    └── tests/
+        └── test_api.py
+```
+
+### Backend Commands
+
+**Check Configuration:**
+```bash
+cd app/api/velt/backend
+python3 manage.py check
+```
+
+**Run Server Manually:**
+```bash
+cd app/api/velt/backend
+python3 manage.py runserver
+```
+
+**Run Tests:**
+```bash
+cd app/api/velt/backend
+python3 api/tests/test_api.py
+```
+
+### API Endpoints
+
+The Django backend provides these endpoints at `http://localhost:8000/api/velt/`:
+
+- `POST /api/velt/comments/get` - Retrieve comments
+- `POST /api/velt/comments/save` - Save comments
+- `POST /api/velt/comments/delete` - Delete comments
+- `POST /api/velt/reactions/get` - Retrieve reactions
+- `POST /api/velt/reactions/save` - Save reactions
+- `POST /api/velt/users/get` - Retrieve users
+- `POST /api/velt/users/save` - Save users
+- `POST /api/velt/attachments/save` - Save attachments
+- `POST /api/velt/attachments/get/<id>` - Get attachment
+- `POST /api/velt/token` - Generate auth token
+
+See `app/api/velt/backend/README.md` for detailed API documentation.
+
+## Database Access
+
+### Viewing the MongoDB Database
+
+To view and manage the MongoDB database, log in to MongoDB Atlas:
+
+1. Go to [MongoDB Atlas](https://cloud.mongodb.com/)
+2. Sign in with your credentials
+3. Navigate to the cluster to browse collections:
+   - `comment_annotations` - Comments
+   - `reaction_annotations` - Reactions
+   - `users` - User data
+   - `attachments` - Attachment files
+
+### Connection String
+
+The Django backend uses MongoDB Atlas. Connection string is configured in `app/api/velt/backend/.env`:
+
+```
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority
+```
+
+## Directory Structure
+
+```
+page-mode-demo/
+├── app/
+│   ├── api/velt/              # API routes
+│   │   ├── token/             # Next.js token endpoint
+│   │   │   └── route.ts
+│   │   └── backend/           # Django backend (Python)
+│   │       ├── manage.py
+│   │       ├── requirements.txt
+│   │       ├── .env
+│   │       ├── config/        # Django settings
+│   │       └── api/           # API handlers
+│   ├── layout.tsx             # Root layout
+│   └── page.tsx               # Main page with VeltProvider
+├── components/
+│   ├── header/
+│   │   └── header.tsx         # Header with presence, sidebar toggle
+│   ├── sidebar/
+│   │   └── sidebar.tsx        # Left navigation
+│   ├── document/
+│   │   ├── document-canvas.tsx        # Main document component
+│   │   └── CommentsSidebar.tsx        # Comments sidebar
+│   └── velt/
+│       ├── VeltCollaboration.tsx      # Velt client setup
+│       ├── VeltInitializeDocument.tsx # Document initialization
+│       ├── VeltInitializeUser.tsx     # User auth provider
+│       ├── VeltDataProviders.ts       # Self-hosting data providers
+│       ├── VeltTools.tsx              # Velt component exports
+│       └── ui-customization/
+│           ├── VeltCustomization.tsx              # UI customization wrapper
+│           ├── VeltCommentBubbleWf.tsx            # Comment bubble customization
+│           ├── VeltCommentToolWf.tsx              # Comment tool customization
+│           ├── VeltSidebarButtonWf.tsx            # Sidebar button customization
+│           ├── VeltCommentsSidebarHeaderWf.tsx    # Sidebar header customization
+│           ├── VeltCommentsSidebarFocusedThreadWf.tsx  # Focused thread customization
+│           └── styles.css                         # Custom Velt styles
+├── hooks/                     # Custom React hooks
+├── lib/                       # Utility functions
+│   └── utils.ts
+├── public/                    # Static assets
+├── styles/                    # Global styles
+│   └── globals.css
+├── .npmrc                     # pnpm config
+├── next.config.js
+├── tailwind.config.js
+├── tsconfig.json
+├── components.json            # shadcn/ui configuration
+└── package.json
+```
+
+## Key Technologies
+
+### Frontend
+- **Next.js 15** with React 19
+- **@veltdev/react** - Velt collaboration components
+- **Tailwind CSS v3.4** - Styling
+- **TypeScript** - Type safety
+
+### Backend
+- **Python 3.13** - Programming language
+- **Django 4.2** - Web framework
+- **PyMongo 4.6** - MongoDB driver
+- **MongoDB Atlas** - Cloud database
+- **velt-py** - Velt Python SDK
+
+## Features
+
+- **Self-Hosted Comments**: Full data ownership with Django backend
+- **Page Mode**: Comments tied to document pages
+- **Embedded Comments Sidebar**: Focused thread view
+- **Presence Awareness**: See active users
+- **Reactions**: React to comments
+- **Attachments**: File uploads
+- **Custom UI**: Tailored comment bubbles and sidebar
+
+## Environment Variables
+
+### Frontend (.env.local)
+
+Create `.env.local` from `.env.local.example`:
+
+```env
+NEXT_PUBLIC_VELT_API_KEY=your_velt_api_key
+NEXT_PUBLIC_SELF_HOSTING_BASE_URL=http://localhost:8000/api/velt
+VELT_AUTH_TOKEN=your_velt_auth_token
+```
+
+### Backend (.env)
+
+Configure in `app/api/velt/backend/.env`:
+
+```env
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/...
+MONGODB_DATABASE=velt_comments
+VELT_API_KEY=your_velt_api_key
+VELT_AUTH_TOKEN=your_velt_auth_token
+```
+
+## Troubleshooting
+
+### Backend Won't Start
+
+Verify Python dependencies:
+```bash
+cd app/api/velt/backend
+pip3 install -r requirements.txt --user
+python3 manage.py check
+```
+
+### Frontend Can't Connect
+
+1. Verify backend is running: `curl http://localhost:8000/api/velt/token`
+2. Check `.env.local` has correct `NEXT_PUBLIC_SELF_HOSTING_BASE_URL`
+
+### MongoDB Connection Errors
+
+1. Verify `MONGODB_URI` in `app/api/velt/backend/.env`
+2. Check MongoDB Atlas network access allows your IP
+3. Verify database credentials
+
+### Port Already in Use
+
+```bash
+# Kill process on port 8000
+lsof -ti:8000 | xargs kill -9
+
+# Or use different port
+cd app/api/velt/backend
+python3 manage.py runserver 8080
+```
 
 ## Important Configuration
 
 ### .npmrc File
-This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS v4 from other workspace packages. This is necessary because:
-- This demo uses Tailwind CSS v3.4.x with traditional PostCSS configuration
-- Other apps in the monorepo may use Tailwind CSS v4
-- Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS errors
+
+This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS v4:
+
+```
+public-hoist-pattern[]=*
+public-hoist-pattern[]=!@tailwindcss*
+```
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
 
-## Architecture
-
-### Frontend (Next.js)
-- React application with Velt SDK integration
-- Self-hosting data providers configured to use Django backend
-- API route at `/api/velt/token` for Velt authentication token generation
-
-### Backend (Django)
-Located in `app/api/velt/django_velt_test/`, the backend provides:
-
-- **MongoDB Integration**: Stores comments, reactions, and user data
-- **Velt API Endpoints**: RESTful endpoints for Velt operations
-  - `POST /api/velt/comments/get` - Retrieve comments
-  - `POST /api/velt/comments/save` - Save comments
-  - `POST /api/velt/comments/delete` - Delete comments
-  - `POST /api/velt/reactions/get` - Retrieve reactions
-  - `POST /api/velt/reactions/save` - Save reactions
-  - `POST /api/velt/users/get` - Retrieve users
-  - `POST /api/velt/users/save` - Save users
-  - `POST /api/velt/token` - Generate Velt auth tokens
-
-See `app/api/velt/django_velt_test/README.md` for detailed API documentation.
-
-## Features
-
-- **Self-Hosted Comments**: Full ownership of comment data stored in MongoDB
-- **Embedded Comments**: Comments sidebar with focused thread mode for contextual discussions
-- **VeltInlineCommentsSection**: Focused comment threads per question/row
-- **Presence Awareness**: See who's currently viewing the document
-- **Light Mode**: Custom theme to match Privado's design system
-- **Django Backend**: Production-ready API with CORS support and error handling
-
-## Next Steps
-
-1. Add your embedded-comments implementation in `components/document/`
-2. Add Velt collaboration features in `components/header/`
-3. Update this README with specific usage instructions
-4. Add the demo to `master-sample-app` if it should be showcased
-5. Update deployment configs (Vercel, GitHub Actions) if needed
-
 ## Learn More
 
-- [Monorepo Structure Guide](../../../../../README_MONOREPO.md)
-- [Structure Documentation](../../../../../docs/structure.md)
 - [Velt Documentation](https://docs.velt.dev)
+- [Velt Self-Hosting Guide](https://docs.velt.dev/self-host-data/overview)
+- [Django Documentation](https://docs.djangoproject.com/)
+- [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/)
