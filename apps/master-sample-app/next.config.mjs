@@ -17,9 +17,7 @@ const nextConfig = {
     return config
   },
   // Turbopack has native support for ?raw imports, no additional config needed
-  experimental: {
-    turbo: {},
-  },
+  turbopack: {},
 }
 
 export default nextConfig
