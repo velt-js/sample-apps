@@ -64,6 +64,24 @@ function hashString(str: string): string {
   return Math.abs(hash).toString(36).padStart(8, '0');
 }
 
+// [Host App] Save user to database via host-app API
+async function saveUserToDatabase(user: User): Promise<void> {
+  try {
+    const response = await fetch('/api/host-app/users/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user })
+    });
+    if (!response.ok) {
+      console.warn('[Host App] Failed to save user:', response.status);
+    } else {
+      console.log('[Host App] User saved to database:', user.userId);
+    }
+  } catch (error) {
+    console.error('[Host App] Error saving user:', error);
+  }
+}
+
 // Generate a random user with deterministic ID based on name
 function generateRandomUser(): User {
   const avatarColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
@@ -106,35 +124,42 @@ export function AppUserProvider({
   useEffect(() => {
     if (typeof window === 'undefined') return; // Guard against SSR
 
-    try {
-      // Detect if running in iframe (for master-sample-app dual view)
-      const isInIframe = window.self !== window.top;
+    async function initializeUser() {
+      try {
+        // Detect if running in iframe (for master-sample-app dual view)
+        const isInIframe = window.self !== window.top;
 
-      // Choose storage based on iframe context:
-      // - In iframe: use sessionStorage (each origin/port is isolated automatically)
-      // - Not in iframe: use localStorage (same user across tabs)
-      const storage = isInIframe ? sessionStorage : localStorage;
-      const STORAGE_KEY = 'velt-demo-user';
+        // Choose storage based on iframe context:
+        // - In iframe: use sessionStorage (each origin/port is isolated automatically)
+        // - Not in iframe: use localStorage (same user across tabs)
+        const storage = isInIframe ? sessionStorage : localStorage;
+        const STORAGE_KEY = 'velt-demo-user';
 
-      // Check storage for existing user
-      const stored = storage.getItem(STORAGE_KEY);
+        // Check storage for existing user
+        const stored = storage.getItem(STORAGE_KEY);
 
-      let selectedUser: User;
-      if (stored) {
-        // Use existing user from storage
-        selectedUser = JSON.parse(stored);
-      } else {
-        // Generate NEW random user
-        selectedUser = generateRandomUser();
-        storage.setItem(STORAGE_KEY, JSON.stringify(selectedUser));
-      }
+        let selectedUser: User;
+        if (stored) {
+          // Use existing user from storage
+          selectedUser = JSON.parse(stored);
+        } else {
+          // Generate NEW random user
+          selectedUser = generateRandomUser();
+          storage.setItem(STORAGE_KEY, JSON.stringify(selectedUser));
+        }
 
-      setUser(selectedUser);
-      setIsUserLoggedIn(true);
-    } catch {}
+        setUser(selectedUser);
+        setIsUserLoggedIn(true);
+
+        // [Host App] Save user to database
+        await saveUserToDatabase(selectedUser);
+      } catch {}
+    }
+
+    initializeUser();
   }, []);
 
-  const login = useCallback((next: User) => {
+  const login = useCallback(async (next: User) => {
     if (typeof window === 'undefined') return;
 
     try {
@@ -145,6 +170,9 @@ export function AppUserProvider({
       setUser(next);
       setIsUserLoggedIn(true);
       storage.setItem(STORAGE_KEY, JSON.stringify(next));
+
+      // [Host App] Save user to database
+      await saveUserToDatabase(next);
     } catch {}
   }, []);
 

@@ -18,15 +18,10 @@ from ..velt_sdk import get_velt_sdk
 def save_attachment(request):
     """Save attachment endpoint - accepts multipart/form-data with file and request JSON"""
     try:
-        # Debug logging
-        content_type = request.content_type or ''
-        print(f'[Velt] save_attachment content-type: {content_type}')
-        print(f'[Velt] save_attachment FILES: {list(request.FILES.keys())}')
-        print(f'[Velt] save_attachment POST: {list(request.POST.keys())}')
-        
         # Check content type - only accept multipart/form-data
+        content_type = request.content_type or ''
+        
         if 'multipart/form-data' not in content_type:
-            print(f'[Velt] save_attachment ERROR: Invalid content type')
             return JsonResponse({
                 'success': False,
                 'error': 'Content-Type must be multipart/form-data',
@@ -64,17 +59,15 @@ def save_attachment(request):
                 'errorCode': 'INVALID_INPUT',
                 'statusCode': 400
             }, status=400)
-        
-        print(f'[Velt] save_attachment request_data: {request_data}')
-        
+
         # Ensure metadata exists and has organizationId
         if 'metadata' not in request_data:
             request_data['metadata'] = {}
         if not request_data['metadata'].get('organizationId'):
             # Use a default organizationId if not provided
-            request_data['metadata']['organizationId'] = 'sample-apps-demo-org'
+            request_data['metadata']['organizationId'] = 'page-mode-demo'
             print(f'[Velt] save_attachment: Added default organizationId to metadata')
-        
+
         # Get SDK and config
         sdk = get_velt_sdk()
         config = sdk.config
@@ -112,15 +105,11 @@ def save_attachment(request):
             api_key=api_key,
             folder_prefix='attachments'
         )
-
-        print(f'[Velt] S3 upload successful: {s3_url}')
-
+        
         # Inject S3 URL into request structure
         if 'attachment' not in request_data:
             request_data['attachment'] = {}
         request_data['attachment']['file'] = s3_url
-
-        print(f'[Velt] Attachment data: {request_data["attachment"]}')
         
         # Ensure attachment has required fields from file
         if not request_data['attachment'].get('name'):
@@ -133,9 +122,7 @@ def save_attachment(request):
         
         # Call SDK
         result = sdk.selfHosting.attachments.saveAttachment(save_request)
-
-        print(f'[Velt] SDK saveAttachment result: {result}')
-
+        
         return JsonResponse(result, status=result.get('statusCode', 200))
         
     except Exception as e:

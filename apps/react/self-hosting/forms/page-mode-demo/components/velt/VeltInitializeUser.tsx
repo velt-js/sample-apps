@@ -34,9 +34,9 @@ export function useVeltAuthProvider() {
   // [Velt] Get your app's current authenticated user to authenticate with Velt.
   const { user } = useAppUser();
 
-  // NOTE: saveCurrentUserToDB() has been removed because the SDK v0.1.3 
-  // doesn't provide a saveUser() method. Users are fetched on-demand via 
-  // the userDataProvider.get() method which uses SDK's getUsers().
+  // NOTE: User saving is handled by the host app (AppUserContext.tsx) when
+  // users log in. This keeps user management separate from the Velt implementation.
+  // Users are fetched on-demand via the userDataProvider.get() method.
 
   // [Velt] Create auth provider object to pass to VeltProvider
   const authProvider: VeltAuthProvider | undefined = useMemo(() => {
