@@ -156,6 +156,13 @@ VELT_SDK_CONFIG = {
         'users': 'users'
     },
     'apiKey': os.getenv('VELT_API_KEY', ''),
-    'authToken': os.getenv('VELT_AUTH_TOKEN', '')
+    'authToken': os.getenv('VELT_AUTH_TOKEN', ''),
+    # AWS S3 configuration for attachments (required by SDK v0.1.3)
+    'aws': {
+        'region': os.getenv('AWS_REGION', 'us-east-1'),
+        'accessKeyId': os.getenv('AWS_ACCESS_KEY_ID'),
+        'secretAccessKey': os.getenv('AWS_SECRET_ACCESS_KEY'),
+        'bucket': os.getenv('AWS_S3_BUCKET')
+    }
 }
 

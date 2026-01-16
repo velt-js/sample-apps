@@ -15,7 +15,7 @@ requests>=2.25.0
 django-cors-headers==4.3.1
 
 # Velt Python SDK - From PyPI
-velt-py==0.1.1
+velt-py==0.1.3
 
 # Production Server
 gunicorn==21.2.0

@@ -10,10 +10,8 @@ from .handlers import (
     save_reactions,
     delete_reaction,
     save_attachment,
-    get_attachment,
     delete_attachment,
     get_users,
-    save_user,
     get_token,
 )
 
@@ -30,12 +28,10 @@ urlpatterns = [
 
     # Attachments endpoints
     path('attachments/save', save_attachment, name='save_attachment'),
-    path('attachments/get/<str:attachment_id>', get_attachment, name='get_attachment'),
     path('attachments/delete', delete_attachment, name='delete_attachment'),
 
     # Users endpoints
     path('users/get', get_users, name='get_users'),
-    path('users/save', save_user, name='save_user'),
 
     # Token endpoint
     path('token', get_token, name='get_token'),

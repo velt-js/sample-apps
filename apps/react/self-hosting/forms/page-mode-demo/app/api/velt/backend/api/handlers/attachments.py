@@ -2,139 +2,121 @@
 Attachment-related API views
 """
 import json
-import base64
-import re
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-from ..store import (
-    save_attachment as db_save_attachment,
-    get_attachment as db_get_attachment,
-    delete_attachment as db_delete_attachment,
+from velt_py import (
+    SaveAttachmentResolverRequest,
+    DeleteAttachmentResolverRequest
 )
-
-
-def sanitize_filename(filename: str) -> str:
-    """Sanitize filename to prevent header injection."""
-    if not filename:
-        return 'attachment'
-    # Remove control characters and problematic characters
-    sanitized = re.sub(r'[\x00-\x1f\x7f]', '', filename)
-    sanitized = re.sub(r'[\\"/]', '_', sanitized)
-    return sanitized.strip() or 'attachment'
+from ..sdk import get_velt_sdk
 
 
 @csrf_exempt
 @require_http_methods(["POST"])
 def save_attachment(request):
-    """Save attachment endpoint - stores in MongoDB and returns URL for retrieval."""
+    """Save attachment endpoint - accepts multipart/form-data with file and request JSON"""
     try:
-        data = json.loads(request.body)
-        attachment = data.get('attachment')
-        metadata = data.get('metadata', {})
-
-        if not attachment:
+        # Check content type - only accept multipart/form-data
+        content_type = request.content_type or ''
+        
+        if 'multipart/form-data' not in content_type:
             return JsonResponse({
                 'success': False,
-                'error': 'No attachment provided',
+                'error': 'Content-Type must be multipart/form-data',
                 'errorCode': 'INVALID_INPUT',
                 'statusCode': 400
             }, status=400)
-
-        if attachment.get('attachmentId') is None:
+        
+        # Extract file from request.FILES
+        file = request.FILES.get('file')
+        if not file:
             return JsonResponse({
                 'success': False,
-                'error': 'No attachment ID provided',
+                'error': 'File is required',
                 'errorCode': 'INVALID_INPUT',
                 'statusCode': 400
             }, status=400)
-
-        # Save attachment to MongoDB and get URL
-        result = db_save_attachment(attachment, metadata)
-
-        return JsonResponse({
-            'success': True,
-            'result': result,  # Contains { url: '/api/velt/attachments/get/{id}' }
-            'statusCode': 200
-        }, status=200)
-
-    except json.JSONDecodeError:
-        return JsonResponse({
-            'success': False,
-            'error': 'Invalid JSON',
-            'errorCode': 'INVALID_INPUT',
-            'statusCode': 400
-        }, status=400)
-    except Exception as e:
-        return JsonResponse({
-            'success': False,
-            'error': str(e),
-            'errorCode': 'INTERNAL_ERROR',
-            'statusCode': 500
-        }, status=500)
-
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def get_attachment(request, attachment_id):
-    """Get attachment endpoint - serves the file binary data."""
-    try:
-        # Parse attachment ID
+        
+        # Extract request JSON from request.POST
+        request_json_str = request.POST.get('request')
+        if not request_json_str:
+            return JsonResponse({
+                'success': False,
+                'error': 'Request JSON is required',
+                'errorCode': 'INVALID_INPUT',
+                'statusCode': 400
+            }, status=400)
+        
+        # Parse the request JSON structure
         try:
-            attachment_id_num = int(attachment_id)
-        except (ValueError, TypeError):
+            request_data = json.loads(request_json_str)
+        except json.JSONDecodeError:
             return JsonResponse({
                 'success': False,
-                'error': 'Invalid attachment ID',
+                'error': 'Invalid request JSON',
                 'errorCode': 'INVALID_INPUT',
                 'statusCode': 400
             }, status=400)
-
-        # Get attachment from MongoDB
-        attachment = db_get_attachment(attachment_id_num)
-
-        if not attachment:
+        
+        # Get SDK and config
+        sdk = get_velt_sdk()
+        config = sdk.config
+        
+        # Validate S3 is enabled
+        if not config.is_s3_enabled():
             return JsonResponse({
                 'success': False,
-                'error': 'Attachment not found',
-                'errorCode': 'NOT_FOUND',
-                'statusCode': 404
-            }, status=404)
-
-        # Check if we have base64Data
-        base64_data = attachment.get('base64Data')
-        if not base64_data:
-            return JsonResponse({
-                'success': False,
-                'error': 'No file data available',
-                'errorCode': 'NOT_FOUND',
-                'statusCode': 404
-            }, status=404)
-
-        # Handle data URL format (e.g., "data:application/pdf;base64,...")
-        if ',' in base64_data:
-            base64_content = base64_data.split(',')[1]
-        else:
-            base64_content = base64_data
-
-        # Convert base64 to binary
-        binary_data = base64.b64decode(base64_content)
-
-        # Sanitize filename
-        safe_filename = sanitize_filename(attachment.get('name'))
-
-        # Return binary response with appropriate headers
-        response = HttpResponse(
-            binary_data,
-            content_type=attachment.get('mimeType', 'application/octet-stream')
+                'error': 'S3 configuration is required for attachments',
+                'errorCode': 'CONFIGURATION_ERROR',
+                'statusCode': 500
+            }, status=500)
+        
+        # Read file bytes
+        file_bytes = file.read()
+        
+        # Upload to S3
+        from velt_py.services.storage.s3_service import S3Service
+        aws_config = config.get_aws_config()
+        s3_service = S3Service(aws_config)
+        
+        # Get API key from config for folder structure
+        api_key = config.get_api_key()
+        
+        # Get file name and mime type from request or file
+        attachment_data = request_data.get('attachment', {})
+        file_name = attachment_data.get('name') or file.name
+        mime_type = attachment_data.get('mimeType') or file.content_type
+        
+        # Upload to S3
+        s3_url = s3_service.upload_file(
+            file_data=file_bytes,
+            file_name=file_name,
+            mime_type=mime_type,
+            api_key=api_key,
+            folder_prefix='attachments'
         )
-        response['Content-Disposition'] = f'inline; filename="{safe_filename}"'
-        response['Content-Length'] = len(binary_data)
-        response['Cache-Control'] = 'public, max-age=31536000'
-
-        return response
-
+        
+        # Inject S3 URL into request structure
+        if 'attachment' not in request_data:
+            request_data['attachment'] = {}
+        request_data['attachment']['file'] = s3_url
+        
+        # Ensure attachment has required fields from file
+        if not request_data['attachment'].get('name'):
+            request_data['attachment']['name'] = file.name
+        if not request_data['attachment'].get('mimeType'):
+            request_data['attachment']['mimeType'] = file.content_type
+        
+        # Create SaveAttachmentResolverRequest from the structure
+        save_request = SaveAttachmentResolverRequest.from_dict(request_data)
+        
+        # Call SDK
+        result = sdk.selfHosting.attachments.saveAttachment(save_request)
+        
+        return JsonResponse(result, status=result.get('statusCode', 200))
+        
     except Exception as e:
         return JsonResponse({
             'success': False,
@@ -147,26 +129,15 @@ def get_attachment(request, attachment_id):
 @csrf_exempt
 @require_http_methods(["POST"])
 def delete_attachment(request):
-    """Delete attachment endpoint"""
+    """Delete attachment endpoint - deletes from S3 and MongoDB via SDK"""
     try:
         data = json.loads(request.body)
-        attachment_id = data.get('attachmentId')
-
-        if attachment_id is None:
-            return JsonResponse({
-                'success': False,
-                'error': 'No attachment ID provided',
-                'errorCode': 'INVALID_INPUT',
-                'statusCode': 400
-            }, status=400)
-
-        db_delete_attachment(int(attachment_id))
-
-        return JsonResponse({
-            'success': True,
-            'statusCode': 200
-        }, status=200)
-
+        delete_request = DeleteAttachmentResolverRequest.from_dict(data)
+        sdk = get_velt_sdk()
+        # SDK's deleteAttachment() handles S3 deletion internally
+        result = sdk.selfHosting.attachments.deleteAttachment(delete_request)
+        return JsonResponse(result, status=result.get('statusCode', 200))
+        
     except json.JSONDecodeError:
         return JsonResponse({
             'success': False,

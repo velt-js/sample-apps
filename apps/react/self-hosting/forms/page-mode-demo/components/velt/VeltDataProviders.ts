@@ -133,28 +133,9 @@ const fetchUsersFromDB = async (userIds: string[]) => {
   }
 };
 
-// Save current user to database (call this when user logs in)
-export const saveCurrentUserToDB = async (user: {
-  userId: string;
-  name?: string;
-  email?: string;
-  photoUrl?: string;
-  [key: string]: unknown;
-}) => {
-  console.log('[Velt Self-Host] Saving current user:', user);
-  try {
-    const response = await fetch(`${USERS_URL}/save`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user })
-    });
-    if (!response.ok) {
-      console.error('[Velt Self-Host] User SAVE endpoint returned', response.status);
-    }
-  } catch (error) {
-    console.error('[Velt Self-Host] Error saving user:', error);
-  }
-};
+// NOTE: saveCurrentUserToDB() has been removed because SDK v0.1.3 doesn't provide
+// a saveUser() endpoint. The /api/velt/users/save endpoint no longer exists.
+// Users are fetched on-demand via userDataProvider.get() which uses SDK's getUsers().
 
 export const userDataProvider = {
   get: fetchUsersFromDB
@@ -176,18 +157,8 @@ const attachmentResolverConfig = {
   }
 };
 
-// Helper function to convert File to base64
-const fileToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      resolve(result); // This includes the data URL prefix (data:mime/type;base64,...)
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-};
+// Note: fileToBase64 helper removed - SDK v0.1.3 uses S3 storage with actual files
+// instead of base64 encoding in MongoDB
 
 const saveAttachmentToDB = async (request: {
   attachment: {
@@ -203,43 +174,45 @@ const saveAttachmentToDB = async (request: {
 }) => {
   console.log('[Velt Self-Host] Attachment SAVE called:', request);
   try {
-    // Extract the file and convert to base64 if present
-    const { file, ...attachmentWithoutFile } = request.attachment;
-    let base64Data = request.attachment.base64Data;
+    const { file, base64Data, ...attachmentWithoutFile } = request.attachment;
 
-    // If we have a File object, convert it to base64
-    if (file && file instanceof File) {
-      console.log('[Velt Self-Host] Converting file to base64:', file.name, file.size, 'bytes');
-      base64Data = await fileToBase64(file);
+    // SDK v0.1.3 requires multipart/form-data with actual file (for S3 storage)
+    if (!file || !(file instanceof File)) {
+      console.error('[Velt Self-Host] No file object provided for attachment save');
+      return { success: false, statusCode: 400 };
     }
 
-    // Create the payload with base64Data instead of file
-    const payload = {
+    console.log('[Velt Self-Host] Uploading file to S3:', file.name, file.size, 'bytes');
+
+    // Create FormData with file and request JSON
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    // Create request JSON structure for SDK
+    const requestJson = {
       attachment: {
         ...attachmentWithoutFile,
-        base64Data,
+        name: file.name,
+        mimeType: file.type,
       },
       metadata: request.metadata,
     };
+    formData.append('request', JSON.stringify(requestJson));
 
     const response = await fetch(`${ATTACHMENTS_URL}/save`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: formData
+      // Note: Don't set Content-Type header - browser will set it with boundary
     });
+    
     if (!response.ok) {
       console.error('[Velt Self-Host] Attachment SAVE endpoint returned', response.status);
       return { success: false, statusCode: response.status };
     }
+    
     const data = await response.json();
-    // The Django backend returns { result: { url: '/api/velt/attachments/get/{id}' } }
-    // We need to prepend the backend base URL for cross-origin requests
-    const result = data.result;
-    if (result?.url && !result.url.startsWith('http')) {
-      // Convert relative URL to absolute URL pointing to Django backend
-      result.url = `${BACKEND_BASE_URL}${result.url.replace('/api/velt', '')}`;
-    }
-    return { success: true, statusCode: 200, data: result };
+    // SDK returns S3 URL in the attachment.file field
+    return { success: true, statusCode: 200, data: data.result };
   } catch (error) {
     console.error('[Velt Self-Host] Error saving attachment:', error);
     return { success: false, statusCode: 500 };
