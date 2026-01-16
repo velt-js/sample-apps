@@ -15,7 +15,7 @@
     "@veltdev/reactflow-crdt": "4.5.0-beta.6",
     "@xyflow/react": "^12.3.0",
     "clsx": "^2",
-    "next": "^15",
+    "next": "^15.5.9",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^2",
