@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { MongoClient } from 'mongodb';
+import type { MongoClient } from 'mongodb';
 
 /**
  * Host App API - Save User to Database
@@ -25,6 +25,8 @@ async function getMongoClient() {
     throw new Error('VELT_MONGODB_CONNECTION_STRING not configured');
   }
 
+  // Dynamic import to avoid build issues with native MongoDB modules
+  const { MongoClient } = await import('mongodb');
   cachedClient = new MongoClient(uri);
   await cachedClient.connect();
   return cachedClient;

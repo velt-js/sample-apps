@@ -4,6 +4,8 @@
 // This uses the new config-based resolver endpoints where the SDK automatically
 // handles HTTP requests, retries, and response formatting.
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // Base URL for the Django backend API
 // In development: http://localhost:8000/api/velt
 // In production: your deployed Django API URL
@@ -49,7 +51,7 @@ export const commentDataProvider = {
       }
     }
   }
-};
+} as any;
 
 // ============================================================
 // User Data Provider (Config-Based)
@@ -78,7 +80,7 @@ export const userDataProvider = {
       }
     }
   }
-};
+} as any;
 
 // ============================================================
 // Attachment Data Provider (Config-Based)
@@ -114,7 +116,7 @@ export const attachmentDataProvider = {
       }
     }
   }
-};
+} as any;
 
 // ============================================================
 // Reaction Data Provider (Config-Based)
@@ -155,4 +157,4 @@ export const reactionDataProvider = {
       }
     }
   }
-};
+} as any;
