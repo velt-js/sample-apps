@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -16,8 +13,12 @@ const nextConfig = {
       resourceQuery: /raw/,
       use: 'raw-loader',
     })
-    
+
     return config
+  },
+  // Turbopack has native support for ?raw imports, no additional config needed
+  experimental: {
+    turbo: {},
   },
 }
 
