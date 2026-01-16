@@ -3,8 +3,8 @@ import '../styles/globals.css'
 import { AppProviders } from "@/app/userAuth/AppProviders"
 
 export const metadata: Metadata = {
-  title: 'privado-demo',
-  description: 'embedded-comments demo for comments',
+  title: 'Page Mode Demo',
+  description: 'Velt Page Mode Comments Demo',
 }
 
 export default function RootLayout({

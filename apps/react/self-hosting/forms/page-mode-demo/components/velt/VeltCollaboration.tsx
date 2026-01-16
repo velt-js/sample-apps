@@ -1,9 +1,9 @@
 "use client";
-import { useVeltClient, VeltComments, VeltCommentsSidebar, VeltPresence } from "@veltdev/react";
+import { useVeltClient, VeltComments } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
 import { useEffect } from "react";
-import { useAppUser } from "@/app/userAuth/AppUserContext";
+import { useAppUser } from "@/app/userAuth/useAppUser";
 
 export function VeltCollaboration() {
   const { isUserLoggedIn } = useAppUser();

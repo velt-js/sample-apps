@@ -12,15 +12,10 @@
   },
   "dependencies": {
     "@veltdev/react": "4.7.1-beta.5",
-    "@veltdev/reactflow-crdt": "4.5.0-beta.6",
-    "@xyflow/react": "^12.3.0",
-    "clsx": "^2",
     "mongodb": "^7.0.0",
     "next": "^16.1.2",
     "react": "^19",
-    "react-dom": "^19",
-    "tailwind-merge": "^2",
-    "yjs": "^13.6.29"
+    "react-dom": "^19"
   },
   "devDependencies": {
     "@types/node": "^22",
