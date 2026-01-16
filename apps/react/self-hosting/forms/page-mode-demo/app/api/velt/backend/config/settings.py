@@ -16,12 +16,18 @@ load_dotenv(BASE_DIR / '.env')
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-test-key-change-in-production'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-test-key-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
+# Parse ALLOWED_HOSTS from environment variable (comma-separated)
+ALLOWED_HOSTS_ENV = os.getenv('ALLOWED_HOSTS', '')
+if ALLOWED_HOSTS_ENV:
+    ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_ENV.split(',')]
+else:
+    # Default for development
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -34,6 +40,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Serve static files in production
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -73,18 +80,27 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Whitenoise configuration for production static file serving
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings for frontend integration
-# Add all origins where your frontend runs
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",    # Next.js default
-    "http://localhost:5173",    # Vite default
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:5173",
-]
+# Parse CORS_ALLOWED_ORIGINS from environment variable (comma-separated)
+CORS_ORIGINS_ENV = os.getenv('CORS_ALLOWED_ORIGINS', '')
+if CORS_ORIGINS_ENV:
+    CORS_ALLOWED_ORIGINS = [origin.strip() for origin in CORS_ORIGINS_ENV.split(',')]
+else:
+    # Default for development
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",    # Next.js default
+        "http://localhost:5173",    # Vite default
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+    ]
 
 CORS_ALLOW_CREDENTIALS = True
 
