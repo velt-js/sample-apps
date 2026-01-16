@@ -12,16 +12,16 @@
     "@veltdev/react": "^4.7.1-beta.2",
     "clsx": "^2",
     "lucide-react": "^0.454.0",
+    "next": "^16.1.2",
     "pg": "^8.13.0",
-    "next": "^15.1.0",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^2",
     "yjs": "^13.6.0"
   },
   "devDependencies": {
-    "@types/pg": "^8.11.0",
     "@types/node": "^22",
+    "@types/pg": "^8.11.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@veltdev/types": "^4.7.1-beta.2",

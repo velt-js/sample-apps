@@ -21,7 +21,7 @@
     "@veltdev/tiptap-crdt-react": "^4.5.9-beta.2",
     "@veltdev/tiptap-velt-comments": "4.5.8-beta.1",
     "clsx": "^2",
-    "next": "^15.5.7",
+    "next": "^16.1.2",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^2",

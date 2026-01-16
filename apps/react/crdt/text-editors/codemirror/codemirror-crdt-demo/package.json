@@ -20,7 +20,7 @@
     "@veltdev/types": "^4.6.10",
     "clsx": "^2",
     "codemirror": "^6",
-    "next": "^15.5.7",
+    "next": "^16.1.2",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^2",

@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "clsx": "^2",
-    "next": "^15.5.7",
     "@veltdev/react": "^4.6.10",
+    "clsx": "^2",
+    "next": "^16.1.2",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^2"
