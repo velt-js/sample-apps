@@ -47,6 +47,18 @@ const nextConfig = {
     };
     return config;
   },
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        '@veltdev/react': getPackageDir('@veltdev/react'),
+        '@codemirror/state': getPackageDir('@codemirror/state'),
+        '@codemirror/view': getPackageDir('@codemirror/view'),
+        'yjs': getPackageDir('yjs'),
+        'y-codemirror.next': getPackageDir('y-codemirror.next'),
+        'lib0': getPackageDir('lib0'),
+      },
+    },
+  },
   async headers() {
     return [
       {

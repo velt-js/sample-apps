@@ -21,6 +21,13 @@ const nextConfig = {
     }
     return config
   },
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        'y-prosemirror': require.resolve('y-prosemirror'),
+      },
+    },
+  },
   async headers() {
     return [
       {

@@ -43,6 +43,15 @@ const nextConfig = {
     };
     return config;
   },
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        'yjs': getPackageDir('yjs'),
+        'y-prosemirror': getPackageDir('y-prosemirror'),
+        'lib0': getPackageDir('lib0'),
+      },
+    },
+  },
   async headers() {
     return [
       {

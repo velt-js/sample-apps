@@ -23,6 +23,13 @@ const nextConfig = {
     };
     return config;
   },
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        '@veltdev/react': path.dirname(require.resolve('@veltdev/react/package.json')),
+      },
+    },
+  },
   async headers() {
     return [
       {
