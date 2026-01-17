@@ -154,7 +154,9 @@ See `app/api/velt/backend/README.md` for detailed API documentation.
 To view and manage the MongoDB database, log in to MongoDB Atlas:
 
 1. Go to [MongoDB Atlas](https://cloud.mongodb.com/)
-2. Sign in with your credentials
+2. Sign in with these credentials:
+   - **Username:** eng@velt.dev
+   - **Password:** engmongodb
 3. Navigate to the cluster to browse collections:
    - `comment_annotations` - Comments
    - `reaction_annotations` - Reactions
@@ -168,6 +170,13 @@ The Django backend uses MongoDB Atlas. Connection string is configured in `app/a
 ```
 MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority
 ```
+
+### AWS Access
+
+To access AWS services:
+
+- **Username:** eng@velt.dev
+- **Password:** engAWS1!
 
 ## Directory Structure
 
