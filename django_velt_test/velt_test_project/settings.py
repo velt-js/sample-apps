@@ -106,7 +106,8 @@ VELT_SDK_CONFIG = {
         'color': 'avatar_color',
         'textColor': 'text_color',
         'isAdmin': 'is_admin',
-        'initial': 'initials'
+        'initial': 'initials',
+        'random':'random' # This is to test that the schema is working for random fields as well.
     },
     'collections': {
         'comments': 'my_comments',           # Custom collection names
