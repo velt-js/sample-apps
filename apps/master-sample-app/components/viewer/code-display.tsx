@@ -5,8 +5,20 @@ import { SampleCodeFile } from "@/types/sample"
 import { ChevronRight, File, Folder } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Syntax highlighting function
+// Syntax highlighting function using markers to prevent regex from matching inside HTML tags
 function highlightCode(code: string): string {
+  // Use unique markers that won't appear in code
+  const MARKERS = {
+    COMMENT: '[[C:',
+    STRING: '[[S:',
+    KEYWORD: '[[K:',
+    NUMBER: '[[N:',
+    LITERAL: '[[L:',
+    FUNCTION: '[[F:',
+    TYPE: '[[T:',
+    END: ':]]'
+  }
+  
   let highlighted = code
   
   // Escape HTML first
@@ -18,44 +30,90 @@ function highlightCode(code: string): string {
   // Comments (must be done before other highlighting)
   highlighted = highlighted.replace(
     /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm,
-    '<span class="code-comment">$1</span>'
+    `${MARKERS.COMMENT}$1${MARKERS.END}`
   )
   
-  // Strings
+  // Strings - but not inside already-marked regions
   highlighted = highlighted.replace(
     /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,
-    '<span class="code-string">$1</span>'
+    (match) => {
+      // Skip if already inside a marker
+      if (match.includes('[[') || match.includes(':]]')) return match
+      return `${MARKERS.STRING}${match}${MARKERS.END}`
+    }
   )
   
-  // Keywords
+  // Keywords - but not inside already-marked regions
   highlighted = highlighted.replace(
     /\b(import|export|from|const|let|var|function|return|if|else|for|while|class|interface|type|extends|implements|async|await|try|catch|throw|new|this|super|static|public|private|protected|default|case|switch|break|continue|do|in|of|typeof|instanceof|void|null|undefined|as)\b/g,
-    '<span class="code-keyword">$1</span>'
+    (match, p1, offset, string) => {
+      // Check if this match is inside a marker (look for unclosed [[ before this position)
+      const before = string.substring(0, offset)
+      const openMarkers = (before.match(/\[\[/g) || []).length
+      const closeMarkers = (before.match(/:]\]/g) || []).length
+      if (openMarkers > closeMarkers) return match
+      return `${MARKERS.KEYWORD}${match}${MARKERS.END}`
+    }
   )
   
-  // Numbers
+  // Numbers - but not inside already-marked regions
   highlighted = highlighted.replace(
     /\b(\d+\.?\d*)\b/g,
-    '<span class="code-number">$1</span>'
+    (match, p1, offset, string) => {
+      const before = string.substring(0, offset)
+      const openMarkers = (before.match(/\[\[/g) || []).length
+      const closeMarkers = (before.match(/:]\]/g) || []).length
+      if (openMarkers > closeMarkers) return match
+      return `${MARKERS.NUMBER}${match}${MARKERS.END}`
+    }
   )
   
   // Boolean and special values
   highlighted = highlighted.replace(
     /\b(true|false)\b/g,
-    '<span class="code-literal">$1</span>'
+    (match, p1, offset, string) => {
+      const before = string.substring(0, offset)
+      const openMarkers = (before.match(/\[\[/g) || []).length
+      const closeMarkers = (before.match(/:]\]/g) || []).length
+      if (openMarkers > closeMarkers) return match
+      return `${MARKERS.LITERAL}${match}${MARKERS.END}`
+    }
   )
   
   // Function names (before parenthesis)
   highlighted = highlighted.replace(
     /\b([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(?=\()/g,
-    '<span class="code-function">$1</span>'
+    (match, p1, offset, string) => {
+      const before = string.substring(0, offset)
+      const openMarkers = (before.match(/\[\[/g) || []).length
+      const closeMarkers = (before.match(/:]\]/g) || []).length
+      if (openMarkers > closeMarkers) return match
+      return `${MARKERS.FUNCTION}${p1}${MARKERS.END}`
+    }
   )
   
   // Types/Classes (PascalCase)
   highlighted = highlighted.replace(
     /\b([A-Z][a-zA-Z0-9_]*)\b/g,
-    '<span class="code-type">$1</span>'
+    (match, p1, offset, string) => {
+      const before = string.substring(0, offset)
+      const openMarkers = (before.match(/\[\[/g) || []).length
+      const closeMarkers = (before.match(/:]\]/g) || []).length
+      if (openMarkers > closeMarkers) return match
+      return `${MARKERS.TYPE}${match}${MARKERS.END}`
+    }
   )
+  
+  // Convert markers to HTML spans
+  highlighted = highlighted
+    .replace(/\[\[C:/g, '<span class="code-comment">')
+    .replace(/\[\[S:/g, '<span class="code-string">')
+    .replace(/\[\[K:/g, '<span class="code-keyword">')
+    .replace(/\[\[N:/g, '<span class="code-number">')
+    .replace(/\[\[L:/g, '<span class="code-literal">')
+    .replace(/\[\[F:/g, '<span class="code-function">')
+    .replace(/\[\[T:/g, '<span class="code-type">')
+    .replace(/:]\]/g, '</span>')
   
   return highlighted
 }

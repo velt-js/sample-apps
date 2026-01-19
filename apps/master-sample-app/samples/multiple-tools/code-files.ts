@@ -1,5 +1,8 @@
 import { SampleCodeFile } from '@/types/sample'
 
+// Import generated code content from JSON
+import codeContent from '../../generated/multiple-tools.json'
+
 // Import all code files using ?raw
 import pageContent from '../../../react/comments/tables/ag-grid/multiple-tools/app/page.tsx?raw'
 import layoutContent from '../../../react/comments/tables/ag-grid/multiple-tools/app/layout.tsx?raw'
@@ -36,54 +39,54 @@ import sidebarContent from '../../../react/comments/tables/ag-grid/multiple-tool
 
 export const codeFiles: SampleCodeFile[] = [
   // App
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/page.tsx', language: 'typescript', content: pageContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/layout.tsx', language: 'typescript', content: layoutContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/page.tsx', language: 'typescript', content: codeContent.pageContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/layout.tsx', language: 'typescript', content: codeContent.layoutContent },
   
   // Document
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/document/DocumentContext.tsx', language: 'typescript', content: documentContextContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/document/useCurrentDocument.ts', language: 'typescript', content: useCurrentDocumentContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/document/DocumentContext.tsx', language: 'typescript', content: codeContent.documentContextContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/document/useCurrentDocument.ts', language: 'typescript', content: codeContent.useCurrentDocumentContent },
   
   // User Auth
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/userAuth/AppUserContext.tsx', language: 'typescript', content: appUserContextContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/userAuth/AppProviders.tsx', language: 'typescript', content: appProvidersContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/userAuth/useAppUser.ts', language: 'typescript', content: useAppUserContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/userAuth/AppUserContext.tsx', language: 'typescript', content: codeContent.appUserContextContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/userAuth/AppProviders.tsx', language: 'typescript', content: codeContent.appProvidersContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/app/userAuth/useAppUser.ts', language: 'typescript', content: codeContent.useAppUserContent },
   
   // Velt Components
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltInitializeUser.tsx', language: 'typescript', content: veltInitializeUserContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltInitializeDocument.tsx', language: 'typescript', content: veltInitializeDocumentContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltCollaboration.tsx', language: 'typescript', content: veltCollaborationContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltTools.tsx', language: 'typescript', content: veltToolsContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltInitializeUser.tsx', language: 'typescript', content: codeContent.veltInitializeUserContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltInitializeDocument.tsx', language: 'typescript', content: codeContent.veltInitializeDocumentContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltCollaboration.tsx', language: 'typescript', content: codeContent.veltCollaborationContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/VeltTools.tsx', language: 'typescript', content: codeContent.veltToolsContent },
   
   // Velt UI Customization
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltCustomization.tsx', language: 'typescript', content: veltCustomizationContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltCommentToolWf.tsx', language: 'typescript', content: veltCommentToolWfContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltCommentBubbleWf.tsx', language: 'typescript', content: veltCommentBubbleWfContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltSidebarButtonWf.tsx', language: 'typescript', content: veltSidebarButtonWfContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltNotificationsToolWf.tsx', language: 'typescript', content: veltNotificationsToolWfContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltCustomization.tsx', language: 'typescript', content: codeContent.veltCustomizationContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltCommentToolWf.tsx', language: 'typescript', content: codeContent.veltCommentToolWfContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltCommentBubbleWf.tsx', language: 'typescript', content: codeContent.veltCommentBubbleWfContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltSidebarButtonWf.tsx', language: 'typescript', content: codeContent.veltSidebarButtonWfContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/velt/ui-customization/VeltNotificationsToolWf.tsx', language: 'typescript', content: codeContent.veltNotificationsToolWfContent },
   
   // Document Canvas
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/document-canvas.tsx', language: 'typescript', content: documentCanvasContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/day-view-table-component.tsx', language: 'typescript', content: dayViewTableContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/document-canvas.tsx', language: 'typescript', content: codeContent.documentCanvasContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/day-view-table-component.tsx', language: 'typescript', content: codeContent.dayViewTableContent },
   
   // Grid Components
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/VeltCellRenderer.tsx', language: 'typescript', content: veltCellRendererContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/RowNumberRenderer.tsx', language: 'typescript', content: rowNumberRendererContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/CustomHeaderComponent.tsx', language: 'typescript', content: customHeaderComponentContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/SortIcon.tsx', language: 'typescript', content: sortIconContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/VeltCellRenderer.tsx', language: 'typescript', content: codeContent.veltCellRendererContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/RowNumberRenderer.tsx', language: 'typescript', content: codeContent.rowNumberRendererContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/CustomHeaderComponent.tsx', language: 'typescript', content: codeContent.customHeaderComponentContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/grid-components/SortIcon.tsx', language: 'typescript', content: codeContent.sortIconContent },
   
   // UI Components
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/ui-components/Breadcrumb.tsx', language: 'typescript', content: breadcrumbContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/ui-components/Toolbar.tsx', language: 'typescript', content: toolbarContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/ui-components/ViewToggle.tsx', language: 'typescript', content: viewToggleContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/ui-components/Breadcrumb.tsx', language: 'typescript', content: codeContent.breadcrumbContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/ui-components/Toolbar.tsx', language: 'typescript', content: codeContent.toolbarContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/ui-components/ViewToggle.tsx', language: 'typescript', content: codeContent.viewToggleContent },
   
   // Hooks & Utils
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/hooks/useTableState.ts', language: 'typescript', content: useTableStateContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/types.ts', language: 'typescript', content: typesContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/utils.ts', language: 'typescript', content: utilsContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/constants.ts', language: 'typescript', content: constantsContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/hooks/useTableState.ts', language: 'typescript', content: codeContent.useTableStateContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/types.ts', language: 'typescript', content: codeContent.typesContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/utils.ts', language: 'typescript', content: codeContent.utilsContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/document/constants.ts', language: 'typescript', content: codeContent.constantsContent },
   
   // Header & Sidebar
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/header/header.tsx', language: 'typescript', content: headerContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/sidebar/SidebarContext.tsx', language: 'typescript', content: sidebarContextContent },
-  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/sidebar/sidebar.tsx', language: 'typescript', content: sidebarContent }
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/header/header.tsx', language: 'typescript', content: codeContent.headerContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/sidebar/SidebarContext.tsx', language: 'typescript', content: codeContent.sidebarContextContent },
+  { path: 'apps/react/comments/tables/ag-grid/multiple-tools/components/sidebar/sidebar.tsx', language: 'typescript', content: codeContent.sidebarContent }
 ]
