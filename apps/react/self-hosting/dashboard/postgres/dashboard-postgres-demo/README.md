@@ -3,7 +3,9 @@
 > **[🚀 View Live Demo](https://sample-apps-dashboard-postgres-demo.vercel.app)**
 
 
-<!-- VIDEO_PLACEHOLDER -->
+https://github.com/user-attachments/assets/a5d9105b-e79a-4d7d-b708-096bebb33599
+
+
 
 
 ## Overview
