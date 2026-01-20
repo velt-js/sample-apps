@@ -2,7 +2,9 @@
 
 > **[🚀 View Live Demo](https://sample-apps-freestyle-comments-demo.vercel.app)**
 
-<!-- Add demo video/screenshot here, placeholder for now -->
+
+<!-- VIDEO_PLACEHOLDER -->
+
 
 ## Overview
 
@@ -28,6 +30,7 @@ apps/react/comments/website-builder/freestyle-comments/freestyle-comments-demo/
 - **Notifications**: Stay updated on new comments and replies
 - **Comment Sidebar**: View and manage all canvas comments in one place
 - **Priority Indicators**: Mark comments with priority levels
+- **Presence Awareness**: See who's currently viewing the canvas
 
 ### Canvas Features
 - **Website Builder Preview**: Interactive waitlist landing page mockup
@@ -35,56 +38,69 @@ apps/react/comments/website-builder/freestyle-comments/freestyle-comments-demo/
 - **iPhone Mockup**: Mobile preview within the canvas
 - **Grid Background**: Visual alignment grid pattern
 - **Collapsible Sidebar**: Toggle navigation panel
+- **Dark Theme**: Professional dark mode interface
 
 ## Directory Structure
 
 ```
 freestyle-comments-demo/
 ├── app/
-│   ├── layout.tsx                       # Root layout with Velt provider
-│   └── page.tsx                         # Main page
+│   ├── api/
+│   │   └── velt/
+│   │       └── token/
+│   │           └── route.ts            # Velt JWT token generation endpoint
+│   ├── document/
+│   │   ├── DocumentContext.tsx         # Document context provider
+│   │   └── useCurrentDocument.ts       # Document hook
+│   ├── userAuth/
+│   │   ├── AppProviders.tsx            # App-level providers
+│   │   ├── AppUserContext.tsx          # User authentication context
+│   │   └── useAppUser.ts               # User authentication hook
+│   ├── layout.tsx                      # Root layout with Velt provider
+│   └── page.tsx                        # Main page
 ├── components/
 │   ├── header/
-│   │   └── header.tsx                   # Header with Velt tools
+│   │   └── header.tsx                  # Header with Velt tools
 │   ├── sidebar/
-│   │   └── sidebar.tsx                  # Navigation sidebar
+│   │   └── sidebar.tsx                 # Navigation sidebar
 │   ├── document/
-│   │   ├── document-canvas.tsx          # Document wrapper component
+│   │   ├── document-canvas.tsx         # Document wrapper component
 │   │   └── FreestyleCanvas/
-│   │       ├── FreestyleCanvas.tsx      # Main canvas with website mockup
-│   │       └── index.tsx                # Barrel export
+│   │       ├── FreestyleCanvas.tsx     # Main canvas with website mockup
+│   │       └── index.tsx               # Barrel export
 │   └── velt/
 │       ├── ui-customization/
-│       │   ├── styles.css               # Velt component styles
-│       │   ├── VeltCommentBubbleWf.tsx  # Customized comment bubble
-│       │   ├── VeltCommentToolWf.tsx    # Customized comment tool
-│       │   ├── VeltCustomization.tsx    # Velt UI customization wrapper
+│       │   ├── styles.css              # Velt component styles
+│       │   ├── VeltCommentBubbleWf.tsx # Customized comment bubble
+│       │   ├── VeltCommentToolWf.tsx   # Customized comment tool
+│       │   ├── VeltCustomization.tsx   # Velt UI customization wrapper
 │       │   ├── VeltNotificationsToolWf.tsx # Customized notifications
-│       │   └── VeltSidebarButtonWf.tsx  # Customized sidebar button
-│       ├── VeltCollaboration.tsx        # Velt client setup with custom tags
-│       ├── VeltInitializeDocument.tsx   # Document initialization
-│       ├── VeltInitializeUser.tsx       # User initialization
-│       └── VeltTools.tsx                # Velt component exports
-├── hooks/                               # Custom React hooks
+│       │   └── VeltSidebarButtonWf.tsx # Customized sidebar button
+│       ├── VeltCollaboration.tsx       # Velt client setup with custom tags
+│       ├── VeltInitializeDocument.tsx  # Document initialization
+│       ├── VeltInitializeUser.tsx      # User initialization
+│       └── VeltTools.tsx               # Velt component exports
+├── hooks/                              # Custom React hooks
 ├── lib/
-│   └── utils.ts                         # Utility functions
+│   └── utils.ts                        # Utility functions
 ├── public/
-│   ├── assets/                          # Canvas assets
-│   └── icons/                           # SVG icons
+│   ├── assets/                         # Canvas assets (SVGs, images)
+│   └── icons/                          # SVG icons
 ├── styles/
-│   └── globals.css                      # Global styles
-├── .npmrc                               # pnpm config to prevent Tailwind v4 hoisting
+│   └── globals.css                     # Global styles
+├── .npmrc                              # pnpm config to prevent Tailwind v4 hoisting
 ├── next.config.js
 ├── tailwind.config.js
 ├── tsconfig.json
-├── components.json                      # shadcn/ui configuration
+├── components.json                     # shadcn/ui configuration
 └── package.json
 ```
 
 ## Key Technologies
 
-- **Next.js 15** with React 19
+- **Next.js 16** with React 19
 - **@veltdev/react** - Velt collaboration components
+- **@xyflow/react** - React Flow for canvas interactions
 - **Tailwind CSS v3.4** - Styling
 - **TypeScript** - Type safety
 
@@ -150,6 +166,12 @@ pnpm --filter @apps/react-comments-website-builder-freestyle-comments-freestyle-
 3. **Comment sidebar**: Open the sidebar to see all comments in one place
 4. **Notifications**: Check the bell icon for new comment activity
 
+### Collaboration Features
+
+- **See active users**: View avatars of online collaborators in the header
+- **Receive notifications**: Bell icon shows comment activity
+- **Real-time updates**: All comments appear instantly for all users
+
 ## Troubleshooting
 
 ### PostCSS Errors
@@ -194,7 +216,6 @@ The SDK provides **fullstack components**:
 - **Multiplayer editing** with conflict resolution
 - **Follow mode** like Figma
 - ... and so much more
-
 
 ### Resources
 - 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
