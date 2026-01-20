@@ -3,7 +3,11 @@
 > **[🚀 View Live Demo](https://sample-apps-dashboard-inline-commen.vercel.app)**
 
 
-<!-- VIDEO_PLACEHOLDER -->
+
+
+https://github.com/user-attachments/assets/32c10dc1-2fa7-4525-9b07-fc422a652c7e
+
+
 
 
 ## Overview
