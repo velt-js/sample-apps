@@ -3,7 +3,11 @@
 > **[🚀 View Live Demo](https://sample-apps-dashboard-mongo-db-demo.vercel.app)**
 
 
-<!-- VIDEO_PLACEHOLDER -->
+
+
+https://github.com/user-attachments/assets/f80e7b89-8f89-44cc-ac0c-f5acfe15dd6a
+
+
 
 
 ## Overview
