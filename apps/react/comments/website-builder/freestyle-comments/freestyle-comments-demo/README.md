@@ -2,8 +2,7 @@
 
 > **[🚀 View Live Demo](https://sample-apps-freestyle-comments-demo.vercel.app)**
 
-
-<!-- VIDEO_PLACEHOLDER -->
+https://github.com/user-attachments/assets/d50a4a77-3c89-4fd9-b7f5-1a99cabf6aac
 
 
 ## Overview
