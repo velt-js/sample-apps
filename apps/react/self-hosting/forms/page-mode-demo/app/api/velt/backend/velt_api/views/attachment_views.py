@@ -59,7 +59,15 @@ def save_attachment(request):
                 'errorCode': 'INVALID_INPUT',
                 'statusCode': 400
             }, status=400)
-        
+
+        # Ensure metadata exists and has organizationId (required by velt-py 0.1.4)
+        if 'metadata' not in request_data:
+            request_data['metadata'] = {}
+        if not request_data['metadata'].get('organizationId'):
+            # Use a default organizationId if not provided
+            request_data['metadata']['organizationId'] = 'page-mode-demo'
+            print(f'[Velt] save_attachment: Added default organizationId to metadata')
+
         # Get SDK and config
         sdk = get_velt_sdk()
         config = sdk.config
