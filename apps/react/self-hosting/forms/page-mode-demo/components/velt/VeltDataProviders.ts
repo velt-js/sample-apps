@@ -67,12 +67,6 @@ export const userDataProvider = {
       retryCount: 3,
       retryDelay: 2000
     },
-    // Configure which levels to resolve users for
-    resolveUsersConfig: {
-      organization: false,
-      folder: false,
-      document: true
-    },
     getConfig: {
       url: `${BACKEND_BASE_URL}/users/get`,
       headers: {
