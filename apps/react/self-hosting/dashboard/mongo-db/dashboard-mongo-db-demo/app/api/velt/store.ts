@@ -1,7 +1,7 @@
 // MongoDB store for Velt self-hosting
 // Docs: https://docs.velt.dev/self-host-data/overview
 
-import { MongoClient, Db } from 'mongodb';
+import type { MongoClient, Db } from 'mongodb';
 
 export type CommentAnnotation = {
   annotationId: string;
@@ -54,6 +54,9 @@ const MAX_RETRY_ATTEMPTS = 3;
 
 async function getDb(): Promise<Db> {
   if (!clientPromise) {
+    // Dynamic import to avoid build issues with native MongoDB modules
+    const { MongoClient } = await import('mongodb');
+
     // Limit connection pool to prevent "80% connection limit" warnings on MongoDB Atlas
     // Default is 100 connections per MongoClient, which can exhaust free/shared tier limits
     const client = new MongoClient(MONGODB_URI, {
@@ -65,7 +68,7 @@ async function getDb(): Promise<Db> {
       retryWrites: true,          // Enable retry writes
       retryReads: true,           // Enable retry reads
     });
-    
+
     clientPromise = client.connect().catch((err) => {
       console.error('[MongoDB] Connection failed:', err.message);
       clientPromise = null; // Reset so next request can retry

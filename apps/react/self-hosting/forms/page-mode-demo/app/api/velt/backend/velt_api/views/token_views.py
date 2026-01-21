@@ -5,7 +5,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from ..sdk import get_velt_sdk
+from ..velt_sdk import get_velt_sdk
 
 
 @csrf_exempt
@@ -36,13 +36,6 @@ def get_token(request):
         )
         
         return JsonResponse(result)
-    except json.JSONDecodeError:
-        return JsonResponse({
-            'success': False,
-            'error': 'Invalid JSON',
-            'errorCode': 'INVALID_INPUT',
-            'statusCode': 400
-        }, status=400)
     except Exception as e:
         return JsonResponse({
             'success': False,

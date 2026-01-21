@@ -12,6 +12,16 @@ const allowList = [
 const EMBED_CSP = `frame-ancestors ${allowList}`;
 
 const nextConfig = {
+  serverExternalPackages: ['mongodb'],
+  // Disable Turbopack for API routes that use native modules (MongoDB)
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        // Force mongodb to be resolved as external
+        'mongodb': 'mongodb',
+      },
+    },
+  },
   async headers() {
     return [
       {
