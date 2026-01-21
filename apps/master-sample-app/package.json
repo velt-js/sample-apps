@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "node scripts/generate-code-files.js",
     "build": "next build --webpack",
+    "predev": "node scripts/generate-code-files.js",
     "dev": "next dev --webpack",
     "lint": "next lint",
     "start": "next start"

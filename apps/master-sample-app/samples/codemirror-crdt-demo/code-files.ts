@@ -1,5 +1,8 @@
 import { SampleCodeFile } from '@/types/sample'
 
+// Import generated code content from JSON
+import codeContent from '../../generated/codemirror-crdt-demo.json'
+
 // Import all code files using ?raw
 import pageContent from '../../../react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/page.tsx?raw'
 import layoutContent from '../../../react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/layout.tsx?raw'
@@ -17,28 +20,28 @@ import codeMirrorComponentContent from '../../../react/crdt/text-editors/codemir
 
 export const codeFiles: SampleCodeFile[] = [
   // App
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/page.tsx', language: 'typescript', content: pageContent },
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/layout.tsx', language: 'typescript', content: layoutContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/page.tsx', language: 'typescript', content: codeContent.pageContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/layout.tsx', language: 'typescript', content: codeContent.layoutContent },
   
   // Document
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/document/DocumentContext.tsx', language: 'typescript', content: documentContextContent },
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/document/useCurrentDocument.ts', language: 'typescript', content: useCurrentDocumentContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/document/DocumentContext.tsx', language: 'typescript', content: codeContent.documentContextContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/document/useCurrentDocument.ts', language: 'typescript', content: codeContent.useCurrentDocumentContent },
   
   // User Auth
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/userAuth/AppUserContext.tsx', language: 'typescript', content: appUserContextContent },
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/userAuth/AppProviders.tsx', language: 'typescript', content: appProvidersContent },
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/userAuth/useAppUser.ts', language: 'typescript', content: useAppUserContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/userAuth/AppUserContext.tsx', language: 'typescript', content: codeContent.appUserContextContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/userAuth/AppProviders.tsx', language: 'typescript', content: codeContent.appProvidersContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/app/userAuth/useAppUser.ts', language: 'typescript', content: codeContent.useAppUserContent },
   
   // Velt Components
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltInitializeUser.tsx', language: 'typescript', content: veltInitializeUserContent },
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltInitializeDocument.tsx', language: 'typescript', content: veltInitializeDocumentContent },
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltCollaboration.tsx', language: 'typescript', content: veltCollaborationContent },
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltTools.tsx', language: 'typescript', content: veltToolsContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltInitializeUser.tsx', language: 'typescript', content: codeContent.veltInitializeUserContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltInitializeDocument.tsx', language: 'typescript', content: codeContent.veltInitializeDocumentContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltCollaboration.tsx', language: 'typescript', content: codeContent.veltCollaborationContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/velt/VeltTools.tsx', language: 'typescript', content: codeContent.veltToolsContent },
   
   // Document Canvas
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/document/document-canvas.tsx', language: 'typescript', content: documentCanvasContent },
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/document/document-canvas.tsx', language: 'typescript', content: codeContent.documentCanvasContent },
   
   // CodeMirror Component
-  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/document/CodeMirrorComponent/CodeMirrorComponent.tsx', language: 'typescript', content: codeMirrorComponentContent }
+  { path: 'apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/components/document/CodeMirrorComponent/CodeMirrorComponent.tsx', language: 'typescript', content: codeContent.codeMirrorComponentContent }
 ]
 
