@@ -2,7 +2,13 @@
 
 ## Overview
 
-This demo showcases a self-hosted comments feature using **Django** as the backend framework and **MongoDB Atlas** as the database. This full-stack implementation demonstrates how to self-host Velt's collaboration features with Python/Django handling all data operations.
+This demo showcases a self-hosted **Page Mode Comments** feature using:
+- **Django** as the backend framework
+- **MongoDB Atlas** for comment and user data storage
+- **AWS S3** for attachment storage
+- **Next.js frontend** with React 19
+
+This full-stack implementation demonstrates how to self-host Velt's collaboration features with Python/Django handling all data operations.
 
 ## Path
 
@@ -13,6 +19,19 @@ apps/react/self-hosting/forms/page-mode-demo/
 ## Package Name
 
 `@apps/react-self-hosting-forms-page-mode-demo`
+
+## Quick Access Credentials
+
+### MongoDB Atlas
+- **URL:** https://cloud.mongodb.com/
+- **Username:** eng@velt.dev
+- **Password:** engmongodb
+
+### AWS Console
+- **URL:** https://console.aws.amazon.com/
+- **User:** eng@velt.dev
+- **Password:** engAWS1!
+- **S3 Bucket:** velt-page-mode-demo (us-east-2)
 
 ## Getting Started
 
@@ -34,6 +53,17 @@ Python dependencies are already installed. If you need to reinstall:
 cd apps/react/self-hosting/forms/page-mode-demo/app/api/velt/backend
 pip3 install -r requirements.txt --user
 ```
+
+**Environment Setup:**
+
+Copy the example environment file and configure it:
+
+```bash
+cd apps/react/self-hosting/forms/page-mode-demo/app/api/velt/backend
+cp .env.example .env
+```
+
+Then edit `.env` to add the actual AWS credentials. You can find them by logging into the AWS Console with the credentials in the "Quick Access Credentials" section above.
 
 ### Run Development Servers
 
@@ -149,7 +179,11 @@ See `app/api/velt/backend/README.md` for detailed API documentation.
 
 ## Database Access
 
-### Viewing the MongoDB Database
+### MongoDB Atlas
+
+This application stores Velt comments, users, reactions, and attachment metadata in MongoDB Atlas.
+
+#### Viewing the MongoDB Database
 
 To view and manage the MongoDB database, log in to MongoDB Atlas:
 
@@ -157,26 +191,50 @@ To view and manage the MongoDB database, log in to MongoDB Atlas:
 2. Sign in with these credentials:
    - **Username:** eng@velt.dev
    - **Password:** engmongodb
-3. Navigate to the cluster to browse collections:
+3. Navigate to Cluster0 to browse collections:
    - `comment_annotations` - Comments
    - `reaction_annotations` - Reactions
    - `users` - User data
-   - `attachments` - Attachment files
+   - `attachments` - Attachment metadata
 
-### Connection String
+#### Connection String
 
-The Django backend uses MongoDB Atlas. Connection string is configured in `app/api/velt/backend/.env`:
+The Django backend uses the following MongoDB Atlas connection string (configured in `app/api/velt/backend/.env`):
 
 ```
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/velt_comments?appName=Cluster0&retryWrites=true&w=majority
 ```
 
-### AWS Access
+**Database:** `velt_comments`
 
-To access AWS services:
+### AWS S3 Storage
 
-- **Username:** eng@velt.dev
-- **Password:** engAWS1!
+#### Attachment File Storage
+
+Comment attachments (files, images) are stored in AWS S3 for scalable file management.
+
+#### AWS Console Access
+
+To view and manage S3 attachments:
+
+1. Go to [AWS Console](https://console.aws.amazon.com/)
+2. Sign in with these credentials:
+   - **User:** eng@velt.dev
+   - **Password:** engAWS1!
+3. Navigate to S3 service to view the bucket
+
+#### S3 Bucket Configuration
+
+The application uses AWS S3 for attachment storage. Configuration is stored in `app/api/velt/backend/.env`:
+
+- **Bucket Name:** `velt-page-mode-demo`
+- **Region:** `us-east-2`
+- **Access Key ID:** See `.env` file
+- **Secret Access Key:** See `.env` file
+
+For the actual AWS credentials, check the `.env` file or log into the AWS Console using the credentials above.
+
+
 
 ## Directory Structure
 
@@ -233,50 +291,78 @@ page-mode-demo/
 ## Key Technologies
 
 ### Frontend
-- **Next.js 15** with React 19
-- **@veltdev/react** - Velt collaboration components
+- **Next.js 16** with React 19
+- **@veltdev/react 4.7.1-beta.5** - Velt collaboration components
 - **Tailwind CSS v3.4** - Styling
-- **TypeScript** - Type safety
+- **TypeScript 5** - Type safety
 
 ### Backend
-- **Python 3.13** - Programming language
-- **Django 4.2** - Web framework
-- **PyMongo 4.6** - MongoDB driver
+- **Python 3.8+** - Programming language
+- **Django 4.2+** - Web framework
+- **PyMongo** - MongoDB driver
 - **MongoDB Atlas** - Cloud database
-- **velt-py** - Velt Python SDK
+- **Boto3** - AWS SDK for Python (S3 operations)
+- **Velt Python SDK** - Velt backend integration
 
 ## Features
 
+### Page Mode Comments
+
+This demo implements Velt's **Page Mode** commenting system with:
+- Inline comment bubbles on each form question
+- Focused thread mode for per-question comments
+- Global comments sidebar showing all comments across the form
+- Comment context tied to specific question IDs
+- Popover-style comment dialogs
+
+### Form Questions
+
+The demo includes 7 GDPR/PIA assessment questions with:
+- Dropdown inputs for answers
+- Progress tracking (Step X of 7)
+- Section navigation with numbered badges
+- Question-specific comment threads
+- "Privado Agent" attribution badges (demo UI element)
+
+### Velt Features Showcased
+
 - **Self-Hosted Comments**: Full data ownership with Django backend
-- **Page Mode**: Comments tied to document pages
-- **Embedded Comments Sidebar**: Focused thread view
-- **Presence Awareness**: See active users
-- **Reactions**: React to comments
-- **Attachments**: File uploads
-- **Custom UI**: Tailored comment bubbles and sidebar
+- **Page Mode**: Comments tied to specific elements via `targetElementId`
+- **Presence Awareness**: Real-time user avatars showing active collaborators
+- **Reactions**: React to comments (stored in MongoDB)
+- **Attachments**: File uploads (stored in AWS S3)
+- **Custom UI**: Shadow DOM disabled for full styling control
+- **Embedded Sidebar**: Both focused thread and global comment views
 
 ## Environment Variables
 
-### Frontend (.env.local)
-
-Create `.env.local` from `.env.local.example`:
+The backend configuration is stored in `app/api/velt/backend/.env`:
 
 ```env
-NEXT_PUBLIC_VELT_API_KEY=your_velt_api_key
+# Django Configuration
+DJANGO_SECRET_KEY=django-insecure-dev-key-change-in-production
+DEBUG=True
+
+# MongoDB Configuration
+VELT_MONGODB_CONNECTION_STRING=mongodb+srv://eng_db_user:pAS6b4RCSkLZI7Wf@cluster0.8belzzg.mongodb.net/velt_comments?appName=Cluster0&retryWrites=true&w=majority
+VELT_MONGODB_DATABASE=velt_comments
+
+# Velt API Credentials (get from https://console.velt.dev)
+NEXT_PUBLIC_VELT_API_KEY=6xTcUFtlYAlCdh11zrKB
 NEXT_PUBLIC_SELF_HOSTING_BASE_URL=http://localhost:8000/api/velt
-VELT_AUTH_TOKEN=your_velt_auth_token
+VELT_AUTH_TOKEN=bd4d5226050470b6c658054fcdf1092a
+
+# AWS S3 Configuration for Attachments
+AWS_REGION=us-east-2
+AWS_ACCESS_KEY_ID=<see .env file or AWS Console>
+AWS_SECRET_ACCESS_KEY=<see .env file or AWS Console>
+AWS_S3_BUCKET=velt-page-mode-demo
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
 ```
 
-### Backend (.env)
-
-Configure in `app/api/velt/backend/.env`:
-
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/...
-MONGODB_DATABASE=velt_comments
-VELT_API_KEY=your_velt_api_key
-VELT_AUTH_TOKEN=your_velt_auth_token
-```
+**Note:** AWS credentials are stored in `app/api/velt/backend/.env`. To access them, either check the `.env` file or log into the AWS Console with the credentials provided in the "Quick Access Credentials" section above.
 
 ## Troubleshooting
 
@@ -328,5 +414,7 @@ public-hoist-pattern[]=!@tailwindcss*
 
 - [Velt Documentation](https://docs.velt.dev)
 - [Velt Self-Hosting Guide](https://docs.velt.dev/self-host-data/overview)
+- [Velt Page Mode Guide](https://docs.velt.dev/comments/customize-behavior/page-mode)
 - [Django Documentation](https://docs.djangoproject.com/)
 - [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/)
+- [AWS S3 Documentation](https://docs.aws.amazon.com/s3/)
