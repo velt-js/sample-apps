@@ -19,10 +19,10 @@ def get_users(request):
     try:
         data = json.loads(request.body)
         user_request = GetUserResolverRequest.from_dict(data)
-
+        
         sdk = get_velt_sdk()
         result = sdk.selfHosting.users.getUsers(user_request)
-
+        
         # SDK returns proper format with success, statusCode, error, errorCode
         return JsonResponse(result, status=result.get('statusCode', 200))
     except json.JSONDecodeError:
