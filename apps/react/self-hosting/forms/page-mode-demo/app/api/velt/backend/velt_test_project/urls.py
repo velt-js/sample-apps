@@ -6,5 +6,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('api/velt/', include('velt_api.urls')),
+    path('api/host-app/', include('host_app.urls')),
 ]
 

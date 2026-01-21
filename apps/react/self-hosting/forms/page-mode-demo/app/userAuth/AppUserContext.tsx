@@ -67,7 +67,9 @@ function hashString(str: string): string {
 // [Host App] Save user to database via host-app API
 async function saveUserToDatabase(user: User): Promise<void> {
   try {
-    const response = await fetch('/api/host-app/users/save', {
+    // Use Django backend for user saving (avoids MongoDB native module issues in Next.js)
+    const baseUrl = process.env.NEXT_PUBLIC_SELF_HOSTING_BASE_URL?.replace('/api/velt', '') || 'http://localhost:8000';
+    const response = await fetch(`${baseUrl}/api/host-app/users/save`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user })

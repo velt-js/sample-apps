@@ -59,7 +59,7 @@ export function useCurrentDocument(): CurrentDocument {
 
       // Update URL with document ID for shareability
       const newUrl = `${window.location.pathname}?documentId=${docId}`;
-      window.history.pushState({}, '', newUrl);
+      window.history.replaceState({}, '', newUrl);
 
       setDocumentId(docId);
     }
