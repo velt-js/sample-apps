@@ -22,13 +22,13 @@ def _get_comments_by_annotation_ids(annotation_ids: list) -> dict:
     try:
         sdk = get_velt_sdk()
         db = sdk.db
-        
+
         # Query the comment_annotations collection directly
         collection = db['comment_annotations']
-        
+
         # Find all annotations matching the IDs
         cursor = collection.find({'annotationId': {'$in': annotation_ids}})
-        
+
         result = {}
         for doc in cursor:
             annotation_id = doc.get('annotationId')
@@ -36,7 +36,7 @@ def _get_comments_by_annotation_ids(annotation_ids: list) -> dict:
                 # Remove MongoDB's _id field for JSON serialization
                 doc.pop('_id', None)
                 result[annotation_id] = doc
-        
+
         return {
             'data': result,
             'success': True,
@@ -60,28 +60,28 @@ def get_comments(request):
         print(f'[Velt] get_comments content-type: {request.content_type}')
         data = json.loads(request.body)
         print(f'[Velt] get_comments request: {data}')
-        
+
         # Handle case where organizationId is empty but commentAnnotationIds are provided
         # This happens when the frontend SDK fetches specific annotations by ID
         organization_id = data.get('organizationId', '')
         annotation_ids = data.get('commentAnnotationIds', [])
-        
+
         if not organization_id and annotation_ids:
             print(f'[Velt] Fetching comments by annotation IDs directly (no organizationId)')
             result = _get_comments_by_annotation_ids(annotation_ids)
             print(f'[Velt] get_comments result: {result}')
             return JsonResponse(result, status=result.get('statusCode', 200))
-        
+
         try:
             comment_request = GetCommentResolverRequest.from_dict(data)
         except Exception as validation_error:
             print(f'[Velt] SDK validation error: {validation_error}')
             raise
-        
+
         sdk = get_velt_sdk()
         result = sdk.selfHosting.comments.getComments(comment_request)
         print(f'[Velt] get_comments result: {result}')
-        
+
         # SDK returns proper format with success, statusCode, error, errorCode
         return JsonResponse(result, status=result.get('statusCode', 200))
     except json.JSONDecodeError as e:
@@ -109,10 +109,10 @@ def save_comments(request):
     try:
         data = json.loads(request.body)
         save_request = SaveCommentResolverRequest.from_dict(data)
-        
+
         sdk = get_velt_sdk()
         result = sdk.selfHosting.comments.saveComments(save_request)
-        
+
         # SDK returns proper format with success, statusCode, error, errorCode
         return JsonResponse(result, status=result.get('statusCode', 200))
     except json.JSONDecodeError:
@@ -138,10 +138,10 @@ def delete_comment(request):
     try:
         data = json.loads(request.body)
         delete_request = DeleteCommentResolverRequest.from_dict(data)
-        
+
         sdk = get_velt_sdk()
         result = sdk.selfHosting.comments.deleteComment(delete_request)
-        
+
         # SDK returns proper format with success, statusCode, error, errorCode
         return JsonResponse(result, status=result.get('statusCode', 200))
     except json.JSONDecodeError:
