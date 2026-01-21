@@ -1,5 +1,6 @@
 [build]
 builder = "nixpacks"
+# Cache bust: 2026-01-21
 
 [deploy]
 startCommand = "gunicorn velt_test_project.wsgi --bind 0.0.0.0:$PORT --log-file -"
