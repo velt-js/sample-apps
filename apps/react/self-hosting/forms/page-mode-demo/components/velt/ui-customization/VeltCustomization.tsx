@@ -3,8 +3,6 @@ import { useVeltClient, VeltWireframe } from "@veltdev/react";
 import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
 import VeltCommentToolWf from "./VeltCommentToolWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
-import VeltCommentsSidebarHeaderWf from "./VeltCommentsSidebarHeaderWf";
-import VeltCommentsSidebarFocusedThreadWf from "./VeltCommentsSidebarFocusedThreadWf";
 import "./styles.css";
 import { useEffect } from "react";
 
@@ -24,8 +22,6 @@ export function VeltCustomization() {
       <VeltCommentBubbleWf />
       <VeltCommentToolWf />
       <VeltSidebarButtonWf />
-      <VeltCommentsSidebarHeaderWf />
-      <VeltCommentsSidebarFocusedThreadWf />
     </VeltWireframe>
   );
 }

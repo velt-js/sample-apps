@@ -2,7 +2,6 @@
 
 import { useRef, useState, useCallback } from 'react'
 import { VeltCommentTool, VeltCommentBubble, VeltCommentsSidebar } from '@veltdev/react'
-import { CommentsSidebar } from './CommentsSidebar'
 import Header from '@/components/header/header'
 
 // Question data structure
@@ -295,10 +294,9 @@ interface QuestionSectionProps {
   sectionRef: React.RefObject<HTMLDivElement | null>
   value: string
   onChange: (value: string) => void
-  onOpenComments: () => void
 }
 
-const QuestionSection = ({ question, sectionRef, value, onChange, onOpenComments }: QuestionSectionProps) => {
+const QuestionSection = ({ question, sectionRef, value, onChange }: QuestionSectionProps) => {
   const targetElementId = `question-${question.id}`
 
   return (
@@ -333,13 +331,7 @@ const QuestionSection = ({ question, sectionRef, value, onChange, onOpenComments
         </div>
 
         {/* [Velt] Comment tools for each question row */}
-        <div
-          className="flex items-center gap-1 ml-4 opacity-60 group-hover:opacity-100 transition-opacity"
-          onClick={(e) => {
-            e.stopPropagation()
-            onOpenComments()
-          }}
-        >
+        <div className="flex items-center gap-1 ml-4 opacity-60 group-hover:opacity-100 transition-opacity">
           <VeltCommentBubble
             targetElementId={targetElementId}
           />
@@ -366,8 +358,6 @@ const QuestionSection = ({ question, sectionRef, value, onChange, onOpenComments
 export default function DocumentCanvas() {
   const [currentStep, setCurrentStep] = useState(1)
   const [answers, setAnswers] = useState<Record<string, string>>({})
-  const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null)
-  const [isCommentSidebarOpen, setIsCommentSidebarOpen] = useState(false)
   const [isGlobalSidebarOpen, setIsGlobalSidebarOpen] = useState(false)
   const questionRefs = useRef<Record<string, React.RefObject<HTMLDivElement | null>>>({})
   const contentRef = useRef<HTMLDivElement>(null)
@@ -394,27 +384,10 @@ export default function DocumentCanvas() {
     setAnswers(prev => ({ ...prev, [questionId]: value }))
   }, [])
 
-  // Handler for opening comments sidebar for a specific question
-  const handleOpenComments = useCallback((question: Question) => {
-    setSelectedQuestion(question)
-    setIsCommentSidebarOpen(true)
-  }, [])
-
-  // Handler for closing comments sidebar
-  const handleCloseCommentSidebar = useCallback(() => {
-    setIsCommentSidebarOpen(false)
-    setSelectedQuestion(null)
-  }, [])
-
   // Handler for toggling global comments sidebar
   const toggleGlobalSidebar = useCallback(() => {
     setIsGlobalSidebarOpen(prev => !prev)
-    // Close per-question sidebar when opening global sidebar
-    if (!isGlobalSidebarOpen) {
-      setIsCommentSidebarOpen(false)
-      setSelectedQuestion(null)
-    }
-  }, [isGlobalSidebarOpen])
+  }, [])
 
   const progress = Math.round(((currentStep) / 7) * 100)
 
@@ -632,19 +605,11 @@ export default function DocumentCanvas() {
                   sectionRef={questionRefs.current[question.id]}
                   value={answers[question.id] || ''}
                   onChange={(value) => handleAnswerChange(question.id, value)}
-                  onOpenComments={() => handleOpenComments(question)}
                 />
               ))}
             </div>
           </div>
         </div>
-
-        {/* [Velt] Embedded Comments Sidebar - for focused threads per question */}
-        <CommentsSidebar
-          isOpen={isCommentSidebarOpen}
-          onClose={handleCloseCommentSidebar}
-          selectedQuestion={selectedQuestion}
-        />
 
         {/* [Velt] Global Comments Sidebar - embedded panel for all comments */}
         {isGlobalSidebarOpen && (
@@ -652,7 +617,8 @@ export default function DocumentCanvas() {
             <VeltCommentsSidebar
               shadowDom={false}
               pageMode={true}
-              sortData="asc"
+              sortOrder="asc"
+              sortBy="createdAt"
               embedMode={true}
               focusedThreadMode={true}
             />
