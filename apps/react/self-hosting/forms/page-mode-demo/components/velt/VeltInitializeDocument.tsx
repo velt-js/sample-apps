@@ -10,7 +10,7 @@ export default function VeltInitializeDocument() {
 
   // [Velt] Set document in Velt. This is the resource where all Velt collaboration data will be scoped.
   useEffect(() => {
-    if (!documentId || !documentName) return;
+    if (!documentId || !documentName || !setDocuments) return;
     setDocuments([
       { id: documentId, metadata: { documentName: documentName } },
     ]);

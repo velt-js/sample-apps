@@ -4,7 +4,6 @@ import { VeltProvider } from "@veltdev/react";
 import { useVeltAuthProvider } from "@/components/velt/VeltInitializeUser";
 import { VeltCollaboration } from "@/components/velt/VeltCollaboration";
 import DocumentCanvas from '@/components/document/document-canvas'
-import { useAppUser } from "@/app/userAuth/useAppUser";
 
 // [Velt] Self-hosting data providers for MongoDB persistence
 import {
@@ -20,13 +19,6 @@ const NEXT_PUBLIC_VELT_API_KEY = process.env.NEXT_PUBLIC_VELT_API_KEY || "6xTcUF
 export default function Home() {
   // [Velt] Auth provider (reads from app/userAuth/useAppUser)
   const { authProvider } = useVeltAuthProvider();
-  const { isUserLoggedIn } = useAppUser();
-
-  // Wait for user initialization to complete before rendering VeltProvider
-  // This prevents race condition where Velt tries to initialize without auth
-  if (isUserLoggedIn === undefined) {
-    return <div>Loading...</div>;
-  }
 
   return (
     // [Velt] Wrap app with VeltProvider + self-hosting dataProviders
