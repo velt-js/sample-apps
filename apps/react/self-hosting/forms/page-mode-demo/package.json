@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@veltdev/react": "5.0.0-beta.4",
+    "@veltdev/react": "4.7.1",
     "mongodb": "^7.0.0",
     "next": "^16.1.2",
     "react": "^19",
@@ -21,7 +21,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@veltdev/types": "5.0.0-beta.4",
+    "@veltdev/types": "4.7.1",
     "autoprefixer": "^10",
     "concurrently": "^8.2.2",
     "postcss": "^8",
