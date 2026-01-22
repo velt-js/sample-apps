@@ -1500,8 +1500,8 @@ importers:
   apps/react/self-hosting/forms/page-mode-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 5.0.0-beta.2
-        version: 5.0.0-beta.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 5.0.0-beta.4
+        version: 5.0.0-beta.4(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       mongodb:
         specifier: ^7.0.0
         version: 7.0.0
@@ -1525,8 +1525,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.8)
       '@veltdev/types':
-        specifier: 5.0.0-beta.2
-        version: 5.0.0-beta.2
+        specifier: 5.0.0-beta.4
+        version: 5.0.0-beta.4
       autoprefixer:
         specifier: ^10
         version: 10.4.23(postcss@8.5.6)
@@ -3924,8 +3924,8 @@ packages:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
 
-  '@veltdev/react@5.0.0-beta.2':
-    resolution: {integrity: sha512-Tv3HqOulKhoJV9WoNKfGQTZFv5/B88Wm29ql8UaQw3HgHPgYw4POQ14CZd7jveIPw7vL1CHIIcGgkAWA/iijfA==}
+  '@veltdev/react@5.0.0-beta.4':
+    resolution: {integrity: sha512-32QEr7ybtChUu8hM2chuZzSKHyx+KNsjSZSNzjqesrKvpvmF9khYHbjDTiOPPhIOvvdsr2X6NeNoLVWVvZf9dA==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -3987,8 +3987,8 @@ packages:
   '@veltdev/types@4.7.1-beta.5':
     resolution: {integrity: sha512-toa+hE/+swfRBVgwvepX1hgoLDgCVkAzibHKICiunSDxE6zlfu1CuRybriKtD/Wt2HuPKPuDvHC7E4AIbN8vVw==}
 
-  '@veltdev/types@5.0.0-beta.2':
-    resolution: {integrity: sha512-qbG2xV62vwdqjoaNVD3MYJKnkspxHCA9K/veHGHk1NM2/1bRdzYJWmq80qeZ8MC//mVSVaERTe/2cV6eKe9NuQ==}
+  '@veltdev/types@5.0.0-beta.4':
+    resolution: {integrity: sha512-IMgctFLqZlTi0xQ8QjGWb3O+MjxPWqe2Tt4OoNBYOIwgnXCSqCv/8e4rsrNUKdNyJvwqIO0iy1TeC4N2BEviBA==}
 
   '@vercel/analytics@1.6.1':
     resolution: {integrity: sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==}
@@ -9268,7 +9268,7 @@ snapshots:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
-  '@veltdev/react@5.0.0-beta.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@veltdev/react@5.0.0-beta.4(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
@@ -9321,7 +9321,7 @@ snapshots:
 
   '@veltdev/types@4.7.1-beta.5': {}
 
-  '@veltdev/types@5.0.0-beta.2': {}
+  '@veltdev/types@5.0.0-beta.4': {}
 
   '@vercel/analytics@1.6.1(next@16.1.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.2))(react@19.2.3)':
     optionalDependencies:
