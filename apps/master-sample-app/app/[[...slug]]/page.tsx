@@ -19,6 +19,11 @@ export default function Page() {
   const getDocumentIdForDemo = useCallback((demoId: string): string => {
     if (typeof window === 'undefined') return ''
 
+    // Use fixed document ID for page-mode-demo (no random generation)
+    if (demoId === 'react-self-hosting-forms-page-mode-demo') {
+      return '1'
+    }
+
     const storageKey = `demo-${demoId}-document-id`
     const stored = localStorage.getItem(storageKey)
 
@@ -127,6 +132,9 @@ export default function Page() {
   // Handle reset: generate new document ID for current demo
   const handleReset = useCallback(() => {
     if (typeof window === 'undefined') return
+
+    // Skip reset for page-mode-demo (uses fixed document ID)
+    if (currentSampleId === 'react-self-hosting-forms-page-mode-demo') return
 
     try {
       const sample = getSampleById(currentSampleId)
