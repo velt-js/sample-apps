@@ -31,6 +31,7 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-comments-website-builder-freestyle-comments-freestyle-comments-demo': 'freestyle-comments-demo',
     'react-self-hosting-dashboard-mongo-db-dashboard-mongo-db-demo': 'dashboard-mongo-db-demo',
     'react-self-hosting-dashboard-postgres-dashboard-postgres-demo': 'dashboard-postgres-demo',
+    'react-self-hosting-forms-page-mode-demo': 'page-mode-demo',
     'react-crdt-text-editors-tiptap-tiptap-crdt-demo': 'tiptap-crdt-demo',
     'react-crdt-text-editors-codemirror-codemirror-crdt-demo': 'codemirror-crdt-demo',
   }
@@ -56,6 +57,7 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     selfHostingDashboard: false,
     selfHostingMongoDB: false,
     selfHostingPostgres: false,
+    selfHostingForms: false,
     crdt: true,
     crdtCanvas: true,
     reactflow: true,
@@ -542,6 +544,31 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                               </button>
                             </div>
                           )}
+                        </div>
+                      )}
+
+                      {/* forms Section */}
+                      <button
+                        onClick={() => toggleSection("selfHostingForms")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>forms</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.selfHostingForms && "rotate-90")} />
+                      </button>
+                      {expandedSections.selfHostingForms && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          <button
+                            onClick={() => {
+                              setSelectedItem("page-mode-demo")
+                              onSampleSelect?.("react-self-hosting-forms-page-mode-demo")
+                            }}
+                            className={cn(
+                              "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                              selectedItem === "page-mode-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                            )}
+                          >
+                            page-mode-demo
+                          </button>
                         </div>
                       )}
                     </div>

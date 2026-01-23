@@ -35,6 +35,8 @@ import dashboardInlineCommentsDemoMeta from './dashboard-inline-comments-demo/me
 import { codeFiles as dashboardInlineCommentsDemoCodeFiles } from './dashboard-inline-comments-demo/code-files'
 import freestyleCommentsDemoMeta from './freestyle-comments-demo/metadata'
 import { codeFiles as freestyleCommentsDemoCodeFiles } from './freestyle-comments-demo/code-files'
+import pageModeDemoMeta from './page-mode-demo/metadata'
+import { codeFiles as pageModeDemoCodeFiles } from './page-mode-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -108,6 +110,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-website-builder-freestyle-comments-freestyle-comments-demo': {
     metadata: freestyleCommentsDemoMeta,
     codeFiles: freestyleCommentsDemoCodeFiles
+  },
+  'react-self-hosting-forms-page-mode-demo': {
+    metadata: pageModeDemoMeta,
+    codeFiles: pageModeDemoCodeFiles
   }
 }
 
