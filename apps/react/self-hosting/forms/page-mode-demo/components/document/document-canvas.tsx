@@ -337,7 +337,7 @@ const QuestionSection = ({ question, sectionRef, value, onChange }: QuestionSect
           />
           <VeltCommentTool
             targetElementId={targetElementId}
-            context={{ questionId: question.id, questionNumber: question.number }}
+            context={{ questionId: question.id, questionNumber: question.number, questionTitle: question.title}}
           />
         </div>
       </div>

@@ -180,3 +180,745 @@
   --velt-dark-mode-accent: #754cff;
   --velt-dark-mode-accent-hover: #5a34d9;
 }
+
+
+
+.privado-comment-dialog-wrapper {
+    display: flex;
+    padding: var(--units-sm, 12px) var(--units-sm, 12px) var(--units-xs, 8px) var(--units-sm, 12px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--units-sm, 12px);
+    align-self: stretch;
+    border-radius: var(--units-sm, 12px);
+    background: var(--default-canvas, #FFF);
+
+    first-child {
+        width: 100% !important;
+    }
+
+    /* Elevation/Base/xs.neutral */
+    box-shadow: 0 1px 1px 0 rgba(92, 108, 138, 0.12), 0 2px 4px 0 rgba(70, 81, 105, 0.08);
+
+    app-if {
+        &:empty {
+            display: none !important;
+        }
+    }
+}
+
+.privado-comment-dialog-question-wrapper {
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 8px;
+    border: 1px solid var(--border-color-default, #EDF0F8);
+    background: var(--container, #F2F6FC);
+}
+
+.privado-comment-dialog-question-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    align-self: stretch;
+    overflow: hidden;
+    color: var(--Text-text-secondary, #465169);
+    font-variant-numeric: lining-nums tabular-nums;
+    text-overflow: ellipsis;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 138.462% */
+}
+
+.privado-comment-dialog-thread-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--units-xs, 8px);
+    align-self: stretch;
+    width: 100% !important;
+}
+
+.privado-comment-dialog-thread-card-top-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--units-xs, 8px);
+    align-self: stretch;
+}
+
+.privado-comment-dialog-thread-card-top-wrapper-left {
+    display: flex;
+    align-items: center;
+    gap: var(--units-xs, 8px);
+    flex: 1 0 0;
+
+    snippyly-user-avatar {
+        --legacy-velt-user-avatar-height: 24px !important;
+        --legacy-velt-user-avatar-width: 24px !important; 
+    }
+}
+
+.privado-comment-dialog-thread-card-top-wrapper-right {
+    display: flex;
+    align-items: center;
+    gap: var(--units-xxs, 4px);
+}
+
+.privado-comment-dialog-thread-card-bottom-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.privado-comment-dialog-thread-card-bottom-wrapper-left {
+    display: flex;
+    align-items: center;
+    gap: var(--units-xxs, 4px);
+
+    .s-emoji-block {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+.privado-comment-dialog-thread-card-bottom-wrapper-right {
+    display: flex;
+    padding: 3px 6px;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+}
+
+.privado-reaction-wrapper {
+    display: flex;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--border-radius-btn-radius-s, 8px);
+}
+
+.privado-comment-dialog-composer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: var(--units-sm, 12px);
+    background: var(--default-canvas, #FFF);
+
+    /* Button/Tertiary/Active */
+    box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14), 0 0 0 2px #FFF, 0 0 0 5px rgba(126, 141, 169, 0.10);
+}
+
+.privado-comment-dialog-composer-input-wrapper {
+    display: flex;
+    padding: 11px 12px;
+    align-items: center;
+    gap: var(--units-sm, 12px);
+    align-self: stretch;
+    min-height: 54px !important;
+}
+
+.privado-comment-dialog-composer-actions-wrapper {
+    display: none;
+    width: 100%;
+    padding: 11px 8px;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--units-sm, 12px);
+}
+
+.privado-comment-dialog-composer-actions-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.privado-comment-dialog-composer-actions-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.privado-comment-dialog-composer-action-button-wrapper {
+    display: flex;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--units-sm, 12px);
+    cursor: pointer;
+}
+
+.privado-comment-dialog-composer-submit-button-wrapper {
+    display: flex;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--units-sm, 24px);
+    background: var(--btn-primary-btn-primary-fill, #754CFF);
+    cursor: pointer;
+
+    /* Button/Primary/Normal */
+    /* box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30) inset, 0 1px 2px 0 rgba(23, 32, 38, 0.24), 0 0 0 1px var(--Purple-60, #5A34D9); */
+    border: 1px solid #5A34D9;
+}
+
+.privado-comments-sidebar-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.privado-comments-sidebar-header-wrapper {
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color-default, #EDF0F8);
+    background: var(--transparent-canvas, rgba(255, 255, 255, 0.60));
+
+    /* Blur/40 */
+    backdrop-filter: blur(20px);
+    position: relative !important;
+    z-index: 999999998 !important; /* Ensure header (with filter dropdown) appears above comment dialogs */
+}
+
+.privado-comments-sidebar-header-left-wrapper {
+    flex: 1 0 0;
+    gap: 2px;
+    display: flex;
+    color: var(--Text-text-primary, #172026);
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'ss02' on;
+
+    /* UI Text/T100/Medium */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 492;
+    line-height: 18px; /* 128.571% */
+}
+
+.privado-comments-sidebar-header-filter-dropdown-trigger-wrapper {
+    display: flex;
+    padding: 6px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--units-base, 16px);
+}
+
+.privado-comments-sidebar-header-right-wrapper {
+    position: relative !important;
+}
+
+.privado-comments-sidebar-header-filter-dropdown-content-item-wrapper {
+    display: flex;
+    padding: 7px 8px;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+    border-radius: 4px;
+    background: var(--default-canvas, #FFF);
+
+    span {
+        align-self: stretch;
+        color: var(--Text-text-secondary, #465169);
+        font-variant-numeric: lining-nums tabular-nums;
+
+        /* UI Text/T200/Regular */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 138.462% */
+    }
+
+    svg {
+        display: none !important;
+    }
+}
+
+.privado-comments-sidebar-header-filter-dropdown-content-divider {
+    width: 192px;
+    height: 1px;
+    background: var(--border-color-medium, #DDE3EE);
+}
+
+.privado-comments-sidebar-focused-thread-header-wrapper {
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color-default, #EDF0F8);
+    background: var(--transparent-canvas, rgba(255, 255, 255, 0.60));
+
+    /* Blur/40 */
+    backdrop-filter: blur(20px);
+}
+
+.privado-comments-sidebar-focused-thread-back-button-wrapper {
+    display: flex;
+    padding: 3px 6px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.privado-comments-sidebar-focused-thread-back-button-text {
+    color: var(--Text-text-tertiary, #5C6C8A);
+    font-variant-numeric: lining-nums tabular-nums;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 138.462% */
+}
+
+.privado-comments-sidebar-focused-thread-question-wrapper {
+    &:has(app-data:empty) {
+        display: none !important;
+    }
+
+    display: flex;
+    width: 380px;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color-default, #EDF0F8);
+    background: var(--transparent-canvas, rgba(255, 255, 255, 0.60));
+
+    /* Blur/40 */
+    backdrop-filter: blur(20px);
+
+    app-data {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        flex: 1 0 0;
+        overflow: hidden;
+        color: var(--Text-text-secondary, #465169);
+        font-variant-numeric: lining-nums tabular-nums;
+        text-overflow: ellipsis;
+    
+        /* UI Text/T200/Regular */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 138.462% */
+    }
+}
+
+.privado-comment-dialog-thread-card-reply-count {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    align-self: stretch;
+    padding-top: 12px;
+    flex: 1;
+
+    color: var(--Text-text-tertiary, #5C6C8A);
+    font-variant-numeric: lining-nums tabular-nums;
+
+    /* UI Text/T300/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+
+    app-comment-dialog-toggle-reply-count {
+        color: var(--Text-text-tertiary, #5C6C8A) !important;
+    }
+
+    .privado-comment-dialog-thread-card-reply-count-left {
+        flex: 1;
+        height: 1px;
+        background: var(--border-color-strong, #BFC8DC);
+    }
+
+    .privado-comment-dialog-thread-card-reply-count-right {
+        flex: 1;
+        height: 1px;
+        background: var(--border-color-strong, #BFC8DC);
+    }
+
+    .privado-comment-dialog-thread-card-reply-count-text {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+}
+
+.privado-comment-dialog-question-wrapper-container {
+    width: 100% !important;
+    &:has(app-if:empty) {
+        display: none !important;
+    }
+
+    app-if {
+        width: 100% !important;
+
+        .privado-comment-dialog-question-wrapper {
+            width: 100% !important;
+        }
+    }
+}
+
+
+/* ------------------------------------------------------------ */
+
+.velt-comment-dialog {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: 0px !important;
+    box-shadow: none !important;
+
+    &:hover {
+        border: 0px !important;
+        background-color: transparent !important;
+    }
+}
+
+.velt-thread-card--name {
+    color: var(--Text-text-secondary, #465169) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T200/Medium */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px !important;
+    font-style: normal !important;
+    font-weight: 492 !important;
+    line-height: 18px !important; /* 138.462% */
+}
+
+.velt-thread-card--time {
+    color: var(--Text-text-fade, #7E8DA9) !important;
+    text-align: right !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T300/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 12px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 16px !important; /* 133.333% */
+}
+
+.velt-thread-card--message {
+    padding: 0 !important;
+    margin: 0 !important;
+    align-self: stretch !important;
+    color: var(--Text-text-secondary, #465169) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 18px !important; /* 138.462% */
+}
+
+app-comment-dialog-toggle-reply-text {
+    color: var(--Text-text-tertiary, #5C6C8A) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 18px !important; /* 138.462% */
+    text-transform: capitalize !important;
+}
+
+.privado-comment-dialog-thread-card-bottom-wrapper-right-count-wrapper {
+    app-comment-dialog-toggle-reply-count, app-comment-dialog-toggle-reply-text {
+        color: var(--btn-primary-btn-primary-fill, #754CFF) !important;
+        font-variant-numeric: lining-nums tabular-nums !important;
+
+        /* UI Text/T200/Medium */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 13px !important;
+        font-style: normal;
+        font-weight: 492 !important;
+        line-height: 18px !important; /* 138.462% */
+    }
+}
+
+.velt-composer-open {
+    overflow: initial !important;
+}
+
+.velt-comment-dialog--page-mode-composer {
+    background-color: transparent !important;
+    .privado-comment-dialog-wrapper { 
+        box-shadow: none !important;
+        background-color: transparent !important;
+        padding: 16px 12px !important;
+        border-top: 1px solid var(--border-color-medium, #DDE3EE) !important; 
+        border-radius: 0 !important;
+    }
+}
+
+.velt-comment-dialog--focused-thread-mode {
+    background-color: transparent !important;
+
+    .privado-comment-dialog-wrapper { 
+        box-shadow: none;
+        display: flex !important;
+        padding: 12px;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        background-color: transparent !important;
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+
+        app-comment-dialog-body {
+            flex: 1 1 0% !important;
+            min-height: 0 !important;
+            height: 0 !important; /* Force flex constraint */
+            overflow: hidden !important; /* Let threads handle scrolling */
+        }
+
+        .privado-comment-dialog-thread-card-wrapper {
+            display: flex;
+            padding: var(--units-sm, 12px) var(--units-sm, 12px) var(--units-xs, 8px) var(--units-sm, 12px);
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--units-sm, 12px);
+            align-self: stretch;
+            border-radius: var(--units-sm, 12px);
+            background: var(--default-canvas, #FFF);
+
+            /* Elevation/Base/xs.neutral */
+            box-shadow: 0 1px 1px 0 rgba(92, 108, 138, 0.12), 0 2px 4px 0 rgba(70, 81, 105, 0.08);
+        }
+    }
+}
+
+.velt-sidebar-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: 0px !important;
+    box-shadow: none !important;
+    width: 380px;
+    border-left: 1px solid var(--border-color-default, #EDF0F8) !important;
+    background: var(--Gray-10, #F2F6FC);
+}
+
+.velt-status-dropdown--content {
+    display: flex !important;
+    width: 194px !important;
+    padding: 0 4px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    border-radius: 10px !important;
+    background: var(--default-canvas, #FFF) !important;
+    box-shadow: 0 0 0 1px rgba(12, 55, 136, 0.14) !important;
+    margin-top: 4px !important;
+    z-index: 999999998 !important; /* Ensure dropdown appears above comment dialogs (sidebar has 999999997) */
+    position: absolute !important; /* Ensure positioning works */
+}
+
+/* Ensure the parent dropdown container creates a stacking context */
+.velt-comments-sidebar-minimal-filter-dropdown {
+    position: relative !important;
+}
+
+.velt-comment-sidebar-minimal-filter-content-item--selected {
+    .privado-comments-sidebar-header-filter-dropdown-content-item-wrapper { 
+
+        span {
+            color: var(--Text-text-accent, #754CFF) !important;
+        }
+        svg {
+            display: flex !important;
+        }
+    }
+}
+
+.velt-comment-sidebar-minimal-filter-dropdown-trigger-open {
+    .privado-comments-sidebar-header-filter-dropdown-trigger-wrapper {
+        display: flex;
+        padding: 6px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        border-radius: var(--units-base, 16px);
+        background: var(--default-canvas, #FFF);
+
+        /* Focus/Neutral */
+        box-shadow: 0 0 0 1px #FFF, 0 0 0 4px rgba(30, 69, 169, 0.08);
+    }
+}
+
+.velt-sidebar--comments-block {
+    margin-bottom: 0 !important;
+}
+
+.velt-sidebar--comments-hr {
+    display: none !important;
+}
+
+.velt-sidebar-content {
+    display: flex;
+    padding: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+app-comment-sidebar-list {
+    padding: 0 !important;
+    height: auto !important;
+    flex: 1 !important;
+}
+ 
+.velt-sidebar-page-mode-composer  {
+    background-color: transparent !important;
+    padding-bottom: 0 !important;
+}
+
+app-comment-sidebar-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+
+app-comment-sidebar-focused-thread {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    flex: 1 !important; /* Take remaining space after header and question */
+
+    app-comment-dialog-body {
+        display: flex !important;
+        flex: 1 1 0% !important; /* Use 0% as flex basis to force constraint */
+        min-height: 0 !important;
+        height: 0 !important; /* Force flex constraint - height will be set by flex */
+        overflow: hidden !important; /* Let threads handle scrolling */
+
+        .velt-comment-dialog-body--focused-thread-mode {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 0 1 auto !important; /* Don't grow, allow shrinking */
+            min-height: 0 !important;
+            width: 100% !important;
+            overflow: visible !important; /* Let parent handle scrolling */
+
+            app-comment-dialog-threads {
+                max-height: none !important;
+                gap: 12px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                min-height: 0 !important;
+                flex: 1 1 0% !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                scrollbar-width: none !important; /* Firefox */
+                -ms-overflow-style: none !important; /* IE and Edge */
+            }
+            
+            /* Chrome, Safari, Opera - hide scrollbar */
+            app-comment-dialog-threads::-webkit-scrollbar {
+                display: none !important;
+            }
+        }
+
+       
+    }
+}
+
+app-comment-dialog-body {
+    width: 100% !important;
+}
+
+/* Ensure comment dialogs appear below the filter dropdown */
+.privado-comment-dialog-wrapper {
+    z-index: 1 !important;
+    position: relative !important;
+}
+
+.velt-comment-dialog-reply-avatars {
+    margin-right: 2px;
+
+    snippyly-user-avatar {
+        --legacy-velt-user-avatar-size: 16px !important;
+    }
+}
+
+.velt-reaction-pin {
+    padding: 1px 4px !important;
+    gap: 2px !important;
+    .velt-reaction-pin--emoji {
+        svg {
+            width: 14px !important;
+            height: 14px !important;
+        }
+    }
+
+    .velt-reaction-pin--count {
+        font-size: 12px !important;
+    }
+}
+
+.velt-composer-open {
+    .privado-comment-dialog-composer-actions-wrapper { 
+        display: flex !important;
+    }
+
+    .privado-comment-dialog-composer-input-wrapper {
+        .privado-comment-dialog-composer-actions-right {
+            display: none !important;
+        }
+    }
+}
+
+.velt-composer-input--message {
+    padding: 0 !important;
+    color: var(--Text-text-primary, #172026)  !important;
+    font-variant-numeric: lining-nums tabular-nums  !important;
+
+    /* UI Text/T100/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 14px  !important;
+    font-style: normal  !important;
+    font-weight: 400  !important;
+    line-height: 18px  !important; /* 128.571% */
+    flex: 1 0 0  !important;
+    align-self: stretch  !important;
+}
+
+.velt-composer--submit-button {
+    &:disabled {
+        .privado-comment-dialog-composer-submit-button-wrapper {
+            background: var(--Gray-40, #BFC8DC) !important;
+            cursor: not-allowed !important;
+            border: 1px solid var(--Gray-40, #BFC8DC) !important;
+        }
+    }
+}

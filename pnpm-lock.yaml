@@ -1500,8 +1500,8 @@ importers:
   apps/react/self-hosting/forms/page-mode-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 4.7.1
-        version: 4.7.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 4.7.3
+        version: 4.7.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       mongodb:
         specifier: ^7.0.0
         version: 7.0.0
@@ -1525,8 +1525,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.8)
       '@veltdev/types':
-        specifier: 4.7.1
-        version: 4.7.1
+        specifier: 4.7.3
+        version: 4.7.3
       autoprefixer:
         specifier: ^10
         version: 10.4.23(postcss@8.5.6)
@@ -3918,14 +3918,14 @@ packages:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
 
-  '@veltdev/react@4.7.1':
-    resolution: {integrity: sha512-JeSGdAtmyRxcA5aljBswiyufmj5+lIypz3UTv4xuL1FIEj2/BUls8mIRkiwumtsSwZdvr/ABhRgSMUpfAGPbSg==}
+  '@veltdev/react@4.7.1-patch.1':
+    resolution: {integrity: sha512-1Va1Ef2DrmlvvwFmRGhFaVWKT484y51yHinXXeNQtSsEiuUhilzsQW55srlh05mPFzX5MFhf3oVQWsjoUG6rIQ==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
 
-  '@veltdev/react@4.7.1-patch.1':
-    resolution: {integrity: sha512-1Va1Ef2DrmlvvwFmRGhFaVWKT484y51yHinXXeNQtSsEiuUhilzsQW55srlh05mPFzX5MFhf3oVQWsjoUG6rIQ==}
+  '@veltdev/react@4.7.3':
+    resolution: {integrity: sha512-xK2AEMRKmeYCPtlw5MoYl6zcc9Y9HdZnyLMXsdAB9HgSDH3cANo0WDSikUeruXS0k90izYNwDuSGHS7ac/UOqA==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -3984,11 +3984,11 @@ packages:
   '@veltdev/types@4.7.0':
     resolution: {integrity: sha512-pYzp7KD5Hpr+LHx32hXc0aajejIm7XYuAx4ZVl1HIbf7qBUg76kGrhmES0Ne/krWqgkRieBv7BovoY1EZG1ZMQ==}
 
-  '@veltdev/types@4.7.1':
-    resolution: {integrity: sha512-Fb8/MuScbD3pY5iXVrDBpomncgRaitJquvMIHT2xBWPqTokmZB20gKOUhGZ812OEkScFYca9/gPTrE07ruRl0g==}
-
   '@veltdev/types@4.7.1-patch.1':
     resolution: {integrity: sha512-NBeWcTbn/NkXFCwKQOjXBdNYDEv45d1h7Lf8wawWNe6xpIWpoYgin/micUsU1wATOo9sXRlrDMZZT0cVFWa0ow==}
+
+  '@veltdev/types@4.7.3':
+    resolution: {integrity: sha512-5QLMBbpuKA/CGDT4Au6uLu45bJNU+qB74yF4nsNvgzGKzASRJD1G8H6Bnjji5kUOiN0etrEnmFHQ1wyFUpwERg==}
 
   '@vercel/analytics@1.6.1':
     resolution: {integrity: sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==}
@@ -9263,12 +9263,12 @@ snapshots:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
-  '@veltdev/react@4.7.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@veltdev/react@4.7.1-patch.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
-  '@veltdev/react@4.7.1-patch.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@veltdev/react@4.7.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
@@ -9319,9 +9319,9 @@ snapshots:
 
   '@veltdev/types@4.7.0': {}
 
-  '@veltdev/types@4.7.1': {}
-
   '@veltdev/types@4.7.1-patch.1': {}
+
+  '@veltdev/types@4.7.3': {}
 
   '@vercel/analytics@1.6.1(next@16.1.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.2))(react@19.2.3)':
     optionalDependencies:

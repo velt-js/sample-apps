@@ -47,7 +47,7 @@ const DEMO_USERS = [
   { userId: "user-10", name: "Drew Martinez", email: "drew.martinez@example.com" },
 ];
 
-const ORGANIZATION_ID = "page-mode-demo";
+const ORGANIZATION_ID = "page-mode-demo-v2";
 const STORAGE_KEY = 'velt-demo-userId';
 
 type AppUserContextValue = {
