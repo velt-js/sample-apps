@@ -787,7 +787,7 @@ app-comment-dialog-toggle-reply-text {
     display: flex;
     padding: 12px;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: 12px;
 }
 
