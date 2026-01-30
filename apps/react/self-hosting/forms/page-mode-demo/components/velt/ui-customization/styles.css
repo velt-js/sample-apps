@@ -1140,3 +1140,19 @@ app-comment-dialog-composer-attachments-other-name {
     height: 24px !important;
     padding: 0 !important;
 }
+
+.velt-multi-thread-comments-section--info {
+    z-index: 1001 !important; /* Above dialog body content */
+    position: sticky !important; /* Maintain sticky positioning */
+}
+
+.velt-multi-thread-comment-dialog-minimal-filter-dropdown {
+    z-index: 1002 !important; /* Above the section */
+    position: relative !important;
+}
+
+.velt-multi-thread-comment-dialog-minimal-filter-dropdown--content {
+    z-index: 1002 !important; /* Ensure dropdown content appears above dialog elements */
+    position: absolute !important;
+    top: 24px !important;
+}
