@@ -216,6 +216,18 @@
     border-radius: 8px;
     border: 1px solid var(--border-color-default, #EDF0F8);
     background: var(--container, #F2F6FC);
+    cursor: pointer !important;
+
+    svg {
+        color: #D3C5FC !important;
+    }
+
+    &:hover {
+        svg {
+            color: #A080FF !important;
+        }
+        background: var(--Purple-10, #F5EFFF);
+    }
 }
 
 .privado-comment-dialog-question-text {
@@ -243,6 +255,16 @@
     gap: var(--units-xs, 8px);
     align-self: stretch;
     width: 100% !important;
+
+    .privado-comment-dialog-thread-card-top-wrapper-right {
+        visibility: hidden !important;
+    }
+
+    &:hover {
+        .privado-comment-dialog-thread-card-top-wrapper-right {
+            visibility: visible !important;
+        }
+    }
 }
 
 .privado-comment-dialog-thread-card-top-wrapper {
@@ -315,24 +337,32 @@
     align-self: stretch;
     border-radius: var(--units-sm, 12px);
     background: var(--default-canvas, #FFF);
-
-    /* Button/Tertiary/Active */
-    box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14), 0 0 0 2px #FFF, 0 0 0 5px rgba(126, 141, 169, 0.10);
+    box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14);
 }
 
 .privado-comment-dialog-composer-input-wrapper {
     display: flex;
-    padding: 11px 12px;
+    flex-direction: column;
+    padding: 8px 8px 8px 12px;
+    gap: var(--units-sm, 12px);
+    align-self: stretch;
+    /* min-height: 54px !important; */
+    justify-content: center;
+}
+
+
+.privado-comment-dialog-composer-input-wrapper-inner {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     gap: var(--units-sm, 12px);
     align-self: stretch;
-    min-height: 54px !important;
 }
 
 .privado-comment-dialog-composer-actions-wrapper {
     display: none;
     width: 100%;
-    padding: 11px 8px;
+    padding: 8px;
     align-items: center;
     justify-content: space-between;
     gap: var(--units-sm, 12px);
@@ -374,7 +404,7 @@
 
     /* Button/Primary/Normal */
     /* box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30) inset, 0 1px 2px 0 rgba(23, 32, 38, 0.24), 0 0 0 1px var(--Purple-60, #5A34D9); */
-    border: 1px solid #5A34D9;
+    outline: 1px solid #5A34D9;
 }
 
 .privado-comments-sidebar-wrapper {
@@ -582,6 +612,87 @@
     }
 }
 
+.privado-comment-dialog-thread-card-attachments-other {
+    display: flex;
+    padding: var(--units-xs, 8px);
+    align-items: center;
+    gap: var(--units-sm, 12px);
+    border-radius: var(--units-sm, 12px);
+    border: 1px solid var(--border-color-default, #EDF0F8);
+    background: var(--Gray-5, #F8FAFF);
+    cursor: pointer;
+
+    app-comment-dialog-thread-card-attachments-other-download {
+        display: none !important;
+    }
+
+    &:hover {
+        background: var(--Others-White, #FFF) !important;
+        app-comment-dialog-thread-card-attachments-other-download {
+            display: block !important;
+        }
+
+        .velt-comment-attachment--name {
+            text-decoration: none !important;
+        }
+    }
+}
+
+.privado-comment-dialog-composer-attachments-other {
+    display: flex;
+    padding: 7px var(--units-xs, 8px);
+    align-items: center;
+    gap: var(--units-sm, 12px);
+    border-radius: var(--units-sm, 12px);
+    border: 1px solid var(--border-color-default, #EDF0F8);
+    background: var(--Gray-5, #F8FAFF);
+    cursor: pointer !important;
+
+    app-comment-dialog-composer-attachments-other-icon {
+        svg {
+            width: 16px !important;
+            height: 16px !important;
+        }
+    }
+
+    app-comment-dialog-composer-attachments-other-delete {
+        display: none !important;
+    }
+
+    .velt-composer-comment-attachment--name {
+        /* color: var(--Text-text-fade, #7E8DA9); */
+        color: var(--Text-text-primary, #172026);
+        font-variant-numeric: lining-nums tabular-nums;
+
+        /* UI Text/T200/Regular */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 138.462% */
+        flex: 1 0 0;
+    }
+
+    &:hover {
+        background: var(--Gray-10, #F2F6FC);
+        app-comment-dialog-composer-attachments-other-delete {
+            display: block !important;
+        }
+    }
+}
+
+.privado-comment-dialog-thread-card-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--units-sm, 12px);
+    width: 100%;
+}
+
+.privado-composer-divider-wrapper {
+    &:has(app-if:empty) {
+        display: none !important;
+    }
+}
 
 /* ------------------------------------------------------------ */
 
@@ -662,10 +773,6 @@ app-comment-dialog-toggle-reply-text {
         font-weight: 492 !important;
         line-height: 18px !important; /* 138.462% */
     }
-}
-
-.velt-composer-open {
-    overflow: initial !important;
 }
 
 .velt-comment-dialog--page-mode-composer {
@@ -887,11 +994,18 @@ app-comment-dialog-body {
 }
 
 .velt-composer-open {
+    overflow: initial !important;
+    
+    .privado-comment-dialog-composer-wrapper {
+        box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14), 0 0 0 2px #FFF, 0 0 0 5px rgba(126, 141, 169, 0.10);
+    }
+
     .privado-comment-dialog-composer-actions-wrapper { 
         display: flex !important;
     }
 
     .privado-comment-dialog-composer-input-wrapper {
+        padding: 11px 12px;
         .privado-comment-dialog-composer-actions-right {
             display: none !important;
         }
@@ -918,7 +1032,133 @@ app-comment-dialog-body {
         .privado-comment-dialog-composer-submit-button-wrapper {
             background: var(--Gray-40, #BFC8DC) !important;
             cursor: not-allowed !important;
-            border: 1px solid var(--Gray-40, #BFC8DC) !important;
+            outline: 1px solid var(--Gray-40, #BFC8DC) !important;
         }
     }
+}
+
+.velt-comment-attachments {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.velt-comment-attachment--name {
+    color: var(--Text-text-accent, #754CFF) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 18px !important; /* 138.462% */
+    text-decoration-line: underline !important;
+    text-decoration-style: solid !important;
+    text-decoration-skip-ink: none !important;
+    text-decoration-thickness: auto !important;
+    text-underline-offset: auto !important;
+    text-underline-position: from-font !important;
+    flex: 1 0 0 !important;
+}
+
+app-comment-dialog-composer-attachments-other-icon, 
+app-comment-dialog-composer-attachments-other-loading, 
+app-comment-dialog-composer-attachments {
+    &:empty {
+        display: none !important;
+    }
+}
+
+button.action__button.velt-action-button {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.velt-composer-input--message {
+    span {
+        color: var(--Text-text-primary, #172026) !important;
+
+        /* UI Text/T100/Medium */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 14px !important;
+        font-style: normal !important;
+        font-weight: 492 !important;
+        line-height: 18px !important;
+        border-radius: 4px;
+        background: var(--Purple-20, #EFE3FF);
+        padding-inline: 2px;
+        padding-block: 1px;
+    }
+}
+
+.velt-autocomplete--contact-chip {
+    color: var(--Text-text-primary, #172026) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T200/Medium */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px !important;
+    font-style: normal !important; 
+    font-weight: 492 !important;
+    line-height: 18px !important;
+
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+
+
+.privado-focused-thread-mode-composer-divider {
+    height: 1px;
+    background-color: var(--border-color-medium, #DDE3EE);
+    width: 385px;
+    margin-left: -57px;
+    margin-right: -48px;
+}
+
+
+.velt-comment-dialog--focused-thread-mode {
+    .velt-comment-dialog-composer {
+        margin-block: 4px;
+    }
+}
+
+app-comment-dialog-thread-card-attachments-other-name {
+    flex: 1 !important;
+}
+
+/* Note */
+app-comment-dialog-composer-attachments-other-name {
+    display: none !important;
+}
+
+.velt-composer--attachment-icon-btn {
+    padding: 0 !important;
+}
+
+.velt-comment-dialog-options-dropdown {
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+}
+
+.velt-multi-thread-comments-section--info {
+    z-index: 1001 !important; /* Above dialog body content */
+    position: sticky !important; /* Maintain sticky positioning */
+}
+
+.velt-multi-thread-comment-dialog-minimal-filter-dropdown {
+    z-index: 1002 !important; /* Above the section */
+    position: relative !important;
+}
+
+.velt-multi-thread-comment-dialog-minimal-filter-dropdown--content {
+    z-index: 1002 !important; /* Ensure dropdown content appears above dialog elements */
+    position: absolute !important;
+    top: 24px !important;
+}
+
+.velt-thread-card--name--unread {
+    width: 8px;
+    height: 8px;
+    background-color: "#FF7452";
 }

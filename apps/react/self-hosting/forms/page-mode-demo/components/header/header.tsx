@@ -3,51 +3,47 @@
 import VeltTools from '@/components/velt/VeltTools'
 
 interface HeaderProps {
-  toggleGlobalSidebar: () => void
-  isGlobalSidebarOpen: boolean
+    toggleGlobalSidebar: () => void
+    isGlobalSidebarOpen: boolean
 }
 
 export default function Header({
-  toggleGlobalSidebar,
-  isGlobalSidebarOpen
+    toggleGlobalSidebar,
+    isGlobalSidebarOpen
 }: HeaderProps) {
-  return (
-    <div className="flex items-center gap-[12px]">
-      {/* [Velt] Show online users/collaborators */}
-      <VeltTools />
-      {/* Custom button to toggle embedded comments sidebar */}
-      <button
-        onClick={toggleGlobalSidebar}
-        className="flex items-center justify-center gap-[6px] px-[12px] py-[6px] rounded-[8px] transition-colors"
-        style={{
-          backgroundColor: isGlobalSidebarOpen ? '#5a34d9' : '#754cff',
-          boxShadow: '0px 0px 0px 1px #5a34d9, 0px 1px 2px rgba(23, 32, 38, 0.24), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)'
-        }}
-        aria-label={isGlobalSidebarOpen ? 'Close comments' : 'Open comments'}
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-        <span
-          style={{
-            fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
-            fontWeight: 500,
-            fontSize: '14px',
-            color: 'white'
-          }}
-        >
-          Comments
-        </span>
-      </button>
-    </div>
-  )
+    return (
+        <div className="flex items-center gap-[12px]">
+            {/* [Velt] Show online users/collaborators */}
+            <VeltTools />
+            {/* Custom button to toggle embedded comments sidebar */}
+            <div className='privado-comment-sidebar-button'>
+                <button onClick={toggleGlobalSidebar} className={`privado-comment-sidebar-button-left-icon ${isGlobalSidebarOpen ? 'privado-comment-sidebar-button-left-icon--active' : ''}`}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_163_2154)">
+                            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_163_2154">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </button>
+                <div className='privado-comment-sidebar-button-divider'></div>
+                <div className='privado-comment-sidebar-button-right-icon'>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_29_10775)">
+                            <path d="M13.5 5.5C13.1886 5.50124 12.8802 5.56129 12.591 5.677L10.323 3.409C10.4387 3.11985 10.4988 2.81144 10.5 2.5C10.5 1.83696 10.2366 1.20107 9.76777 0.732233C9.29893 0.263392 8.66304 0 8 0C7.33696 0 6.70107 0.263392 6.23223 0.732233C5.76339 1.20107 5.5 1.83696 5.5 2.5C5.50124 2.81144 5.56129 3.11985 5.677 3.409L3.409 5.677C3.11985 5.56129 2.81144 5.50124 2.5 5.5C1.83696 5.5 1.20107 5.76339 0.732233 6.23223C0.263392 6.70107 0 7.33696 0 8C0 8.66304 0.263392 9.29893 0.732233 9.76777C1.20107 10.2366 1.83696 10.5 2.5 10.5C2.81144 10.4988 3.11985 10.4387 3.409 10.323L5.677 12.591C5.56129 12.8802 5.50124 13.1886 5.5 13.5C5.5 14.163 5.76339 14.7989 6.23223 15.2678C6.70107 15.7366 7.33696 16 8 16C8.66304 16 9.29893 15.7366 9.76777 15.2678C10.2366 14.7989 10.5 14.163 10.5 13.5C10.4988 13.1886 10.4387 12.8802 10.323 12.591L12.591 10.323C12.8802 10.4387 13.1886 10.4988 13.5 10.5C14.163 10.5 14.7989 10.2366 15.2678 9.76777C15.7366 9.29893 16 8.66304 16 8C16 7.33696 15.7366 6.70107 15.2678 6.23223C14.7989 5.76339 14.163 5.5 13.5 5.5ZM8 11C7.68856 11.0012 7.38015 11.0613 7.091 11.177L4.823 8.909C5.05896 8.32597 5.05896 7.67403 4.823 7.091L7.091 4.823C7.67403 5.05896 8.32597 5.05896 8.909 4.823L11.177 7.091C10.941 7.67403 10.941 8.32597 11.177 8.909L8.909 11.177C8.61985 11.0613 8.31144 11.0012 8 11Z" fill="#5C6C8A" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_29_10775">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    )
 }
