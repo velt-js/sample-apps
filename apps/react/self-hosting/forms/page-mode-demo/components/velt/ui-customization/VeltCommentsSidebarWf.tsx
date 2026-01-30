@@ -11,6 +11,7 @@ const VeltCommentsSidebarWf = () => {
                     <div className="privado-comments-sidebar-header-wrapper">
                         <div className="privado-comments-sidebar-header-left-wrapper">
                             <VeltData field="filteredCommentAnnotationsCount" />
+                            &nbsp;
                             <span>Comments</span>
                         </div>
                         <div className="privado-comments-sidebar-header-right-wrapper">

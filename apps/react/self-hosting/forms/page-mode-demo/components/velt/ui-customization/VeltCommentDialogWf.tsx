@@ -140,7 +140,8 @@ const VeltCommentDialoglWf = () => {
                                     <div className="privado-comment-dialog-thread-card-reply-count-left"></div>
                                     <span className="privado-comment-dialog-thread-card-reply-count-text">
                                         <VeltCommentDialogWireframe.ToggleReply.Count />
-                                        replies
+                                        <VeltIf condition="{annotation.comments.length} === 2">reply</VeltIf>
+                                        <VeltIf condition="{annotation.comments.length} > 2">replies</VeltIf>
                                     </span>
                                     <div className="privado-comment-dialog-thread-card-reply-count-right"></div>
                                 </div>
