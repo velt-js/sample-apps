@@ -115,3 +115,43 @@
 .velt-comment-dialog--inline-comment-section-mode {
   border-radius: 0px !important;
 }
+
+.privado-comment-sidebar-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--units-xs, 8px);
+    background: var(--default-canvas, #FFF);
+    overflow: hidden;
+
+    /* Button/Tertiary/Normal */
+    box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14);
+
+    .privado-comment-sidebar-button-left-icon {
+        display: flex;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: var(--Gray-5, #F8FAFF);
+
+        &.privado-comment-sidebar-button-left-icon--active {
+            background: var(--Purple-5, #F9F5FF);
+        }
+    }
+
+    .privado-comment-sidebar-button-divider {
+        width: 1px;
+        align-self: stretch;
+        background: var(--Gray-40, #BFC8DC);
+    }
+
+    .privado-comment-sidebar-button-right-icon {
+        display: flex;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        background: var(--Gray-5, #F8FAFF);
+    }
+}
