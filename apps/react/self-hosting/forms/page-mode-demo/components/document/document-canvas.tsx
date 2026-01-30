@@ -621,6 +621,7 @@ export default function DocumentCanvas() {
               sortBy="createdAt"
               embedMode={true}
               focusedThreadMode={true}
+              defaultMinimalFilter="reset"
             />
           </div>
         )}

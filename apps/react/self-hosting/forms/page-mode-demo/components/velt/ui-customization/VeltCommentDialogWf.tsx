@@ -7,6 +7,46 @@ const VeltCommentDialoglWf = () => {
         // [Velt] Custom wireframe for comment dialog
         <VeltCommentDialogWireframe>
             <div className="privado-comment-dialog-wrapper">
+                <VeltCommentDialogWireframe.AssigneeBanner>
+                    <div className="privado-comment-dialog-assignee-banner-wrapper">
+                        <div className="privado-comment-dialog-assignee-banner-wrapper-left">
+                            <VeltCommentDialogWireframe.AssigneeBanner.ResolveButton>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_249_2027)">
+                                        <rect x="1.22729" y="1.22729" width="13.5455" height="13.5455" rx="6.77273" fill="white" stroke="#BFC8DC" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_249_2027">
+                                            <rect width="16" height="16" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                                <span className="privado-comment-dialog-assignee-banner-resolve-button-text">Resolve</span>
+                            </VeltCommentDialogWireframe.AssigneeBanner.ResolveButton>
+                            <VeltCommentDialogWireframe.AssigneeBanner.UnresolveButton>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_249_2066)">
+                                        <rect x="0.727295" y="0.727295" width="14.5455" height="14.5455" rx="7.27273" fill="#1DCA73" />
+                                        <rect x="11.1948" y="4.64136" width="1.5" height="8" rx="0.75" transform="rotate(45 11.1948 4.64136)" fill="white" />
+                                        <rect x="3.74463" y="8.53052" width="1.5" height="4" rx="0.75" transform="rotate(-45 3.74463 8.53052)" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_249_2066">
+                                            <rect width="16" height="16" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <span className="privado-comment-dialog-assignee-banner-unresolve-button-text">Resolved by
+                                    <VeltData field="annotation.resolvedByUserId" />
+                                </span>
+                            </VeltCommentDialogWireframe.AssigneeBanner.UnresolveButton>
+                        </div>
+                        <div className="privado-comment-dialog-assignee-banner-wrapper-right">
+                            Assigned to <VeltData field="annotation.assignedTo.userId" />
+                        </div>
+                    </div>
+                </VeltCommentDialogWireframe.AssigneeBanner>
                 <div className="privado-comment-dialog-question-wrapper-container">
                     <VeltIf condition="!{focusedThreadMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
                         <div className="privado-comment-dialog-question-wrapper">
@@ -119,10 +159,12 @@ const VeltCommentDialoglWf = () => {
                                         <div className="privado-comment-dialog-thread-card-bottom-wrapper-right">
                                             <VeltCommentDialogWireframe.ReplyAvatars />
                                             <VeltIf condition="{annotation.comments.length} === 1">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.5 3.5V6.5C4.5 7.29565 4.81607 8.05871 5.37868 8.62132C5.94129 9.18393 6.70435 9.5 7.5 9.5H12.5" stroke="#465169" strokeLinecap="round" strokeLinejoin="round" />
-                                                    <path d="M9.5 6.5L12.5 9.5L9.5 12.5" stroke="#465169" strokeLinecap="round" strokeLinejoin="round" />
-                                                </svg>
+                                                <div className="privado-comment-dialog-thread-card-bottom-wrapper-right-reply-icon-wrapper">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M4.5 3.5V6.5C4.5 7.29565 4.81607 8.05871 5.37868 8.62132C5.94129 9.18393 6.70435 9.5 7.5 9.5H12.5" stroke="#465169" strokeLinecap="round" strokeLinejoin="round" />
+                                                        <path d="M9.5 6.5L12.5 9.5L9.5 12.5" stroke="#465169" strokeLinecap="round" strokeLinejoin="round" />
+                                                    </svg>
+                                                </div>
                                                 <VeltCommentDialogWireframe.ToggleReply.Text />
                                             </VeltIf>
                                             <VeltIf condition="{annotation.comments.length} > 1">

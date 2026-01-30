@@ -694,6 +694,73 @@
     }
 }
 
+.privado-comment-dialog-assignee-banner-wrapper {
+    display: flex;
+    padding: 7px 12px;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--units-xs, 8px);
+    align-self: stretch;
+    border-bottom: 1px solid var(--border-color-default, #EDF0F8);
+    background: var(--Gray-5, #F8FAFF);
+    margin-inline: -12px;
+    margin-top: -12px;
+    border-radius: 12px 12px 0 0;
+}
+
+.privado-comment-dialog-assignee-banner-wrapper-left {
+    display: flex;
+    gap: var(--units-xs, 8px);
+
+    app-resolve-button, app-unresolve-button {
+        .velt-tooltip-button {
+            width: auto !important;
+            height: auto !important;
+            display: flex;
+            gap: var(--units-xs, 8px);
+            background-color: transparent !important;
+        }
+    }
+}
+
+.privado-comment-dialog-assignee-banner-resolve-button-text, .privado-comment-dialog-assignee-banner-unresolve-button-text {
+    flex: 1 0 0;
+    align-self: stretch;
+    color: var(--Text-text-secondary, #465169);
+    font-variant-numeric: lining-nums tabular-nums;
+    display: flex;
+    gap: 3px;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 138.462% */
+}
+
+.privado-comment-dialog-assignee-banner-wrapper-right {
+    display: flex;
+    align-self: stretch;
+    color: var(--Text-text-secondary, #465169);
+    text-align: right;
+    font-variant-numeric: lining-nums tabular-nums;
+
+    /* UI Text/T300/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+
+    app-data {
+        margin-left: 3px;
+    }
+}
+
+.privado-comment-dialog-thread-card-bottom-wrapper-right-reply-icon-wrapper {
+    margin-right: 3px;
+}
 /* ------------------------------------------------------------ */
 
 .velt-comment-dialog {
@@ -705,6 +772,21 @@
     &:hover {
         border: 0px !important;
         background-color: transparent !important;
+    }
+}
+
+div[data-velt-comment-dialog-comments-status="RESOLVED"] .privado-comment-dialog-assignee-banner-wrapper-right {
+    text-decoration: line-through !important;
+    color: var(--Text-text-fade, #7E8DA9) !important;
+}
+
+.velt-comment-dialog--focused-thread-mode {
+    .privado-comment-dialog-wrapper {
+        border-radius: 0 !important;
+    }
+
+    .privado-comment-dialog-assignee-banner-wrapper {
+        border-radius: 0 !important;
     }
 }
 
