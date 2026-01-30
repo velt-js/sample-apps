@@ -1156,3 +1156,9 @@ app-comment-dialog-composer-attachments-other-name {
     position: absolute !important;
     top: 24px !important;
 }
+
+.velt-thread-card--name--unread {
+    width: 8px;
+    height: 8px;
+    background-color: "#FF7452";
+}

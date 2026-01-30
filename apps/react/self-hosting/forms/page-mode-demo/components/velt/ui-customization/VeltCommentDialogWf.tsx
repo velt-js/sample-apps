@@ -36,7 +36,7 @@ const VeltCommentDialoglWf = () => {
                                         <VeltCommentDialogWireframe.ThreadCard.Options>
                                             <VeltCommentDialogWireframe.ThreadCard.Options.Trigger>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect width="16" height="16" fill="white" fill-opacity="0.01" />
+                                                    <rect width="16" height="16" fill="white" fillOpacity="0.01" />
                                                     <path d="M7 8.5C7 9.32843 7.67157 10 8.5 10C9.32843 10 10 9.32843 10 8.5C10 7.67157 9.32843 7 8.5 7C7.67157 7 7 7.67157 7 8.5Z" fill="#5C6C8A" />
                                                     <path d="M12 8.5C12 9.32843 12.6716 10 13.5 10C14.3284 10 15 9.32843 15 8.5C15 7.67157 14.3284 7 13.5 7C12.6716 7 12 7.67157 12 8.5Z" fill="#5C6C8A" />
                                                     <path d="M2 8.5C2 9.32843 2.67157 10 3.5 10C4.32843 10 5 9.32843 5 8.5C5 7.67157 4.32843 7 3.5 7C2.67157 7 2 7.67157 2 8.5Z" fill="#5C6C8A" />
