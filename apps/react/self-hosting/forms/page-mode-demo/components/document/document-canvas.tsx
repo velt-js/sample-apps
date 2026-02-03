@@ -296,7 +296,7 @@ interface QuestionSectionProps {
   onChange: (value: string) => void
 }
 
-const QuestionSection = ({ question, sectionRef, value, onChange }: QuestionSectionProps) => {
+const QuestionSection = ({ question, sectionRef, value, onChange, activeCommentToolId }: QuestionSectionProps) => {
   const targetElementId = `question-${question.id}`
 
   return (
@@ -331,11 +331,12 @@ const QuestionSection = ({ question, sectionRef, value, onChange }: QuestionSect
         </div>
 
         {/* [Velt] Comment tools for each question row */}
-        <div className="flex items-center gap-1 ml-4">
-          {/* <VeltCommentBubble
-            targetElementId={targetElementId}
+        <div className={`flex items-center gap-1 ml-4 ${activeCommentToolId === question.id ? 'velt-comment-tool-wrapper-active' : ''}`}>
+          <VeltCommentBubble
+            // targetElementId={targetElementId}
             openDialog={false}
-          /> */}
+            context={{ questionId: question.id, questionNumber: question.number, questionTitle: question.title}}
+          />
           <VeltCommentTool
             contextInPageModeComposer={true}
             // targetElementId={targetElementId}
@@ -361,6 +362,7 @@ export default function DocumentCanvas() {
   const [currentStep, setCurrentStep] = useState(1)
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [isGlobalSidebarOpen, setIsGlobalSidebarOpen] = useState(false)
+  const [activeCommentToolId, setActiveCommentToolId] = useState<string | null>(null)
   const questionRefs = useRef<Record<string, React.RefObject<HTMLDivElement | null>>>({})
   const contentRef = useRef<HTMLDivElement>(null)
 
@@ -439,6 +441,7 @@ export default function DocumentCanvas() {
           toggleGlobalSidebar={toggleGlobalSidebar}
           openGlobalSidebar={openGlobalSidebar}
           isGlobalSidebarOpen={isGlobalSidebarOpen}
+          setActiveCommentToolId={setActiveCommentToolId}
         />
       </div>
 
@@ -612,6 +615,7 @@ export default function DocumentCanvas() {
                   sectionRef={questionRefs.current[question.id]}
                   value={answers[question.id] || ''}
                   onChange={(value) => handleAnswerChange(question.id, value)}
+                  activeCommentToolId={activeCommentToolId}
                 />
               ))}
             </div>
@@ -629,6 +633,7 @@ export default function DocumentCanvas() {
               embedMode={true}
               focusedThreadMode={true}
               defaultMinimalFilter="reset"
+              openAnnotationInFocusMode={true}
             />
           </div>
         )}

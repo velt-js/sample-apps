@@ -1346,24 +1346,16 @@ velt-autocomplete-option-description-internal {
         }
     }
 
-    .velt-comment-tool-has-comments-icon {
-        display: none;
-    }
-
-    .velt-comment-tool-no-comments-icon {
-        display: flex;
-    }
-
-    app-data {
-        color: var(--Text-text-accent, #754CFF);
-        font-variant-numeric: lining-nums tabular-nums;
+    app-comment-bubble-comments-count {
+        color: var(--Text-text-accent, #754CFF) !important;
+        font-variant-numeric: lining-nums tabular-nums !important;
 
         /* UI Text/T300/Regular */
         /* font-family: "TT Interphases Pro Variable"; */
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 16px; /* 133.333% */
+        font-size: 12px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 16px !important; /* 133.333% */
     }
 }
 
@@ -1391,16 +1383,6 @@ velt-autocomplete-option-description-internal {
 .velt-comment-tool-wrapper-active {
     .privado-comment-tool-wrapper { 
         background: var(--btn-secondary-btn-secondary-hover, #F5EFFF);
-    }
-}
-
-.privado-comment-tool-wrapper:has(app-data:not(:empty)) {
-    .velt-comment-tool-has-comments-icon {
-        display: flex;
-    }
-
-    .velt-comment-tool-no-comments-icon {
-        display: none;
     }
 }
 

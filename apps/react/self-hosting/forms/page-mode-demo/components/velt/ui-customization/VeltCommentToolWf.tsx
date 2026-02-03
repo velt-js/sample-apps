@@ -11,11 +11,6 @@ const VeltCommentToolWf = () => {
                     <CommentNoCommentsIcon />
                     <span className="velt-comment-tool-tooltip">Add comment</span>
                 </span>
-                <span className="velt-comment-tool-has-comments-icon">
-                    <CommentHasCommentsIcon />
-                    <span className="velt-comment-tool-tooltip">View comments</span>
-                </span>
-                <VeltData field="questionCounts[context.questionId]" />
             </div>
         </VeltCommentToolWireframe>
     );

@@ -23,13 +23,13 @@ export function VeltCollaboration() {
       <VeltInitializeDocument />
       {/* [Velt] Comments configuration - popoverMode for inline comment dialogs */}
       <VeltComments
-        // popoverTriangleComponent={false}
-        // popoverMode={true}
+        popoverTriangleComponent={false}
+        popoverMode={true}
         shadowDom={false}
         textMode={false}
         commentPinHighlighter={false}
         dialogOnHover={false}
-        groupMatchedComments={true}
+        // groupMatchedComments={true}
         autoCompleteScrollConfig={{
             itemSize: 32,
         }}

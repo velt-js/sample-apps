@@ -9,18 +9,21 @@ interface HeaderProps {
     toggleGlobalSidebar: () => void
     openGlobalSidebar: () => void
     isGlobalSidebarOpen: boolean
+    setActiveCommentToolId: (annotationId: string | null) => void
 }
 
 export default function Header({
     toggleGlobalSidebar,
     openGlobalSidebar,
-    isGlobalSidebarOpen
+    isGlobalSidebarOpen,
+    setActiveCommentToolId
 }: HeaderProps) {
 
     const commentToolClickedCallback = useCommentEventCallback('commentToolClick');
     const commentUtils = useCommentUtils();
     const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
     const sidebarButtonClickedCallback = useCommentEventCallback('sidebarButtonClick');
+    const commentBubbleClickedCallback = useCommentEventCallback('commentBubbleClicked');
     const { client } = useVeltClient();
 
     useEffect(() => {
@@ -38,56 +41,27 @@ export default function Header({
                 commentUtils?.setContextInPageModeComposer(commentToolClickedCallback?.context);
                 commentUtils?.focusPageModeComposer();
             }
-
-            if( client ) {
-                client.setUiState({
-                    activeCommentToolId: commentToolClickedCallback?.context?.questionId
-                });
-            }
-
+            setActiveCommentToolId(commentToolClickedCallback?.context?.questionId);
         }
-    }, [commentToolClickedCallback, commentUtils, client]);
+    }, [commentToolClickedCallback, commentUtils, client, setActiveCommentToolId]);
 
     useEffect(() => {
         if (sidebarButtonClickedCallback) {
             toggleGlobalSidebar();
             commentUtils?.clearPageModeComposerContext();
-
-            if(isGlobalSidebarOpen && client) {
-                client.setUiState({
-                    activeCommentToolId: null
-                });
-            }
+            setActiveCommentToolId(null);
         }
-    }, [sidebarButtonClickedCallback, commentUtils, client]);
+    }, [sidebarButtonClickedCallback, commentUtils, client, setActiveCommentToolId]);
 
     useEffect(() => {
-        if (commentUtils) {
-            commentUtils.getCommentAnnotations().subscribe((annotations) => {
-                const questionCounts = getQuestionCounts(annotations);
-                if (client) {
-                    client.setUiState({
-                        questionCounts: questionCounts
-                    });
-                }
-            });
+        if (commentBubbleClickedCallback && commentUtils) {
+            openGlobalSidebar();
+            setTimeout(() => {
+                commentUtils.selectCommentByAnnotationId(commentBubbleClickedCallback.annotationId);
+            }, 0);
+            setActiveCommentToolId(commentBubbleClickedCallback.commentAnnotation?.context?.questionId);
         }
-    }, [commentUtils, client]);
-
-    const getQuestionCounts = (data: GetCommentAnnotationsResponse) => {
-        const result: Record<string, number> = {};
-
-        for (const annotations of Object.values(data.data || {})) {
-            for (const annotation of annotations) {
-                const questionId = annotation.context?.questionId;
-                if (questionId) {
-                    result[questionId] = (result[questionId] || 0) + 1;
-                }
-            }
-        }
-
-        return result;
-    }
+    }, [commentBubbleClickedCallback, commentUtils, client, setActiveCommentToolId]);
 
     return (
         <div className="flex items-center gap-[12px]">
