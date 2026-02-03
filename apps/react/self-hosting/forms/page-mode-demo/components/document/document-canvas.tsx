@@ -294,6 +294,7 @@ interface QuestionSectionProps {
   sectionRef: React.RefObject<HTMLDivElement | null>
   value: string
   onChange: (value: string) => void
+  activeCommentToolId: string | null
 }
 
 const QuestionSection = ({ question, sectionRef, value, onChange, activeCommentToolId }: QuestionSectionProps) => {
