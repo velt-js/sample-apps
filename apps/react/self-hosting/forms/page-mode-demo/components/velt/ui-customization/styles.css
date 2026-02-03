@@ -1339,26 +1339,6 @@ velt-autocomplete-option-description-internal {
     gap: 4px;
     position: relative;
 
-    .velt-comment-tool-tooltip {
-        position: absolute;
-        top: -35px;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;  /* Prevents text from wrapping */
-        display: inline-flex;
-        padding: 6px 12px;
-        align-items: flex-end;
-        gap: 10px;
-        border-radius: 12px;
-        background: var(--Gray-100, #12161F);
-        color: #F8F9F9;
-        font-variant-numeric: lining-nums tabular-nums;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18px;
-        display: none;
-    }
     &:hover {
         background: var(--btn-tertiary-btn-tertiary-hover, #F8FAFF);
         .velt-comment-tool-tooltip {
@@ -1385,6 +1365,27 @@ velt-autocomplete-option-description-internal {
         font-weight: 400;
         line-height: 16px; /* 133.333% */
     }
+}
+
+.velt-comment-tool-tooltip {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;  /* Prevents text from wrapping */
+    display: inline-flex;
+    padding: 6px 12px;
+    align-items: flex-end;
+    gap: 10px;
+    border-radius: 12px;
+    background: var(--Gray-100, #12161F);
+    color: #F8F9F9;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    display: none;
 }
 
 .velt-comment-tool-wrapper-active {
@@ -1758,5 +1759,55 @@ app-reaction-pin {
 app-attachment-button {
     button.action__button.velt-action-button[_ngcontent-ng-c1599586684]:hover {
         background: transparent !important;
+    }
+}
+
+.velt-thread-card--assign-to-menu {
+    padding: 0px !important;
+}
+
+.velt-autocomplete-panel--input input {
+    display: flex !important;
+    padding: 6px 8px !important;
+    align-items: center !important;
+    gap: 8px !important;
+    align-self: stretch !important;
+    border-radius: var(--units-xs, 8px) !important;
+    border: 1px solid var(--border-color-medium, #DDE3EE) !important;
+    background: var(--Gray-5, #FFF) !important;
+
+    color: var(--Text-text-primary, #172026) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T100/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 18px !important; /* 128.571% */
+
+
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16' fill='white' fill-opacity='0.01'/%3E%3Cpath d='M7.5 13.5C10.8137 13.5 13.5 10.8137 13.5 7.5C13.5 4.18629 10.8137 1.5 7.5 1.5C4.18629 1.5 1.5 4.18629 1.5 7.5C1.5 10.8137 4.18629 13.5 7.5 13.5Z' stroke='%23465169' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15.4999 15.4999L11.7419 11.7419' stroke='%23465169' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: 8px center !important;
+    background-size: 16px 16px !important;
+    padding-left: 32px !important;
+}
+
+.velt-autocomplete-panel--input input:focus {
+    border: 1px solid var(--Purple-50, #754CFF) !important;
+    /* background: var(--default-canvas, #FFF) !important; */
+
+    /* Focus/Accent */
+    box-shadow: 0 0 0 1px #FFF, 0 0 0 4px rgba(117, 76, 255, 0.10) !important;
+}
+
+.privado-comment-dialog-thread-card-assign-button-wrapper {
+    position: relative;
+
+    &:hover {
+        .velt-comment-tool-tooltip {
+            display: inline-flex;
+        }
     }
 }

@@ -70,6 +70,7 @@ const VeltCommentDialoglWf = () => {
                                         <VeltCommentDialogWireframe.ThreadCard.AssignButton veltIf="!{annotation.resolvedByUserId}">
                                             <div className="privado-comment-dialog-thread-card-assign-button-wrapper">
                                                 <AssignUserIcon />
+                                                <span className="velt-comment-tool-tooltip">Assign</span>
                                             </div>
                                         </VeltCommentDialogWireframe.ThreadCard.AssignButton>
                                         <VeltCommentDialogWireframe.ThreadCard.Options veltIf="{commentObj.from.userId} === {user.userId}">
@@ -77,11 +78,6 @@ const VeltCommentDialoglWf = () => {
                                                 <OptionsDotsIcon />
                                             </VeltCommentDialogWireframe.ThreadCard.Options.Trigger>
                                             <VeltCommentDialogWireframe.ThreadCard.Options.Content>
-                                                {/* <VeltCommentDialogWireframe.ThreadCard.Options.Content.Assign>
-                                                    <div className="privado-comment-dialog-thread-card-options-content-item-wrapper">
-                                                        Assign
-                                                    </div>
-                                                </VeltCommentDialogWireframe.ThreadCard.Options.Content.Assign> */}
                                                 <VeltCommentDialogWireframe.ThreadCard.Options.Content.Edit>
                                                     <div className="privado-comment-dialog-thread-card-options-content-item-wrapper">
                                                         Edit
