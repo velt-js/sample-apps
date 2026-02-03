@@ -331,12 +331,14 @@ const QuestionSection = ({ question, sectionRef, value, onChange }: QuestionSect
         </div>
 
         {/* [Velt] Comment tools for each question row */}
-        <div className="flex items-center gap-1 ml-4 opacity-60 group-hover:opacity-100 transition-opacity">
-          <VeltCommentBubble
+        <div className="flex items-center gap-1 ml-4">
+          {/* <VeltCommentBubble
             targetElementId={targetElementId}
-          />
+            openDialog={false}
+          /> */}
           <VeltCommentTool
-            targetElementId={targetElementId}
+            contextInPageModeComposer={true}
+            // targetElementId={targetElementId}
             context={{ questionId: question.id, questionNumber: question.number, questionTitle: question.title}}
           />
         </div>
@@ -389,6 +391,10 @@ export default function DocumentCanvas() {
     setIsGlobalSidebarOpen(prev => !prev)
   }, [])
 
+  const openGlobalSidebar = useCallback(() => {
+    setIsGlobalSidebarOpen(true)
+  }, [])
+
   const progress = Math.round(((currentStep) / 7) * 100)
 
   return (
@@ -431,6 +437,7 @@ export default function DocumentCanvas() {
         {/* [Velt] Header tools: Presence and Comments Sidebar Button */}
         <Header
           toggleGlobalSidebar={toggleGlobalSidebar}
+          openGlobalSidebar={openGlobalSidebar}
           isGlobalSidebarOpen={isGlobalSidebarOpen}
         />
       </div>

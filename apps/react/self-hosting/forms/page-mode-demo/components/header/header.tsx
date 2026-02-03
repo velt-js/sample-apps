@@ -1,35 +1,102 @@
 'use client'
 
 import VeltTools from '@/components/velt/VeltTools'
+import { useCommentUtils, useCommentEventCallback, useVeltEventCallback, VeltSidebarButton, useVeltClient } from '@veltdev/react';
+import { GetCommentAnnotationsResponse } from '@veltdev/types';
+import { useEffect } from 'react';
 
 interface HeaderProps {
     toggleGlobalSidebar: () => void
+    openGlobalSidebar: () => void
     isGlobalSidebarOpen: boolean
 }
 
 export default function Header({
     toggleGlobalSidebar,
+    openGlobalSidebar,
     isGlobalSidebarOpen
 }: HeaderProps) {
+
+    const commentToolClickedCallback = useCommentEventCallback('commentToolClick');
+    const commentUtils = useCommentUtils();
+    const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
+    const sidebarButtonClickedCallback = useCommentEventCallback('sidebarButtonClick');
+    const { client } = useVeltClient();
+
+    useEffect(() => {
+        if (veltButtonClickEventData) {
+            if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'remove-page-mode-composer-button') {
+                commentUtils?.clearPageModeComposerContext();
+            }
+        }
+    }, [veltButtonClickEventData, commentUtils]);
+
+    useEffect(() => {
+        if (commentToolClickedCallback) {
+            openGlobalSidebar();
+            if (commentUtils) {
+                commentUtils?.setContextInPageModeComposer(commentToolClickedCallback?.context);
+                commentUtils?.focusPageModeComposer();
+            }
+
+            if( client ) {
+                client.setUiState({
+                    activeCommentToolId: commentToolClickedCallback?.context?.questionId
+                });
+            }
+
+        }
+    }, [commentToolClickedCallback, commentUtils, client]);
+
+    useEffect(() => {
+        if (sidebarButtonClickedCallback) {
+            toggleGlobalSidebar();
+            commentUtils?.clearPageModeComposerContext();
+
+            if(isGlobalSidebarOpen && client) {
+                client.setUiState({
+                    activeCommentToolId: null
+                });
+            }
+        }
+    }, [sidebarButtonClickedCallback, commentUtils, client]);
+
+    useEffect(() => {
+        if (commentUtils) {
+            commentUtils.getCommentAnnotations().subscribe((annotations) => {
+                const questionCounts = getQuestionCounts(annotations);
+                if (client) {
+                    client.setUiState({
+                        questionCounts: questionCounts
+                    });
+                }
+            });
+        }
+    }, [commentUtils, client]);
+
+    const getQuestionCounts = (data: GetCommentAnnotationsResponse) => {
+        const result: Record<string, number> = {};
+
+        for (const annotations of Object.values(data.data || {})) {
+            for (const annotation of annotations) {
+                const questionId = annotation.context?.questionId;
+                if (questionId) {
+                    result[questionId] = (result[questionId] || 0) + 1;
+                }
+            }
+        }
+
+        return result;
+    }
+
     return (
         <div className="flex items-center gap-[12px]">
             {/* [Velt] Show online users/collaborators */}
             <VeltTools />
             {/* Custom button to toggle embedded comments sidebar */}
-            <div className='privado-comment-sidebar-button'>
-                <button onClick={toggleGlobalSidebar} className={`privado-comment-sidebar-button-left-icon ${isGlobalSidebarOpen ? 'privado-comment-sidebar-button-left-icon--active' : ''}`}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clipPath="url(#clip0_163_2154)">
-                            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_163_2154">
-                                <rect width="16" height="16" fill="white" />
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </button>
+
+            <div className={`privado-comment-sidebar-button ${isGlobalSidebarOpen ? 'privado-comment-sidebar-button--active' : ''}`}>
+                <VeltSidebarButton></VeltSidebarButton>
                 <div className='privado-comment-sidebar-button-divider'></div>
                 <div className='privado-comment-sidebar-button-right-icon'>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

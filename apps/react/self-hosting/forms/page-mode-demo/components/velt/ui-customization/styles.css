@@ -257,13 +257,19 @@
     width: 100% !important;
 
     .privado-comment-dialog-thread-card-top-wrapper-right {
-        visibility: hidden !important;
+        /* visibility: hidden !important; */
     }
 
     &:hover {
         .privado-comment-dialog-thread-card-top-wrapper-right {
             visibility: visible !important;
         }
+    }
+}
+
+.velt-thread-card--show-actions {
+    .privado-comment-dialog-thread-card-top-wrapper-right {
+        visibility: visible !important;
     }
 }
 
@@ -303,7 +309,7 @@
 .privado-comment-dialog-thread-card-bottom-wrapper-left {
     display: flex;
     align-items: center;
-    gap: var(--units-xxs, 4px);
+    gap: 8px;
 
     .s-emoji-block {
         padding: 0 !important;
@@ -316,7 +322,7 @@
     padding: 3px 6px;
     justify-content: center;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     cursor: pointer;
 }
 
@@ -390,6 +396,10 @@
     gap: 8px;
     border-radius: var(--units-sm, 12px);
     cursor: pointer;
+
+    &:hover {
+        background: var(--Gray-10, #F2F6FC);
+    }
 }
 
 .privado-comment-dialog-composer-submit-button-wrapper {
@@ -659,18 +669,18 @@
         display: none !important;
     }
 
-    .velt-composer-comment-attachment--name {
+    .velt-composer--attachment-name {
         /* color: var(--Text-text-fade, #7E8DA9); */
-        color: var(--Text-text-primary, #172026);
-        font-variant-numeric: lining-nums tabular-nums;
+        color: var(--Text-text-primary, #172026) !important;
+        font-variant-numeric: lining-nums tabular-nums !important;
 
         /* UI Text/T200/Regular */
         /* font-family: "TT Interphases Pro Variable"; */
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18px; /* 138.462% */
-        flex: 1 0 0;
+        font-size: 13px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 18px !important; /* 138.462% */
+        flex: 1 0 0 !important;
     }
 
     &:hover {
@@ -679,6 +689,10 @@
             display: block !important;
         }
     }
+}
+
+app-comment-dialog-composer-attachments-other-name {
+    flex: 1 !important;
 }
 
 .privado-comment-dialog-thread-card-content-wrapper {
@@ -1208,11 +1222,6 @@ app-comment-dialog-thread-card-attachments-other-name {
     flex: 1 !important;
 }
 
-/* Note */
-app-comment-dialog-composer-attachments-other-name {
-    display: none !important;
-}
-
 .velt-composer--attachment-icon-btn {
     padding: 0 !important;
 }
@@ -1243,4 +1252,511 @@ app-comment-dialog-composer-attachments-other-name {
     width: 8px;
     height: 8px;
     background-color: "#FF7452";
+}
+
+.velt-autocomplete-panel--autocomplete.mat-mdc-autocomplete-panel {
+    padding: 0 4px !important;
+    border-radius: 10px !important;
+    background: var(--default-canvas, #FFF) !important;
+    box-shadow: 0 0 0 1px rgba(12, 55, 136, 0.14) !important;
+    width: 248px !important;
+}
+
+.velt-autocomplete-panel--autocomplete.mat-mdc-autocomplete-panel .mat-mdc-option {
+    min-height: auto !important;
+}
+
+.velt-autocomplete-panel--autocomplete.mat-mdc-autocomplete-panel .mat-mdc-option.mdc-list-item {
+    padding: 7px 8px !important;
+    border-radius: var(--units-xs, 8px) !important;
+    background: var(--default-canvas, #FFF) !important;
+    cursor: pointer !important;
+
+    &:hover {
+        background: var(--container, #F2F6FC) !important;
+    }
+}
+
+.privado-autocomplete-option-wrapper {
+    display: flex !important;
+    gap: 8px !important;
+    align-self: stretch !important;
+    align-items: center !important;
+
+    svg {
+        display: none !important;
+    }
+}
+
+velt-autocomplete-option-description-internal {
+    display: none !important;
+}
+
+.velt-autocomplete-option-icon {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    margin-right: 0 !important;
+    snippyly-user-avatar {
+        --legacy-velt-user-avatar-height: 16px !important;
+        --legacy-velt-user-avatar-width: 16px !important;
+    }
+}
+
+.velt-autocomplete-option-name {
+    color: var(--Text-text-secondary, #465169) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 18px !important; /* 138.462% */
+    align-self: stretch !important;
+}
+
+.velt-autocomplete-panel--autocomplete.mat-mdc-autocomplete-panel .mat-mdc-option.mdc-list-item.mat-mdc-option-active {
+    .velt-autocomplete-option-name {
+        color: var(--Text-text-accent, #754CFF) !important;
+    }
+
+    .privado-autocomplete-option-wrapper {
+        svg {
+            display: flex !important;
+        }
+    }
+}
+
+.privado-comment-tool-wrapper {
+    display: flex;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-btn-radius-xs, 6px);
+    cursor: pointer;
+    gap: 4px;
+    position: relative;
+
+    .velt-comment-tool-tooltip {
+        position: absolute;
+        top: -35px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;  /* Prevents text from wrapping */
+        display: inline-flex;
+        padding: 6px 12px;
+        align-items: flex-end;
+        gap: 10px;
+        border-radius: 12px;
+        background: var(--Gray-100, #12161F);
+        color: #F8F9F9;
+        font-variant-numeric: lining-nums tabular-nums;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        display: none;
+    }
+    &:hover {
+        background: var(--btn-tertiary-btn-tertiary-hover, #F8FAFF);
+        .velt-comment-tool-tooltip {
+            display: inline-flex;
+        }
+    }
+
+    .velt-comment-tool-has-comments-icon {
+        display: none;
+    }
+
+    .velt-comment-tool-no-comments-icon {
+        display: flex;
+    }
+
+    app-data {
+        color: var(--Text-text-accent, #754CFF);
+        font-variant-numeric: lining-nums tabular-nums;
+
+        /* UI Text/T300/Regular */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px; /* 133.333% */
+    }
+}
+
+.velt-comment-tool-wrapper-active {
+    .privado-comment-tool-wrapper { 
+        background: var(--btn-secondary-btn-secondary-hover, #F5EFFF);
+    }
+}
+
+.privado-comment-tool-wrapper:has(app-data:not(:empty)) {
+    .velt-comment-tool-has-comments-icon {
+        display: flex;
+    }
+
+    .velt-comment-tool-no-comments-icon {
+        display: none;
+    }
+}
+
+.privado-comment-bubble-wrapper {
+    display: flex;
+    padding: 4px;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+   border-radius: var(--border-radius-btn-radius-xs, 6px);
+
+    app-comment-bubble-comments-count {
+        color: var(--Text-text-accent, #754CFF) !important;
+        font-variant-numeric: lining-nums tabular-nums !important;
+
+        /* UI Text/T300/Regular */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 12px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 16px !important; /* 133.333% */
+    }
+
+    &:hover {
+        background: var(--btn-secondary-btn-secondary-hover, #F5EFFF);
+    }
+}
+
+
+.privado-page-mode-composer-header-wrapper {
+    width: 100%;
+
+    &:has(app-if:empty) {
+        display: none;
+    }
+
+    app-if {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px;
+        margin-top: -16px;
+        margin-inline: -12px;
+        border-radius: 0px;
+        padding-inline: 12px;
+        background-color: var(--transparent-canvas, #fff9);
+
+        app-data {
+            -webkit-line-clamp: 1;
+            color: var(--Text-text-secondary, #465169);
+            font-variant-numeric: lining-nums tabular-nums;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            align-self: stretch;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 18px;
+            display: -webkit-box;
+            overflow: hidden;
+        }
+       
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+.velt-sidebar-button {
+    display: flex !important;
+    padding: 8px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    background: var(--Gray-5, #F8FAFF) !important;
+    position: relative;
+}
+
+.privado-comment-sidebar-button--active {
+    .velt-sidebar-button {
+        background: var(--Purple-5, #F9F5FF) !important;
+    }
+}
+
+app-sidebar-button-unread-icon {
+    right: 2px !important;
+}
+
+.privado-sidebar-button-unread-icon-wrapper {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--Red-300, #FF7452);
+}
+
+.velt-assign-dropdown {
+    margin-bottom: 0px !important;
+}
+
+.velt-assign-dropdown>div {
+    padding: 0px !important;
+}
+
+.velt-dropdown-assign-trigger {
+    display: flex !important;
+    padding: 7px 12px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: var(--units-xs, 8px) !important;
+    align-self: stretch !important;
+    border-bottom: 1px solid var(--border-color-default, #EDF0F8) !important;
+    background: var(--Gray-5, #F8FAFF) !important;
+    border-radius: 12px 12px 0 0 !important;
+
+    .velt-assign-dropdown--checkbox-icon {
+        svg {
+            width: 14px !important;
+            height: 14px !important;
+            color: var(--Gray-50, #9AA8C3) !important;
+        }
+    }
+
+    .velt-assign-dropdown--input-label {
+        color: var(--Text-text-primary, #172026) !important;
+        font-variant-numeric: lining-nums tabular-nums !important;
+
+        /* UI Text/T200/Regular */
+        /* font-family: "TT Interphases Pro Variable" !important; */
+        font-size: 13px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 18px !important; /* 138.462% */
+        opacity: 0.4;
+    }
+
+    .velt-assign-dropdown--contact {
+        flex-grow: 0 !important;
+        flex-basis: auto !important;
+        margin-left: -4px !important;
+        color: var(--Text-text-primary, #172026) !important;
+        font-variant-numeric: lining-nums tabular-nums !important;
+
+        /* UI Text/T200/Regular */
+        /* font-family: "TT Interphases Pro Variable" !important; */
+        font-size: 13px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 18px !important; /* 138.462% */
+        opacity: 0.4;
+    }
+
+    .velt-assign-dropdown--arrow {
+        margin-left: -8px !important;
+    }
+}
+
+.v-dropdown-menu-trigger {
+    &:hover {
+        opacity: 1 !important;
+    }
+}
+
+.velt-dropdown-content-assign {
+    padding: 0 4px !important;
+    border-radius: 10px !important;
+    background: var(--default-canvas, #FFF) !important;
+    box-shadow: 0 0 0 1px rgba(12, 55, 136, 0.14) !important;
+    width: 248px !important;
+}
+
+.velt-assign-dropdown--item {
+    display: flex !important;
+    padding: 7px 8px !important;
+    align-items: center !important;
+    gap: 8px !important;
+    align-self: stretch !important;
+    border-radius: var(--units-xs, 8px) !important;
+    background: var(--default-canvas, #FFF);
+
+    &:hover {
+        background: var(--container, #F2F6FC) !important;
+    }
+    snippyly-user-avatar {
+        --legacy-velt-user-avatar-height: 16px !important;
+        --legacy-velt-user-avatar-width: 16px !important;
+    }
+    .velt-assign-dropdown--item-label {
+        color: var(--Text-text-secondary, #465169) !important;
+        font-variant-numeric: lining-nums tabular-nums !important;
+
+        /* UI Text/T200/Regular */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 13px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 18px !important; /* 138.462% */
+    }
+}
+
+.snippyly-menu .mat-mdc-menu-content .mat-mdc-menu-item {
+    padding: 0px !important;
+    min-height: auto !important;
+}
+
+app-comment-dialog-options-dropdown-content {
+    display: flex !important;
+    padding: 4px !important;
+    flex-direction: column !important;
+    /* align-items: center !important; */
+    align-self: stretch !important;
+    border-radius: 10px !important;
+    background: var(--default-canvas, #FFF) !important;
+    box-shadow: 0 0 0 1px rgba(12, 55, 136, 0.14) !important;
+}
+
+.privado-comment-dialog-thread-card-options-content-item-wrapper {
+    align-self: stretch;
+    color: var(--Text-text-secondary, #465169);
+    font-variant-numeric: lining-nums tabular-nums;
+
+    /* UI Text/T200/Regular */
+    /* font-family: "TT Interphases Pro Variable"; */
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 138.462% */
+
+    display: flex;
+    padding: 7px 8px;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+    border-radius: var(--units-xs, 8px);
+    background: var(--default-canvas, #FFF);
+
+    &:hover {
+        background: var(--container, #F2F6FC) !important;
+    }
+}
+
+
+app-comment-dialog-options-dropdown-trigger {
+    display: flex !important;
+    padding: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: var(--units-xxs, 4px) !important;
+    border-radius: var(--border-radius-btn-radius-s, 4px) !important;
+    background: var(--default-canvas, #FFF) !important;
+    cursor: pointer !important;
+}
+
+.velt-comment-dialog-options-dropdown-container {
+    margin-top: 6px !important;
+}
+
+.velt-options-dropdown-open {
+    app-comment-dialog-options-dropdown-trigger {
+                /* Focus/Neutral */
+        box-shadow: 0 0 0 1px #FFF, 0 0 0 4px rgba(30, 69, 169, 0.08) !important;
+    }
+}
+
+.privado-comments-sidebar-empty-placeholder-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    app-if {
+        width: fit-content;
+    }
+    .privado-comments-sidebar-empty-placeholder-icon-wrapper {
+        display: flex;
+        padding: 6.667px;
+        align-items: flex-start;
+        gap: 6.667px;
+        border-radius: 13.333px;
+        background: var(--transparent-canvas, rgba(255, 255, 255, 0.60));
+        box-shadow: 0 0 0 0.833px rgba(70, 81, 105, 0.10), 0 0.833px 0.833px 0 rgba(70, 81, 105, 0.08), 0 3.333px 6.667px 0 rgba(70, 81, 105, 0.08);
+        margin-bottom: 24px;
+    }
+
+    .privado-comments-sidebar-empty-placeholder-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        color: var(--Text-text-secondary, #465169);
+        text-align: center;
+        font-feature-settings: 'ss02' on, 'calt' off;
+        
+        /* Headlines/H500/Medium */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 492;
+        line-height: 24px; /* 150% */
+        align-self: stretch;
+        margin-bottom: 4px;
+    }
+
+    .privado-comments-sidebar-empty-placeholder-description {
+        color: var(--Text-text-fade, #7E8DA9);
+        text-align: center;
+        font-variant-numeric: lining-nums tabular-nums;
+
+        /* UI Text/T200/Regular */
+        /* font-family: "TT Interphases Pro Variable"; */
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 138.462% */
+        align-self: stretch;
+
+    }
+}
+
+.velt-reaction-pin--default {
+    height: 22px !important;
+}
+
+app-reaction-pin {
+    .skeleton-loader {
+        --velt-skeleton-loader-height: 22px !important;
+        --velt-skeleton-loader-width: 28px !important;
+    }
+}
+
+.s-user-avatar-initial-container {
+    border: 1px solid #FFF !important;
+
+    .s-user-avatar-initial {
+        font-size: 8px !important;
+    }
+}
+
+.loading-spinner {
+    animation: rotate 1s linear infinite;
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .velt-comment-dialog-options-dropdown:hover, .velt-comment-dialog-options-dropdown[_ngcontent-ng-c317025722]:focus {
+    background: transparent !important;
+}
+
+
+app-attachment-button {
+    button.action__button.velt-action-button[_ngcontent-ng-c1599586684]:hover {
+        background: transparent !important;
+    }
 }

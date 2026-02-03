@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import VeltReactionToolWf from "./VeltReactionToolWf";
 import VeltCommentDialogWf from "./VeltCommentDialogWf";
 import VeltCommentsSidebarWf from "./VeltCommentsSidebarWf";
+import VeltAutocompleteOptionWf from "./VeltAutocompleteOptionWf";
 
 export function VeltCustomization() {
   // [Velt] Get Velt client instance
@@ -28,6 +29,7 @@ export function VeltCustomization() {
       <VeltCommentDialogWf />
       <VeltReactionToolWf />
       <VeltCommentsSidebarWf />
+      <VeltAutocompleteOptionWf />
     </VeltWireframe>
   );
 }
