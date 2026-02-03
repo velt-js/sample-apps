@@ -1888,7 +1888,7 @@ velt-autocomplete-option-description-internal {
 }
 
 
-.oe-thread-card-info oe--actions-container {
+.oe-thread-card-info.oe--actions-container {
     app-if {
         &:empty {
             display: none !important;

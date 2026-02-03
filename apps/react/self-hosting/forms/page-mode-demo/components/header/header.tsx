@@ -1,8 +1,7 @@
 'use client'
 
 import VeltTools from '@/components/velt/VeltTools'
-import { useCommentUtils, useCommentEventCallback, useVeltEventCallback, VeltSidebarButton, useVeltClient } from '@veltdev/react';
-import { GetCommentAnnotationsResponse } from '@veltdev/types';
+import { useCommentUtils, useCommentEventCallback, useVeltEventCallback, VeltSidebarButton } from '@veltdev/react';
 import { useEffect } from 'react';
 
 interface HeaderProps {
@@ -24,7 +23,6 @@ export default function Header({
     const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
     const sidebarButtonClickedCallback = useCommentEventCallback('sidebarButtonClick');
     const commentBubbleClickedCallback = useCommentEventCallback('commentBubbleClicked');
-    const { client } = useVeltClient();
 
     useEffect(() => {
         if (veltButtonClickEventData) {
@@ -43,7 +41,7 @@ export default function Header({
             }
             setActiveCommentToolId(commentToolClickedCallback?.context?.questionId);
         }
-    }, [commentToolClickedCallback, commentUtils, client, setActiveCommentToolId]);
+    }, [commentToolClickedCallback, commentUtils, setActiveCommentToolId, openGlobalSidebar]);
 
     useEffect(() => {
         if (sidebarButtonClickedCallback) {
@@ -51,7 +49,7 @@ export default function Header({
             commentUtils?.clearPageModeComposerContext();
             setActiveCommentToolId(null);
         }
-    }, [sidebarButtonClickedCallback, commentUtils, client, setActiveCommentToolId]);
+    }, [sidebarButtonClickedCallback, commentUtils, setActiveCommentToolId, toggleGlobalSidebar]);
 
     useEffect(() => {
         if (commentBubbleClickedCallback && commentUtils) {
@@ -61,7 +59,7 @@ export default function Header({
             }, 0);
             setActiveCommentToolId(commentBubbleClickedCallback.commentAnnotation?.context?.questionId);
         }
-    }, [commentBubbleClickedCallback, commentUtils, client, setActiveCommentToolId]);
+    }, [commentBubbleClickedCallback, commentUtils, setActiveCommentToolId, openGlobalSidebar]);
 
     return (
         <div className="flex items-center gap-[12px]">
