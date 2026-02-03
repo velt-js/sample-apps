@@ -445,7 +445,6 @@ export default function DocumentCanvas() {
           setActiveCommentToolId={setActiveCommentToolId}
         />
       </div>
-
       {/* Second Header Bar */}
       <div
         className="flex items-center justify-between pl-[24px] pr-[20px] py-[12px] flex-shrink-0"
