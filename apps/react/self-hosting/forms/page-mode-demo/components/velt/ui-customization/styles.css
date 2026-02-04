@@ -257,7 +257,7 @@
     width: 100% !important;
 
     .privado-comment-dialog-thread-card-top-wrapper-right {
-        /* visibility: hidden !important; */
+        visibility: hidden !important;
     }
 
     &:hover {
@@ -1189,17 +1189,17 @@ button.action__button.velt-action-button {
 
 .velt-autocomplete--contact-chip {
     color: var(--Text-text-primary, #172026) !important;
-    font-variant-numeric: lining-nums tabular-nums !important;
 
-    /* UI Text/T200/Medium */
+    /* UI Text/T100/Medium */
     /* font-family: "TT Interphases Pro Variable"; */
-    font-size: 13px !important;
-    font-style: normal !important; 
+    font-size: 14px !important;
+    font-style: normal !important;
     font-weight: 492 !important;
     line-height: 18px !important;
-
-    background-color: transparent !important;
-    padding: 0 !important;
+    border-radius: 4px !important;
+    background: var(--Purple-20, #EFE3FF) !important;
+    padding-inline: 2px !important;
+    padding-block: 1px !important;
 }
 
 
@@ -1791,5 +1791,13 @@ app-attachment-button {
         .velt-comment-tool-tooltip {
             display: inline-flex;
         }
+    }
+}
+
+.velt-thread-card--container {
+    app-if {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
     }
 }
