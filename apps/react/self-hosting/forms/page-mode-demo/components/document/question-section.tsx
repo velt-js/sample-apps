@@ -52,7 +52,6 @@ export const QuestionSection = ({ question, sectionRef, value, onChange, activeC
           <VeltCommentBubble
             targetElementId={targetElementId}
             openDialog={false}
-            context={{ questionId: question.id, questionNumber: question.number, questionTitle: question.title}}
           />
           <VeltCommentTool
             contextInPageModeComposer={true}
