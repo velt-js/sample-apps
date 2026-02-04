@@ -38,7 +38,7 @@ const VeltCommentDialoglWf = () => {
                             </VeltCommentDialogWireframe.AssigneeBanner.UnresolveButton>
                         </div>
                         <div className="privado-comment-dialog-assignee-banner-wrapper-right">
-                            Assigned to <VeltData field="annotation.assignedTo.userId" />
+                            Assigned to <VeltData field="annotation.assignedTo.name" />
                         </div>
                     </div>
                 </VeltCommentDialogWireframe.AssigneeBanner>
@@ -70,7 +70,7 @@ const VeltCommentDialoglWf = () => {
                                         <VeltCommentDialogWireframe.ThreadCard.AssignButton veltIf="!{annotation.resolvedByUserId}">
                                             <div className="privado-comment-dialog-thread-card-assign-button-wrapper">
                                                 <AssignUserIcon />
-                                                <span className="velt-comment-tool-tooltip">Assign</span>
+                                                {/* <span className="velt-comment-tool-tooltip">Assign</span> */}
                                             </div>
                                         </VeltCommentDialogWireframe.ThreadCard.AssignButton>
                                         <VeltCommentDialogWireframe.ThreadCard.Options veltIf="{commentObj.from.userId} === {user.userId}">
@@ -108,10 +108,12 @@ const VeltCommentDialoglWf = () => {
                                     </VeltCommentDialogWireframe.ThreadCard.Attachments>
                                 </div>
                                 <div className="privado-comment-dialog-thread-card-bottom-wrapper">
-                                    <div className="privado-comment-dialog-thread-card-bottom-wrapper-left">
-                                        <VeltCommentDialogWireframe.ThreadCard.ReactionPin reactionId="THUMBS_UP" />
-                                        <VeltCommentDialogWireframe.ThreadCard.Reactions excludeReactionIds={['THUMBS_UP']} />
-                                    </div>
+                                    <VeltIf condition="{editCommentIndex} !== {i}">
+                                        <div className="privado-comment-dialog-thread-card-bottom-wrapper-left">
+                                            <VeltCommentDialogWireframe.ThreadCard.ReactionPin reactionId="THUMBS_UP" />
+                                            <VeltCommentDialogWireframe.ThreadCard.Reactions excludeReactionIds={['THUMBS_UP']} />
+                                        </div>
+                                    </VeltIf>
                                     <VeltIf condition="!{focusedThreadMode} && !{commentDialogSelected}">
                                         <div className="privado-comment-dialog-thread-card-bottom-wrapper-right">
                                             <VeltCommentDialogWireframe.ReplyAvatars />
