@@ -1793,3 +1793,11 @@ app-attachment-button {
         }
     }
 }
+
+.velt-thread-card--container {
+    app-if {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
+    }
+}
