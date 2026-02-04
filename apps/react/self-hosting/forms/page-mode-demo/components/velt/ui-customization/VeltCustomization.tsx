@@ -9,6 +9,8 @@ import VeltReactionToolWf from "./VeltReactionToolWf";
 import VeltCommentDialogWf from "./VeltCommentDialogWf";
 import VeltCommentsSidebarWf from "./VeltCommentsSidebarWf";
 import VeltAutocompleteOptionWf from "./VeltAutocompleteOptionWf";
+import VeltReactionPinWf from "./VeltReactionPinWf";
+import VeltCommentComposerWf from "./VeltCommentComposerWf";
 
 export function VeltCustomization() {
   // [Velt] Get Velt client instance
@@ -30,6 +32,8 @@ export function VeltCustomization() {
       <VeltReactionToolWf />
       <VeltCommentsSidebarWf />
       <VeltAutocompleteOptionWf />
+      <VeltReactionPinWf />
+      <VeltCommentComposerWf />
     </VeltWireframe>
   );
 }

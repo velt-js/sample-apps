@@ -50,13 +50,13 @@ export const QuestionSection = ({ question, sectionRef, value, onChange, activeC
         {/* activeCommentToolId is used to show the active comment tool / bubble */}
         <div className={`flex items-center gap-1 ml-4 ${activeCommentToolId === question.id ? 'velt-comment-tool-wrapper-active' : ''}`}>
           <VeltCommentBubble
-            // targetElementId={targetElementId}
+            targetElementId={targetElementId}
             openDialog={false}
             context={{ questionId: question.id, questionNumber: question.number, questionTitle: question.title}}
           />
           <VeltCommentTool
             contextInPageModeComposer={true}
-            // targetElementId={targetElementId}
+            targetElementId={targetElementId}
             context={{ questionId: question.id, questionNumber: question.number, questionTitle: question.title}}
           />
         </div>
