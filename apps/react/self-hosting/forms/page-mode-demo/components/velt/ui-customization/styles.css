@@ -1799,3 +1799,8 @@ app-attachment-button {
     flex-direction: column;
     width: 100% !important;
 }
+
+.velt-reaction-pin--emoji img {
+    width: 14px !important;
+    height: 14px !important;
+}
