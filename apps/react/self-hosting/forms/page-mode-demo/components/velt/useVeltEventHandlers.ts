@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { useCommentUtils, useCommentEventCallback, useVeltEventCallback } from '@veltdev/react'
+import { CommentBubbleClickedEvent, CommentToolClickEvent, SidebarButtonClickEvent, VeltButtonClickEvent } from '@veltdev/types'
 
 interface UseVeltEventHandlersProps {
   toggleGlobalSidebar: () => void
@@ -22,10 +23,10 @@ export function useVeltEventHandlers({
   setActiveCommentToolId
 }: UseVeltEventHandlersProps) {
   const commentUtils = useCommentUtils()
-  const commentToolClickedCallback = useCommentEventCallback('commentToolClick')
-  const commentBubbleClickedCallback = useCommentEventCallback('commentBubbleClicked')
-  const sidebarButtonClickedCallback = useCommentEventCallback('sidebarButtonClick')
-  const veltButtonClickEventData = useVeltEventCallback('veltButtonClick')
+  const commentToolClickedCallback: CommentToolClickEvent = useCommentEventCallback('commentToolClick')
+  const commentBubbleClickedCallback: CommentBubbleClickedEvent = useCommentEventCallback('commentBubbleClicked')
+  const sidebarButtonClickedCallback: SidebarButtonClickEvent = useCommentEventCallback('sidebarButtonClick')
+  const veltButtonClickEventData: VeltButtonClickEvent = useVeltEventCallback('veltButtonClick')
 
   // Handle custom button click (remove page mode composer)
   useEffect(() => {
@@ -41,7 +42,7 @@ export function useVeltEventHandlers({
     if (commentToolClickedCallback) {
       openGlobalSidebar()
       if (commentUtils) {
-        commentUtils?.setContextInPageModeComposer(commentToolClickedCallback?.context)
+        commentUtils?.setContextInPageModeComposer({context: commentToolClickedCallback?.context, targetElementId: commentToolClickedCallback?.targetElementId})
         commentUtils?.focusPageModeComposer()
       }
       setActiveCommentToolId(commentToolClickedCallback?.context?.questionId)
