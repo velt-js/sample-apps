@@ -1,73 +1,19 @@
 'use client'
 
 import VeltTools from '@/components/velt/VeltTools'
-import { useCommentUtils, useCommentEventCallback, useVeltEventCallback, VeltSidebarButton } from '@veltdev/react';
-import { useEffect } from 'react';
+import { VeltSidebarButton } from '@veltdev/react'
 
 interface HeaderProps {
-    toggleGlobalSidebar: () => void
-    openGlobalSidebar: () => void
     isGlobalSidebarOpen: boolean
-    setActiveCommentToolId: (annotationId: string | null) => void
 }
 
-export default function Header({
-    toggleGlobalSidebar,
-    openGlobalSidebar,
-    isGlobalSidebarOpen,
-    setActiveCommentToolId
-}: HeaderProps) {
-
-    const commentToolClickedCallback = useCommentEventCallback('commentToolClick');
-    const commentUtils = useCommentUtils();
-    const veltButtonClickEventData = useVeltEventCallback('veltButtonClick');
-    const sidebarButtonClickedCallback = useCommentEventCallback('sidebarButtonClick');
-    const commentBubbleClickedCallback = useCommentEventCallback('commentBubbleClicked');
-
-    useEffect(() => {
-        if (veltButtonClickEventData) {
-            if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'remove-page-mode-composer-button') {
-                commentUtils?.clearPageModeComposerContext();
-            }
-        }
-    }, [veltButtonClickEventData, commentUtils]);
-
-    useEffect(() => {
-        if (commentToolClickedCallback) {
-            openGlobalSidebar();
-            if (commentUtils) {
-                commentUtils?.setContextInPageModeComposer(commentToolClickedCallback?.context);
-                commentUtils?.focusPageModeComposer();
-            }
-            setActiveCommentToolId(commentToolClickedCallback?.context?.questionId);
-        }
-    }, [commentToolClickedCallback, commentUtils, setActiveCommentToolId, openGlobalSidebar]);
-
-    useEffect(() => {
-        if (sidebarButtonClickedCallback) {
-            toggleGlobalSidebar();
-            commentUtils?.clearPageModeComposerContext();
-            setActiveCommentToolId(null);
-        }
-    }, [sidebarButtonClickedCallback, commentUtils, setActiveCommentToolId, toggleGlobalSidebar]);
-
-    useEffect(() => {
-        if (commentBubbleClickedCallback && commentUtils) {
-            openGlobalSidebar();
-            setTimeout(() => {
-                commentUtils.selectCommentByAnnotationId(commentBubbleClickedCallback.annotationId);
-            }, 0);
-            setActiveCommentToolId(commentBubbleClickedCallback.commentAnnotation?.context?.questionId);
-        }
-    }, [commentBubbleClickedCallback, commentUtils, setActiveCommentToolId, openGlobalSidebar]);
-
+export default function Header({ isGlobalSidebarOpen }: HeaderProps) {
     return (
         <div className="flex items-center gap-[12px]">
             {/* [Velt] Show online users/collaborators */}
             <VeltTools />
-            {/* Custom button to toggle embedded comments sidebar */}
-
             <div className={`privado-comment-sidebar-button ${isGlobalSidebarOpen ? 'privado-comment-sidebar-button--active' : ''}`}>
+                {/* Custom button to toggle embedded comments sidebar */}
                 <VeltSidebarButton></VeltSidebarButton>
                 <div className='privado-comment-sidebar-button-divider'></div>
                 <div className='privado-comment-sidebar-button-right-icon'>
