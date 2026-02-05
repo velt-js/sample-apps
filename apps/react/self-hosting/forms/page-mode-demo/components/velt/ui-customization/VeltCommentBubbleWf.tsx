@@ -1,18 +1,19 @@
 "use client";
-import { VeltCommentBubbleWireframe, VeltData } from '@veltdev/react';
-import { CommentBubbleIcon, CommentHasCommentsIcon, CommentNoCommentsIcon } from './VeltIcons';
+import { VeltCommentBubbleWireframe } from '@veltdev/react';
+import { CommentHasCommentsIcon } from './VeltIcons';
+import { CommentToolWrapper, CommentToolTooltip } from './styled';
 
 const VeltCommentBubbleWf = () => {
     return (
         // [Velt] Custom wireframe for comment bubble UI - shows when comments exist
         <VeltCommentBubbleWireframe>
-            <div className="privado-comment-tool-wrapper">
+            <CommentToolWrapper className="privado-comment-tool-wrapper">
                 <span className="velt-comment-tool-has-comments-icon">
                     <CommentHasCommentsIcon />
-                    <span className="velt-comment-tool-tooltip">View comments</span>
+                    <CommentToolTooltip className="velt-comment-tool-tooltip">View comments</CommentToolTooltip>
                 </span>
                 <VeltCommentBubbleWireframe.CommentsCount />
-            </div>
+            </CommentToolWrapper>
         </VeltCommentBubbleWireframe>
     );
 };

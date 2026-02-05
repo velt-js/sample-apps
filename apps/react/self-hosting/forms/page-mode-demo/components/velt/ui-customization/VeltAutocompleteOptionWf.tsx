@@ -2,15 +2,16 @@
 
 import { VeltAutocompleteOptionWireframe } from "@veltdev/react";
 import { CheckIcon } from './VeltIcons';
+import { AutocompleteOptionWrapper } from './styled';
 
 const VeltAutocompleteOptionWf = () => {
     return (
         <VeltAutocompleteOptionWireframe>
-            <div className="privado-autocomplete-option-wrapper">
+            <AutocompleteOptionWrapper className="privado-autocomplete-option-wrapper">
                 <VeltAutocompleteOptionWireframe.Icon />
                 <VeltAutocompleteOptionWireframe.Name />
                 <CheckIcon />
-            </div>
+            </AutocompleteOptionWrapper>
         </VeltAutocompleteOptionWireframe>
     );
 };
