@@ -688,6 +688,16 @@ export const GlobalVeltStyles = createGlobalStyle`
     margin: 4px !important;
   }
 
+  .privado-comment-dialog-thread-card-edit-mode {
+    app-comment-dialog-thread-card-message {
+      display: none !important;
+    }
+
+    app-comment-dialog-thread-card-attachments {
+      display: none !important;
+    }
+  }
+
   .privado-reaction-pin-default-icon {
     display: none !important;
   }
@@ -772,6 +782,7 @@ export const CommentDialogWrapper = styled.div`
   background: var(--default-canvas, #FFF);
   box-shadow: 0 1px 1px 0 rgba(92, 108, 138, 0.12), 0 2px 4px 0 rgba(70, 81, 105, 0.08);
   position: relative !important;
+  z-index: 1 !important;
 
   & > *:first-child {
     width: 100% !important;
@@ -1346,7 +1357,9 @@ export const SidebarHeaderWrapper = styled.div`
   gap: 12px;
   border-bottom: 1px solid var(--border-color-default, #EDF0F8);
   background: var(--transparent-canvas, rgba(255, 255, 255, 0.60));
+  backdrop-filter: blur(20px);
   position: relative !important;
+  z-index: 999999998 !important;
 `;
 
 export const SidebarHeaderLeftWrapper = styled.div`
@@ -1560,28 +1573,6 @@ export const CommentToolTooltip = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-`;
-
-export const CommentBubbleWrapper = styled.div`
-  display: flex;
-  padding: 4px;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  border-radius: var(--border-radius-btn-radius-xs, 6px);
-
-  app-comment-bubble-comments-count {
-    color: var(--Text-text-accent, #754CFF) !important;
-    font-variant-numeric: lining-nums tabular-nums !important;
-    font-size: 12px !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    line-height: 16px !important;
-  }
-
-  &:hover {
-    background: var(--btn-secondary-btn-secondary-hover, #F5EFFF);
-  }
 `;
 
 // =============================================
