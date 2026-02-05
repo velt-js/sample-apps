@@ -1,6 +1,7 @@
 "use client";
 import { VeltSidebarButtonWireframe } from '@veltdev/react';
 import { SidebarButtonIcon } from './VeltIcons';
+import { SidebarButtonUnreadIconWrapper } from './styled';
 
 const VeltSidebarButtonWf = () => {
     return (
@@ -8,7 +9,7 @@ const VeltSidebarButtonWf = () => {
         <VeltSidebarButtonWireframe>
             <SidebarButtonIcon />
             <VeltSidebarButtonWireframe.UnreadIcon>
-                <div className='privado-sidebar-button-unread-icon-wrapper'></div>
+                <SidebarButtonUnreadIconWrapper className='privado-sidebar-button-unread-icon-wrapper' />
             </VeltSidebarButtonWireframe.UnreadIcon>
         </VeltSidebarButtonWireframe>
     );

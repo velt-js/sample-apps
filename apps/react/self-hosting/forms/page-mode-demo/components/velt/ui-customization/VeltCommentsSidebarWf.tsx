@@ -2,93 +2,109 @@
 
 import { VeltCommentsSidebarWireframe, VeltData, VeltIf } from "@veltdev/react";
 import { FilterIcon, CheckIcon, EmptyCommentIcon, BackArrowIcon } from './VeltIcons';
+import {
+    SidebarWrapper,
+    SidebarHeaderWrapper,
+    SidebarHeaderLeftWrapper,
+    SidebarHeaderRightWrapper,
+    FilterDropdownTriggerWrapper,
+    FilterDropdownContentItemWrapper,
+    FilterDropdownContentDivider,
+    EmptyPlaceholderWrapper,
+    EmptyPlaceholderIconWrapper,
+    EmptyPlaceholderTitle,
+    EmptyPlaceholderDescription,
+    FocusedThreadHeaderWrapper,
+    FocusedThreadBackButtonWrapper,
+    FocusedThreadBackButtonText,
+    FocusedThreadQuestionWrapper
+} from './styled';
 
 const VeltCommentsSidebarWf = () => {
     return (
         <VeltCommentsSidebarWireframe>
-            <div className="privado-comments-sidebar-wrapper">
+            <SidebarWrapper className="privado-comments-sidebar-wrapper">
                 <VeltCommentsSidebarWireframe.Skeleton />
                 <VeltCommentsSidebarWireframe.Panel>
-                    <div className="privado-comments-sidebar-header-wrapper">
-                        <div className="privado-comments-sidebar-header-left-wrapper">
+                    <SidebarHeaderWrapper className="privado-comments-sidebar-header-wrapper">
+                        <SidebarHeaderLeftWrapper className="privado-comments-sidebar-header-left-wrapper">
                             <VeltData field="filteredCommentAnnotationsCount" />
                             &nbsp;
                             <span>Comments</span>
-                        </div>
-                        <div className="privado-comments-sidebar-header-right-wrapper">
+                        </SidebarHeaderLeftWrapper>
+                        <SidebarHeaderRightWrapper className="privado-comments-sidebar-header-right-wrapper">
                             <VeltCommentsSidebarWireframe.MinimalFilterDropdown>
                                 <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Trigger>
-                                    <div className="privado-comments-sidebar-header-filter-dropdown-trigger-wrapper">
+                                    <FilterDropdownTriggerWrapper className="privado-comments-sidebar-header-filter-dropdown-trigger-wrapper">
                                         <FilterIcon />
-                                    </div>
+                                    </FilterDropdownTriggerWrapper>
                                 </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Trigger>
                                 <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content>
                                     <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.SortDate>
-                                        <div className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
+                                        <FilterDropdownContentItemWrapper className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
                                             <span>Sort by date</span>
                                             <CheckIcon />
-                                        </div>
+                                        </FilterDropdownContentItemWrapper>
                                     </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.SortDate>
                                     <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.SortUnread>
-                                        <div className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
+                                        <FilterDropdownContentItemWrapper className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
                                             <span>Sort by unread</span>
                                             <CheckIcon />
-                                        </div>
+                                        </FilterDropdownContentItemWrapper>
                                     </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.SortUnread>
-                                    <div className="privado-comments-sidebar-header-filter-dropdown-content-divider">
-                                    </div>
+                                    <FilterDropdownContentDivider className="privado-comments-sidebar-header-filter-dropdown-content-divider" />
                                     <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterAssignedToMe>
-                                        <div className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
+                                        <FilterDropdownContentItemWrapper className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
                                             <span>Only show assigned to me</span>
                                             <CheckIcon />
-                                        </div>
+                                        </FilterDropdownContentItemWrapper>
                                     </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterAssignedToMe>
                                     <VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterOpen>
-                                        <div className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
+                                        <FilterDropdownContentItemWrapper className="privado-comments-sidebar-header-filter-dropdown-content-item-wrapper">
                                             <span>Hide resolved comments</span>
                                             <CheckIcon />
-                                        </div>
+                                        </FilterDropdownContentItemWrapper>
                                     </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content.FilterOpen>
                                 </VeltCommentsSidebarWireframe.MinimalFilterDropdown.Content>
                             </VeltCommentsSidebarWireframe.MinimalFilterDropdown>
-                        </div>
-                    </div>
+                        </SidebarHeaderRightWrapper>
+                    </SidebarHeaderWrapper>
                     <VeltCommentsSidebarWireframe.List />
                     <VeltCommentsSidebarWireframe.EmptyPlaceholder>
-                        <div className="privado-comments-sidebar-empty-placeholder-wrapper">
-                            <div className="privado-comments-sidebar-empty-placeholder-icon-wrapper">
+                        <EmptyPlaceholderWrapper className="privado-comments-sidebar-empty-placeholder-wrapper">
+                            <EmptyPlaceholderIconWrapper className="privado-comments-sidebar-empty-placeholder-icon-wrapper">
                                 <EmptyCommentIcon />
-                            </div>
-                            <div className="privado-comments-sidebar-empty-placeholder-title">
+                            </EmptyPlaceholderIconWrapper>
+                            <EmptyPlaceholderTitle className="privado-comments-sidebar-empty-placeholder-title">
                                 <VeltIf condition="{noCommentsFound}">
                                     No comments yet
                                 </VeltIf>
                                 <VeltIf condition="!{noCommentsFound}">
                                     No comments to display
                                 </VeltIf>
-                            </div>
-                            <div className="privado-comments-sidebar-empty-placeholder-description">
+                            </EmptyPlaceholderTitle>
+                            <EmptyPlaceholderDescription className="privado-comments-sidebar-empty-placeholder-description">
                                 Comment on findings, discuss questions, or @mention teammates
-                            </div>
-                        </div>
+                            </EmptyPlaceholderDescription>
+                        </EmptyPlaceholderWrapper>
                     </VeltCommentsSidebarWireframe.EmptyPlaceholder>
                     <VeltCommentsSidebarWireframe.PageModeComposer />
                 </VeltCommentsSidebarWireframe.Panel>
                 <VeltCommentsSidebarWireframe.FocusedThread>
-                    <div className="privado-comments-sidebar-focused-thread-header-wrapper">
+                    <FocusedThreadHeaderWrapper className="privado-comments-sidebar-focused-thread-header-wrapper">
                         <VeltCommentsSidebarWireframe.FocusedThread.BackButton>
-                            <div className="privado-comments-sidebar-focused-thread-back-button-wrapper">
+                            <FocusedThreadBackButtonWrapper className="privado-comments-sidebar-focused-thread-back-button-wrapper">
                                 <BackArrowIcon />
-                                <span className="privado-comments-sidebar-focused-thread-back-button-text">Back</span>
-                            </div>
+                                <FocusedThreadBackButtonText className="privado-comments-sidebar-focused-thread-back-button-text">Back</FocusedThreadBackButtonText>
+                            </FocusedThreadBackButtonWrapper>
                         </VeltCommentsSidebarWireframe.FocusedThread.BackButton>
-                    </div>
-                    <div className="privado-comments-sidebar-focused-thread-question-wrapper">
+                    </FocusedThreadHeaderWrapper>
+                    <FocusedThreadQuestionWrapper className="privado-comments-sidebar-focused-thread-question-wrapper">
                         <VeltData field="focusedAnnotation.context.questionTitle" />
-                    </div>
+                    </FocusedThreadQuestionWrapper>
                     <VeltCommentsSidebarWireframe.FocusedThread.DialogContainer />
                 </VeltCommentsSidebarWireframe.FocusedThread>
-            </div>
+            </SidebarWrapper>
         </VeltCommentsSidebarWireframe>
     );
 };

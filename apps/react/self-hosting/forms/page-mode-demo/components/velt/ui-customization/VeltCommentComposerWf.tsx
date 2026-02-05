@@ -2,28 +2,39 @@
 
 import { VeltCommentDialogWireframe } from "@veltdev/react";
 import { SendIcon, PdfAttachmentIcon, LoadingSpinnerIcon, DeleteIcon, AttachmentIcon, MentionIcon } from "./VeltIcons";
+import {
+    ComposerWrapper,
+    ComposerInputWrapper,
+    ComposerInputWrapperInner,
+    ComposerActionsWrapper,
+    ComposerActionsLeft,
+    ComposerActionsRight,
+    ComposerActionButtonWrapper,
+    ComposerSubmitButtonWrapper,
+    ComposerAttachmentsOther
+} from './styled';
 
 const VeltCommentComposerWf = () => {
     return (
         <VeltCommentDialogWireframe.Composer>
-            <div className="privado-comment-dialog-composer-wrapper">
+            <ComposerWrapper className="privado-comment-dialog-composer-wrapper">
                 <VeltCommentDialogWireframe.Composer.AssignUser />
-                <div className="privado-comment-dialog-composer-input-wrapper">
-                    <div className="privado-comment-dialog-composer-input-wrapper-inner">
+                <ComposerInputWrapper className="privado-comment-dialog-composer-input-wrapper">
+                    <ComposerInputWrapperInner className="privado-comment-dialog-composer-input-wrapper-inner">
                         <VeltCommentDialogWireframe.Composer.Input placeholder="Write a comment..." />
-                        <div className="privado-comment-dialog-composer-actions-right">
+                        <ComposerActionsRight className="privado-comment-dialog-composer-actions-right">
                             <VeltCommentDialogWireframe.Composer.ActionButton type="submit">
-                                <div className="privado-comment-dialog-composer-submit-button-wrapper">
+                                <ComposerSubmitButtonWrapper className="privado-comment-dialog-composer-submit-button-wrapper">
                                     <SendIcon />
-                                </div>
+                                </ComposerSubmitButtonWrapper>
                             </VeltCommentDialogWireframe.Composer.ActionButton>
-                        </div>
-                    </div>
+                        </ComposerActionsRight>
+                    </ComposerInputWrapperInner>
                     <VeltCommentDialogWireframe.Composer.Attachments>
                         <VeltCommentDialogWireframe.Composer.Attachments.Selected>
                             <VeltCommentDialogWireframe.Composer.Attachments.Selected.Image />
                             <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other>
-                                <div className="privado-comment-dialog-composer-attachments-other">
+                                <ComposerAttachmentsOther className="privado-comment-dialog-composer-attachments-other">
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Icon>
                                         <PdfAttachmentIcon />
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Icon>
@@ -34,33 +45,33 @@ const VeltCommentComposerWf = () => {
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Delete>
                                         <DeleteIcon />
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Delete>
-                                </div>
+                                </ComposerAttachmentsOther>
                             </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other>
                         </VeltCommentDialogWireframe.Composer.Attachments.Selected>
                     </VeltCommentDialogWireframe.Composer.Attachments>
-                </div>
-                <div className="privado-comment-dialog-composer-actions-wrapper">
-                    <div className="privado-comment-dialog-composer-actions-left">
+                </ComposerInputWrapper>
+                <ComposerActionsWrapper className="privado-comment-dialog-composer-actions-wrapper">
+                    <ComposerActionsLeft className="privado-comment-dialog-composer-actions-left">
                         <VeltCommentDialogWireframe.Composer.ActionButton type="attachments">
-                            <div className="privado-comment-dialog-composer-action-button-wrapper">
+                            <ComposerActionButtonWrapper className="privado-comment-dialog-composer-action-button-wrapper">
                                 <AttachmentIcon />
-                            </div>
+                            </ComposerActionButtonWrapper>
                         </VeltCommentDialogWireframe.Composer.ActionButton>
                         <VeltCommentDialogWireframe.Composer.ActionButton type="userMentions">
-                            <div className="privado-comment-dialog-composer-action-button-wrapper">
+                            <ComposerActionButtonWrapper className="privado-comment-dialog-composer-action-button-wrapper">
                                 <MentionIcon />
-                            </div>
+                            </ComposerActionButtonWrapper>
                         </VeltCommentDialogWireframe.Composer.ActionButton>
-                    </div>
-                    <div className="privado-comment-dialog-composer-actions-right">
+                    </ComposerActionsLeft>
+                    <ComposerActionsRight className="privado-comment-dialog-composer-actions-right">
                         <VeltCommentDialogWireframe.Composer.ActionButton type="submit">
-                            <div className="privado-comment-dialog-composer-submit-button-wrapper">
+                            <ComposerSubmitButtonWrapper className="privado-comment-dialog-composer-submit-button-wrapper">
                                 <SendIcon />
-                            </div>
+                            </ComposerSubmitButtonWrapper>
                         </VeltCommentDialogWireframe.Composer.ActionButton>
-                    </div>
-                </div>
-            </div>
+                    </ComposerActionsRight>
+                </ComposerActionsWrapper>
+            </ComposerWrapper>
         </VeltCommentDialogWireframe.Composer>
     );
 };

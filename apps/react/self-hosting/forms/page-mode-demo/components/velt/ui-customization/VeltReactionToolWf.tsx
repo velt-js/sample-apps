@@ -2,13 +2,14 @@
 
 import { VeltReactionToolWireframe } from "@veltdev/react";
 import { ReactionIcon } from './VeltIcons';
+import { ReactionWrapper } from './styled';
 
 const VeltReactionToolWf = () => {
     return (
         <VeltReactionToolWireframe>
-            <div className="privado-reaction-wrapper">
+            <ReactionWrapper className="privado-reaction-wrapper">
                 <ReactionIcon />
-            </div>
+            </ReactionWrapper>
         </VeltReactionToolWireframe>
     );
 };

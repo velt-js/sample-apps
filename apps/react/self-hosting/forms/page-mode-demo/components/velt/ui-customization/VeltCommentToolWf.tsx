@@ -1,17 +1,18 @@
 "use client";
-import { VeltCommentToolWireframe, VeltData } from '@veltdev/react';
-import { CommentNoCommentsIcon, CommentHasCommentsIcon } from './VeltIcons';
+import { VeltCommentToolWireframe } from '@veltdev/react';
+import { CommentNoCommentsIcon } from './VeltIcons';
+import { CommentToolWrapper, CommentToolTooltip } from './styled';
 
 const VeltCommentToolWf = () => {
     return (
         // [Velt] Custom wireframe for comment tool - add new comment button
         <VeltCommentToolWireframe veltClass="'velt-comment-tool-wrapper-active': {activeCommentToolId} === {context.questionId}">
-            <div className="privado-comment-tool-wrapper">
+            <CommentToolWrapper className="privado-comment-tool-wrapper">
                 <span className="velt-comment-tool-no-comments-icon">
                     <CommentNoCommentsIcon />
-                    <span className="velt-comment-tool-tooltip">Add comment</span>
+                    <CommentToolTooltip className="velt-comment-tool-tooltip">Add comment</CommentToolTooltip>
                 </span>
-            </div>
+            </CommentToolWrapper>
         </VeltCommentToolWireframe>
     );
 };

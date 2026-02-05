@@ -3,7 +3,7 @@ import { useVeltClient, VeltWireframe } from "@veltdev/react";
 import VeltCommentBubbleWf from "./VeltCommentBubbleWf";
 import VeltCommentToolWf from "./VeltCommentToolWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
-import "./styles.css";
+import { GlobalVeltStyles } from "./styled";
 import { useEffect } from "react";
 import VeltReactionToolWf from "./VeltReactionToolWf";
 import VeltCommentDialogWf from "./VeltCommentDialogWf";
@@ -24,16 +24,19 @@ export function VeltCustomization() {
   }, [client]);
 
   return (
-    <VeltWireframe>
-      <VeltCommentBubbleWf />
-      <VeltCommentToolWf />
-      <VeltSidebarButtonWf />
-      <VeltCommentDialogWf />
-      <VeltReactionToolWf />
-      <VeltCommentsSidebarWf />
-      <VeltAutocompleteOptionWf />
-      <VeltReactionPinWf />
-      <VeltCommentComposerWf />
-    </VeltWireframe>
+    <>
+      <GlobalVeltStyles />
+      <VeltWireframe>
+        <VeltCommentBubbleWf />
+        <VeltCommentToolWf />
+        <VeltSidebarButtonWf />
+        <VeltCommentDialogWf />
+        <VeltReactionToolWf />
+        <VeltCommentsSidebarWf />
+        <VeltAutocompleteOptionWf />
+        <VeltReactionPinWf />
+        <VeltCommentComposerWf />
+      </VeltWireframe>
+    </>
   );
 }
