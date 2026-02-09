@@ -89,33 +89,6 @@
   }
 }
 
-/* Velt Comments Sidebar Container - Embedded mode */
-.velt-sidebar-container {
-  width: 400px;
-  border-left: 1px solid var(--pia-border-medium);
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* Velt Comments Sidebar - Embedded mode styling */
-/* With embedMode={true}, sidebar renders inline in container */
-.velt-sidebar-container velt-comments-sidebar {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* Velt Inline Comments Section styling */
-.velt-inline-comments-section {
-  padding: 0px !important;
-}
-
-.velt-comment-dialog--inline-comment-section-mode {
-  border-radius: 0px !important;
-}
-
 .privado-comment-sidebar-button {
     display: flex;
     justify-content: center;
@@ -127,18 +100,6 @@
     /* Button/Tertiary/Normal */
     box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14);
 
-    .privado-comment-sidebar-button-left-icon {
-        display: flex;
-        padding: 8px;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-        background: var(--Gray-5, #F8FAFF);
-
-        &.privado-comment-sidebar-button-left-icon--active {
-            background: var(--Purple-5, #F9F5FF);
-        }
-    }
 
     .privado-comment-sidebar-button-divider {
         width: 1px;

@@ -4,24 +4,26 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:backend": "cd app/api/velt/backend && python3 manage.py runserver",
+    "dev:backend": "cd app/api/velt/backend && source venv/bin/activate && python3 manage.py runserver",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:backend\" --names \"frontend,backend\" --prefix-colors \"cyan,magenta\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@veltdev/react": "4.7.3",
+    "@veltdev/react": "4.7.9",
     "mongodb": "^7.0.0",
     "next": "^16.1.2",
     "react": "^19",
-    "react-dom": "^19"
+    "react-dom": "^19",
+    "styled-components": "^6.3.8"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@veltdev/types": "4.7.3",
+    "@types/styled-components": "^5.1.36",
+    "@veltdev/types": "4.7.9",
     "autoprefixer": "^10",
     "concurrently": "^8.2.2",
     "postcss": "^8",

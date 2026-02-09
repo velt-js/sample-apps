@@ -36,11 +36,13 @@ const VeltCommentDialogWf = () => {
                                     </div>
                                     <div className="oe-thread-card-info oe--actions-container">
                                         <VeltCommentDialogWireframe.ThreadCard.ReactionTool />
-                                        <VeltCommentDialogWireframe.ResolveButton>
-                                            <div className="oe--icon-button">
-                                                <Checkmark width={17.5} height={17.5} />
-                                            </div>
-                                        </VeltCommentDialogWireframe.ResolveButton>
+                                        <VeltIf condition='{i} === 0'>
+                                            <VeltCommentDialogWireframe.ResolveButton>
+                                                <div className="oe--icon-button">
+                                                    <Checkmark width={17.5} height={17.5} />
+                                                </div>
+                                            </VeltCommentDialogWireframe.ResolveButton>
+                                        </VeltIf>
                                         <VeltCommentDialogWireframe.UnresolveButton>
                                             <div className="oe--icon-button oe--unresolve-button">
                                                 <Checkmark width={17.5} height={17.5} />

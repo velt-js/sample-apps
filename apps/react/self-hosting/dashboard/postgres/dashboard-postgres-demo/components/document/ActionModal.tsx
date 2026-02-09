@@ -1,6 +1,7 @@
 'use client'
 
-import { useVeltEventCallback, VeltCommentComposer } from '@veltdev/react'
+import { useCommentUtils, useVeltEventCallback, VeltCommentComposer } from '@veltdev/react'
+import { CommentAnnotation } from '@veltdev/types'
 import { useEffect, useState } from 'react'
 
 interface ActionModalProps {
@@ -178,7 +179,40 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
         }
     ]
 
+    const commentUtils = useCommentUtils();
+    const [annotation, setAnnotation] = useState<CommentAnnotation | null>(null);
 
+    useEffect(() => {
+        if (!commentUtils) {
+            return;
+        }
+
+        // @ts-ignore
+        const subscription = commentUtils.on('composerTextChange').subscribe((event: any) => {
+            console.log('Text changed:', event);
+            // Store annotation by targetComposerElementId for later programmatic submission
+            if (event.annotation && event.targetComposerElementId) {
+                setAnnotation(event.annotation);
+            }
+        });
+
+        // Cleanup: unsubscribe when component unmounts or commentUtils changes
+        return () => {
+            subscription?.unsubscribe();
+        };
+    }, [commentUtils]);
+
+    const handleSubmitProgrammatic = async () => {
+        if(annotation) {
+            // Clear annotation state immediately to prevent duplicate submissions from rapid clicks
+            const annotationToSubmit = annotation;
+            setAnnotation(null);
+            
+            const result = await commentUtils?.addCommentAnnotation({ annotation: annotationToSubmit });
+            console.log('addCommentAnnotation result:', result);
+            (commentUtils as any)?.clearComposer({ targetComposerElementId: 'composer-1' });
+        }
+    }
 
     return (
         <>
@@ -216,7 +250,8 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
                                 jobId: jobId,
                                 commentType: 'action',
                                 highlightData: highlightDataValues[5]
-                            }} shadowDom={false} />
+                            }} shadowDom={false} targetComposerElementId='composer-1' />
+                            <button onClick={() => handleSubmitProgrammatic()}>Submit</button>
                         </div>
                     </div>
                 </div>

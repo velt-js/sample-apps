@@ -1,9 +1,9 @@
 "use client";
+import { useAppUser } from "@/app/userAuth/useAppUser";
 import { useVeltClient, VeltComments } from "@veltdev/react";
+import { useEffect } from "react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
-import { useEffect } from "react";
-import { useAppUser } from "@/app/userAuth/useAppUser";
 
 export function VeltCollaboration() {
   const { isUserLoggedIn } = useAppUser();
@@ -17,6 +17,7 @@ export function VeltCollaboration() {
     }
   }, [isUserLoggedIn, client]);
 
+
   return (
     <>
       <VeltInitializeDocument />
@@ -28,7 +29,11 @@ export function VeltCollaboration() {
         textMode={false}
         commentPinHighlighter={false}
         dialogOnHover={false}
-        groupMatchedComments={true}
+        // groupMatchedComments={true}
+        autoCompleteScrollConfig={{
+            itemSize: 32,
+        }}
+        assignToType='checkbox'
       />
       <VeltCustomization />
     </>
