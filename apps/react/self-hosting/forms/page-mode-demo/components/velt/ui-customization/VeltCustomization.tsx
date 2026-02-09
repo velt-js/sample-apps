@@ -11,6 +11,7 @@ import VeltCommentsSidebarWf from "./VeltCommentsSidebarWf";
 import VeltAutocompleteOptionWf from "./VeltAutocompleteOptionWf";
 import VeltReactionPinWf from "./VeltReactionPinWf";
 import VeltCommentComposerWf from "./VeltCommentComposerWf";
+import VeltConfirmDialogWf from "./VeltConfirmDialogWf";
 
 export function VeltCustomization() {
   // [Velt] Get Velt client instance
@@ -36,6 +37,7 @@ export function VeltCustomization() {
         <VeltAutocompleteOptionWf />
         <VeltReactionPinWf />
         <VeltCommentComposerWf />
+        <VeltConfirmDialogWf />
       </VeltWireframe>
     </>
   );

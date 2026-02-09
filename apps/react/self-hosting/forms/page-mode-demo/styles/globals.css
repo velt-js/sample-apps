@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TT Interphases Pro Variable - using system fallbacks */
+/* TT Interphases Pro Variable */
 @font-face {
   font-family: 'TT Interphases Pro Variable';
-  src: local('TT Interphases Pro Variable'), local('Inter'), local('system-ui');
+  src: url('../TTInterphasesPro/woff2/TT_Interphases_Pro_Variable.woff2') format('woff2'),
+       url('../TTInterphasesPro/woff/TT_Interphases_Pro_Variable.woff') format('woff'),
+       url('../TTInterphasesPro/ttf/TT_Interphases_Pro_Variable-1.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
 }
 
 @layer base {
@@ -86,6 +89,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'TT Interphases Pro Variable', Inter, system-ui, sans-serif;
+    --velt-default-font-family: 'TT Interphases Pro Variable', Inter, system-ui, sans-serif;
   }
 }
 
@@ -116,3 +121,4 @@
         background: var(--Gray-5, #F8FAFF);
     }
 }
+
