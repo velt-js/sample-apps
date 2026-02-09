@@ -210,7 +210,7 @@ function FileTreeNode({
         ) : (
           <File className="h-3.5 w-3.5 flex-shrink-0 text-blue-500 ml-3" />
         )}
-        <span className="truncate font-mono text-xs">{node.name}</span>
+        <span className="whitespace-nowrap font-mono text-xs">{node.name}</span>
       </button>
 
       {node.type === 'folder' && isExpanded && node.children && (
@@ -250,7 +250,7 @@ export function FileExplorer({ codeFiles, selectedFile, onFileSelect }: FileExpl
   }
 
   return (
-    <div className="h-full overflow-y-auto p-2 bg-[#0d0d0d]">
+    <div className="h-full overflow-auto p-2 bg-[#0d0d0d]">
       {fileTree.map((node, index) => (
         <FileTreeNode
           key={`${node.path}-${index}`}

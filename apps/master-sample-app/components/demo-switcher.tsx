@@ -11,6 +11,7 @@ interface DemoSwitcherProps {
   onClose: () => void
   onSampleSelect: (sampleId: string) => void
   currentSampleId: string
+  initialLevel?: number
 }
 
 interface ParsedSample {
@@ -62,9 +63,9 @@ const FRAMEWORK_EXTRAS = [
   { id: 'Vue', icon: 'vue' },
 ]
 
-const FEATURE_EXTRAS = ['Notification']
+const FEATURE_EXTRAS: string[] = []
 
-export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId }: DemoSwitcherProps) {
+export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId, initialLevel }: DemoSwitcherProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedFramework, setSelectedFramework] = useState('React')
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null)
@@ -78,18 +79,28 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
     return getAllSamples().map(parseSample)
   }, [])
 
-  // Initialize selections from current sample
+  // Initialize selections from current sample, respecting initialLevel from breadcrumb clicks
   useEffect(() => {
     if (isOpen && currentSampleId) {
       const current = allParsed.find(p => p.sampleId === currentSampleId)
       if (current) {
-        setSelectedFramework(current.framework)
-        setSelectedFeature(current.feature || null)
-        setSelectedAppType(current.appType || null)
-        setSelectedLibrary(current.library || null)
+        if (initialLevel !== undefined) {
+          // Breadcrumb click: preserve selections up to and including the clicked level,
+          // clear everything below it so the user can re-navigate from that point
+          setSelectedFramework(current.framework)
+          setSelectedFeature(initialLevel >= 1 ? (current.feature || null) : null)
+          setSelectedAppType(initialLevel >= 2 ? (current.appType || null) : null)
+          setSelectedLibrary(initialLevel >= 3 ? (current.library || null) : null)
+        } else {
+          // Search button or Cmd+K: show full current selection
+          setSelectedFramework(current.framework)
+          setSelectedFeature(current.feature || null)
+          setSelectedAppType(current.appType || null)
+          setSelectedLibrary(current.library || null)
+        }
       }
     }
-  }, [isOpen, currentSampleId, allParsed])
+  }, [isOpen, currentSampleId, allParsed, initialLevel])
 
   // Focus search input when opened
   useEffect(() => {
@@ -259,19 +270,19 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
       {/* Overlay Panel */}
       <div
         ref={overlayRef}
-        className="absolute left-3 top-[52px] w-[720px] max-w-[calc(100vw-24px)] bg-[#0d0d0d] border border-[#333] rounded-xl shadow-2xl overflow-hidden"
+        className="absolute left-1/2 -translate-x-1/2 top-[44px] w-[714px] max-w-[calc(100vw-24px)] bg-[#0e0e0e] border border-[rgba(255,255,255,0.08)] rounded-[16px] shadow-[0px_24px_80px_0px_black] overflow-hidden"
       >
         {/* Search Input */}
-        <div className="p-3">
+        <div className="p-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/52" />
             <input
               ref={searchInputRef}
               type="text"
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg bg-[#1a1a1a] border border-[#333] px-10 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[#555]"
+              className="w-full rounded-[9px] bg-[rgba(255,255,255,0.04)] border border-white px-10 py-2 text-sm text-white placeholder:text-white/52 focus:outline-none font-[family-name:var(--font-urbanist)]"
             />
             {searchQuery && (
               <button
@@ -285,13 +296,13 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
         </div>
 
         {/* Category Columns */}
-        <div className="grid grid-cols-4 gap-0 px-3 pb-4">
+        <div className="flex gap-4 px-4 pb-4 font-[family-name:var(--font-urbanist)]">
           {/* Framework Column */}
-          <div className="pr-3">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2 px-1">
+          <div className="flex-1 min-w-0">
+            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
               Framework
             </div>
-            <div className="space-y-0.5">
+            <div className="space-y-1">
               {frameworks.filter(f => searchFilter(f)).map(framework => {
                 const hasDemo = allParsed.some(p => p.framework === framework)
                 return (
@@ -299,12 +310,12 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
                     key={framework}
                     onClick={() => hasDemo && handleFrameworkSelect(framework)}
                     className={cn(
-                      "w-full flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-left transition-colors",
+                      "w-full flex items-center gap-3 rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                       selectedFramework === framework
-                        ? "bg-[#1a1a1a] text-foreground"
+                        ? "bg-[#171617] text-white"
                         : hasDemo
-                          ? "text-foreground/80 hover:bg-[#1a1a1a]/50"
-                          : "text-muted-foreground/50 cursor-not-allowed"
+                          ? "text-white hover:bg-[#171617]/50"
+                          : "text-white/52 cursor-not-allowed"
                     )}
                     disabled={!hasDemo}
                   >
@@ -317,11 +328,11 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
           </div>
 
           {/* Feature Column */}
-          <div className="pr-3">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2 px-1">
+          <div className="flex-1 min-w-0">
+            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
               Feature
             </div>
-            <div className="space-y-0.5">
+            <div className="space-y-1">
               {features.filter(f => searchFilter(f)).map(feature => {
                 const hasDemo = filteredByFramework.some(p => p.feature === feature)
                 return (
@@ -329,12 +340,12 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
                     key={feature}
                     onClick={() => hasDemo && handleFeatureSelect(feature)}
                     className={cn(
-                      "w-full rounded-lg px-2.5 py-2 text-sm text-left transition-colors",
+                      "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                       selectedFeature === feature
-                        ? "bg-[#1a1a1a] text-foreground"
+                        ? "bg-[#171617] text-white"
                         : hasDemo
-                          ? "text-foreground/80 hover:bg-[#1a1a1a]/50"
-                          : "text-muted-foreground/50 cursor-not-allowed"
+                          ? "text-white/52 hover:bg-[#171617]/50"
+                          : "text-white/30 cursor-not-allowed"
                     )}
                     disabled={!hasDemo}
                   >
@@ -346,27 +357,27 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
           </div>
 
           {/* App Type Column */}
-          <div className="pr-3">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2 px-1">
+          <div className="flex-1 min-w-0">
+            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
               App Type
             </div>
-            <div className="space-y-0.5">
+            <div className="space-y-1">
               {appTypes.filter(a => searchFilter(a)).map(appType => (
                 <button
                   key={appType}
                   onClick={() => handleAppTypeSelect(appType)}
                   className={cn(
-                    "w-full rounded-lg px-2.5 py-2 text-sm text-left transition-colors",
+                    "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                     selectedAppType === appType
-                      ? "bg-[#1a1a1a] text-foreground"
-                      : "text-foreground/80 hover:bg-[#1a1a1a]/50"
+                      ? "bg-[#171617] text-white"
+                      : "text-white/52 hover:bg-[#171617]/50"
                   )}
                 >
                   {formatLabel(appType)}
                 </button>
               ))}
               {appTypes.length === 0 && selectedFeature && (
-                <div className="px-2.5 py-2 text-xs text-muted-foreground">
+                <div className="px-2 py-2 text-xs text-white/30">
                   Select a feature
                 </div>
               )}
@@ -374,27 +385,27 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId 
           </div>
 
           {/* Library Column */}
-          <div>
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2 px-1">
+          <div className="flex-1 min-w-0">
+            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
               Library
             </div>
-            <div className="space-y-0.5">
+            <div className="space-y-1">
               {libraries.filter(l => searchFilter(l)).map(library => (
                 <button
                   key={library}
                   onClick={() => handleLibrarySelect(library)}
                   className={cn(
-                    "w-full rounded-lg px-2.5 py-2 text-sm text-left transition-colors",
+                    "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                     selectedLibrary === library
-                      ? "bg-[#1a1a1a] text-foreground"
-                      : "text-foreground/80 hover:bg-[#1a1a1a]/50"
+                      ? "bg-[#171617] text-white"
+                      : "text-white/52 hover:bg-[#171617]/50"
                   )}
                 >
                   {formatLabel(library)}
                 </button>
               ))}
               {libraries.length === 0 && selectedAppType && (
-                <div className="px-2.5 py-2 text-xs text-muted-foreground">
+                <div className="px-2 py-2 text-xs text-white/30">
                   No library needed
                 </div>
               )}

@@ -1,6 +1,6 @@
 "use client"
 
-import { Search, ChevronRight, Code, ExternalLink, RotateCcw, Github, Copy } from "lucide-react"
+import { Search, ChevronRight, ExternalLink, RotateCcw, Github, Copy } from "lucide-react"
 import { VeltLogo } from "./velt-logo"
 import { cn } from "@/lib/utils"
 import { useState, useEffect, useRef } from "react"
@@ -10,6 +10,7 @@ interface HeaderBarProps {
   mode: "code" | "demo"
   onModeChange: (mode: "code" | "demo") => void
   onSearchClick: () => void
+  onBreadcrumbClick?: (level: number) => void
   githubUrl?: string
   routePath?: string
   documentId?: string
@@ -36,6 +37,7 @@ export function HeaderBar({
   mode,
   onModeChange,
   onSearchClick,
+  onBreadcrumbClick,
   githubUrl,
   routePath,
   documentId,
@@ -90,104 +92,123 @@ export function HeaderBar({
   }, [documentId, resetting])
 
   return (
-    <header className="flex h-12 items-center border-b border-border bg-[#0d0d0d] px-3 shrink-0 gap-2">
+    <header className="relative flex h-[38px] items-center border-b border-[rgba(255,255,255,0.08)] bg-[#0e0e0e] px-[19px] shrink-0 shadow-[0px_12px_32px_0px_black]">
       {/* Left: Brand + Breadcrumbs */}
-      <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
+      <div className="flex items-center gap-4 min-w-0 overflow-hidden font-[family-name:var(--font-urbanist)]">
+        {/* Velt brand */}
         <div className="flex items-center gap-2 shrink-0">
-          <VeltLogo className="h-5 w-5 text-foreground" />
-          <span className="text-sm font-medium text-foreground">Velt</span>
+          <VeltLogo className="h-[11.2px] w-[11.2px] text-foreground" />
+          <span className="text-[11.2px] font-bold text-white tracking-[0.112px] leading-none">Velt</span>
         </div>
 
-        {segments.map((segment, i) => (
-          <div key={i} className="flex items-center gap-1.5 shrink-0">
-            <ChevronRight className="h-3 w-3 text-muted-foreground" />
-            {i === 0 && segment.toLowerCase() === 'react' ? (
-              <div className="flex items-center gap-1.5">
-                <ReactIcon />
-                <span className="text-sm text-foreground">{segment}</span>
-              </div>
-            ) : (
-              <span className={cn(
-                "text-sm",
-                i === segments.length - 1 ? "text-muted-foreground truncate max-w-[200px]" : "text-foreground"
-              )}>
-                {segment}
-              </span>
-            )}
-          </div>
-        ))}
+        {/* Vertical divider line */}
+        <div className="h-[18px] w-px bg-[rgba(255,255,255,0.12)] shrink-0" />
+
+        {/* Breadcrumb path */}
+        <div className="flex items-center gap-[10px] shrink-0">
+          {segments.map((segment, i) => (
+            <div key={i} className="flex items-center gap-[10px] shrink-0">
+              {i > 0 && (
+                <ChevronRight className="h-[14px] w-[14px] text-white/50" />
+              )}
+              {i === 0 && segment.toLowerCase() === 'react' ? (
+                <button
+                  onClick={() => onBreadcrumbClick?.(i)}
+                  className="flex items-center gap-2 text-[12px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
+                >
+                  <ReactIcon />
+                  <span>{segment}</span>
+                </button>
+              ) : i === segments.length - 1 ? (
+                <button
+                  onClick={() => onBreadcrumbClick?.(i)}
+                  className="text-[12px] text-white/50 hover:text-white/70 transition-colors cursor-pointer truncate max-w-[200px] leading-normal"
+                >
+                  {segment}
+                </button>
+              ) : (
+                <button
+                  onClick={() => onBreadcrumbClick?.(i)}
+                  className="text-[12px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
+                >
+                  {segment}
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Center: Mode Toggle */}
-      <div className="flex items-center gap-1.5 shrink-0">
+      {/* Center: Mode Toggle - absolutely centered */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-[2px] bg-[#1e1e1e] rounded-[16px] p-[2px]">
         <button
-          className="h-8 w-8 flex items-center justify-center rounded-full bg-[#1a1a1a] hover:bg-[#252525] transition-colors"
-          title="Settings"
+          onClick={() => onModeChange("demo")}
+          className={cn(
+            "p-1 flex items-center justify-center rounded-[32px] transition-colors",
+            mode === "demo"
+              ? "bg-white"
+              : "hover:bg-white/10"
+          )}
+          title="Demo view"
         >
-          <SettingsIcon />
+          <ClickIcon className={mode === "demo" ? "text-black" : "text-white"} />
         </button>
         <button
-          onClick={() => onModeChange(mode === "code" ? "demo" : "code")}
+          onClick={() => onModeChange("code")}
           className={cn(
-            "h-8 w-8 flex items-center justify-center rounded-full transition-colors",
+            "p-1 flex items-center justify-center rounded-[32px] transition-colors",
             mode === "code"
-              ? "bg-[#ffc31c] text-black"
-              : "bg-[#1a1a1a] text-foreground hover:bg-[#252525]"
+              ? "bg-white"
+              : "hover:bg-white/10"
           )}
-          title={mode === "code" ? "Switch to demo view" : "Switch to code view"}
+          title="Code view"
         >
-          <Code className="h-4 w-4" />
+          <CodeBracketsIcon className={cn(mode === "code" ? "text-black" : "text-white")} />
         </button>
       </div>
 
       {/* Right: Search + Icons */}
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-3 shrink-0 ml-auto">
         <button
           onClick={onSearchClick}
-          className="flex items-center gap-2 h-8 px-3 rounded-md border border-[#333] bg-[#1a1a1a] text-muted-foreground hover:bg-[#252525] transition-colors text-sm w-[180px]"
+          className="flex items-center gap-[9px] h-auto px-3 py-[5px] rounded-lg border border-[rgba(255,255,255,0.12)] text-white opacity-52 hover:opacity-80 transition-opacity w-[233px] font-[family-name:var(--font-urbanist)]"
         >
-          <Search className="h-3.5 w-3.5 shrink-0" />
-          <span className="text-xs">Search</span>
+          <Search className="h-[14px] w-[14px] shrink-0" />
+          <span className="text-[12px] leading-normal">Search</span>
         </button>
 
-        <button
-          onClick={handleShare}
-          className={cn(
-            "h-8 w-8 flex items-center justify-center rounded-md transition-colors",
-            copied ? "bg-green-500 text-white" : "hover:bg-[#252525] text-muted-foreground"
-          )}
-          title={copied ? "Copied!" : "Copy link"}
-        >
-          <Copy className="h-3.5 w-3.5" />
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleShare}
+            className={cn(
+              "transition-colors",
+              copied ? "text-green-400" : "text-white/60 hover:text-white"
+            )}
+            title={copied ? "Copied!" : "Copy link"}
+          >
+            <Copy className="h-[12.8px] w-[12.8px]" />
+          </button>
 
-        <button
-          onClick={handleOpenInNewTab}
-          className="h-8 w-8 flex items-center justify-center rounded-md hover:bg-[#252525] text-muted-foreground transition-colors"
-          title="Open in new tab"
-        >
-          <ExternalLink className="h-3.5 w-3.5" />
-        </button>
+          <button
+            onClick={handleGithubClick}
+            className="text-white/60 hover:text-white transition-colors"
+            title="View on GitHub"
+          >
+            <Github className="h-[12.8px] w-[12.8px]" />
+          </button>
 
-        <button
-          onClick={handleGithubClick}
-          className="h-8 w-8 flex items-center justify-center rounded-md hover:bg-[#252525] text-muted-foreground transition-colors"
-          title="View on GitHub"
-        >
-          <Github className="h-3.5 w-3.5" />
-        </button>
-
-        <button
-          onClick={handleReset}
-          className={cn(
-            "h-8 w-8 flex items-center justify-center rounded-md transition-colors",
-            resetting ? "bg-blue-500 text-white" : "hover:bg-[#252525] text-muted-foreground"
-          )}
-          title={resetting ? "Resetting..." : "Reset document"}
-          disabled={resetting}
-        >
-          <RotateCcw className="h-3.5 w-3.5" />
-        </button>
+          <button
+            onClick={handleReset}
+            className={cn(
+              "transition-colors",
+              resetting ? "text-blue-400" : "text-white/60 hover:text-white"
+            )}
+            title={resetting ? "Resetting..." : "Reset document"}
+            disabled={resetting}
+          >
+            <RotateCcw className="h-[12.8px] w-[12.8px]" />
+          </button>
+        </div>
       </div>
     </header>
   )
@@ -195,20 +216,27 @@ export function HeaderBar({
 
 function ReactIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="shrink-0">
-      <circle cx="12" cy="12" r="2.5" fill="#61DAFB" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" fill="none" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" fill="none" transform="rotate(60 12 12)" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" fill="none" transform="rotate(120 12 12)" />
+    <svg width="13.336" height="12" viewBox="0 0 24 22" fill="none" className="shrink-0">
+      <circle cx="12" cy="11" r="2.2" fill="#61DAFB" />
+      <ellipse cx="12" cy="11" rx="10" ry="3.8" stroke="#61DAFB" strokeWidth="1.2" fill="none" />
+      <ellipse cx="12" cy="11" rx="10" ry="3.8" stroke="#61DAFB" strokeWidth="1.2" fill="none" transform="rotate(60 12 11)" />
+      <ellipse cx="12" cy="11" rx="10" ry="3.8" stroke="#61DAFB" strokeWidth="1.2" fill="none" transform="rotate(120 12 11)" />
     </svg>
   )
 }
 
-function SettingsIcon() {
+function ClickIcon({ className }: { className?: string }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground">
-      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-      <circle cx="12" cy="12" r="3" />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M2 8H4M8 2V4M5.20007 5.19998L3.7334 3.73332M10.8 5.19998L12.2666 3.73332M5.20007 10.8L3.7334 12.2667M8 8L14 10L11.3333 11.3333L10 14L8 8Z" />
+    </svg>
+  )
+}
+
+function CodeBracketsIcon({ className }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M4.66667 5.33333L2 8L4.66667 10.6667M11.3333 5.33333L14 8L11.3333 10.6667M9.33333 2.66667L6.66667 13.3333" />
     </svg>
   )
 }

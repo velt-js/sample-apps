@@ -14,6 +14,7 @@ export default function Page() {
   const isInitialized = useRef(false)
   const [mode, setMode] = useState<"code" | "demo">("demo")
   const [switcherOpen, setSwitcherOpen] = useState(false)
+  const [switcherLevel, setSwitcherLevel] = useState<number | undefined>(undefined)
 
   const currentSample = getSampleById(currentSampleId) || getDefaultSample()
 
@@ -203,7 +204,8 @@ export default function Page() {
         title={currentSample.metadata.title}
         mode={mode}
         onModeChange={setMode}
-        onSearchClick={() => setSwitcherOpen(true)}
+        onSearchClick={() => { setSwitcherLevel(undefined); setSwitcherOpen(true) }}
+        onBreadcrumbClick={(level) => { setSwitcherLevel(level); setSwitcherOpen(true) }}
         githubUrl={currentSample.metadata.githubUrl}
         routePath={currentSample.metadata.routePath}
         documentId={documentId}
@@ -214,9 +216,10 @@ export default function Page() {
       {/* Demo Switcher Overlay */}
       <DemoSwitcher
         isOpen={switcherOpen}
-        onClose={() => setSwitcherOpen(false)}
+        onClose={() => { setSwitcherOpen(false); setSwitcherLevel(undefined) }}
         onSampleSelect={handleSampleSelect}
         currentSampleId={currentSampleId}
+        initialLevel={switcherLevel}
       />
 
       {/* Main Content */}
