@@ -1,4 +1,5 @@
 import React from 'react';
+import colors from './colors';
 
 // ============================================
 // Comment Tool Icons
@@ -198,6 +199,16 @@ export const DeleteIcon = () => (
         <path d="M3.5 3.5L12.5 12.5" stroke="#5C6C8A" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
+
+export const ConfirmDialogCloseIcon = () => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="16" height="16" transform="translate(4 4)" fill="white" fillOpacity="0.01" />
+            <path d="M17.5 6.5L6.5 17.5" stroke={colors.neutral.p70} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M6.5 6.5L17.5 17.5" stroke={colors.neutral.p70} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    );
+};
 
 export const LoadingSpinnerIcon = ({ className }: { className?: string }) => (
     <svg className={className} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

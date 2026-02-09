@@ -1,6 +1,7 @@
 "use client";
 
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import TextStyles from './textStyles';
 
 // =============================================
 // ANIMATIONS
@@ -755,6 +756,98 @@ export const GlobalVeltStyles = createGlobalStyle`
   app-comment-dialog-composer-attachments-other-name {
     flex: 1 !important;
   }
+
+  /* =============================================
+     CONFIRM DIALOG STYLES
+     ============================================= */
+  
+  .velt-confirm-dialog {
+    width: auto !important;
+    padding: 0px !important;
+  }
+
+  h2.velt-confirm-dialog-title,
+  .mat-mdc-dialog-title.velt-confirm-dialog-title,
+  .mdc-dialog__title.velt-confirm-dialog-title {
+    align-self: stretch !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    font-style: normal !important;
+    color: var(--Text-text-primary, #172026) !important;
+    padding: 0px !important;
+    margin: 0 !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+  }
+
+  .velt-confirm-dialog-message,
+  .mat-mdc-dialog-content.velt-confirm-dialog-message,
+  .mdc-dialog__content.velt-confirm-dialog-message {
+    align-self: stretch !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 22px !important;
+    font-style: normal !important;
+    color: var(--Text-text-tertiary, #5C6C8A) !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+
+    > div {
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      line-height: 22px !important;
+      font-style: normal !important;
+      color: var(--Text-text-tertiary, #5C6C8A) !important;
+      font-variant-numeric: lining-nums tabular-nums !important;
+    }
+  }
+
+  .velt-confirm-dialog--reject {
+    display: flex !important;
+    padding: 5px 10px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 2px !important;
+    border-radius: var(--border-radius-btn-radius-s, 8px) !important;
+    background: var(--btn-tertiary-btn-tertiary-fill, #FFF) !important;
+    width: auto !important;
+    box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14) !important;
+    font-size: 14px !important;
+    font-weight: 492 !important;
+    line-height: 18px !important;
+    font-style: normal !important;
+    color: var(--btn-tertiary-btn-tertiary-text, #465169) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+    font-feature-settings: 'ss02' on !important;
+  }
+
+  .velt-confirm-dialog--approve {
+    display: flex !important;
+    padding: 5px 10px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 2px !important;
+    border-radius: var(--border-radius-btn-radius-s, 8px) !important;
+    background: var(--Red-100, #FFEBE6) !important;
+    width: auto !important;
+    box-shadow: 0 1px 2px 0 rgba(23, 32, 38, 0.24), 0 0 0 1px #FF7452 !important;
+    font-size: 14px !important;
+    font-weight: 492 !important;
+    line-height: 18px !important;
+    font-style: normal !important;
+    color: var(--Red-400, #D92E0D) !important;
+    font-variant-numeric: lining-nums tabular-nums !important;
+    font-feature-settings: 'ss02' on !important;
+  }
+
+  app-confirm-dialog-reject, app-confirm-dialog-approve {
+    flex: 0 !important;
+  }
+
+  .velt-mat-dialog-container mat-dialog-container .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
+    border-radius: var(--units-xs, 8px) !important;
+  }
 `;
 
 // =============================================
@@ -848,28 +941,22 @@ export const AssigneeBannerWrapperLeft = styled.div`
 `;
 
 export const ResolveButtonText = styled.span`
+  ${TextStyles.TextT200Regular}
   flex: 1 0 0;
   align-self: stretch;
   color: var(--Text-text-secondary, #465169);
   font-variant-numeric: lining-nums tabular-nums;
   display: flex;
   gap: 3px;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
 `;
 
 export const AssigneeBannerWrapperRight = styled.div`
+  ${TextStyles.TextT300Regular}
   display: flex;
   align-self: stretch;
   color: var(--Text-text-secondary, #465169);
   text-align: right;
   font-variant-numeric: lining-nums tabular-nums;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
 
   app-data {
     margin-left: 3px;
@@ -913,6 +1000,7 @@ export const QuestionWrapper = styled.div`
 `;
 
 export const QuestionText = styled.span`
+  ${TextStyles.TextT200Regular}
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -921,10 +1009,6 @@ export const QuestionText = styled.span`
   color: var(--Text-text-secondary, #465169);
   font-variant-numeric: lining-nums tabular-nums;
   text-overflow: ellipsis;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
 `;
 
 export const ThreadCardWrapper = styled.div`
@@ -1070,16 +1154,14 @@ export const ReplyIconWrapper = styled.div`
 export const ReplyCountWrapper = styled.div`
   app-comment-dialog-toggle-reply-count,
   app-comment-dialog-toggle-reply-text {
+    ${TextStyles.T200Medium}
     color: var(--btn-primary-btn-primary-fill, #754CFF) !important;
     font-variant-numeric: lining-nums tabular-nums !important;
-    font-size: 13px !important;
-    font-style: normal;
-    font-weight: 492 !important;
-    line-height: 18px !important;
   }
 `;
 
 export const ThreadCardReplyCount = styled.div`
+  ${TextStyles.TextT300Regular}
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1088,10 +1170,6 @@ export const ThreadCardReplyCount = styled.div`
   flex: 1;
   color: var(--Text-text-tertiary, #5C6C8A);
   font-variant-numeric: lining-nums tabular-nums;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
 
   app-comment-dialog-toggle-reply-count {
     color: var(--Text-text-tertiary, #5C6C8A) !important;
@@ -1143,16 +1221,13 @@ export const PageModeComposerHeaderWrapper = styled.div`
     background-color: var(--transparent-canvas, #fff9);
 
     app-data {
+      ${TextStyles.TextT200Regular}
       -webkit-line-clamp: 1;
       color: var(--Text-text-secondary, #465169);
       font-variant-numeric: lining-nums tabular-nums;
       text-overflow: ellipsis;
       -webkit-box-orient: vertical;
       align-self: stretch;
-      font-size: 13px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 18px;
       display: -webkit-box;
       overflow: hidden;
     }
@@ -1164,13 +1239,10 @@ export const PageModeComposerHeaderWrapper = styled.div`
 `;
 
 export const OptionsContentItemWrapper = styled.div`
+  ${TextStyles.TextT200Regular}
   align-self: stretch;
   color: var(--Text-text-secondary, #465169);
   font-variant-numeric: lining-nums tabular-nums;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
   display: flex;
   padding: 7px 8px;
   align-items: center;
@@ -1350,16 +1422,13 @@ export const SidebarHeaderWrapper = styled.div`
 `;
 
 export const SidebarHeaderLeftWrapper = styled.div`
+  ${TextStyles.TextT100Medium}
   flex: 1 0 0;
   gap: 2px;
   display: flex;
   color: var(--Text-text-primary, #172026);
   font-variant-numeric: lining-nums tabular-nums;
   font-feature-settings: 'ss02' on;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 492;
-  line-height: 18px;
 `;
 
 export const SidebarHeaderRightWrapper = styled.div`
@@ -1385,13 +1454,10 @@ export const FilterDropdownContentItemWrapper = styled.div`
   background: var(--default-canvas, #FFF);
 
   span {
+    ${TextStyles.TextT200Regular}
     align-self: stretch;
     color: var(--Text-text-secondary, #465169);
     font-variant-numeric: lining-nums tabular-nums;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px;
   }
 
   svg {
@@ -1428,28 +1494,23 @@ export const EmptyPlaceholderIconWrapper = styled.div`
 `;
 
 export const EmptyPlaceholderTitle = styled.div`
+  ${TextStyles.HeadlineH500Medium}
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--Text-text-secondary, #465169);
   text-align: center;
   font-feature-settings: 'ss02' on, 'calt' off;
-  font-size: 16px;
-  font-style: normal;
   font-weight: 492;
-  line-height: 24px;
   align-self: stretch;
   margin-bottom: 4px;
 `;
 
 export const EmptyPlaceholderDescription = styled.div`
+  ${TextStyles.TextT200Regular}
   color: var(--Text-text-fade, #7E8DA9);
   text-align: center;
   font-variant-numeric: lining-nums tabular-nums;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
   align-self: stretch;
 `;
 
@@ -1472,12 +1533,9 @@ export const FocusedThreadBackButtonWrapper = styled.div`
 `;
 
 export const FocusedThreadBackButtonText = styled.span`
+  ${TextStyles.TextT200Regular}
   color: var(--Text-text-tertiary, #5C6C8A);
   font-variant-numeric: lining-nums tabular-nums;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
 `;
 
 export const FocusedThreadQuestionWrapper = styled.div`
@@ -1495,6 +1553,7 @@ export const FocusedThreadQuestionWrapper = styled.div`
   backdrop-filter: blur(20px);
 
   app-data {
+    ${TextStyles.TextT200Regular}
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -1503,10 +1562,6 @@ export const FocusedThreadQuestionWrapper = styled.div`
     color: var(--Text-text-secondary, #465169);
     font-variant-numeric: lining-nums tabular-nums;
     text-overflow: ellipsis;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px;
   }
 `;
 
@@ -1543,6 +1598,7 @@ export const CommentToolWrapper = styled.div`
 `;
 
 export const CommentToolTooltip = styled.span`
+  ${TextStyles.TextT200Regular}
   position: absolute;
   top: -35px;
   left: 50%;
@@ -1556,10 +1612,6 @@ export const CommentToolTooltip = styled.span`
   background: var(--Gray-100, #12161F);
   color: #F8F9F9;
   font-variant-numeric: lining-nums tabular-nums;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
 `;
 
 export const CommentBubbleWrapper = styled.div`
@@ -1639,4 +1691,53 @@ export const SidebarButtonUnreadIconWrapper = styled.div`
   height: 8px;
   border-radius: 4px;
   background: var(--Red-300, #FF7452);
+`;
+
+// =============================================
+// CONFIRM DIALOG STYLED COMPONENTS
+// =============================================
+
+export const ConfirmDialogWrapper = styled.div`
+  display: flex;
+  width: 440px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: var(--units-xs, 8px);
+  border: 1px solid var(--border-color-medium, #DDE3EE);
+  background: var(--Others-White, #FFF);
+  box-shadow: 0 12px 24px 0 rgba(37, 45, 51, 0.10);
+`;
+
+export const ConfirmDialogContent = styled.div`
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  position: relative;
+`;
+
+export const ConfirmDialogCloseButton = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+`;
+
+export const ConfirmDialogRejectButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ConfirmDialogButtons = styled.div`
+  display: flex;
+  padding: 12px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  border-top: 1px solid var(--border-color-default, #EDF0F8);
+  background: var(--Gray-5, #F8FAFF);
 `;
