@@ -1,17 +1,19 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
-import { Sidebar } from "@/components/sidebar"
+import { HeaderBar } from "@/components/header-bar"
+import { DemoSwitcher } from "@/components/demo-switcher"
 import { SampleViewer } from "@/components/viewer/sample-viewer"
 import { getDefaultSample, getSampleById, getAllSamples } from "@/samples"
 
 export default function Page() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
   // Always initialize with default to match server render
   const [currentSampleId, setCurrentSampleId] = useState<string>(getDefaultSample().metadata.id)
   const [documentId, setDocumentId] = useState<string>('')
   const [isMounted, setIsMounted] = useState(false)
   const isInitialized = useRef(false)
+  const [mode, setMode] = useState<"code" | "demo">("demo")
+  const [switcherOpen, setSwitcherOpen] = useState(false)
 
   const currentSample = getSampleById(currentSampleId) || getDefaultSample()
 
@@ -161,6 +163,30 @@ export default function Page() {
     }
   }, [currentSampleId])
 
+  // Cmd/Ctrl+K keyboard shortcut to open switcher
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setSwitcherOpen(prev => !prev)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  // Compute iframe URL for header bar share/open actions
+  const iframeUrl = (() => {
+    if (!documentId || !currentSample.metadata.iframeUrl) return undefined
+    try {
+      const url = new URL(currentSample.metadata.iframeUrl)
+      url.searchParams.set('documentId', documentId)
+      return url.toString()
+    } catch {
+      return undefined
+    }
+  })()
+
   // Show loading state during hydration to prevent flash
   if (!isMounted) {
     return (
@@ -171,22 +197,33 @@ export default function Page() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
-      {/* Sidebar */}
-      <Sidebar
-        isOpen={sidebarOpen}
-        onToggle={() => setSidebarOpen(!sidebarOpen)}
-        currentSampleId={currentSampleId}
+    <div className="flex flex-col h-screen overflow-hidden bg-background">
+      {/* Top Header Bar */}
+      <HeaderBar
+        title={currentSample.metadata.title}
+        mode={mode}
+        onModeChange={setMode}
+        onSearchClick={() => setSwitcherOpen(true)}
+        githubUrl={currentSample.metadata.githubUrl}
+        routePath={currentSample.metadata.routePath}
+        documentId={documentId}
+        onReset={handleReset}
+        iframeUrl={iframeUrl}
+      />
+
+      {/* Demo Switcher Overlay */}
+      <DemoSwitcher
+        isOpen={switcherOpen}
+        onClose={() => setSwitcherOpen(false)}
         onSampleSelect={handleSampleSelect}
+        currentSampleId={currentSampleId}
       />
 
       {/* Main Content */}
       <SampleViewer
         sample={currentSample}
-        sidebarOpen={sidebarOpen}
-        onSidebarToggle={() => setSidebarOpen(!sidebarOpen)}
         documentId={documentId}
-        onReset={handleReset}
+        mode={mode}
       />
     </div>
   )

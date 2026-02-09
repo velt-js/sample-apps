@@ -18,21 +18,21 @@ function highlightCode(code: string): string {
     TYPE: '[[T:',
     END: ':]]'
   }
-  
+
   let highlighted = code
-  
+
   // Escape HTML first
   highlighted = highlighted
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-  
+
   // Comments (must be done before other highlighting)
   highlighted = highlighted.replace(
     /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm,
     `${MARKERS.COMMENT}$1${MARKERS.END}`
   )
-  
+
   // Strings - but not inside already-marked regions
   highlighted = highlighted.replace(
     /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,
@@ -42,7 +42,7 @@ function highlightCode(code: string): string {
       return `${MARKERS.STRING}${match}${MARKERS.END}`
     }
   )
-  
+
   // Keywords - but not inside already-marked regions
   highlighted = highlighted.replace(
     /\b(import|export|from|const|let|var|function|return|if|else|for|while|class|interface|type|extends|implements|async|await|try|catch|throw|new|this|super|static|public|private|protected|default|case|switch|break|continue|do|in|of|typeof|instanceof|void|null|undefined|as)\b/g,
@@ -55,7 +55,7 @@ function highlightCode(code: string): string {
       return `${MARKERS.KEYWORD}${match}${MARKERS.END}`
     }
   )
-  
+
   // Numbers - but not inside already-marked regions
   highlighted = highlighted.replace(
     /\b(\d+\.?\d*)\b/g,
@@ -67,7 +67,7 @@ function highlightCode(code: string): string {
       return `${MARKERS.NUMBER}${match}${MARKERS.END}`
     }
   )
-  
+
   // Boolean and special values
   highlighted = highlighted.replace(
     /\b(true|false)\b/g,
@@ -79,7 +79,7 @@ function highlightCode(code: string): string {
       return `${MARKERS.LITERAL}${match}${MARKERS.END}`
     }
   )
-  
+
   // Function names (before parenthesis)
   highlighted = highlighted.replace(
     /\b([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(?=\()/g,
@@ -91,7 +91,7 @@ function highlightCode(code: string): string {
       return `${MARKERS.FUNCTION}${p1}${MARKERS.END}`
     }
   )
-  
+
   // Types/Classes (PascalCase)
   highlighted = highlighted.replace(
     /\b([A-Z][a-zA-Z0-9_]*)\b/g,
@@ -103,7 +103,7 @@ function highlightCode(code: string): string {
       return `${MARKERS.TYPE}${match}${MARKERS.END}`
     }
   )
-  
+
   // Convert markers to HTML spans
   highlighted = highlighted
     .replace(/\[\[C:/g, '<span class="code-comment">')
@@ -114,7 +114,7 @@ function highlightCode(code: string): string {
     .replace(/\[\[F:/g, '<span class="code-function">')
     .replace(/\[\[T:/g, '<span class="code-type">')
     .replace(/:]\]/g, '</span>')
-  
+
   return highlighted
 }
 
@@ -133,15 +133,15 @@ interface FileNode {
 
 function buildFileTree(files: SampleCodeFile[]): FileNode[] {
   const root: FileNode[] = []
-  
+
   files.forEach(file => {
     const parts = file.path.split('/')
     let currentLevel = root
-    
+
     parts.forEach((part, index) => {
       const isFile = index === parts.length - 1
       const existingNode = currentLevel.find(node => node.name === part)
-      
+
       if (existingNode) {
         if (!isFile && existingNode.children) {
           currentLevel = existingNode.children
@@ -153,32 +153,32 @@ function buildFileTree(files: SampleCodeFile[]): FileNode[] {
           type: isFile ? 'file' : 'folder',
           ...(isFile ? { file } : { children: [] })
         }
-        
+
         currentLevel.push(newNode)
-        
+
         if (!isFile && newNode.children) {
           currentLevel = newNode.children
         }
       }
     })
   })
-  
+
   return root
 }
 
-function FileTreeNode({ 
-  node, 
-  level = 0, 
+function FileTreeNode({
+  node,
+  level = 0,
   onFileSelect,
-  selectedPath 
-}: { 
+  selectedPath
+}: {
   node: FileNode
   level?: number
   onFileSelect: (file: SampleCodeFile) => void
   selectedPath?: string
 }) {
   const [isExpanded, setIsExpanded] = useState(true)
-  
+
   const handleClick = () => {
     if (node.type === 'folder') {
       setIsExpanded(!isExpanded)
@@ -186,7 +186,7 @@ function FileTreeNode({
       onFileSelect(node.file)
     }
   }
-  
+
   return (
     <div>
       <button
@@ -198,11 +198,11 @@ function FileTreeNode({
         style={{ paddingLeft: `${level * 12 + 8}px` }}
       >
         {node.type === 'folder' && (
-          <ChevronRight 
+          <ChevronRight
             className={cn(
               "h-3 w-3 transition-transform flex-shrink-0",
               isExpanded && "rotate-90"
-            )} 
+            )}
           />
         )}
         {node.type === 'folder' ? (
@@ -212,7 +212,7 @@ function FileTreeNode({
         )}
         <span className="truncate font-mono text-xs">{node.name}</span>
       </button>
-      
+
       {node.type === 'folder' && isExpanded && node.children && (
         <div>
           {node.children.map((child, index) => (
@@ -230,11 +230,82 @@ function FileTreeNode({
   )
 }
 
+// ─── Exported sub-components for 3-column code view layout ───
+
+interface FileExplorerProps {
+  codeFiles: SampleCodeFile[]
+  selectedFile: SampleCodeFile | null
+  onFileSelect: (file: SampleCodeFile) => void
+}
+
+export function FileExplorer({ codeFiles, selectedFile, onFileSelect }: FileExplorerProps) {
+  const fileTree = useMemo(() => buildFileTree(codeFiles), [codeFiles])
+
+  if (codeFiles.length === 0) {
+    return (
+      <div className="h-full flex items-center justify-center p-4">
+        <span className="text-xs text-muted-foreground">No files</span>
+      </div>
+    )
+  }
+
+  return (
+    <div className="h-full overflow-y-auto p-2 bg-[#0d0d0d]">
+      {fileTree.map((node, index) => (
+        <FileTreeNode
+          key={`${node.path}-${index}`}
+          node={node}
+          onFileSelect={onFileSelect}
+          selectedPath={selectedFile?.path}
+        />
+      ))}
+    </div>
+  )
+}
+
+interface CodeEditorProps {
+  selectedFile: SampleCodeFile | null
+}
+
+export function CodeEditor({ selectedFile }: CodeEditorProps) {
+  const codeContent = useMemo(() => {
+    if (!selectedFile) return "// Select a file to view its contents"
+    return selectedFile.content || `// No content available for ${selectedFile.path}`
+  }, [selectedFile])
+
+  return (
+    <div className="h-full flex flex-col overflow-hidden bg-[#1a1a1a]">
+      {selectedFile && (
+        <div className="px-4 py-2 border-b border-border bg-[#111] shrink-0">
+          <span className="text-xs font-mono text-muted-foreground">{selectedFile.path}</span>
+        </div>
+      )}
+      <div className="flex-1 overflow-auto">
+        <div className="flex">
+          <div className="py-4 px-4 text-right select-none text-[#858585] text-xs font-mono leading-relaxed">
+            {codeContent.split('\n').map((_, i) => (
+              <div key={i}>{i + 1}</div>
+            ))}
+          </div>
+          <pre className="flex-1 py-4 pr-4 text-xs font-mono leading-relaxed overflow-x-auto">
+            <code
+              className="code-highlight"
+              dangerouslySetInnerHTML={{ __html: highlightCode(codeContent) }}
+            />
+          </pre>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Original combined CodeDisplay (kept for backward compatibility) ───
+
 export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
   const [selectedFile, setSelectedFile] = useState<SampleCodeFile | null>(
     codeFiles.length > 0 ? codeFiles[0] : null
   )
-  
+
   const fileTree = useMemo(() => buildFileTree(codeFiles), [codeFiles])
 
   // Get code content directly from the selected file (no async loading needed)
@@ -270,7 +341,7 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
             />
           ))}
         </div>
-        
+
         {/* Code Content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {selectedFile && (
@@ -278,7 +349,7 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
               <span className="text-xs font-mono text-muted-foreground">{selectedFile.path}</span>
             </div>
           )}
-          
+
             <div className="flex-1 overflow-auto bg-[#1a1a1a]">
               <div className="flex">
                 {/* Line numbers */}
@@ -289,7 +360,7 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
                 </div>
                 {/* Code content */}
                 <pre className="flex-1 py-4 pr-4 text-xs font-mono leading-relaxed overflow-x-auto">
-                  <code 
+                  <code
                     className="code-highlight"
                     dangerouslySetInnerHTML={{ __html: highlightCode(codeContent) }}
                   />
@@ -301,4 +372,3 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
     </div>
   )
 }
-
