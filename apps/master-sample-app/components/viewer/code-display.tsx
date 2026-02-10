@@ -251,14 +251,16 @@ export function FileExplorer({ codeFiles, selectedFile, onFileSelect }: FileExpl
 
   return (
     <div className="h-full overflow-auto p-2 bg-[#0d0d0d]">
-      {fileTree.map((node, index) => (
-        <FileTreeNode
-          key={`${node.path}-${index}`}
-          node={node}
-          onFileSelect={onFileSelect}
-          selectedPath={selectedFile?.path}
-        />
-      ))}
+      <div className="min-w-max">
+        {fileTree.map((node, index) => (
+          <FileTreeNode
+            key={`${node.path}-${index}`}
+            node={node}
+            onFileSelect={onFileSelect}
+            selectedPath={selectedFile?.path}
+          />
+        ))}
+      </div>
     </div>
   )
 }

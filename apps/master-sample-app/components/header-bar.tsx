@@ -198,6 +198,14 @@ export function HeaderBar({
           </button>
 
           <button
+            onClick={handleOpenInNewTab}
+            className="text-white/60 hover:text-white transition-colors"
+            title="Open in new tab"
+          >
+            <ExternalLink className="h-[12.8px] w-[12.8px]" />
+          </button>
+
+          <button
             onClick={handleReset}
             className={cn(
               "transition-colors",

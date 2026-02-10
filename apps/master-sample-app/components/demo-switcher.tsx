@@ -1,7 +1,7 @@
 "use client"
 
 import { Search, X } from "lucide-react"
-import { useState, useEffect, useRef, useMemo, useCallback } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { getAllSamples } from "@/samples"
 import { Sample } from "@/types/sample"
 import { cn } from "@/lib/utils"
@@ -57,13 +57,11 @@ function formatLabel(value: string): string {
     .join(' ')
 }
 
-// Fixed entries to match screenshot (these show even if no demos exist yet)
+// Fixed entries (these show even if no demos exist yet)
 const FRAMEWORK_EXTRAS = [
   { id: 'Angular', icon: 'angular' },
   { id: 'Vue', icon: 'vue' },
 ]
-
-const FEATURE_EXTRAS: string[] = []
 
 export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId, initialLevel }: DemoSwitcherProps) {
   const [searchQuery, setSearchQuery] = useState('')
@@ -74,10 +72,27 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
   const overlayRef = useRef<HTMLDivElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
 
-  // Parse all samples once
+  // Parse all samples once, keeping title for search
+  const allSamples = useMemo(() => getAllSamples(), [])
   const allParsed = useMemo(() => {
-    return getAllSamples().map(parseSample)
-  }, [])
+    return allSamples.map(parseSample)
+  }, [allSamples])
+
+  // Flat search results: match against title, demoName, and all segments
+  const searchResults = useMemo(() => {
+    if (!searchQuery) return []
+    const q = searchQuery.toLowerCase()
+    return allSamples
+      .map((sample, i) => ({ sample, parsed: allParsed[i] }))
+      .filter(({ sample, parsed }) => {
+        const title = sample.metadata.title.toLowerCase()
+        const segments = [parsed.framework, parsed.feature, parsed.appType, parsed.library, parsed.demoName]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase()
+        return title.includes(q) || segments.includes(q) || parsed.demoName.toLowerCase().includes(q)
+      })
+  }, [searchQuery, allSamples, allParsed])
 
   // Initialize selections from current sample, respecting initialLevel from breadcrumb clicks
   useEffect(() => {
@@ -85,14 +100,11 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
       const current = allParsed.find(p => p.sampleId === currentSampleId)
       if (current) {
         if (initialLevel !== undefined) {
-          // Breadcrumb click: preserve selections up to and including the clicked level,
-          // clear everything below it so the user can re-navigate from that point
           setSelectedFramework(current.framework)
           setSelectedFeature(initialLevel >= 1 ? (current.feature || null) : null)
           setSelectedAppType(initialLevel >= 2 ? (current.appType || null) : null)
           setSelectedLibrary(initialLevel >= 3 ? (current.library || null) : null)
         } else {
-          // Search button or Cmd+K: show full current selection
           setSelectedFramework(current.framework)
           setSelectedFeature(current.feature || null)
           setSelectedAppType(current.appType || null)
@@ -130,7 +142,6 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
         onClose()
       }
     }
-    // Delay to prevent immediate close on the same click that opened it
     const timeout = setTimeout(() => {
       document.addEventListener('mousedown', handleClickOutside)
     }, 100)
@@ -143,7 +154,6 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
   // Get unique values for each column based on cascading filters
   const frameworks = useMemo(() => {
     const unique = [...new Set(allParsed.map(p => p.framework))]
-    // Add extras from screenshot
     FRAMEWORK_EXTRAS.forEach(f => {
       if (!unique.includes(f.id)) unique.push(f.id)
     })
@@ -155,12 +165,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
   }, [allParsed, selectedFramework])
 
   const features = useMemo(() => {
-    const unique = [...new Set(filteredByFramework.map(p => p.feature).filter(Boolean))]
-    FEATURE_EXTRAS.forEach(f => {
-      const lower = f.toLowerCase()
-      if (!unique.some(u => u.toLowerCase() === lower)) unique.push(f.toLowerCase())
-    })
-    return unique
+    return [...new Set(filteredByFramework.map(p => p.feature).filter(Boolean))]
   }, [filteredByFramework])
 
   const filteredByFeature = useMemo(() => {
@@ -181,28 +186,17 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
     return [...new Set(filteredByAppType.map(p => p.library).filter(Boolean))]
   }, [filteredByAppType])
 
-  // Search filter
-  const searchFilter = useCallback((value: string) => {
-    if (!searchQuery) return true
-    return value.toLowerCase().includes(searchQuery.toLowerCase())
-  }, [searchQuery])
+  const filteredByLibrary = useMemo(() => {
+    if (!selectedLibrary) return filteredByAppType
+    return filteredByAppType.filter(p => p.library === selectedLibrary)
+  }, [filteredByAppType, selectedLibrary])
 
-  // Handle selection and auto-navigate to demo
-  const selectAndNavigate = useCallback((framework: string, feature: string | null, appType: string | null, library: string | null) => {
-    let candidates = allParsed.filter(p => p.framework === framework)
-    if (feature) candidates = candidates.filter(p => p.feature === feature)
-    if (appType) candidates = candidates.filter(p => p.appType === appType)
-    if (library) candidates = candidates.filter(p => p.library === library)
-
-    if (candidates.length === 1) {
-      onSampleSelect(candidates[0].sampleId)
-      onClose()
-    } else if (candidates.length > 0 && library) {
-      // If we have a library selected but multiple demos, pick the first
-      onSampleSelect(candidates[0].sampleId)
-      onClose()
-    }
-  }, [allParsed, onSampleSelect, onClose])
+  // Demo names for the 5th column, sorted alphabetically for consistent ordering
+  const demos = useMemo(() => {
+    return filteredByLibrary
+      .map(p => ({ demoName: p.demoName, sampleId: p.sampleId }))
+      .sort((a, b) => a.demoName.localeCompare(b.demoName))
+  }, [filteredByLibrary])
 
   const handleFrameworkSelect = (framework: string) => {
     setSelectedFramework(framework)
@@ -216,25 +210,16 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
     setSelectedAppType(null)
     setSelectedLibrary(null)
 
-    // Check if only one app type available
+    // Auto-cascade column selections (but never navigate - only demo click navigates)
     const filtered = filteredByFramework.filter(p => p.feature === feature)
     const types = [...new Set(filtered.map(p => p.appType).filter(Boolean))]
     if (types.length === 1) {
-      const libs = [...new Set(filtered.filter(p => p.appType === types[0]).map(p => p.library).filter(Boolean))]
+      setSelectedAppType(types[0])
+      const withType = filtered.filter(p => p.appType === types[0])
+      const libs = [...new Set(withType.map(p => p.library).filter(Boolean))]
       if (libs.length === 1) {
-        setSelectedAppType(types[0])
         setSelectedLibrary(libs[0])
-        selectAndNavigate(selectedFramework, feature, types[0], libs[0])
-        return
-      } else if (libs.length === 0) {
-        // No library level, select directly
-        setSelectedAppType(types[0])
-        selectAndNavigate(selectedFramework, feature, types[0], null)
-        return
       }
-    }
-    if (types.length === 0 && filtered.length === 1) {
-      selectAndNavigate(selectedFramework, feature, null, null)
     }
   }
 
@@ -242,22 +227,21 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
     setSelectedAppType(appType)
     setSelectedLibrary(null)
 
-    // Check if only one library available
+    // Auto-cascade column selections (but never navigate)
     const filtered = filteredByFeature.filter(p => p.appType === appType)
     const libs = [...new Set(filtered.map(p => p.library).filter(Boolean))]
     if (libs.length === 1) {
       setSelectedLibrary(libs[0])
-      selectAndNavigate(selectedFramework, selectedFeature, appType, libs[0])
-      return
-    }
-    if (libs.length === 0 && filtered.length === 1) {
-      selectAndNavigate(selectedFramework, selectedFeature, appType, null)
     }
   }
 
   const handleLibrarySelect = (library: string) => {
     setSelectedLibrary(library)
-    selectAndNavigate(selectedFramework, selectedFeature, selectedAppType, library)
+  }
+
+  const handleDemoSelect = (sampleId: string) => {
+    onSampleSelect(sampleId)
+    onClose()
   }
 
   if (!isOpen) return null
@@ -270,7 +254,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
       {/* Overlay Panel */}
       <div
         ref={overlayRef}
-        className="absolute left-1/2 -translate-x-1/2 top-[44px] w-[714px] max-w-[calc(100vw-24px)] bg-[#0e0e0e] border border-[rgba(255,255,255,0.08)] rounded-[16px] shadow-[0px_24px_80px_0px_black] overflow-hidden"
+        className="absolute left-1/2 -translate-x-1/2 top-[44px] w-[880px] max-w-[calc(100vw-24px)] bg-[#0e0e0e] border border-[rgba(255,255,255,0.08)] rounded-[16px] shadow-[0px_24px_80px_0px_black] overflow-hidden"
       >
         {/* Search Input */}
         <div className="p-4">
@@ -295,123 +279,176 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
           </div>
         </div>
 
-        {/* Category Columns */}
-        <div className="flex gap-4 px-4 pb-4 font-[family-name:var(--font-urbanist)]">
-          {/* Framework Column */}
-          <div className="flex-1 min-w-0">
-            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
-              Framework
-            </div>
-            <div className="space-y-1">
-              {frameworks.filter(f => searchFilter(f)).map(framework => {
-                const hasDemo = allParsed.some(p => p.framework === framework)
-                return (
+        {/* Search Results (flat list) or Category Columns */}
+        {searchQuery ? (
+          <div className="px-4 pb-4 font-[family-name:var(--font-urbanist)] max-h-[400px] overflow-y-auto">
+            {searchResults.length === 0 ? (
+              <div className="px-2 py-4 text-sm text-white/30 text-center">
+                No demos found
+              </div>
+            ) : (
+              <div className="space-y-0.5">
+                {searchResults.map(({ sample, parsed }) => (
                   <button
-                    key={framework}
-                    onClick={() => hasDemo && handleFrameworkSelect(framework)}
+                    key={parsed.sampleId}
+                    onClick={() => handleDemoSelect(parsed.sampleId)}
                     className={cn(
-                      "w-full flex items-center gap-3 rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
-                      selectedFramework === framework
+                      "w-full rounded-[8px] px-3 py-2.5 text-left transition-colors flex items-center justify-between gap-4",
+                      currentSampleId === parsed.sampleId
                         ? "bg-[#171617] text-white"
-                        : hasDemo
-                          ? "text-white hover:bg-[#171617]/50"
-                          : "text-white/52 cursor-not-allowed"
+                        : "text-white/80 hover:bg-[#171617]/50"
                     )}
-                    disabled={!hasDemo}
                   >
-                    <FrameworkIcon framework={framework} />
-                    <span>{framework}</span>
+                    <span className="text-[13px]">{sample.metadata.title}</span>
+                    <span className="text-[11px] text-white/30 shrink-0">
+                      {[parsed.feature, parsed.appType, parsed.library].filter(Boolean).map(formatLabel).join(' / ')}
+                    </span>
                   </button>
-                )
-              })}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
-
-          {/* Feature Column */}
-          <div className="flex-1 min-w-0">
-            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
-              Feature
+        ) : (
+          <div className="flex gap-4 px-4 pb-4 font-[family-name:var(--font-urbanist)]">
+            {/* Framework Column */}
+            <div className="flex-1 min-w-0">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+                Framework
+              </div>
+              <div className="space-y-1">
+                {frameworks.map(framework => {
+                  const hasDemo = allParsed.some(p => p.framework === framework)
+                  return (
+                    <button
+                      key={framework}
+                      onClick={() => hasDemo && handleFrameworkSelect(framework)}
+                      className={cn(
+                        "w-full flex items-center gap-3 rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
+                        selectedFramework === framework
+                          ? "bg-[#171617] text-white"
+                          : hasDemo
+                            ? "text-white hover:bg-[#171617]/50"
+                            : "text-white/52 cursor-not-allowed"
+                      )}
+                      disabled={!hasDemo}
+                    >
+                      <FrameworkIcon framework={framework} />
+                      <span>{framework}</span>
+                    </button>
+                  )
+                })}
+              </div>
             </div>
-            <div className="space-y-1">
-              {features.filter(f => searchFilter(f)).map(feature => {
-                const hasDemo = filteredByFramework.some(p => p.feature === feature)
-                return (
+
+            {/* Feature Column */}
+            <div className="flex-1 min-w-0">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+                Feature
+              </div>
+              <div className="space-y-1">
+                {features.map(feature => {
+                  const hasDemo = filteredByFramework.some(p => p.feature === feature)
+                  return (
+                    <button
+                      key={feature}
+                      onClick={() => hasDemo && handleFeatureSelect(feature)}
+                      className={cn(
+                        "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
+                        selectedFeature === feature
+                          ? "bg-[#171617] text-white"
+                          : hasDemo
+                            ? "text-white/52 hover:bg-[#171617]/50"
+                            : "text-white/30 cursor-not-allowed"
+                      )}
+                      disabled={!hasDemo}
+                    >
+                      {formatLabel(feature)}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* App Type Column */}
+            <div className="flex-1 min-w-0">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+                App Type
+              </div>
+              <div className="space-y-1">
+                {appTypes.map(appType => (
                   <button
-                    key={feature}
-                    onClick={() => hasDemo && handleFeatureSelect(feature)}
+                    key={appType}
+                    onClick={() => handleAppTypeSelect(appType)}
                     className={cn(
                       "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
-                      selectedFeature === feature
+                      selectedAppType === appType
                         ? "bg-[#171617] text-white"
-                        : hasDemo
-                          ? "text-white/52 hover:bg-[#171617]/50"
-                          : "text-white/30 cursor-not-allowed"
+                        : "text-white/52 hover:bg-[#171617]/50"
                     )}
-                    disabled={!hasDemo}
                   >
-                    {formatLabel(feature)}
+                    {formatLabel(appType)}
                   </button>
-                )
-              })}
+                ))}
+                {appTypes.length === 0 && selectedFeature && (
+                  <div className="px-2 py-2 text-xs text-white/30">
+                    Select a feature
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
 
-          {/* App Type Column */}
-          <div className="flex-1 min-w-0">
-            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
-              App Type
+            {/* Library Column */}
+            <div className="flex-1 min-w-0">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+                Library
+              </div>
+              <div className="space-y-1">
+                {libraries.map(library => (
+                  <button
+                    key={library}
+                    onClick={() => handleLibrarySelect(library)}
+                    className={cn(
+                      "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
+                      selectedLibrary === library
+                        ? "bg-[#171617] text-white"
+                        : "text-white/52 hover:bg-[#171617]/50"
+                    )}
+                  >
+                    {formatLabel(library)}
+                  </button>
+                ))}
+                {libraries.length === 0 && selectedAppType && (
+                  <div className="px-2 py-2 text-xs text-white/30">
+                    No library needed
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="space-y-1">
-              {appTypes.filter(a => searchFilter(a)).map(appType => (
-                <button
-                  key={appType}
-                  onClick={() => handleAppTypeSelect(appType)}
-                  className={cn(
-                    "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
-                    selectedAppType === appType
-                      ? "bg-[#171617] text-white"
-                      : "text-white/52 hover:bg-[#171617]/50"
-                  )}
-                >
-                  {formatLabel(appType)}
-                </button>
-              ))}
-              {appTypes.length === 0 && selectedFeature && (
-                <div className="px-2 py-2 text-xs text-white/30">
-                  Select a feature
-                </div>
-              )}
-            </div>
-          </div>
 
-          {/* Library Column */}
-          <div className="flex-1 min-w-0">
-            <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
-              Library
-            </div>
-            <div className="space-y-1">
-              {libraries.filter(l => searchFilter(l)).map(library => (
-                <button
-                  key={library}
-                  onClick={() => handleLibrarySelect(library)}
-                  className={cn(
-                    "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
-                    selectedLibrary === library
-                      ? "bg-[#171617] text-white"
-                      : "text-white/52 hover:bg-[#171617]/50"
-                  )}
-                >
-                  {formatLabel(library)}
-                </button>
-              ))}
-              {libraries.length === 0 && selectedAppType && (
-                <div className="px-2 py-2 text-xs text-white/30">
-                  No library needed
-                </div>
-              )}
+            {/* Demo Column - always visible */}
+            <div className="flex-1 min-w-0">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+                Demo
+              </div>
+              <div className="space-y-1 max-h-[300px] overflow-y-auto">
+                {demos.map(demo => (
+                  <button
+                    key={demo.sampleId}
+                    onClick={() => handleDemoSelect(demo.sampleId)}
+                    className={cn(
+                      "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
+                      currentSampleId === demo.sampleId
+                        ? "bg-[#171617] text-white"
+                        : "text-white/52 hover:bg-[#171617]/50"
+                    )}
+                  >
+                    {formatLabel(demo.demoName)}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
