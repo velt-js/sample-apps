@@ -92,13 +92,13 @@ export function HeaderBar({
   }, [documentId, resetting])
 
   return (
-    <header className="relative flex h-[38px] items-center border-b border-[rgba(255,255,255,0.08)] bg-[#0e0e0e] px-[19px] shrink-0 shadow-[0px_12px_32px_0px_black]">
+    <header className="relative flex h-[48px] items-center border-b border-[rgba(255,255,255,0.08)] bg-[#0e0e0e] px-[19px] shrink-0 shadow-[0px_12px_32px_0px_black]">
       {/* Left: Brand + Breadcrumbs */}
       <div className="flex items-center gap-4 min-w-0 overflow-hidden font-[family-name:var(--font-urbanist)]">
         {/* Velt brand */}
         <div className="flex items-center gap-2 shrink-0">
-          <VeltLogo className="h-[11.2px] w-[11.2px] text-foreground" />
-          <span className="text-[11.2px] font-bold text-white tracking-[0.112px] leading-none">Velt</span>
+          <VeltLogo className="h-[20px] w-[20px] text-foreground" />
+          <span className="text-[20px] font-bold text-white tracking-[0.2px] leading-none">Velt</span>
         </div>
 
         {/* Vertical divider line */}
@@ -114,7 +114,7 @@ export function HeaderBar({
               {i === 0 && segment.toLowerCase() === 'react' ? (
                 <button
                   onClick={() => onBreadcrumbClick?.(i)}
-                  className="flex items-center gap-2 text-[12px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
+                  className="flex items-center gap-2 text-[14px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
                 >
                   <ReactIcon />
                   <span>{segment}</span>
@@ -122,14 +122,14 @@ export function HeaderBar({
               ) : i === segments.length - 1 ? (
                 <button
                   onClick={() => onBreadcrumbClick?.(i)}
-                  className="text-[12px] text-white/50 hover:text-white/70 transition-colors cursor-pointer truncate max-w-[200px] leading-normal"
+                  className="text-[14px] text-white/50 hover:text-white/70 transition-colors cursor-pointer truncate max-w-[200px] leading-normal"
                 >
                   {segment}
                 </button>
               ) : (
                 <button
                   onClick={() => onBreadcrumbClick?.(i)}
-                  className="text-[12px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
+                  className="text-[14px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
                 >
                   {segment}
                 </button>
@@ -174,7 +174,7 @@ export function HeaderBar({
           className="flex items-center gap-[9px] h-auto px-3 py-[5px] rounded-lg border border-[rgba(255,255,255,0.12)] text-white opacity-52 hover:opacity-80 transition-opacity w-[233px] font-[family-name:var(--font-urbanist)]"
         >
           <Search className="h-[14px] w-[14px] shrink-0" />
-          <span className="text-[12px] leading-normal">Search</span>
+          <span className="text-[14px] leading-normal">Search</span>
         </button>
 
         <div className="flex items-center gap-3">
@@ -186,7 +186,7 @@ export function HeaderBar({
             )}
             title={copied ? "Copied!" : "Copy link"}
           >
-            <Copy className="h-[12.8px] w-[12.8px]" />
+            <Copy className="h-[14.8px] w-[14.8px]" />
           </button>
 
           <button
@@ -194,7 +194,7 @@ export function HeaderBar({
             className="text-white/60 hover:text-white transition-colors"
             title="View on GitHub"
           >
-            <Github className="h-[12.8px] w-[12.8px]" />
+            <Github className="h-[14.8px] w-[14.8px]" />
           </button>
 
           <button
@@ -202,7 +202,7 @@ export function HeaderBar({
             className="text-white/60 hover:text-white transition-colors"
             title="Open in new tab"
           >
-            <ExternalLink className="h-[12.8px] w-[12.8px]" />
+            <ExternalLink className="h-[14.8px] w-[14.8px]" />
           </button>
 
           <button
@@ -214,7 +214,7 @@ export function HeaderBar({
             title={resetting ? "Resetting..." : "Reset document"}
             disabled={resetting}
           >
-            <RotateCcw className="h-[12.8px] w-[12.8px]" />
+            <RotateCcw className="h-[14.8px] w-[14.8px]" />
           </button>
         </div>
       </div>
@@ -235,7 +235,7 @@ function ReactIcon() {
 
 function ClickIcon({ className }: { className?: string }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M2 8H4M8 2V4M5.20007 5.19998L3.7334 3.73332M10.8 5.19998L12.2666 3.73332M5.20007 10.8L3.7334 12.2667M8 8L14 10L11.3333 11.3333L10 14L8 8Z" />
     </svg>
   )
@@ -243,7 +243,7 @@ function ClickIcon({ className }: { className?: string }) {
 
 function CodeBracketsIcon({ className }: { className?: string }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M4.66667 5.33333L2 8L4.66667 10.6667M11.3333 5.33333L14 8L11.3333 10.6667M9.33333 2.66667L6.66667 13.3333" />
     </svg>
   )
