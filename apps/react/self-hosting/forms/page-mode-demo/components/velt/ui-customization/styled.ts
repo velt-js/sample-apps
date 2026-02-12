@@ -726,12 +726,12 @@ export const GlobalVeltStyles = createGlobalStyle`
   .velt-composer-edit-mode {
     margin: 4px !important;
     min-width: 0 !important;
-    overflow: hidden !important;
+    // overflow: hidden !important;
   }
 
   app-comment-dialog-composer {
     min-width: 0 !important;
-    overflow: hidden !important;
+    // overflow: hidden !important;
   }
 
   .velt-comment-dialog-composer-attachments--selected {
@@ -1407,7 +1407,7 @@ export const ComposerWrapper = styled.div`
   background: var(--default-canvas, #FFF);
   box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14);
   min-width: 0;
-  overflow: hidden;
+//   overflow: hidden;
 
   .velt-composer-open & {
     box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14), 0 0 0 2px #FFF, 0 0 0 5px rgba(126, 141, 169, 0.10);
@@ -1422,7 +1422,7 @@ export const ComposerInputWrapper = styled.div`
   align-self: stretch;
   justify-content: center;
   min-width: 0;
-  overflow: hidden;
+//   overflow: hidden;
 
   .velt-composer-open & {
     padding: 11px 12px;

@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { useId } from 'react';
 import colors from './colors';
+
+/**
+ * Safari cannot resolve url(#id) when the ID contains special characters
+ * like the colons in React's useId() output (e.g. ":r0:").
+ * This helper strips non-alphanumeric chars to produce safe SVG IDs.
+ */
+function useSvgId(prefix: string) {
+    const id = useId();
+    return `${prefix}_${id.replace(/[^a-zA-Z0-9]/g, '')}`;
+}
 
 // ============================================
 // Comment Tool Icons
@@ -7,28 +17,14 @@ import colors from './colors';
 
 export const CommentNoCommentsIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_324_2570)">
-            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#5C6C8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </g>
-        <defs>
-            <clipPath id="clip0_324_2570">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#5C6C8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
 
 export const CommentHasCommentsIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_353_1206)">
-            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
-        </g>
-        <defs>
-            <clipPath id="clip0_353_1206">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
     </svg>
 );
 
@@ -38,29 +34,15 @@ export const CommentHasCommentsIcon = () => (
 
 export const ResolveIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_249_2027)">
-            <rect x="1.22729" y="1.22729" width="13.5455" height="13.5455" rx="6.77273" fill="white" stroke="#BFC8DC" />
-        </g>
-        <defs>
-            <clipPath id="clip0_249_2027">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <rect x="1.22729" y="1.22729" width="13.5455" height="13.5455" rx="6.77273" fill="white" stroke="#BFC8DC" />
     </svg>
 );
 
 export const ResolvedIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_249_2066)">
-            <rect x="0.727295" y="0.727295" width="14.5455" height="14.5455" rx="7.27273" fill="#1DCA73" />
-            <rect x="11.1948" y="4.64136" width="1.5" height="8" rx="0.75" transform="rotate(45 11.1948 4.64136)" fill="white" />
-            <rect x="3.74463" y="8.53052" width="1.5" height="4" rx="0.75" transform="rotate(-45 3.74463 8.53052)" fill="white" />
-        </g>
-        <defs>
-            <clipPath id="clip0_249_2066">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <rect x="0.727295" y="0.727295" width="14.5455" height="14.5455" rx="7.27273" fill="#1DCA73" />
+        <rect x="11.1948" y="4.64136" width="1.5" height="8" rx="0.75" transform="rotate(45 11.1948 4.64136)" fill="white" />
+        <rect x="3.74463" y="8.53052" width="1.5" height="4" rx="0.75" transform="rotate(-45 3.74463 8.53052)" fill="white" />
     </svg>
 );
 
@@ -72,17 +54,10 @@ export const QuestionBarIcon = () => (
 
 export const AssignUserIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_353_2022)">
-            <path d="M8.00002 8.5C5.13102 8.5 2.77802 10.697 2.52502 13.5" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M8 8.5C9.65685 8.5 11 7.15685 11 5.5C11 3.84315 9.65685 2.5 8 2.5C6.34315 2.5 5 3.84315 5 5.5C5 7.15685 6.34315 8.5 8 8.5Z" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M11.5 9.5V13.5" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M9.5 11.5H13.5" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
-        </g>
-        <defs>
-            <clipPath id="clip0_353_2022">
-                <rect width="12" height="12" fill="white" transform="translate(2 2)" />
-            </clipPath>
-        </defs>
+        <path d="M8.00002 8.5C5.13102 8.5 2.77802 10.697 2.52502 13.5" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8 8.5C9.65685 8.5 11 7.15685 11 5.5C11 3.84315 9.65685 2.5 8 2.5C6.34315 2.5 5 3.84315 5 5.5C5 7.15685 6.34315 8.5 8 8.5Z" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M11.5 9.5V13.5" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M9.5 11.5H13.5" stroke="#5C6C8A" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
 
@@ -95,74 +70,81 @@ export const OptionsDotsIcon = () => (
     </svg>
 );
 
-export const PdfAttachmentIcon = () => (
-    <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d_220_539)">
-            <path data-figma-bg-blur-radius="20" d="M26.5607 10.0607L19.9393 3.43934C19.658 3.15804 19.2765 3 18.8787 3H8C6.34315 3 5 4.34315 5 6V26C5 27.6569 6.34315 29 8 29H24C25.6569 29 27 27.6569 27 26V11.1213C27 10.7235 26.842 10.342 26.5607 10.0607Z" fill="white" fillOpacity="0.9" />
-            <path d="M20.7922 24V17H25.0122V18.1H22.0422V20H24.6422V21.1H22.0422V24H20.7922Z" fill="#5C6C8A" />
-            <path d="M14.1461 24V17H16.1961C17.9161 17 19.0961 18.42 19.0961 20.5C19.0961 22.58 17.9161 24 16.1961 24H14.1461ZM15.3961 22.9H16.1961C17.2061 22.9 17.8461 21.97 17.8461 20.5C17.8461 19.03 17.2061 18.1 16.1961 18.1H15.3961V22.9Z" fill="#5C6C8A" />
-            <path d="M8 24V17H10.51C11.83 17 12.75 17.89 12.75 19.15C12.75 20.41 11.83 21.3 10.51 21.3H9.25V24H8ZM9.25 20.2H10.56C11.15 20.2 11.55 19.78 11.55 19.15C11.55 18.52 11.15 18.1 10.56 18.1H9.25V20.2Z" fill="#5C6C8A" />
-            <g filter="url(#filter2_d_220_539)">
-                <path d="M19 4V11H26" fill="white" />
-                <path d="M19 4V11H26L19 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+export const PdfAttachmentIcon = () => {
+    const filterId0 = useSvgId('f0pdf');
+    const filterId2 = useSvgId('f2pdf');
+    return (
+        <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter={`url(#${filterId0})`}>
+                <path data-figma-bg-blur-radius="20" d="M26.5607 10.0607L19.9393 3.43934C19.658 3.15804 19.2765 3 18.8787 3H8C6.34315 3 5 4.34315 5 6V26C5 27.6569 6.34315 29 8 29H24C25.6569 29 27 27.6569 27 26V11.1213C27 10.7235 26.842 10.342 26.5607 10.0607Z" fill="white" fillOpacity="0.9" />
+                <path d="M20.7922 24V17H25.0122V18.1H22.0422V20H24.6422V21.1H22.0422V24H20.7922Z" fill="#5C6C8A" />
+                <path d="M14.1461 24V17H16.1961C17.9161 17 19.0961 18.42 19.0961 20.5C19.0961 22.58 17.9161 24 16.1961 24H14.1461ZM15.3961 22.9H16.1961C17.2061 22.9 17.8461 21.97 17.8461 20.5C17.8461 19.03 17.2061 18.1 16.1961 18.1H15.3961V22.9Z" fill="#5C6C8A" />
+                <path d="M8 24V17H10.51C11.83 17 12.75 17.89 12.75 19.15C12.75 20.41 11.83 21.3 10.51 21.3H9.25V24H8ZM9.25 20.2H10.56C11.15 20.2 11.55 19.78 11.55 19.15C11.55 18.52 11.15 18.1 10.56 18.1H9.25V20.2Z" fill="#5C6C8A" />
+                <g filter={`url(#${filterId2})`}>
+                    <path d="M19 4V11H26" fill="white" />
+                    <path d="M19 4V11H26L19 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </g>
             </g>
-        </g>
-        <defs>
-            <filter id="filter0_d_220_539" x="-2.66667" y="-1.33333" width="37.3333" height="37.3333" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                <feOffset dy="1.33333" />
-                <feGaussianBlur stdDeviation="1.33333" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0.643275 0 0 0 0 0.672823 0 0 0 0 0.725353 0 0 0 0.32 0" />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_220_539" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_220_539" result="shape" />
-            </filter>
-            <clipPath id="bgblur_0_220_539_clip_path" transform="translate(15 17)"><path d="M26.5607 10.0607L19.9393 3.43934C19.658 3.15804 19.2765 3 18.8787 3H8C6.34315 3 5 4.34315 5 6V26C5 27.6569 6.34315 29 8 29H24C25.6569 29 27 27.6569 27 26V11.1213C27 10.7235 26.842 10.342 26.5607 10.0607Z" />
-            </clipPath><filter id="filter2_d_220_539" x="14" y="1" width="17" height="17" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                <feOffset dy="2" />
-                <feGaussianBlur stdDeviation="2" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0.496 0 0 0 0 0.554286 0 0 0 0 0.664 0 0 0 0.5 0" />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_220_539" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_220_539" result="shape" />
-            </filter>
-        </defs>
-    </svg>
-);
+            <defs>
+                <filter id={filterId0} x="-2.66667" y="-1.33333" width="37.3333" height="37.3333" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feOffset dy="1.33333" />
+                    <feGaussianBlur stdDeviation="1.33333" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.643275 0 0 0 0 0.672823 0 0 0 0 0.725353 0 0 0 0.32 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                </filter>
+                <filter id={filterId2} x="14" y="1" width="17" height="17" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feOffset dy="2" />
+                    <feGaussianBlur stdDeviation="2" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.496 0 0 0 0 0.554286 0 0 0 0 0.664 0 0 0 0.5 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                </filter>
+            </defs>
+        </svg>
+    );
+};
 
-export const ImgAttachmentIcon = () => (
-    <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d_img_attach)">
-            <path data-figma-bg-blur-radius="20" d="M26.5607 10.0607L19.9393 3.43934C19.658 3.15804 19.2765 3 18.8787 3H8C6.34315 3 5 4.34315 5 6V26C5 27.6569 6.34315 29 8 29H24C25.6569 29 27 27.6569 27 26V11.1213C27 10.7235 26.842 10.342 26.5607 10.0607Z" fill="white" fillOpacity="0.9" />
-            <text x="8" y="24" fill="#5C6C8A" fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fontSize="8.5" letterSpacing="0.3">IMG</text>
-            <g filter="url(#filter2_d_img_attach)">
-                <path d="M19 4V11H26" fill="white" />
-                <path d="M19 4V11H26L19 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+export const ImgAttachmentIcon = () => {
+    const filterId0 = useSvgId('f0img');
+    const filterId2 = useSvgId('f2img');
+    return (
+        <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter={`url(#${filterId0})`}>
+                <path data-figma-bg-blur-radius="20" d="M26.5607 10.0607L19.9393 3.43934C19.658 3.15804 19.2765 3 18.8787 3H8C6.34315 3 5 4.34315 5 6V26C5 27.6569 6.34315 29 8 29H24C25.6569 29 27 27.6569 27 26V11.1213C27 10.7235 26.842 10.342 26.5607 10.0607Z" fill="white" fillOpacity="0.9" />
+                <text x="8" y="24" fill="#5C6C8A" fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fontSize="8.5" letterSpacing="0.3">IMG</text>
+                <g filter={`url(#${filterId2})`}>
+                    <path d="M19 4V11H26" fill="white" />
+                    <path d="M19 4V11H26L19 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </g>
             </g>
-        </g>
-        <defs>
-            <filter id="filter0_d_img_attach" x="-2.66667" y="-1.33333" width="37.3333" height="37.3333" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                <feOffset dy="1.33333" />
-                <feGaussianBlur stdDeviation="1.33333" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0.643275 0 0 0 0 0.672823 0 0 0 0 0.725353 0 0 0 0.32 0" />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_img_attach" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_img_attach" result="shape" />
-            </filter>
-            <filter id="filter2_d_img_attach" x="14" y="1" width="17" height="17" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                <feOffset dy="2" />
-                <feGaussianBlur stdDeviation="2" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0.496 0 0 0 0 0.554286 0 0 0 0 0.664 0 0 0 0.5 0" />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_img_attach" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_img_attach" result="shape" />
-            </filter>
-        </defs>
-    </svg>
-);
+            <defs>
+                <filter id={filterId0} x="-2.66667" y="-1.33333" width="37.3333" height="37.3333" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feOffset dy="1.33333" />
+                    <feGaussianBlur stdDeviation="1.33333" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.643275 0 0 0 0 0.672823 0 0 0 0 0.725353 0 0 0 0.32 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                </filter>
+                <filter id={filterId2} x="14" y="1" width="17" height="17" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feOffset dy="2" />
+                    <feGaussianBlur stdDeviation="2" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.496 0 0 0 0 0.554286 0 0 0 0 0.664 0 0 0 0.5 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                </filter>
+            </defs>
+        </svg>
+    );
+};
 
 export const DownloadIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -182,14 +164,7 @@ export const ReplyIcon = () => (
 
 export const CloseCircleIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_324_2541)">
-            <path d="M8 1.5C6.71442 1.5 5.45772 1.88122 4.3888 2.59545C3.31988 3.30968 2.48676 4.32484 1.99479 5.51256C1.50282 6.70028 1.37409 8.00721 1.6249 9.26809C1.8757 10.529 2.49477 11.6872 3.40381 12.5962C4.31285 13.5052 5.47104 14.1243 6.73192 14.3751C7.99279 14.6259 9.29973 14.4972 10.4874 14.0052C11.6752 13.5132 12.6903 12.6801 13.4046 11.6112C14.1188 10.5423 14.5 9.28558 14.5 8C14.4982 6.27665 13.8128 4.62441 12.5942 3.40582C11.3756 2.18722 9.72335 1.50182 8 1.5ZM10.3538 9.64625C10.4002 9.69271 10.4371 9.74786 10.4622 9.80855C10.4873 9.86925 10.5003 9.9343 10.5003 10C10.5003 10.0657 10.4873 10.1308 10.4622 10.1914C10.4371 10.2521 10.4002 10.3073 10.3538 10.3538C10.3073 10.4002 10.2521 10.4371 10.1915 10.4622C10.1308 10.4873 10.0657 10.5003 10 10.5003C9.93431 10.5003 9.86925 10.4873 9.80855 10.4622C9.74786 10.4371 9.69271 10.4002 9.64625 10.3538L8 8.70687L6.35375 10.3538C6.3073 10.4002 6.25215 10.4371 6.19145 10.4622C6.13075 10.4873 6.0657 10.5003 6 10.5003C5.93431 10.5003 5.86925 10.4873 5.80855 10.4622C5.74786 10.4371 5.69271 10.4002 5.64625 10.3538C5.5998 10.3073 5.56295 10.2521 5.53781 10.1914C5.51266 10.1308 5.49972 10.0657 5.49972 10C5.49972 9.9343 5.51266 9.86925 5.53781 9.80855C5.56295 9.74786 5.5998 9.69271 5.64625 9.64625L7.29313 8L5.64625 6.35375C5.55243 6.25993 5.49972 6.13268 5.49972 6C5.49972 5.86732 5.55243 5.74007 5.64625 5.64625C5.74007 5.55243 5.86732 5.49972 6 5.49972C6.13268 5.49972 6.25993 5.55243 6.35375 5.64625L8 7.29313L9.64625 5.64625C9.69271 5.59979 9.74786 5.56294 9.80855 5.5378C9.86925 5.51266 9.93431 5.49972 10 5.49972C10.0657 5.49972 10.1308 5.51266 10.1915 5.5378C10.2521 5.56294 10.3073 5.59979 10.3538 5.64625C10.4002 5.6927 10.4371 5.74786 10.4622 5.80855C10.4873 5.86925 10.5003 5.9343 10.5003 6C10.5003 6.0657 10.4873 6.13075 10.4622 6.19145C10.4371 6.25214 10.4002 6.3073 10.3538 6.35375L8.70688 8L10.3538 9.64625Z" fill="#9AA8C3" />
-        </g>
-        <defs>
-            <clipPath id="clip0_324_2541">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <path d="M8 1.5C6.71442 1.5 5.45772 1.88122 4.3888 2.59545C3.31988 3.30968 2.48676 4.32484 1.99479 5.51256C1.50282 6.70028 1.37409 8.00721 1.6249 9.26809C1.8757 10.529 2.49477 11.6872 3.40381 12.5962C4.31285 13.5052 5.47104 14.1243 6.73192 14.3751C7.99279 14.6259 9.29973 14.4972 10.4874 14.0052C11.6752 13.5132 12.6903 12.6801 13.4046 11.6112C14.1188 10.5423 14.5 9.28558 14.5 8C14.4982 6.27665 13.8128 4.62441 12.5942 3.40582C11.3756 2.18722 9.72335 1.50182 8 1.5ZM10.3538 9.64625C10.4002 9.69271 10.4371 9.74786 10.4622 9.80855C10.4873 9.86925 10.5003 9.9343 10.5003 10C10.5003 10.0657 10.4873 10.1308 10.4622 10.1914C10.4371 10.2521 10.4002 10.3073 10.3538 10.3538C10.3073 10.4002 10.2521 10.4371 10.1915 10.4622C10.1308 10.4873 10.0657 10.5003 10 10.5003C9.93431 10.5003 9.86925 10.4873 9.80855 10.4622C9.74786 10.4371 9.69271 10.4002 9.64625 10.3538L8 8.70687L6.35375 10.3538C6.3073 10.4002 6.25215 10.4371 6.19145 10.4622C6.13075 10.4873 6.0657 10.5003 6 10.5003C5.93431 10.5003 5.86925 10.4873 5.80855 10.4622C5.74786 10.4371 5.69271 10.4002 5.64625 10.3538C5.5998 10.3073 5.56295 10.2521 5.53781 10.1914C5.51266 10.1308 5.49972 10.0657 5.49972 10C5.49972 9.9343 5.51266 9.86925 5.53781 9.80855C5.56295 9.74786 5.5998 9.69271 5.64625 9.64625L7.29313 8L5.64625 6.35375C5.55243 6.25993 5.49972 6.13268 5.49972 6C5.49972 5.86732 5.55243 5.74007 5.64625 5.64625C5.74007 5.55243 5.86732 5.49972 6 5.49972C6.13268 5.49972 6.25993 5.55243 6.35375 5.64625L8 7.29313L9.64625 5.64625C9.69271 5.59979 9.74786 5.56294 9.80855 5.5378C9.86925 5.51266 9.93431 5.49972 10 5.49972C10.0657 5.49972 10.1308 5.51266 10.1915 5.5378C10.2521 5.56294 10.3073 5.59979 10.3538 5.64625C10.4002 5.6927 10.4371 5.74786 10.4622 5.80855C10.4873 5.86925 10.5003 5.9343 10.5003 6C10.5003 6.0657 10.4873 6.13075 10.4622 6.19145C10.4371 6.25214 10.4002 6.3073 10.3538 6.35375L8.70688 8L10.3538 9.64625Z" fill="#9AA8C3" />
     </svg>
 );
 
@@ -201,27 +176,13 @@ export const SendIcon = () => (
 
 export const AttachmentIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_163_436)">
-            <path d="M8.85695 5.357L5.85195 8.362C5.16895 9.045 5.16895 10.153 5.85195 10.837C6.53495 11.52 7.64295 11.52 8.32695 10.837L12.393 6.771C13.76 5.404 13.76 3.188 12.393 1.821C11.026 0.453996 8.80995 0.453996 7.44295 1.821L3.02395 6.241C0.97395 8.291 0.97395 11.615 3.02395 13.666C5.07395 15.716 8.39795 15.716 10.449 13.666L14.514 9.6" stroke="#9AA8C3" strokeLinecap="round" strokeLinejoin="round" />
-        </g>
-        <defs>
-            <clipPath id="clip0_163_436">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <path d="M8.85695 5.357L5.85195 8.362C5.16895 9.045 5.16895 10.153 5.85195 10.837C6.53495 11.52 7.64295 11.52 8.32695 10.837L12.393 6.771C13.76 5.404 13.76 3.188 12.393 1.821C11.026 0.453996 8.80995 0.453996 7.44295 1.821L3.02395 6.241C0.97395 8.291 0.97395 11.615 3.02395 13.666C5.07395 15.716 8.39795 15.716 10.449 13.666L14.514 9.6" stroke="#9AA8C3" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
 
 export const MentionIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_163_440)">
-            <path d="M5.24976 0.489441C6.86723 -0.102535 8.63323 -0.15659 10.2839 0.335144C11.9348 0.827063 13.3831 1.83904 14.4128 3.21991C15.4426 4.60085 15.9993 6.27757 15.9998 8.00018V9.50018C15.9997 10.1632 15.7361 10.799 15.2673 11.2678C14.7985 11.7365 14.1627 12.0002 13.4998 12.0002C12.8368 12.0001 12.201 11.7365 11.7322 11.2678C11.4901 11.0257 11.3031 10.7389 11.1785 10.4269C10.4475 11.3828 9.29598 12.0002 7.99976 12.0002C5.79077 12.0001 3.99982 10.2092 3.99976 8.00018C3.99976 5.79113 5.79073 4.00031 7.99976 4.00018C9.19451 4.00018 10.2668 4.52418 10.9998 5.35468V4.50018C10.9998 4.22412 11.2237 4.0003 11.4998 4.00018C11.7759 4.00018 11.9997 4.22405 11.9998 4.50018V9.50018C11.9998 9.89789 12.158 10.2795 12.4392 10.5607C12.7205 10.8419 13.1021 11.0001 13.4998 11.0002C13.8975 11.0002 14.279 10.8419 14.5603 10.5607C14.8416 10.2795 14.9997 9.89794 14.9998 9.50018V8.00018C14.9993 6.4929 14.5121 5.02589 13.6111 3.81757C12.7101 2.60942 11.4431 1.72455 9.99878 1.29413C8.55431 0.863749 7.00891 0.910873 5.59351 1.42889C4.17831 1.947 2.96761 2.90811 2.14233 4.16913C1.3171 5.43025 0.920648 6.92455 1.01245 8.42889C1.10432 9.93308 1.67975 11.3674 2.6521 12.5187C3.62464 13.6701 4.94311 14.4774 6.41089 14.8195C7.87868 15.1615 9.41823 15.0209 10.7996 14.4182C11.0526 14.3077 11.3472 14.423 11.4578 14.676C11.5682 14.929 11.4529 15.2236 11.2 15.3342C9.6212 16.0231 7.86193 16.1841 6.18433 15.7932C4.50674 15.4022 2.99998 14.4802 1.88843 13.1642C0.77693 11.8483 0.119337 10.2088 0.0144043 8.48944C-0.0905067 6.77015 0.362238 5.06258 1.30542 3.62128C2.24862 2.18007 3.63232 1.08154 5.24976 0.489441ZM7.99976 5.00018C6.34301 5.00032 4.99976 6.34341 4.99976 8.00018C4.99982 9.6569 6.34305 11.0001 7.99976 11.0002C9.65657 11.0002 10.9997 9.65698 10.9998 8.00018C10.9998 6.34333 9.65661 5.00018 7.99976 5.00018Z" fill="#9AA8C3" />
-        </g>
-        <defs>
-            <clipPath id="clip0_163_440">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <path d="M5.24976 0.489441C6.86723 -0.102535 8.63323 -0.15659 10.2839 0.335144C11.9348 0.827063 13.3831 1.83904 14.4128 3.21991C15.4426 4.60085 15.9993 6.27757 15.9998 8.00018V9.50018C15.9997 10.1632 15.7361 10.799 15.2673 11.2678C14.7985 11.7365 14.1627 12.0002 13.4998 12.0002C12.8368 12.0001 12.201 11.7365 11.7322 11.2678C11.4901 11.0257 11.3031 10.7389 11.1785 10.4269C10.4475 11.3828 9.29598 12.0002 7.99976 12.0002C5.79077 12.0001 3.99982 10.2092 3.99976 8.00018C3.99976 5.79113 5.79073 4.00031 7.99976 4.00018C9.19451 4.00018 10.2668 4.52418 10.9998 5.35468V4.50018C10.9998 4.22412 11.2237 4.0003 11.4998 4.00018C11.7759 4.00018 11.9997 4.22405 11.9998 4.50018V9.50018C11.9998 9.89789 12.158 10.2795 12.4392 10.5607C12.7205 10.8419 13.1021 11.0001 13.4998 11.0002C13.8975 11.0002 14.279 10.8419 14.5603 10.5607C14.8416 10.2795 14.9997 9.89794 14.9998 9.50018V8.00018C14.9993 6.4929 14.5121 5.02589 13.6111 3.81757C12.7101 2.60942 11.4431 1.72455 9.99878 1.29413C8.55431 0.863749 7.00891 0.910873 5.59351 1.42889C4.17831 1.947 2.96761 2.90811 2.14233 4.16913C1.3171 5.43025 0.920648 6.92455 1.01245 8.42889C1.10432 9.93308 1.67975 11.3674 2.6521 12.5187C3.62464 13.6701 4.94311 14.4774 6.41089 14.8195C7.87868 15.1615 9.41823 15.0209 10.7996 14.4182C11.0526 14.3077 11.3472 14.423 11.4578 14.676C11.5682 14.929 11.4529 15.2236 11.2 15.3342C9.6212 16.0231 7.86193 16.1841 6.18433 15.7932C4.50674 15.4022 2.99998 14.4802 1.88843 13.1642C0.77693 11.8483 0.119337 10.2088 0.0144043 8.48944C-0.0905067 6.77015 0.362238 5.06258 1.30542 3.62128C2.24862 2.18007 3.63232 1.08154 5.24976 0.489441ZM7.99976 5.00018C6.34301 5.00032 4.99976 6.34341 4.99976 8.00018C4.99982 9.6569 6.34305 11.0001 7.99976 11.0002C9.65657 11.0002 10.9997 9.65698 10.9998 8.00018C10.9998 6.34333 9.65661 5.00018 7.99976 5.00018Z" fill="#9AA8C3" />
     </svg>
 );
 
@@ -270,25 +231,28 @@ export const CheckIcon = () => (
     </svg>
 );
 
-export const EmptyCommentIcon = () => (
-    <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_i_318_4343)">
-            <path d="M0.821875 10.8819C0.749049 10.9431 0.660252 10.9823 0.565914 10.9949C0.471577 11.0074 0.375619 10.9928 0.289312 10.9527C0.203006 10.9126 0.129936 10.8487 0.0786879 10.7685C0.0274397 10.6883 0.000141319 10.5952 0 10.5L0 0.5C0 0.367392 0.0526785 0.240215 0.146447 0.146447C0.240215 0.0526785 0.367392 0 0.5 0L11.5 0C11.6326 0 11.7598 0.0526785 11.8536 0.146447C11.9473 0.240215 12 0.367392 12 0.5V8.5C12 8.63261 11.9473 8.75978 11.8536 8.85355C11.7598 8.94732 11.6326 9 11.5 9H3.15625C3.03847 9.00003 2.92448 9.04164 2.83437 9.1175L0.821875 10.8819Z" fill="#9AA8C3" />
-        </g>
-        <defs>
-            <filter id="filter0_i_318_4343" x="0" y="0" width="12" height="11.9993" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                <feOffset dy="1" />
-                <feGaussianBlur stdDeviation="0.5" />
-                <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0" />
-                <feBlend mode="normal" in2="shape" result="effect1_innerShadow_318_4343" />
-            </filter>
-        </defs>
-    </svg>
-);
+export const EmptyCommentIcon = () => {
+    const filterId = useSvgId('fempty');
+    return (
+        <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter={`url(#${filterId})`}>
+                <path d="M0.821875 10.8819C0.749049 10.9431 0.660252 10.9823 0.565914 10.9949C0.471577 11.0074 0.375619 10.9928 0.289312 10.9527C0.203006 10.9126 0.129936 10.8487 0.0786879 10.7685C0.0274397 10.6883 0.000141319 10.5952 0 10.5L0 0.5C0 0.367392 0.0526785 0.240215 0.146447 0.146447C0.240215 0.0526785 0.367392 0 0.5 0L11.5 0C11.6326 0 11.7598 0.0526785 11.8536 0.146447C11.9473 0.240215 12 0.367392 12 0.5V8.5C12 8.63261 11.9473 8.75978 11.8536 8.85355C11.7598 8.94732 11.6326 9 11.5 9H3.15625C3.03847 9.00003 2.92448 9.04164 2.83437 9.1175L0.821875 10.8819Z" fill="#9AA8C3" />
+            </g>
+            <defs>
+                <filter id={filterId} x="0" y="0" width="12" height="11.9993" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feOffset dy="1" />
+                    <feGaussianBlur stdDeviation="0.5" />
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0" />
+                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
+                </filter>
+            </defs>
+        </svg>
+    );
+};
 
 export const BackArrowIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -303,15 +267,8 @@ export const BackArrowIcon = () => (
 
 export const SidebarButtonIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_163_2154)">
-            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
-        </g>
-        <defs>
-            <clipPath id="clip0_163_2154">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
     </svg>
 );
 
@@ -335,14 +292,7 @@ export const ReactionIcon = () => (
 
 export const CommentBubbleIcon = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_324_1206)">
-            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
-        </g>
-        <defs>
-            <clipPath id="clip0_324_1206">
-                <rect width="16" height="16" fill="white" />
-            </clipPath>
-        </defs>
+        <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" stroke="#754CFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2.82188 14.3819C2.74905 14.4431 2.66025 14.4823 2.56591 14.4949C2.47158 14.5074 2.37562 14.4928 2.28931 14.4527C2.20301 14.4126 2.12994 14.3487 2.07869 14.2685C2.02744 14.1883 2.00014 14.0952 2 14V4C2 3.86739 2.05268 3.74021 2.14645 3.64645C2.24021 3.55268 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.55268 13.8536 3.64645C13.9473 3.74021 14 3.86739 14 4V12C14 12.1326 13.9473 12.2598 13.8536 12.3536C13.7598 12.4473 13.6326 12.5 13.5 12.5H5.15625C5.03847 12.5 4.92448 12.5416 4.83437 12.6175L2.82188 14.3819Z" fill="#754CFF" />
     </svg>
 );
