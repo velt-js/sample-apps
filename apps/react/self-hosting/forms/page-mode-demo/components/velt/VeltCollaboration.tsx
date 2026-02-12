@@ -1,6 +1,6 @@
 "use client";
 import { useAppUser } from "@/app/userAuth/useAppUser";
-import { useVeltClient, VeltComments } from "@veltdev/react";
+import { useVeltClient, useVeltEventCallback, VeltComments, useCommentUtils } from "@veltdev/react";
 import { useEffect } from "react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
@@ -16,6 +16,19 @@ export function VeltCollaboration() {
       client.signOutUser();
     }
   }, [isUserLoggedIn, client]);
+
+
+  // @ts-ignore
+  const commentUtils = useCommentUtils();
+
+  useEffect(() => {
+    if (commentUtils) {
+      commentUtils.disableAttachmentDownload();
+      commentUtils.on('attachmentDownloadClicked').subscribe((event: any) => {
+        console.log('attachmentDownloadClicked: ', event);
+      });
+    }
+  }, [commentUtils]);
 
 
   return (

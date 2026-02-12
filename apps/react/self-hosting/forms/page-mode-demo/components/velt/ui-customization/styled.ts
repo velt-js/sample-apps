@@ -257,6 +257,10 @@ export const GlobalVeltStyles = createGlobalStyle`
     overflow: hidden !important;
     flex: 1 !important;
 
+    snippyly-comment-dialog {
+        width: 100% !important;
+    }
+
     app-comment-dialog-body {
       display: flex !important;
       flex: 1 1 0% !important;
@@ -355,8 +359,28 @@ export const GlobalVeltStyles = createGlobalStyle`
     font-weight: 400 !important;
     line-height: 18px !important;
     text-decoration-line: underline !important;
-    flex: 1 0 0 !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
   }
+
+  .velt-composer-attachment--loading {
+     app-comment-dialog-composer-attachments-other-icon {
+        display: none !important;
+     }
+     app-comment-dialog-composer-attachments-other-loading {
+        display: block !important;
+     }
+  }
+
+    app-comment-dialog-composer-attachments-other-icon {
+        display: block !important;
+     }
+     app-comment-dialog-composer-attachments-other-loading {
+        display: none !important;
+     }
 
   app-comment-dialog-composer-attachments-other-icon,
   app-comment-dialog-composer-attachments-other-loading,
@@ -391,6 +415,10 @@ export const GlobalVeltStyles = createGlobalStyle`
 
   app-comment-dialog-thread-card-attachments-other-name {
     flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
   }
 
   .velt-composer--attachment-icon-btn {
@@ -674,6 +702,16 @@ export const GlobalVeltStyles = createGlobalStyle`
     width: 100% !important;
   }
 
+  .velt-thread-card--container {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  app-comment-dialog-thread-card {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
   .privado-comment-dialog-thread-card-options-wrapper {
     .velt-comment-dialog-options-dropdown {
       width: 0px !important;
@@ -687,6 +725,24 @@ export const GlobalVeltStyles = createGlobalStyle`
 
   .velt-composer-edit-mode {
     margin: 4px !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  app-comment-dialog-composer {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .velt-comment-dialog-composer-attachments--selected {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  app-comment-dialog-composer-attachments,
+  app-comment-dialog-composer-attachments-other {
+    min-width: 0 !important;
+    overflow: hidden !important;
   }
 
   .privado-reaction-pin-default-icon {
@@ -755,7 +811,11 @@ export const GlobalVeltStyles = createGlobalStyle`
   }
 
   app-comment-dialog-composer-attachments-other-name {
-    flex: 1 !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 
   /* =============================================
@@ -1051,6 +1111,8 @@ export const ThreadCardWrapper = styled.div`
   gap: var(--units-xs, 8px);
   align-self: stretch;
   width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden;
 
 
   .privado-comment-dialog-thread-card-reactions-wrapper {
@@ -1121,9 +1183,19 @@ export const ThreadCardContentWrapper = styled.div`
   flex-direction: column;
   gap: var(--units-sm, 12px);
   width: 100%;
+  min-width: 0;
+  overflow: hidden;
+
+  .privado-comment-dialog-thread-card-message-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--units-sm, 12px);
+    width: 100%;
+    align-items: initial !important;
+  }
 `;
 
-export const AttachmentsOther = styled.div`
+export const Attachments = styled.div`
   display: flex;
   padding: var(--units-xs, 8px);
   align-items: center;
@@ -1132,9 +1204,29 @@ export const AttachmentsOther = styled.div`
   border: 1px solid var(--border-color-default, #EDF0F8);
   background: var(--Gray-5, #F8FAFF);
   cursor: pointer;
+  overflow: hidden;
+
+  > svg {
+    flex-shrink: 0;
+  }
+
+  .velt-comment-attachment--name {
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+  }
 
   app-comment-dialog-thread-card-attachments-other-download {
     display: none !important;
+  }
+
+  app-comment-dialog-thread-card-attachments-image-download {
+    display: none !important;
+  }
+
+  app-comment-dialog-thread-card-attachments-other-download,
+  app-comment-dialog-thread-card-attachments-image-download {
+    flex-shrink: 0;
   }
 
   &:hover {
@@ -1142,6 +1234,10 @@ export const AttachmentsOther = styled.div`
 
     app-comment-dialog-thread-card-attachments-other-download {
       display: block !important;
+    }
+
+    app-comment-dialog-thread-card-attachments-image-download {
+        display: block !important;
     }
 
     .velt-comment-attachment--name {
@@ -1310,6 +1406,8 @@ export const ComposerWrapper = styled.div`
   border-radius: var(--units-sm, 12px);
   background: var(--default-canvas, #FFF);
   box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14);
+  min-width: 0;
+  overflow: hidden;
 
   .velt-composer-open & {
     box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14), 0 0 0 2px #FFF, 0 0 0 5px rgba(126, 141, 169, 0.10);
@@ -1323,6 +1421,8 @@ export const ComposerInputWrapper = styled.div`
   gap: var(--units-sm, 12px);
   align-self: stretch;
   justify-content: center;
+  min-width: 0;
+  overflow: hidden;
 
   .velt-composer-open & {
     padding: 11px 12px;
@@ -1403,8 +1503,10 @@ export const ComposerAttachmentsOther = styled.div`
   border: 1px solid var(--border-color-default, #EDF0F8);
   background: var(--Gray-5, #F8FAFF);
   cursor: pointer !important;
+  overflow: hidden;
 
   app-comment-dialog-composer-attachments-other-icon {
+    flex-shrink: 0;
     svg {
       width: 16px !important;
       height: 16px !important;
@@ -1413,6 +1515,7 @@ export const ComposerAttachmentsOther = styled.div`
 
   app-comment-dialog-composer-attachments-other-delete {
     display: none !important;
+    flex-shrink: 0;
   }
 
   .velt-composer--attachment-name {
@@ -1422,7 +1525,19 @@ export const ComposerAttachmentsOther = styled.div`
     font-style: normal !important;
     font-weight: 400 !important;
     line-height: 18px !important;
-    flex: 1 0 0 !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  app-comment-dialog-composer-attachments-other-name {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 
   &:hover {

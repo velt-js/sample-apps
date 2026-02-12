@@ -5,6 +5,7 @@ import {
     AssignUserIcon,
     CloseCircleIcon,
     DownloadIcon,
+    ImgAttachmentIcon,
     OptionsDotsIcon,
     PdfAttachmentIcon,
     QuestionBarIcon,
@@ -27,7 +28,6 @@ import {
     ThreadCardTopWrapperRight,
     AssignButtonWrapper,
     ThreadCardContentWrapper,
-    AttachmentsOther,
     ThreadCardBottomWrapper,
     ThreadCardBottomWrapperLeft,
     ThreadCardBottomWrapperRight,
@@ -41,7 +41,8 @@ import {
     PageModeComposerHeaderWrapper,
     OptionsContentItemWrapper,
     ReactionsWrapper,
-    ReplyCountWrapperOuter
+    ReplyCountWrapperOuter,
+    Attachments
 } from './styled';
 
 const VeltCommentDialoglWf = () => {
@@ -118,19 +119,29 @@ const VeltCommentDialoglWf = () => {
                                     </ThreadCardTopWrapperRight>
                                 </ThreadCardTopWrapper>
                                 <ThreadCardContentWrapper className="privado-comment-dialog-thread-card-content-wrapper">
-                                    <VeltCommentDialogWireframe.ThreadCard.Message />
-                                    <VeltCommentDialogWireframe.ThreadCard.Attachments>
-                                        <VeltCommentDialogWireframe.ThreadCard.Attachments.Image />
-                                        <VeltCommentDialogWireframe.ThreadCard.Attachments.Other>
-                                            <AttachmentsOther className="privado-comment-dialog-thread-card-attachments-other">
-                                                <PdfAttachmentIcon />
-                                                <VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Name />
-                                                <VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Download>
-                                                    <DownloadIcon />
-                                                </VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Download>
-                                            </AttachmentsOther>
-                                        </VeltCommentDialogWireframe.ThreadCard.Attachments.Other>
-                                    </VeltCommentDialogWireframe.ThreadCard.Attachments>
+                                    <VeltIf className="privado-comment-dialog-thread-card-message-content-wrapper" condition="{editCommentIndex} !== {i}">
+                                        <VeltCommentDialogWireframe.ThreadCard.Message />
+                                        <VeltCommentDialogWireframe.ThreadCard.Attachments>
+                                            <VeltCommentDialogWireframe.ThreadCard.Attachments.Image>
+                                                <Attachments className="privado-comment-dialog-thread-card-attachments-other">
+                                                    <ImgAttachmentIcon />
+                                                    <VeltData className="velt-comment-attachment--name" field="attachment.name" />
+                                                    <VeltCommentDialogWireframe.ThreadCard.Attachments.Image.Download>
+                                                        <DownloadIcon />
+                                                    </VeltCommentDialogWireframe.ThreadCard.Attachments.Image.Download>
+                                                </Attachments>
+                                            </VeltCommentDialogWireframe.ThreadCard.Attachments.Image>
+                                            <VeltCommentDialogWireframe.ThreadCard.Attachments.Other>
+                                                <Attachments className="privado-comment-dialog-thread-card-attachments-other">
+                                                    <PdfAttachmentIcon />
+                                                    <VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Name />
+                                                    <VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Download>
+                                                        <DownloadIcon />
+                                                    </VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Download>
+                                                </Attachments>
+                                            </VeltCommentDialogWireframe.ThreadCard.Attachments.Other>
+                                        </VeltCommentDialogWireframe.ThreadCard.Attachments>
+                                    </VeltIf>
                                     <VeltCommentDialogWireframe.ThreadCard.EditComposer />
                                 </ThreadCardContentWrapper>
                                 <VeltIf condition="{editCommentIndex} !== {i}" className="privado-comment-dialog-thread-card-reactions-wrapper">

@@ -131,6 +131,39 @@ export const PdfAttachmentIcon = () => (
     </svg>
 );
 
+export const ImgAttachmentIcon = () => (
+    <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_d_img_attach)">
+            <path data-figma-bg-blur-radius="20" d="M26.5607 10.0607L19.9393 3.43934C19.658 3.15804 19.2765 3 18.8787 3H8C6.34315 3 5 4.34315 5 6V26C5 27.6569 6.34315 29 8 29H24C25.6569 29 27 27.6569 27 26V11.1213C27 10.7235 26.842 10.342 26.5607 10.0607Z" fill="white" fillOpacity="0.9" />
+            <text x="8" y="24" fill="#5C6C8A" fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fontSize="8.5" letterSpacing="0.3">IMG</text>
+            <g filter="url(#filter2_d_img_attach)">
+                <path d="M19 4V11H26" fill="white" />
+                <path d="M19 4V11H26L19 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </g>
+        </g>
+        <defs>
+            <filter id="filter0_d_img_attach" x="-2.66667" y="-1.33333" width="37.3333" height="37.3333" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                <feOffset dy="1.33333" />
+                <feGaussianBlur stdDeviation="1.33333" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0.643275 0 0 0 0 0.672823 0 0 0 0 0.725353 0 0 0 0.32 0" />
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_img_attach" />
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_img_attach" result="shape" />
+            </filter>
+            <filter id="filter2_d_img_attach" x="14" y="1" width="17" height="17" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                <feOffset dy="2" />
+                <feGaussianBlur stdDeviation="2" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0.496 0 0 0 0 0.554286 0 0 0 0 0.664 0 0 0 0.5 0" />
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_img_attach" />
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_img_attach" result="shape" />
+            </filter>
+        </defs>
+    </svg>
+);
+
 export const DownloadIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="16" height="16" transform="translate(4 4)" fill="white" fillOpacity="0.01" />
