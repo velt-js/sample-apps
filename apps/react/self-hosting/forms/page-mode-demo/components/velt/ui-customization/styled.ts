@@ -736,6 +736,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     gap: 2px !important;
 
     .velt-reaction-pin--emoji {
+      display: flex !important;
       svg {
         width: 14px !important;
         height: 14px !important;
@@ -927,38 +928,70 @@ export const AssigneeBannerWrapper = styled.div`
 export const AssigneeBannerWrapperLeft = styled.div`
   display: flex;
   gap: var(--units-xs, 8px);
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+
+  > * {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  app-comment-dialog-assignee-banner-resolve-button,
+  app-comment-dialog-assignee-banner-unresolve-button {
+    min-width: 0;
+    overflow: hidden;
+  }
 
   app-resolve-button,
   app-unresolve-button {
+    min-width: 0;
+    overflow: hidden;
+    display: block;
+
     .velt-tooltip-button {
-      width: auto !important;
+      width: 100% !important;
       height: auto !important;
       display: flex;
       gap: var(--units-xs, 8px);
       background-color: transparent !important;
+      min-width: 0;
+      overflow: hidden;
     }
   }
 `;
 
 export const ResolveButtonText = styled.span`
   ${TextStyles.TextT200Regular}
-  flex: 1 0 0;
+  flex: 1 1 0;
   align-self: stretch;
   color: var(--Text-text-secondary, #465169);
   font-variant-numeric: lining-nums tabular-nums;
-  display: flex;
-  gap: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+
+  app-data {
+    display: inline;
+    margin-left: 3px;
+  }
 `;
 
 export const AssigneeBannerWrapperRight = styled.div`
   ${TextStyles.TextT300Regular}
-  display: flex;
+  flex: 1 1 0;
   align-self: stretch;
   color: var(--Text-text-secondary, #465169);
   text-align: right;
   font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 
   app-data {
+    display: inline;
     margin-left: 3px;
   }
 `;
@@ -1461,7 +1494,7 @@ export const FilterDropdownContentItemWrapper = styled.div`
   }
 
   svg {
-    display: none !important;
+    display: none;
   }
 `;
 

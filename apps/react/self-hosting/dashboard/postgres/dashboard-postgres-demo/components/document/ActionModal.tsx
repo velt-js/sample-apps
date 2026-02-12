@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 
 interface ActionModalProps {
     jobId: string
+    jobName: string
     actionType: string
     actionLabel: string
     onClose: () => void
@@ -24,7 +25,7 @@ const CheckIcon = () => (
     </svg>
 )
 
-export default function ActionModal({ jobId, actionType, actionLabel, onClose, onSubmit }: ActionModalProps) {
+export default function ActionModal({ jobId, jobName, actionType, actionLabel, onClose, onSubmit }: ActionModalProps) {
     const [comment, setComment] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showSuccess, setShowSuccess] = useState(false)
@@ -248,6 +249,7 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
                             </label>
                             <VeltCommentComposer variant="action-comment-section" context={{
                                 jobId: jobId,
+                                jobName: jobName,
                                 commentType: 'action',
                                 highlightData: highlightDataValues[5]
                             }} shadowDom={false} targetComposerElementId='composer-1' />

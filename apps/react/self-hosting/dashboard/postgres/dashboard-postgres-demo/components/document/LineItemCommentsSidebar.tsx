@@ -3,7 +3,7 @@ import { JobLineItem } from './types'
 
 interface LineItemCommentsSidebarProps {
     isOpen: boolean
-    selectedLineItem: { lineItem: JobLineItem; jobId: string } | null
+    selectedLineItem: { lineItem: JobLineItem; jobId: string; jobName: string } | null
     onClose?: () => void
 }
 
@@ -20,6 +20,7 @@ export const LineItemCommentsSidebar = ({ isOpen, selectedLineItem, onClose }: L
             <VeltInlineCommentsSection
                 context={{ 
                     jobId: selectedLineItem.jobId,
+                    jobName: selectedLineItem.jobName,
                     lineItemId: selectedLineItem.lineItem.id,
                     lineItemDescription: selectedLineItem.lineItem.description,
                     lineItemCurrency: selectedLineItem.lineItem.currency,

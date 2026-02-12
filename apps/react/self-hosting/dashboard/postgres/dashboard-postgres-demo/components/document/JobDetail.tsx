@@ -125,7 +125,7 @@ interface JobDetailProps {
 
 export default function JobDetail({ job, onBack }: JobDetailProps) {
     const [actionModal, setActionModal] = useState<{ type: string; label: string } | null>(null)
-    const [selectedLineItem, setSelectedLineItem] = useState<{ lineItem: JobLineItem; jobId: string } | null>(null)
+    const [selectedLineItem, setSelectedLineItem] = useState<{ lineItem: JobLineItem; jobId: string; jobName: string } | null>(null)
     const [isCommentSidebarOpen, setIsCommentSidebarOpen] = useState(false)
 
     // Velt hooks for comment annotations
@@ -178,7 +178,7 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
     }, [veltButtonClickEventData, client]);
 
     const handleLineItemCommentClick = (lineItem: JobLineItem) => {
-        setSelectedLineItem({ lineItem, jobId: job.id })
+        setSelectedLineItem({ lineItem, jobId: job.id, jobName: job.jobName })
         setIsCommentSidebarOpen(true)
     }
 
@@ -397,6 +397,7 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
             {actionModal && (
                 <ActionModal
                     jobId={job.id}
+                    jobName={job.jobName}
                     actionType={actionModal.type}
                     actionLabel={actionModal.label}
                     onClose={handleActionClose}
