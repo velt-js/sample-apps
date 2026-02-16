@@ -4,14 +4,17 @@ import { VeltButtonWireframe, VeltCommentDialogWireframe, VeltData, VeltIf } fro
 import {
     AssignUserIcon,
     CloseCircleIcon,
+    DefaultFileIcon,
     DownloadIcon,
-    ImgAttachmentIcon,
+    ImageFileIcon,
+    JsonFileIcon,
     OptionsDotsIcon,
-    PdfAttachmentIcon,
+    PdfFileTypeIcon,
     QuestionBarIcon,
     ReplyIcon,
     ResolveIcon,
-    ResolvedIcon
+    ResolvedIcon,
+    VideoFileIcon
 } from './VeltIcons';
 import {
     CommentDialogWrapper,
@@ -22,6 +25,7 @@ import {
     QuestionWrapperContainer,
     QuestionWrapper,
     QuestionText,
+    QuestionTooltip,
     ThreadCardWrapper,
     ThreadCardTopWrapper,
     ThreadCardTopWrapperLeft,
@@ -69,18 +73,23 @@ const VeltCommentDialoglWf = () => {
                         </AssigneeBannerWrapperRight>
                     </AssigneeBannerWrapper>
                 </VeltCommentDialogWireframe.AssigneeBanner>
-                <QuestionWrapperContainer className="privado-comment-dialog-question-wrapper-container">
-                    <VeltIf condition="!{focusedThreadMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
-                        <QuestionWrapper className="privado-comment-dialog-question-wrapper">
-                            <QuestionBarIcon />
-                            <QuestionText className="privado-comment-dialog-question-text">
-                                <VeltData field="annotation.context.questionNumber" />
-                                {'. '}
-                                <VeltData field="annotation.context.questionTitle" />
-                            </QuestionText>
-                        </QuestionWrapper>
-                    </VeltIf>
-                </QuestionWrapperContainer>
+                <VeltButtonWireframe type="button" id="navigate-to-question-button">
+                    <QuestionWrapperContainer className="privado-comment-dialog-question-wrapper-container">
+                        <VeltIf condition="!{focusedThreadMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
+                            <QuestionWrapper className="privado-comment-dialog-question-wrapper">
+                                <QuestionBarIcon />
+                                <QuestionText className="privado-comment-dialog-question-text">
+                                    <VeltData field="annotation.context.questionNumber" />
+                                    {'. '}
+                                    <VeltData field="annotation.context.questionTitle" />
+                                </QuestionText>
+                                <QuestionTooltip className="privado-question-tooltip">
+                                    <VeltData field="annotation.context.questionTitle" />
+                                </QuestionTooltip>
+                            </QuestionWrapper>
+                        </VeltIf>
+                    </QuestionWrapperContainer>
+                </VeltButtonWireframe>
                 <VeltCommentDialogWireframe.Body>
                     <VeltCommentDialogWireframe.Threads>
                         <VeltCommentDialogWireframe.ThreadCard veltClass="'privado-comment-dialog-thread-card-edit-mode': {editCommentIndex} === {i}">
@@ -124,7 +133,7 @@ const VeltCommentDialoglWf = () => {
                                         <VeltCommentDialogWireframe.ThreadCard.Attachments>
                                             <VeltCommentDialogWireframe.ThreadCard.Attachments.Image>
                                                 <Attachments className="privado-comment-dialog-thread-card-attachments-other">
-                                                    <ImgAttachmentIcon />
+                                                    <ImageFileIcon />
                                                     <VeltData className="velt-comment-attachment--name" field="attachment.name" />
                                                     <VeltCommentDialogWireframe.ThreadCard.Attachments.Image.Download>
                                                         <DownloadIcon />
@@ -133,7 +142,20 @@ const VeltCommentDialoglWf = () => {
                                             </VeltCommentDialogWireframe.ThreadCard.Attachments.Image>
                                             <VeltCommentDialogWireframe.ThreadCard.Attachments.Other>
                                                 <Attachments className="privado-comment-dialog-thread-card-attachments-other">
-                                                    <PdfAttachmentIcon />
+                                                    <VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Icon>
+                                                        <VeltIf condition="{attachment.type} === 'mp4' || {attachment.type} === 'mp3'">
+                                                            <VideoFileIcon />
+                                                        </VeltIf>
+                                                        <VeltIf condition="{attachment.type} === 'pdf'">
+                                                            <PdfFileTypeIcon />
+                                                        </VeltIf>
+                                                        <VeltIf condition="{attachment.type} === 'json'">
+                                                            <JsonFileIcon />
+                                                        </VeltIf>
+                                                        <VeltIf condition="{attachment.type} !== 'mp4' && {attachment.type} !== 'mp3' && {attachment.type} !== 'pdf' && {attachment.type} !== 'json'">
+                                                            <DefaultFileIcon />
+                                                        </VeltIf>
+                                                    </VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Icon>
                                                     <VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Name />
                                                     <VeltCommentDialogWireframe.ThreadCard.Attachments.Other.Download>
                                                         <DownloadIcon />
@@ -205,7 +227,7 @@ const VeltCommentDialoglWf = () => {
 
                 <VeltCommentDialogWireframe.Composer />
             </CommentDialogWrapper>
-        </VeltCommentDialogWireframe>
+        </VeltCommentDialogWireframe >
     );
 };
 

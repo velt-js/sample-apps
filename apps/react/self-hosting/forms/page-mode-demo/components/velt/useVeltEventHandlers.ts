@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useCommentUtils, useCommentEventCallback, useVeltEventCallback } from '@veltdev/react'
+import { useCommentUtils, useCommentEventCallback, useVeltEventCallback, useContactSelected } from '@veltdev/react'
 import { CommentBubbleClickedEvent, CommentToolClickEvent, SidebarButtonClickEvent, VeltButtonClickEvent } from '@veltdev/types'
 
 interface UseVeltEventHandlersProps {
@@ -27,12 +27,17 @@ export function useVeltEventHandlers({
   const commentBubbleClickedCallback: CommentBubbleClickedEvent = useCommentEventCallback('commentBubbleClicked')
   const sidebarButtonClickedCallback: SidebarButtonClickEvent = useCommentEventCallback('sidebarButtonClick')
   const veltButtonClickEventData: VeltButtonClickEvent = useVeltEventCallback('veltButtonClick')
+  const selectedContact = useContactSelected();
 
   // Handle custom button click (remove page mode composer)
   useEffect(() => {
     if (veltButtonClickEventData) {
       if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'remove-page-mode-composer-button') {
         commentUtils?.clearPageModeComposerContext()
+      }
+
+      if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'navigate-to-question-button') {
+        console.log('navigate-to-question-button clicked: ', veltButtonClickEventData)
       }
     }
   }, [veltButtonClickEventData, commentUtils])
@@ -68,4 +73,8 @@ export function useVeltEventHandlers({
       setActiveCommentToolId(commentBubbleClickedCallback.commentAnnotation?.context?.questionId)
     }
   }, [commentBubbleClickedCallback, commentUtils, setActiveCommentToolId, openGlobalSidebar])
+
+  useEffect(() => {
+    console.log('selectedContact: ', selectedContact);
+  }, [selectedContact]);
 }

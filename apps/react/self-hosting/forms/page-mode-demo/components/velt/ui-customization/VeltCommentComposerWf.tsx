@@ -1,7 +1,7 @@
 "use client";
 
-import { VeltCommentDialogWireframe } from "@veltdev/react";
-import { SendIcon, PdfAttachmentIcon, LoadingSpinnerIcon, DeleteIcon, AttachmentIcon, MentionIcon } from "./VeltIcons";
+import { VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
+import { SendIcon, PdfAttachmentIcon, LoadingSpinnerIcon, DeleteIcon, AttachmentIcon, MentionIcon, DefaultFileIcon, JsonFileIcon, PdfFileTypeIcon, VideoFileIcon } from "./VeltIcons";
 import {
     ComposerWrapper,
     ComposerInputWrapper,
@@ -18,7 +18,7 @@ const VeltCommentComposerWf = () => {
     return (
         <VeltCommentDialogWireframe.Composer>
             <ComposerWrapper className="privado-comment-dialog-composer-wrapper">
-                <VeltCommentDialogWireframe.Composer.AssignUser />
+                <VeltCommentDialogWireframe.Composer.AssignUser veltIf="!{annotation.annotationId}" />
                 <ComposerInputWrapper className="privado-comment-dialog-composer-input-wrapper">
                     <ComposerInputWrapperInner className="privado-comment-dialog-composer-input-wrapper-inner">
                         <VeltCommentDialogWireframe.Composer.Input placeholder="Write a comment..." />
@@ -36,7 +36,18 @@ const VeltCommentComposerWf = () => {
                             <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other>
                                 <ComposerAttachmentsOther className="privado-comment-dialog-composer-attachments-other">
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Icon>
-                                        <PdfAttachmentIcon />
+                                        <VeltIf condition="{file.fileType} === 'video/mp4' || {file.fileType} === 'audio/mpeg'">
+                                            <VideoFileIcon />
+                                        </VeltIf>
+                                        <VeltIf condition="{file.fileType} === 'application/pdf'">
+                                            <PdfFileTypeIcon />
+                                        </VeltIf>
+                                        <VeltIf condition="{file.fileType} === 'application/json'">
+                                            <JsonFileIcon />
+                                        </VeltIf>
+                                        <VeltIf condition="{file.fileType} !== 'video/mp4' && {file.fileType} !== 'audio/mpeg' && {file.fileType} !== 'application/pdf' && {file.fileType} !== 'application/json'">
+                                            <DefaultFileIcon />
+                                        </VeltIf>
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Icon>
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Loading>
                                         <LoadingSpinnerIcon className="loading-spinner" />

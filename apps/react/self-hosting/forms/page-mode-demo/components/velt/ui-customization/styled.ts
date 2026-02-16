@@ -704,12 +704,20 @@ export const GlobalVeltStyles = createGlobalStyle`
 
   .velt-thread-card--container {
     max-width: 100% !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
   app-comment-dialog-thread-card {
     max-width: 100% !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+  }
+
+  app-comment-dialog-threads {
+    max-height: none !important;
+  }
+
+  .velt-body {
+    max-height: none !important;
   }
 
   .privado-comment-dialog-thread-card-options-wrapper {
@@ -726,7 +734,7 @@ export const GlobalVeltStyles = createGlobalStyle`
   .velt-composer-edit-mode {
     margin: 4px !important;
     min-width: 0 !important;
-    // overflow: hidden !important;
+    max-height: none !important;
   }
 
   app-comment-dialog-composer {
@@ -1079,6 +1087,7 @@ export const QuestionWrapper = styled.div`
   background: var(--container, #F2F6FC);
   cursor: pointer !important;
   width: 100% !important;
+  position: relative;
 
   svg {
     color: #D3C5FC !important;
@@ -1089,6 +1098,10 @@ export const QuestionWrapper = styled.div`
       color: #A080FF !important;
     }
     background: var(--Purple-10, #F5EFFF);
+
+    .privado-question-tooltip {
+      display: inline-flex;
+    }
   }
 `;
 
@@ -1102,6 +1115,27 @@ export const QuestionText = styled.span`
   color: var(--Text-text-secondary, #465169);
   font-variant-numeric: lining-nums tabular-nums;
   text-overflow: ellipsis;
+`;
+
+export const QuestionTooltip = styled.span`
+  ${TextStyles.TextT200Regular}
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  padding: 6px 12px;
+  align-items: flex-end;
+  gap: 10px;
+  border-radius: 12px;
+  background: var(--Gray-100, #12161F);
+  color: #F8F9F9;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: normal;
+  max-width: 320px;
+  width: max-content;
+  z-index: 10;
+  pointer-events: none;
 `;
 
 export const ThreadCardWrapper = styled.div`
@@ -1192,6 +1226,8 @@ export const ThreadCardContentWrapper = styled.div`
     gap: var(--units-sm, 12px);
     width: 100%;
     align-items: initial !important;
+    max-height: 200px;
+    overflow-y: auto;
   }
 `;
 

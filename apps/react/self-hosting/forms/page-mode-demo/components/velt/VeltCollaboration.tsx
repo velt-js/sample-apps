@@ -1,6 +1,6 @@
 "use client";
 import { useAppUser } from "@/app/userAuth/useAppUser";
-import { useVeltClient, useVeltEventCallback, VeltComments, useCommentUtils } from "@veltdev/react";
+import { useVeltClient, VeltComments, useCommentUtils } from "@veltdev/react";
 import { useEffect } from "react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
