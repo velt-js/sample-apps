@@ -615,6 +615,7 @@ velt-comment-dialog-toggle-reply-text-internal {
   }
 
   .oe-composer--focused-thread-metadata-item,
+  .oe-composer--popover-metadata-item,
   .oe-composer--page-mode-metadata-item {
     @include flex-row-center;
     gap: $spacing-xxs;
@@ -647,6 +648,19 @@ velt-comment-dialog-toggle-reply-text-internal {
   > div {
     white-space: nowrap;
   }
+}
+
+.oe-composer--popover-metadata-item {
+    width: 100%;
+    padding-bottom: $spacing-xs;
+    padding-inline: $spacing-xl !important;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xxs;
+  
+    > div {
+      white-space: nowrap;
+    }
 }
 
 // ============================================================
@@ -872,6 +886,14 @@ app-sidebar-button-unread-icon {
 // ============================================================
 // 14. Inline Comments Section
 // ============================================================
+
+.oe-comment-modal-inline {
+  border-radius: 12px;
+
+  .velt-comment-dialog {
+    border-radius: 12px !important;
+  }
+}
 
 .velt-inline-comments-section--comment {
   .velt-comment-dialog {
