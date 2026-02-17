@@ -650,19 +650,6 @@ velt-comment-dialog-toggle-reply-text-internal {
   }
 }
 
-.oe-composer--popover-metadata-item {
-    width: 100%;
-    padding-bottom: $spacing-xs;
-    padding-inline: $spacing-xl !important;
-    display: flex;
-    align-items: center;
-    gap: $spacing-xxs;
-  
-    > div {
-      white-space: nowrap;
-    }
-}
-
 // ============================================================
 // 13. Sidebar
 // ============================================================
@@ -892,6 +879,22 @@ app-sidebar-button-unread-icon {
 
   .velt-comment-dialog {
     border-radius: 12px !important;
+  }
+
+  .oe-composer--focused-thread-metadata-item {
+    width: 100%;
+    padding-bottom: $spacing-xs;
+    padding-inline: $spacing-xl;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xxs;
+    border-bottom: none !important;
+    border-top: none !important;
+    padding-top: 0 !important;
+  
+    > div {
+      white-space: nowrap;
+    }
   }
 }
 
