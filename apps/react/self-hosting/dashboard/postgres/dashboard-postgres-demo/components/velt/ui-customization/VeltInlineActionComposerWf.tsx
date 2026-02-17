@@ -16,15 +16,15 @@ const VeltInlineActionComposerWf = () => {
                         <div className="oe-composer--metadata">
                             <VeltIf condition="{annotation.context} && {commentDialogSelected} && {inlineCommentSectionMode}">
                                 <div className="oe-composer--focused-thread-metadata-item">
-                                    <div>Comment on line</div>
+                                    <div>Leave a comment on transaction</div>
                                     "
-                                    <VeltData field="annotation.context.lineItemDescription" />"
+                                    <VeltData field="annotation.context.jobId" />"
                                 </div>
                             </VeltIf>
                             <VeltIf condition="!{annotation.context} && {commentDialogSelected} && {inlineCommentSectionMode}">
                                 <div className="oe-composer--focused-thread-metadata-item">
-                                    <div>Comment on line</div>
-                                    "<VeltData field="context.lineItemDescription" />"
+                                    <div>Leave a comment on transaction</div>
+                                    "<VeltData field="context.jobId" />"
                                 </div>
                             </VeltIf>
                         </div>
