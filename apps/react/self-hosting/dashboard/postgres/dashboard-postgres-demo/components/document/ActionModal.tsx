@@ -253,7 +253,7 @@ export default function ActionModal({ jobId, jobName, actionType, actionLabel, o
                                 commentType: 'action',
                                 highlightData: highlightDataValues[5]
                             }} shadowDom={false} targetComposerElementId='composer-1' />
-                            <button onClick={() => handleSubmitProgrammatic()}>Submit</button>
+                            {/* <button onClick={() => handleSubmitProgrammatic()}>Submit</button> */}
                         </div>
                     </div>
                 </div>

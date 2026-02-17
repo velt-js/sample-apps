@@ -14,6 +14,8 @@ import VeltNotificationListItemWf from './VeltNotificationListItemWf';
 import VeltActionCommentsComposerWf from './VeltActionCommentsComposerWf';
 import VeltConfirmDialogWf from './VeltConfirmDialogWf';
 import './styles.scss';
+import VeltInlineActionComposerWf from './VeltInlineActionComposerWf';
+import VeltCommentComposerWf from './VeltCommentComposerWf';
 
 export function VeltCustomization() {
   return (
@@ -32,6 +34,8 @@ export function VeltCustomization() {
       <VeltNotificationWf />
       <VeltNotificationListItemWf />
       <VeltConfirmDialogWf />
+      <VeltInlineActionComposerWf />
+      <VeltCommentComposerWf />
     </VeltWireframe>
   );
 }

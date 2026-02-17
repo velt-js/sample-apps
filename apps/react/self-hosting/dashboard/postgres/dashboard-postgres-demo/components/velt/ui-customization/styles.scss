@@ -2,9 +2,102 @@
 @import './variables';
 @import './font_mixin';
 
-/* Velt variables overrides */
+// ============================================================
+// Reusable Mixins
+// ============================================================
+
+@mixin hide-when-empty {
+  &:empty {
+    display: none !important;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@mixin scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+}
+
+@mixin unread-dot($bg-color) {
+  position: absolute;
+  bottom: 0;
+  right: 1px;
+  width: 6px;
+  height: 6px;
+  background-color: $bg-color;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+@mixin icon-button($color: var(--v2-grey-dark)) {
+  @include flex-center;
+  padding: $spacing-xs;
+  color: $color;
+  cursor: pointer;
+  border-radius: 4px !important;
+
+  &:hover {
+    background-color: var(--v2-grey-extra-light) !important;
+  }
+}
+
+@mixin unread-badge {
+  @include flex-center;
+  @include font10;
+  border-radius: 3px;
+  padding: 3px $spacing-xxs;
+  background-color: var(--v2-red-medium);
+  color: var(--v2-white);
+  gap: 3px;
+  line-height: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+// Shared list of hover-reveal elements in thread cards
+$thread-hover-elements:
+  'velt-comment-dialog-thread-card-options-internal',
+  'app-copy-link',
+  'app-resolve-button',
+  'app-unresolve-button',
+  'velt-comment-dialog-thread-card-reaction-tool-internal',
+  'velt-comment-dialog-resolve-button-internal',
+  'velt-comment-dialog-unresolve-button-internal';
+
+@mixin thread-hover-elements-selector {
+  @each $el in $thread-hover-elements {
+    #{$el} {
+      @content;
+    }
+  }
+}
+
+// ============================================================
+// 1. Velt Variable Overrides
+// ============================================================
+
 body {
-  --velt-default-font-family: 'Inter', sans-serif
+  --velt-default-font-family: 'Inter', sans-serif;
   --velt-spacing-2xs: 4px;
   --velt-spacing-xs: 8px;
   --velt-spacing-sm: 12px;
@@ -15,8 +108,38 @@ body {
   --velt-spacing-3xl: 80px;
 }
 
-/* Velt custom styles */
-/* Custom Comment Tool & Bubble Styling */
+// ============================================================
+// 2. Global Velt Resets & Utilities
+// ============================================================
+
+velt-if {
+  @include hide-when-empty;
+}
+
+app-if {
+  @include hide-when-empty;
+}
+
+.velt-button {
+  cursor: pointer;
+}
+
+.velt-user-avatar--initial {
+  font-size: 11px !important;
+}
+
+.velt-comment-dialog button {
+  box-shadow: none !important;
+
+  &:disabled {
+    box-shadow: none !important;
+  }
+}
+
+// ============================================================
+// 3. Comment Tool & Bubble
+// ============================================================
+
 .custom-bubble-tool {
   position: relative;
   display: flex;
@@ -25,69 +148,46 @@ body {
 }
 
 .unread-icon {
-  position: absolute;
-  bottom: 0px;
-  right: 1px;
-  width: 6px;
-  height: 6px;
-  background-color: var(--v2-red-medium);
-  border-radius: 50%;
-  border: 1px solid white;
+  @include unread-dot(var(--v2-red-medium));
 }
 
 .has-comments {
-  position: absolute;
-  bottom: 0px;
-  right: 1px;
-  width: 6px;
-  height: 6px;
-  background-color: var(--v2-primary-medium);
-  border-radius: 50%;
-  border: 1px solid white;
+  @include unread-dot(var(--v2-primary-medium));
 }
 
-velt-comment-tool {
-  display: flex !important;
-}
-
+velt-comment-tool,
 velt-comment-bubble {
   display: flex !important;
+
+  .custom-bubble-tool {
+    color: white !important;
+  }
+
+  &:hover .custom-bubble-tool {
+    color: var(--v2-primary-medium) !important;
+  }
 }
 
-/* Handle empty VeltIf components */
-velt-if:empty {
-  display: none !important;
-}
+velt-comment-tool.velt-comment-tool-active,
+velt-comment-bubble.velt-comment-bubble-open {
+  .custom-bubble-tool {
+    color: white !important;
+  }
 
-/* Keep icons white by default - only purple on hover */
-velt-comment-tool .custom-bubble-tool,
-velt-comment-bubble .custom-bubble-tool {
-  color: white !important;
-}
-
-/* Purple on hover only */
-velt-comment-tool:hover .custom-bubble-tool,
-velt-comment-bubble:hover .custom-bubble-tool {
-  color: var(--v2-primary-medium) !important;
-}
-
-/* Prevent active/open states from changing color */
-velt-comment-tool.velt-comment-tool-active .custom-bubble-tool,
-velt-comment-bubble.velt-comment-bubble-open .custom-bubble-tool {
-  color: white !important;
-}
-
-/* But still allow hover on active states */
-velt-comment-tool.velt-comment-tool-active:hover .custom-bubble-tool,
-velt-comment-bubble.velt-comment-bubble-open:hover .custom-bubble-tool {
-  color: var(--v2-primary-medium) !important;
+  &:hover .custom-bubble-tool {
+    color: var(--v2-primary-medium) !important;
+  }
 }
 
 .velt-notifications-tool {
   width: 100% !important;
 }
 
-app-comment-dialog-thread-card-avatar {
+// ============================================================
+// 4. Thread Card
+// ============================================================
+
+velt-comment-dialog-thread-card-avatar-internal {
   snippyly-user-avatar {
     --legacy-velt-user-avatar-height: 24px !important;
     --legacy-velt-user-avatar-width: 24px !important;
@@ -111,34 +211,6 @@ app-comment-dialog-thread-card-avatar {
   display: contents !important;
 }
 
-.oe--icon-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-xs;
-  color: var(--v2-grey-dark);
-  cursor: pointer;
-  border-radius: 4px !important;
-
-  &:hover {
-    background-color: var(--v2-grey-extra-light) !important;
-  }
-}
-
-.velt-tooltip-button:hover {
-  background-color: transparent !important;
-}
-
-.velt-comment-dialog-options-dropdown:hover,
-.velt-comment-dialog-options-dropdown:focus {
-  background-color: transparent !important;
-}
-
-.velt-comment-dialog-options-dropdown {
-  width: auto !important;
-  height: auto !important;
-}
-
 .velt-thread-card--message {
   padding: 0 !important;
   margin: 0 !important;
@@ -151,53 +223,65 @@ app-comment-dialog-thread-card-avatar {
   color: var(--v2-black) !important;
 }
 
-app-comment-dialog-thread-card-reactions {
-  .s-emoji-block {
-    padding-left: 0px !important;
-    margin-block: 0px !important;
-  }
+.velt-thread-card--name--unread {
+  width: 6px !important;
+  height: 6px !important;
+  background-color: var(--v2-red-medium) !important;
 }
 
-.s-emoji-block .velt-reaction-pin--default {
-  height: 32px !important;
-  gap: $spacing-xs !important;
-  padding-right: $spacing-xs !important;
-  padding-left: $spacing-xs !important;
-  border-radius: 6px !important;
-  border: none !important;
-  margin: 0 !important;
-  background-color: var(--v2-grey-extra-light) !important;
-}
-
-.s-emoji-block .velt-reaction-pin--default .velt-reaction-pin--emoji svg {
-  width: 16px !important;
-  height: 16px !important;
-}
-
-.s-emoji-block .velt-reaction-pin--default .velt-reaction-pin--count {
-  @include label;
-  font-weight: 500 !important;
-  font-size: 12px !important;
-  line-height: 18px !important;
-  letter-spacing: 0.25px !important;
-  color: var(--v2-grey-extra-dark) !important;
-}
-
-.velt-thread-card--container[velt-reactions='0'] {
-  app-comment-dialog-thread-card-reactions {
-    display: none !important;
-  }
-}
-
-.velt-thread-card--container:not([velt-reactions='0']) {
-  app-comment-dialog-thread-card-reaction-tool {
-    display: none !important;
+// Thread card hover-reveal actions
+.velt-thread-card--container {
+  @include thread-hover-elements-selector {
+    opacity: 0;
+    transition: 0.5s;
   }
 
-  app-comment-dialog-thread-card-reactions {
-    app-comment-dialog-thread-card-reaction-tool {
-      display: flex !important;
+  &:hover {
+    @include thread-hover-elements-selector {
+      opacity: 1;
     }
+  }
+}
+
+.velt-thread-card--show-actions {
+  @include thread-hover-elements-selector {
+    opacity: 1;
+  }
+}
+
+// ============================================================
+// 5. Icon Buttons & Action Buttons
+// ============================================================
+
+.oe--icon-button {
+  @include icon-button;
+}
+
+.oe-composer--icon-button {
+  @include icon-button(var(--v2-grey-medium));
+
+  &:hover {
+    background-color: rgb(239, 239, 239) !important;
+  }
+}
+
+.velt-tooltip-button:hover,
+.velt-comment-dialog-options-dropdown:hover,
+.velt-comment-dialog-options-dropdown:focus {
+  background-color: transparent !important;
+}
+
+.velt-comment-dialog-options-dropdown {
+  width: auto !important;
+  height: auto !important;
+}
+
+button.action__button.velt-action-button {
+  width: auto !important;
+  height: auto !important;
+
+  &:hover {
+    background-color: transparent !important;
   }
 }
 
@@ -208,11 +292,66 @@ app-comment-dialog-thread-card-reactions {
   color: initial !important;
 }
 
-.velt-thread-card--name--unread {
-  width: 6px !important;
-  height: 6px !important;
-  background-color: var(--v2-red-medium) !important;
+// ============================================================
+// 6. Reactions
+// ============================================================
+
+velt-comment-dialog-thread-card-reactions-internal {
+  .s-emoji-block {
+    padding-left: 0 !important;
+    margin-block: 0 !important;
+  }
 }
+
+.s-emoji-block {
+  .velt-reaction-pin--default {
+    height: 32px !important;
+    gap: $spacing-xs !important;
+    padding-right: $spacing-xs !important;
+    padding-left: $spacing-xs !important;
+    border-radius: 6px !important;
+    border: none !important;
+    margin: 0 !important;
+    background-color: var(--v2-grey-extra-light) !important;
+
+    .velt-reaction-pin--emoji svg {
+      width: 16px !important;
+      height: 16px !important;
+    }
+
+    .velt-reaction-pin--count {
+      @include label;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      line-height: 18px !important;
+      letter-spacing: 0.25px !important;
+      color: var(--v2-grey-extra-dark) !important;
+    }
+  }
+}
+
+// Hide reactions block when count is 0, show reaction tool inline otherwise
+.velt-thread-card--container[velt-reactions='0'] {
+  velt-comment-dialog-thread-card-reactions-internal {
+    display: none !important;
+  }
+}
+
+.velt-thread-card--container:not([velt-reactions='0']) {
+  velt-comment-dialog-thread-card-reaction-tool-internal {
+    display: none !important;
+  }
+
+  velt-comment-dialog-thread-card-reactions-internal {
+    velt-comment-dialog-thread-card-reaction-tool-internal {
+      display: flex !important;
+    }
+  }
+}
+
+// ============================================================
+// 7. User Avatar
+// ============================================================
 
 .s-user-avatar-initial {
   font-weight: 600 !important;
@@ -228,32 +367,26 @@ app-comment-dialog-thread-card-reactions {
   background-color: var(--v2-primary-medium) !important;
 }
 
-app-comment-dialog-reply-avatars-remaining-count {
-  margin-left: 0px !important;
+// ============================================================
+// 8. Reply Section
+// ============================================================
+
+velt-comment-dialog-reply-avatars-remaining-count-internal,
+velt-comment-dialog-reply-avatars-list-item-internal {
+  margin-left: 0 !important;
 }
 
-app-comment-dialog-reply-avatars-list-item {
-  margin-left: 0px !important;
-}
-
-.velt-comment-dialog-reply-avatars-list {
-  gap: 2px !important;
-}
-
+.velt-comment-dialog-reply-avatars-list,
 .velt-comment-dialog-reply-avatars {
   gap: 2px !important;
 }
 
-.velt-body {
-  gap: $spacing-xs !important;
-}
-
-app-comment-dialog-toggle-reply-icon {
+velt-comment-dialog-toggle-reply-icon-internal {
   display: none !important;
 }
 
-app-comment-dialog-toggle-reply-count,
-app-comment-dialog-toggle-reply-text {
+velt-comment-dialog-toggle-reply-count-internal,
+velt-comment-dialog-toggle-reply-text-internal {
   @include label;
   font-weight: 500 !important;
   font-size: 12px !important;
@@ -268,42 +401,13 @@ app-comment-dialog-toggle-reply-text {
   gap: $spacing-xxs !important;
 }
 
-.velt-thread-card--container {
-  app-comment-dialog-thread-card-options,
-  app-copy-link,
-  app-resolve-button,
-  app-unresolve-button,
-  app-comment-dialog-thread-card-reaction-tool,
-  app-comment-dialog-resolve-button,
-  app-comment-dialog-unresolve-button {
-    opacity: 0;
-    transition: 0.5s;
-  }
-
-  &:hover {
-    app-comment-dialog-thread-card-options,
-    app-copy-link,
-    app-resolve-button,
-    app-unresolve-button,
-    app-comment-dialog-thread-card-reaction-tool,
-    app-comment-dialog-resolve-button,
-    app-comment-dialog-unresolve-button {
-      opacity: 1;
-    }
-  }
+.velt-body {
+  gap: $spacing-xs !important;
 }
 
-.velt-thread-card--show-actions {
-  app-comment-dialog-thread-card-options,
-  app-copy-link,
-  app-resolve-button,
-  app-unresolve-button,
-  app-comment-dialog-thread-card-reaction-tool,
-  app-comment-dialog-resolve-button,
-  app-comment-dialog-unresolve-button {
-    opacity: 1;
-  }
-}
+// ============================================================
+// 9. Comment Metadata
+// ============================================================
 
 .oe-comment--metadata {
   height: 32px;
@@ -316,46 +420,56 @@ app-comment-dialog-toggle-reply-text {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* Prevent the container itself from expanding beyond its parent */
   width: 100%;
   overflow: hidden;
+
+  span {
+    @include label;
+    color: var(--v2-grey-dark);
+    flex: 0 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  svg {
+    flex: none;
+    color: var(--v2-grey-dark);
+  }
+
+  .oe-comment--metadata-separator,
+  .oe-comment--metadata-label {
+    flex: none;
+  }
 }
 
-.oe-comment--metadata span {
-  /* This is the magic combo for ellipsis */
-  flex: 0 1 auto;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.oe-comment--metadata-container {
+  padding-inline: $spacing-lg;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid var(--v2-black-transparent);
+
+  &:has(app-if:empty + app-if:empty) {
+    display: none !important;
+  }
+
+  &:has(app-if:empty) {
+    padding: 2px;
+  }
+
+  app-if {
+    @include hide-when-empty;
+  }
 }
 
-/* We must stop the hyphens from shrinking or growing */
-/* This targets the 3rd, 5th, and 7th elements (the dashes) */
-.oe-comment--metadata .oe-comment--metadata-separator {
-  flex: none;
-  overflow: visible;
-}
-
-/* Keep the icon and "Line:" label from shrinking */
-.oe-comment--metadata svg,
-.oe-comment--metadata .oe-comment--metadata-label {
-  flex: none;
-}
-
-.oe-comment--metadata svg {
-  color: var(--v2-grey-dark);
-}
-
-.oe-comment--metadata span {
-  @include label;
-  color: var(--v2-grey-dark);
-}
+// ============================================================
+// 10. Comment Dialog
+// ============================================================
 
 .velt-comment-dialog {
   padding: 20px 32px !important;
   border: none !important;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
   width: auto !important;
 
   &:hover {
@@ -363,137 +477,28 @@ app-comment-dialog-toggle-reply-text {
   }
 
   &.velt-comment-dialog--page-mode-composer {
+    padding: $spacing-md $spacing-xl $spacing-xl $spacing-xl !important;
+    align-items: center !important;
+    justify-content: center !important;
     background-color: transparent !important;
 
     &:hover {
       background-color: transparent !important;
     }
   }
-}
 
-.velt-inline-comments-section--comment {
-  .velt-comment-dialog {
-    &:hover {
-      background-color: transparent !important;
-    }
+  &.velt-comment-dialog--sidebar-mode {
+    gap: 0 !important;
+  }
+
+  &.velt-comment-dialog--page-mode-composer {
+    border-top: 1px solid var(--v2-black-transparent) !important;
   }
 }
 
-.velt-sidebar-container {
-  width: 552px !important;
-  padding: 0px !important;
-  border-radius: 0px !important;
-
-  .velt-sidebar {
-    border-radius: 0px !important;
-  }
-}
-
-app-comment-sidebar-list {
-  padding-inline: 0px !important;
-}
-
-.velt-sidebar--comments-block {
-  margin-bottom: 0px !important;
-}
-
-.velt-sidebar--comments-hr {
-  display: none !important;
-}
-
-.velt-comment-dialog.velt-comment-dialog--page-mode-composer {
-  padding: 0px !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: $spacing-md $spacing-xl $spacing-xl $spacing-xl !important;
-}
-
-.velt-sidebar-page-mode-composer {
-  padding-bottom: 0px !important;
-
-  .oe-composer--content {
-    background: var(--v2-grey-lightest);
-  }
-}
-
-.oe-composer--content {
-//   width: 486px;
-  gap: 10px;
-  padding-top: 10px;
-  padding-right: $spacing-sm;
-  padding-bottom: 10px;
-  padding-left: $spacing-sm;
-  border-radius: 3px;
-  border: 1px solid var(--v2-grey-light);
-  background-color: var(--v2-grey-lightest);
-}
-
-.velt-composer-input--message {
-  padding: 0px $spacing-sm !important;
-  @include input;
-  font-weight: 400 !important;
-  font-size: 14px !important;
-  line-height: 21px !important;
-  letter-spacing: -0.75% !important;
-  color: var(--v2-grey-dark) !important;
-  color: var(--v2-black) !important;
-}
-
-button.action__button.velt-action-button {
-  width: auto !important;
-  height: auto !important;
-
-  &:hover {
-    background-color: transparent !important;
-  }
-}
-
-.oe-composer--icon-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-xs;
-  color: var(--v2-grey-medium);
-  cursor: pointer;
-  border-radius: 4px !important;
-
-  &:hover {
-    background-color: rgb(239, 239, 239) !important;
-  }
-}
-
-.velt-composer--submit-button {
-  height: 28px;
-  padding: 0;
-  .oe-composer--icon-button {
-    padding: 5px !important;
-    border-radius: 32px !important;
-    background-color: var(--v2-primary-oe-brand);
-    color: var(--v2-white);
-  }
-
-  &:disabled {
-    .oe-composer--icon-button {
-      cursor: not-allowed !important;
-      background-color: rgb(239, 239, 239) !important;
-      color: var(--v2-grey-medium) !important;
-    }
-
-    &:hover {
-        .oe-composer--icon-button {
-            background-color: rgb(239, 239, 239) !important;
-            color: var(--v2-grey-medium) !important;
-        }
-    }
-  }
-
-  &:hover {
-    .oe-composer--icon-button {
-      background-color: var(--v2-primary-oe-brand) !important;
-      color: var(--v2-white) !important;
-    }
-  }
-}
+// ============================================================
+// 11. Comment Dialog Options Dropdown
+// ============================================================
 
 .velt-comment-dialog-options-dropdown-container {
   border-radius: 3px !important;
@@ -501,7 +506,7 @@ button.action__button.velt-action-button {
   box-shadow: 0px 3px 6px 0px #0e0e0e1a !important;
 
   .mat-mdc-menu-content {
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     border: none !important;
     background-color: var(--v2-white) !important;
     box-shadow: none !important;
@@ -510,6 +515,7 @@ button.action__button.velt-action-button {
 
 .oe-thread-card--options-content {
   padding: $spacing-xs;
+
   .oe-thread-card--options-content-item {
     width: 137px;
     height: 32px;
@@ -525,9 +531,7 @@ button.action__button.velt-action-button {
     color: var(--v2-grey-extra-dark);
 
     app-if {
-      &:empty {
-        display: none !important;
-      }
+      @include hide-when-empty;
     }
 
     &:hover {
@@ -537,12 +541,174 @@ button.action__button.velt-action-button {
   }
 }
 
+// ============================================================
+// 12. Composer
+// ============================================================
+
+.oe-composer--content {
+  gap: 10px;
+  padding: 10px $spacing-sm;
+  border-radius: 3px;
+  border: 1px solid var(--v2-grey-light);
+  background-color: var(--v2-grey-lightest);
+}
+
+.velt-composer-input--message {
+  padding: 0 $spacing-sm !important;
+  @include input;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
+  letter-spacing: -0.75% !important;
+  color: var(--v2-black) !important;
+}
+
+.velt-composer--submit-button {
+  height: 28px;
+  padding: 0;
+
+  .oe-composer--icon-button {
+    padding: 5px !important;
+    border-radius: 32px !important;
+    background-color: var(--v2-primary-oe-brand);
+    color: var(--v2-white);
+  }
+
+  &:hover .oe-composer--icon-button {
+    background-color: var(--v2-primary-oe-brand) !important;
+    color: var(--v2-white) !important;
+  }
+
+  &:disabled {
+    .oe-composer--icon-button {
+      cursor: not-allowed !important;
+      background-color: rgb(239, 239, 239) !important;
+      color: var(--v2-grey-medium) !important;
+    }
+
+    &:hover .oe-composer--icon-button {
+      background-color: rgb(239, 239, 239) !important;
+      color: var(--v2-grey-medium) !important;
+    }
+  }
+}
+
+.velt-composer-input-focused {
+  outline: 2px solid var(--v2-primary-transparent) !important;
+  border-radius: 3px !important;
+
+  .oe-composer--content {
+    border: 1px solid var(--v2-primary) !important;
+  }
+}
+
+.velt-comment-attachments {
+  padding-left: 0 !important;
+}
+
+.oe-composer--metadata {
+  width: 100% !important;
+
+  app-if {
+    @include hide-when-empty;
+    width: 100% !important;
+  }
+
+  .oe-composer--focused-thread-metadata-item,
+  .oe-composer--page-mode-metadata-item {
+    @include flex-row-center;
+    gap: $spacing-xxs;
+    @include button;
+    letter-spacing: -0.3%;
+    color: var(--v2-black);
+
+    app-data {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  .oe-composer--page-mode-metadata-item {
+    padding-bottom: $spacing-xs;
+  }
+}
+
+.oe-composer--focused-thread-metadata-item {
+  width: 100%;
+  border-top: 1px solid var(--v2-black-transparent) !important;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-xs;
+  padding-inline: $spacing-xl !important;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xxs;
+
+  > div {
+    white-space: nowrap;
+  }
+}
+
+// ============================================================
+// 13. Sidebar
+// ============================================================
+
+.velt-sidebar-container {
+  width: 552px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+
+  .velt-sidebar {
+    border-radius: 0 !important;
+  }
+}
+
+app-comment-sidebar-list {
+  padding-inline: 0 !important;
+}
+
 app-comment-sidebar-header {
-  padding: 0px !important;
+  padding: 0 !important;
+}
+
+.velt-sidebar--comments-block {
+  margin-bottom: 0 !important;
+}
+
+.velt-sidebar--comments-hr {
+  display: none !important;
+}
+
+.velt-sidebar-page-mode-composer {
+  padding-bottom: 0 !important;
+
+  .oe-composer--content {
+    background: var(--v2-grey-lightest);
+  }
 }
 
 .velt-comment-sidebar-panel {
-  gap: 0px !important;
+  gap: 0 !important;
+}
+
+.velt-sidebar--no-comments-container {
+  align-items: flex-start !important;
+}
+
+// Sidebar header
+.oe-comment-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: $spacing-base1;
+  padding-bottom: $spacing-md;
+  padding-right: $spacing-lg;
+  border-bottom: 1px solid var(--v2-black-transparent);
+
+  &.thread-header {
+    border-bottom: none !important;
+  }
 }
 
 .oe-comment-sidebar-header--title {
@@ -561,28 +727,17 @@ app-comment-sidebar-header {
 }
 
 .oe-comment-sidebar-header--unread-count {
-  border-radius: 3px;
-  padding: 3px $spacing-xxs;
-  background-color: var(--v2-red-medium);
-  color: var(--v2-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  @include font10;
-  line-height: 10px;
-  text-align: center;
-  vertical-align: middle;
+  @include unread-badge;
   height: 16px;
+
   > div {
     @include font10;
   }
 }
 
+// Sidebar status filter
 .oe-comment-sidebar-header--status-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   padding: $spacing-xxs $spacing-md;
   gap: $spacing-xxs;
   border-radius: 3px;
@@ -613,168 +768,7 @@ app-comment-sidebar-header {
   top: 42px !important;
 }
 
-.oe-comment-sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding-top: $spacing-base1;
-  padding-bottom: $spacing-md;
-  padding-right: $spacing-lg;
-  border-bottom: 1px solid var(--v2-black-transparent);
-  &.thread-header {
-    border-bottom: none !important;
-  }
-}
-
-.oe-comment-sidebar-inline {
-  position: fixed;
-  top: 45px;
-  right: 0;
-  width: 552px;
-  height: calc(100vh - 45px);
-  display: flex;
-  flex-direction: column;
-  background-color: var(--v2-white);
-  border-left: 1px solid var(--v2-black-transparent);
-  z-index: 50;
-  overflow: hidden;
-}
-
-.velt-button {
-  cursor: pointer;
-}
-
-velt-inline-comments-section {
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 !important;
-  height: 100% !important;
-.oe-comment-sidebar-header {
-  border: unset !important;
-}
-  app-inline-comments-section-panel {
-    flex: 1 !important;
-    display: flex !important;
-    min-height: 0px !important;
-
-    &:empty {
-      display: none !important;
-    }
-
-    .velt-inline-comments-section--panel {
-      flex: 1 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      width: 100% !important;
-
-      app-if {
-        display: flex !important;
-        flex: 1 !important;
-        min-height: 0px !important;
-        align-items: flex-start !important;
-
-        &:empty {
-          display: none !important;
-        }
-      }
-
-      app-inline-comments-section-list {
-        display: flex !important;
-        flex: 1 !important;
-
-        &:empty {
-          display: none !important;
-        }
-
-        .velt-inline-comments-section--comments {
-          margin-top: 0px !important;
-          width: 100% !important;
-
-          .velt-inline-comments-section--comment {
-            display: flex !important;
-            flex: 1 !important;
-            min-height: 0px !important;
-
-            snippyly-comment-dialog {
-              display: flex !important;
-              width: 100% !important;
-
-              app-comment-dialog-body {
-                display: flex !important;
-                flex: 1 !important;
-                min-height: 0px !important;
-
-                .velt-body.velt-comment-dialog-body--inline-comment-section-mode {
-                  width: 100% !important;
-
-                  app-comment-dialog-threads {
-                    -ms-overflow-style: none; /* IE and Edge */
-                    scrollbar-width: none; /* Firefox */
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  app-comment-dialog-threads {
-    max-height: none !important;
-  }
-}
-
-app-comment-sidebar-focused-thread {
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.oe-comment--metadata-container {
-  padding-inline: $spacing-lg;
-  padding-bottom: $spacing-md;
-  border-bottom: 1px solid var(--v2-black-transparent);
-
-  &:has(app-if:empty + app-if:empty) {
-    display: none !important;
-  }
-
-  &:has(app-if:empty) {
-    padding: 2px;
-  }
-  app-if {
-    &:empty {
-      display: none !important;
-    }
-  }
-}
-
-app-sidebar-button-unread-icon {
-  top: 0px !important;
-  right: 0px !important;
-}
-
-.oe-comment-sidebar-empty-placeholder--title {
-  @include header1;
-  letter-spacing: -0.91px;
-  text-align: center;
-  color: var(--v2-primary-medium);
-}
-
-.oe-comment-sidebar-empty-placeholder--description {
-  @include paragraph;
-  letter-spacing: -1.25%;
-  text-align: center;
-  color: var(--v2-grey-dark);
-}
-
-.velt-sidebar--no-comments-container {
-  align-items: flex-start !important;
-}
-
 .oe-comment-sidebar-header--status-content-name {
-  width: 96;
   border-radius: 3px;
   padding: $spacing-xs;
   @include input;
@@ -800,83 +794,42 @@ app-comment-sidebar-reset-filter-button {
   }
 }
 
-.oe-composer--metadata {
-  width: 100% !important;
-  app-if {
-    &:empty {
-      display: none !important;
-    }
-  }
-
-  .oe-composer--focused-thread-metadata-item,
-  .oe-composer--page-mode-metadata-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: $spacing-xxs;
-    app-data {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-    @include button;
-    letter-spacing: -0.3%;
-    color: var(--v2-black);
-  }
-
-  .oe-composer--page-mode-metadata-item {
-    padding-bottom: $spacing-xs;
-  }
+// Sidebar inline panel
+.oe-comment-sidebar-inline {
+  position: fixed;
+  top: 45px;
+  right: 0;
+  width: 552px;
+  height: calc(100vh - 45px);
+  @include flex-column;
+  background-color: var(--v2-white);
+  border-left: 1px solid var(--v2-black-transparent);
+  z-index: 50;
+  overflow: hidden;
 }
 
-.oe-composer--focused-thread-metadata-item {
-  width: 100%;
-  border-top: 1px solid var(--v2-black-transparent) !important;
-  padding-top: $spacing-md;
-  padding-bottom: $spacing-xs;
-  padding-inline: $spacing-xl !important;
-  display: flex;
-  align-items: center;
-  gap: $spacing-xxs;
-  > div {
-    white-space: nowrap;
-  }
-}
-.velt-comment-dialog.velt-comment-dialog--page-mode-composer {
-  border-top: 1px solid var(--v2-black-transparent) !important;
+// Sidebar empty state
+.oe-comment-sidebar-empty-placeholder--title {
+  @include header1;
+  letter-spacing: -0.91px;
+  text-align: center;
+  color: var(--v2-primary-medium);
 }
 
-.velt-comment-dialog.velt-comment-dialog--sidebar-mode {
-  gap: 0 !important;
+.oe-comment-sidebar-empty-placeholder--description {
+  @include paragraph;
+  letter-spacing: -1.25%;
+  text-align: center;
+  color: var(--v2-grey-dark);
 }
 
-.velt-inline-comments-section--comment {
-  .velt-comment-dialog {
-    padding-inline: 0px !important;
-    width: 100% !important;
-    gap: 0 !important;
-    app-comment-dialog-body {
-      padding-inline: $spacing-xl !important;
-    }
-
-    app-comment-dialog-composer {
-      padding-inline: $spacing-xl !important;
-
-      .oe-composer--content {
-        background-color: var(--v2-grey-lightest) !important;
-      }
-    }
-  }
+// Sidebar button unread
+app-sidebar-button-unread-icon {
+  top: 0 !important;
+  right: 0 !important;
 }
 
-.velt-inline-comments-section--comment {
-  .velt-thread-card--edit-mode {
-    app-comment-dialog-composer {
-      padding-inline: 0px !important;
-    }
-  }
-}
-
+// Read-only states
 .velt-comment-sidebar--read-only {
   app-comment-sidebar-page-mode-composer {
     display: none !important;
@@ -886,27 +839,28 @@ app-comment-sidebar-reset-filter-button {
 .velt-comment-dialog--read-only {
   .oe--actions-container,
   .oe-composer--metadata,
-  app-comment-dialog-composer {
+  velt-comment-dialog-composer-internal {
     display: none !important;
   }
 }
 
+// Disabled state
 .oe-disabled {
   app-resolve-button,
-  app-comment-dialog-thread-card-reaction-tool,
-  app-comment-dialog-options-dropdown {
+  velt-comment-dialog-thread-card-reaction-tool-internal,
+  velt-comment-dialog-options-dropdown-internal {
     pointer-events: none !important;
   }
 
   .velt-thread-card--show-actions {
     app-resolve-button,
-    app-comment-dialog-thread-card-reaction-tool,
-    app-comment-dialog-options-dropdown {
+    velt-comment-dialog-thread-card-reaction-tool-internal,
+    velt-comment-dialog-options-dropdown-internal {
       opacity: 0.6 !important;
     }
   }
 
-  app-comment-dialog-thread-card-reactions {
+  velt-comment-dialog-thread-card-reactions-internal {
     pointer-events: none !important;
   }
 
@@ -915,32 +869,247 @@ app-comment-sidebar-reset-filter-button {
   }
 }
 
+// ============================================================
+// 14. Inline Comments Section
+// ============================================================
+
+.velt-inline-comments-section--comment {
+  .velt-comment-dialog {
+    padding-inline: 0 !important;
+    width: 100% !important;
+    gap: 0 !important;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+
+    velt-comment-dialog-body-internal {
+      padding-inline: 0 !important;
+    }
+
+    velt-comment-dialog-thread-card-internal {
+      padding: $spacing-base1 $spacing-xl !important;
+
+      &:hover {
+        background-color: var(--v2-grey-lightest) !important;
+      }
+    }
+
+    velt-comment-dialog-composer-internal {
+      padding-inline: $spacing-xl !important;
+
+      .oe-composer--content {
+        background-color: var(--v2-grey-lightest) !important;
+      }
+    }
+  }
+
+  .velt-thread-card--edit-mode {
+    velt-comment-dialog-composer-internal {
+      padding-inline: 0 !important;
+    }
+  }
+}
+
+velt-inline-comments-section {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  height: 100% !important;
+
+  .oe-comment-sidebar-header {
+    border: unset !important;
+  }
+
+  app-inline-comments-section-panel {
+    flex: 1 !important;
+    display: flex !important;
+    min-height: 0 !important;
+    @include hide-when-empty;
+
+    .velt-inline-comments-section--panel {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+
+      app-if {
+        display: flex !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        align-items: flex-start !important;
+        @include hide-when-empty;
+      }
+
+      app-inline-comments-section-list {
+        display: flex !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        @include hide-when-empty;
+
+        .velt-inline-comments-section--comments {
+          margin-top: 0 !important;
+          width: 100% !important;
+          flex: 1 !important;
+          min-height: 0 !important;
+
+          .velt-inline-comments-section--comment {
+            display: flex !important;
+            flex: 1 !important;
+            min-height: 0 !important;
+
+            velt-comment-dialog-internal {
+              display: flex !important;
+              flex-direction: column !important;
+              flex: 1 !important;
+              min-height: 0 !important;
+              width: 100% !important;
+
+              .velt-comment-dialog {
+                flex: 1 !important;
+                min-height: 0 !important;
+              }
+
+              velt-comment-dialog-body-internal {
+                display: flex !important;
+                flex: 1 !important;
+                min-height: 0 !important;
+                overflow-y: auto !important;
+                @include scrollbar-hidden;
+
+                .velt-body.velt-comment-dialog-body--inline-comment-section-mode {
+                  width: 100% !important;
+
+                  velt-comment-dialog-threads-internal {
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                    gap: 0 !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  velt-comment-dialog-threads-internal {
+    max-height: none !important;
+  }
+}
+
+.velt-inline-comments-section--composer-container {
+  .velt-comment-dialog {
+    padding-inline: 0 !important;
+    background-color: #ffffff !important;
+
+    velt-comment-dialog-composer-internal {
+      width: auto !important;
+      margin-inline: $spacing-xl !important;
+      background-color: #fafafa !important;
+    }
+  }
+}
+
+// ============================================================
+// 15. Focused Thread
+// ============================================================
+
+app-comment-sidebar-focused-thread {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+app-comment-sidebar-focused-thread-dialog-container {
+  velt-comment-dialog-internal {
+    width: 100% !important;
+  }
+}
+
+.velt-comment-dialog--focused-thread-mode {
+  padding-inline: 0 !important;
+  width: 100% !important;
+  gap: 0 !important;
+  padding-top: 0 !important;
+
+  &:hover {
+    background-color: transparent !important;
+  }
+
+  velt-comment-dialog-body-internal {
+    display: flex !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+    width: 552px !important;
+    padding-inline: 0 !important;
+
+    velt-comment-dialog-threads-internal {
+      max-height: none !important;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 0 !important;
+
+      velt-comment-dialog-thread-card-internal {
+        padding: $spacing-base1 $spacing-xl !important;
+
+        &:hover {
+          background-color: #fafafa !important;
+        }
+      }
+    }
+  }
+
+  .oe-composer--page-mode-metadata-item {
+    padding-top: $spacing-md !important;
+    padding-inline: $spacing-xl !important;
+    border-top: 1px solid var(--v2-black-transparent) !important;
+    width: 100% !important;
+  }
+
+  velt-comment-dialog-composer-internal {
+    padding-inline: $spacing-xl !important;
+    padding-bottom: $spacing-sm !important;
+
+    .oe-composer--content {
+      background-color: var(--v2-grey-lightest) !important;
+      width: 100% !important;
+    }
+  }
+
+  .velt-thread-card--edit-mode {
+    velt-comment-dialog-composer-internal {
+      padding: 0 !important;
+    }
+  }
+}
+
+// ============================================================
+// 16. Notifications Panel
+// ============================================================
+
 .velt-notifications-panel {
   width: 392px !important;
   border: 1px solid var(--v2-black-transparent) !important;
-  border-radius: 0px !important;
-  padding: 0px !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
   height: 100% !important;
   min-height: auto !important;
   max-height: none !important;
   box-shadow: none !important;
 
   .oe-notifications-panel {
-    display: flex !important;
-    flex-direction: column !important;
+    @include flex-column;
     height: 100% !important;
+
     .oe-notifications-panel-header {
       padding: $spacing-base1 $spacing-lg $spacing-md $spacing-lg !important;
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
+      @include flex-row-center;
       justify-content: space-between !important;
       border-bottom: 1px solid var(--v2-black-transparent) !important;
 
       .oe-notifications-panel-header-info {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
+        @include flex-row-center;
         gap: $spacing-xs !important;
 
         .oe-notifications-panel-header-info-title {
@@ -951,37 +1120,20 @@ app-comment-sidebar-reset-filter-button {
         }
 
         .oe-notifications-panel-header-info-unread {
-          border-radius: 3px;
-          padding: 3px $spacing-xxs;
-          background-color: var(--v2-red-medium);
-          color: var(--v2-white);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 3px;
-          @include font10;
-          line-height: 10px;
-          text-align: center;
-          vertical-align: middle;
+          @include unread-badge;
 
           app-if,
           app-data {
-            &:empty {
-              display: none !important;
-            }
+            @include hide-when-empty;
           }
         }
       }
 
       .oe-notifications-panel-header-actions {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
+        @include flex-row-center;
 
         .oe-notifications-panel-header-actions-button {
-          display: flex !important;
-          align-items: center !important;
-          justify-content: center !important;
+          @include flex-center;
           width: 32px !important;
           height: 32px !important;
           border-radius: 4px !important;
@@ -996,9 +1148,7 @@ app-comment-sidebar-reset-filter-button {
     }
 
     .oe-notifications-panel-tab-header {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
+      @include flex-row-center;
       gap: $spacing-xs !important;
       padding: $spacing-xs $spacing-lg !important;
       border-bottom: 1px solid var(--v2-black-transparent) !important;
@@ -1010,9 +1160,44 @@ app-comment-sidebar-reset-filter-button {
   }
 }
 
+// Notification tabs
+.velt-notifications-panel--tab {
+  @include flex-center;
+  @include header5;
+  border: 1px solid transparent !important;
+  height: 32px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  padding: 2px $spacing-md !important;
+  color: rgb(119, 117, 114) !important;
+  justify-content: center !important;
+  margin-right: $spacing-xs !important;
+
+  &:hover {
+    background: rgba(220, 223, 230, 0.35) !important;
+    border: 1px solid rgba(14, 14, 14, 0.08) !important;
+    border-radius: 3px !important;
+    color: rgb(54, 73, 185) !important;
+  }
+}
+
+.velt-notifications-panel--tab-selected {
+  background: rgb(242, 244, 255) !important;
+  border: 1px solid rgb(219, 225, 255) !important;
+  border-radius: 3px !important;
+  color: rgb(71, 94, 229) !important;
+
+  &:hover {
+    background: rgb(242, 244, 255) !important;
+    border: 1px solid rgb(219, 225, 255) !important;
+    border-radius: 3px !important;
+    color: rgb(71, 94, 229) !important;
+  }
+}
+
+// Notification list items
 .oe-notifications-panel-list-item {
-  display: flex !important;
-  flex-direction: column !important;
+  @include flex-column;
   align-items: flex-start !important;
   gap: $spacing-xs !important;
   width: 100% !important;
@@ -1061,7 +1246,6 @@ app-comment-sidebar-reset-filter-button {
         font-size: 14px !important;
         line-height: 21px !important;
         color: var(--v2-black) !important;
-        display: inline !important;
       }
 
       app-data {
@@ -1077,7 +1261,7 @@ app-comment-sidebar-reset-filter-button {
 
 .velt-notifications-panel--list-item {
   padding: $spacing-md $spacing-md $spacing-md $spacing-lg !important;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
 }
 
 .velt-notifications-panel--list-item-timestamp {
@@ -1121,545 +1305,23 @@ app-notifications-panel-content-list-item-body {
 app-notifications-panel-content {
   flex: 1 !important;
   min-height: 0 !important;
-
-  /* hide scrollbar */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
-  }
+  @include scrollbar-hidden;
 }
 
 .velt-notifications-panel-content {
   max-height: none !important;
 }
 
-.velt-composer-input-focused {
-  outline: 2px solid var(--v2-primary-transparent) !important;
-  border-radius: 3px !important;
-  .oe-composer--content {
-    border: 1px solid var(--v2-primary) !important;
-  }
-}
-
-.velt-comment-attachments {
-  padding-left: 0px !important;
-}
-
-.oe--unresolve-button {
-  color: var(--v2-green-medium) !important;
-
-  &:hover {
-    background-color: var(--v2-green-medium) !important;
-    color: var(--v2-white) !important;
-  }
-}
-
-app-if {
-  &:empty {
-    display: none !important;
-  }
-}
-
-/* ========================================
-     Tailwind Replacement Classes
-     ======================================== */
-
-/* Common utility classes */
-.oe-relative {
-  position: relative;
-}
-
-.oe-icon-sm {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.oe-btn-padding-sm {
-  padding: $spacing-xxs;
-}
-
-/* Comment Bubble & Tool Button */
-.oe-comment-bubble-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  transition: background-color 0.15s ease;
-}
-
-.oe-comment-bubble-button:hover {
-  background-color: var(--v2-primary-lightest);
-}
-
-.oe-comment-bubble-content {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-/* Sidebar Header */
-.oe-sidebar-header-left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-left: $spacing-xxs;
-  padding-right: $spacing-xxs;
-}
-
-.oe-sidebar-header-right {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* Empty Placeholder */
-.oe-empty-placeholder-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 140px;
-}
-
-/* Thread Card (Comment Dialog) */
-.oe-thread-card-wrapper {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.oe-thread-card-avatar {
-  margin-top: $spacing-xxs;
-}
-
-.oe-thread-card-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-  gap: $spacing-xs;
-}
-
-.oe-thread-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.oe-thread-card-info {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.oe-thread-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xs;
-}
-
-/* Reply Section */
-.oe-reply-section {
-  display: flex;
-  align-items: center;
-  height: 32px;
-  margin-left: $spacing-xl;
-}
-
-/* Composer */
-.oe-composer-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.oe-composer-input-section {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xxs;
-}
-
-.oe-composer-actions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.oe-composer-actions-group {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-/* Metadata Close Button */
-.oe-metadata-close {
-  margin-left: auto;
-  padding-left: 2px;
-  border-left: 1px solid var(--v2-black-transparent);
-}
-
-/* Inline Empty Placeholder */
-.oe-inline-empty-placeholder {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 140px;
-}
-
-/* Notification List Item */
-.oe-notification-item-meta-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xs;
-  width: 100%;
-}
-
-/* Sidebar Button */
-.oe-sidebar-button-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.125rem;
-}
-
-.oe-sidebar-button-count {
-  color: var(--v2-grey-dark);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-/* Document Canvas Layout */
-.oe-document-canvas {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-}
-
-.oe-document-canvas-body {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-  height: calc(100vh - 45px);
-}
-
-.oe-document-canvas-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--v2-white);
-  overflow: hidden;
-}
-
-/* Notifications Panel */
-.oe-notifications-backdrop {
-  position: fixed;
-  inset: 0;
-  left: 240px;
-  z-index: 40;
-}
-
-.oe-notifications-panel-container {
-  position: fixed;
-  top: 0px;
-  bottom: 0;
-  left: 240px;
-  width: 392px;
-  background-color: var(--v2-white);
-  z-index: 50;
-  border-right: 1px solid var(--v2-black-transparent);
-}
-
 app-notifications-panel-view-all-button {
   display: none !important;
 }
-.velt-comment-dialog button {
-  box-shadow: none !important;
-}
-.velt-comment-dialog button:disabled {
-  box-shadow: none !important;
-}
-.velt-user-avatar--initial {
-  font-size: 11px !important;
-}
 
-/* ========================================
-   Action Comments Section Styling
-   ======================================== */
-
-.oe-action-composer {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
-}
-
-.oe-action-composer-input-wrapper {
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  min-height: 100px;
-  padding: $spacing-xs $spacing-sm;
-  background-color: #ffffff;
-}
-
-.oe-action-composer-input-wrapper .velt-composer-input--message {
-  padding: 0 !important;
-  min-height: 76px !important;
-  @include input;
-  color: #0e0e0e !important;
-}
-
-.oe-action-composer-input-wrapper .velt-composer-input--message::placeholder {
-  color: #9ca3af !important;
-}
-
-.oe-action-composer-input-wrapper:focus-within {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
-}
-
-.oe-action-composer-note {
-  background-color: #fefce8;
-  border: 1px solid #fcd34d;
-  border-radius: 8px;
-  padding: $spacing-sm;
-  margin-inline: $spacing-lg !important;
-}
-
-.oe-action-composer-note-text {
-  @include subtext;
-  color: rgb(146, 64, 14);
-  margin: 0;
-}
-
-.oe-action-composer-note-text strong {
-  color: #b45309;
-}
-
-.oe-action-composer-buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding-top: $spacing-xs;
-  justify-content: flex-end !important;
-}
-
-.oe-action-comment-composer-wrapper {
-  .velt-composer-input-focused {
-    outline: none !important;
-    border-radius: 0px !important;
-  }
-
-  .oe-action-composer-input-wrapper {
-    margin-inline: $spacing-lg !important;
-  }
-
-  .oe-action-composer-buttons {
-    padding-inline: $spacing-lg !important;
-    padding-block: $spacing-md !important;
-    background-color: rgb(249, 250, 251);
-    border-radius: 0px 0px 12px 12px;
-    border-top: 1px solid rgb(229, 231, 235);
-    gap: 0.75rem;
-    margin-top: $spacing-xs;
-  }
-
-  .velt-comment-dialog {
-    padding: 0px !important;
-    box-shadow: none !important;
-  }
-
-  .velt-comment-dialog--selected {
-    background-color: transparent !important;
-  }
-
-  .oe-action-composer-buttons-cancel {
-    color: rgb(55 65 81);
-    @include button;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background-color: rgb(255 255 255);
-    border-color: rgb(209 213 219);
-    border-width: 1px;
-    border-radius: 8px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgb(249 250 251);
-    }
-  }
-
-  .velt-composer--submit-button {
-    color: #ffffff !important;
-    @include button;
-    padding: $spacing-xs $spacing-md;
-    background-color: rgb(22, 163, 74) !important;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    height: auto !important;
-
-    &:hover {
-      background-color: rgb(21 128 61) !important;
-    }
-  }
-
-  .velt-composer--submit-button:disabled {
-    pointer-events: none !important;
-    background-color: #e5e7eb !important; /* Use a neutral disabled color */
-    color: #bdbdbd !important;
-    cursor: not-allowed !important;
-  }
-}
-
-/* ========================================
-     Delete Confirmation Dialog Styling
-     ======================================== */
-
-.velt-confirm-dialog {
-    padding: 32px !important;
-    width: 552px !important;
-    position: relative !important;
-  }
-  
-  .velt-mat-dialog-container
-    mat-dialog-container
-    .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
-    border-radius: 4px !important;
-  }
-  
-  .oe-confirm-dialog-close-button {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    color: #6b758a;
-    border-radius: 4px;
-    padding: 4px;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: #f3f4f6;
-    }
-  }
-  
-  .oe-confirm-dialog-title {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 36px;
-    letter-spacing: 0.15px;
-    color: #00102e;
-  }
-  
-  .velt-confirm-dialog-message {
-    font-weight: 300 !important;
-    font-size: 16px !important;
-    line-height: 24px !important;
-    letter-spacing: 0.3px !important;
-    color: #6b758a !important;
-    padding: 0px !important;
-    margin: 16px 0px 32px 0px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
-  }
-  
-  .oe-confirm-dialog-buttons {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 16px !important;
-  
-    .oe-confirm-dialog-cancel-button {
-      cursor: pointer !important;
-      height: 40px !important;
-      border-radius: 3px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      border: 1px solid #e6e8ed !important;
-      box-shadow: 0px 1px 2px 0px #00102e0f !important;
-      font-weight: 500 !important;
-      font-size: 14px !important;
-      line-height: 21px !important;
-      letter-spacing: 0.25px !important;
-      text-align: center !important;
-      vertical-align: middle !important;
-      color: #3c475c !important;
-    }
-  
-    .oe-confirm-dialog-delete-button {
-      cursor: pointer !important;
-      height: 40px !important;
-      border-radius: 3px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      background-color: #F75452 !important;
-      border: 1px solid #CA3D3D !important;
-      box-shadow: 0px 1px 2px 0px #00102E0F !important;
-      font-weight: 500 !important;
-      font-size: 14px !important;
-      line-height: 21px !important;
-      letter-spacing: 0.25px !important;
-      text-align: center !important;
-      vertical-align: middle !important;
-      color: #ffffff !important;
-    }
-  }
-  app-comment-sidebar-focused-thread-dialog-container {
-    snippyly-comment-dialog {
-      width: 100% !important;
-    }
-  }
-
-.velt-notifications-panel--tab {
-  display: flex !important;
-  align-items: center !important;
-  border: 1px solid transparent !important;
-  height: 32px !important;
-  text-decoration: none !important;
-  text-transform: uppercase !important;
-  padding: 2px $spacing-md !important;
-  color: rgb(119, 117, 114) !important;
-  justify-content: center !important;
-  margin-right: $spacing-xs !important;
-  @include header5;
-
-  &:hover {
-    background: rgba(220, 223, 230, 0.35) !important;
-    border: 1px solid rgba(14, 14, 14, 0.08) !important;
-    border-radius: 3px !important;
-    color: rgb(54, 73, 185) !important;
-  }
-}
-
-.velt-notifications-panel--tab-selected {
-  background: rgb(242, 244, 255) !important;
-  border: 1px solid rgb(219, 225, 255) !important;
-  border-radius: 3px !important;
-  color: rgb(71, 94, 229) !important;
-
-  &:hover {
-    background: rgb(242, 244, 255) !important;
-    border: 1px solid rgb(219, 225, 255) !important;
-    border-radius: 3px !important;
-    color: rgb(71, 94, 229) !important;
-  }
-}
-
+// Notification settings
 .oe-notifications-panel-settings {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
 
   .oe-notifications-panel-settings-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    @include flex-row-center;
     padding-top: $spacing-base1;
     padding-right: $spacing-lg;
     padding-bottom: $spacing-md;
@@ -1667,11 +1329,9 @@ app-notifications-panel-view-all-button {
     border-bottom: 1px solid #0e0e0e14;
 
     .oe-notifications-panel-settings-bell-icon {
+      @include flex-center;
       height: 32px;
       width: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: #777572;
       cursor: pointer;
     }
@@ -1701,13 +1361,11 @@ app-notifications-panel-view-all-button {
 }
 
 .velt-notification-panel--settings-list-container {
-  margin-block: 0px !important;
+  margin-block: 0 !important;
 }
 
 .oe-notifications-panel-settings-accordion-trigger-selected-value {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   gap: $spacing-xxs;
 }
 
@@ -1720,7 +1378,7 @@ app-notifications-panel-view-all-button {
   border: 1px solid #f7f7f7 !important;
   box-shadow: 0px 3px 6px 0px #0e0e0e1a;
   border-radius: 3px !important;
-  gap: 0px !important;
+  gap: 0 !important;
   padding: $spacing-xs !important;
   align-items: normal !important;
 
@@ -1751,6 +1409,23 @@ app-notifications-panel-view-all-button {
   }
 }
 
+// ============================================================
+// 17. Unresolve Button
+// ============================================================
+
+.oe--unresolve-button {
+  color: var(--v2-green-medium) !important;
+
+  &:hover {
+    background-color: var(--v2-green-medium) !important;
+    color: var(--v2-white) !important;
+  }
+}
+
+// ============================================================
+// 18. Autocomplete / Mention Dropdown
+// ============================================================
+
 velt-autocomplete-option-description-internal {
   display: none !important;
 }
@@ -1767,6 +1442,7 @@ velt-autocomplete-option-description-internal {
   min-height: auto !important;
   height: auto !important;
   margin-right: $spacing-xs !important;
+
   snippyly-user-avatar {
     --legacy-velt-user-avatar-height: 24px !important;
     --legacy-velt-user-avatar-width: 24px !important;
@@ -1788,13 +1464,14 @@ velt-autocomplete-option-description-internal {
     display: flex !important;
     align-items: center !important;
     border-radius: 3px !important;
-    cursor: pointer !important  ;
+    cursor: pointer !important;
     color: rgb(74, 73, 71) !important;
     gap: $spacing-xs !important;
     background-color: #ffffff !important;
 
     &:hover {
       background-color: rgba(242, 244, 255, 0.65) !important;
+
       .velt-autocomplete-option-name {
         color: rgb(54, 73, 185) !important;
       }
@@ -1805,6 +1482,7 @@ velt-autocomplete-option-description-internal {
 .velt-autocomplete-panel--autocomplete.mat-mdc-autocomplete-panel
   .mat-mdc-option.mdc-list-item.mat-mdc-option-active {
   background-color: #ffffff !important;
+
   .velt-autocomplete-option-name {
     @include button;
     color: #475ee5 !important;
@@ -1812,86 +1490,423 @@ velt-autocomplete-option-description-internal {
 
   &:hover {
     background-color: rgba(242, 244, 255, 0.65) !important;
+
     .velt-autocomplete-option-name {
       color: #475ee5 !important;
     }
   }
 }
 
-.velt-inline-comments-section--composer-container {
-  .velt-comment-dialog {
-    padding-inline: 0px !important;
-    background-color: #ffffff !important;
+// ============================================================
+// 19. Confirm Dialog
+// ============================================================
 
-    app-comment-dialog-composer {
-      width: auto !important;
-      margin-inline: $spacing-xl !important;
-      background-color: #fafafa !important;
-    }
+.velt-confirm-dialog {
+  padding: 32px !important;
+  width: 552px !important;
+  position: relative !important;
+}
+
+.velt-mat-dialog-container
+  mat-dialog-container
+  .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
+  border-radius: 4px !important;
+}
+
+.oe-confirm-dialog-close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #6b758a;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f3f4f6;
   }
 }
 
-.velt-comment-dialog--focused-thread-mode {
-  padding-inline: 0px !important;
-  width: 100% !important;
-  gap: 0 !important;
-  padding-top: 0px !important;
+.oe-confirm-dialog-title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0.15px;
+  color: #00102e;
+}
 
-  &:hover {
+.velt-confirm-dialog-message {
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  letter-spacing: 0.3px !important;
+  color: #6b758a !important;
+  padding: 0 !important;
+  margin: 16px 0 32px 0 !important;
+  @include flex-column;
+  gap: 24px !important;
+}
+
+.oe-confirm-dialog-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 16px !important;
+
+  .oe-confirm-dialog-cancel-button,
+  .oe-confirm-dialog-delete-button {
+    cursor: pointer !important;
+    height: 40px !important;
+    border-radius: 3px !important;
+    @include flex-center;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    letter-spacing: 0.25px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+  }
+
+  .oe-confirm-dialog-cancel-button {
+    border: 1px solid #e6e8ed !important;
+    box-shadow: 0px 1px 2px 0px #00102e0f !important;
+    color: #3c475c !important;
+  }
+
+  .oe-confirm-dialog-delete-button {
+    background-color: #f75452 !important;
+    border: 1px solid #ca3d3d !important;
+    box-shadow: 0px 1px 2px 0px #00102e0f !important;
+    color: #ffffff !important;
+  }
+}
+
+// ============================================================
+// 20. Action Comments Section
+// ============================================================
+
+.oe-action-composer {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.oe-action-composer-input-wrapper {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  min-height: 100px;
+  padding: $spacing-xs $spacing-sm;
+  background-color: #ffffff;
+
+  .velt-composer-input--message {
+    padding: 0 !important;
+    min-height: 76px !important;
+    @include input;
+    color: #0e0e0e !important;
+
+    &::placeholder {
+      color: #9ca3af !important;
+    }
+  }
+
+  &:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.oe-action-composer-note {
+  background-color: #fefce8;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: $spacing-sm;
+  margin-inline: $spacing-lg !important;
+}
+
+.oe-action-composer-note-text {
+  @include subtext;
+  color: rgb(146, 64, 14);
+  margin: 0;
+
+  strong {
+    color: #b45309;
+  }
+}
+
+.oe-action-composer-buttons {
+  @include flex-row-center;
+  justify-content: flex-end !important;
+  padding-top: $spacing-xs;
+}
+
+.oe-action-comment-composer-wrapper {
+  .velt-composer-input-focused {
+    outline: none !important;
+    border-radius: 0 !important;
+  }
+
+  .oe-action-composer-input-wrapper {
+    margin-inline: $spacing-lg !important;
+  }
+
+  .oe-action-composer-buttons {
+    padding-inline: $spacing-lg !important;
+    padding-block: $spacing-md !important;
+    background-color: rgb(249, 250, 251);
+    border-radius: 0 0 12px 12px;
+    border-top: 1px solid rgb(229, 231, 235);
+    gap: 0.75rem;
+    margin-top: $spacing-xs;
+  }
+
+  .velt-comment-dialog {
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .velt-comment-dialog--selected {
     background-color: transparent !important;
   }
 
-  app-comment-dialog-body {
-    display: flex !important;
-    flex: 1 !important;
-    min-height: 0px !important;
-    width: 552px !important;
-    padding-inline: 0px !important;
+  .oe-action-composer-buttons-cancel {
+    @include button;
+    color: rgb(55, 65, 81);
+    padding: 0.5rem 1rem;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(209, 213, 219);
+    border-radius: 8px;
+    cursor: pointer;
 
-    app-comment-dialog-threads {
-      max-height: none !important;
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-      gap: 0px !important;
-
-      app-comment-dialog-thread-card {
-        padding: $spacing-base1 $spacing-xl !important;
-        &:hover {
-          background-color: #fafafa !important;
-        }
-      }
+    &:hover {
+      background-color: rgb(249, 250, 251);
     }
   }
 
-  .oe-composer--page-mode-metadata-item {
-    padding-top: $spacing-md !important;
-    padding-inline: $spacing-xl !important;
-    border-top: 1px solid var(--v2-black-transparent) !important;
-    width: 100% !important;
-  }
+  .velt-composer--submit-button {
+    @include button;
+    color: #ffffff !important;
+    padding: $spacing-xs $spacing-md;
+    background-color: rgb(22, 163, 74) !important;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    height: auto !important;
 
-  app-comment-dialog-composer {
-    padding-inline: $spacing-xl !important;
-    padding-bottom: $spacing-sm !important;
-
-    .oe-composer--content {
-      background-color: var(--v2-grey-lightest) !important;
-      width: 100% !important;
+    &:hover {
+      background-color: rgb(21, 128, 61) !important;
     }
-  }
 
-  .velt-thread-card--edit-mode {
-    app-comment-dialog-composer {
-        padding: 0px !important;
+    &:disabled {
+      pointer-events: none !important;
+      background-color: #e5e7eb !important;
+      color: #bdbdbd !important;
+      cursor: not-allowed !important;
     }
   }
 }
 
+// ============================================================
+// 21. Utility Classes (Tailwind Replacements)
+// ============================================================
 
-.oe-thread-card-info.oe--actions-container {
+.oe-relative {
+  position: relative;
+}
+
+.oe-icon-sm {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.oe-btn-padding-sm {
+  padding: $spacing-xxs;
+}
+
+// ============================================================
+// 22. Component Layout Classes
+// ============================================================
+
+// Comment bubble button
+.oe-comment-bubble-button {
+  @include flex-center;
+  width: 2rem;
+  height: 2rem;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--v2-primary-lightest);
+  }
+}
+
+.oe-comment-bubble-content {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+// Sidebar header layout
+.oe-sidebar-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: $spacing-xxs;
+}
+
+.oe-sidebar-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// Empty placeholder
+.oe-empty-placeholder-container {
+  @include flex-column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 140px;
+}
+
+// Thread card layout
+.oe-thread-card-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.oe-thread-card-avatar {
+  margin-top: $spacing-xxs;
+}
+
+.oe-thread-card-content {
+  @include flex-column;
+  flex: 1;
+  min-width: 0;
+  gap: $spacing-xs;
+}
+
+.oe-thread-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.oe-thread-card-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &.oe--actions-container {
     app-if {
-        &:empty {
-            display: none !important;
-        }
+      @include hide-when-empty;
     }
+  }
+}
+
+.oe-thread-card-body {
+  @include flex-column;
+  gap: $spacing-xs;
+}
+
+// Reply section
+.oe-reply-section {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  margin-left: $spacing-xl;
+}
+
+// Composer layout
+.oe-composer-wrapper {
+  @include flex-column;
+}
+
+.oe-composer-input-section {
+  @include flex-column;
+  gap: $spacing-xxs;
+}
+
+.oe-composer-actions {
+  @include flex-row-center;
+  justify-content: space-between;
+}
+
+.oe-composer-actions-group {
+  @include flex-row-center;
+}
+
+// Metadata close button
+.oe-metadata-close {
+  margin-left: auto;
+  padding-left: 2px;
+  border-left: 1px solid var(--v2-black-transparent);
+}
+
+// Inline empty placeholder
+.oe-inline-empty-placeholder {
+  @include flex-column;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 140px;
+}
+
+// Notification item meta
+.oe-notification-item-meta-wrapper {
+  @include flex-column;
+  gap: $spacing-xs;
+  width: 100%;
+}
+
+// Sidebar button
+.oe-sidebar-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.oe-sidebar-button-count {
+  color: var(--v2-grey-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+// ============================================================
+// 23. Document Canvas Layout
+// ============================================================
+
+.oe-document-canvas {
+  @include flex-column;
+  width: 100%;
+  height: 100vh;
+}
+
+.oe-document-canvas-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 45px);
+}
+
+.oe-document-canvas-content {
+  flex: 1;
+  @include flex-column;
+  background-color: var(--v2-white);
+  overflow: hidden;
+}
+
+// Notifications panel container
+.oe-notifications-backdrop {
+  position: fixed;
+  inset: 0;
+  left: 240px;
+  z-index: 40;
+}
+
+.oe-notifications-panel-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 240px;
+  width: 392px;
+  background-color: var(--v2-white);
+  z-index: 50;
+  border-right: 1px solid var(--v2-black-transparent);
 }

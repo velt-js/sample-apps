@@ -5,6 +5,7 @@ import { useVeltEventCallback, useGetCommentAnnotations, useAddCommentAnnotation
 import type { AddCommentAnnotationRequest, CommentAnnotation } from '@veltdev/types'
 import ActionModal from './ActionModal'
 import { LineItemCommentsSidebar } from './LineItemCommentsSidebar'
+import { LineItemCommentsModal } from './LineItemCommentsModal'
 import { BackIcon, GLIcon, TagIcon, CommentIcon, EditIcon } from './icons'
 import type { Job, JobLineItem } from './types'
 
@@ -13,12 +14,16 @@ function LineItemRow({
     lineItem,
     jobId,
     onCommentClick,
-    annotationData
+    onPopoverCommentClick,
+    annotationData,
+    popoverAnnotationData
 }: {
     lineItem: JobLineItem;
     jobId: string;
     onCommentClick: (lineItem: JobLineItem) => void;
+    onPopoverCommentClick: (lineItem: JobLineItem) => void;
     annotationData: { count: number; hasUnread: boolean } | undefined;
+    popoverAnnotationData: { count: number; hasUnread: boolean } | undefined;
 }) {
     const formatCurrency = (value: number, currency: string) => {
         const symbol = currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'
@@ -27,6 +32,9 @@ function LineItemRow({
 
     const count = annotationData?.count || 0;
     const hasUnread = annotationData?.hasUnread || false;
+
+    const popoverCount = popoverAnnotationData?.count || 0;
+    const popoverHasUnread = popoverAnnotationData?.hasUnread || false;
 
     const { client } = useVeltClient();
 
@@ -71,6 +79,17 @@ function LineItemRow({
                         title="Comments"
                     >
                         <CommentIcon count={count} hasUnread={hasUnread} />
+                    </button>
+                </div>
+
+                {/* Comments Popover button - opens in modal */}
+                <div className="w-[100px] min-w-[100px] flex items-center justify-center">
+                    <button
+                        onClick={() => onPopoverCommentClick(lineItem)}
+                        className="flex items-center justify-center px-1 py-1.5 hover:bg-gray-100 rounded transition-colors"
+                        title="Comments Popover"
+                    >
+                        <CommentIcon count={popoverCount} hasUnread={popoverHasUnread} />
                     </button>
                 </div>
 
@@ -128,6 +147,10 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
     const [selectedLineItem, setSelectedLineItem] = useState<{ lineItem: JobLineItem; jobId: string; jobName: string } | null>(null)
     const [isCommentSidebarOpen, setIsCommentSidebarOpen] = useState(false)
 
+    // Popover modal state (separate from sidebar)
+    const [popoverLineItem, setPopoverLineItem] = useState<{ lineItem: JobLineItem; jobId: string; jobName: string } | null>(null)
+    const [isCommentModalOpen, setIsCommentModalOpen] = useState(false)
+
     // Velt hooks for comment annotations
     const commentAnnotations = useGetCommentAnnotations();
     const { addCommentAnnotation } = useAddCommentAnnotation();
@@ -144,6 +167,7 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
                         if (!dataMap[targetId]) {
                             dataMap[targetId] = { count: 0, hasUnread: false };
                         }
+
                         if(annotation.status.id !== 'RESOLVED') {
                             dataMap[targetId].count = annotation.comments.length;
                         }
@@ -180,6 +204,11 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
     const handleLineItemCommentClick = (lineItem: JobLineItem) => {
         setSelectedLineItem({ lineItem, jobId: job.id, jobName: job.jobName })
         setIsCommentSidebarOpen(true)
+    }
+
+    const handlePopoverCommentClick = (lineItem: JobLineItem) => {
+        setPopoverLineItem({ lineItem, jobId: job.id, jobName: job.jobName })
+        setIsCommentModalOpen(true)
     }
 
     // Calculate totals
@@ -324,9 +353,10 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
                         <div className="mb-6">
                             <div className="border border-gray-200 rounded-lg overflow-hidden overflow-x-auto">
                                 {/* Header */}
-                                <div className="flex items-center py-3 px-6 gap-6 border-b border-gray-200 bg-white min-w-[924px]">
+                                <div className="flex items-center py-3 px-6 gap-6 border-b border-gray-200 bg-white min-w-[1030px]">
                                     <div className="w-[180px] min-w-[180px] text-xs font-normal text-gray-400">Itemized charges</div>
                                     <div className="w-[60px] min-w-[60px] text-xs font-normal text-gray-400 text-center">Comments</div>
+                                    <div className="w-[100px] min-w-[100px] text-xs font-normal text-gray-400 text-center">Comments Popover</div>
                                     <div className="w-[70px] min-w-[70px] text-xs font-normal text-gray-400 text-center">Quantity</div>
                                     <div className="w-[70px] min-w-[70px] text-xs font-normal text-gray-400 text-center">Currency</div>
                                     <div className="w-[60px] min-w-[60px] text-xs font-normal text-gray-400 text-center">Unit</div>
@@ -341,20 +371,22 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
                                 <div className="h-px bg-violet-200 mx-6" />
 
                                 {/* Line Items */}
-                                <div className="min-w-[924px]">
+                                <div className="min-w-[1030px]">
                                     {job.lineItems.map((lineItem) => (
                                         <LineItemRow
                                             key={lineItem.id}
                                             lineItem={lineItem}
                                             jobId={job.id}
                                             onCommentClick={handleLineItemCommentClick}
+                                            onPopoverCommentClick={handlePopoverCommentClick}
                                             annotationData={annotationDataByTargetId[`lineitem-${job.id}-${lineItem.id}`]}
+                                            popoverAnnotationData={annotationDataByTargetId[`lineitem-${job.id}-${lineItem.id}`]}
                                         />
                                     ))}
                                 </div>
 
                                 {/* Totals */}
-                                <div className="bg-gray-50 border-t border-gray-200 min-w-[924px]">
+                                <div className="bg-gray-50 border-t border-gray-200 min-w-[1030px]">
                                     <div className="flex items-center py-2 px-6">
                                         <div className="flex-1"></div>
                                         <div className="w-[110px] min-w-[110px] text-right">
@@ -390,6 +422,16 @@ export default function JobDetail({ job, onBack }: JobDetailProps) {
                 onClose={() => {
                     setIsCommentSidebarOpen(false)
                     setSelectedLineItem(null)
+                }}
+            />
+
+            {/* Line Item Comments Modal (popover) */}
+            <LineItemCommentsModal
+                isOpen={isCommentModalOpen}
+                selectedLineItem={popoverLineItem}
+                onClose={() => {
+                    setIsCommentModalOpen(false)
+                    setPopoverLineItem(null)
                 }}
             />
 
