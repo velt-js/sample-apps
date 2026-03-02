@@ -15,6 +15,15 @@ const rotate = keyframes`
   }
 `;
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 // =============================================
 // GLOBAL STYLES (CSS Variables & Velt Overrides)
 // =============================================
@@ -90,6 +99,10 @@ export const GlobalVeltStyles = createGlobalStyle`
     animation: ${rotate} 1s linear infinite;
   }
 
+  .velt-comment-tool-has-comments-icon {
+    animation: ${fadeIn} 300ms ease-in;
+  }
+
   /* =============================================
      VELT COMPONENT OVERRIDES
      ============================================= */
@@ -109,6 +122,10 @@ export const GlobalVeltStyles = createGlobalStyle`
   div[data-velt-comment-dialog-comments-status="RESOLVED"] .privado-comment-dialog-assignee-banner-wrapper-right {
     text-decoration: line-through !important;
     color: var(--Text-text-fade, #7E8DA9) !important;
+  }
+
+  div[data-velt-comment-dialog-comments-status="RESOLVED"] .privado-resolve-action-tooltip {
+    display: none !important;
   }
 
   .velt-comment-dialog--focused-thread-mode {
@@ -180,7 +197,7 @@ export const GlobalVeltStyles = createGlobalStyle`
   .velt-status-dropdown--content {
     display: flex !important;
     width: 194px !important;
-    padding: 0 4px !important;
+    padding: 4px !important;
     flex-direction: column !important;
     align-items: center !important;
     align-self: stretch !important;
@@ -284,9 +301,10 @@ export const GlobalVeltStyles = createGlobalStyle`
           min-height: 0 !important;
           flex: 1 1 0% !important;
           overflow-y: auto !important;
-          overflow-x: hidden !important;
+          overflow-x: clip !important;
           scrollbar-width: none !important;
           -ms-overflow-style: none !important;
+          padding-inline: 2px !important;
         }
 
         app-comment-dialog-threads::-webkit-scrollbar {
@@ -438,7 +456,7 @@ export const GlobalVeltStyles = createGlobalStyle`
   }
 
   .velt-autocomplete-panel--autocomplete.mat-mdc-autocomplete-panel {
-    padding: 0 4px !important;
+    padding: 4px !important;
     border-radius: 10px !important;
     background: var(--default-canvas, #FFF) !important;
     box-shadow: 0 0 0 1px rgba(12, 55, 136, 0.14) !important;
@@ -584,7 +602,7 @@ export const GlobalVeltStyles = createGlobalStyle`
 
   .velt-assign-dropdown--item {
     display: flex !important;
-    padding: 7px 8px !important;
+    padding: 8px !important;
     align-items: center !important;
     gap: 8px !important;
     align-self: stretch !important;
@@ -642,7 +660,7 @@ export const GlobalVeltStyles = createGlobalStyle`
 
   .velt-options-dropdown-open {
     app-comment-dialog-options-dropdown-trigger {
-      box-shadow: 0 0 0 1px #FFF, 0 0 0 4px rgba(30, 69, 169, 0.08) !important;
+      box-shadow: 0 0 0 1px #FFF, 0 0 0 3px rgba(30, 69, 169, 0.04) !important;
     }
   }
 
@@ -667,6 +685,10 @@ export const GlobalVeltStyles = createGlobalStyle`
 
   .velt-thread-card--assign-to-menu {
     padding: 0px !important;
+  }
+
+  .velt-tooltip-overlay {
+    display: none !important;
   }
 
   .velt-autocomplete-panel--input input {
@@ -735,6 +757,8 @@ export const GlobalVeltStyles = createGlobalStyle`
     margin: 4px !important;
     min-width: 0 !important;
     max-height: none !important;
+    border-radius: 12px;
+    overflow: visible !important;
   }
 
   app-comment-dialog-composer {
@@ -1043,6 +1067,19 @@ export const AssigneeBannerWrapper = styled.div`
   margin-inline: -12px;
   margin-top: -12px;
   border-radius: 12px 12px 0 0;
+  min-height: 34px;
+  position: relative;
+
+  .privado-comment-dialog-assignee-banner-wrapper-right:hover ~ .privado-assigned-name-tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .privado-comment-dialog-assignee-banner-wrapper-left:hover ~ .privado-resolve-action-tooltip,
+  .privado-comment-dialog-assignee-banner-wrapper-left:hover ~ .privado-resolved-by-name-tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
 
   .velt-comment-dialog--focused-thread-mode & {
     border-radius: 0 !important;
@@ -1116,12 +1153,92 @@ export const AssigneeBannerWrapperRight = styled.div`
 
   app-data {
     display: inline;
-    margin-left: 3px;
+  }
+`;
+
+export const AssignedNameTooltip = styled.span`
+  ${TextStyles.TextT200Regular}
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  display: inline-flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, visibility 150ms ease;
+  pointer-events: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: var(--Gray-100, #12161F);
+  color: #F8F9F9;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  z-index: 10;
+
+  &:has(app-data:empty) {
+    display: none !important;
+  }
+
+  .velt-comment-dialog--focused-thread-mode & {
+    bottom: auto;
+    top: calc(100% + 8px);
+  }
+`;
+
+export const ResolvedByNameTooltip = styled.span`
+  ${TextStyles.TextT200Regular}
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  display: inline-flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, visibility 150ms ease;
+  pointer-events: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: var(--Gray-100, #12161F);
+  color: #F8F9F9;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  z-index: 10;
+
+  &:has(app-data:empty) {
+    display: none !important;
+  }
+
+  .velt-comment-dialog--focused-thread-mode & {
+    bottom: auto;
+    top: calc(100% + 8px);
+  }
+`;
+
+export const ResolveActionTooltip = styled.span`
+  ${TextStyles.TextT200Regular}
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  display: inline-flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, visibility 150ms ease;
+  pointer-events: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: var(--Gray-100, #12161F);
+  color: #F8F9F9;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  z-index: 10;
+
+  .velt-comment-dialog--focused-thread-mode & {
+    bottom: auto;
+    top: calc(100% + 8px);
   }
 `;
 
 export const QuestionWrapperContainer = styled.div`
   width: 100% !important;
+  overflow: visible !important;
 
   &:has(app-if:empty) {
     display: none !important;
@@ -1156,7 +1273,8 @@ export const QuestionWrapper = styled.div`
     background: var(--Purple-10, #F5EFFF);
 
     .privado-question-tooltip {
-      display: inline-flex;
+      opacity: 1;
+      visibility: visible;
     }
   }
 `;
@@ -1176,10 +1294,14 @@ export const QuestionText = styled.span`
 export const QuestionTooltip = styled.span`
   ${TextStyles.TextT200Regular}
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  display: none;
+  display: inline-flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, visibility 150ms ease;
+  pointer-events: none;
   padding: 6px 12px;
   align-items: flex-end;
   gap: 10px;
@@ -1191,7 +1313,6 @@ export const QuestionTooltip = styled.span`
   max-width: 320px;
   width: max-content;
   z-index: 10;
-  pointer-events: none;
 `;
 
 export const ThreadCardWrapper = styled.div`
@@ -1203,6 +1324,10 @@ export const ThreadCardWrapper = styled.div`
   width: 100% !important;
   max-width: 100% !important;
   overflow: hidden;
+
+  .privado-comment-dialog-thread-card-edit-mode & {
+    overflow: visible;
+  }
 
 
   .privado-comment-dialog-thread-card-reactions-wrapper {
@@ -1229,6 +1354,10 @@ export const ThreadCardWrapper = styled.div`
     border-radius: var(--units-sm, 12px);
     background: var(--default-canvas, #FFF);
     box-shadow: 0 1px 1px 0 rgba(92, 108, 138, 0.12), 0 2px 4px 0 rgba(70, 81, 105, 0.08);
+
+    &:has(.privado-comment-dialog-assignee-banner-wrapper) {
+      overflow: visible;
+    }
   }
 `;
 
@@ -1263,7 +1392,8 @@ export const AssignButtonWrapper = styled.div`
 
   &:hover {
     .velt-comment-tool-tooltip {
-      display: inline-flex;
+      opacity: 1;
+      visibility: visible;
     }
   }
 `;
@@ -1275,6 +1405,10 @@ export const ThreadCardContentWrapper = styled.div`
   width: 100%;
   min-width: 0;
   overflow: hidden;
+
+  .privado-comment-dialog-thread-card-edit-mode & {
+    overflow: visible;
+  }
 
   .privado-comment-dialog-thread-card-message-content-wrapper {
     display: flex;
@@ -1692,6 +1826,11 @@ export const FilterDropdownContentItemWrapper = styled.div`
   align-self: stretch;
   border-radius: 4px;
   background: var(--default-canvas, #FFF);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--container, #F2F6FC);
+  }
 
   span {
     ${TextStyles.TextT200Regular}
@@ -1709,6 +1848,7 @@ export const FilterDropdownContentDivider = styled.div`
   width: 192px;
   height: 1px;
   background: var(--border-color-medium, #DDE3EE);
+  margin-block: 4px;
 `;
 
 export const EmptyPlaceholderWrapper = styled.div`
@@ -1803,6 +1943,14 @@ export const FocusedThreadQuestionWrapper = styled.div`
     font-variant-numeric: lining-nums tabular-nums;
     text-overflow: ellipsis;
   }
+
+  .privado-focused-thread-question-number {
+    flex: 0 0 auto;
+    display: inline;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+  }
 `;
 
 // =============================================
@@ -1823,7 +1971,8 @@ export const CommentToolWrapper = styled.div`
     background: var(--btn-tertiary-btn-tertiary-hover, #F8FAFF);
 
     .velt-comment-tool-tooltip {
-      display: inline-flex;
+      opacity: 1;
+      visibility: visible;
     }
   }
 
@@ -1844,7 +1993,11 @@ export const CommentToolTooltip = styled.span`
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  display: none;
+  display: inline-flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, visibility 150ms ease;
+  pointer-events: none;
   padding: 6px 12px;
   align-items: flex-end;
   gap: 10px;
@@ -1887,6 +2040,7 @@ export const ReactionWrapper = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: var(--border-radius-btn-radius-s, 8px);
+  cursor: pointer;
 `;
 
 export const ReactionPinWrapper = styled.div`

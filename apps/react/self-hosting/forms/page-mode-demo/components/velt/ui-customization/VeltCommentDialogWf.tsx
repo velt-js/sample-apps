@@ -12,41 +12,35 @@ import {
     PdfFileTypeIcon,
     QuestionBarIcon,
     ReplyIcon,
-    ResolveIcon,
-    ResolvedIcon,
     VideoFileIcon
 } from './VeltIcons';
 import {
+    AssignButtonWrapper,
+    Attachments,
     CommentDialogWrapper,
-    AssigneeBannerWrapper,
-    AssigneeBannerWrapperLeft,
-    AssigneeBannerWrapperRight,
-    ResolveButtonText,
-    QuestionWrapperContainer,
-    QuestionWrapper,
+    ComposerDividerWrapper,
+    FocusedThreadModeComposerDivider,
+    OptionsContentItemWrapper,
+    PageModeComposerHeaderWrapper,
     QuestionText,
     QuestionTooltip,
-    ThreadCardWrapper,
-    ThreadCardTopWrapper,
-    ThreadCardTopWrapperLeft,
-    ThreadCardTopWrapperRight,
-    AssignButtonWrapper,
-    ThreadCardContentWrapper,
+    QuestionWrapper,
+    QuestionWrapperContainer,
+    ReactionsWrapper,
+    ReplyCountLine,
+    ReplyCountText,
+    ReplyCountWrapper,
+    ReplyCountWrapperOuter,
+    ReplyIconWrapper,
     ThreadCardBottomWrapper,
     ThreadCardBottomWrapperLeft,
     ThreadCardBottomWrapperRight,
-    ReplyIconWrapper,
-    ReplyCountWrapper,
+    ThreadCardContentWrapper,
     ThreadCardReplyCount,
-    ReplyCountLine,
-    ReplyCountText,
-    ComposerDividerWrapper,
-    FocusedThreadModeComposerDivider,
-    PageModeComposerHeaderWrapper,
-    OptionsContentItemWrapper,
-    ReactionsWrapper,
-    ReplyCountWrapperOuter,
-    Attachments
+    ThreadCardTopWrapper,
+    ThreadCardTopWrapperLeft,
+    ThreadCardTopWrapperRight,
+    ThreadCardWrapper
 } from './styled';
 
 const VeltCommentDialoglWf = () => {
@@ -54,28 +48,10 @@ const VeltCommentDialoglWf = () => {
         // [Velt] Custom wireframe for comment dialog
         <VeltCommentDialogWireframe>
             <CommentDialogWrapper className="privado-comment-dialog-wrapper">
-                <VeltCommentDialogWireframe.AssigneeBanner>
-                    <AssigneeBannerWrapper className="privado-comment-dialog-assignee-banner-wrapper">
-                        <AssigneeBannerWrapperLeft className="privado-comment-dialog-assignee-banner-wrapper-left">
-                            <VeltCommentDialogWireframe.AssigneeBanner.ResolveButton>
-                                <ResolveIcon />
-                                <ResolveButtonText className="privado-comment-dialog-assignee-banner-resolve-button-text">Resolve</ResolveButtonText>
-                            </VeltCommentDialogWireframe.AssigneeBanner.ResolveButton>
-                            <VeltCommentDialogWireframe.AssigneeBanner.UnresolveButton>
-                                <ResolvedIcon />
-                                <ResolveButtonText className="privado-comment-dialog-assignee-banner-unresolve-button-text">Resolved by
-                                    <VeltData field="annotation.resolvedByUser.name" />
-                                </ResolveButtonText>
-                            </VeltCommentDialogWireframe.AssigneeBanner.UnresolveButton>
-                        </AssigneeBannerWrapperLeft>
-                        <AssigneeBannerWrapperRight className="privado-comment-dialog-assignee-banner-wrapper-right">
-                            Assigned to <VeltData field="annotation.assignedTo.name" />
-                        </AssigneeBannerWrapperRight>
-                    </AssigneeBannerWrapper>
-                </VeltCommentDialogWireframe.AssigneeBanner>
+                <VeltCommentDialogWireframe.AssigneeBanner veltIf="!{focusedThreadMode}" />
                 <VeltButtonWireframe type="button" id="navigate-to-question-button" className="privado-comment-dialog-navigate-to-question-button">
                     <QuestionWrapperContainer className="privado-comment-dialog-question-wrapper-container">
-                        <VeltIf condition="!{focusedThreadMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
+                        <VeltIf condition="!{focusedThreadMode} && !{inlineCommentSectionMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
                             <QuestionWrapper className="privado-comment-dialog-question-wrapper">
                                 <QuestionBarIcon />
                                 <QuestionText className="privado-comment-dialog-question-text">
@@ -94,6 +70,7 @@ const VeltCommentDialoglWf = () => {
                     <VeltCommentDialogWireframe.Threads>
                         <VeltCommentDialogWireframe.ThreadCard veltClass="'privado-comment-dialog-thread-card-edit-mode': {editCommentIndex} === {i}">
                             <ThreadCardWrapper className="privado-comment-dialog-thread-card-wrapper">
+                                <VeltCommentDialogWireframe.AssigneeBanner veltIf="{focusedThreadMode} && {i} == 0" />
                                 <ThreadCardTopWrapper className="privado-comment-dialog-thread-card-top-wrapper">
                                     <ThreadCardTopWrapperLeft className="privado-comment-dialog-thread-card-top-wrapper-left">
                                         <VeltCommentDialogWireframe.ThreadCard.Avatar />
