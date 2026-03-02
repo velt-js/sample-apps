@@ -73,7 +73,7 @@ const VeltCommentDialoglWf = () => {
                         </AssigneeBannerWrapperRight>
                     </AssigneeBannerWrapper>
                 </VeltCommentDialogWireframe.AssigneeBanner>
-                <VeltButtonWireframe type="button" id="navigate-to-question-button">
+                <VeltButtonWireframe type="button" id="navigate-to-question-button" className="privado-comment-dialog-navigate-to-question-button">
                     <QuestionWrapperContainer className="privado-comment-dialog-question-wrapper-container">
                         <VeltIf condition="!{focusedThreadMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
                             <QuestionWrapper className="privado-comment-dialog-question-wrapper">
@@ -103,7 +103,7 @@ const VeltCommentDialoglWf = () => {
                                         <VeltCommentDialogWireframe.ThreadCard.Edited />
                                     </ThreadCardTopWrapperLeft>
                                     <ThreadCardTopWrapperRight className="privado-comment-dialog-thread-card-top-wrapper-right">
-                                        <VeltCommentDialogWireframe.ThreadCard.AssignButton veltIf="!{annotation.resolvedByUserId}">
+                                        <VeltCommentDialogWireframe.ThreadCard.AssignButton veltIf="!{annotation.resolvedByUserId} && !{inlineCommentSectionMode}">
                                             <AssignButtonWrapper className="privado-comment-dialog-thread-card-assign-button-wrapper">
                                                 <AssignUserIcon />
                                             </AssignButtonWrapper>

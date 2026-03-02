@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import Header from '@/components/header/header'
 import { BackArrowIcon } from './icons'
 import { StatusBadge } from './ui-components'
@@ -42,6 +43,19 @@ export const TopHeaderBar = ({ isGlobalSidebarOpen }: TopHeaderBarProps) => {
             <StatusBadge status="Open" />
           </div>
         </div>
+
+        {/* Inline Comments Page Link */}
+        <Link
+          href="/inline-comments"
+          className="ml-4 px-3 py-1.5 text-sm font-medium rounded-lg transition-colors"
+          style={{
+            fontFamily: "'TT Interphases Pro Variable', Inter, system-ui, sans-serif",
+            color: '#5A34D9',
+            backgroundColor: 'rgba(90, 52, 217, 0.08)',
+          }}
+        >
+          Inline Comments Demo
+        </Link>
       </div>
 
       {/* [Velt] Header tools: Presence and Comments Sidebar Button */}

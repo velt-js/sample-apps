@@ -917,6 +917,62 @@ export const GlobalVeltStyles = createGlobalStyle`
   .velt-mat-dialog-container mat-dialog-container .mat-mdc-dialog-surface.mdc-dialog__surface:has(snippyly-confirm-dialog) {
     border-radius: var(--units-xs, 8px) !important;
   }
+
+
+  /* =============================================
+     INLINE COMMENTS SECTION STYLES
+     ============================================= */
+
+  velt-inline-comments-section {
+    .velt-inline-comments-section--top {
+      display: none !important;
+    }
+
+    .velt-comment-dialog {
+      width: 100% !important;
+    }
+
+    .privado-comment-dialog-assignee-banner-wrapper {
+        margin-inline: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .privado-comment-dialog-wrapper {
+      padding: 0 !important;
+      box-shadow: none !important;
+      border: 1px solid var(--border-color-medium, #DDE3EE) !important;
+      gap: 0 !important;
+    }
+
+    app-comment-dialog-threads {
+      gap: 0 !important;
+    }
+
+    app-comment-dialog-thread-card {
+      padding: var(--units-sm, 12px) !important;
+      border-bottom: 1px solid var(--border-color-default, #EDF0F8);
+    }
+
+    .privado-comment-dialog-composer-wrapper {
+      box-shadow: none !important;
+    }
+
+    .privado-comment-dialog-navigate-to-question-button {
+      display: none !important;
+    }
+
+    .velt-composer-edit-mode {
+      .privado-comment-dialog-composer-input-wrapper {
+        padding: 0 !important;
+        gap: 0 !important;
+      }
+
+      .privado-comment-dialog-composer-actions-wrapper {
+        padding-inline: 0 !important;
+        padding-bottom: 0 !important;
+      }
+    }
+  }
 `;
 
 // =============================================
