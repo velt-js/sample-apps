@@ -1344,6 +1344,10 @@ export const ThreadCardWrapper = styled.div`
     }
   }
 
+  .privado-comment-dialog-thread-card-assignee-banner-wrapper {
+    width: 100% !important;
+  }
+
   .velt-comment-dialog--focused-thread-mode & {
     display: flex;
     padding: var(--units-sm, 12px) var(--units-sm, 12px) var(--units-xs, 8px) var(--units-sm, 12px);
@@ -1354,10 +1358,6 @@ export const ThreadCardWrapper = styled.div`
     border-radius: var(--units-sm, 12px);
     background: var(--default-canvas, #FFF);
     box-shadow: 0 1px 1px 0 rgba(92, 108, 138, 0.12), 0 2px 4px 0 rgba(70, 81, 105, 0.08);
-
-    &:has(.privado-comment-dialog-assignee-banner-wrapper) {
-      overflow: visible;
-    }
   }
 `;
 

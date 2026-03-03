@@ -70,7 +70,9 @@ const VeltCommentDialoglWf = () => {
                     <VeltCommentDialogWireframe.Threads>
                         <VeltCommentDialogWireframe.ThreadCard veltClass="'privado-comment-dialog-thread-card-edit-mode': {editCommentIndex} === {i}">
                             <ThreadCardWrapper className="privado-comment-dialog-thread-card-wrapper">
-                                <VeltCommentDialogWireframe.AssigneeBanner veltIf="{focusedThreadMode} && {i} == 0" />
+                                <VeltIf condition="{i} === 0" className="privado-comment-dialog-thread-card-assignee-banner-wrapper">
+                                    <VeltCommentDialogWireframe.AssigneeBanner veltIf="{focusedThreadMode}" />
+                                </VeltIf>
                                 <ThreadCardTopWrapper className="privado-comment-dialog-thread-card-top-wrapper">
                                     <ThreadCardTopWrapperLeft className="privado-comment-dialog-thread-card-top-wrapper-left">
                                         <VeltCommentDialogWireframe.ThreadCard.Avatar />
