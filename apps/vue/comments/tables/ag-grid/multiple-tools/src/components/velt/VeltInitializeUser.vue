@@ -11,24 +11,24 @@ import { getVeltAuthToken } from '@/api/veltToken';
 const { client } = useVeltClient();
 const { user } = useAppUser();
 
-// [Velt] Identify user with Velt when both client and user are available
+// [Velt] Create auth provider object and pass it to the Velt client
 watch(
   [client, user],
-  async ([veltClient, appUser]) => {
+  ([veltClient, appUser]) => {
     if (!veltClient || !appUser) return;
 
-    try {
-      const authToken = await getVeltAuthToken({
-        userId: appUser.userId,
-        organizationId: appUser.organizationId,
-        email: appUser.email,
-        isAdmin: false,
-      });
-
-      veltClient.identify(appUser, { authToken });
-    } catch (err) {
-      console.error('Failed to identify user with Velt:', err);
-    }
+    veltClient.setVeltAuthProvider({
+      user: appUser,
+      retryConfig: { retryCount: 3, retryDelay: 1000 },
+      generateToken: async () => {
+        return await getVeltAuthToken({
+          userId: appUser.userId,
+          organizationId: appUser.organizationId,
+          email: appUser.email,
+          isAdmin: false,
+        });
+      },
+    });
   },
   { immediate: true }
 );

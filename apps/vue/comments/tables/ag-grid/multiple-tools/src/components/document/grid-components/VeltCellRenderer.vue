@@ -5,7 +5,11 @@
   >
     <span :style="{ ...textStyle, paddingLeft: '12px' }">{{ params.value }}</span>
     <div :style="{ display: 'flex', alignItems: 'center', gap: '4px', paddingRight: '8px' }">
+      <!-- [Velt] velt-comment-tool renders a button that allows users to add comments to this specific cell -->
+      <!-- [Velt] target-element-id references the parent AG Grid cell with the ID set above -->
+      <!-- [Velt] Comment tool only appears on hover over the entire cell -->
       <velt-comment-tool
+        v-if="isHovered"
         :target-element-id="cellId"
       ></velt-comment-tool>
     </div>
@@ -13,19 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import type { CellFormatting } from '../types';
 import { getCellFormattingKey } from '../utils';
 
-// AG Grid Vue passes everything (including cellRendererParams) merged into `params`
 const props = defineProps<{ params: any }>();
 
 const cellRef = ref<HTMLDivElement | null>(null);
+const isHovered = ref(false);
 
 const cellId = computed(() => `cell-${props.params.data.id}-${props.params.colDef.field}`);
 const cellKey = computed(() => getCellFormattingKey(props.params.data.id, props.params.colDef.field));
 
-// cellFormatting comes from cellRendererParams, merged into params
 const formatting = computed<CellFormatting>(() => {
   const cf = props.params.cellFormatting || {};
   return cf[cellKey.value] || {};
@@ -40,17 +43,29 @@ const textStyle = computed(() => ({
   ].filter(Boolean).join(' ') || 'none',
 }));
 
-// AG Grid Vue mounts the component into a detached fragment before inserting
-// it into the grid DOM, so closest('.ag-cell') returns null during onMounted.
-// Use requestAnimationFrame to defer until the element is in the live DOM.
+let parentCell: Element | null = null;
+const handleMouseEnter = () => { isHovered.value = true; };
+const handleMouseLeave = () => { isHovered.value = false; };
+
+// [Velt] Set ID on parent AG Grid cell element and add hover listeners to the cell
 onMounted(() => {
   requestAnimationFrame(() => {
-    if (cellRef.value) {
-      const parentCell = cellRef.value.closest('.ag-cell');
-      if (parentCell && parentCell.id !== cellId.value) {
+    if (!cellRef.value) return;
+    parentCell = cellRef.value.closest('.ag-cell');
+    if (parentCell) {
+      if (parentCell.id !== cellId.value) {
         parentCell.id = cellId.value;
       }
+      parentCell.addEventListener('mouseenter', handleMouseEnter);
+      parentCell.addEventListener('mouseleave', handleMouseLeave);
     }
   });
+});
+
+onUnmounted(() => {
+  if (parentCell) {
+    parentCell.removeEventListener('mouseenter', handleMouseEnter);
+    parentCell.removeEventListener('mouseleave', handleMouseLeave);
+  }
 });
 </script>
