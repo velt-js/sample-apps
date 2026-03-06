@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm run build",
+  "installCommand": "cd ../../../../../.. && pnpm install",
+  "framework": "vite",
+  "ignoreCommand": "npx turbo-ignore"
+}
