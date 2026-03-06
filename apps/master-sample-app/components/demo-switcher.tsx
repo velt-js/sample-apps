@@ -27,10 +27,17 @@ function parseSample(sample: Sample): ParsedSample {
   const routePath = sample.metadata.routePath || ''
   const segments = routePath.split('/').filter(Boolean)
 
-  if (segments[0] === 'react') {
+  const knownFrameworks: Record<string, string> = {
+    react: 'React',
+    vue: 'Vue',
+    angular: 'Angular',
+  }
+
+  const frameworkKey = segments[0]
+  if (frameworkKey && knownFrameworks[frameworkKey]) {
     return {
       sampleId: sample.metadata.id,
-      framework: 'React',
+      framework: knownFrameworks[frameworkKey],
       feature: segments[1] || '',
       appType: segments[2] || '',
       library: segments[3] || '',
@@ -38,7 +45,7 @@ function parseSample(sample: Sample): ParsedSample {
     }
   }
 
-  // For non-react-prefixed routes (e.g., cursors)
+  // For non-framework-prefixed routes (e.g., cursors)
   return {
     sampleId: sample.metadata.id,
     framework: 'React',
