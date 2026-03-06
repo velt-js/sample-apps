@@ -6,7 +6,6 @@
     <span :style="{ ...textStyle, paddingLeft: '12px' }">{{ params.value }}</span>
     <div :style="{ display: 'flex', alignItems: 'center', gap: '4px', paddingRight: '8px' }">
       <velt-comment-tool
-        ref="commentToolRef"
         :target-element-id="cellId"
       ></velt-comment-tool>
     </div>

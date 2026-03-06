@@ -1,6 +1,6 @@
 <template>
   <VeltInitializeUser />
-  <VeltCollaboration />
+  <VeltCollaboration v-if="client" />
   <DocumentCanvas />
 </template>
 
@@ -16,7 +16,7 @@ import DocumentCanvas from '@/components/document/DocumentCanvas.vue';
 // [Velt] Replace with your own API key from https://console.velt.dev
 const VELT_API_KEY = '6xTcUFtlYAlCdh11zrKB';
 
-const { setClient } = useVeltClient();
+const { client, setClient } = useVeltClient();
 
 // Provide app user context
 provideAppUser();
