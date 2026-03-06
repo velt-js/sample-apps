@@ -11,7 +11,7 @@
       borderRadius: '8px',
     }"
   >
-    <IconChevronRightPipe :size="20" color="rgb(255, 255, 255)" :stroke="1" />
+    <IconChevronRightPipe :size="20" color="rgb(255, 255, 255)" stroke="1" />
   </div>
 
   <aside
@@ -42,7 +42,7 @@
         }"
       >
         <div class="flex flex-row items-center" :style="{ gap: '8px' }">
-          <IconMenu2 :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+          <IconMenu2 :size="16" color="rgb(255, 255, 255)" stroke="1" />
           <span :style="{
             color: 'rgb(255, 255, 255)',
             fontFamily: 'Urbanist, sans-serif',
@@ -62,7 +62,7 @@
             gap: '10px',
           }"
         >
-          <IconChevronLeftPipe :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+          <IconChevronLeftPipe :size="16" color="rgb(255, 255, 255)" stroke="1" />
         </div>
       </div>
 
@@ -104,7 +104,7 @@
                 height: '32px',
               }"
             >
-              <IconFolder :size="14" color="rgb(255, 255, 255)" :stroke="1" />
+              <IconFolder :size="14" color="rgb(255, 255, 255)" stroke="1" />
               <span :style="navLabelStyle">FY2023</span>
             </div>
           </div>
@@ -122,7 +122,7 @@
                 height: '32px',
               }"
             >
-              <IconFolder :size="14" color="rgb(255, 255, 255)" :stroke="1" />
+              <IconFolder :size="14" color="rgb(255, 255, 255)" stroke="1" />
               <span :style="navLabelStyle">FY2024</span>
             </div>
 
@@ -138,15 +138,15 @@
               }"
             >
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconSpeakerphone :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+                <IconSpeakerphone :size="16" color="rgb(255, 255, 255)" stroke="1" />
                 <span :style="nestedLabelStyle">Marketing Spend</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconCurrencyDollar :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+                <IconCurrencyDollar :size="16" color="rgb(255, 255, 255)" stroke="1" />
                 <span :style="nestedLabelStyle">Salaries</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconFileAnalytics :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+                <IconFileAnalytics :size="16" color="rgb(255, 255, 255)" stroke="1" />
                 <span :style="nestedLabelStyle">Misc.</span>
               </div>
             </div>
@@ -165,7 +165,7 @@
                 height: '32px',
               }"
             >
-              <IconFolder :size="14" color="rgb(255, 255, 255)" :stroke="1" />
+              <IconFolder :size="14" color="rgb(255, 255, 255)" stroke="1" />
               <span :style="navLabelStyle">FY2025</span>
             </div>
 
@@ -192,15 +192,15 @@
                   height: '32px',
                 }"
               >
-                <IconSpeakerphone :size="16" color="rgb(255, 205, 46)" :stroke="1" />
+                <IconSpeakerphone :size="16" color="rgb(255, 205, 46)" stroke="1" />
                 <span :style="nestedLabelStyle">Marketing Spend</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconCurrencyDollar :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+                <IconCurrencyDollar :size="16" color="rgb(255, 255, 255)" stroke="1" />
                 <span :style="nestedLabelStyle">Salaries</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconFileAnalytics :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+                <IconFileAnalytics :size="16" color="rgb(255, 255, 255)" stroke="1" />
                 <span :style="nestedLabelStyle">Misc.</span>
               </div>
             </div>
@@ -214,7 +214,7 @@
       class="flex flex-row items-center"
       :style="{ padding: '16px', gap: '8px' }"
     >
-      <IconSettings :size="16" color="rgb(255, 255, 255)" :stroke="1" />
+      <IconSettings :size="16" color="rgb(255, 255, 255)" stroke="1" />
       <span :style="{
         color: 'rgb(255, 255, 255)',
         fontFamily: 'Urbanist, sans-serif',

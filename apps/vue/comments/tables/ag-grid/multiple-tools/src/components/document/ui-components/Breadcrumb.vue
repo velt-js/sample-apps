@@ -13,7 +13,7 @@
       gap: '8px',
       flexShrink: 0,
     }">
-      <IconFolder :size="14" :stroke="1.5" color="rgba(255, 255, 255, 0.52)" />
+      <IconFolder :size="14" stroke="1.5" color="rgba(255, 255, 255, 0.52)" />
       <span :style="{
         fontFamily: 'Inter, sans-serif',
         fontSize: '13px',
@@ -23,7 +23,7 @@
         whiteSpace: 'pre',
       }">FY2025</span>
     </div>
-    <IconChevronRight :size="12" :stroke="1.5" color="rgba(255, 255, 255, 0.52)" />
+    <IconChevronRight :size="12" stroke="1.5" color="rgba(255, 255, 255, 0.52)" />
     <div :style="{
       display: 'flex',
       flexDirection: 'row',
@@ -31,7 +31,7 @@
       gap: '8px',
       flexShrink: 0,
     }">
-      <IconFolder :size="14" :stroke="1.5" color="rgba(255, 255, 255, 0.52)" />
+      <IconFolder :size="14" stroke="1.5" color="rgba(255, 255, 255, 0.52)" />
       <span :style="{
         fontFamily: 'Inter, sans-serif',
         fontSize: '13px',
