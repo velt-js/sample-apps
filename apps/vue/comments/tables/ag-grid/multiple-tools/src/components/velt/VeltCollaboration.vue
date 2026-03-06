@@ -9,7 +9,7 @@
     dialog-on-hover="false"
   ></velt-comments>
   <!-- [Velt] Comments sidebar -->
-  <velt-comments-sidebar></velt-comments-sidebar>
+  <velt-comments-sidebar group-config='{"enable": false}'></velt-comments-sidebar>
   <VeltCustomization />
 </template>
 

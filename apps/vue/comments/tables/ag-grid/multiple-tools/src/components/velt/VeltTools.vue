@@ -7,5 +7,10 @@
   <velt-notifications-tool
     settings="true"
     shadow-dom="false"
+    :tab-config="JSON.stringify({
+      forYou: { name: 'For You', enable: true },
+      documents: { name: 'Documents', enable: true },
+      all: { name: 'All', enable: true },
+    })"
   ></velt-notifications-tool>
 </template>

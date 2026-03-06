@@ -5,9 +5,8 @@
   >
     <span :style="{ ...textStyle, paddingLeft: '12px' }">{{ params.value }}</span>
     <div :style="{ display: 'flex', alignItems: 'center', gap: '4px', paddingRight: '8px' }">
-      <!-- [Velt] Comment tool only appears on hover over the entire cell -->
       <velt-comment-tool
-        v-if="isHovered"
+        ref="commentToolRef"
         :target-element-id="cellId"
       ></velt-comment-tool>
     </div>
@@ -15,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import type { CellFormatting } from '../types';
 import { getCellFormattingKey } from '../utils';
 
@@ -23,7 +22,6 @@ import { getCellFormattingKey } from '../utils';
 const props = defineProps<{ params: any }>();
 
 const cellRef = ref<HTMLDivElement | null>(null);
-const isHovered = ref(false);
 
 const cellId = computed(() => `cell-${props.params.data.id}-${props.params.colDef.field}`);
 const cellKey = computed(() => getCellFormattingKey(props.params.data.id, props.params.colDef.field));
@@ -43,27 +41,17 @@ const textStyle = computed(() => ({
   ].filter(Boolean).join(' ') || 'none',
 }));
 
-let parentCell: Element | null = null;
-const handleMouseEnter = () => { isHovered.value = true; };
-const handleMouseLeave = () => { isHovered.value = false; };
-
+// AG Grid Vue mounts the component into a detached fragment before inserting
+// it into the grid DOM, so closest('.ag-cell') returns null during onMounted.
+// Use requestAnimationFrame to defer until the element is in the live DOM.
 onMounted(() => {
-  if (cellRef.value) {
-    parentCell = cellRef.value.closest('.ag-cell');
-    if (parentCell) {
-      if (parentCell.id !== cellId.value) {
+  requestAnimationFrame(() => {
+    if (cellRef.value) {
+      const parentCell = cellRef.value.closest('.ag-cell');
+      if (parentCell && parentCell.id !== cellId.value) {
         parentCell.id = cellId.value;
       }
-      parentCell.addEventListener('mouseenter', handleMouseEnter);
-      parentCell.addEventListener('mouseleave', handleMouseLeave);
     }
-  }
-});
-
-onUnmounted(() => {
-  if (parentCell) {
-    parentCell.removeEventListener('mouseenter', handleMouseEnter);
-    parentCell.removeEventListener('mouseleave', handleMouseLeave);
-  }
+  });
 });
 </script>
