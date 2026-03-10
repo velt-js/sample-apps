@@ -1503,8 +1503,8 @@ importers:
   apps/react/self-hosting/forms/page-mode-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 4.7.13
-        version: 4.7.13(react-dom@19.2.0)(react@19.2.0)
+        specifier: 5.0.2-beta.7
+        version: 5.0.2-beta.7(react-dom@19.2.0)(react@19.2.0)
       mongodb:
         specifier: ^7.0.0
         version: 7.0.0
@@ -1534,8 +1534,8 @@ importers:
         specifier: ^5.1.36
         version: 5.1.36
       '@veltdev/types':
-        specifier: 4.7.13
-        version: 4.7.13
+        specifier: 5.0.2-beta.7
+        version: 5.0.2-beta.7
       autoprefixer:
         specifier: ^10
         version: 10.4.21(postcss@8.5.6)
@@ -6489,8 +6489,8 @@ packages:
       react-dom: 19.2.0(react@19.2.0)
     dev: false
 
-  /@veltdev/react@4.7.13(react-dom@19.2.0)(react@19.2.0):
-    resolution: {integrity: sha512-Lq3sPbx6tq3YpVhvoQt9A6dPO9YAc/ase54IpFCiDxyOT+Ba7CvYr4sYghrwK49FqcCU2fUO0MJJacUR29PBzA==}
+  /@veltdev/react@5.0.1-beta.3(react-dom@19.2.0)(react@19.2.0):
+    resolution: {integrity: sha512-qWZABq6la6E71LceHNlybdNZliqpXCQtOKc9/Y8wiQhATlTFrx8/AQcS3oYarkOa2qJLP+ogyDrDb8oWVSe0Mg==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -6499,8 +6499,8 @@ packages:
       react-dom: 19.2.0(react@19.2.0)
     dev: false
 
-  /@veltdev/react@5.0.1-beta.3(react-dom@19.2.0)(react@19.2.0):
-    resolution: {integrity: sha512-qWZABq6la6E71LceHNlybdNZliqpXCQtOKc9/Y8wiQhATlTFrx8/AQcS3oYarkOa2qJLP+ogyDrDb8oWVSe0Mg==}
+  /@veltdev/react@5.0.2-beta.7(react-dom@19.2.0)(react@19.2.0):
+    resolution: {integrity: sha512-rt+6V6RnrILTMoR5hBWyQ+Rfos89vxSm7Qu1n90MS9p7C2j5y4WUG+6DS0k00w9JEZRZBZ65p38cG7dH6pHcjg==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -6616,12 +6616,12 @@ packages:
   /@veltdev/types@4.7.12:
     resolution: {integrity: sha512-e5YQgEa7wZFD/gk1vX4U39BtEg+RuY6dw8JV6xtKMFw3fpMYlaMqmQaTOJwizygHfLZxZy0ZmDAzCVASjmRrmg==}
 
-  /@veltdev/types@4.7.13:
-    resolution: {integrity: sha512-BpQumkfRtsvkrhuO2lRad3l8APxJ1PJXAg9vJHm108YrfUiUu2n2gTeD//v8W43czta0dTCN2qoesziBgNXu+A==}
-    dev: true
-
   /@veltdev/types@5.0.1-beta.3:
     resolution: {integrity: sha512-rXwgE/nH95wEwSLD7eyDPqXexLJ15MaUhKSIj9/GRsnwQ9eoDrxzA8mYUSEHoS9vVGnaekyYa80aFGZrhP84lA==}
+    dev: true
+
+  /@veltdev/types@5.0.2-beta.7:
+    resolution: {integrity: sha512-jDf6ykxd/yCud39bOC5yfHE4k8t15beQAFyvqtJOnM5mprS/64EhbMTf97MEuIFw9CxzQkGgrGp9VsksR00C7g==}
     dev: true
 
   /@vercel/analytics@1.6.1(next@16.1.2)(react@19.2.0):

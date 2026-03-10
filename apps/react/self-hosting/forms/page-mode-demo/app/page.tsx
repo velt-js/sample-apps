@@ -25,12 +25,12 @@ export default function Home() {
     <VeltProvider
       apiKey={NEXT_PUBLIC_VELT_API_KEY}
       authProvider={authProvider}
-      dataProviders={{
-        comment: commentDataProvider,
-        user: userDataProvider,
-        attachment: attachmentDataProvider,
-        reaction: reactionDataProvider,
-      }}
+    //   dataProviders={{
+    //     comment: commentDataProvider,
+    //     user: userDataProvider,
+    //     attachment: attachmentDataProvider,
+    //     reaction: reactionDataProvider,
+    //   }}
     >
       <VeltCollaboration />
       <DocumentCanvas />

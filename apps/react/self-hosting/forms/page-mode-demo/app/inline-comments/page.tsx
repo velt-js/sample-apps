@@ -125,8 +125,9 @@ export default function InlineCommentsPage() {
                             <VeltInlineCommentsSection
                                 targetElementId="policy-section"
                                 shadowDom={false}
-                                composerPosition="bottom"
+                                composerPosition="top"
                                 composerPlaceholder="Write a comment..."
+                                fullExpanded={true}
                             />
                         </div>
                     </section>

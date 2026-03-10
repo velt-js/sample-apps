@@ -1,6 +1,7 @@
 'use client'
 
-import { VeltCommentTool, VeltCommentBubble } from '@veltdev/react'
+import { useState, useEffect } from 'react'
+import { VeltCommentTool, VeltCommentBubble, useVeltClient } from '@veltdev/react'
 import { DropdownInput, PrivadoAgentBadge } from './ui-components'
 import type { Question } from './questions'
 
@@ -13,7 +14,22 @@ interface QuestionSectionProps {
 }
 
 export const QuestionSection = ({ question, sectionRef, value, onChange, activeCommentToolId }: QuestionSectionProps) => {
+  const { client } = useVeltClient()
+  const [commentsLoaded, setCommentsLoaded] = useState(false)
   const targetElementId = `question-${question.id}`
+
+  useEffect(() => {
+    if (!client) return
+
+    const commentElement = client.getCommentElement()
+    const subscription = commentElement.getAllCommentAnnotations().subscribe((commentAnnotations) => {
+      if (commentAnnotations !== null) {
+        setCommentsLoaded(true)
+      }
+    })
+
+    return () => subscription.unsubscribe()
+  }, [client])
 
   return (
     <div
@@ -48,7 +64,7 @@ export const QuestionSection = ({ question, sectionRef, value, onChange, activeC
 
         {/* [Velt] Comment tools for each question row */}
         {/* activeCommentToolId is used to show the active comment tool / bubble */}
-        <div className={`flex items-center gap-1 ml-4 ${activeCommentToolId === question.id ? 'velt-comment-tool-wrapper-active' : ''}`}>
+        <div className={`flex items-center gap-1 ml-4 ${activeCommentToolId === question.id ? 'velt-comment-tool-wrapper-active' : ''} ${commentsLoaded ? 'velt-comment-bubble-loaded' : 'velt-comment-bubble-loading'}`}>
           <VeltCommentBubble
             targetElementId={targetElementId}
             openDialog={false}

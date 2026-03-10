@@ -99,8 +99,14 @@ export const GlobalVeltStyles = createGlobalStyle`
     animation: ${rotate} 1s linear infinite;
   }
 
-  .velt-comment-tool-has-comments-icon {
-    animation: ${fadeIn} 300ms ease-in;
+  .velt-comment-bubble-loading {
+    opacity: 0.4;
+    transition: opacity 300ms ease-in;
+  }
+
+  .velt-comment-bubble-loaded {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
   }
 
   /* =============================================
@@ -119,13 +125,9 @@ export const GlobalVeltStyles = createGlobalStyle`
     }
   }
 
-  div[data-velt-comment-dialog-comments-status="RESOLVED"] .privado-comment-dialog-assignee-banner-wrapper-right {
+  [data-velt-comment-dialog-comments-status="RESOLVED"] .privado-comment-dialog-assignee-banner-wrapper-right {
     text-decoration: line-through !important;
     color: var(--Text-text-fade, #7E8DA9) !important;
-  }
-
-  div[data-velt-comment-dialog-comments-status="RESOLVED"] .privado-resolve-action-tooltip {
-    display: none !important;
   }
 
   .velt-comment-dialog--focused-thread-mode {
@@ -169,7 +171,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     line-height: 18px !important;
   }
 
-  app-comment-dialog-toggle-reply-text {
+  velt-comment-dialog-toggle-reply-text-internal {
     color: var(--Text-text-tertiary, #5C6C8A) !important;
     font-variant-numeric: lining-nums tabular-nums !important;
     font-size: 13px !important;
@@ -274,11 +276,11 @@ export const GlobalVeltStyles = createGlobalStyle`
     overflow: hidden !important;
     flex: 1 !important;
 
-    snippyly-comment-dialog {
+    velt-comment-dialog-internal {
         width: 100% !important;
     }
 
-    app-comment-dialog-body {
+    velt-comment-dialog-body-internal {
       display: flex !important;
       flex: 1 1 0% !important;
       min-height: 0 !important;
@@ -293,7 +295,7 @@ export const GlobalVeltStyles = createGlobalStyle`
         width: 100% !important;
         overflow: visible !important;
 
-        app-comment-dialog-threads {
+        velt-comment-dialog-threads-internal {
           max-height: none !important;
           gap: 12px !important;
           display: flex !important;
@@ -307,14 +309,14 @@ export const GlobalVeltStyles = createGlobalStyle`
           padding-inline: 2px !important;
         }
 
-        app-comment-dialog-threads::-webkit-scrollbar {
+        velt-comment-dialog-threads-internal::-webkit-scrollbar {
           display: none !important;
         }
       }
     }
   }
 
-  app-comment-dialog-body {
+  velt-comment-dialog-body-internal {
     width: 100% !important;
   }
 
@@ -385,24 +387,24 @@ export const GlobalVeltStyles = createGlobalStyle`
   }
 
   .velt-composer-attachment--loading {
-     app-comment-dialog-composer-attachments-other-icon {
+     velt-comment-dialog-composer-attachments-other-icon-internal {
         display: none !important;
      }
-     app-comment-dialog-composer-attachments-other-loading {
+     velt-comment-dialog-composer-attachments-other-loading-internal {
         display: block !important;
      }
   }
 
-    app-comment-dialog-composer-attachments-other-icon {
+    velt-comment-dialog-composer-attachments-other-icon-internal {
         display: block !important;
      }
-     app-comment-dialog-composer-attachments-other-loading {
+     velt-comment-dialog-composer-attachments-other-loading-internal {
         display: none !important;
      }
 
-  app-comment-dialog-composer-attachments-other-icon,
-  app-comment-dialog-composer-attachments-other-loading,
-  app-comment-dialog-composer-attachments {
+  velt-comment-dialog-composer-attachments-other-icon-internal,
+  velt-comment-dialog-composer-attachments-other-loading-internal,
+  velt-comment-dialog-composer-attachments-internal {
     &:empty {
       display: none !important;
     }
@@ -431,7 +433,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     }
   }
 
-  app-comment-dialog-thread-card-attachments-other-name {
+  velt-comment-dialog-thread-card-attachments-other-name-internal {
     flex: 1 !important;
     min-width: 0 !important;
     overflow: hidden !important;
@@ -633,7 +635,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     min-height: auto !important;
   }
 
-  app-comment-dialog-options-dropdown-content {
+  velt-comment-dialog-options-dropdown-content-internal {
     display: flex !important;
     padding: 4px !important;
     flex-direction: column !important;
@@ -643,7 +645,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     box-shadow: 0 0 0 1px rgba(12, 55, 136, 0.14) !important;
   }
 
-  app-comment-dialog-options-dropdown-trigger {
+  velt-comment-dialog-options-dropdown-trigger-internal {
     display: flex !important;
     padding: 0px !important;
     justify-content: center !important;
@@ -659,7 +661,7 @@ export const GlobalVeltStyles = createGlobalStyle`
   }
 
   .velt-options-dropdown-open {
-    app-comment-dialog-options-dropdown-trigger {
+    velt-comment-dialog-options-dropdown-trigger-internal {
       box-shadow: 0 0 0 1px #FFF, 0 0 0 3px rgba(30, 69, 169, 0.04) !important;
     }
   }
@@ -729,12 +731,12 @@ export const GlobalVeltStyles = createGlobalStyle`
     overflow: visible !important;
   }
 
-  app-comment-dialog-thread-card {
+  velt-comment-dialog-thread-card-internal {
     max-width: 100% !important;
     overflow: visible !important;
   }
 
-  app-comment-dialog-threads {
+  velt-comment-dialog-threads-internal {
     max-height: none !important;
   }
 
@@ -748,7 +750,7 @@ export const GlobalVeltStyles = createGlobalStyle`
       height: 0px !important;
     }
 
-    app-comment-dialog-options-dropdown-trigger {
+    velt-comment-dialog-options-dropdown-trigger-internal {
       display: none !important;
     }
   }
@@ -761,7 +763,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     overflow: visible !important;
   }
 
-  app-comment-dialog-composer {
+  velt-comment-dialog-composer-internal {
     min-width: 0 !important;
     // overflow: hidden !important;
   }
@@ -771,8 +773,8 @@ export const GlobalVeltStyles = createGlobalStyle`
     overflow: hidden !important;
   }
 
-  app-comment-dialog-composer-attachments,
-  app-comment-dialog-composer-attachments-other {
+  velt-comment-dialog-composer-attachments-internal,
+  velt-comment-dialog-composer-attachments-other-internal {
     min-width: 0 !important;
     overflow: hidden !important;
   }
@@ -781,7 +783,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     display: none !important;
   }
 
-  app-comment-dialog-thread-card-reaction-pin {
+  velt-comment-dialog-thread-card-reaction-pin-internal {
     .velt-reaction-pin--no-reactions {
       .privado-reaction-pin-default-icon {
         display: flex !important;
@@ -842,7 +844,7 @@ export const GlobalVeltStyles = createGlobalStyle`
     }
   }
 
-  app-comment-dialog-composer-attachments-other-name {
+  velt-comment-dialog-composer-attachments-other-name-internal {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     overflow: hidden !important;
@@ -956,6 +958,15 @@ export const GlobalVeltStyles = createGlobalStyle`
       width: 100% !important;
     }
 
+    .privado-comment-dialog-thread-card-top-wrapper{
+     display: flex !important;
+     align-items: center !important;
+    }
+
+    .privado-comment-dialog-thread-card-wrapper {
+      gap: 0 !important;
+    }
+
     .privado-comment-dialog-assignee-banner-wrapper {
         margin-inline: 0 !important;
         margin-top: 0 !important;
@@ -968,13 +979,16 @@ export const GlobalVeltStyles = createGlobalStyle`
       gap: 0 !important;
     }
 
-    app-comment-dialog-threads {
+    velt-comment-dialog-threads-internal {
       gap: 0 !important;
     }
 
-    app-comment-dialog-thread-card {
+    velt-comment-dialog-thread-card-internal {
       padding: var(--units-sm, 12px) !important;
       border-bottom: 1px solid var(--border-color-default, #EDF0F8);
+      .s-emoji-block {
+        padding-left: 4px !important;
+      }
     }
 
     .privado-comment-dialog-composer-wrapper {
@@ -1038,7 +1052,7 @@ export const CommentDialogWrapper = styled.div`
     min-height: 0 !important;
     overflow: hidden !important;
 
-    app-comment-dialog-body {
+    velt-comment-dialog-body-internal {
       flex: 1 1 0% !important;
       min-height: 0 !important;
       height: 0 !important;
@@ -1075,8 +1089,8 @@ export const AssigneeBannerWrapper = styled.div`
     visibility: visible;
   }
 
-  .privado-comment-dialog-assignee-banner-wrapper-left:hover ~ .privado-resolve-action-tooltip,
-  .privado-comment-dialog-assignee-banner-wrapper-left:hover ~ .privado-resolved-by-name-tooltip {
+  .privado-comment-dialog-assignee-banner-wrapper-left:hover .privado-resolve-action-tooltip,
+  .privado-comment-dialog-assignee-banner-wrapper-left:hover .privado-resolved-by-name-tooltip {
     opacity: 1;
     visibility: visible;
   }
@@ -1091,24 +1105,26 @@ export const AssigneeBannerWrapperLeft = styled.div`
   gap: var(--units-xs, 8px);
   flex: 1 1 0;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 
   > * {
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
-  app-comment-dialog-assignee-banner-resolve-button,
-  app-comment-dialog-assignee-banner-unresolve-button {
+  velt-comment-dialog-assignee-banner-resolve-button-internal,
+  velt-comment-dialog-assignee-banner-unresolve-button-internal {
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
   }
 
   app-resolve-button,
   app-unresolve-button {
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
     display: block;
+    position: relative;
 
     .velt-tooltip-button {
       width: 100% !important;
@@ -1117,7 +1133,7 @@ export const AssigneeBannerWrapperLeft = styled.div`
       gap: var(--units-xs, 8px);
       background-color: transparent !important;
       min-width: 0;
-      overflow: hidden;
+      overflow: visible;
     }
   }
 `;
@@ -1159,7 +1175,7 @@ export const AssigneeBannerWrapperRight = styled.div`
 export const AssignedNameTooltip = styled.span`
   ${TextStyles.TextT200Regular}
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
   right: 0;
   display: inline-flex;
   opacity: 0;
@@ -1177,17 +1193,12 @@ export const AssignedNameTooltip = styled.span`
   &:has(app-data:empty) {
     display: none !important;
   }
-
-  .velt-comment-dialog--focused-thread-mode & {
-    bottom: auto;
-    top: calc(100% + 8px);
-  }
 `;
 
 export const ResolvedByNameTooltip = styled.span`
   ${TextStyles.TextT200Regular}
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
   left: 0;
   display: inline-flex;
   opacity: 0;
@@ -1205,17 +1216,12 @@ export const ResolvedByNameTooltip = styled.span`
   &:has(app-data:empty) {
     display: none !important;
   }
-
-  .velt-comment-dialog--focused-thread-mode & {
-    bottom: auto;
-    top: calc(100% + 8px);
-  }
 `;
 
 export const ResolveActionTooltip = styled.span`
   ${TextStyles.TextT200Regular}
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
   left: 0;
   display: inline-flex;
   opacity: 0;
@@ -1229,11 +1235,6 @@ export const ResolveActionTooltip = styled.span`
   font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
   z-index: 10;
-
-  .velt-comment-dialog--focused-thread-mode & {
-    bottom: auto;
-    top: calc(100% + 8px);
-  }
 `;
 
 export const QuestionWrapperContainer = styled.div`
@@ -1346,6 +1347,14 @@ export const ThreadCardWrapper = styled.div`
 
   .privado-comment-dialog-thread-card-assignee-banner-wrapper {
     width: 100% !important;
+
+    &:empty {
+      display: none !important;
+    }
+
+    &:has(velt-comment-dialog-assignee-banner-internal:empty) {
+      display: none !important;
+    }
   }
 
   .velt-comment-dialog--focused-thread-mode & {
@@ -1442,27 +1451,27 @@ export const Attachments = styled.div`
     text-overflow: ellipsis !important;
   }
 
-  app-comment-dialog-thread-card-attachments-other-download {
+  velt-comment-dialog-thread-card-attachments-other-download-internal {
     display: none !important;
   }
 
-  app-comment-dialog-thread-card-attachments-image-download {
+  velt-comment-dialog-thread-card-attachments-image-download-internal {
     display: none !important;
   }
 
-  app-comment-dialog-thread-card-attachments-other-download,
-  app-comment-dialog-thread-card-attachments-image-download {
+  velt-comment-dialog-thread-card-attachments-other-download-internal,
+  velt-comment-dialog-thread-card-attachments-image-download-internal {
     flex-shrink: 0;
   }
 
   &:hover {
     background: var(--Others-White, #FFF) !important;
 
-    app-comment-dialog-thread-card-attachments-other-download {
+    velt-comment-dialog-thread-card-attachments-other-download-internal {
       display: block !important;
     }
 
-    app-comment-dialog-thread-card-attachments-image-download {
+    velt-comment-dialog-thread-card-attachments-image-download-internal {
         display: block !important;
     }
 
@@ -1507,8 +1516,8 @@ export const ReplyIconWrapper = styled.div`
 `;
 
 export const ReplyCountWrapper = styled.div`
-  app-comment-dialog-toggle-reply-count,
-  app-comment-dialog-toggle-reply-text {
+  velt-comment-dialog-toggle-reply-count-internal,
+  velt-comment-dialog-toggle-reply-text-internal {
     ${TextStyles.T200Medium}
     color: var(--btn-primary-btn-primary-fill, #754CFF) !important;
     font-variant-numeric: lining-nums tabular-nums !important;
@@ -1526,7 +1535,7 @@ export const ThreadCardReplyCount = styled.div`
   color: var(--Text-text-tertiary, #5C6C8A);
   font-variant-numeric: lining-nums tabular-nums;
 
-  app-comment-dialog-toggle-reply-count {
+  velt-comment-dialog-toggle-reply-count-internal {
     color: var(--Text-text-tertiary, #5C6C8A) !important;
   }
 `;
@@ -1731,7 +1740,7 @@ export const ComposerAttachmentsOther = styled.div`
   cursor: pointer !important;
   overflow: hidden;
 
-  app-comment-dialog-composer-attachments-other-icon {
+  velt-comment-dialog-composer-attachments-other-icon-internal {
     flex-shrink: 0;
     svg {
       width: 16px !important;
@@ -1739,7 +1748,7 @@ export const ComposerAttachmentsOther = styled.div`
     }
   }
 
-  app-comment-dialog-composer-attachments-other-delete {
+  velt-comment-dialog-composer-attachments-other-delete-internal {
     display: none !important;
     flex-shrink: 0;
   }
@@ -1758,7 +1767,7 @@ export const ComposerAttachmentsOther = styled.div`
     white-space: nowrap !important;
   }
 
-  app-comment-dialog-composer-attachments-other-name {
+  velt-comment-dialog-composer-attachments-other-name-internal {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     overflow: hidden !important;
@@ -1769,7 +1778,7 @@ export const ComposerAttachmentsOther = styled.div`
   &:hover {
     background: var(--Gray-10, #F2F6FC);
 
-    app-comment-dialog-composer-attachments-other-delete {
+    velt-comment-dialog-composer-attachments-other-delete-internal {
       display: block !important;
     }
   }
@@ -1926,8 +1935,8 @@ export const FocusedThreadQuestionWrapper = styled.div`
   display: flex;
   width: 380px;
   padding: 10px 20px;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: baseline;
   border-bottom: 1px solid var(--border-color-default, #EDF0F8);
   background: var(--transparent-canvas, rgba(255, 255, 255, 0.60));
   backdrop-filter: blur(20px);
@@ -1950,6 +1959,12 @@ export const FocusedThreadQuestionWrapper = styled.div`
     -webkit-line-clamp: unset;
     -webkit-box-orient: unset;
     overflow: visible;
+  }
+
+  .privado-focused-thread-question-number-wrapper {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    margin-right: 4px;
   }
 `;
 

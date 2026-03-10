@@ -100,7 +100,9 @@ const VeltCommentsSidebarWf = () => {
                         </VeltCommentsSidebarWireframe.FocusedThread.BackButton>
                     </FocusedThreadHeaderWrapper>
                     <FocusedThreadQuestionWrapper className="privado-comments-sidebar-focused-thread-question-wrapper">
-                        <VeltData className="privado-focused-thread-question-number" field="focusedAnnotation.context.questionNumber" />{'. '}
+                        <span className="privado-focused-thread-question-number-wrapper">
+                            <VeltData className="privado-focused-thread-question-number" field="focusedAnnotation.context.questionNumber" />.
+                        </span>
                         <VeltData field="focusedAnnotation.context.questionTitle" />
                     </FocusedThreadQuestionWrapper>
                     <VeltCommentsSidebarWireframe.FocusedThread.DialogContainer />

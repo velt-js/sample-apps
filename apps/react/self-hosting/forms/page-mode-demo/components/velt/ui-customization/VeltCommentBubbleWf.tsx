@@ -8,10 +8,8 @@ const VeltCommentBubbleWf = () => {
         // [Velt] Custom wireframe for comment bubble UI - shows when comments exist
         <VeltCommentBubbleWireframe>
             <CommentToolWrapper className="privado-comment-tool-wrapper">
-                <span className="velt-comment-tool-has-comments-icon">
-                    <CommentHasCommentsIcon />
-                    <CommentToolTooltip className="velt-comment-tool-tooltip">View comments</CommentToolTooltip>
-                </span>
+                <CommentHasCommentsIcon />
+                <CommentToolTooltip className="velt-comment-tool-tooltip">View comments</CommentToolTooltip>
                 <VeltCommentBubbleWireframe.CommentsCount />
             </CommentToolWrapper>
         </VeltCommentBubbleWireframe>

@@ -48,10 +48,10 @@ const VeltCommentDialoglWf = () => {
         // [Velt] Custom wireframe for comment dialog
         <VeltCommentDialogWireframe>
             <CommentDialogWrapper className="privado-comment-dialog-wrapper">
-                <VeltCommentDialogWireframe.AssigneeBanner veltIf="!{focusedThreadMode}" />
-                <VeltButtonWireframe type="button" id="navigate-to-question-button" className="privado-comment-dialog-navigate-to-question-button">
-                    <QuestionWrapperContainer className="privado-comment-dialog-question-wrapper-container">
-                        <VeltIf condition="!{focusedThreadMode} && !{inlineCommentSectionMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
+                <VeltCommentDialogWireframe.AssigneeBanner veltIf="!{focusedThreadMode} && !{inlineCommentSectionMode}" />
+                <VeltIf condition="!{focusedThreadMode} && !{inlineCommentSectionMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
+                    <VeltButtonWireframe type="button" id="navigate-to-question-button" className="privado-comment-dialog-navigate-to-question-button">
+                        <QuestionWrapperContainer className="privado-comment-dialog-question-wrapper-container">
                             <QuestionWrapper className="privado-comment-dialog-question-wrapper">
                                 <QuestionBarIcon />
                                 <QuestionText className="privado-comment-dialog-question-text">
@@ -63,15 +63,15 @@ const VeltCommentDialoglWf = () => {
                                     <VeltData field="annotation.context.questionTitle" />
                                 </QuestionTooltip>
                             </QuestionWrapper>
-                        </VeltIf>
-                    </QuestionWrapperContainer>
-                </VeltButtonWireframe>
+                        </QuestionWrapperContainer>
+                    </VeltButtonWireframe>
+                </VeltIf>
                 <VeltCommentDialogWireframe.Body>
                     <VeltCommentDialogWireframe.Threads>
                         <VeltCommentDialogWireframe.ThreadCard veltClass="'privado-comment-dialog-thread-card-edit-mode': {editCommentIndex} === {i}">
                             <ThreadCardWrapper className="privado-comment-dialog-thread-card-wrapper">
-                                <VeltIf condition="{i} === 0" className="privado-comment-dialog-thread-card-assignee-banner-wrapper">
-                                    <VeltCommentDialogWireframe.AssigneeBanner veltIf="{focusedThreadMode}" />
+                                <VeltIf condition="{i} === 0 && {focusedThreadMode}" className="privado-comment-dialog-thread-card-assignee-banner-wrapper">
+                                    <VeltCommentDialogWireframe.AssigneeBanner />
                                 </VeltIf>
                                 <ThreadCardTopWrapper className="privado-comment-dialog-thread-card-top-wrapper">
                                     <ThreadCardTopWrapperLeft className="privado-comment-dialog-thread-card-top-wrapper-left">
@@ -82,6 +82,10 @@ const VeltCommentDialoglWf = () => {
                                         <VeltCommentDialogWireframe.ThreadCard.Edited />
                                     </ThreadCardTopWrapperLeft>
                                     <ThreadCardTopWrapperRight className="privado-comment-dialog-thread-card-top-wrapper-right">
+                                        <VeltIf condition="{inlineCommentSectionMode}">
+                                            <VeltCommentDialogWireframe.ThreadCard.ReactionPin reactionId="THUMBS_UP" />
+                                            <VeltCommentDialogWireframe.ThreadCard.Reactions excludeReactionIds={['THUMBS_UP']} />
+                                        </VeltIf>
                                         <VeltCommentDialogWireframe.ThreadCard.AssignButton veltIf="!{annotation.resolvedByUserId} && !{inlineCommentSectionMode}">
                                             <AssignButtonWrapper className="privado-comment-dialog-thread-card-assign-button-wrapper">
                                                 <AssignUserIcon />
@@ -148,10 +152,12 @@ const VeltCommentDialoglWf = () => {
                                 <VeltIf condition="{editCommentIndex} !== {i}" className="privado-comment-dialog-thread-card-reactions-wrapper">
                                     <ReactionsWrapper className="privado-comment-dialog-thread-card-reactions-wrapper">
                                         <ThreadCardBottomWrapper className="privado-comment-dialog-thread-card-bottom-wrapper">
-                                            <ThreadCardBottomWrapperLeft className="privado-comment-dialog-thread-card-bottom-wrapper-left">
-                                                <VeltCommentDialogWireframe.ThreadCard.ReactionPin reactionId="THUMBS_UP" />
-                                                <VeltCommentDialogWireframe.ThreadCard.Reactions excludeReactionIds={['THUMBS_UP']} />
-                                            </ThreadCardBottomWrapperLeft>
+                                            <VeltIf condition="!{inlineCommentSectionMode}">
+                                                <ThreadCardBottomWrapperLeft className="privado-comment-dialog-thread-card-bottom-wrapper-left">
+                                                    <VeltCommentDialogWireframe.ThreadCard.ReactionPin reactionId="THUMBS_UP" />
+                                                    <VeltCommentDialogWireframe.ThreadCard.Reactions excludeReactionIds={['THUMBS_UP']} />
+                                                </ThreadCardBottomWrapperLeft>
+                                            </VeltIf>
                                             <VeltIf condition="!{focusedThreadMode} && !{commentDialogSelected}">
                                                 <ThreadCardBottomWrapperRight className="privado-comment-dialog-thread-card-bottom-wrapper-right">
                                                     <VeltCommentDialogWireframe.ReplyAvatars />
