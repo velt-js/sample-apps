@@ -995,6 +995,15 @@ export const GlobalVeltStyles = createGlobalStyle`
       box-shadow: none !important;
     }
 
+
+    .velt-composer-input-focused {
+      &.velt-comment-dialog-composer--no-comments {
+       .privado-comment-dialog-composer-wrapper {
+         box-shadow: 0 1px 2px 0 rgba(92, 108, 138, 0.24), 0 0 0 1px rgba(12, 55, 136, 0.14), 0 0 0 2px #FFF, 0 0 0 5px rgba(126, 141, 169, 0.10) !important;
+       }
+      }
+    }
+
     .privado-comment-dialog-navigate-to-question-button {
       display: none !important;
     }
@@ -1010,6 +1019,25 @@ export const GlobalVeltStyles = createGlobalStyle`
         padding-bottom: 0 !important;
       }
     }
+  }
+  .velt-comment-dialog-composer--inline {
+   &.velt-comment-dialog-composer--no-comments {
+   
+    .privado-comment-dialog-composer-input-wrapper {
+     padding: 11px 12px !important;
+    }
+    .privado-comment-dialog-composer-actions-right {
+      display: none !important;
+    }
+
+    .privado-comment-dialog-composer-actions-wrapper {
+        display: flex !important;
+
+        .privado-comment-dialog-composer-actions-right {
+            display: flex !important;
+        }
+    }
+}
   }
 `;
 
