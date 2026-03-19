@@ -14,7 +14,7 @@ export const RowNumberRenderer: React.FC<RowNumberRendererProps> = ({ rowIndex }
       height: '100%',
       fontFamily: 'DM Mono, monospace',
       fontSize: '12px',
-      color: 'rgba(255, 255, 255, 0.5)',
+      color: 'var(--app-text-muted)',
       letterSpacing: '0.12px'
     }}>
       {rowIndex + 1}

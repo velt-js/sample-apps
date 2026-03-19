@@ -54,7 +54,7 @@ export const CustomHeaderComponent: React.FC<CustomHeaderComponentProps> = ({
           fontFamily: 'Urbanist, sans-serif',
           fontSize: '14px',
           fontWeight: 600,
-          color: '#ffffff',
+          color: 'var(--app-text-primary)',
           letterSpacing: '0.14px',
         }}
       >

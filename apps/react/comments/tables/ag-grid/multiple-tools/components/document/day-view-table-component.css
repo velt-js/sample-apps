@@ -1,3 +1,6 @@
+/* [Velt] Single-tool pattern: cells need position relative for click-to-target commenting */
+
+
 /* Remove contentEditable outline/box */
 [contenteditable] {
   outline: none !important;
@@ -15,7 +18,7 @@
 .ag-header-cell-label {
   font-weight: 600;
   letter-spacing: 0.14px;
-  color: #ffffff;
+  color: var(--app-text-primary);
 }
 
 /* Cell customization */
@@ -51,11 +54,11 @@
 
 /* Row number column styling */
 .ag-pinned-left-cols-container .ag-cell {
-  background-color: #090909 !important;
+  background-color: var(--app-surface) !important;
 }
 
 .ag-row-pinned-top .ag-pinned-left-cols-container .ag-cell {
-  background-color: #090909 !important;
+  background-color: var(--app-surface) !important;
 }
 
 
@@ -72,22 +75,22 @@
 
 /* Selected column header highlighting */
 .ag-header-cell.header-selected {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 .ag-header-cell.header-selected > div {
   opacity: 1 !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--app-text-secondary) !important;
 }
 
 /* Selected row number highlighting */
 .ag-pinned-left-cols-container .ag-cell.row-selected {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 .ag-pinned-left-cols-container .ag-cell.row-selected > div {
   opacity: 1 !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--app-text-secondary) !important;
 }
 
 /* Remove default row selection highlighting */
@@ -100,27 +103,27 @@
 }
 
 .ag-row-selected .ag-pinned-left-cols-container .ag-cell {
-  background-color: #090909 !important;
+  background-color: var(--app-surface) !important;
 }
 
 /* Keep row selected class highlighting for row numbers */
 .ag-row-selected .ag-pinned-left-cols-container .ag-cell.row-selected {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 /* Hover effect on column */
 .ag-column-hover {
-  background-color: rgba(255, 255, 255, 0.03) !important;
+  background-color: var(--app-column-hover) !important;
 }
 
 /* Column header hover effect */
 .ag-header-cell:hover {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 .ag-header-cell:hover > div {
   opacity: 1 !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--app-text-secondary) !important;
 }
 
 /* Cell data opacity */

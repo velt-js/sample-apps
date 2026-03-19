@@ -1,36 +1,5 @@
-/* Comment bubble styling - Exact replication of popover-comments Angular demo */
+/* [Velt] Single-tool pattern: cells need position relative for click-to-target commenting */
 
-/* [Velt] Comment tool - positioned directly in ag-cell, outside ag-cell-wrapper */
-.ag-cell > velt-comment-tool {
-  display: flex !important;
-  justify-content: flex-end !important;
-  border-radius: 24px;
-  opacity: 0;
-  transition: all 150ms ease-in-out;
-  transform: translateY(10%);
-  overflow: hidden;
-}
-
-/* Show comment tool on cell hover only (when no comments exist) */
-.ag-cell:hover > velt-comment-tool {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* [Velt] Comment bubble - always visible when comments exist */
-.ag-cell > velt-comment-bubble {
-  display: flex !important;
-  justify-content: flex-end !important;
-  border-radius: 24px;
-  transition: all 150ms ease-in-out;
-  overflow: hidden;
-  pointer-events: auto !important;
-}
-
-/* Hide comment tool when comment bubble is visible (has comments) */
-.ag-cell:has(velt-comment-bubble:not(:empty)) > velt-comment-tool {
-  display: none !important;
-}
 
 /* Remove contentEditable outline/box */
 [contenteditable] {
@@ -49,7 +18,7 @@
 .ag-header-cell-label {
   font-weight: 600;
   letter-spacing: 0.14px;
-  color: #ffffff;
+  color: var(--app-text-primary);
 }
 
 /* Cell customization */
@@ -85,11 +54,11 @@
 
 /* Row number column styling */
 .ag-pinned-left-cols-container .ag-cell {
-  background-color: #090909 !important;
+  background-color: var(--app-surface) !important;
 }
 
 .ag-row-pinned-top .ag-pinned-left-cols-container .ag-cell {
-  background-color: #090909 !important;
+  background-color: var(--app-surface) !important;
 }
 
 
@@ -106,22 +75,22 @@
 
 /* Selected column header highlighting */
 .ag-header-cell.header-selected {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 .ag-header-cell.header-selected > div {
   opacity: 1 !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--app-text-secondary) !important;
 }
 
 /* Selected row number highlighting */
 .ag-pinned-left-cols-container .ag-cell.row-selected {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 .ag-pinned-left-cols-container .ag-cell.row-selected > div {
   opacity: 1 !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--app-text-secondary) !important;
 }
 
 /* Remove default row selection highlighting */
@@ -134,27 +103,27 @@
 }
 
 .ag-row-selected .ag-pinned-left-cols-container .ag-cell {
-  background-color: #090909 !important;
+  background-color: var(--app-surface) !important;
 }
 
 /* Keep row selected class highlighting for row numbers */
 .ag-row-selected .ag-pinned-left-cols-container .ag-cell.row-selected {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 /* Hover effect on column */
 .ag-column-hover {
-  background-color: rgba(255, 255, 255, 0.03) !important;
+  background-color: var(--app-column-hover) !important;
 }
 
 /* Column header hover effect */
 .ag-header-cell:hover {
-  background-color: #171717 !important;
+  background-color: var(--app-surface-hover) !important;
 }
 
 .ag-header-cell:hover > div {
   opacity: 1 !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--app-text-secondary) !important;
 }
 
 /* Cell data opacity */

@@ -25,6 +25,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
     cursor: 'pointer',
     padding: '8px',
     flexShrink: 0,
+    color: 'var(--app-text-secondary)',
   };
 
   if (!visible) return null;
@@ -43,16 +44,16 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       {/* Text Formatting */}
       <div style={{ display: 'flex', gap: '0px' }}>
         <button style={toolButton} onClick={() => toggleFormatting('bold')}>
-          <IconBold size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
+          <IconBold size={20} stroke={1.5} />
         </button>
         <button style={toolButton} onClick={() => toggleFormatting('italic')}>
-          <IconItalic size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
+          <IconItalic size={20} stroke={1.5} />
         </button>
         <button style={toolButton} onClick={() => toggleFormatting('underline')}>
-          <IconUnderline size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
+          <IconUnderline size={20} stroke={1.5} />
         </button>
         <button style={toolButton} onClick={() => toggleFormatting('strikethrough')}>
-          <IconStrikethrough size={20} stroke={1.5} color="rgba(255, 255, 255, 0.7)" />
+          <IconStrikethrough size={20} stroke={1.5} />
         </button>
       </div>
     </div>

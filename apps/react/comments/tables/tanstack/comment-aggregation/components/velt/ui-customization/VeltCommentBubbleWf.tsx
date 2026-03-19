@@ -5,7 +5,6 @@ const VeltCommentBubbleWf = () => {
   return (
     // [Velt] Custom wireframe for comment bubble UI
     <VeltCommentBubbleWireframe>
-      {/* Only show bubble when there are direct comments OR aggregated comments */}
         <div
           style={{
             position: 'relative',
@@ -16,7 +15,7 @@ const VeltCommentBubbleWf = () => {
         >
           <div
             style={{
-              background: 'rgba(255, 255, 255, 0.08)',
+              background: 'var(--app-toggle-active-bg)',
               borderRadius: '18.667px',
               padding: '4.667px 8px 4.667px 6.222px',
               display: 'flex',
@@ -45,7 +44,7 @@ const VeltCommentBubbleWf = () => {
                   transform: 'translate(-50%, -50%)',
                   width: '11px',
                   height: '11px',
-                  border: '1.5px solid white',
+                  border: '1.5px solid var(--app-text-primary)',
                   borderRadius: '6px 6px 6px 1px',
                   boxSizing: 'border-box'
                 }}
@@ -57,13 +56,12 @@ const VeltCommentBubbleWf = () => {
                 fontWeight: 700,
                 fontSize: '14px',
                 lineHeight: '1.3',
-                color: 'white',
+                color: 'var(--app-text-primary)',
                 margin: 0,
                 whiteSpace: 'pre',
                 flexShrink: 0
               }}
             >
-              {/* Display total count including aggregated comments */}
               <VeltCommentBubbleWireframe.CommentsCount />
             </p>
           </div>

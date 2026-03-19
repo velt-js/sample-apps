@@ -40,13 +40,13 @@ export default function Sidebar() {
           style={{
             width: "40px",
             height: "40px",
-            backgroundColor: "rgb(14, 14, 14)",
+            backgroundColor: "var(--app-sidebar-bg)",
             borderRadius: "8px",
           }}
         >
           <IconChevronRightPipe
             size={20}
-            color="rgb(255, 255, 255)"
+            style={{ color: "var(--app-text-primary)" }}
             stroke={1}
           />
         </div>
@@ -57,7 +57,7 @@ export default function Sidebar() {
         style={{
           width: isCollapsed ? "0px" : "251px",
           height: "calc(100vh - 32px)",
-          backgroundColor: "rgb(14, 14, 14)",
+          backgroundColor: "var(--app-sidebar-bg)",
           borderRadius: "12px",
           margin: "16px",
           marginRight: "8px",
@@ -86,17 +86,17 @@ export default function Sidebar() {
                 gap: "8px",
               }}
             >
-              <IconMenu2 size={16} color="rgb(255, 255, 255)" stroke={1} />
+              <IconMenu2 size={16} style={{ color: "var(--app-text-primary)" }} stroke={1} />
               <span
                 style={{
-                  color: "rgb(255, 255, 255)",
+                  color: "var(--app-text-primary)",
                   fontFamily: "Urbanist, sans-serif",
                   fontSize: "14px",
                   fontWeight: 400,
                   lineHeight: "14px",
                 }}
               >
-                Bingo's Workspace
+                Bingo&apos;s Workspace
               </span>
             </div>
 
@@ -113,7 +113,7 @@ export default function Sidebar() {
             >
               <IconChevronLeftPipe
                 size={16}
-                color="rgb(255, 255, 255)"
+                style={{ color: "var(--app-text-primary)" }}
                 stroke={1}
               />
             </div>
@@ -146,7 +146,7 @@ export default function Sidebar() {
             >
               <span
                 style={{
-                  color: "rgb(163, 163, 163)",
+                  color: "var(--app-sidebar-text-muted)",
                   fontFamily: "Urbanist, sans-serif",
                   fontSize: "12px",
                   fontWeight: 600,
@@ -175,10 +175,10 @@ export default function Sidebar() {
                   height: "32px",
                 }}
               >
-                <IconFolder size={14} color="rgb(255, 255, 255)" stroke={1} />
+                <IconFolder size={14} style={{ color: "var(--app-text-primary)" }} stroke={1} />
                 <span
                   style={{
-                    color: "rgb(255, 255, 255)",
+                    color: "var(--app-text-primary)",
                     fontFamily: "Urbanist, sans-serif",
                     fontSize: "15px",
                     fontWeight: 400,
@@ -209,10 +209,10 @@ export default function Sidebar() {
                   height: "32px",
                 }}
               >
-                <IconFolder size={14} color="rgb(255, 255, 255)" stroke={1} />
+                <IconFolder size={14} style={{ color: "var(--app-text-primary)" }} stroke={1} />
                 <span
                   style={{
-                    color: "rgb(255, 255, 255)",
+                    color: "var(--app-text-primary)",
                     fontFamily: "Urbanist, sans-serif",
                     fontSize: "15px",
                     fontWeight: 400,
@@ -247,12 +247,12 @@ export default function Sidebar() {
                   >
                     <IconSpeakerphone
                       size={16}
-                      color="rgb(255, 255, 255)"
+                      style={{ color: "var(--app-text-primary)" }}
                       stroke={1}
                     />
                     <span
                       style={{
-                        color: "rgb(255, 255, 255)",
+                        color: "var(--app-text-primary)",
                         fontFamily: "Urbanist, sans-serif",
                         fontSize: "15px",
                         fontWeight: 400,
@@ -276,12 +276,12 @@ export default function Sidebar() {
                   >
                     <IconCurrencyDollar
                       size={16}
-                      color="rgb(255, 255, 255)"
+                      style={{ color: "var(--app-text-primary)" }}
                       stroke={1}
                     />
                     <span
                       style={{
-                        color: "rgb(255, 255, 255)",
+                        color: "var(--app-text-primary)",
                         fontFamily: "Urbanist, sans-serif",
                         fontSize: "15px",
                         fontWeight: 400,
@@ -305,12 +305,12 @@ export default function Sidebar() {
                   >
                     <IconFileAnalytics
                       size={16}
-                      color="rgb(255, 255, 255)"
+                      style={{ color: "var(--app-text-primary)" }}
                       stroke={1}
                     />
                     <span
                       style={{
-                        color: "rgb(255, 255, 255)",
+                        color: "var(--app-text-primary)",
                         fontFamily: "Urbanist, sans-serif",
                         fontSize: "15px",
                         fontWeight: 400,
@@ -343,10 +343,10 @@ export default function Sidebar() {
                   height: "32px",
                 }}
               >
-                <IconFolder size={14} color="rgb(255, 255, 255)" stroke={1} />
+                <IconFolder size={14} style={{ color: "var(--app-text-primary)" }} stroke={1} />
                 <span
                   style={{
-                    color: "rgb(255, 255, 255)",
+                    color: "var(--app-text-primary)",
                     fontFamily: "Urbanist, sans-serif",
                     fontSize: "15px",
                     fontWeight: 400,
@@ -373,7 +373,7 @@ export default function Sidebar() {
                   <div
                     className="flex flex-row items-center"
                     style={{
-                      backgroundColor: "rgb(35, 35, 35)",
+                      backgroundColor: "var(--app-sidebar-selected)",
                       borderRadius: "8px",
                       padding: "8px",
                       gap: "12px",
@@ -388,7 +388,7 @@ export default function Sidebar() {
                     />
                     <span
                       style={{
-                        color: "rgb(255, 255, 255)",
+                        color: "var(--app-text-primary)",
                         fontFamily: "Urbanist, sans-serif",
                         fontSize: "15px",
                         fontWeight: 400,
@@ -412,12 +412,12 @@ export default function Sidebar() {
                   >
                     <IconCurrencyDollar
                       size={16}
-                      color="rgb(255, 255, 255)"
+                      style={{ color: "var(--app-text-primary)" }}
                       stroke={1}
                     />
                     <span
                       style={{
-                        color: "rgb(255, 255, 255)",
+                        color: "var(--app-text-primary)",
                         fontFamily: "Urbanist, sans-serif",
                         fontSize: "15px",
                         fontWeight: 400,
@@ -441,12 +441,12 @@ export default function Sidebar() {
                   >
                     <IconFileAnalytics
                       size={16}
-                      color="rgb(255, 255, 255)"
+                      style={{ color: "var(--app-text-primary)" }}
                       stroke={1}
                     />
                     <span
                       style={{
-                        color: "rgb(255, 255, 255)",
+                        color: "var(--app-text-primary)",
                         fontFamily: "Urbanist, sans-serif",
                         fontSize: "15px",
                         fontWeight: 400,
@@ -472,10 +472,10 @@ export default function Sidebar() {
             gap: "8px",
           }}
         >
-          <IconSettings size={16} color="rgb(255, 255, 255)" stroke={1} />
+          <IconSettings size={16} style={{ color: "var(--app-text-primary)" }} stroke={1} />
           <span
             style={{
-              color: "rgb(255, 255, 255)",
+              color: "var(--app-text-primary)",
               fontFamily: "Urbanist, sans-serif",
               fontSize: "14px",
               fontWeight: 400,

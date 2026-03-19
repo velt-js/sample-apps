@@ -2,7 +2,7 @@ import React from 'react';
 
 export const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    backgroundColor: '#000000',
+    backgroundColor: 'var(--app-bg)' as any,
     width: '100%',
     height: '100vh',
     display: 'flex',
@@ -19,7 +19,7 @@ export const styles: { [key: string]: React.CSSProperties } = {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#090909',
+    backgroundColor: 'var(--app-surface)' as any,
     borderRadius: '8px',
     overflow: 'hidden',
     paddingTop: '45px',

@@ -10,7 +10,7 @@ import './day-view-table-component.css';
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 // Import modularized components and utilities
-import { customDarkTheme } from './constants';
+import { customDarkTheme, customLightTheme } from './constants';
 import { dateComparator, aggregateDataByWeek, aggregateDataByMonth } from './utils';
 import { createCustomHeaderComponent } from './grid-components/CustomHeaderComponent';
 import { RowNumberRenderer } from './grid-components/RowNumberRenderer';
@@ -21,9 +21,12 @@ import { Toolbar } from './ui-components/Toolbar';
 import { styles } from './styles';
 import { useTableState } from './hooks/useTableState';
 import { ViewType } from './types';
+import { useTheme } from '@/components/theme/ThemeContext';
 
 export const TableComponent: React.FC = () => {
   const { isCollapsed } = useSidebar();
+  const { resolvedTheme } = useTheme();
+  const gridTheme = resolvedTheme === 'dark' ? customDarkTheme : customLightTheme;
   const [viewType, setViewType] = useState<ViewType>('day');
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const {
@@ -135,11 +138,11 @@ export const TableComponent: React.FC = () => {
         </div>
       ),
       cellStyle: {
-        backgroundColor: '#090909',
+        backgroundColor: 'var(--app-surface)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-      },
+      } as any,
     },
     {
       field: 'date' as any,
@@ -255,7 +258,7 @@ export const TableComponent: React.FC = () => {
 
         <div style={styles.gridWrapper}>
           <AgGridReact
-            theme={customDarkTheme}
+            theme={gridTheme}
             rowData={displayData}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}

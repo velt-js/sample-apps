@@ -9,7 +9,8 @@ import './day-view-table-component.css';
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 // Import modularized components and utilities
-import { customDarkTheme } from './constants';
+import { customDarkTheme, customLightTheme } from './constants';
+import { useTheme } from '@/components/theme/ThemeContext';
 import { dateComparator } from './utils';
 import { createCustomHeaderComponent } from './grid-components/CustomHeaderComponent';
 import { RowNumberRenderer } from './grid-components/RowNumberRenderer';
@@ -35,6 +36,9 @@ export const TableComponent: React.FC = () => {
     setLocalSortState,
     toggleFormatting,
   } = useTableState();
+
+  const { resolvedTheme } = useTheme();
+  const gridTheme = resolvedTheme === 'dark' ? customDarkTheme : customLightTheme;
 
   // Sync localSortState with sortState (when AG Grid updates)
   useEffect(() => {
@@ -108,11 +112,11 @@ export const TableComponent: React.FC = () => {
         </div>
       ),
       cellStyle: {
-        backgroundColor: '#090909',
+        backgroundColor: 'var(--app-surface)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-      },
+      } as any,
     },
     {
       field: 'date' as any,
@@ -224,7 +228,7 @@ export const TableComponent: React.FC = () => {
 
         <div style={styles.gridWrapper}>
           <AgGridReact
-            theme={customDarkTheme}
+            theme={gridTheme}
             rowData={rowData}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}

@@ -1,6 +1,7 @@
 "use client";
 
 import VeltTools from "@/components/velt/VeltTools";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export default function Header() {
   return (
@@ -14,6 +15,7 @@ export default function Header() {
         padding: "16px",
       }}
     >
+      <ThemeToggle />
       <VeltTools />
     </div>
   );

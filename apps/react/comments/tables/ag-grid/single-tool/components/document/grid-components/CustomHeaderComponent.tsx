@@ -54,7 +54,7 @@ export const createCustomHeaderComponent = (
           fontFamily: 'Urbanist, sans-serif',
           fontSize: '14px',
           fontWeight: 600,
-          color: '#ffffff',
+          color: 'var(--app-text-primary)',
           letterSpacing: '0.14px',
         }}
       >

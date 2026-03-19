@@ -8,7 +8,7 @@ interface ViewToggleProps {
 
 export const ViewToggle: React.FC<ViewToggleProps> = ({ currentView, onViewChange }) => {
   const getButtonStyle = (isActive: boolean) => ({
-    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+    backgroundColor: isActive ? 'var(--app-toggle-active-bg)' : 'transparent',
     border: 'none',
     borderRadius: '8px',
     padding: '4px 8px',
@@ -23,7 +23,7 @@ export const ViewToggle: React.FC<ViewToggleProps> = ({ currentView, onViewChang
     fontSize: '13px',
     fontWeight: 400,
     lineHeight: '16px',
-    color: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.52)',
+    color: isActive ? 'var(--app-text-primary)' : 'var(--app-text-tertiary)',
     whiteSpace: 'pre' as const,
     letterSpacing: '0.13px',
   });

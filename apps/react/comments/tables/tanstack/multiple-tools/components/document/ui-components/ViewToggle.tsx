@@ -13,7 +13,7 @@ export const ViewToggle: React.FC = () => {
       zIndex: 10,
     }}>
       <div style={{
-        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+        backgroundColor: 'var(--app-toggle-active-bg)',
         border: 'none',
         borderRadius: '8px',
         padding: '4px 8px',
@@ -26,7 +26,7 @@ export const ViewToggle: React.FC = () => {
           fontSize: '13px',
           fontWeight: 400,
           lineHeight: '16px',
-          color: '#ffffff',
+          color: 'var(--app-text-primary)',
           whiteSpace: 'pre',
           letterSpacing: '0.13px',
         }}>Day View</span>
