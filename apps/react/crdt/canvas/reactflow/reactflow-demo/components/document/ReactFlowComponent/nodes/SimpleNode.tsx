@@ -13,7 +13,7 @@ export function SimpleNode({ data }: NodeProps) {
       id={nodeId}
       data-id={nodeId}
       style={{
-        background: '#1d1d1d',
+        background: 'var(--app-node-bg)',
         borderRadius: '17.75px',
         height: '48px',
         width: 'max-content',
@@ -72,7 +72,7 @@ export function SimpleNode({ data }: NodeProps) {
           fontWeight: 400,
           fontSize: '20.625px',
           lineHeight: '1.3',
-          color: 'white',
+          color: 'var(--app-text-primary)',
           margin: 0,
           whiteSpace: 'nowrap',
           position: 'relative',

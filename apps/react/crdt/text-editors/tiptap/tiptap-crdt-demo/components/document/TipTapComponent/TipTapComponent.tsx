@@ -106,11 +106,11 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   }, [])
 
   return (
-    <div className="bg-black relative size-full overflow-hidden" data-name="Tiptap / Bubble Menu">
+    <div className="relative size-full overflow-hidden" style={{ backgroundColor: 'var(--app-bg)' }} data-name="Tiptap / Bubble Menu">
       <div ref={scrollContainerRef} className="absolute inset-0 overflow-y-auto pb-20">
         <div className="flex justify-center pt-[51px] px-4">
           <div className="w-full max-w-[850px]">
-            <div className="bg-[rgb(17,17,17)] border border-[rgb(20,20,20)] border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]">
+            <div className="border border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]" style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-surface-border)' }}>
               <div className="w-full max-w-[738px]">
                 <EditorContent
                   editor={editor}

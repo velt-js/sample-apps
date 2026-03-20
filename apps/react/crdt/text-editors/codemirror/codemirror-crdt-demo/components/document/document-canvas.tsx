@@ -43,56 +43,56 @@ export default function DocumentCanvas() {
         </div>
 
         {/* File Tree Section */}
-        <div className="bg-[#1e1e1e] w-[291px] h-full flex-shrink-0 overflow-y-auto">
+        <div className="w-[291px] h-full flex-shrink-0 overflow-y-auto" style={{ backgroundColor: 'var(--app-filetree-bg)', color: 'var(--app-text-primary)' }}>
           {/* Search Box */}
-          <div className="bg-[rgba(255,255,255,0.06)] box-border flex gap-[8px] items-center m-[10px] p-[8px] rounded-[8px]">
+          <div className="box-border flex gap-[8px] items-center m-[10px] p-[8px] rounded-[8px]" style={{ backgroundColor: 'var(--app-filetree-selected)' }}>
             <div className="relative shrink-0 size-[14px]">
-              <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-search.svg" />
+              <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-search.svg" style={{ filter: 'var(--app-icon-invert)' }} />
             </div>
-            <p className="font-['Inter',sans-serif] font-normal leading-none not-italic opacity-[0.32] relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+            <p className="font-['Inter',sans-serif] font-normal leading-none not-italic opacity-[0.32] relative shrink-0 text-[13px] text-nowrap whitespace-pre">
               Search Files
             </p>
           </div>
 
           {/* File Tree */}
-          <div className="text-[13px] font-['Inter',sans-serif] text-white px-2 pt-2">
+          <div className="text-[13px] font-['Inter',sans-serif] px-2 pt-2">
             {/* Folder: angular */}
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" style={{ }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <ChevronRight />
               <FolderIcon color="#f14c4c" />
               <span className="opacity-80">angular</span>
             </div>
 
             {/* Folder: cursor */}
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <ChevronRight />
               <FolderIcon color="#8b8b8b" />
               <span className="opacity-80">cursor</span>
             </div>
 
             {/* Folder: vscode */}
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <ChevronRight />
               <FolderIcon color="#559fd7" />
               <span className="opacity-80">vscode</span>
             </div>
 
             {/* Folder: dist */}
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <ChevronRight />
               <FolderIcon color="#dcb67a" />
               <span className="opacity-80">dist</span>
             </div>
 
             {/* Folder: node_modules */}
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <ChevronRight />
               <FolderIcon color="#dcb67a" />
               <span className="opacity-80">node_modules</span>
             </div>
 
             {/* Folder: src (expanded) */}
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <ChevronDown />
               <FolderIcon color="#dcb67a" />
               <span className="opacity-80">src</span>
@@ -100,92 +100,92 @@ export default function DocumentCanvas() {
 
             {/* src children */}
             <div className="pl-4">
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FolderIcon color="#f14c4c" />
                 <span className="opacity-80">app</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FolderIcon color="#dcb67a" />
                 <span className="opacity-80">assets</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#f1e05a" />
                 <span className="opacity-80">content-script-isolated.js</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#f1e05a" />
                 <span className="opacity-80">content-script-main.js</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#f1e05a" />
                 <span className="opacity-80">content-sdk-detector.js</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#e34c26" />
                 <span className="opacity-80">default-popup.html</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#f1e05a" />
                 <span className="opacity-80">detect-sdk.js</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#e34c26" />
                 <span className="opacity-80">devtools.html</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#f1e05a" />
                 <span className="opacity-80">devtools.js</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#f1e05a" />
                 <span className="opacity-80">favicon.ico</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#e34c26" />
                 <span className="opacity-80">index.html</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#3178c6" />
                 <span className="opacity-80">main.ts</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#cbcb41" />
                 <span className="opacity-80">manifest.json</span>
               </div>
 
-              <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#e34c26" />
                 <span className="opacity-80">popup-velt.html</span>
               </div>
 
               {/* Selected file: styles.scss */}
-              <div className="flex items-center gap-1 px-2 py-0.5 bg-[rgba(255,255,255,0.06)] border border-[#0070f3] rounded-[6px] cursor-pointer">
+              <div className="flex items-center gap-1 px-2 py-0.5 border border-[#0070f3] rounded-[6px] cursor-pointer" style={{ backgroundColor: 'var(--app-filetree-selected)' }}>
                 <span className="w-[10px]"></span>
                 <FileIcon color="#c6538c" />
                 <span className="font-semibold">styles.scss</span>
@@ -193,55 +193,55 @@ export default function DocumentCanvas() {
             </div>
 
             {/* Root files */}
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#858585" />
               <span className="opacity-80">.editorconfig</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#858585" />
               <span className="opacity-80">.gitignore</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#cbcb41" />
               <span className="opacity-80">angular.json</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#519aba" />
               <span className="opacity-80">observations.md</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#cbcb41" />
               <span className="opacity-80">package-lock.json</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#cbcb41" />
               <span className="opacity-80">package.json</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#519aba" />
               <span className="opacity-80">README.md</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#3178c6" />
               <span className="opacity-80">tsconfig.app.json</span>
             </div>
 
-            <div className="flex items-center gap-1 px-2 py-0.5 hover:bg-[#2a2d2e] cursor-pointer">
+            <div className="flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded" onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-filetree-hover)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
               <span className="w-[10px]"></span>
               <FileIcon color="#3178c6" />
               <span className="opacity-80">tsconfig.json</span>
@@ -250,29 +250,29 @@ export default function DocumentCanvas() {
         </div>
 
         {/* Main Canvas Content */}
-        <div className="bg-black relative flex-1 px-[16px]">
+        <div className="relative flex-1 px-[16px]" style={{ backgroundColor: 'var(--app-canvas-bg)' }}>
       {/* Breadcrumb Section */}
       <div className="absolute contents left-[32px] top-[6.5px]">
         <div className="absolute content-stretch flex gap-[12px] items-center left-[32px] top-[14px]">
-          <p className="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+          <p className="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
             Photographer website
           </p>
           <div className="relative shrink-0 size-[8px]">
-            <img alt="" className="block max-w-none size-full" src="/figma-assets/ellipse-dot.svg" />
+            <img alt="" className="block max-w-none size-full" src="/figma-assets/ellipse-dot.svg" style={{ filter: 'var(--app-icon-invert)' }} />
           </div>
           <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
-            <p className="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+            <p className="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
               v1
             </p>
             <div className="relative shrink-0 size-[14px]">
-              <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-chevron-right.svg" />
+              <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-chevron-right.svg" style={{ filter: 'var(--app-icon-invert)' }} />
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Container Border */}
-      <div className="absolute border-2 border-[#121212] border-solid h-[720px] left-[16px] right-[16px] rounded-[12px] top-[56px]" />
+      <div className="absolute border-2 border-solid h-[720px] left-[16px] right-[16px] rounded-[12px] top-[56px]" style={{ borderColor: 'var(--app-canvas-border)' }} />
 
       {/* Code Editor Area - CodeMirror CRDT */}
       <div className="absolute h-[680px] left-[16px] top-[94px] right-[16px] overflow-hidden">
@@ -281,27 +281,27 @@ export default function DocumentCanvas() {
 
       {/* File Path Breadcrumb */}
       <div className="absolute content-stretch flex gap-[12px] items-center left-[32px] top-[68px]">
-        <p className="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+        <p className="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
           src
         </p>
         <div className="relative shrink-0 size-[14px]">
-          <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-chevron-right-white.svg" />
+          <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-chevron-right-white.svg" style={{ filter: 'var(--app-icon-invert)' }} />
         </div>
-        <p className="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+        <p className="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
           style.scss
         </p>
       </div>
 
       {/* Code/Preview Toggle */}
-      <div className="absolute border border-[rgba(255,255,255,0.08)] border-solid box-border content-stretch flex gap-[2px] items-center left-1/2 -translate-x-1/2 p-[2px] rounded-[4px] top-[13px]">
-        <div className="bg-[rgba(255,255,255,0.08)] box-border content-stretch flex gap-[10px] items-center p-[4px] relative rounded-[4px] shrink-0">
+      <div className="absolute border border-solid box-border content-stretch flex gap-[2px] items-center left-1/2 -translate-x-1/2 p-[2px] rounded-[4px] top-[13px]" style={{ borderColor: 'var(--app-divider)' }}>
+        <div className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative rounded-[4px] shrink-0" style={{ backgroundColor: 'var(--app-divider)' }}>
           <div className="relative shrink-0 size-[20px]">
-            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-code.svg" />
+            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-code.svg" style={{ filter: 'var(--app-icon-invert)' }} />
           </div>
         </div>
         <div className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative rounded-[4px] shrink-0">
           <div className="relative shrink-0 size-[20px]">
-            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-device-desktop.svg" />
+            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-device-desktop.svg" style={{ filter: 'var(--app-icon-invert)' }} />
           </div>
         </div>
       </div>
@@ -331,12 +331,12 @@ export default function DocumentCanvas() {
       <div className="absolute content-stretch flex gap-[4px] items-center right-[16px] top-[63px]">
         <div className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0">
           <div className="relative shrink-0 size-[14px]">
-            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-copy.svg" />
+            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-copy.svg" style={{ filter: 'var(--app-icon-invert)' }} />
           </div>
         </div>
         <div className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0">
           <div className="relative shrink-0 size-[14px]">
-            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-download.svg" />
+            <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-download.svg" style={{ filter: 'var(--app-icon-invert)' }} />
           </div>
         </div>
       </div>

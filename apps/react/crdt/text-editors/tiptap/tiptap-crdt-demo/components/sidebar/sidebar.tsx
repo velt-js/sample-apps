@@ -39,7 +39,7 @@ export default function Sidebar({ onScrollToHeading }: SidebarProps) {
           style={{
             width: "40px",
             height: "40px",
-            backgroundColor: "rgb(14, 14, 14)",
+            backgroundColor: "var(--app-sidebar-bg)",
             borderRadius: "8px",
           }}
         >
@@ -47,7 +47,7 @@ export default function Sidebar({ onScrollToHeading }: SidebarProps) {
             src={imgTablerIconChevronLeftPipe}
             alt="Expand"
             className="block max-w-none w-5 h-5"
-            style={{ transform: 'rotate(180deg)' }}
+            style={{ transform: 'rotate(180deg)', filter: 'var(--app-icon-invert)' }}
           />
         </div>
       )}
@@ -58,7 +58,7 @@ export default function Sidebar({ onScrollToHeading }: SidebarProps) {
         style={{
           width: isCollapsed ? "0px" : "254px",
           height: "calc(100vh - 32px)",
-          backgroundColor: '#0e0e0e',
+          backgroundColor: 'var(--app-sidebar-bg)',
           borderRadius: '12px',
           boxShadow: '0px -24px 100px 0px rgba(0, 0, 0, 0.25)',
           margin: "16px",
@@ -71,24 +71,24 @@ export default function Sidebar({ onScrollToHeading }: SidebarProps) {
         <div className="flex items-start gap-[6px]">
           <div className="relative shrink-0 size-[12px] opacity-50">
             <svg width="12" height="12" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="0" width="8" height="1" fill="white" />
-              <rect x="0" y="2.5" width="8" height="1" fill="white" />
-              <rect x="0" y="5" width="8" height="1" fill="white" />
+              <rect x="0" y="0" width="8" height="1" fill="var(--app-text-primary)" />
+              <rect x="0" y="2.5" width="8" height="1" fill="var(--app-text-primary)" />
+              <rect x="0" y="5" width="8" height="1" fill="var(--app-text-primary)" />
             </svg>
           </div>
-          <p className="font-['Urbanist',sans-serif] font-normal leading-none opacity-50 text-[12px] text-white whitespace-pre">
+          <p className="font-['Urbanist',sans-serif] font-normal leading-none opacity-50 text-[12px] whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
             Mihir&apos;s Workspace
           </p>
         </div>
 
-        <p className="font-['Urbanist',sans-serif] font-semibold leading-none opacity-90 text-[16px] text-white whitespace-pre">
+        <p className="font-['Urbanist',sans-serif] font-semibold leading-none opacity-90 text-[16px] whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
           Attention Is All You Need
         </p>
       </div>
 
       <div className="absolute left-[24px] top-[155px] right-[24px] bottom-[384px] flex flex-col gap-[12px]">
         <div className="flex gap-[8px] items-center justify-between">
-          <div className="font-['Geist_Mono',monospace] font-normal leading-[0] opacity-[0.52] text-[10px] text-white uppercase">
+          <div className="font-['Geist_Mono',monospace] font-normal leading-[0] opacity-[0.52] text-[10px] uppercase" style={{ color: 'var(--app-text-primary)' }}>
             <p className="leading-[1.5] whitespace-pre">Table of Contents</p>
           </div>
           <button
@@ -99,6 +99,7 @@ export default function Sidebar({ onScrollToHeading }: SidebarProps) {
               src={imgTablerIconChevronLeftPipe}
               alt="Collapse"
               className="block max-w-none w-5 h-5"
+              style={{ filter: 'var(--app-icon-invert)' }}
             />
           </button>
         </div>
@@ -126,7 +127,7 @@ export default function Sidebar({ onScrollToHeading }: SidebarProps) {
                   </div>
                 </div>
 
-                <div className="font-['Geist_Mono',monospace] font-normal text-[12px] text-white">
+                <div className="font-['Geist_Mono',monospace] font-normal text-[12px]" style={{ color: 'var(--app-text-primary)' }}>
                   <p className="leading-[2.2] whitespace-pre">{item.label}</p>
                 </div>
               </button>

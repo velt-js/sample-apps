@@ -24,6 +24,16 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --app-bg: #ffffff;
+    --app-surface: #f5f5f5;
+    --app-border: #e0e0e0;
+    --app-text-primary: #000000;
+    --app-text-tertiary: rgba(0,0,0,0.52);
+    --app-toggle-active-bg: rgba(0,0,0,0.06);
+    --app-sidebar-bg: #f0f0f0;
+    --app-icon-invert: invert(1);
+    --app-node-bg: #e8e8e8;
+    --app-node-border: #d0d0d0;
   }
 
   .dark {
@@ -46,6 +56,16 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    --app-bg: #000000;
+    --app-surface: #0e0e0e;
+    --app-border: #141414;
+    --app-text-primary: #ffffff;
+    --app-text-tertiary: rgba(255,255,255,0.52);
+    --app-toggle-active-bg: rgba(255,255,255,0.08);
+    --app-sidebar-bg: #0e0e0e;
+    --app-icon-invert: none;
+    --app-node-bg: #1d1d1d;
+    --app-node-border: transparent;
   }
 }
 

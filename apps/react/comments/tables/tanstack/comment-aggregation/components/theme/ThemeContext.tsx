@@ -25,6 +25,15 @@ function resolveTheme(theme: Theme): ResolvedTheme {
   return theme;
 }
 
+function applyTheme(resolved: ResolvedTheme) {
+  if (typeof document === 'undefined') return;
+  if (resolved === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'light';
@@ -40,11 +49,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const resolved = resolveTheme(theme);
     setResolvedTheme(resolved);
-    if (resolved === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    applyTheme(resolved);
   }, [theme]);
 
   useEffect(() => {
@@ -53,11 +58,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const handler = () => {
       const resolved = getSystemTheme();
       setResolvedTheme(resolved);
-      if (resolved === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      applyTheme(resolved);
     };
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
@@ -70,10 +71,49 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useTheme() {
+/**
+ * useTheme hook - works both with and without ThemeProvider.
+ * When ThemeProvider is present, uses shared context.
+ * When absent, manages its own state as a standalone fallback.
+ */
+export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+
+  // Standalone state — always called to satisfy rules of hooks
+  const [localTheme, setLocalThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'light';
+    return (localStorage.getItem(STORAGE_KEY) as Theme) || 'light';
+  });
+  const [localResolved, setLocalResolved] = useState<ResolvedTheme>(() => resolveTheme(localTheme));
+
+  const setLocalTheme = useCallback((newTheme: Theme) => {
+    setLocalThemeState(newTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, newTheme);
+    }
+  }, []);
+
+  // Only apply side effects when running standalone (no provider)
+  useEffect(() => {
+    if (context) return; // Provider handles it
+    const resolved = resolveTheme(localTheme);
+    setLocalResolved(resolved);
+    applyTheme(resolved);
+  }, [localTheme, context]);
+
+  useEffect(() => {
+    if (context) return;
+    if (localTheme !== 'system') return;
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = () => {
+      const resolved = getSystemTheme();
+      setLocalResolved(resolved);
+      applyTheme(resolved);
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, [localTheme, context]);
+
+  if (context) return context;
+  return { theme: localTheme, resolvedTheme: localResolved, setTheme: setLocalTheme };
 }

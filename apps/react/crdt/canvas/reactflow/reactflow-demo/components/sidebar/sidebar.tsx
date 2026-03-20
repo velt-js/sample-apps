@@ -54,7 +54,7 @@ function SidebarItem({ icon, label, bgColor, iconSize = '13.897px', nodeType }: 
           style={{ width: iconSize, height: iconSize }}
         />
       </div>
-      <p className="font-['Urbanist',_sans-serif] font-normal text-base leading-none text-white whitespace-nowrap">
+      <p className="font-['Urbanist',_sans-serif] font-normal text-base leading-none whitespace-nowrap" style={{ color: 'var(--app-text-primary)' }}>
         {label}
       </p>
     </div>
@@ -70,7 +70,7 @@ function SidebarSection({ title, items }: SidebarSectionProps) {
   return (
     <div className="flex flex-col items-start w-full">
       <div className="flex gap-1 items-start px-2 py-1.5 rounded-full w-full">
-        <p className="font-['Urbanist',_sans-serif] font-semibold text-xs leading-none text-neutral-400 uppercase tracking-[0.96px] whitespace-nowrap">
+        <p className="font-['Urbanist',_sans-serif] font-semibold text-xs leading-none uppercase tracking-[0.96px] whitespace-nowrap" style={{ color: 'var(--app-text-tertiary)' }}>
           {title}
         </p>
       </div>
@@ -124,14 +124,14 @@ export default function Sidebar() {
         onClick={() => setIsCollapsed(false)}
         className="flex gap-2.5 items-center p-2 rounded-full shrink-0 hover:bg-white/5 transition-colors"
         style={{
-          backgroundColor: '#141414',
+          backgroundColor: 'var(--app-sidebar-bg)',
         }}
       >
         <img
           src={imgTablerIconChevronLeftPipe}
           alt="Expand"
           className="block max-w-none w-5 h-5"
-          style={{ transform: 'rotate(180deg)' }}
+          style={{ transform: 'rotate(180deg)', filter: 'var(--app-icon-invert)' }}
         />
       </button>
     );
@@ -144,18 +144,18 @@ export default function Sidebar() {
       style={{
         width: '270px',
         height: '668px',
-        backgroundColor: '#0e0e0e',
+        backgroundColor: 'var(--app-sidebar-bg)',
         borderRadius: '12px',
         boxShadow: '0px -24px 100px 0px rgba(0, 0, 0, 0.25)',
       }}
     >
       {/* Header */}
       <div className="flex items-center justify-between p-4 w-full shrink-0">
-        <div className="flex flex-col gap-1.5 items-start leading-none text-white whitespace-nowrap">
-          <p className="font-['Urbanist',_sans-serif] font-normal text-xs opacity-52">
+        <div className="flex flex-col gap-1.5 items-start leading-none whitespace-nowrap" style={{ color: 'var(--app-text-primary)' }}>
+          <p className="font-['Urbanist',_sans-serif] font-normal text-xs" style={{ opacity: 0.52 }}>
             My Workflows
           </p>
-          <p className="font-['Urbanist',_sans-serif] font-semibold text-base opacity-90">
+          <p className="font-['Urbanist',_sans-serif] font-semibold text-base" style={{ opacity: 0.9 }}>
             Slack Summarizer
           </p>
         </div>
@@ -167,6 +167,7 @@ export default function Sidebar() {
             src={imgTablerIconChevronLeftPipe}
             alt="Collapse"
             className="block max-w-none w-5 h-5"
+            style={{ filter: 'var(--app-icon-invert)' }}
           />
         </button>
       </div>

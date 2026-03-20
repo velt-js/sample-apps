@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
-import { AppUserProvider } from './userAuth/AppUserContext'
+import { AppProviders } from './userAuth/AppProviders'
 
 export const metadata: Metadata = {
   title: 'tiptap-crdt-demo',
@@ -13,11 +13,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme-preference')||'light';var d=t==='system'?window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light':t;if(d==='dark')document.documentElement.classList.add('dark')}catch(e){}})()` }} />
+      </head>
       <body>
-        <AppUserProvider>
+        <AppProviders>
           {children}
-        </AppUserProvider>
+        </AppProviders>
       </body>
     </html>
   )

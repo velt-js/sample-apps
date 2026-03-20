@@ -179,7 +179,7 @@ export function AddNodeOnEdgeDrop() {
         width: '100%',
         height: '100%',
         position: 'relative',
-        background: '#000000'
+        background: 'var(--app-bg)'
       }}
     >
       {/* Background pattern */}
@@ -194,6 +194,7 @@ export function AddNodeOnEdgeDrop() {
           backgroundRepeat: 'repeat',
           backgroundSize: '16px 16px',
           opacity: 0.08,
+          filter: 'var(--app-icon-invert)',
           pointerEvents: 'none',
           zIndex: 0
         }}
