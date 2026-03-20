@@ -7,7 +7,7 @@ import Underline from '@tiptap/extension-underline'
 import BubbleMenu from '@tiptap/extension-bubble-menu'
 import { useEffect, useState, useRef } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
-import { useVeltTiptapCrdtExtension } from '@veltdev/tiptap-crdt-react'
+import { useCollaboration } from '@veltdev/tiptap-crdt-react'
 import { useCommentAnnotations } from '@veltdev/react' // [Velt] Hook that listens to comment annotations and provides real-time updates when comments are added/removed
 import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments' // [Velt] TipTap extension and utilities for integrating Velt comments into the editor
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
@@ -22,9 +22,10 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   const bubbleMenuRootRef = useRef<Root | null>(null)
 
   // [Velt] Initialize CRDT extension for real-time collaborative editing
-  const { VeltCrdt } = useVeltTiptapCrdtExtension({
+  const { extension } = useCollaboration({
     editorId: documentId || 'default-editor',
     initialContent: initialContent,
+    onError: (err) => console.error('[Velt CRDT] Collaboration error:', err),
   })
 
   // Create bubble menu element
@@ -60,11 +61,11 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
           offset: 8,
         },
       })] : []),
-      ...(VeltCrdt ? [VeltCrdt] : []), // [Velt] Add CRDT extension for real-time collaboration when available
+      ...(extension ? [extension] : []), // [Velt] Add CRDT extension for real-time collaboration when available
     ],
     // content: initialContent,
     immediatelyRender: false, // Prevents SSR hydration mismatches by only rendering on client
-  }, [VeltCrdt, bubbleMenuElement])
+  }, [extension, bubbleMenuElement])
 
   const commentAnnotations = useCommentAnnotations() // [Velt] Subscribes to comment data changes and returns array of all active comment annotations
 
