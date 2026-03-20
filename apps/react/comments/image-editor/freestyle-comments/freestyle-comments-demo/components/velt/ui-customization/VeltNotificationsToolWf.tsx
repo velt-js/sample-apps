@@ -5,17 +5,17 @@ const bellIcon = "/icons/bell-icon.svg";
 
 const VeltNotificationsToolWf = () => {
   return (
+    // [Velt] Custom wireframe for notifications tool UI
     <VeltNotificationsToolWireframe>
       <div
         style={{
-          background: '#252525',
-          borderRadius: '16px',
-          padding: '6px 10px',
+          background: 'var(--app-border)',
+          borderRadius: '23.333px',
+          padding: '5.833px 4px 5.833px 7px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '6px',
-          height: '32px',
+          gap: '3.889px',
           cursor: 'pointer',
           boxSizing: 'border-box',
           flexShrink: 0
@@ -23,8 +23,8 @@ const VeltNotificationsToolWf = () => {
       >
         <div
           style={{
-            width: '18px',
-            height: '18px',
+            width: '19.444px',
+            height: '19.444px',
             position: 'relative',
             flexShrink: 0
           }}
@@ -36,7 +36,7 @@ const VeltNotificationsToolWf = () => {
               width: '100%',
               height: '100%',
               display: 'block',
-              filter: 'none'
+              filter: 'var(--app-icon-invert)'
             }}
           />
         </div>
@@ -46,7 +46,7 @@ const VeltNotificationsToolWf = () => {
             fontWeight: 500,
             fontSize: '14px',
             lineHeight: '1.5',
-            color: '#ffffff',
+            color: 'var(--app-text-primary)',
             whiteSpace: 'pre',
             flexShrink: 0
           }}

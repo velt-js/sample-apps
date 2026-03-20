@@ -7,36 +7,32 @@ https://github.com/user-attachments/assets/d50a4a77-3c89-4fd9-b7f5-1a99cabf6aac
 
 ## Overview
 
-This demo showcases **freestyle and text commenting on a website builder canvas** built using **Velt's commenting integration**. Users can pin comments anywhere on the canvas, select text to add inline comments, tag comments with custom labels, and collaborate asynchronously on design feedback.
+This demo showcases **freestyle commenting on an image editor canvas** built using **Velt's commenting integration**. Users can pin comments anywhere on AI-generated images, tag comments with custom labels, and collaborate asynchronously on design feedback.
 
 ## Path
 
 ```
-apps/react/comments/website-builder/freestyle-comments/freestyle-comments-demo/
+apps/react/comments/image-editor/freestyle-comments/freestyle-comments-demo/
 ```
 
 ## Package Name
 
-`@apps/react-comments-website-builder-freestyle-comments-freestyle-comments-demo`
+`@apps/react-comments-image-editor-freestyle-comments-freestyle-comments-demo`
 
 ## Features
 
 ### Commenting Features
 - **Freestyle Comments**: Click anywhere on the canvas to pin comments
-- **Text Selection Comments**: Highlight any text to add inline comments
 - **Custom Tags**: Categorize comments with tags (Design, Content, Bug, Enhancement)
 - **@Mentions**: Tag collaborators in comments for direct feedback
 - **Notifications**: Stay updated on new comments and replies
 - **Comment Sidebar**: View and manage all canvas comments in one place
-- **Priority Indicators**: Mark comments with priority levels
 - **Presence Awareness**: See who's currently viewing the canvas
 
 ### Canvas Features
-- **Website Builder Preview**: Interactive waitlist landing page mockup
-- **Device Preview**: Desktop (1440px) viewport indicator
-- **iPhone Mockup**: Mobile preview within the canvas
-- **Grid Background**: Visual alignment grid pattern
-- **Collapsible Sidebar**: Toggle navigation panel
+- **Image Gallery**: Browse and switch between AI-generated images
+- **Zoom & Pan**: Zoom (10-400%) with mouse wheel, presets, and fit-to-page/width
+- **Details Panel**: View image prompt, organization, and metadata properties
 - **Dark Theme**: Professional dark mode interface
 
 ## Directory Structure
@@ -55,43 +51,51 @@ freestyle-comments-demo/
 │   │   ├── AppProviders.tsx            # App-level providers
 │   │   ├── AppUserContext.tsx          # User authentication context
 │   │   └── useAppUser.ts               # User authentication hook
+│   ├── icon.png                        # App favicon
 │   ├── layout.tsx                      # Root layout with Velt provider
 │   └── page.tsx                        # Main page
 ├── components/
+│   ├── document/
+│   │   ├── document-canvas.tsx         # Document wrapper component
+│   │   └── FreestyleCanvas/
+│   │       ├── FreestyleCanvas.tsx     # Main image editor canvas with Velt comments
+│   │       ├── constants.ts            # Image data and zoom presets
+│   │       ├── index.tsx               # Barrel export
+│   │       └── types.ts               # TypeScript type definitions
 │   ├── header/
 │   │   └── header.tsx                  # Header with Velt tools
 │   ├── sidebar/
 │   │   └── sidebar.tsx                 # Navigation sidebar
-│   ├── document/
-│   │   ├── document-canvas.tsx         # Document wrapper component
-│   │   └── FreestyleCanvas/
-│   │       ├── FreestyleCanvas.tsx     # Main canvas with website mockup
-│   │       └── index.tsx               # Barrel export
-│   └── velt/
-│       ├── ui-customization/
-│       │   ├── styles.css              # Velt component styles
-│       │   ├── VeltCommentBubbleWf.tsx # Customized comment bubble
-│       │   ├── VeltCommentToolWf.tsx   # Customized comment tool
-│       │   ├── VeltCustomization.tsx   # Velt UI customization wrapper
-│       │   ├── VeltNotificationsToolWf.tsx # Customized notifications
-│       │   └── VeltSidebarButtonWf.tsx # Customized sidebar button
-│       ├── VeltCollaboration.tsx       # Velt client setup with custom tags
-│       ├── VeltInitializeDocument.tsx  # Document initialization
-│       ├── VeltInitializeUser.tsx      # User initialization
-│       └── VeltTools.tsx               # Velt component exports
+│   ├── theme/
+│   │   ├── ThemeContext.tsx            # Theme provider (light/dark/system)
+│   │   └── ThemeToggle.tsx             # Theme toggle component
+│   ├── velt/
+│   │   ├── ui-customization/
+│   │   │   ├── styles.css              # Velt component styles
+│   │   │   ├── VeltCommentBubbleWf.tsx # Customized comment bubble
+│   │   │   ├── VeltCommentToolWf.tsx   # Customized comment tool
+│   │   │   ├── VeltCustomization.tsx   # Velt UI customization wrapper
+│   │   │   ├── VeltNotificationsToolWf.tsx # Customized notifications
+│   │   │   └── VeltSidebarButtonWf.tsx # Customized sidebar button
+│   │   ├── VeltCollaboration.tsx       # Velt client setup with custom tags
+│   │   ├── VeltInitializeDocument.tsx  # Document initialization
+│   │   ├── VeltInitializeUser.tsx      # User initialization
+│   │   └── VeltTools.tsx               # Velt component exports
+│   └── velt-logo.tsx                   # Velt logo SVG component
 ├── hooks/                              # Custom React hooks
 ├── lib/
 │   └── utils.ts                        # Utility functions
 ├── public/
-│   ├── assets/                         # Canvas assets (SVGs, images)
+│   ├── assets/                         # Canvas assets (images, SVGs)
 │   └── icons/                          # SVG icons
 ├── styles/
 │   └── globals.css                     # Global styles
 ├── .npmrc                              # pnpm config to prevent Tailwind v4 hoisting
+├── components.json                     # shadcn/ui configuration
 ├── next.config.js
 ├── tailwind.config.js
 ├── tsconfig.json
-├── components.json                     # shadcn/ui configuration
+├── vercel.json                         # Vercel deployment configuration
 └── package.json
 ```
 
@@ -99,7 +103,7 @@ freestyle-comments-demo/
 
 - **Next.js 16** with React 19
 - **@veltdev/react** - Velt collaboration components
-- **@xyflow/react** - React Flow for canvas interactions
+- **@floating-ui/dom** - Floating UI positioning
 - **Tailwind CSS v3.4** - Styling
 - **TypeScript** - Type safety
 
@@ -118,14 +122,14 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/comments/website-builder/freestyle-comments/freestyle-comments-demo
+cd apps/react/comments/image-editor/freestyle-comments/freestyle-comments-demo
 pnpm dev
 ```
 
 Or run from the root:
 
 ```bash
-pnpm --filter @apps/react-comments-website-builder-freestyle-comments-freestyle-comments-demo dev
+pnpm --filter @apps/react-comments-image-editor-freestyle-comments-freestyle-comments-demo dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -133,7 +137,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-comments-website-builder-freestyle-comments-freestyle-comments-demo build
+pnpm --filter @apps/react-comments-image-editor-freestyle-comments-freestyle-comments-demo build
 ```
 
 ## Usage
@@ -145,13 +149,6 @@ pnpm --filter @apps/react-comments-website-builder-freestyle-comments-freestyle-
 3. **Write comment**: Add your feedback with optional @mentions and tags
 4. **Submit**: Comment appears as a pin marker on the canvas
 
-### Adding Text Comments
-
-1. **Select text**: Highlight any text on the canvas
-2. **Comment popup**: A comment dialog appears automatically
-3. **Write comment**: Add your feedback with optional @mentions and tags
-4. **Submit**: Comment is linked to the selected text
-
 ### Using Custom Tags
 
 1. **Open comment dialog**: Create a new comment or reply
@@ -161,9 +158,8 @@ pnpm --filter @apps/react-comments-website-builder-freestyle-comments-freestyle-
 ### Viewing Comments
 
 1. **Pin markers**: Click any pin on the canvas to view and reply to comments
-2. **Text highlights**: Click highlighted text to view associated comments
-3. **Comment sidebar**: Open the sidebar to see all comments in one place
-4. **Notifications**: Check the bell icon for new comment activity
+2. **Comment sidebar**: Open the sidebar to see all comments in one place
+3. **Notifications**: Check the bell icon for new comment activity
 
 ### Collaboration Features
 
@@ -188,9 +184,8 @@ If Velt features don't appear:
 ### Comments Not Appearing
 If comments aren't showing:
 1. Check browser console for errors
-2. Verify the canvas element has `data-name="Waitlist"` attribute
+2. Verify the canvas element has `data-velt-manual-comment-container="true"` attribute
 3. Confirm document ID is properly initialized
-4. Ensure `allowedElementQuerySelectors` is configured correctly
 
 ## About Velt SDK
 

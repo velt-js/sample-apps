@@ -5,17 +5,18 @@ const inboxIcon = "/icons/inbox-icon.svg";
 
 const VeltSidebarButtonWf = () => {
   return (
+    // [Velt] Custom wireframe for sidebar button UI
     <VeltSidebarButtonWireframe>
       <div
         style={{
-          background: '#252525',
-          borderRadius: '16px',
-          padding: '6px 10px',
+          background: 'var(--app-border)',
+          borderRadius: '24px',
+          padding: '6px 7px 6px 12px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '6px',
-          height: '32px',
+          gap: '4px',
+          height: '28px',
           cursor: 'pointer',
           boxSizing: 'border-box',
           flexShrink: 0
@@ -23,8 +24,8 @@ const VeltSidebarButtonWf = () => {
       >
         <div
           style={{
-            width: '18px',
-            height: '18px',
+            width: '19.444px',
+            height: '19.444px',
             position: 'relative',
             flexShrink: 0
           }}
@@ -36,7 +37,7 @@ const VeltSidebarButtonWf = () => {
               width: '100%',
               height: '100%',
               display: 'block',
-              filter: 'none'
+              filter: 'var(--app-icon-invert)'
             }}
           />
         </div>
@@ -46,7 +47,7 @@ const VeltSidebarButtonWf = () => {
             fontWeight: 500,
             fontSize: '14px',
             lineHeight: '1.5',
-            color: '#ffffff',
+            color: 'var(--app-text-primary)',
             whiteSpace: 'pre',
             flexShrink: 0
           }}

@@ -37,6 +37,8 @@ import freestyleCommentsDemoMeta from './freestyle-comments-demo/metadata'
 import { codeFiles as freestyleCommentsDemoCodeFiles } from './freestyle-comments-demo/code-files'
 import pageModeDemoMeta from './page-mode-demo/metadata'
 import { codeFiles as pageModeDemoCodeFiles } from './page-mode-demo/code-files'
+import imageEditorDemoMeta from './image-editor-demo/metadata'
+import { codeFiles as imageEditorDemoCodeFiles } from './image-editor-demo/code-files'
 import vueAgGridMultipleToolsMeta from './vue-ag-grid-multiple-tools/metadata'
 import { codeFiles as vueAgGridMultipleToolsCodeFiles } from './vue-ag-grid-multiple-tools/code-files'
 
@@ -116,6 +118,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-self-hosting-forms-page-mode-demo': {
     metadata: pageModeDemoMeta,
     codeFiles: pageModeDemoCodeFiles
+  },
+  'react-comments-image-editor-freestyle-comments-freestyle-comments-demo': {
+    metadata: imageEditorDemoMeta,
+    codeFiles: imageEditorDemoCodeFiles
   },
   'vue-comments-tables-aggrid-multiple-tools': {
     metadata: vueAgGridMultipleToolsMeta,
