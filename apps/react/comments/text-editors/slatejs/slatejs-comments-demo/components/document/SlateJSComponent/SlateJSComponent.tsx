@@ -42,19 +42,19 @@ const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
 
   if (leaf.heading === 'h1') {
     processedChildren = (
-      <span className="text-[40px] font-bold leading-[1.2] text-white" data-heading="h1">
+      <span className="text-[40px] font-bold leading-[1.2]" data-heading="h1">
         {processedChildren}
       </span>
     )
   } else if (leaf.heading === 'h2') {
     processedChildren = (
-      <span className="text-[32px] font-bold leading-[1.2] mt-8 text-white" data-heading="h2">
+      <span className="text-[32px] font-bold leading-[1.2] mt-8" data-heading="h2">
         {processedChildren}
       </span>
     )
   } else if (leaf.heading === 'h3') {
     processedChildren = (
-      <span className="text-[24px] font-bold leading-[1.2] mt-6 text-white" data-heading="h3">
+      <span className="text-[24px] font-bold leading-[1.2] mt-6" data-heading="h3">
         {processedChildren}
       </span>
     )
@@ -86,9 +86,17 @@ export default function SlateJSComponent({ scrollContainerRef }: SlateJSComponen
 
   const handleAddComment = useCallback(() => {
     if (editor) {
+      // Preserve scroll position across Velt comment creation
+      const scrollContainer = scrollContainerRef?.current
+      const scrollTop = scrollContainer?.scrollTop ?? 0
       addComment({ editor }) // [Velt] Triggers comment creation flow on selected text in the editor
+      if (scrollContainer) {
+        requestAnimationFrame(() => {
+          scrollContainer.scrollTop = scrollTop
+        })
+      }
     }
-  }, [editor])
+  }, [editor, scrollContainerRef])
 
   const updateBubbleMenu = useCallback(() => {
     const { selection } = editor
@@ -154,15 +162,15 @@ export default function SlateJSComponent({ scrollContainerRef }: SlateJSComponen
   )
 
   return (
-    <div className="bg-black relative size-full overflow-hidden" data-name="SlateJS / Expanded Toolbar">
+    <div className="relative size-full overflow-hidden" style={{ backgroundColor: 'var(--app-bg)' }} data-name="SlateJS / Expanded Toolbar">
       <div ref={scrollContainerRef} className="absolute inset-0 overflow-y-auto pb-20">
         <div className="flex justify-center pt-[51px] px-4">
           <div className="w-full max-w-[850px]">
-            <div className="bg-[rgb(17,17,17)] border border-[rgb(20,20,20)] border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]">
+            <div className="border border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]" style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-surface-border)' }}>
               <div className="w-full max-w-[738px]">
                 <Slate editor={editor} initialValue={value} onChange={handleChange}>
                   <Editable
-                    className="slatejs-editor-content prose prose-invert max-w-none outline-none text-white"
+                    className="slatejs-editor-content prose prose-invert max-w-none outline-none"
                     renderElement={Element}
                     renderLeaf={Leaf}
                     onKeyDown={handleKeyDown}

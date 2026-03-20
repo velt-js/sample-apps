@@ -3,7 +3,6 @@ import '../styles/globals.css'
 import '../components/velt/ui-customization/styles.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
-// Prevent static generation - Velt SDK requires client-side execution
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
@@ -17,7 +16,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            try {
+              var theme = localStorage.getItem('theme-preference');
+              var isDark = theme === 'dark' || (!theme && false) || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+              if (isDark) document.documentElement.classList.add('dark');
+            } catch(e) {}
+          })();
+        `}} />
+      </head>
       <body>
         <AppProviders>{children}</AppProviders>
       </body>
