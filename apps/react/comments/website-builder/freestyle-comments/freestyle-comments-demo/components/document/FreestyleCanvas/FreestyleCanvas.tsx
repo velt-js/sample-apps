@@ -48,16 +48,17 @@ export default function FreestyleCanvas() {
   return (
     <div
       className="absolute inset-0 select-text"
-      style={{ backgroundColor: 'rgb(0, 0, 0)' }}
+      style={{ backgroundColor: 'var(--app-bg)' }}
       data-name="freestyle"
     >
       {/* Desktop label */}
       <p
-        className="absolute left-1/2 -translate-x-1/2 font-mono text-xs text-white opacity-50 uppercase tracking-tight select-text"
+        className="absolute left-1/2 -translate-x-1/2 font-mono text-xs opacity-50 uppercase tracking-tight select-text"
         style={{
           fontFamily: 'Geist Mono, monospace',
           top: '53px',
-          letterSpacing: '-0.36px'
+          letterSpacing: '-0.36px',
+          color: 'var(--app-text-primary)',
         }}
       >
         Desktop (1440)

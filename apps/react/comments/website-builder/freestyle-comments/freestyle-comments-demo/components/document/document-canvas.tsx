@@ -6,7 +6,7 @@ import FreestyleCanvas from './FreestyleCanvas'
 
 export default function DocumentCanvas() {
   return (
-    <div className="fixed inset-0 flex flex-col bg-black">
+    <div className="fixed inset-0 flex flex-col" style={{ backgroundColor: 'var(--app-bg)' }}>
       {/* Main canvas area - fills available space */}
       <div className="relative flex-1 min-h-0">
         <FreestyleCanvas />

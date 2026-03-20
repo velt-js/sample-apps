@@ -41,7 +41,7 @@ export default function Sidebar() {
           style={{
             width: '40px',
             height: '40px',
-            backgroundColor: 'rgb(14, 14, 14)',
+            backgroundColor: 'var(--app-sidebar-bg)',
             borderRadius: '8px',
           }}
         >
@@ -49,7 +49,7 @@ export default function Sidebar() {
             src="/assets/tabler-icon-chevron-left-pipe.svg"
             alt="Expand"
             className="block max-w-none w-5 h-5"
-            style={{ transform: 'rotate(180deg)' }}
+            style={{ transform: 'rotate(180deg)', filter: 'var(--app-icon-invert)' }}
           />
         </div>
       )}
@@ -58,7 +58,7 @@ export default function Sidebar() {
         className="flex flex-col h-full transition-all duration-300 overflow-hidden"
         style={{
           width: isCollapsed ? '0px' : '251px',
-          backgroundColor: 'rgb(14, 14, 14)',
+          backgroundColor: 'var(--app-sidebar-bg)',
           opacity: isCollapsed ? 0 : 1,
         }}
       >
@@ -98,7 +98,7 @@ export default function Sidebar() {
               fontFamily: 'Urbanist, sans-serif',
               fontSize: '14px',
               fontWeight: '400',
-              color: 'rgb(255, 255, 255)',
+              color: 'var(--app-text-primary)',
             }}
           >
             SuperSite
@@ -114,7 +114,7 @@ export default function Sidebar() {
           <img
             src="/assets/tabler-icon-chevron-left-pipe.svg"
             alt="Collapse"
-            style={{ width: '16px', height: '16px' }}
+            style={{ width: '16px', height: '16px', filter: 'var(--app-icon-invert)' }}
           />
         </button>
       </div>
@@ -129,21 +129,21 @@ export default function Sidebar() {
           className="flex items-center gap-[8px]"
           style={{
             padding: '8px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            border: '1px solid var(--app-sidebar-border)',
             borderRadius: '8px',
           }}
         >
           <img
             src="/assets/tabler-icon-search.svg"
             alt="Search"
-            style={{ width: '16px', height: '16px' }}
+            style={{ width: '16px', height: '16px', filter: 'var(--app-icon-invert)' }}
           />
           <span
             style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: '12px',
               fontWeight: '400',
-              color: 'rgba(255, 255, 255, 0.32)',
+              color: 'var(--app-text-muted)',
             }}
           >
             Search Layers...
@@ -167,14 +167,14 @@ export default function Sidebar() {
                     : '/assets/tabler-icon-frame.svg'
                 }
                 alt={layer.type}
-                style={{ width: '16px', height: '16px' }}
+                style={{ width: '16px', height: '16px', filter: 'var(--app-icon-invert)' }}
               />
               <span
                 style={{
                   fontFamily: 'Inter, sans-serif',
                   fontSize: '12px',
                   fontWeight: '400',
-                  color: 'rgba(255, 255, 255, 0.52)',
+                  color: 'var(--app-text-tertiary)',
                 }}
               >
                 {layer.name}

@@ -6,7 +6,7 @@ const VeltCommentToolWf = () => {
     <VeltCommentToolWireframe>
       <div
         style={{
-          background: '#141414',
+          background: 'var(--app-border)',
           border: 'none',
           padding: '5px',
           cursor: 'pointer',
@@ -35,7 +35,7 @@ const VeltCommentToolWf = () => {
               transform: 'translate(-50%, -50%)',
               width: '14px',
               height: '14px',
-              border: '1.5px solid white',
+              border: '1.5px solid var(--app-text-primary)',
               borderRadius: '7px 7px 7px 2px',
               boxSizing: 'border-box'
             }}

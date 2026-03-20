@@ -8,7 +8,7 @@ const VeltSidebarButtonWf = () => {
     <VeltSidebarButtonWireframe>
       <div
         style={{
-          background: '#141414',
+          background: 'var(--app-border)',
           borderRadius: '24px',
           padding: '6px 7px 6px 12px',
           display: 'flex',
@@ -35,7 +35,8 @@ const VeltSidebarButtonWf = () => {
             style={{
               width: '100%',
               height: '100%',
-              display: 'block'
+              display: 'block',
+              filter: 'var(--app-icon-invert)'
             }}
           />
         </div>
@@ -45,7 +46,7 @@ const VeltSidebarButtonWf = () => {
             fontWeight: 500,
             fontSize: '14px',
             lineHeight: '1.5',
-            color: 'white',
+            color: 'var(--app-text-primary)',
             whiteSpace: 'pre',
             flexShrink: 0
           }}
