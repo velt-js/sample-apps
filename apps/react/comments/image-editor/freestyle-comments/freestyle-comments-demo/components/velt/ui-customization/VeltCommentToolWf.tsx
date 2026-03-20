@@ -7,38 +7,37 @@ const VeltCommentToolWf = () => {
     <VeltCommentToolWireframe>
       <div
         style={{
-          background: 'var(--app-border)',
+          background: '#252525',
           border: 'none',
-          padding: '4.667px 6.32px 4.667px 6.222px',
+          padding: '6px',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '28px',
-          height: '28px',
-          borderRadius: '18.667px',
+          width: '32px',
+          height: '32px',
+          borderRadius: '16px',
           boxSizing: 'border-box'
         }}
       >
         <div
           style={{
-            width: '15.556px',
-            height: '15.556px',
+            width: '18px',
+            height: '18px',
             position: 'relative',
-            overflow: 'clip',
             flexShrink: 0
           }}
         >
           <div
             style={{
               position: 'absolute',
-              left: 'calc(50% + 0.492px)',
+              left: '50%',
               top: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '11px',
-              height: '11px',
-              border: '0.972px solid var(--app-text-primary)',
-              borderRadius: '6px 6px 6px 1px',
+              width: '14px',
+              height: '14px',
+              border: '1.5px solid #ffffff',
+              borderRadius: '7px 7px 7px 2px',
               boxSizing: 'border-box'
             }}
           />

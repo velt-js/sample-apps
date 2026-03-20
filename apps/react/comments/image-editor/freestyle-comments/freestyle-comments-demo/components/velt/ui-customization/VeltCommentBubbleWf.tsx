@@ -15,7 +15,7 @@ const VeltCommentBubbleWf = () => {
         >
           <div
             style={{
-              background: 'var(--app-toggle-active-bg)',
+              background: '#252525',
               borderRadius: '18.667px',
               padding: '4.667px 8px 4.667px 6.222px',
               display: 'flex',
@@ -44,7 +44,7 @@ const VeltCommentBubbleWf = () => {
                   transform: 'translate(-50%, -50%)',
                   width: '11px',
                   height: '11px',
-                  border: '1.5px solid var(--app-text-primary)',
+                  border: '1.5px solid #ffffff',
                   borderRadius: '6px 6px 6px 1px',
                   boxSizing: 'border-box'
                 }}
@@ -56,7 +56,7 @@ const VeltCommentBubbleWf = () => {
                 fontWeight: 700,
                 fontSize: '14px',
                 lineHeight: '1.3',
-                color: 'var(--app-text-primary)',
+                color: '#ffffff',
                 margin: 0,
                 whiteSpace: 'pre',
                 flexShrink: 0
