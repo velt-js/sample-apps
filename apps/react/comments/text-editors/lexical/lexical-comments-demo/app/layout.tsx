@@ -3,6 +3,8 @@ import '../styles/globals.css'
 import '../components/velt/ui-customization/styles.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Velt Lexical Comments Demo',
   description: 'Lexical editor with Velt commenting features',

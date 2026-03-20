@@ -116,7 +116,7 @@ export default function CodeMirrorComponent() {
         // - store.getAwareness(): Provides presence information (cursors, selections) for other users
         // - store.getUndoManager(): Enables collaborative undo/redo that respects all users' changes
         yCollab(store.getYText()!, store.getAwareness(), {
-          undoManager: store.getUndoManager()
+          undoManager: store.getUndoManager() || false
         }),
       ],
     })

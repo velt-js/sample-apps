@@ -4,6 +4,8 @@ import '../styles/globals.css'
 import '../components/velt/ui-customization/styles.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
+export const dynamic = 'force-dynamic';
+
 const urbanist = Urbanist({
   subsets: ['latin'],
   weight: ['400', '600'],

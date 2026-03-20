@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 import { AppProviders } from './userAuth/AppProviders'
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'tiptap-crdt-demo',
   description: 'tiptap demo for crdt',

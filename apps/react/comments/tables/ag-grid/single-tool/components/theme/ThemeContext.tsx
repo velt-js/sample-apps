@@ -132,6 +132,20 @@ export function useTheme(): ThemeContextType {
     applyTheme(resolved);
   }, [localTheme, context]);
 
+  // Listen for postMessage from master app (standalone mode)
+  useEffect(() => {
+    if (context) return;
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'theme-change' && event.data.theme) {
+        const newTheme = event.data.theme as Theme;
+        setLocalThemeState(newTheme);
+        localStorage.setItem(STORAGE_KEY, newTheme);
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, [context]);
+
   useEffect(() => {
     if (context) return;
     if (localTheme !== 'system') return;

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 import { AppProviders } from "@/app/userAuth/AppProviders";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Velt BlockNote Demo',
   description: 'BlockNote editor with Velt collaboration features',
