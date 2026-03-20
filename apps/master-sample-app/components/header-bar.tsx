@@ -1,9 +1,10 @@
 "use client"
 
-import { Search, ChevronRight, ExternalLink, RotateCcw, Github, Copy } from "lucide-react"
+import { Search, ChevronRight, ExternalLink, RotateCcw, Github, Copy, Sun, Moon, Monitor } from "lucide-react"
 import { VeltLogo } from "./velt-logo"
 import { cn } from "@/lib/utils"
 import { useState, useEffect, useRef } from "react"
+import { useTheme } from "next-themes"
 
 interface HeaderBarProps {
   title: string
@@ -167,8 +168,9 @@ export function HeaderBar({
         </button>
       </div>
 
-      {/* Right: Search + Icons */}
+      {/* Right: Theme Toggle + Search + Icons */}
       <div className="flex items-center gap-3 shrink-0 ml-auto">
+        <HeaderThemeToggle />
         <button
           onClick={onSearchClick}
           className="flex items-center gap-[9px] h-auto px-3 py-[5px] rounded-lg border border-[rgba(255,255,255,0.12)] text-white opacity-52 hover:opacity-80 transition-opacity w-[233px] font-[family-name:var(--font-urbanist)]"
@@ -246,5 +248,51 @@ function CodeBracketsIcon({ className }: { className?: string }) {
     <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M4.66667 5.33333L2 8L4.66667 10.6667M11.3333 5.33333L14 8L11.3333 10.6667M9.33333 2.66667L6.66667 13.3333" />
     </svg>
+  )
+}
+
+function HeaderThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
+  return (
+    <div className="flex items-center gap-[2px] bg-[#1e1e1e] rounded-[8px] p-[2px]">
+      <button
+        onClick={() => setTheme("light")}
+        className={cn(
+          "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
+          theme === "light" ? "bg-white/10 text-white" : "text-white/40 hover:text-white/70"
+        )}
+        title="Light"
+      >
+        <Sun className="h-[14px] w-[14px]" />
+      </button>
+      <button
+        onClick={() => setTheme("dark")}
+        className={cn(
+          "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
+          theme === "dark" ? "bg-white/10 text-white" : "text-white/40 hover:text-white/70"
+        )}
+        title="Dark"
+      >
+        <Moon className="h-[14px] w-[14px]" />
+      </button>
+      <button
+        onClick={() => setTheme("system")}
+        className={cn(
+          "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
+          theme === "system" ? "bg-white/10 text-white" : "text-white/40 hover:text-white/70"
+        )}
+        title="System"
+      >
+        <Monitor className="h-[14px] w-[14px]" />
+      </button>
+    </div>
   )
 }

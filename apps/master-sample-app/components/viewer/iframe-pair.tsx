@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 
 interface IframePairProps {
   url?: string
@@ -8,6 +8,7 @@ interface IframePairProps {
   height?: string
   displayMode?: 'single' | 'dual'
   direction?: 'horizontal' | 'vertical'
+  theme?: string
 }
 
 export function IframePair({
@@ -15,13 +16,22 @@ export function IframePair({
   secondUrl,
   height = "982px",
   displayMode = 'dual',
-  direction = 'horizontal'
+  direction = 'horizontal',
+  theme
 }: IframePairProps) {
   const [error1, setError1] = useState(false)
   const [error2, setError2] = useState(false)
 
   const iframe1Ref = useRef<HTMLIFrameElement>(null)
   const iframe2Ref = useRef<HTMLIFrameElement>(null)
+
+  // Send theme to iframes via postMessage when theme changes
+  useEffect(() => {
+    if (!theme) return
+    const msg = { type: 'theme-change', theme }
+    iframe1Ref.current?.contentWindow?.postMessage(msg, '*')
+    iframe2Ref.current?.contentWindow?.postMessage(msg, '*')
+  }, [theme])
 
   // Safety check: don't render if URL is not provided
   if (!url) {

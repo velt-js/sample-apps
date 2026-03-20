@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
+import { useTheme } from "next-themes"
 import { HeaderBar } from "@/components/header-bar"
 import { DemoSwitcher } from "@/components/demo-switcher"
 import { SampleViewer } from "@/components/viewer/sample-viewer"
@@ -15,6 +16,7 @@ export default function Page() {
   const [mode, setMode] = useState<"code" | "demo">("demo")
   const [switcherOpen, setSwitcherOpen] = useState(false)
   const [switcherLevel, setSwitcherLevel] = useState<number | undefined>(undefined)
+  const { resolvedTheme } = useTheme()
 
   const currentSample = getSampleById(currentSampleId) || getDefaultSample()
 
@@ -182,6 +184,7 @@ export default function Page() {
     try {
       const url = new URL(currentSample.metadata.iframeUrl)
       url.searchParams.set('documentId', documentId)
+      if (resolvedTheme) url.searchParams.set('theme', resolvedTheme)
       return url.toString()
     } catch {
       return undefined
@@ -227,6 +230,7 @@ export default function Page() {
         sample={currentSample}
         documentId={documentId}
         mode={mode}
+        theme={resolvedTheme}
       />
     </div>
   )

@@ -10,9 +10,10 @@ interface SampleViewerProps {
   sample: Sample
   documentId: string
   mode: "code" | "demo"
+  theme?: string
 }
 
-export function SampleViewer({ sample, documentId, mode }: SampleViewerProps) {
+export function SampleViewer({ sample, documentId, mode, theme }: SampleViewerProps) {
   const [selectedFile, setSelectedFile] = useState<SampleCodeFile | null>(
     sample.codeFiles.length > 0 ? sample.codeFiles[0] : null
   )
@@ -29,15 +30,17 @@ export function SampleViewer({ sample, documentId, mode }: SampleViewerProps) {
     if (!documentId || !sample.metadata.iframeUrl) return undefined
     const url = new URL(sample.metadata.iframeUrl)
     url.searchParams.set('documentId', documentId)
+    if (theme) url.searchParams.set('theme', theme)
     return url.toString()
-  }, [sample.metadata.iframeUrl, documentId])
+  }, [sample.metadata.iframeUrl, documentId, theme])
 
   const iframeUrl2 = useMemo(() => {
     if (!documentId || !sample.metadata.iframeUrl2) return undefined
     const url = new URL(sample.metadata.iframeUrl2)
     url.searchParams.set('documentId', documentId)
+    if (theme) url.searchParams.set('theme', theme)
     return url.toString()
-  }, [sample.metadata.iframeUrl2, documentId])
+  }, [sample.metadata.iframeUrl2, documentId, theme])
 
   // Don't render iframes until documentId is ready AND URLs are computed
   const isReady = !!documentId && !!iframeUrl
@@ -63,6 +66,7 @@ export function SampleViewer({ sample, documentId, mode }: SampleViewerProps) {
           secondUrl={iframeUrl2}
           height="calc(100vh - 80px)"
           displayMode={sample.metadata.displayMode || 'dual'}
+          theme={theme}
           key={iframeKey}
         />
       </main>
@@ -94,6 +98,7 @@ export function SampleViewer({ sample, documentId, mode }: SampleViewerProps) {
           height="100%"
           displayMode={sample.metadata.displayMode || 'dual'}
           direction="vertical"
+          theme={theme}
           key={`${iframeKey}-code`}
         />
       </div>
