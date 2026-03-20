@@ -17,6 +17,13 @@ export function VeltCollaboration() {
     }
   }, [isUserLoggedIn, client]);
 
+  // [Velt] Enable dark mode for all Velt components
+  useEffect(() => {
+    if (client) {
+      client.setDarkMode(true);
+    }
+  }, [client]);
+
   // [Velt] Configure custom annotation dropdown for tagging comments
   useEffect(() => {
     if (client) {
@@ -31,7 +38,6 @@ export function VeltCollaboration() {
           { id: 'enhancement', label: 'Enhancement' },
         ]
       });
-      
     }
   }, [client]);
 
@@ -48,9 +54,9 @@ export function VeltCollaboration() {
         textMode={true}
         priority={false}
         status={true}
-        allowedElementQuerySelectors={['[data-name="ImageCanvas"]']}
+        darkMode={true}
       />
-      <VeltCommentsSidebar groupConfig={groupConfig} />
+      <VeltCommentsSidebar groupConfig={groupConfig} darkMode={true} />
       <VeltCustomization />
     </>
   );

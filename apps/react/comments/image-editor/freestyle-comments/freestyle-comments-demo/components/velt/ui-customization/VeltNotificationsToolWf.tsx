@@ -8,13 +8,14 @@ const VeltNotificationsToolWf = () => {
     <VeltNotificationsToolWireframe>
       <div
         style={{
-          background: 'var(--app-border)',
-          borderRadius: '23.333px',
-          padding: '5.833px 2px 5.833px 7px',
+          background: '#252525',
+          borderRadius: '16px',
+          padding: '6px 10px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '3.889px',
+          gap: '6px',
+          height: '32px',
           cursor: 'pointer',
           boxSizing: 'border-box',
           flexShrink: 0
@@ -35,7 +36,7 @@ const VeltNotificationsToolWf = () => {
               width: '100%',
               height: '100%',
               display: 'block',
-              filter: 'var(--app-icon-invert)'
+              filter: 'none'
             }}
           />
         </div>
@@ -45,7 +46,7 @@ const VeltNotificationsToolWf = () => {
             fontWeight: 500,
             fontSize: '14px',
             lineHeight: '1.5',
-            color: 'var(--app-text-primary)',
+            color: '#ffffff',
             whiteSpace: 'pre',
             flexShrink: 0
           }}

@@ -6,16 +6,16 @@ const VeltCommentToolWf = () => {
     <VeltCommentToolWireframe>
       <div
         style={{
-          background: 'var(--app-border)',
+          background: '#252525',
           border: 'none',
-          padding: '5px',
+          padding: '6px',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '28px',
-          height: '28px',
-          borderRadius: '18px',
+          width: '32px',
+          height: '32px',
+          borderRadius: '16px',
           boxSizing: 'border-box'
         }}
       >
@@ -35,7 +35,7 @@ const VeltCommentToolWf = () => {
               transform: 'translate(-50%, -50%)',
               width: '14px',
               height: '14px',
-              border: '1.5px solid var(--app-text-primary)',
+              border: '1.5px solid #ffffff',
               borderRadius: '7px 7px 7px 2px',
               boxSizing: 'border-box'
             }}

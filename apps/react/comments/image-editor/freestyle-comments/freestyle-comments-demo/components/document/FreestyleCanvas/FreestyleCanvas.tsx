@@ -1,12 +1,42 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { useVeltClient, useCommentAnnotations, useCommentModeState, VeltCommentPin } from '@veltdev/react'
+import VeltTools from '../../velt/VeltTools'
 
 const IMAGES = [
-  { src: '/assets/ai-1.webp', prompt: 'A futuristic cityscape at sunset with neon lights reflecting off rain-soaked streets, cyberpunk aesthetic, ultra detailed' },
-  { src: '/assets/ai-2.webp', prompt: 'An enchanted forest with bioluminescent mushrooms and floating fireflies, magical atmosphere, soft ethereal lighting' },
-  { src: '/assets/ai-3.webp', prompt: 'Abstract fluid art in deep ocean colors with gold metallic accents, high resolution, dramatic contrast' },
-  { src: '/assets/ai-4.webp', prompt: 'A cozy mountain cabin in winter with warm light spilling from windows, snow-covered pines, northern lights in the sky' },
+  {
+    src: '/assets/ai-1.webp',
+    prompt: 'Sample image of a dog with a loving family',
+    filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193153_01',
+    dimensions: '1024px x 1024px',
+    size: '1.6 MB',
+    seed: '1755152713',
+  },
+  {
+    src: '/assets/ai-2.webp',
+    prompt: 'Sample image of a dog with a loving family',
+    filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193153_02',
+    dimensions: '1024px x 1024px',
+    size: '1.7 MB',
+    seed: '989848097',
+  },
+  {
+    src: '/assets/ai-3.webp',
+    prompt: 'Sample image of a dog with a loving family',
+    filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193153_03',
+    dimensions: '1024px x 1024px',
+    size: '1.7 MB',
+    seed: '1988426835',
+  },
+  {
+    src: '/assets/ai-4.webp',
+    prompt: 'Sample image of a dog with a loving family',
+    filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193152_04',
+    dimensions: '1024px x 1024px',
+    size: '1.7 MB',
+    seed: '1091232068',
+  },
 ]
 
 export default function FreestyleCanvas() {
@@ -15,9 +45,19 @@ export default function FreestyleCanvas() {
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 })
   const [isPanning, setIsPanning] = useState(false)
   const [showDetailsPanel, setShowDetailsPanel] = useState(true)
+  const [activeTab, setActiveTab] = useState<'details' | 'properties'>('details')
+  const [showZoomMenu, setShowZoomMenu] = useState(false)
   const panStart = useRef({ x: 0, y: 0 })
   const panOffsetStart = useRef({ x: 0, y: 0 })
   const canvasRef = useRef<HTMLDivElement>(null)
+  const zoomMenuRef = useRef<HTMLDivElement>(null)
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
+
+  const { client } = useVeltClient()
+  const commentModeState = useCommentModeState()
+  const commentAnnotations = useCommentAnnotations()
+
+  const activeImage = IMAGES[activeImageIndex]
 
   const changeImage = useCallback((index: number) => {
     setActiveImageIndex(index)
@@ -40,32 +80,64 @@ export default function FreestyleCanvas() {
     setZoomLevel(z => Math.max(10, z - 10))
   }, [])
 
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault()
+  // Attach wheel handler as non-passive so preventDefault() works
+  useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const rect = canvas.getBoundingClientRect()
-    const mouseX = e.clientX - rect.left - rect.width / 2
-    const mouseY = e.clientY - rect.top - rect.height / 2
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault()
 
-    setZoomLevel(prevZoom => {
-      const newZoom = Math.min(400, Math.max(10, prevZoom + e.deltaY * -0.1))
-      const zoomFactor = newZoom / prevZoom
-      setPanOffset(prev => ({
-        x: mouseX - (mouseX - prev.x) * zoomFactor,
-        y: mouseY - (mouseY - prev.y) * zoomFactor,
-      }))
-      return Math.round(newZoom)
-    })
+      const rect = canvas.getBoundingClientRect()
+      const mouseX = e.clientX - rect.left - rect.width / 2
+      const mouseY = e.clientY - rect.top - rect.height / 2
+
+      setZoomLevel(prevZoom => {
+        const newZoom = Math.min(400, Math.max(10, prevZoom + e.deltaY * -0.1))
+        const zoomFactor = newZoom / prevZoom
+        setPanOffset(prev => ({
+          x: mouseX - (mouseX - prev.x) * zoomFactor,
+          y: mouseY - (mouseY - prev.y) * zoomFactor,
+        }))
+        return Math.round(newZoom)
+      })
+    }
+
+    canvas.addEventListener('wheel', handleWheel, { passive: false })
+    return () => canvas.removeEventListener('wheel', handleWheel)
   }, [])
+
+  const handleCommentClick = useCallback((e: React.MouseEvent) => {
+    if (!client || !canvasRef.current) return
+    const rect = canvasRef.current.getBoundingClientRect()
+    const S = zoomLevel / 100
+    const screenRelX = e.clientX - rect.left - rect.width / 2
+    const screenRelY = e.clientY - rect.top - rect.height / 2
+    const imageX = screenRelX / S - panOffset.x
+    const imageY = screenRelY / S - panOffset.y
+
+    const context = {
+      positionX: imageX,
+      positionY: imageY,
+      imageIndex: activeImageIndex,
+    }
+    client.getCommentElement().addManualComment({ context })
+  }, [client, zoomLevel, panOffset, activeImageIndex])
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (e.button !== 0) return
+    if ((e.target as HTMLElement).closest?.('velt-comment-pin')) return
+    if (commentModeState) return
     setIsPanning(true)
     panStart.current = { x: e.clientX, y: e.clientY }
     panOffsetStart.current = { ...panOffset }
-  }, [panOffset])
+  }, [panOffset, commentModeState])
+
+  const handleCanvasClick = useCallback((e: React.MouseEvent) => {
+    if (!commentModeState) return
+    if ((e.target as HTMLElement).closest?.('velt-comment-pin')) return
+    handleCommentClick(e)
+  }, [commentModeState, handleCommentClick])
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!isPanning) return
@@ -85,166 +157,107 @@ export default function FreestyleCanvas() {
     return () => window.removeEventListener('mouseup', handleGlobalMouseUp)
   }, [])
 
+  // Close zoom menu on outside click
+  useEffect(() => {
+    if (!showZoomMenu) return
+    const handleClick = (e: MouseEvent) => {
+      if (zoomMenuRef.current && !zoomMenuRef.current.contains(e.target as Node)) {
+        setShowZoomMenu(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [showZoomMenu])
+
+  // Track canvas size for pin positioning
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect
+      setCanvasSize({ width, height })
+    })
+    observer.observe(canvas)
+    return () => observer.disconnect()
+  }, [])
+
+  const ZOOM_PRESETS = [20, 50, 80, 100, 120, 200]
+
+  const fitToPage = useCallback(() => {
+    setZoomLevel(66)
+    setPanOffset({ x: 0, y: 0 })
+    setShowZoomMenu(false)
+  }, [])
+
+  const fitToWidth = useCallback(() => {
+    setZoomLevel(100)
+    setPanOffset({ x: 0, y: 0 })
+    setShowZoomMenu(false)
+  }, [])
+
+  const selectZoom = useCallback((level: number) => {
+    setZoomLevel(level)
+    setPanOffset({ x: 0, y: 0 })
+    setShowZoomMenu(false)
+  }, [])
+
+  const renderCommentPins = useCallback(() => {
+    if (!commentAnnotations || canvasSize.width === 0) return null
+    return commentAnnotations
+      .filter((annotation: any) => {
+        const ctx = annotation.context
+        return ctx && ctx.positionX !== undefined && ctx.imageIndex === activeImageIndex
+      })
+      .map((annotation: any) => {
+        const { positionX, positionY } = annotation.context
+        const S = zoomLevel / 100
+        const left = (positionX + panOffset.x) * S + canvasSize.width / 2
+        const top = (positionY + panOffset.y) * S + canvasSize.height / 2
+        return (
+          <div
+            key={annotation.annotationId}
+            style={{
+              position: 'absolute',
+              left: `${left}px`,
+              top: `${top}px`,
+              transform: 'translate(0, -100%)',
+              zIndex: 40,
+              pointerEvents: 'auto',
+            }}
+          >
+            <VeltCommentPin annotationId={annotation.annotationId} />
+          </div>
+        )
+      })
+  }, [commentAnnotations, activeImageIndex, zoomLevel, panOffset, canvasSize])
+
+  const truncatedFilename = activeImage.filename.length > 40
+    ? activeImage.filename.slice(0, 40) + '...'
+    : activeImage.filename
+
   return (
     <div
       className="absolute inset-0 flex flex-col select-text"
       style={{ backgroundColor: '#1a1a1a', color: '#e0e0e0' }}
       data-name="freestyle"
     >
-      {/* Top Toolbar */}
-      <div
-        className="flex items-center justify-between px-4 shrink-0"
-        style={{ height: '48px', backgroundColor: '#252525', borderBottom: '1px solid #333' }}
-      >
-        {/* Left: Zoom controls + tool icons */}
-        <div className="flex items-center gap-1">
-          {/* Zoom out */}
-          <button
-            onClick={zoomOut}
-            className="flex items-center justify-center rounded hover:bg-[#333]"
-            style={{ width: '28px', height: '28px' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-          </button>
-          {/* Zoom in */}
-          <button
-            onClick={zoomIn}
-            className="flex items-center justify-center rounded hover:bg-[#333]"
-            style={{ width: '28px', height: '28px' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-          </button>
-          {/* Zoom percentage */}
-          <button
-            className="flex items-center gap-1 px-2 py-1 rounded hover:bg-[#333] text-xs"
-            style={{ color: '#aaa', fontFamily: 'system-ui' }}
-          >
-            <span>{zoomLevel}%</span>
-            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
-
-          {/* Separator */}
-          <div style={{ width: '1px', height: '20px', backgroundColor: '#444', margin: '0 4px' }} />
-
-          {/* Download */}
-          <button className="flex items-center justify-center rounded hover:bg-[#333]" style={{ width: '28px', height: '28px' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-          </button>
-          {/* Star */}
-          <button className="flex items-center justify-center rounded hover:bg-[#333]" style={{ width: '28px', height: '28px' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-          </button>
-          {/* Trash */}
-          <button className="flex items-center justify-center rounded hover:bg-[#333]" style={{ width: '28px', height: '28px' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>
-          </button>
-          {/* Pen / Edit */}
-          <button className="flex items-center justify-center rounded hover:bg-[#333]" style={{ width: '28px', height: '28px' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-            </svg>
-          </button>
-          {/* Sliders / Settings */}
-          <button className="flex items-center justify-center rounded hover:bg-[#333]" style={{ width: '28px', height: '28px' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <line x1="4" y1="21" x2="4" y2="14" />
-              <line x1="4" y1="10" x2="4" y2="3" />
-              <line x1="12" y1="21" x2="12" y2="12" />
-              <line x1="12" y1="8" x2="12" y2="3" />
-              <line x1="20" y1="21" x2="20" y2="16" />
-              <line x1="20" y1="12" x2="20" y2="3" />
-              <line x1="1" y1="14" x2="7" y2="14" />
-              <line x1="9" y1="8" x2="15" y2="8" />
-              <line x1="17" y1="16" x2="23" y2="16" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Right: Info, prev/next, close */}
-        <div className="flex items-center gap-1">
-          {/* Info toggle */}
-          <button
-            onClick={() => setShowDetailsPanel(p => !p)}
-            className="flex items-center justify-center rounded hover:bg-[#333]"
-            style={{ width: '28px', height: '28px', backgroundColor: showDetailsPanel ? '#444' : 'transparent' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="16" x2="12" y2="12" />
-              <line x1="12" y1="8" x2="12.01" y2="8" />
-            </svg>
-          </button>
-
-          {/* Separator */}
-          <div style={{ width: '1px', height: '20px', backgroundColor: '#444', margin: '0 4px' }} />
-
-          {/* Prev */}
-          <button
-            onClick={prevImage}
-            className="flex items-center justify-center rounded hover:bg-[#333]"
-            style={{ width: '28px', height: '28px' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-          {/* Next */}
-          <button
-            onClick={nextImage}
-            className="flex items-center justify-center rounded hover:bg-[#333]"
-            style={{ width: '28px', height: '28px' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-
-          {/* Separator */}
-          <div style={{ width: '1px', height: '20px', backgroundColor: '#444', margin: '0 4px' }} />
-
-          {/* Close */}
-          <button className="flex items-center justify-center rounded hover:bg-[#333]" style={{ width: '28px', height: '28px' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Main content area */}
-      <div className="flex flex-1 min-h-0">
-        {/* Image canvas area */}
+      {/* Main content area (relative container for floating controls + panel) */}
+      <div className="relative flex-1 min-h-0">
+        {/* Image canvas area - takes full space */}
         <div
           ref={canvasRef}
-          className="flex-1 flex items-center justify-center overflow-hidden relative"
-          style={{ cursor: isPanning ? 'grabbing' : 'grab' }}
-          onWheel={handleWheel}
+          className="absolute inset-0 flex items-center justify-center overflow-hidden"
+          style={{ cursor: commentModeState ? 'crosshair' : (isPanning ? 'grabbing' : 'grab') }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
+          onClick={handleCanvasClick}
           data-name="ImageCanvas"
+          data-velt-manual-comment-container="true"
         >
           <img
-            src={IMAGES[activeImageIndex].src}
+            src={activeImage.src}
             alt={`AI generated image ${activeImageIndex + 1}`}
             draggable={false}
             style={{
@@ -257,85 +270,323 @@ export default function FreestyleCanvas() {
               userSelect: 'none',
             }}
           />
+          {renderCommentPins()}
         </div>
 
-        {/* Details Panel */}
+        {/* Floating top-left: Zoom controls */}
+        <div className="absolute top-3 left-3 flex items-center gap-2 z-30">
+          <div
+            className="flex items-center gap-0.5 px-1"
+            style={{ backgroundColor: '#252525', borderRadius: '12px', height: '40px' }}
+          >
+            <button
+              onClick={zoomOut}
+              className="flex items-center justify-center rounded-full hover:bg-[#333]"
+              style={{ width: '32px', height: '32px' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+            <button
+              onClick={zoomIn}
+              className="flex items-center justify-center rounded-full hover:bg-[#333]"
+              style={{ width: '32px', height: '32px' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+            <div className="relative" ref={zoomMenuRef}>
+              <button
+                onClick={() => setShowZoomMenu(v => !v)}
+                className="flex items-center gap-1 px-3 py-1 rounded-full hover:bg-[#333] text-[13px]"
+                style={{ color: '#ccc', fontFamily: 'system-ui', border: '1px solid #444' }}
+              >
+                <span>{zoomLevel}%</span>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              {showZoomMenu && (
+                <div
+                  className="absolute left-0 top-full mt-1 py-1 rounded-lg z-50"
+                  style={{ backgroundColor: '#2a2a2a', border: '1px solid #444', minWidth: '140px' }}
+                >
+                  <button onClick={fitToWidth} className="w-full text-left px-4 py-1.5 text-[13px] hover:bg-[#383838]" style={{ color: '#ccc' }}>Fit to Width</button>
+                  <button onClick={fitToPage} className="w-full text-left px-4 py-1.5 text-[13px] hover:bg-[#383838]" style={{ color: '#ccc' }}>Fit to Page</button>
+                  {ZOOM_PRESETS.map(level => (
+                    <button
+                      key={level}
+                      onClick={() => selectZoom(level)}
+                      className="w-full text-left px-4 py-1.5 text-[13px] hover:bg-[#383838]"
+                      style={{ color: '#ccc', fontWeight: level === zoomLevel ? 600 : 400 }}
+                    >
+                      {level}%
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Tool icons group */}
+          <div
+            className="flex items-center gap-0.5 px-1"
+            style={{ backgroundColor: '#252525', borderRadius: '12px', height: '40px' }}
+          >
+            <button className="flex items-center justify-center rounded-full hover:bg-[#333]" style={{ width: '32px', height: '32px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </button>
+            <button className="flex items-center justify-center rounded-full hover:bg-[#333]" style={{ width: '32px', height: '32px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </button>
+            <button className="flex items-center justify-center rounded-full hover:bg-[#333]" style={{ width: '32px', height: '32px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+              </svg>
+            </button>
+            <button className="flex items-center justify-center rounded-full hover:bg-[#333]" style={{ width: '32px', height: '32px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+            </button>
+            <button className="flex items-center justify-center rounded-full hover:bg-[#333]" style={{ width: '32px', height: '32px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <line x1="4" y1="21" x2="4" y2="14" />
+                <line x1="4" y1="10" x2="4" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12" y2="3" />
+                <line x1="20" y1="21" x2="20" y2="16" />
+                <line x1="20" y1="12" x2="20" y2="3" />
+                <line x1="1" y1="14" x2="7" y2="14" />
+                <line x1="9" y1="8" x2="15" y2="8" />
+                <line x1="17" y1="16" x2="23" y2="16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Floating top-right: Velt controls + nav controls */}
+        <div className="absolute top-3 right-3 flex items-center gap-2 z-30">
+          {/* Velt controls */}
+          <div className="flex items-center gap-1">
+            <VeltTools />
+          </div>
+
+          {/* Nav controls: info toggle, prev/next, close */}
+          <div
+            className="flex items-center gap-0.5 px-1"
+            style={{ backgroundColor: '#252525', borderRadius: '12px', height: '40px' }}
+          >
+            <button
+              onClick={() => setShowDetailsPanel(p => !p)}
+              className="flex items-center justify-center rounded-full hover:bg-[#333]"
+              style={{
+                width: '32px',
+                height: '32px',
+                backgroundColor: showDetailsPanel ? '#333' : 'transparent',
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ccc" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <circle cx="12" cy="8" r="0.5" fill="#ccc" />
+              </svg>
+            </button>
+
+            <div style={{ width: '1px', height: '20px', backgroundColor: '#444', margin: '0 2px' }} />
+
+            <button
+              onClick={prevImage}
+              className="flex items-center justify-center rounded-full hover:bg-[#333]"
+              style={{ width: '32px', height: '32px' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button
+              onClick={nextImage}
+              className="flex items-center justify-center rounded-full hover:bg-[#333]"
+              style={{ width: '32px', height: '32px' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+
+            <div style={{ width: '1px', height: '20px', backgroundColor: '#444', margin: '0 2px' }} />
+
+            <button className="flex items-center justify-center rounded-full hover:bg-[#333]" style={{ width: '32px', height: '32px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Floating Details/Properties Panel */}
         {showDetailsPanel && (
           <div
-            className="shrink-0 flex flex-col overflow-y-auto"
+            className="absolute flex flex-col overflow-y-auto z-20"
             style={{
+              top: '56px',
+              right: '12px',
               width: '280px',
-              backgroundColor: '#222',
-              borderLeft: '1px solid #333',
+              maxHeight: 'calc(100% - 60px)',
+              backgroundColor: '#1e1e1e',
+              borderRadius: '12px',
+              border: '1px solid #333',
             }}
           >
-            {/* Tabs */}
-            <div className="flex" style={{ borderBottom: '1px solid #333' }}>
+            {/* Tabs + Close */}
+            <div className="flex items-center shrink-0 px-2 pt-2" style={{ borderBottom: '1px solid #333' }}>
               <button
-                className="flex-1 py-3 text-xs font-medium text-center"
-                style={{ color: '#fff', borderBottom: '2px solid #fff' }}
+                onClick={() => setActiveTab('details')}
+                className="flex items-center gap-1.5 px-3 pb-3 pt-1 text-[13px] font-medium"
+                style={{
+                  color: activeTab === 'details' ? '#ddd' : '#666',
+                  borderBottom: activeTab === 'details' ? '2px solid #ddd' : '2px solid transparent',
+                }}
               >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4" />
+                  <circle cx="12" cy="8" r="0.5" fill="currentColor" />
+                </svg>
                 Details
               </button>
               <button
-                className="flex-1 py-3 text-xs font-medium text-center"
-                style={{ color: '#666' }}
+                onClick={() => setActiveTab('properties')}
+                className="flex items-center gap-1.5 px-3 pb-3 pt-1 text-[13px] font-medium"
+                style={{
+                  color: activeTab === 'properties' ? '#ddd' : '#666',
+                  borderBottom: activeTab === 'properties' ? '2px solid #ddd' : '2px solid transparent',
+                }}
               >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="4" />
+                  <rect x="14" y="10" width="7" height="4" />
+                  <rect x="3" y="13" width="7" height="7" />
+                </svg>
                 Properties
               </button>
+              <div className="flex-1" />
+              <button
+                onClick={() => setShowDetailsPanel(false)}
+                className="flex items-center justify-center rounded hover:bg-[#333] mb-2"
+                style={{ width: '24px', height: '24px' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
             </div>
 
-            {/* Prompt section */}
-            <div className="p-4" style={{ borderBottom: '1px solid #333' }}>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium" style={{ color: '#888' }}>Prompt</span>
-                <div className="flex items-center gap-2">
-                  {/* Copy icon */}
-                  <button className="flex items-center justify-center hover:opacity-80" style={{ width: '20px', height: '20px' }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
-                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                    </svg>
-                  </button>
-                  {/* Heart icon */}
-                  <button className="flex items-center justify-center hover:opacity-80" style={{ width: '20px', height: '20px' }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
+            {activeTab === 'details' ? (
+              <>
+                {/* Prompt section */}
+                <div className="px-5 pt-5 pb-5" style={{ borderBottom: '1px solid #333' }}>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[14px]" style={{ color: '#999' }}>Prompt</span>
+                    <div className="flex items-center gap-3">
+                      <button className="flex items-center justify-center hover:opacity-80" style={{ width: '20px', height: '20px' }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="1.5">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                      </button>
+                      <button className="flex items-center justify-center hover:opacity-80" style={{ width: '20px', height: '20px' }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="1.5">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-[14px] leading-relaxed select-text" style={{ color: '#ddd' }}>
+                    {activeImage.prompt}
+                  </p>
+                </div>
+
+                {/* Organization section */}
+                <div className="px-5 pt-5 pb-5">
+                  <span className="text-[14px] block mb-4" style={{ color: '#999' }}>Organization</span>
+                  <div className="flex items-baseline gap-2 mb-5">
+                    <span className="text-[14px] font-semibold" style={{ color: '#ddd' }}>Project:</span>
+                    <button className="text-[14px] hover:underline" style={{ color: '#c8a96e' }}>
+                      My First Project
+                    </button>
+                  </div>
+                  <button
+                    className="text-[13px] px-4 py-2 rounded-full border border-dashed hover:border-solid"
+                    style={{ color: '#999', borderColor: '#555' }}
+                  >
+                    Add Tag +
                   </button>
                 </div>
-              </div>
-              <p className="text-xs leading-relaxed select-text" style={{ color: '#ccc' }}>
-                {IMAGES[activeImageIndex].prompt}
-              </p>
-            </div>
+              </>
+            ) : (
+              <>
+                {/* Properties tab: filename */}
+                <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid #333' }}>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[13px] select-text truncate" style={{ color: '#888' }}>
+                      {truncatedFilename}
+                    </span>
+                    <button className="flex items-center justify-center shrink-0 hover:opacity-80" style={{ width: '20px', height: '20px' }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="1.5">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
 
-            {/* Organization section */}
-            <div className="p-4" style={{ borderBottom: '1px solid #333' }}>
-              <span className="text-xs font-medium block mb-2" style={{ color: '#888' }}>Organization</span>
-              <button className="text-xs hover:underline" style={{ color: '#7B9FFF' }}>
-                My First Project
-              </button>
-            </div>
-
-            {/* Tags section */}
-            <div className="p-4">
-              <span className="text-xs font-medium block mb-2" style={{ color: '#888' }}>Tags</span>
-              <button
-                className="text-xs px-3 py-1.5 rounded-full border border-dashed hover:border-solid"
-                style={{ color: '#888', borderColor: '#555' }}
-              >
-                Add Tag +
-              </button>
-            </div>
+                {/* Properties tab: metadata */}
+                <div className="px-5 pt-4 pb-5 flex flex-col gap-4">
+                  <PropertyRow label="Tool" value="Create" />
+                  <PropertyRow label="Model" value="Stable Image Ultra" />
+                  <PropertyRow label="Ratio" value="1 x 1" />
+                  <PropertyRow label="Image Dimensions" value={activeImage.dimensions} />
+                  <PropertyRow label="Image Size" value={activeImage.size} />
+                  <div className="flex items-baseline gap-1.5 flex-nowrap">
+                    <span className="text-[13px] font-semibold shrink-0 whitespace-nowrap" style={{ color: '#ddd' }}>Seed:</span>
+                    <span className="text-[13px] select-text whitespace-nowrap" style={{ color: '#ddd' }}>{activeImage.seed}</span>
+                    <button className="flex items-center justify-center shrink-0 hover:opacity-80 ml-1" style={{ width: '16px', height: '16px' }}>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="1.5">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
 
       {/* Bottom thumbnail strip */}
       <div
-        className="flex items-center justify-center gap-2 px-4 shrink-0"
-        style={{ height: '72px', backgroundColor: '#1e1e1e', borderTop: '1px solid #333' }}
+        className="flex items-center justify-center gap-3 px-4 shrink-0"
+        style={{ height: '80px', backgroundColor: '#1a1a1a', borderTop: '1px solid #333' }}
       >
         {IMAGES.map((img, i) => (
           <button
@@ -343,8 +594,8 @@ export default function FreestyleCanvas() {
             onClick={() => changeImage(i)}
             className="rounded overflow-hidden shrink-0"
             style={{
-              width: '52px',
-              height: '52px',
+              width: '56px',
+              height: '56px',
               border: i === activeImageIndex ? '2px solid #fff' : '2px solid transparent',
               opacity: i === activeImageIndex ? 1 : 0.5,
               transition: 'opacity 0.15s, border-color 0.15s',
@@ -359,6 +610,15 @@ export default function FreestyleCanvas() {
           </button>
         ))}
       </div>
+    </div>
+  )
+}
+
+function PropertyRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-baseline gap-1.5 flex-nowrap">
+      <span className="text-[13px] font-semibold shrink-0 whitespace-nowrap" style={{ color: '#ddd' }}>{label}:</span>
+      <span className="text-[13px] select-text whitespace-nowrap" style={{ color: '#ddd' }}>{value}</span>
     </div>
   )
 }

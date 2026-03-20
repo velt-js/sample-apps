@@ -106,12 +106,12 @@ app-comment-dialog-custom-annotation-dropdown-trigger * {
 
 /* Dark Mode - Matching Figma Design */
 /* Accent Colors */
---velt-dark-mode-accent: #141414;
---velt-dark-mode-accent-text: #ffffff;
---velt-dark-mode-accent-hover: #000000;
---velt-dark-mode-accent-foreground: #ffffff;
---velt-dark-mode-accent-light: #1f1f1f;
---velt-dark-mode-accent-transparent: rgba(20, 20, 20, 0.08);
+--velt-dark-mode-accent: #ffffff;
+--velt-dark-mode-accent-text: #141414;
+--velt-dark-mode-accent-hover: #e0e0e0;
+--velt-dark-mode-accent-foreground: #141414;
+--velt-dark-mode-accent-light: #333333;
+--velt-dark-mode-accent-transparent: rgba(255, 255, 255, 0.08);
 
 /* Background Shades */
 --velt-dark-mode-background-0: #000000;
