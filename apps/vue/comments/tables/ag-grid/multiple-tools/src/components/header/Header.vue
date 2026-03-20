@@ -9,10 +9,12 @@
       padding: '16px',
     }"
   >
+    <ThemeToggle />
     <VeltTools />
   </div>
 </template>
 
 <script setup lang="ts">
 import VeltTools from '@/components/velt/VeltTools.vue';
+import ThemeToggle from '@/components/theme/ThemeToggle.vue';
 </script>

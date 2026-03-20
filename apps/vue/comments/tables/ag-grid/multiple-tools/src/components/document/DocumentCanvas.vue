@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full h-screen overflow-hidden bg-black">
+  <div class="flex w-full h-screen overflow-hidden" :style="{ backgroundColor: 'var(--app-bg)' }">
     <Sidebar />
     <div class="flex-1 overflow-auto relative">
       <Header />

@@ -1,6 +1,6 @@
 export const styles: { [key: string]: Record<string, string> } = {
   container: {
-    backgroundColor: '#000000',
+    backgroundColor: 'var(--app-bg)',
     width: '100%',
     height: '100vh',
     display: 'flex',
@@ -17,7 +17,7 @@ export const styles: { [key: string]: Record<string, string> } = {
     flex: '1',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#090909',
+    backgroundColor: 'var(--app-surface)',
     borderRadius: '8px',
     overflow: 'hidden',
     paddingTop: '40px',

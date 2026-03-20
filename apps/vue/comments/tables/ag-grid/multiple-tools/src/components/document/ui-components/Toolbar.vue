@@ -11,16 +11,16 @@
   }">
     <div :style="{ display: 'flex', gap: '0px' }">
       <button :style="toolButton" @click="$emit('toggleFormatting', 'bold')">
-        <IconBold :size="20" stroke="1.5" color="rgba(255, 255, 255, 0.7)" />
+        <IconBold :size="20" stroke="1.5" :style="{ color: 'var(--app-text-secondary)' }" />
       </button>
       <button :style="toolButton" @click="$emit('toggleFormatting', 'italic')">
-        <IconItalic :size="20" stroke="1.5" color="rgba(255, 255, 255, 0.7)" />
+        <IconItalic :size="20" stroke="1.5" :style="{ color: 'var(--app-text-secondary)' }" />
       </button>
       <button :style="toolButton" @click="$emit('toggleFormatting', 'underline')">
-        <IconUnderline :size="20" stroke="1.5" color="rgba(255, 255, 255, 0.7)" />
+        <IconUnderline :size="20" stroke="1.5" :style="{ color: 'var(--app-text-secondary)' }" />
       </button>
       <button :style="toolButton" @click="$emit('toggleFormatting', 'strikethrough')">
-        <IconStrikethrough :size="20" stroke="1.5" color="rgba(255, 255, 255, 0.7)" />
+        <IconStrikethrough :size="20" stroke="1.5" :style="{ color: 'var(--app-text-secondary)' }" />
       </button>
     </div>
   </div>

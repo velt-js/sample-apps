@@ -7,11 +7,11 @@
     :style="{
       width: '40px',
       height: '40px',
-      backgroundColor: 'rgb(14, 14, 14)',
+      backgroundColor: 'var(--app-sidebar-bg)',
       borderRadius: '8px',
     }"
   >
-    <IconChevronRightPipe :size="20" color="rgb(255, 255, 255)" stroke="1" />
+    <IconChevronRightPipe :size="20" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
   </div>
 
   <aside
@@ -19,7 +19,7 @@
     :style="{
       width: isCollapsed ? '0px' : '251px',
       height: 'calc(100vh - 32px)',
-      backgroundColor: 'rgb(14, 14, 14)',
+      backgroundColor: 'var(--app-sidebar-bg)',
       borderRadius: '12px',
       margin: '16px',
       marginRight: '8px',
@@ -42,9 +42,9 @@
         }"
       >
         <div class="flex flex-row items-center" :style="{ gap: '8px' }">
-          <IconMenu2 :size="16" color="rgb(255, 255, 255)" stroke="1" />
+          <IconMenu2 :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
           <span :style="{
-            color: 'rgb(255, 255, 255)',
+            color: 'var(--app-text-primary)',
             fontFamily: 'Urbanist, sans-serif',
             fontSize: '14px',
             fontWeight: 400,
@@ -62,7 +62,7 @@
             gap: '10px',
           }"
         >
-          <IconChevronLeftPipe :size="16" color="rgb(255, 255, 255)" stroke="1" />
+          <IconChevronLeftPipe :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
         </div>
       </div>
 
@@ -83,7 +83,7 @@
             }"
           >
             <span :style="{
-              color: 'rgb(163, 163, 163)',
+              color: 'var(--app-sidebar-text-muted)',
               fontFamily: 'Urbanist, sans-serif',
               fontSize: '12px',
               fontWeight: 600,
@@ -104,7 +104,7 @@
                 height: '32px',
               }"
             >
-              <IconFolder :size="14" color="rgb(255, 255, 255)" stroke="1" />
+              <IconFolder :size="14" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
               <span :style="navLabelStyle">FY2023</span>
             </div>
           </div>
@@ -122,7 +122,7 @@
                 height: '32px',
               }"
             >
-              <IconFolder :size="14" color="rgb(255, 255, 255)" stroke="1" />
+              <IconFolder :size="14" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
               <span :style="navLabelStyle">FY2024</span>
             </div>
 
@@ -138,15 +138,15 @@
               }"
             >
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconSpeakerphone :size="16" color="rgb(255, 255, 255)" stroke="1" />
+                <IconSpeakerphone :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
                 <span :style="nestedLabelStyle">Marketing Spend</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconCurrencyDollar :size="16" color="rgb(255, 255, 255)" stroke="1" />
+                <IconCurrencyDollar :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
                 <span :style="nestedLabelStyle">Salaries</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconFileAnalytics :size="16" color="rgb(255, 255, 255)" stroke="1" />
+                <IconFileAnalytics :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
                 <span :style="nestedLabelStyle">Misc.</span>
               </div>
             </div>
@@ -165,7 +165,7 @@
                 height: '32px',
               }"
             >
-              <IconFolder :size="14" color="rgb(255, 255, 255)" stroke="1" />
+              <IconFolder :size="14" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
               <span :style="navLabelStyle">FY2025</span>
             </div>
 
@@ -184,7 +184,7 @@
               <div
                 class="flex flex-row items-center"
                 :style="{
-                  backgroundColor: 'rgb(35, 35, 35)',
+                  backgroundColor: 'var(--app-sidebar-selected)',
                   borderRadius: '8px',
                   padding: '8px',
                   gap: '12px',
@@ -196,11 +196,11 @@
                 <span :style="nestedLabelStyle">Marketing Spend</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconCurrencyDollar :size="16" color="rgb(255, 255, 255)" stroke="1" />
+                <IconCurrencyDollar :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
                 <span :style="nestedLabelStyle">Salaries</span>
               </div>
               <div class="flex flex-row items-center" :style="nestedItemStyle">
-                <IconFileAnalytics :size="16" color="rgb(255, 255, 255)" stroke="1" />
+                <IconFileAnalytics :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
                 <span :style="nestedLabelStyle">Misc.</span>
               </div>
             </div>
@@ -214,9 +214,9 @@
       class="flex flex-row items-center"
       :style="{ padding: '16px', gap: '8px' }"
     >
-      <IconSettings :size="16" color="rgb(255, 255, 255)" stroke="1" />
+      <IconSettings :size="16" :style="{ color: 'var(--app-text-primary)' }" stroke="1" />
       <span :style="{
-        color: 'rgb(255, 255, 255)',
+        color: 'var(--app-text-primary)',
         fontFamily: 'Urbanist, sans-serif',
         fontSize: '14px',
         fontWeight: 400,
@@ -253,7 +253,7 @@ function toggleSection(section: string) {
 }
 
 const navLabelStyle = {
-  color: 'rgb(255, 255, 255)',
+  color: 'var(--app-text-primary)',
   fontFamily: 'Urbanist, sans-serif',
   fontSize: '15px',
   fontWeight: 400,
@@ -270,7 +270,7 @@ const nestedItemStyle = {
 };
 
 const nestedLabelStyle = {
-  color: 'rgb(255, 255, 255)',
+  color: 'var(--app-text-primary)',
   fontFamily: 'Urbanist, sans-serif',
   fontSize: '15px',
   fontWeight: 400,

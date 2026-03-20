@@ -79,7 +79,7 @@ app-comment-dialog-thread-card-avatar {
 .oe-thread-card--name {
   font-weight: 500 !important;
   font-size: 14px !important;
-  color: #0e0e0e !important;
+  color: var(--app-text-primary) !important;
 }
 
 .velt-thread-card--time {
@@ -125,7 +125,7 @@ app-comment-dialog-thread-card-avatar {
   line-height: 21px !important;
   letter-spacing: -0.75% !important;
   vertical-align: middle !important;
-  color: #0e0e0e !important;
+  color: var(--app-text-primary) !important;
 }
 
 app-comment-dialog-thread-card-reactions {
@@ -286,8 +286,8 @@ app-comment-dialog-toggle-reply-text {
   padding-left: 8px;
   padding-right: 2px;
   border-radius: 3px;
-  border: 1px solid #e0e0e0;
-  background: #fafafa;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -622,8 +622,8 @@ app-comment-sidebar-header {
   height: calc(100vh - 45px);
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  border: 1px solid #0e0e0e14;
+  background-color: var(--app-bg);
+  border: 1px solid var(--app-border);
   overflow: hidden;
 }
 

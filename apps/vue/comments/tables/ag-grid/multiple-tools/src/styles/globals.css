@@ -29,6 +29,23 @@
     --light-bg-1: #f5f5f5;
     --light-text-0: #000000;
     --light-text-1: #333333;
+
+    /* App theme variables (light default) */
+    --app-bg: #ffffff;
+    --app-surface: #f5f5f5;
+    --app-surface-hover: #e8e8e8;
+    --app-border: #e0e0e0;
+    --app-text-primary: #000000;
+    --app-text-secondary: rgba(0,0,0,0.7);
+    --app-text-tertiary: rgba(0,0,0,0.52);
+    --app-text-muted: rgba(0,0,0,0.5);
+    --app-row-hover: rgba(0,0,0,0.04);
+    --app-column-hover: rgba(0,0,0,0.03);
+    --app-toggle-active-bg: rgba(0,0,0,0.06);
+    --app-sidebar-bg: #f0f0f0;
+    --app-sidebar-selected: #e0e0e0;
+    --app-sidebar-text-muted: #666666;
+    --app-icon-invert: invert(1);
   }
 
   .dark {
@@ -56,6 +73,23 @@
     --dark-bg-1: #1a1a1a;
     --dark-text-0: #ffffff;
     --dark-text-1: rgba(255, 255, 255, 0.8);
+
+    /* App theme variables (dark) */
+    --app-bg: #000000;
+    --app-surface: #090909;
+    --app-surface-hover: #171717;
+    --app-border: #141414;
+    --app-text-primary: #ffffff;
+    --app-text-secondary: rgba(255,255,255,0.8);
+    --app-text-tertiary: rgba(255,255,255,0.52);
+    --app-text-muted: rgba(255,255,255,0.5);
+    --app-row-hover: rgba(255,255,255,0.05);
+    --app-column-hover: rgba(255,255,255,0.03);
+    --app-toggle-active-bg: rgba(255,255,255,0.08);
+    --app-sidebar-bg: rgb(14,14,14);
+    --app-sidebar-selected: rgb(35,35,35);
+    --app-sidebar-text-muted: rgb(163,163,163);
+    --app-icon-invert: none;
   }
 }
 

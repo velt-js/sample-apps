@@ -3,7 +3,7 @@
   <velt-comment-tool-wireframe>
     <div
       :style="{
-        background: '#141414',
+        background: 'var(--app-border)',
         border: 'none',
         padding: '4.667px 6.32px 4.667px 6.222px',
         cursor: 'pointer',
@@ -33,7 +33,7 @@
             transform: 'translate(-50%, -50%)',
             width: '11px',
             height: '11px',
-            border: '0.972px solid white',
+            border: '0.972px solid var(--app-text-primary)',
             borderRadius: '6px 6px 6px 1px',
             boxSizing: 'border-box'
           }"

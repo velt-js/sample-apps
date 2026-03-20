@@ -9,7 +9,7 @@
 
       <div :style="styles.gridWrapper">
         <ag-grid-vue
-          :theme="customDarkTheme"
+          :theme="agGridTheme"
           :rowData="rowData"
           :columnDefs="columnDefs"
           :defaultColDef="defaultColDef"
@@ -38,7 +38,8 @@ import { AgGridVue } from 'ag-grid-vue3';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import './day-view-table-component.css';
 
-import { customDarkTheme } from './constants';
+import { customDarkTheme, customLightTheme } from './constants';
+import { useTheme } from '@/composables/useTheme';
 import { dateComparator } from './utils';
 import CustomHeaderComponent from './grid-components/CustomHeaderComponent.vue';
 import RowNumberRenderer from './grid-components/RowNumberRenderer.vue';
@@ -52,6 +53,9 @@ import { useTableState } from '@/composables/useTableState';
 
 // Register AG Grid modules
 ModuleRegistry.registerModules([AllCommunityModule]);
+
+const { resolvedTheme } = useTheme();
+const agGridTheme = computed(() => resolvedTheme.value === 'dark' ? customDarkTheme : customLightTheme);
 
 const {
   selectedCell,
@@ -117,7 +121,7 @@ const columnDefs = computed(() => [
     cellRenderer: markRaw(RowNumberRenderer),
     headerComponent: markRaw(RowNumberHeaderComponent),
     cellStyle: {
-      backgroundColor: '#090909',
+      backgroundColor: 'var(--app-surface)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
