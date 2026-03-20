@@ -9,17 +9,17 @@ export const StatusBadge = ({ status, type }: StatusBadgeProps) => {
   const getStatusStyles = () => {
     switch (type) {
       case 'review':
-        return 'bg-violet-100 text-violet-700 border-violet-200'
+        return 'bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-900/40 dark:text-violet-300 dark:border-violet-700'
       case 'pending':
-        return 'bg-gray-100 text-gray-600 border-gray-200'
+        return 'bg-gray-100 text-gray-600 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700'
       case 'conflict':
-        return 'bg-red-50 text-red-600 border-red-200'
+        return 'bg-red-50 text-red-600 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-700'
       case 'dispute':
-        return 'bg-red-50 text-red-600 border-red-200'
+        return 'bg-red-50 text-red-600 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-700'
       case 'submit':
-        return 'bg-green-50 text-green-700 border-green-200'
+        return 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700'
       default:
-        return 'bg-gray-50 text-gray-600 border-gray-200'
+        return 'bg-gray-50 text-gray-600 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700'
     }
   }
 

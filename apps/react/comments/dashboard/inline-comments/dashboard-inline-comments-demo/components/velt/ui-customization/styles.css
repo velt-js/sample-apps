@@ -2,7 +2,7 @@
 .custom-bubble-tool {
     position: relative;
     display: flex;
-    color: white !important;
+    color: var(--app-text-primary) !important;
     cursor: pointer;
 }
 
@@ -14,7 +14,7 @@
     height: 6px;
     background-color: #FF7162;
     border-radius: 50%;
-    border: 1px solid white;
+    border: 1px solid var(--app-bg);
 }
 
 .has-comments {
@@ -25,7 +25,7 @@
     height: 6px;
     background-color: #625DF5;
     border-radius: 50%;
-    border: 1px solid white;
+    border: 1px solid var(--app-bg);
 }
 
 velt-comment-tool {
@@ -41,10 +41,10 @@ velt-if:empty {
     display: none !important;
 }
 
-/* Keep icons white by default - only purple on hover */
+/* Keep icons themed by default - only purple on hover */
 velt-comment-tool .custom-bubble-tool,
 velt-comment-bubble .custom-bubble-tool {
-    color: white !important;
+    color: var(--app-text-primary) !important;
 }
 
 /* Purple on hover only */
@@ -56,7 +56,7 @@ velt-comment-bubble:hover .custom-bubble-tool {
 /* Prevent active/open states from changing color */
 velt-comment-tool.velt-comment-tool-active .custom-bubble-tool,
 velt-comment-bubble.velt-comment-bubble-open .custom-bubble-tool {
-    color: white !important;
+    color: var(--app-text-primary) !important;
 }
 
 /* But still allow hover on active states */

@@ -13,9 +13,10 @@ export default function Breadcrumb() {
             src="/assets/dashboard/icon-layout-grid.svg"
             width={14}
             height={14}
+            style={{ filter: 'var(--app-icon-invert)' }}
           />
         </div>
-        <p className="font-['Inter',sans-serif] font-normal leading-[1.1] not-italic text-[13px] text-[rgba(255,255,255,0.52)] text-nowrap whitespace-pre">
+        <p className="font-['Inter',sans-serif] font-normal leading-[1.1] not-italic text-[13px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-tertiary)' }}>
           All Dashboards
         </p>
       </div>
@@ -26,6 +27,7 @@ export default function Breadcrumb() {
           src="/assets/dashboard/icon-chevron-right.svg"
           width={12}
           height={12}
+          style={{ filter: 'var(--app-icon-invert)' }}
         />
       </div>
       <div className="flex gap-[8px] items-center">
@@ -36,9 +38,10 @@ export default function Breadcrumb() {
             src="/assets/dashboard/frame.svg"
             width={14}
             height={14}
+            style={{ filter: 'var(--app-icon-invert)' }}
           />
         </div>
-        <p className="font-['Inter',sans-serif] font-normal leading-[1.1] not-italic text-[13px] text-[rgba(255,255,255,0.52)] text-nowrap whitespace-pre">
+        <p className="font-['Inter',sans-serif] font-normal leading-[1.1] not-italic text-[13px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-tertiary)' }}>
           Marketing Spend
         </p>
       </div>

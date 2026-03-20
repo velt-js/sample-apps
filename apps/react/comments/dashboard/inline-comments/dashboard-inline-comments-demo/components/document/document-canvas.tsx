@@ -48,13 +48,13 @@ export default function DocumentCanvas() {
         <Sidebar />
         <div className="flex-1 flex overflow-hidden">
           {/* Main Content Area */}
-          <div className="flex-1 flex flex-col bg-white overflow-hidden">
+          <div className="flex-1 flex flex-col bg-background overflow-hidden">
             {/* Page Header */}
-            <div className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
+            <div className="flex items-center justify-between px-8 py-4 border-b border-border">
               <div className="flex items-center gap-2">
                 <FileIcon />
-                <span className="text-base font-semibold text-gray-900">Active jobs</span>
-                <span className="text-sm text-gray-500">(26)</span>
+                <span className="text-base font-semibold text-gray-900 dark:text-gray-100">Active jobs</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">(26)</span>
                 <ChevronDownIcon />
               </div>
               <button className="w-8 h-8 rounded-full bg-blue-500 hover:bg-blue-600 flex items-center justify-center shadow-sm">
@@ -64,15 +64,15 @@ export default function DocumentCanvas() {
 
             {/* Filter Toolbar */}
             <div className="flex items-center justify-between px-8 py-3">
-              <button className="inline-flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">
+              <button className="inline-flex items-center gap-2 px-3 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">
                 <FilterIcon />
                 Filter
               </button>
               <div className="flex items-center gap-2">
-                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
                   <SearchIcon />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
                   <SettingsIcon />
                 </button>
               </div>

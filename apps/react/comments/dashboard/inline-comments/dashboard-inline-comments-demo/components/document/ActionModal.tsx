@@ -12,7 +12,7 @@ interface ActionModalProps {
 
 const CloseIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15 5L5 15M5 5l10 10" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 )
 
@@ -121,16 +121,16 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
       <>
         <div className="fixed inset-0 bg-black/50 z-[60]" />
         <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl p-8 max-w-sm w-full text-center">
+          <div className="bg-background rounded-xl shadow-2xl p-8 max-w-sm w-full text-center">
             <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${
-              actionType === 'reject' || actionType === 'dispute' ? 'bg-red-100' : 'bg-green-100'
+              actionType === 'reject' || actionType === 'dispute' ? 'bg-red-100 dark:bg-red-900/30' : 'bg-green-100 dark:bg-green-900/30'
             }`}>
               <CheckIcon />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
               {actionLabel} Complete
             </h3>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {comment.trim()
                 ? 'Your comment has been added to this job.'
                 : 'Action completed successfully.'}
@@ -148,13 +148,13 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
 
       {/* Modal */}
       <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full" onClick={(e) => e.stopPropagation()}>
+        <div className="bg-background rounded-xl shadow-2xl max-w-lg w-full" onClick={(e) => e.stopPropagation()}>
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">{config.title}</h2>
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{config.title}</h2>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-500 dark:text-gray-400"
             >
               <CloseIcon />
             </button>
@@ -162,7 +162,7 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
 
           {/* Content */}
           <div className="p-6">
-            <p className="text-sm text-gray-600 mb-4">{config.description}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{config.description}</p>
 
             {/* Comment input - action comments are stored but not deletable */}
             <div
@@ -170,7 +170,7 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
               data-id={actionTargetId}
               className="mb-4"
             >
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Comment {config.required && <span className="text-red-500">*</span>}
               </label>
               <div className="relative">
@@ -179,19 +179,17 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
                   onChange={(e) => setComment(e.target.value)}
                   placeholder={`Add your ${actionType} comment here...`}
                   rows={4}
-                  className={`w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${
-                    config.required && !comment.trim() ? 'border-gray-300' : 'border-gray-300'
-                  }`}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-background text-foreground"
                 />
               </div>
               {config.required && !comment.trim() && (
-                <p className="mt-1 text-xs text-gray-500">A comment is required for this action.</p>
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">A comment is required for this action.</p>
               )}
             </div>
 
             {/* Info about action comments */}
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <p className="text-xs text-amber-800">
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-3">
+              <p className="text-xs text-amber-800 dark:text-amber-300">
                 <strong>Note:</strong> Action comments are recorded for audit purposes and cannot be deleted.
                 They will appear in the job&apos;s comment history.
               </p>
@@ -199,10 +197,10 @@ export default function ActionModal({ jobId, actionType, actionLabel, onClose, o
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
+          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-b-xl">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-background border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
             >
               Cancel
             </button>

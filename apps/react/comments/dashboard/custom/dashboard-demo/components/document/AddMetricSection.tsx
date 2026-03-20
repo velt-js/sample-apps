@@ -13,9 +13,10 @@ export default function AddMetricSection() {
             src="/assets/dashboard/icon-plus.svg"
             width={18}
             height={18}
+            style={{ filter: 'var(--app-icon-invert)' }}
           />
         </div>
-        <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[18px] text-nowrap text-white whitespace-pre">
+        <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[18px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
           Add New Metric
         </p>
       </div>

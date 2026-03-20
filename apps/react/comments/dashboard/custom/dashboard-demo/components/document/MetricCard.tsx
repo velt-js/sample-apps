@@ -27,7 +27,8 @@ export default function MetricCard({
   return (
     <div
       id={id}
-      className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]"
+      className="flex-1 border border-solid box-border flex flex-col h-[145px] items-start justify-between p-[24px] rounded-[8px]"
+      style={{ borderColor: 'var(--app-divider)' }}
     >
       <div className="flex gap-[4px] items-end w-full">
         <div className="flex-1 flex gap-[8px] items-center">
@@ -40,7 +41,7 @@ export default function MetricCard({
               height={16}
             />
           </div>
-          <p className="flex-1 font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-white">
+          <p className="flex-1 font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px]" style={{ color: 'var(--app-text-primary)' }}>
             {title}
           </p>
         </div>
@@ -52,7 +53,7 @@ export default function MetricCard({
         </div>
       </div>
       <div className="flex gap-[8px] items-baseline w-full">
-        <p className="font-['Poppins',sans-serif] font-medium leading-none not-italic text-[24px] text-nowrap text-white whitespace-pre">
+        <p className="font-['Poppins',sans-serif] font-medium leading-none not-italic text-[24px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
           {value}
         </p>
         <div className="flex gap-[5px] items-center">

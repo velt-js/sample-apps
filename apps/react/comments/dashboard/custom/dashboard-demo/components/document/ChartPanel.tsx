@@ -12,10 +12,11 @@ export default function ChartPanel({ id, title }: ChartPanelProps) {
   return (
     <div
       id={id}
-      className="flex-1 border border-[rgba(217,217,217,0.08)] border-solid h-[284px] rounded-[8px] p-[24px] relative"
+      className="flex-1 border border-solid h-[284px] rounded-[8px] p-[24px] relative"
+      style={{ borderColor: 'var(--app-divider)' }}
     >
       <div className="flex gap-[4px] items-center justify-between w-full mb-[17px]">
-        <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-nowrap text-white whitespace-pre">
+        <p className="font-['Poppins',sans-serif] leading-none not-italic opacity-[0.51] text-[15px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
           {title}
         </p>
         <div className="flex gap-[8px] items-center">

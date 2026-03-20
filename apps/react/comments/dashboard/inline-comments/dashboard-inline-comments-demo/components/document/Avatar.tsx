@@ -14,7 +14,7 @@ export const Avatar = ({ initials, color, size = 24, hasIndicator = false }: Ava
       {initials}
     </div>
     {hasIndicator && (
-      <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full border border-white"></span>
+      <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full border border-background"></span>
     )}
   </div>
 )

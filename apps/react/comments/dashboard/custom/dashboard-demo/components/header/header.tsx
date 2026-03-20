@@ -2,6 +2,7 @@
 
 import { VeltSidebarButton } from "@veltdev/react";
 import VeltTools from "@/components/velt/VeltTools";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface HeaderProps {
   toggleCommentsSidebar: () => void;
@@ -19,6 +20,7 @@ export default function Header({ toggleCommentsSidebar }: HeaderProps) {
         padding: "16px",
       }}
     >
+      <ThemeToggle />
       <VeltTools>
         {/* [Velt] Toggle comments sidebar */}
         <div onClick={toggleCommentsSidebar}>

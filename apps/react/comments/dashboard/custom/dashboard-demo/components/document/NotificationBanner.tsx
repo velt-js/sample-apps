@@ -14,7 +14,7 @@ export default function NotificationBanner() {
           height={24}
         />
       </div>
-      <p className="flex-1 font-['Urbanist',sans-serif] font-normal leading-none text-[15px] text-nowrap text-white whitespace-pre">
+      <p className="flex-1 font-['Urbanist',sans-serif] font-normal leading-none text-[15px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
         You got 50 signups from Reddit.
       </p>
     </div>

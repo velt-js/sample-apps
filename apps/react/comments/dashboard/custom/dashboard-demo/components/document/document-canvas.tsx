@@ -31,7 +31,7 @@ export default function DocumentCanvas() {
   return (
     <div className="flex w-full h-screen overflow-hidden">
       <Sidebar />
-      <div className="flex-1 overflow-auto bg-black relative">
+      <div className="flex-1 overflow-auto relative" style={{ backgroundColor: 'var(--app-bg)' }}>
         <Header toggleCommentsSidebar={toggleSidebar} />
           <div className="p-6 max-w-[1440px] mx-auto" data-name="Dashboard">
             {/* Breadcrumb Navigation */}
@@ -41,7 +41,7 @@ export default function DocumentCanvas() {
             <DashboardHeader />
 
             {/* Horizontal Line */}
-            <div className="w-full h-[1px] bg-white opacity-[0.08] mb-[24px]" />
+            <div className="w-full h-[1px] mb-[24px]" style={{ backgroundColor: 'var(--app-divider)' }} />
 
             {/* Metric Cards Row */}
             <div className="flex gap-[7px] items-center mb-[6px]">
@@ -109,17 +109,19 @@ export default function DocumentCanvas() {
 
       {/* [Velt] Embedded Comments Sidebar - Managed by host app */}
       <div
-        className="h-full bg-[#1a1a1a] shadow-xl transition-all duration-300 ease-in-out overflow-hidden flex flex-col"
+        className="h-full shadow-xl transition-all duration-300 ease-in-out overflow-hidden flex flex-col"
         style={{
-          width: isOpen ? '400px' : '0px'
+          width: isOpen ? '400px' : '0px',
+          backgroundColor: 'var(--app-comments-sidebar-bg)'
         }}
       >
         {isOpen && (
           <>
-            <div className="flex items-center gap-3 p-4 border-b border-gray-700 flex-shrink-0">
+            <div className="flex items-center gap-3 p-4 border-b flex-shrink-0" style={{ borderColor: 'var(--app-border)' }}>
               <button
                 onClick={closeSidebar}
-                className="text-gray-400 hover:text-white transition-colors"
+                className="hover:text-white transition-colors"
+                style={{ color: 'var(--app-text-tertiary)' }}
                 aria-label="Close comments sidebar"
               >
                 <svg
@@ -133,7 +135,7 @@ export default function DocumentCanvas() {
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </button>
-              <h2 className="text-white font-semibold">Comments</h2>
+              <h2 className="font-semibold" style={{ color: 'var(--app-text-primary)' }}>Comments</h2>
             </div>
             <div className="flex-1 overflow-hidden">
               {/* [Velt] VeltCommentsSidebar with embedMode for inline rendering, groupConfig to disable grouping, pageMode for page-level comments */}

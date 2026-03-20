@@ -2,7 +2,7 @@
 
 export default function DashboardHeader() {
   return (
-    <div className="flex flex-col gap-[16px] items-start leading-none text-white mb-[24px]">
+    <div className="flex flex-col gap-[16px] items-start leading-none mb-[24px]" style={{ color: 'var(--app-text-primary)' }}>
       <p className="font-['Urbanist',sans-serif] font-semibold text-[32px]">
         Marketing Spent
       </p>

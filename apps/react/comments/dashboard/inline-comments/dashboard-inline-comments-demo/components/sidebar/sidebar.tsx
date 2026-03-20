@@ -39,17 +39,20 @@ function NavItem({ icon, label, isActive = false, isBold = false, badge, onClick
       className={`
         w-full h-8 flex items-center gap-3 px-2 py-1 rounded-[3px]
         transition-colors duration-150
-        ${isActive ? 'bg-[rgba(242,244,255,0.65)] border border-[#DBE1FF]' : 'hover:bg-[#F2F4FF]/40'}
+        ${isActive ? 'bg-[rgba(242,244,255,0.65)] dark:bg-[rgba(71,94,229,0.15)] border border-[#DBE1FF] dark:border-[#475EE5]/40' : 'hover:bg-[#F2F4FF]/40 dark:hover:bg-white/10'}
       `}
     >
-      <img src={icon} alt="" className="w-4 h-4 flex-shrink-0 block" />
+      <img src={icon} alt="" className="w-4 h-4 flex-shrink-0 block" style={{ filter: 'var(--app-icon-invert)' }} />
       <span
         className={`
           flex-1 text-left text-sm leading-[21px]
-          ${isActive ? 'text-[#475EE5] font-medium tracking-[-0.042px]' : 'text-[#4A4947] tracking-[-0.105px]'}
+          ${isActive ? 'text-[#475EE5] font-medium tracking-[-0.042px]' : 'tracking-[-0.105px]'}
           ${isBold && !isActive ? 'font-medium' : ''}
         `}
-        style={{ fontFamily: 'Inter, sans-serif' }}
+        style={{
+          fontFamily: 'Inter, sans-serif',
+          color: isActive ? undefined : 'var(--app-text-primary)',
+        }}
       >
         {label}
       </span>
@@ -72,8 +75,8 @@ interface SectionHeaderProps {
 function SectionHeader({ label }: SectionHeaderProps) {
   return (
     <div
-      className="text-[#777572] text-xs leading-[18px] tracking-[0.1px] uppercase px-2 pt-4 pb-1"
-      style={{ fontFamily: 'Inter, sans-serif' }}
+      className="text-xs leading-[18px] tracking-[0.1px] uppercase px-2 pt-4 pb-1"
+      style={{ fontFamily: 'Inter, sans-serif', color: 'var(--app-text-tertiary)' }}
     >
       {label}
     </div>
@@ -86,12 +89,11 @@ export default function Sidebar() {
       <aside
         className="w-60 h-full flex flex-col relative flex-shrink-0"
         style={{
-          backgroundColor: 'rgba(250, 250, 250, 0.5)',
+          backgroundColor: 'var(--app-surface)',
         }}
       >
       {/* Divider on right edge */}
-      <div className="absolute top-0 right-0 w-px h-full">
-        <img src={imgDivider} alt="" className="w-full h-full object-cover" />
+      <div className="absolute top-0 right-0 w-px h-full bg-border">
       </div>
 
       {/* Main content wrapper */}
@@ -102,9 +104,10 @@ export default function Sidebar() {
             src={imgLogo}
             alt="Dashboard Inline Demo"
             className="w-[113px] h-7"
+            style={{ filter: 'var(--app-icon-invert)' }}
           />
           <button className="ml-auto">
-            <img src={imgCopy} alt="Copy" className="w-4 h-4" />
+            <img src={imgCopy} alt="Copy" className="w-4 h-4" style={{ filter: 'var(--app-icon-invert)' }} />
           </button>
         </div>
 
@@ -125,7 +128,7 @@ export default function Sidebar() {
           />
           <div className="relative w-100">
             {/* [Velt] Notifications Tool */}
-            <VeltNotificationsTool shadowDom={false} />  
+            <VeltNotificationsTool shadowDom={false} />
           </div>
           <NavItem
             icon={imgHome}
@@ -182,13 +185,13 @@ export default function Sidebar() {
             />
 
             {/* User Profile */}
-            <button className="w-full h-8 flex items-center gap-[10px] pl-[6px] pr-2 py-1 rounded-[3px] hover:bg-[#F2F4FF]/40 transition-colors duration-150">
+            <button className="w-full h-8 flex items-center gap-[10px] pl-[6px] pr-2 py-1 rounded-[3px] hover:bg-[#F2F4FF]/40 dark:hover:bg-white/10 transition-colors duration-150">
               <div className="w-5 h-5 rounded-full bg-[#3649B9] flex items-center justify-center text-white text-[9px] font-semibold leading-[18px]">
                 LW
               </div>
               <span
-                className="flex-1 text-left text-sm leading-[21px] text-[#4A4947] tracking-[-0.105px]"
-                style={{ fontFamily: 'Inter, sans-serif' }}
+                className="flex-1 text-left text-sm leading-[21px] tracking-[-0.105px]"
+                style={{ fontFamily: 'Inter, sans-serif', color: 'var(--app-text-primary)' }}
               >
                 Linda Wang
               </span>

@@ -10,12 +10,12 @@ export default function Sidebar() {
       {/* Expand Button - shown when sidebar is collapsed */}
       {isCollapsed && (
         <div
-          className="fixed left-4 top-4 z-50 cursor-pointer flex items-center justify-center hover:bg-[#1a1a1a] transition-colors"
+          className="fixed left-4 top-4 z-50 cursor-pointer flex items-center justify-center transition-colors"
           onClick={() => setIsCollapsed(false)}
           style={{
             width: "40px",
             height: "40px",
-            backgroundColor: "rgb(14, 14, 14)",
+            backgroundColor: "var(--app-sidebar-bg)",
             borderRadius: "8px",
           }}
         >
@@ -23,15 +23,16 @@ export default function Sidebar() {
             src="/assets/sidebar/icon-chevron-left-pipe.svg"
             alt="Expand sidebar"
             className="block max-w-none w-4 h-4"
-            style={{ transform: 'rotate(180deg)' }}
+            style={{ transform: 'rotate(180deg)', filter: 'var(--app-icon-invert)' }}
           />
         </div>
       )}
 
       {/* Sidebar - with smooth animation */}
       <div
-        className="bg-[#0e0e0e] content-stretch flex flex-col items-start justify-between relative h-full transition-all duration-300"
+        className="content-stretch flex flex-col items-start justify-between relative h-full transition-all duration-300"
         style={{
+          backgroundColor: 'var(--app-sidebar-bg)',
           width: isCollapsed ? "0px" : "251px",
           overflow: "hidden",
           opacity: isCollapsed ? 0 : 1,
@@ -46,16 +47,19 @@ export default function Sidebar() {
                   W
                 </p>
               </div>
-              <p className="font-[var(--font-urbanist)] font-normal leading-none relative shrink-0 text-[14px] text-nowrap text-white whitespace-pre">
+              <p className="font-[var(--font-urbanist)] font-normal leading-none relative shrink-0 text-[14px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
                 Willow HQ
               </p>
             </div>
             <button
               onClick={() => setIsCollapsed(true)}
-              className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0 hover:bg-white/5 rounded transition-colors cursor-pointer"
+              className="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0 rounded transition-colors cursor-pointer"
+              style={{ backgroundColor: 'transparent' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--app-toggle-active-bg)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
               <div className="relative shrink-0 size-[16px]">
-                <img alt="Collapse sidebar" className="block max-w-none size-full" src="/assets/sidebar/icon-chevron-left-pipe.svg" />
+                <img alt="Collapse sidebar" className="block max-w-none size-full" src="/assets/sidebar/icon-chevron-left-pipe.svg" style={{ filter: 'var(--app-icon-invert)' }} />
               </div>
             </button>
           </div>
@@ -64,9 +68,9 @@ export default function Sidebar() {
             <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full">
               <div className="box-border content-stretch flex gap-[12px] h-[32px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full">
                 <div className="relative shrink-0 size-[14px]">
-                  <img alt="Home" className="block max-w-none size-full" src="/assets/sidebar/icon-smart-home.svg" />
+                  <img alt="Home" className="block max-w-none size-full" src="/assets/sidebar/icon-smart-home.svg" style={{ filter: 'var(--app-icon-invert)' }} />
                 </div>
-                <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-[rgba(255,255,255,0.52)] text-nowrap">
+                <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap" style={{ color: 'var(--app-text-tertiary)' }}>
                   Home
                 </p>
               </div>
@@ -74,34 +78,34 @@ export default function Sidebar() {
             <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full">
               <div className="box-border content-stretch flex gap-[12px] h-[32px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full">
                 <div className="relative shrink-0 size-[14px]">
-                  <img alt="Dashboard" className="block max-w-none size-full" src="/assets/sidebar/icon-layout-grid.svg" />
+                  <img alt="Dashboard" className="block max-w-none size-full" src="/assets/sidebar/icon-layout-grid.svg" style={{ filter: 'var(--app-icon-invert)' }} />
                 </div>
-                <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap text-white">
+                <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap" style={{ color: 'var(--app-text-primary)' }}>
                   Dashboard
                 </p>
               </div>
               <div className="box-border content-stretch flex flex-col gap-[4px] items-start justify-center pl-[24px] pr-0 py-[8px] relative rounded-[8px] shrink-0 w-full">
-                <div className="bg-[rgba(255,255,255,0.08)] box-border content-stretch flex gap-[12px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full">
+                <div className="box-border content-stretch flex gap-[12px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full" style={{ backgroundColor: 'var(--app-toggle-active-bg)' }}>
                   <div className="relative shrink-0 size-[16px]">
-                    <img alt="Marketing Spend" className="block max-w-none size-full" src="/assets/sidebar/icon-dashboard-chart.svg" />
+                    <img alt="Marketing Spend" className="block max-w-none size-full" src="/assets/sidebar/icon-dashboard-chart.svg" style={{ filter: 'var(--app-icon-invert)' }} />
                   </div>
-                  <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap text-white">
+                  <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap" style={{ color: 'var(--app-text-primary)' }}>
                     Marketing Spend
                   </p>
                 </div>
                 <div className="box-border content-stretch flex gap-[12px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full">
                   <div className="relative shrink-0 size-[16px]">
-                    <img alt="Salaries" className="block max-w-none size-full" src="/assets/sidebar/icon-currency-dollar.svg" />
+                    <img alt="Salaries" className="block max-w-none size-full" src="/assets/sidebar/icon-currency-dollar.svg" style={{ filter: 'var(--app-icon-invert)' }} />
                   </div>
-                  <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-[rgba(255,255,255,0.52)] text-nowrap">
+                  <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap" style={{ color: 'var(--app-text-tertiary)' }}>
                     Salaries
                   </p>
                 </div>
                 <div className="box-border content-stretch flex gap-[12px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full">
                   <div className="relative shrink-0 size-[16px]">
-                    <img alt="Misc" className="block max-w-none size-full" src="/assets/sidebar/icon-file-analytics.svg" />
+                    <img alt="Misc" className="block max-w-none size-full" src="/assets/sidebar/icon-file-analytics.svg" style={{ filter: 'var(--app-icon-invert)' }} />
                   </div>
-                  <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-[rgba(255,255,255,0.52)] text-nowrap">
+                  <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap" style={{ color: 'var(--app-text-tertiary)' }}>
                     Misc.
                   </p>
                 </div>
@@ -109,17 +113,17 @@ export default function Sidebar() {
             </div>
             <div className="box-border content-stretch flex gap-[12px] h-[32px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full">
               <div className="relative shrink-0 size-[14px]">
-                <img alt="Analytics" className="block max-w-none size-full" src="/assets/sidebar/icon-trending-up.svg" />
+                <img alt="Analytics" className="block max-w-none size-full" src="/assets/sidebar/icon-trending-up.svg" style={{ filter: 'var(--app-icon-invert)' }} />
               </div>
-              <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-[rgba(255,255,255,0.52)] text-nowrap">
+              <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap" style={{ color: 'var(--app-text-tertiary)' }}>
                 Analytics
               </p>
             </div>
             <div className="box-border content-stretch flex gap-[12px] h-[32px] items-center p-[8px] relative rounded-[8px] shrink-0 w-full">
               <div className="relative shrink-0 size-[14px]">
-                <img alt="NPS" className="block max-w-none size-full" src="/assets/sidebar/icon-heart.svg" />
+                <img alt="NPS" className="block max-w-none size-full" src="/assets/sidebar/icon-heart.svg" style={{ filter: 'var(--app-icon-invert)' }} />
               </div>
-              <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-[rgba(255,255,255,0.52)] text-nowrap">
+              <p className="[white-space-collapse:collapse] basis-0 font-[var(--font-urbanist)] font-normal grow leading-none min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[15px] text-nowrap" style={{ color: 'var(--app-text-tertiary)' }}>
                 NPS
               </p>
             </div>
@@ -128,9 +132,9 @@ export default function Sidebar() {
       </div>
       <div className="box-border content-stretch flex gap-[8px] items-start p-[16px] relative shrink-0 w-[251px]">
         <div className="relative shrink-0 size-[16px]">
-          <img alt="Settings" className="block max-w-none size-full" src="/assets/sidebar/icon-settings.svg" />
+          <img alt="Settings" className="block max-w-none size-full" src="/assets/sidebar/icon-settings.svg" style={{ filter: 'var(--app-icon-invert)' }} />
         </div>
-        <div className="flex flex-col font-[var(--font-urbanist)] font-normal justify-center leading-[0] opacity-50 relative shrink-0 text-[14px] text-nowrap text-white">
+        <div className="flex flex-col font-[var(--font-urbanist)] font-normal justify-center leading-[0] opacity-50 relative shrink-0 text-[14px] text-nowrap" style={{ color: 'var(--app-text-primary)' }}>
           <p className="leading-[1.2] whitespace-pre">Settings</p>
         </div>
       </div>
