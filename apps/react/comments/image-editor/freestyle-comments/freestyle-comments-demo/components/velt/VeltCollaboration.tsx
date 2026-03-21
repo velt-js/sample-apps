@@ -26,6 +26,7 @@ export function VeltCollaboration() {
         textMode={false}
         allowedElementIds={['image-canvas']}
         areaComment={true}
+        commentToNearestAllowedElement={true}
       />
       <VeltCommentsSidebar />
       <VeltCustomization />
