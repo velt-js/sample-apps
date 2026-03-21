@@ -29,6 +29,7 @@ export function VeltCollaboration() {
         shadowDom={false}
         textMode={false}
         allowedElementIds={['image-canvas']}
+        areaComment={false}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} darkMode={true} />
       <VeltCustomization />
