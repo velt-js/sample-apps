@@ -28,6 +28,8 @@ export function VeltCollaboration() {
         areaComment={false}
         commentToNearestAllowedElement={true}
         hotkey={true}
+        darkMode={true}
+        status={false}
       />
       <VeltCommentsSidebar />
       <VeltCustomization />
