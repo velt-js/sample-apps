@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
-import { useVeltClient, useCommentAnnotations, useCommentModeState, VeltCommentPin } from '@veltdev/react'
 import VeltTools from '../../velt/VeltTools'
 import { IMAGES, ZOOM_PRESETS } from './constants'
 import { PropertyRowProps } from './types'
+
+const BASE_SIZE = 1024
 
 export default function FreestyleCanvas() {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
@@ -18,17 +19,26 @@ export default function FreestyleCanvas() {
   const panOffsetStart = useRef({ x: 0, y: 0 })
   const canvasRef = useRef<HTMLDivElement>(null)
   const zoomMenuRef = useRef<HTMLDivElement>(null)
-  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
-
-  const { client } = useVeltClient()
-  const commentModeState = useCommentModeState()
-  const commentAnnotations = useCommentAnnotations()
 
   const activeImage = IMAGES[activeImageIndex]
 
+  const getCenteredOffset = useCallback((zoom: number) => {
+    const canvas = canvasRef.current
+    if (!canvas) return { x: 0, y: 0 }
+    const scale = zoom / 100
+    return {
+      x: (canvas.clientWidth - BASE_SIZE * scale) / 2,
+      y: (canvas.clientHeight - BASE_SIZE * scale) / 2,
+    }
+  }, [])
+
+  useEffect(() => {
+    setPanOffset(getCenteredOffset(zoomLevel))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeImageIndex])
+
   const changeImage = useCallback((index: number) => {
     setActiveImageIndex(index)
-    setPanOffset({ x: 0, y: 0 })
   }, [])
 
   const prevImage = useCallback(() => {
@@ -40,11 +50,35 @@ export default function FreestyleCanvas() {
   }, [activeImageIndex, changeImage])
 
   const zoomIn = useCallback(() => {
-    setZoomLevel(z => Math.min(400, z + 10))
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const cx = canvas.clientWidth / 2
+    const cy = canvas.clientHeight / 2
+    setZoomLevel(z => {
+      const newZ = Math.min(400, z + 10)
+      const factor = newZ / z
+      setPanOffset(prev => ({
+        x: cx + (prev.x - cx) * factor,
+        y: cy + (prev.y - cy) * factor,
+      }))
+      return newZ
+    })
   }, [])
 
   const zoomOut = useCallback(() => {
-    setZoomLevel(z => Math.max(10, z - 10))
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const cx = canvas.clientWidth / 2
+    const cy = canvas.clientHeight / 2
+    setZoomLevel(z => {
+      const newZ = Math.max(10, z - 10)
+      const factor = newZ / z
+      setPanOffset(prev => ({
+        x: cx + (prev.x - cx) * factor,
+        y: cy + (prev.y - cy) * factor,
+      }))
+      return newZ
+    })
   }, [])
 
   // Attach wheel handler as non-passive so preventDefault() works
@@ -56,15 +90,15 @@ export default function FreestyleCanvas() {
       e.preventDefault()
 
       const rect = canvas.getBoundingClientRect()
-      const mouseX = e.clientX - rect.left - rect.width / 2
-      const mouseY = e.clientY - rect.top - rect.height / 2
+      const mouseX = e.clientX - rect.left
+      const mouseY = e.clientY - rect.top
 
       setZoomLevel(prevZoom => {
         const newZoom = Math.min(400, Math.max(10, prevZoom + e.deltaY * -0.1))
         const zoomFactor = newZoom / prevZoom
         setPanOffset(prev => ({
-          x: mouseX - (mouseX - prev.x) * zoomFactor,
-          y: mouseY - (mouseY - prev.y) * zoomFactor,
+          x: mouseX + (prev.x - mouseX) * zoomFactor,
+          y: mouseY + (prev.y - mouseY) * zoomFactor,
         }))
         return Math.round(newZoom)
       })
@@ -74,37 +108,13 @@ export default function FreestyleCanvas() {
     return () => canvas.removeEventListener('wheel', handleWheel)
   }, [])
 
-  const handleCommentClick = useCallback((e: React.MouseEvent) => {
-    if (!client || !canvasRef.current) return
-    const rect = canvasRef.current.getBoundingClientRect()
-    const S = zoomLevel / 100
-    const screenRelX = e.clientX - rect.left - rect.width / 2
-    const screenRelY = e.clientY - rect.top - rect.height / 2
-    const imageX = screenRelX / S - panOffset.x
-    const imageY = screenRelY / S - panOffset.y
-
-    const context = {
-      positionX: imageX,
-      positionY: imageY,
-      imageIndex: activeImageIndex,
-    }
-    client.getCommentElement().addManualComment({ context })
-  }, [client, zoomLevel, panOffset, activeImageIndex])
-
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (e.button !== 0) return
     if ((e.target as HTMLElement).closest?.('velt-comment-pin')) return
-    if (commentModeState) return
     setIsPanning(true)
     panStart.current = { x: e.clientX, y: e.clientY }
     panOffsetStart.current = { ...panOffset }
-  }, [panOffset, commentModeState])
-
-  const handleCanvasClick = useCallback((e: React.MouseEvent) => {
-    if (!commentModeState) return
-    if ((e.target as HTMLElement).closest?.('velt-comment-pin')) return
-    handleCommentClick(e)
-  }, [commentModeState, handleCommentClick])
+  }, [panOffset])
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!isPanning) return
@@ -136,65 +146,23 @@ export default function FreestyleCanvas() {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [showZoomMenu])
 
-  // Track canvas size for pin positioning
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const observer = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect
-      setCanvasSize({ width, height })
-    })
-    observer.observe(canvas)
-    return () => observer.disconnect()
-  }, [])
-
   const fitToPage = useCallback(() => {
     setZoomLevel(66)
-    setPanOffset({ x: 0, y: 0 })
+    setPanOffset(getCenteredOffset(66))
     setShowZoomMenu(false)
-  }, [])
+  }, [getCenteredOffset])
 
   const fitToWidth = useCallback(() => {
     setZoomLevel(100)
-    setPanOffset({ x: 0, y: 0 })
+    setPanOffset(getCenteredOffset(100))
     setShowZoomMenu(false)
-  }, [])
+  }, [getCenteredOffset])
 
   const selectZoom = useCallback((level: number) => {
     setZoomLevel(level)
-    setPanOffset({ x: 0, y: 0 })
+    setPanOffset(getCenteredOffset(level))
     setShowZoomMenu(false)
-  }, [])
-
-  const renderCommentPins = useCallback(() => {
-    if (!commentAnnotations || canvasSize.width === 0) return null
-    return commentAnnotations
-      .filter((annotation: any) => {
-        const ctx = annotation.context
-        return ctx && ctx.positionX !== undefined && ctx.imageIndex === activeImageIndex
-      })
-      .map((annotation: any) => {
-        const { positionX, positionY } = annotation.context
-        const S = zoomLevel / 100
-        const left = (positionX + panOffset.x) * S + canvasSize.width / 2
-        const top = (positionY + panOffset.y) * S + canvasSize.height / 2
-        return (
-          <div
-            key={annotation.annotationId}
-            style={{
-              position: 'absolute',
-              left: `${left}px`,
-              top: `${top}px`,
-              transform: 'translate(0, -100%)',
-              zIndex: 40,
-              pointerEvents: 'auto',
-            }}
-          >
-            <VeltCommentPin annotationId={annotation.annotationId} />
-          </div>
-        )
-      })
-  }, [commentAnnotations, activeImageIndex, zoomLevel, panOffset, canvasSize])
+  }, [getCenteredOffset])
 
   const truncatedFilename = activeImage.filename.length > 40
     ? activeImage.filename.slice(0, 40) + '...'
@@ -211,31 +179,37 @@ export default function FreestyleCanvas() {
         {/* Image canvas area - takes full space */}
         <div
           ref={canvasRef}
-          className="absolute inset-0 flex items-center justify-center overflow-hidden"
-          style={{ cursor: commentModeState ? 'crosshair' : (isPanning ? 'grabbing' : 'grab') }}
+          className="absolute inset-0 overflow-hidden"
+          style={{ cursor: isPanning ? 'grabbing' : 'grab', width: '100%', height: '100%' }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          onClick={handleCanvasClick}
           data-name="ImageCanvas"
-          data-velt-manual-comment-container="true"
         >
-          <img
-            src={activeImage.src}
-            alt={`AI generated image ${activeImageIndex + 1}`}
-            draggable={false}
+          <div
             style={{
-              maxWidth: '90%',
-              maxHeight: '90%',
-              objectFit: 'contain',
-              transform: `scale(${zoomLevel / 100}) translate(${panOffset.x}px, ${panOffset.y}px)`,
-              transformOrigin: 'center center',
-              pointerEvents: 'none',
-              userSelect: 'none',
+              width: '1024px',
+              height: '1024px',
+              transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${zoomLevel / 100})`,
+              transformOrigin: '0 0',
+              // pointerEvents: 'none',
             }}
-          />
-          {renderCommentPins()}
+            id="image-canvas"
+          >
+            <img
+              src={activeImage.src}
+              alt={`AI generated image ${activeImageIndex + 1}`}
+              width={1024}
+              height={1024}
+              draggable={false}
+              style={{
+                display: 'block',
+                pointerEvents: 'auto',
+                userSelect: 'none',
+              }}
+            />
+          </div>
         </div>
 
         {/* Floating top-left: Zoom controls */}

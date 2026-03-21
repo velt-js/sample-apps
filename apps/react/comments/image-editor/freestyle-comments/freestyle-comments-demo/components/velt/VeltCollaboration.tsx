@@ -17,30 +17,6 @@ export function VeltCollaboration() {
     }
   }, [isUserLoggedIn, client]);
 
-  // [Velt] Enable dark mode for all Velt components
-  useEffect(() => {
-    if (client) {
-      client.setDarkMode(true);
-    }
-  }, [client]);
-
-  // [Velt] Configure custom annotation dropdown for tagging comments
-  useEffect(() => {
-    if (client) {
-      const commentElement = client.getCommentElement();
-      commentElement.createCustomListDataOnAnnotation({
-        type: 'multi',
-        placeholder: 'Select tags',
-        data: [
-          { id: 'design', label: 'Design' },
-          { id: 'content', label: 'Content' },
-          { id: 'bug', label: 'Bug' },
-          { id: 'enhancement', label: 'Enhancement' },
-        ]
-      });
-    }
-  }, [client]);
-
   const groupConfig = {
     enable: false
   };
@@ -51,10 +27,8 @@ export function VeltCollaboration() {
       {/* [Velt] Freestyle and text comments - restricted to document canvas only */}
       <VeltComments
         shadowDom={false}
-        textMode={true}
-        priority={false}
-        status={true}
-        darkMode={true}
+        textMode={false}
+        allowedElementIds={['image-canvas']}
       />
       <VeltCommentsSidebar groupConfig={groupConfig} darkMode={true} />
       <VeltCustomization />

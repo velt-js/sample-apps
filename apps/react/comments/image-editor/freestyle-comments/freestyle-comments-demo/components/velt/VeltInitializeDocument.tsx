@@ -2,11 +2,9 @@
 import { useEffect } from 'react';
 import { useSetDocuments, useCurrentUser } from '@veltdev/react';
 import { useCurrentDocument } from '@/app/document/useCurrentDocument';
-import { useAppUser } from '@/app/userAuth/useAppUser';
 
 export default function VeltInitializeDocument() {
   const { documentId, documentName } = useCurrentDocument();
-  const { user } = useAppUser();
 
   // [Velt] Get document setter hook
   const { setDocuments } = useSetDocuments();
@@ -16,11 +14,12 @@ export default function VeltInitializeDocument() {
 
   // [Velt] Set document in Velt. This is the resource where all Velt collaboration data will be scoped.
   useEffect(() => {
-    if (!veltUser || !user || !documentId || !documentName) return;
-    setDocuments([
-      { id: documentId, metadata: { documentName: documentName } },
-    ]);
-  }, [veltUser, user, setDocuments, documentId, documentName]);
+    if (veltUser && documentId && documentName && setDocuments) {
+      setDocuments([
+          { id: documentId, metadata: { documentName: documentName } },
+        ]);
+      }
+  }, [veltUser, setDocuments, documentId, documentName]);
 
   return null;
 }

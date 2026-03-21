@@ -12,9 +12,9 @@ function VeltTools() {
       {/* [Velt] Show online users */}
       <VeltPresence />
       {/* [Velt] Freestyle comments - click to pin comments anywhere */}
-      <VeltCommentTool darkMode={true} />
+      <VeltCommentTool />
       {/* [Velt] Toggle comments sidebar */}
-      <VeltSidebarButton darkMode={true} />
+      <VeltSidebarButton />
       {/* [Velt] Notifications panel */}
       <VeltNotificationsTool
         settings={true}
@@ -22,7 +22,7 @@ function VeltTools() {
         darkMode={true}
         tabConfig={{
           forYou: { name: "For You", enable: true },
-          documents: { name: "Documents", enable: true },
+          documents: { name: "Images", enable: true },
           all: { name: "All", enable: true },
         }}
       />
