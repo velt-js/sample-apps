@@ -1,4 +1,4 @@
 'use client';
 
-export { useCurrentDocument } from './DocumentContext';
+export { useCurrentDocument, ActiveImageProvider, useActiveImage } from './DocumentContext';
 export type { CurrentDocument } from './DocumentContext';

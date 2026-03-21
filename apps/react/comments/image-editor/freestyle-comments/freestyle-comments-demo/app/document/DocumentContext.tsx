@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useEffect, useState, useRef } from 'react';
+import { createContext, useContext, useMemo, useEffect, useState, useRef } from 'react';
 
 /**
  * ⚠️ IMPORTANT DISCLAIMER FOR DEVELOPERS ⚠️
@@ -29,6 +29,25 @@ export type CurrentDocument = {
   documentId: string | null;
   documentName: string;
 };
+
+const ActiveImageContext = createContext<{
+  activeImageId: string;
+  setActiveImageId: (id: string) => void;
+}>({ activeImageId: 'image-1', setActiveImageId: () => {} });
+
+export function ActiveImageProvider({ children }: { children: React.ReactNode }) {
+  const [activeImageId, setActiveImageId] = useState('image-1');
+  const value = useMemo(() => ({ activeImageId, setActiveImageId }), [activeImageId]);
+  return (
+    <ActiveImageContext.Provider value={value}>
+      {children}
+    </ActiveImageContext.Provider>
+  );
+}
+
+export function useActiveImage() {
+  return useContext(ActiveImageContext);
+}
 
 export function useCurrentDocument(): CurrentDocument {
   const [documentId, setDocumentId] = useState<string | null>(null);

@@ -17,10 +17,6 @@ export function VeltCollaboration() {
     }
   }, [isUserLoggedIn, client]);
 
-  const groupConfig = {
-    enable: false
-  };
-
   return (
     <>
       <VeltInitializeDocument />
@@ -29,9 +25,9 @@ export function VeltCollaboration() {
         shadowDom={false}
         textMode={false}
         allowedElementIds={['image-canvas']}
-        areaComment={false}
+        areaComment={true}
       />
-      <VeltCommentsSidebar groupConfig={groupConfig} darkMode={true} />
+      <VeltCommentsSidebar />
       <VeltCustomization />
     </>
   );

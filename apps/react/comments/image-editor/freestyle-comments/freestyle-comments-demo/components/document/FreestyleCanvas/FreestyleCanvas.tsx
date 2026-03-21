@@ -4,6 +4,7 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 import VeltTools from '../../velt/VeltTools'
 import { IMAGES, ZOOM_PRESETS } from './constants'
 import { PropertyRowProps } from './types'
+import { useActiveImage } from '@/app/document/useCurrentDocument'
 
 const BASE_SIZE = 1024
 
@@ -19,6 +20,7 @@ export default function FreestyleCanvas() {
   const panOffsetStart = useRef({ x: 0, y: 0 })
   const canvasRef = useRef<HTMLDivElement>(null)
   const zoomMenuRef = useRef<HTMLDivElement>(null)
+  const { setActiveImageId } = useActiveImage()
 
   const activeImage = IMAGES[activeImageIndex]
 
@@ -39,7 +41,8 @@ export default function FreestyleCanvas() {
 
   const changeImage = useCallback((index: number) => {
     setActiveImageIndex(index)
-  }, [])
+    setActiveImageId(IMAGES[index].id)
+  }, [setActiveImageId])
 
   const prevImage = useCallback(() => {
     changeImage((activeImageIndex - 1 + IMAGES.length) % IMAGES.length)

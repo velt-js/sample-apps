@@ -2,6 +2,7 @@ import { ImageData } from './types'
 
 export const IMAGES: ImageData[] = [
   {
+    id: 'image-1',
     src: '/assets/ai-1.webp',
     prompt: 'Sample image of a dog with a loving family',
     filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193153_01',
@@ -10,6 +11,7 @@ export const IMAGES: ImageData[] = [
     seed: '1755152713',
   },
   {
+    id: 'image-2',
     src: '/assets/ai-2.webp',
     prompt: 'Sample image of a dog with a loving family',
     filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193153_02',
@@ -18,6 +20,7 @@ export const IMAGES: ImageData[] = [
     seed: '989848097',
   },
   {
+    id: 'image-3',
     src: '/assets/ai-3.webp',
     prompt: 'Sample image of a dog with a loving family',
     filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193153_03',
@@ -26,6 +29,7 @@ export const IMAGES: ImageData[] = [
     seed: '1988426835',
   },
   {
+    id: 'image-4',
     src: '/assets/ai-4.webp',
     prompt: 'Sample image of a dog with a loving family',
     filename: 'Sample_image_of_a_dog_with_a_loving_family_20260320193152_04',

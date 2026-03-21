@@ -1,4 +1,5 @@
 export interface ImageData {
+  id: string
   src: string
   prompt: string
   filename: string
