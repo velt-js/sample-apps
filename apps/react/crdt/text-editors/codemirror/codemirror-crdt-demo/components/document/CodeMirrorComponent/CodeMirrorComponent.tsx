@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { useVeltCodeMirrorCrdtExtension } from "@veltdev/codemirror-crdt-react"
+import { useCollaboration } from "@veltdev/codemirror-crdt-react"
 import { yCollab } from "y-codemirror.next"
 import { EditorState } from "@codemirror/state"
 import { basicSetup, EditorView } from "codemirror"
@@ -58,13 +58,14 @@ export default function CodeMirrorComponent() {
   const viewRef = useRef<EditorView | null>(null)
 
   // Initialize the Velt CRDT extension
-  const { store, isLoading } = useVeltCodeMirrorCrdtExtension({
+  const { primitives, isLoading, isSynced, status, error } = useCollaboration({
     editorId: 'codemirror-editor-1',
-    initialContent: initialContent
+    initialContent: initialContent,
+    onError: (err) => console.error('Collaboration error:', err),
   })
 
   useEffect(() => {
-    if (!store || !editorRef.current) return
+    if (!primitives?.ytext || !editorRef.current) return
 
     // Clean up existing view if any
     if (viewRef.current) {
@@ -73,9 +74,9 @@ export default function CodeMirrorComponent() {
     }
 
     const startState = EditorState.create({
-      // store.getYText() returns the shared Yjs Text document that syncs across all collaborators
+      // primitives.ytext is the shared Yjs Text document that syncs across all collaborators
       // toString() converts it to a plain string for the initial editor content
-      doc: store.getYText()?.toString() ?? '',
+      doc: primitives.ytext.toString(),
       extensions: [
         basicSetup,
         oneDark,
@@ -112,11 +113,11 @@ export default function CodeMirrorComponent() {
           }
         }),
         // yCollab enables real-time collaborative editing with CodeMirror using Yjs
-        // - store.getYText(): The shared Yjs Text document that automatically syncs changes
-        // - store.getAwareness(): Provides presence information (cursors, selections) for other users
-        // - store.getUndoManager(): Enables collaborative undo/redo that respects all users' changes
-        yCollab(store.getYText()!, store.getAwareness(), {
-          undoManager: store.getUndoManager() || false
+        // - primitives.ytext: The shared Yjs Text document that automatically syncs changes
+        // - primitives.awareness: Provides presence information (cursors, selections) for other users
+        // - primitives.undoManager: Enables collaborative undo/redo that respects all users' changes
+        yCollab(primitives.ytext!, primitives.awareness, {
+          undoManager: primitives.undoManager || false
         }),
       ],
     })
@@ -132,7 +133,18 @@ export default function CodeMirrorComponent() {
         viewRef.current = null
       }
     }
-  }, [store])
+  }, [primitives])
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-full bg-[#1e1e1e]">
+        <div className="text-red-400">
+          <p className="text-lg font-semibold">Failed to initialize editor</p>
+          <p className="text-sm mt-2 opacity-75">{error.message}</p>
+        </div>
+      </div>
+    )
+  }
 
   if (isLoading) {
     return (
@@ -143,8 +155,25 @@ export default function CodeMirrorComponent() {
   }
 
   return (
-    <div className="h-full w-full overflow-hidden bg-[#1e1e1e]">
-      <div ref={editorRef} className="h-full w-full" style={{ overflow: 'auto' }} />
+    <div className="h-full w-full overflow-hidden bg-[#1e1e1e] flex flex-col">
+      <div ref={editorRef} className="flex-1 min-h-0" style={{ overflow: 'auto' }} />
+      <div className="flex items-center gap-3 px-3 py-1 text-xs font-mono border-t border-[#333]"
+        style={{ backgroundColor: '#1a1a1a', color: '#858585' }}>
+        <span className="flex items-center gap-1.5">
+          <span
+            className="inline-block w-2 h-2 rounded-full"
+            style={{
+              backgroundColor:
+                status === 'connected' ? '#4ec9b0' :
+                status === 'connecting' ? '#dcdcaa' :
+                '#f14c4c',
+            }}
+          />
+          {status}
+        </span>
+        <span className="opacity-40">|</span>
+        <span>{isSynced ? 'Synced' : 'Syncing\u2026'}</span>
+      </div>
     </div>
   )
 }

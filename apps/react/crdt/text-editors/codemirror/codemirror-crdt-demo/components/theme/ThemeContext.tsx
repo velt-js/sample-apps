@@ -43,19 +43,22 @@ function getUrlTheme(): Theme | null {
   return null;
 }
 
-function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'light';
-  // URL param takes priority (master app override), then localStorage
-  return getUrlTheme() || (localStorage.getItem(STORAGE_KEY) as Theme) || 'light';
-}
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => resolveTheme(theme));
+  const [theme, setThemeState] = useState<Theme>('light');
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>('light');
 
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
     localStorage.setItem(STORAGE_KEY, newTheme);
+  }, []);
+
+  // Hydrate from URL param / localStorage after mount to avoid SSR mismatch
+  useEffect(() => {
+    const stored = getUrlTheme() || (localStorage.getItem(STORAGE_KEY) as Theme) || 'light';
+    setThemeState(stored);
+    if (stored !== theme) {
+      localStorage.setItem(STORAGE_KEY, stored);
+    }
   }, []);
 
   useEffect(() => {
@@ -63,15 +66,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setResolvedTheme(resolved);
     applyTheme(resolved);
   }, [theme]);
-
-  // Sync with URL param on mount
-  useEffect(() => {
-    const urlTheme = getUrlTheme();
-    if (urlTheme && urlTheme !== theme) {
-      setThemeState(urlTheme);
-      localStorage.setItem(STORAGE_KEY, urlTheme);
-    }
-  }, []);
 
   // Listen for postMessage from master app for live theme switching
   useEffect(() => {
@@ -114,8 +108,15 @@ export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
 
   // Standalone state — always called to satisfy rules of hooks
-  const [localTheme, setLocalThemeState] = useState<Theme>(getInitialTheme);
-  const [localResolved, setLocalResolved] = useState<ResolvedTheme>(() => resolveTheme(localTheme));
+  const [localTheme, setLocalThemeState] = useState<Theme>('light');
+  const [localResolved, setLocalResolved] = useState<ResolvedTheme>('light');
+
+  // Hydrate standalone state from storage after mount
+  useEffect(() => {
+    if (context) return;
+    const stored = getUrlTheme() || (localStorage.getItem(STORAGE_KEY) as Theme) || 'light';
+    setLocalThemeState(stored);
+  }, [context]);
 
   const setLocalTheme = useCallback((newTheme: Theme) => {
     setLocalThemeState(newTheme);
