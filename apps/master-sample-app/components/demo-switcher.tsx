@@ -261,19 +261,19 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
       {/* Overlay Panel */}
       <div
         ref={overlayRef}
-        className="absolute left-1/2 -translate-x-1/2 top-[44px] w-[880px] max-w-[calc(100vw-24px)] bg-[#0e0e0e] border border-[rgba(255,255,255,0.08)] rounded-[16px] shadow-[0px_24px_80px_0px_black] overflow-hidden"
+        className="absolute left-1/2 -translate-x-1/2 top-[44px] w-[880px] max-w-[calc(100vw-24px)] bg-white dark:bg-[#0e0e0e] border border-black/8 dark:border-white/8 rounded-[16px] shadow-[0px_24px_80px_0px_rgba(0,0,0,0.15)] dark:shadow-[0px_24px_80px_0px_black] overflow-hidden"
       >
         {/* Search Input */}
         <div className="p-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/52" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-black/52 dark:text-white/52" />
             <input
               ref={searchInputRef}
               type="text"
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-[9px] bg-[rgba(255,255,255,0.04)] border border-white px-10 py-2 text-sm text-white placeholder:text-white/52 focus:outline-none font-[family-name:var(--font-urbanist)]"
+              className="w-full rounded-[9px] bg-black/4 dark:bg-white/4 border border-black dark:border-white px-10 py-2 text-sm text-black dark:text-white placeholder:text-black/52 dark:placeholder:text-white/52 focus:outline-none font-[family-name:var(--font-urbanist)]"
             />
             {searchQuery && (
               <button
@@ -290,7 +290,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
         {searchQuery ? (
           <div className="px-4 pb-4 font-[family-name:var(--font-urbanist)] max-h-[400px] overflow-y-auto">
             {searchResults.length === 0 ? (
-              <div className="px-2 py-4 text-sm text-white/30 text-center">
+              <div className="px-2 py-4 text-sm text-black/30 dark:text-white/30 text-center">
                 No demos found
               </div>
             ) : (
@@ -302,12 +302,12 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
                     className={cn(
                       "w-full rounded-[8px] px-3 py-2.5 text-left transition-colors flex items-center justify-between gap-4",
                       currentSampleId === parsed.sampleId
-                        ? "bg-[#171617] text-white"
-                        : "text-white/80 hover:bg-[#171617]/50"
+                        ? "bg-black/6 dark:bg-[#171617] text-black dark:text-white"
+                        : "text-black/80 dark:text-white/80 hover:bg-black/4 dark:hover:bg-[#171617]/50"
                     )}
                   >
                     <span className="text-[13px]">{sample.metadata.title}</span>
-                    <span className="text-[11px] text-white/30 shrink-0">
+                    <span className="text-[11px] text-black/30 dark:text-white/30 shrink-0">
                       {[parsed.feature, parsed.appType, parsed.library].filter(Boolean).map(formatLabel).join(' / ')}
                     </span>
                   </button>
@@ -319,7 +319,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
           <div className="flex gap-4 px-4 pb-4 font-[family-name:var(--font-urbanist)]">
             {/* Framework Column */}
             <div className="flex-1 min-w-0">
-              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-black/52 dark:text-white/52 mb-3 px-2">
                 Framework
               </div>
               <div className="space-y-1">
@@ -332,10 +332,10 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
                       className={cn(
                         "w-full flex items-center gap-3 rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                         selectedFramework === framework
-                          ? "bg-[#171617] text-white"
+                          ? "bg-black/6 dark:bg-[#171617] text-black dark:text-white"
                           : hasDemo
-                            ? "text-white hover:bg-[#171617]/50"
-                            : "text-white/52 cursor-not-allowed"
+                            ? "text-black dark:text-white hover:bg-black/4 dark:hover:bg-[#171617]/50"
+                            : "text-black/52 dark:text-white/52 cursor-not-allowed"
                       )}
                       disabled={!hasDemo}
                     >
@@ -349,7 +349,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
 
             {/* Feature Column */}
             <div className="flex-1 min-w-0">
-              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-black/52 dark:text-white/52 mb-3 px-2">
                 Feature
               </div>
               <div className="space-y-1">
@@ -362,10 +362,10 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
                       className={cn(
                         "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                         selectedFeature === feature
-                          ? "bg-[#171617] text-white"
+                          ? "bg-black/6 dark:bg-[#171617] text-black dark:text-white"
                           : hasDemo
-                            ? "text-white/52 hover:bg-[#171617]/50"
-                            : "text-white/30 cursor-not-allowed"
+                            ? "text-black/52 dark:text-white/52 hover:bg-black/4 dark:hover:bg-[#171617]/50"
+                            : "text-black/30 dark:text-white/30 cursor-not-allowed"
                       )}
                       disabled={!hasDemo}
                     >
@@ -378,7 +378,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
 
             {/* App Type Column */}
             <div className="flex-1 min-w-0">
-              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-black/52 dark:text-white/52 mb-3 px-2">
                 App Type
               </div>
               <div className="space-y-1">
@@ -389,15 +389,15 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
                     className={cn(
                       "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                       selectedAppType === appType
-                        ? "bg-[#171617] text-white"
-                        : "text-white/52 hover:bg-[#171617]/50"
+                        ? "bg-black/6 dark:bg-[#171617] text-black dark:text-white"
+                        : "text-black/52 dark:text-white/52 hover:bg-black/4 dark:hover:bg-[#171617]/50"
                     )}
                   >
                     {formatLabel(appType)}
                   </button>
                 ))}
                 {appTypes.length === 0 && selectedFeature && (
-                  <div className="px-2 py-2 text-xs text-white/30">
+                  <div className="px-2 py-2 text-xs text-black/30 dark:text-white/30">
                     Select a feature
                   </div>
                 )}
@@ -406,7 +406,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
 
             {/* Library Column */}
             <div className="flex-1 min-w-0">
-              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-black/52 dark:text-white/52 mb-3 px-2">
                 Library
               </div>
               <div className="space-y-1">
@@ -417,15 +417,15 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
                     className={cn(
                       "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                       selectedLibrary === library
-                        ? "bg-[#171617] text-white"
-                        : "text-white/52 hover:bg-[#171617]/50"
+                        ? "bg-black/6 dark:bg-[#171617] text-black dark:text-white"
+                        : "text-black/52 dark:text-white/52 hover:bg-black/4 dark:hover:bg-[#171617]/50"
                     )}
                   >
                     {formatLabel(library)}
                   </button>
                 ))}
                 {libraries.length === 0 && selectedAppType && (
-                  <div className="px-2 py-2 text-xs text-white/30">
+                  <div className="px-2 py-2 text-xs text-black/30 dark:text-white/30">
                     No library needed
                   </div>
                 )}
@@ -434,7 +434,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
 
             {/* Demo Column - always visible */}
             <div className="flex-1 min-w-0">
-              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-white/52 mb-3 px-2">
+              <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-black/52 dark:text-white/52 mb-3 px-2">
                 Demo
               </div>
               <div className="space-y-1 max-h-[300px] overflow-y-auto">
@@ -445,8 +445,8 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
                     className={cn(
                       "w-full rounded-[8px] px-2 py-2 text-[13px] text-left transition-colors",
                       currentSampleId === demo.sampleId
-                        ? "bg-[#171617] text-white"
-                        : "text-white/52 hover:bg-[#171617]/50"
+                        ? "bg-black/6 dark:bg-[#171617] text-black dark:text-white"
+                        : "text-black/52 dark:text-white/52 hover:bg-black/4 dark:hover:bg-[#171617]/50"
                     )}
                   >
                     {formatLabel(demo.demoName)}

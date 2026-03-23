@@ -93,29 +93,29 @@ export function HeaderBar({
   }, [documentId, resetting])
 
   return (
-    <header className="relative flex h-[48px] items-center border-b border-[rgba(255,255,255,0.08)] bg-[#0e0e0e] px-[19px] shrink-0 shadow-[0px_12px_32px_0px_black]">
+    <header className="relative flex h-[48px] items-center border-b border-black/8 dark:border-white/8 bg-white dark:bg-[#0e0e0e] px-[19px] shrink-0">
       {/* Left: Brand + Breadcrumbs */}
       <div className="flex items-center gap-4 min-w-0 overflow-hidden font-[family-name:var(--font-urbanist)]">
         {/* Velt brand */}
         <div className="flex items-center gap-2 shrink-0">
           <VeltLogo className="h-[20px] w-[20px] text-foreground" />
-          <span className="text-[20px] font-bold text-white tracking-[0.2px] leading-none">Velt</span>
+          <span className="text-[20px] font-bold text-black dark:text-white tracking-[0.2px] leading-none">Velt</span>
         </div>
 
         {/* Vertical divider line */}
-        <div className="h-[18px] w-px bg-[rgba(255,255,255,0.12)] shrink-0" />
+        <div className="h-[18px] w-px bg-black/12 dark:bg-white/12 shrink-0" />
 
         {/* Breadcrumb path */}
         <div className="flex items-center gap-[10px] shrink-0">
           {segments.map((segment, i) => (
             <div key={i} className="flex items-center gap-[10px] shrink-0">
               {i > 0 && (
-                <ChevronRight className="h-[14px] w-[14px] text-white/50" />
+                <ChevronRight className="h-[14px] w-[14px] text-black/50 dark:text-white/50" />
               )}
               {i === 0 && segment.toLowerCase() === 'react' ? (
                 <button
                   onClick={() => onBreadcrumbClick?.(i)}
-                  className="flex items-center gap-2 text-[14px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
+                  className="flex items-center gap-2 text-[14px] text-black dark:text-white hover:text-black/80 dark:hover:text-white/80 transition-colors cursor-pointer leading-normal"
                 >
                   <ReactIcon />
                   <span>{segment}</span>
@@ -123,14 +123,14 @@ export function HeaderBar({
               ) : i === segments.length - 1 ? (
                 <button
                   onClick={() => onBreadcrumbClick?.(i)}
-                  className="text-[14px] text-white/50 hover:text-white/70 transition-colors cursor-pointer truncate max-w-[200px] leading-normal"
+                  className="text-[14px] text-black/50 dark:text-white/50 hover:text-black/70 dark:hover:text-white/70 transition-colors cursor-pointer truncate max-w-[200px] leading-normal"
                 >
                   {segment}
                 </button>
               ) : (
                 <button
                   onClick={() => onBreadcrumbClick?.(i)}
-                  className="text-[14px] text-white hover:text-white/80 transition-colors cursor-pointer leading-normal"
+                  className="text-[14px] text-black dark:text-white hover:text-black/80 dark:hover:text-white/80 transition-colors cursor-pointer leading-normal"
                 >
                   {segment}
                 </button>
@@ -141,30 +141,30 @@ export function HeaderBar({
       </div>
 
       {/* Center: Mode Toggle - absolutely centered */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-[2px] bg-[#1e1e1e] rounded-[16px] p-[2px]">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-[2px] bg-black/6 dark:bg-[#1e1e1e] rounded-[16px] p-[2px]">
         <button
           onClick={() => onModeChange("demo")}
           className={cn(
             "p-1 flex items-center justify-center rounded-[32px] transition-colors",
             mode === "demo"
-              ? "bg-white"
-              : "hover:bg-white/10"
+              ? "bg-black dark:bg-white"
+              : "hover:bg-black/10 dark:hover:bg-white/10"
           )}
           title="Demo view"
         >
-          <ClickIcon className={mode === "demo" ? "text-black" : "text-white"} />
+          <ClickIcon className={mode === "demo" ? "text-white dark:text-black" : "text-black dark:text-white"} />
         </button>
         <button
           onClick={() => onModeChange("code")}
           className={cn(
             "p-1 flex items-center justify-center rounded-[32px] transition-colors",
             mode === "code"
-              ? "bg-white"
-              : "hover:bg-white/10"
+              ? "bg-black dark:bg-white"
+              : "hover:bg-black/10 dark:hover:bg-white/10"
           )}
           title="Code view"
         >
-          <CodeBracketsIcon className={cn(mode === "code" ? "text-black" : "text-white")} />
+          <CodeBracketsIcon className={cn(mode === "code" ? "text-white dark:text-black" : "text-black dark:text-white")} />
         </button>
       </div>
 
@@ -173,7 +173,7 @@ export function HeaderBar({
         <HeaderThemeToggle />
         <button
           onClick={onSearchClick}
-          className="flex items-center gap-[9px] h-auto px-3 py-[5px] rounded-lg border border-[rgba(255,255,255,0.12)] text-white opacity-52 hover:opacity-80 transition-opacity w-[233px] font-[family-name:var(--font-urbanist)]"
+          className="flex items-center gap-[9px] h-auto px-3 py-[5px] rounded-lg border border-black/12 dark:border-white/12 text-black dark:text-white opacity-52 hover:opacity-80 transition-opacity w-[233px] font-[family-name:var(--font-urbanist)]"
         >
           <Search className="h-[14px] w-[14px] shrink-0" />
           <span className="text-[14px] leading-normal">Search</span>
@@ -184,7 +184,7 @@ export function HeaderBar({
             onClick={handleShare}
             className={cn(
               "transition-colors",
-              copied ? "text-green-400" : "text-white/60 hover:text-white"
+              copied ? "text-green-400" : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white"
             )}
             title={copied ? "Copied!" : "Copy link"}
           >
@@ -193,7 +193,7 @@ export function HeaderBar({
 
           <button
             onClick={handleGithubClick}
-            className="text-white/60 hover:text-white transition-colors"
+            className="text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors"
             title="View on GitHub"
           >
             <Github className="h-[14.8px] w-[14.8px]" />
@@ -201,7 +201,7 @@ export function HeaderBar({
 
           <button
             onClick={handleOpenInNewTab}
-            className="text-white/60 hover:text-white transition-colors"
+            className="text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors"
             title="Open in new tab"
           >
             <ExternalLink className="h-[14.8px] w-[14.8px]" />
@@ -211,7 +211,7 @@ export function HeaderBar({
             onClick={handleReset}
             className={cn(
               "transition-colors",
-              resetting ? "text-blue-400" : "text-white/60 hover:text-white"
+              resetting ? "text-blue-400" : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white"
             )}
             title={resetting ? "Resetting..." : "Reset document"}
             disabled={resetting}
@@ -262,12 +262,12 @@ function HeaderThemeToggle() {
   if (!mounted) return null
 
   return (
-    <div className="flex items-center gap-[2px] bg-[#1e1e1e] rounded-[8px] p-[2px]">
+    <div className="flex items-center gap-[2px] bg-black/6 dark:bg-[#1e1e1e] rounded-[8px] p-[2px]">
       <button
         onClick={() => setTheme("light")}
         className={cn(
           "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
-          theme === "light" ? "bg-white/10 text-white" : "text-white/40 hover:text-white/70"
+          theme === "light" ? "bg-black/10 dark:bg-white/10 text-black dark:text-white" : "text-black/40 dark:text-white/40 hover:text-black/70 dark:hover:text-white/70"
         )}
         title="Light"
       >
@@ -277,7 +277,7 @@ function HeaderThemeToggle() {
         onClick={() => setTheme("dark")}
         className={cn(
           "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
-          theme === "dark" ? "bg-white/10 text-white" : "text-white/40 hover:text-white/70"
+          theme === "dark" ? "bg-black/10 dark:bg-white/10 text-black dark:text-white" : "text-black/40 dark:text-white/40 hover:text-black/70 dark:hover:text-white/70"
         )}
         title="Dark"
       >
@@ -287,7 +287,7 @@ function HeaderThemeToggle() {
         onClick={() => setTheme("system")}
         className={cn(
           "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
-          theme === "system" ? "bg-white/10 text-white" : "text-white/40 hover:text-white/70"
+          theme === "system" ? "bg-black/10 dark:bg-white/10 text-black dark:text-white" : "text-black/40 dark:text-white/40 hover:text-black/70 dark:hover:text-white/70"
         )}
         title="System"
       >
