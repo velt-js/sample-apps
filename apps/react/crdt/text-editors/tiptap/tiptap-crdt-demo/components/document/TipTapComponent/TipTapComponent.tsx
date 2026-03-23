@@ -22,7 +22,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   const bubbleMenuRootRef = useRef<Root | null>(null)
 
   // [Velt] Initialize CRDT extension for real-time collaborative editing
-  const { extension } = useCollaboration({
+  const { extension, status, isSynced } = useCollaboration({
     editorId: documentId || 'default-editor',
     initialContent: initialContent,
     onError: (err) => console.error('[Velt CRDT] Collaboration error:', err),
@@ -106,11 +106,29 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
     }
   }, [])
 
+  const statusDotColor =
+    status === 'connected' ? (isSynced ? '#22c55e' : '#eab308') :
+    status === 'connecting' ? '#eab308' : '#ef4444'
+
+  const statusLabel =
+    status === 'connected' ? (isSynced ? 'Synced' : 'Syncing…') :
+    status === 'connecting' ? 'Connecting…' : 'Disconnected'
+
   return (
     <div className="relative size-full overflow-hidden" style={{ backgroundColor: 'var(--app-bg)' }} data-name="Tiptap / Bubble Menu">
       <div ref={scrollContainerRef} className="absolute inset-0 overflow-y-auto pb-20">
         <div className="flex justify-center pt-[51px] px-4">
           <div className="w-full max-w-[850px]">
+            {/* [Velt] Real-time connection and sync status from useCollaboration v2 */}
+            <div className="flex items-center gap-1.5 mb-2 px-1">
+              <span
+                className="inline-block size-2 rounded-full shrink-0"
+                style={{ backgroundColor: statusDotColor }}
+              />
+              <span className="text-xs" style={{ color: 'var(--app-text-tertiary)' }}>
+                {statusLabel}
+              </span>
+            </div>
             <div className="border border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]" style={{ backgroundColor: 'var(--app-surface)', borderColor: 'var(--app-surface-border)' }}>
               <div className="w-full max-w-[738px]">
                 <EditorContent

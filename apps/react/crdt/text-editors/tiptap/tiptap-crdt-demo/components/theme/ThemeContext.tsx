@@ -50,12 +50,20 @@ function getInitialTheme(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => resolveTheme(theme));
+  const [theme, setThemeState] = useState<Theme>('light');
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>('light');
 
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
     localStorage.setItem(STORAGE_KEY, newTheme);
+  }, []);
+
+  // Hydrate to the real theme on mount (client-only)
+  useEffect(() => {
+    const urlTheme = getUrlTheme();
+    const initial = urlTheme || (localStorage.getItem(STORAGE_KEY) as Theme) || 'light';
+    setThemeState(initial);
+    if (urlTheme) localStorage.setItem(STORAGE_KEY, urlTheme);
   }, []);
 
   useEffect(() => {
@@ -63,15 +71,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setResolvedTheme(resolved);
     applyTheme(resolved);
   }, [theme]);
-
-  // Sync with URL param on mount
-  useEffect(() => {
-    const urlTheme = getUrlTheme();
-    if (urlTheme && urlTheme !== theme) {
-      setThemeState(urlTheme);
-      localStorage.setItem(STORAGE_KEY, urlTheme);
-    }
-  }, []);
 
   // Listen for postMessage from master app for live theme switching
   useEffect(() => {
@@ -114,8 +113,14 @@ export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
 
   // Standalone state — always called to satisfy rules of hooks
-  const [localTheme, setLocalThemeState] = useState<Theme>(getInitialTheme);
-  const [localResolved, setLocalResolved] = useState<ResolvedTheme>(() => resolveTheme(localTheme));
+  const [localTheme, setLocalThemeState] = useState<Theme>('light');
+  const [localResolved, setLocalResolved] = useState<ResolvedTheme>('light');
+
+  useEffect(() => {
+    if (context) return;
+    const initial = getInitialTheme();
+    setLocalThemeState(initial);
+  }, [context]);
 
   const setLocalTheme = useCallback((newTheme: Theme) => {
     setLocalThemeState(newTheme);

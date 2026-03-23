@@ -1,9 +1,11 @@
 'use client'
 
 import { useRef, useCallback } from 'react'
-import TipTapComponent from './TipTapComponent'
+import dynamic from 'next/dynamic'
 import Sidebar from '../sidebar/sidebar'
 import Header from '../header/header'
+
+const TipTapComponent = dynamic(() => import('./TipTapComponent'), { ssr: false })
 
 export default function DocumentCanvas() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
