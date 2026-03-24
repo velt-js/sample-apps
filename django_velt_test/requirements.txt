@@ -6,4 +6,4 @@ python-dateutil==2.8.2
 requests>=2.25.0
 django-cors-headers==4.3.1
 boto3>=1.28.0
-velt-py==0.1.5
+velt-py==0.1.6
