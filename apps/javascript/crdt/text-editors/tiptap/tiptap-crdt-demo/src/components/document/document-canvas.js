@@ -23,7 +23,8 @@ export function createDocumentCanvas(container) {
 
   // Create the main TipTap content area
   const tiptapContainer = document.createElement('div');
-  tiptapContainer.className = 'bg-black relative size-full overflow-hidden';
+  tiptapContainer.className = 'relative size-full overflow-hidden';
+  tiptapContainer.style.backgroundColor = 'var(--app-bg)';
   tiptapContainer.setAttribute('data-name', 'Tiptap / Bubble Menu');
 
   // Create scroll container
@@ -41,7 +42,9 @@ export function createDocumentCanvas(container) {
 
   // Create the document card
   const documentCard = document.createElement('div');
-  documentCard.className = 'bg-[rgb(17,17,17)] border border-[rgb(20,20,20)] border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]';
+  documentCard.className = 'border border-solid rounded-[16px] p-[42px_56px_64px_56px] min-h-[880px]';
+  documentCard.style.backgroundColor = 'var(--app-surface)';
+  documentCard.style.borderColor = 'var(--app-surface-border)';
 
   // Create editor content wrapper
   const editorWrapper = document.createElement('div');

@@ -180,6 +180,16 @@ export function enableDarkMode() {
 }
 
 /**
+ * Set Velt dark mode
+ * @param {boolean} isDark - Whether to enable dark mode
+ */
+export function setVeltDarkMode(isDark) {
+  if (veltClient) {
+    veltClient.setDarkMode(isDark);
+  }
+}
+
+/**
  * Sign out user
  */
 export async function signOutUser() {

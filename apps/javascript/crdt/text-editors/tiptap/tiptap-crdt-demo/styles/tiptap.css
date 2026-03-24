@@ -10,7 +10,7 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
-  color: white;
+  color: var(--app-text-primary);
 }
 
 .tiptap-editor-content h1 {
@@ -18,7 +18,7 @@
   font-size: 32px !important;
   font-weight: 700 !important;
   line-height: 1.5 !important;
-  color: white !important;
+  color: var(--app-text-primary) !important;
   opacity: 1 !important;
   background: transparent !important;
   margin-bottom: 16px;
@@ -29,7 +29,7 @@
   font-size: 20px !important;
   font-weight: 700 !important;
   line-height: 1.5 !important;
-  color: white !important;
+  color: var(--app-text-primary) !important;
   opacity: 1 !important;
   background: transparent !important;
   margin-bottom: 16px;
@@ -40,7 +40,7 @@
   font-size: 16px !important;
   font-weight: 700 !important;
   line-height: 1.5 !important;
-  color: white !important;
+  color: var(--app-text-primary) !important;
   opacity: 1 !important;
   background: transparent !important;
   margin-bottom: 16px;
@@ -71,7 +71,7 @@
 
 /* Placeholder text when editor is empty */
 .ProseMirror p.is-editor-empty:first-child::before {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--app-text-tertiary);
   content: attr(data-placeholder);
   float: left;
   height: 0;
@@ -83,11 +83,11 @@
   z-index: 50;
 }
 
-/* Collaboration cursor styling - Dark theme adjustments */
+/* Collaboration cursor styling */
 .collaboration-cursor__caret,
 .collaboration-carets__caret {
-  border-left: 1px solid #ffffff;
-  border-right: 1px solid #ffffff;
+  border-left: 1px solid var(--app-text-primary);
+  border-right: 1px solid var(--app-text-primary);
   margin-left: -1px;
   margin-right: -1px;
   pointer-events: none;

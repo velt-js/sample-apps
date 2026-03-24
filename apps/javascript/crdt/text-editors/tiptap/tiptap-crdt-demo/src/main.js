@@ -17,8 +17,8 @@ import {
   initializeVelt,
   authenticateUser,
   setVeltDocument,
-  enableDarkMode,
 } from './lib/velt.js';
+import { initializeTheme } from './lib/theme.js';
 import { createDocumentCanvas } from './components/document/document-canvas.js';
 import { configureNotificationsTool } from './components/velt/velt-tools.js';
 import { createTipTapEditor } from './components/document/tiptap/index.js';
@@ -121,9 +121,9 @@ async function init() {
     console.log('[App] Step 5: Setting document in Velt...');
     await setVeltDocument(doc.documentId, doc.documentName);
 
-    // Step 6: Enable dark mode
-    console.log('[App] Step 6: Enabling dark mode...');
-    enableDarkMode();
+    // Step 6: Initialize theme system
+    console.log('[App] Step 6: Initializing theme...');
+    initializeTheme();
 
     // Step 7: Configure notifications
     console.log('[App] Step 7: Configuring notifications...');

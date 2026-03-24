@@ -38,13 +38,13 @@ export function createSidebar(container, options = {}) {
   // Expand button (shown when collapsed)
   const expandButton = document.createElement('div');
   expandButton.className = 'fixed left-4 top-4 z-50 cursor-pointer flex items-center justify-center';
-  expandButton.style.cssText = 'width: 40px; height: 40px; background-color: rgb(14, 14, 14); border-radius: 8px;';
+  expandButton.style.cssText = 'width: 40px; height: 40px; background-color: var(--app-sidebar-bg); border-radius: 8px;';
   expandButton.innerHTML = `
     <img
       src="${imgTablerIconChevronLeftPipe}"
       alt="Expand"
       class="block max-w-none w-5 h-5"
-      style="transform: rotate(180deg);"
+      style="transform: rotate(180deg); filter: var(--app-icon-invert);"
     />
   `;
 
@@ -58,7 +58,7 @@ export function createSidebar(container, options = {}) {
   function renderSidebar() {
     sidebar.style.width = isCollapsed ? '0px' : '254px';
     sidebar.style.height = 'calc(100vh - 32px)';
-    sidebar.style.backgroundColor = '#0e0e0e';
+    sidebar.style.backgroundColor = 'var(--app-sidebar-bg)';
     sidebar.style.borderRadius = '12px';
     sidebar.style.boxShadow = '0px -24px 100px 0px rgba(0, 0, 0, 0.25)';
     sidebar.style.margin = '16px';
@@ -71,24 +71,24 @@ export function createSidebar(container, options = {}) {
         <div class="flex items-start gap-[6px]">
           <div class="relative shrink-0 size-[12px] opacity-50">
             <svg width="12" height="12" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="0" width="8" height="1" fill="white" />
-              <rect x="0" y="2.5" width="8" height="1" fill="white" />
-              <rect x="0" y="5" width="8" height="1" fill="white" />
+              <rect x="0" y="0" width="8" height="1" fill="var(--app-text-primary)" />
+              <rect x="0" y="2.5" width="8" height="1" fill="var(--app-text-primary)" />
+              <rect x="0" y="5" width="8" height="1" fill="var(--app-text-primary)" />
             </svg>
           </div>
-          <p class="font-['Urbanist',sans-serif] font-normal leading-none opacity-50 text-[12px] text-white whitespace-pre">
+          <p class="font-['Urbanist',sans-serif] font-normal leading-none opacity-50 text-[12px] text-[var(--app-text-primary)] whitespace-pre">
             Mihir's Workspace
           </p>
         </div>
 
-        <p class="font-['Urbanist',sans-serif] font-semibold leading-none opacity-90 text-[16px] text-white whitespace-pre">
+        <p class="font-['Urbanist',sans-serif] font-semibold leading-none opacity-90 text-[16px] text-[var(--app-text-primary)] whitespace-pre">
           Attention Is All You Need
         </p>
       </div>
 
       <div class="absolute left-[24px] top-[155px] right-[24px] bottom-[384px] flex flex-col gap-[12px]">
         <div class="flex gap-[8px] items-center justify-between">
-          <div class="font-['Geist_Mono',monospace] font-normal leading-[0] opacity-[0.52] text-[10px] text-white uppercase">
+          <div class="font-['Geist_Mono',monospace] font-normal leading-[0] opacity-[0.52] text-[10px] text-[var(--app-text-primary)] uppercase">
             <p class="leading-[1.5] whitespace-pre">Table of Contents</p>
           </div>
           <button
@@ -98,6 +98,7 @@ export function createSidebar(container, options = {}) {
               src="${imgTablerIconChevronLeftPipe}"
               alt="Collapse"
               class="block max-w-none w-5 h-5"
+              style="filter: var(--app-icon-invert);"
             />
           </button>
         </div>
@@ -117,7 +118,7 @@ export function createSidebar(container, options = {}) {
                   </div>
                 </div>
 
-                <div class="font-['Geist_Mono',monospace] font-normal text-[12px] text-white">
+                <div class="font-['Geist_Mono',monospace] font-normal text-[12px] text-[var(--app-text-primary)]">
                   <p class="leading-[2.2] whitespace-pre">${item.label}</p>
                 </div>
               </button>
