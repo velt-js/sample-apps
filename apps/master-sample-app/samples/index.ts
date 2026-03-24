@@ -43,6 +43,8 @@ import vueAgGridMultipleToolsMeta from './vue-ag-grid-multiple-tools/metadata'
 import { codeFiles as vueAgGridMultipleToolsCodeFiles } from './vue-ag-grid-multiple-tools/code-files'
 import blocknoteCrdtDemoMeta from './blocknote-crdt-demo/metadata'
 import { codeFiles as blocknoteCrdtDemoCodeFiles } from './blocknote-crdt-demo/code-files'
+import coreCrdtDemoMeta from './core-crdt-demo/metadata'
+import { codeFiles as coreCrdtDemoCodeFiles } from './core-crdt-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -132,6 +134,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-blocknote-blocknote-demo': {
     metadata: blocknoteCrdtDemoMeta,
     codeFiles: blocknoteCrdtDemoCodeFiles
+  },
+  'react-crdt-text-editors-core-core-crdt-demo': {
+    metadata: coreCrdtDemoMeta,
+    codeFiles: coreCrdtDemoCodeFiles
   }
 }
 
