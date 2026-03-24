@@ -1,7 +1,7 @@
 /**
  * TipTap Editor Component with Velt CRDT
  *
- * Vanilla JS implementation using createVeltTipTapStore from @veltdev/tiptap-crdt
+ * Vanilla JS implementation using createCollaboration from @veltdev/tiptap-crdt (v2 API)
  * for real-time collaborative editing.
  */
 
@@ -10,8 +10,7 @@ import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
 import Underline from '@tiptap/extension-underline';
 import BubbleMenu from '@tiptap/extension-bubble-menu';
-import CollaborationCaret from '@tiptap/extension-collaboration-caret';
-import { createVeltTipTapStore } from '@veltdev/tiptap-crdt';
+import { createCollaboration } from '@veltdev/tiptap-crdt';
 import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments';
 
 import { getVeltClient } from '../../../lib/velt.js';
@@ -51,23 +50,20 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
   container.appendChild(loadingSpinner);
 
   let editor = null;
-  let store = null;
+  let manager = null;
   let bubbleMenuElement = null;
 
   try {
-    // [Velt] Create the CRDT store using createVeltTipTapStore
-    console.log('[TipTap] Creating Velt TipTap store...');
-    store = await createVeltTipTapStore({
+    // [Velt] Create the CollaborationManager using createCollaboration (v2 API)
+    console.log('[TipTap] Creating collaboration manager...');
+    manager = await createCollaboration({
       editorId: editorId,
       veltClient: veltClient,
       initialContent: initialContent,
+      onError: (error) => console.error('[TipTap] Collaboration error:', error),
     });
 
-    if (!store) {
-      throw new Error('Failed to create Velt TipTap store');
-    }
-
-    console.log('[TipTap] Store created, initializing editor...');
+    console.log('[TipTap] Collaboration manager created, initializing editor...');
 
     // Store editorId globally for comment handler access
     window.__veltEditorId = editorId;
@@ -108,24 +104,16 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
           return from !== to && editor.isEditable;
         },
       }),
-      // [Velt] Get the collaboration extension from the store
-      store.getCollabExtension(),
-      // [Velt] Add collaboration caret to show other users' cursors
-      CollaborationCaret.configure({
-        provider: store.getStore().getProvider(),
-        user: {
-          name: user?.name || 'Anonymous',
-          color: user?.color || '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'),
-        },
-      }),
+      // [Velt] Single extension that bundles Yjs document binding + remote cursor rendering (v2 API)
+      manager.createExtension(),
     ];
 
     // Debug: Check what's in the Yjs document
-    const yXml = store.getYXml();
-    const yDoc = store.getYDoc();
+    const yXml = manager.getXmlFragment();
+    const yDoc = manager.getDoc();
     console.log('[TipTap] YXml content:', yXml?.toString());
     console.log('[TipTap] YDoc:', yDoc);
-    console.log('[TipTap] Store connected:', store.isConnected());
+    console.log('[TipTap] Connection status:', manager.status);
 
     // Create the TipTap editor
     editor = new Editor({
@@ -160,14 +148,14 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
     console.log('[TipTap] Editor initialized successfully');
     console.log('[TipTap] Editor content after init:', editor.getHTML());
 
-    // Fallback: If editor is empty after a short delay (CRDT sync may not have initial content),
-    // set the initial content directly
-    setTimeout(() => {
-      if (editor && editor.isEmpty) {
-        console.log('[TipTap] Editor is empty, setting initial content as fallback...');
-        editor.commands.setContent(initialContent);
-      }
-    }, 1000);
+    // [Velt] Subscribe to status and sync events (v2 API)
+    manager.onStatusChange((status) => {
+      console.log('[TipTap] Connection status:', status);
+    });
+
+    manager.onSynced((synced) => {
+      console.log('[TipTap] Synced:', synced);
+    });
 
     // [Velt] Subscribe to comment annotations and render them in the editor
     const client = getVeltClient();
@@ -206,16 +194,17 @@ export async function createTipTapEditor(container, veltClient, editorId, user) 
 
   return {
     editor,
-    store,
+    manager,
     destroy() {
-      // [Velt] Proper teardown
+      // [Velt] Cleanup — destroying the editor automatically triggers manager.destroy()
+      // via the extension's onDestroy hook, but we call it explicitly for safety
       if (editor) {
         editor.destroy();
         editor = null;
       }
-      if (store && store.destroy) {
-        store.destroy();
-        store = null;
+      if (manager) {
+        manager.destroy();
+        manager = null;
       }
       if (bubbleMenuElement) {
         bubbleMenuElement.remove();
