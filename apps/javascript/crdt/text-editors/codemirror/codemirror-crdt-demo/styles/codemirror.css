@@ -160,15 +160,15 @@
   flex: 1;
 }
 
-/* CodeMirror Editor Styles - Dark Theme */
+/* CodeMirror Editor Styles - Light Theme */
 .cm-editor {
   border-radius: 0;
   font-family: 'Fira Code', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
   font-size: 14px;
   line-height: 1.5;
   height: 100%;
-  background: #000000 !important;
-  color: #e0e0e0;
+  background: #ffffff;
+  color: #24292f;
   border: none;
 }
 
@@ -264,28 +264,28 @@
   color: #005cc5;
 }
 
-/* Scrollbars - Dark Theme */
+/* Scrollbars - Light Theme */
 .cm-scroller::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
 }
 
 .cm-scroller::-webkit-scrollbar-track {
-  background: #1e1e1e;
+  background: #ffffff;
 }
 
 .cm-scroller::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 5px;
-  border: 2px solid #1e1e1e;
+  background: #d1d9e0;
+  border-radius: 7px;
+  border: 3px solid #ffffff;
 }
 
 .cm-scroller::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: #8c959f;
 }
 
 .cm-scroller::-webkit-scrollbar-corner {
-  background: #1e1e1e;
+  background: #ffffff;
 }
 
 /* Gutters - Light Theme */
@@ -355,7 +355,149 @@
   background-position: bottom;
 }
 
-/* CodeMirror Collaboration Cursors - Light Theme */
+/* =============================================
+   DARK MODE OVERRIDES
+   ============================================= */
+
+.dark .cm-editor {
+  background: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.dark .cm-lineNumbers {
+  background: #1e1e1e;
+  color: #858585;
+  border-right: none;
+}
+
+.dark .cm-lineNumbers .cm-lineNumber {
+  color: #858585;
+}
+
+.dark .cm-activeLineGutter {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.dark .cm-activeLine {
+  background: #2a2a2a;
+}
+
+.dark .cm-selectionBackground {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .cm-cursor {
+  border-left: 2px solid #fff;
+}
+
+.dark .cm-dropCursor {
+  border-left: 2px solid #fff;
+}
+
+/* Syntax highlighting - Dark Theme */
+.dark .cm-editor .tok-comment {
+  color: #6a9955;
+}
+
+.dark .cm-editor .tok-keyword {
+  color: #569cd6;
+  font-weight: bold;
+}
+
+.dark .cm-editor .tok-string {
+  color: #ce9178;
+}
+
+.dark .cm-editor .tok-number {
+  color: #b5cea8;
+}
+
+.dark .cm-editor .tok-variable {
+  color: #9cdcfe;
+}
+
+.dark .cm-editor .tok-function {
+  color: #dcdcaa;
+}
+
+.dark .cm-editor .tok-operator {
+  color: #d4d4d4;
+}
+
+.dark .cm-editor .tok-punctuation {
+  color: #d4d4d4;
+}
+
+.dark .cm-editor .tok-bracket {
+  color: #ffd700;
+}
+
+/* Scrollbars - Dark Theme */
+.dark .cm-scroller::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.dark .cm-scroller::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  border: 2px solid #1e1e1e;
+}
+
+.dark .cm-scroller::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.dark .cm-scroller::-webkit-scrollbar-corner {
+  background: #1e1e1e;
+}
+
+/* Gutters - Dark Theme */
+.dark .cm-gutters {
+  background: #1e1e1e;
+  border-right: none;
+}
+
+/* Auto-completion - Dark Theme */
+.dark .cm-tooltip.cm-tooltip-autocomplete {
+  background: #252526;
+  border: 1px solid #454545;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dark .cm-tooltip.cm-tooltip-autocomplete > ul > li {
+  color: #d4d4d4;
+}
+
+.dark .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background: #094771;
+  color: #ffffff;
+}
+
+/* Matching brackets - Dark Theme */
+.dark .cm-matchingBracket {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Fold markers - Dark Theme */
+.dark .cm-foldMarker {
+  background: #2a2a2a;
+  border: 1px solid #454545;
+  color: #858585;
+}
+
+/* Search - Dark Theme */
+.dark .cm-searchMatch {
+  background: rgba(255, 235, 59, 0.3);
+  border: 1px solid rgba(255, 193, 7, 0.5);
+}
+
+.dark .cm-searchMatch.cm-searchMatch-selected {
+  background: rgba(255, 235, 59, 0.5);
+}
+
+/* CodeMirror Collaboration Cursors */
 .cm-ySelectionInfo {
   position: absolute;
   top: -1.4em;

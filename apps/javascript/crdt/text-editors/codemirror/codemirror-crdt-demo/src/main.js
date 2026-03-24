@@ -13,11 +13,11 @@ import './components/velt/ui-customization/styles.css';
 // Import modules
 import { initializeUser } from './lib/user.js';
 import { initializeDocument } from './lib/document.js';
+import { initializeTheme, getTheme, subscribeToTheme } from './lib/theme.js';
 import {
   initializeVelt,
   authenticateUser,
   setVeltDocument,
-  enableDarkMode,
 } from './lib/velt.js';
 import { createDocumentCanvas } from './components/document/document-canvas.js';
 import { configureNotificationsTool } from './components/velt/velt-tools.js';
@@ -77,12 +77,16 @@ async function init() {
     return;
   }
 
+  // Step 0: Initialize theme system (before anything renders)
+  console.log('[App] Step 0: Initializing theme...');
+  initializeTheme();
+
   // Show loading state
   app.innerHTML = `
-    <div class="flex items-center justify-center h-screen w-screen bg-black">
-      <div class="text-white text-center">
+    <div class="flex items-center justify-center h-screen w-screen" style="background-color: var(--app-canvas-bg);">
+      <div style="color: var(--app-text-primary);" class="text-center">
         <div class="mb-4">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 mx-auto" style="border-color: var(--app-text-primary);"></div>
         </div>
         <p>Initializing collaboration...</p>
       </div>
@@ -121,9 +125,15 @@ async function init() {
     console.log('[App] Step 5: Setting document in Velt...');
     await setVeltDocument(doc.documentId, doc.documentName);
 
-    // Step 6: Enable dark mode
-    console.log('[App] Step 6: Enabling dark mode...');
-    enableDarkMode();
+    // Step 6: Set Velt dark mode based on current theme
+    console.log('[App] Step 6: Setting Velt theme...');
+    const { resolvedTheme } = getTheme();
+    veltClient.setDarkMode(resolvedTheme === 'dark');
+
+    // Subscribe to theme changes to update Velt dark mode reactively
+    subscribeToTheme(({ resolvedTheme: newResolved }) => {
+      veltClient.setDarkMode(newResolved === 'dark');
+    });
 
     // Step 7: Configure notifications
     console.log('[App] Step 7: Configuring notifications...');
@@ -168,13 +178,14 @@ async function init() {
   } catch (error) {
     console.error('[App] Initialization failed:', error);
     app.innerHTML = `
-      <div class="flex items-center justify-center h-screen w-screen bg-black">
+      <div class="flex items-center justify-center h-screen w-screen" style="background-color: var(--app-canvas-bg);">
         <div class="text-red-400 text-center">
           <p class="text-xl mb-2">Failed to initialize</p>
           <p class="opacity-70">${error.message}</p>
           <button
             onclick="window.location.reload()"
-            class="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded"
+            class="mt-4 px-4 py-2 rounded"
+            style="background-color: var(--app-divider);"
           >
             Retry
           </button>

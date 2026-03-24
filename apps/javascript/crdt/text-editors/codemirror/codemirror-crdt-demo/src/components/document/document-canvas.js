@@ -3,6 +3,7 @@
  *
  * Vanilla JS port of the React DocumentCanvas component.
  * Main layout container with file tree, breadcrumbs, and editor area.
+ * Uses CSS variables for theme-aware styling.
  */
 
 import { createSidebar } from '../sidebar/sidebar.js';
@@ -41,15 +42,20 @@ const chevronDownSvg = `<svg width="10" height="10" viewBox="0 0 16 16" fill="cu
  * @returns {string} - HTML string
  */
 function createFileTreeItem(name, icon, isSelected = false, hasChevron = false, chevronType = 'right', indent = 0) {
-  const baseClass = 'flex items-center gap-1 px-2 py-0.5 cursor-pointer';
-  const selectedClass = isSelected
-    ? 'bg-[rgba(255,255,255,0.06)] border border-[#0070f3] rounded-[6px]'
-    : 'hover:bg-[#2a2d2e]';
+  const baseClass = 'flex items-center gap-1 px-2 py-0.5 cursor-pointer rounded';
+  const selectedStyle = isSelected
+    ? `background-color: var(--app-filetree-selected); border: 1px solid #0070f3; border-radius: 6px;`
+    : '';
   const textClass = isSelected ? 'font-semibold' : 'opacity-80';
   const paddingLeft = indent > 0 ? `pl-${indent * 4}` : '';
 
+  // For non-selected items, add hover handlers
+  const hoverHandlers = !isSelected
+    ? `onmouseenter="this.style.backgroundColor='var(--app-filetree-hover)'" onmouseleave="this.style.backgroundColor='transparent'"`
+    : '';
+
   return `
-    <div class="${baseClass} ${selectedClass} ${paddingLeft}">
+    <div class="${baseClass} ${paddingLeft}" style="${selectedStyle}" ${hoverHandlers}>
       ${hasChevron ? (chevronType === 'down' ? chevronDownSvg : chevronRightSvg) : '<span class="w-[10px]"></span>'}
       ${icon}
       <span class="${textClass}">${name}</span>
@@ -82,22 +88,24 @@ export function createDocumentCanvas(container, options = {}) {
   sidebarContainer.className = 'h-full flex-shrink-0';
   mainContent.appendChild(sidebarContainer);
 
-  // File Tree Section
+  // File Tree Section - uses CSS variables
   const fileTree = document.createElement('div');
-  fileTree.className = 'bg-[#1e1e1e] w-[291px] h-full flex-shrink-0 overflow-y-auto';
+  fileTree.className = 'w-[291px] h-full flex-shrink-0 overflow-y-auto';
+  fileTree.style.backgroundColor = 'var(--app-filetree-bg)';
+  fileTree.style.color = 'var(--app-text-primary)';
   fileTree.innerHTML = `
     <!-- Search Box -->
-    <div class="bg-[rgba(255,255,255,0.06)] box-border flex gap-[8px] items-center m-[10px] p-[8px] rounded-[8px]">
+    <div class="box-border flex gap-[8px] items-center m-[10px] p-[8px] rounded-[8px]" style="background-color: var(--app-filetree-selected);">
       <div class="relative shrink-0 size-[14px]">
-        <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-search.svg" />
+        <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-search.svg" style="filter: var(--app-icon-invert);" />
       </div>
-      <p class="font-['Inter',sans-serif] font-normal leading-none not-italic opacity-[0.32] relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+      <p class="font-['Inter',sans-serif] font-normal leading-none not-italic opacity-[0.32] relative shrink-0 text-[13px] text-nowrap whitespace-pre">
         Search Files
       </p>
     </div>
 
     <!-- File Tree -->
-    <div class="text-[13px] font-['Inter',sans-serif] text-white px-2 pt-2">
+    <div class="text-[13px] font-['Inter',sans-serif] px-2 pt-2">
       ${createFileTreeItem('angular', createFolderIconSvg('#f14c4c'), false, true, 'right')}
       ${createFileTreeItem('cursor', createFolderIconSvg('#8b8b8b'), false, true, 'right')}
       ${createFileTreeItem('vscode', createFolderIconSvg('#559fd7'), false, true, 'right')}
@@ -138,59 +146,60 @@ export function createDocumentCanvas(container, options = {}) {
   `;
   mainContent.appendChild(fileTree);
 
-  // Main Canvas Content
+  // Main Canvas Content - uses CSS variables
   const mainCanvas = document.createElement('div');
-  mainCanvas.className = 'bg-black relative flex-1 px-[16px]';
+  mainCanvas.className = 'relative flex-1 px-[16px]';
+  mainCanvas.style.backgroundColor = 'var(--app-canvas-bg)';
   mainCanvas.innerHTML = `
     <!-- Breadcrumb Section -->
     <div class="absolute contents left-[32px] top-[6.5px]">
       <div class="absolute content-stretch flex gap-[12px] items-center left-[32px] top-[14px]">
-        <p class="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+        <p class="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style="color: var(--app-text-primary);">
           Photographer website
         </p>
         <div class="relative shrink-0 size-[8px]">
-          <img alt="" class="block max-w-none size-full" src="/figma-assets/ellipse-dot.svg" />
+          <img alt="" class="block max-w-none size-full" src="/figma-assets/ellipse-dot.svg" style="filter: var(--app-icon-invert);" />
         </div>
         <div class="content-stretch flex gap-[4px] items-center relative shrink-0">
-          <p class="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+          <p class="font-['Inter',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style="color: var(--app-text-primary);">
             v1
           </p>
           <div class="relative shrink-0 size-[14px]">
-            <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-chevron-right.svg" />
+            <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-chevron-right.svg" style="filter: var(--app-icon-invert);" />
           </div>
         </div>
       </div>
     </div>
 
     <!-- Main Container Border -->
-    <div class="absolute border-2 border-[#121212] border-solid h-[720px] left-[16px] right-[16px] rounded-[12px] top-[56px]"></div>
+    <div class="absolute border-2 border-solid h-[720px] left-[16px] right-[16px] rounded-[12px] top-[56px]" style="border-color: var(--app-canvas-border);"></div>
 
     <!-- Code Editor Area - CodeMirror CRDT -->
     <div id="codemirror-container" class="absolute h-[680px] left-[16px] top-[94px] right-[16px] overflow-hidden"></div>
 
     <!-- File Path Breadcrumb -->
     <div class="absolute content-stretch flex gap-[12px] items-center left-[32px] top-[68px]">
-      <p class="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+      <p class="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style="color: var(--app-text-primary);">
         src
       </p>
       <div class="relative shrink-0 size-[14px]">
-        <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-chevron-right-white.svg" />
+        <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-chevron-right-white.svg" style="filter: var(--app-icon-invert);" />
       </div>
-      <p class="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap text-white whitespace-pre">
+      <p class="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style="color: var(--app-text-primary);">
         api.ts
       </p>
     </div>
 
     <!-- Code/Preview Toggle -->
-    <div class="absolute border border-[rgba(255,255,255,0.08)] border-solid box-border content-stretch flex gap-[2px] items-center left-1/2 -translate-x-1/2 p-[2px] rounded-[4px] top-[13px]">
-      <div class="bg-[rgba(255,255,255,0.08)] box-border content-stretch flex gap-[10px] items-center p-[4px] relative rounded-[4px] shrink-0">
+    <div class="absolute border border-solid box-border content-stretch flex gap-[2px] items-center left-1/2 -translate-x-1/2 p-[2px] rounded-[4px] top-[13px]" style="border-color: var(--app-divider);">
+      <div class="box-border content-stretch flex gap-[10px] items-center p-[4px] relative rounded-[4px] shrink-0" style="background-color: var(--app-divider);">
         <div class="relative shrink-0 size-[20px]">
-          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-code.svg" />
+          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-code.svg" style="filter: var(--app-icon-invert);" />
         </div>
       </div>
       <div class="box-border content-stretch flex gap-[10px] items-center p-[4px] relative rounded-[4px] shrink-0">
         <div class="relative shrink-0 size-[20px]">
-          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-device-desktop.svg" />
+          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-device-desktop.svg" style="filter: var(--app-icon-invert);" />
         </div>
       </div>
     </div>
@@ -206,12 +215,12 @@ export function createDocumentCanvas(container, options = {}) {
     <div class="absolute content-stretch flex gap-[4px] items-center right-[16px] top-[63px]">
       <div class="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0">
         <div class="relative shrink-0 size-[14px]">
-          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-copy.svg" />
+          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-copy.svg" style="filter: var(--app-icon-invert);" />
         </div>
       </div>
       <div class="box-border content-stretch flex gap-[10px] items-center p-[4px] relative shrink-0">
         <div class="relative shrink-0 size-[14px]">
-          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-download.svg" />
+          <img alt="" class="block max-w-none size-full" src="/figma-assets/icon-download.svg" style="filter: var(--app-icon-invert);" />
         </div>
       </div>
     </div>

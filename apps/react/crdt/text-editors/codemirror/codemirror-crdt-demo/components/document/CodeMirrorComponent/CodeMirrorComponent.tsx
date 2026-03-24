@@ -3,12 +3,13 @@
 import { useEffect, useRef } from 'react'
 import { useCollaboration } from "@veltdev/codemirror-crdt-react"
 import { yCollab } from "y-codemirror.next"
-import { EditorState } from "@codemirror/state"
+import { EditorState, Compartment } from "@codemirror/state"
 import { basicSetup, EditorView } from "codemirror"
 import { javascript } from "@codemirror/lang-javascript"
 import { css } from "@codemirror/lang-css"
 import { html } from "@codemirror/lang-html"
 import { oneDark } from "@codemirror/theme-one-dark"
+import { useTheme } from '@/components/theme/ThemeContext'
 
 // Initial content for the editor
 const initialContent = `@import "tailwindcss";
@@ -53,9 +54,81 @@ const initialContent = `@import "tailwindcss";
 }
 `
 
+/** Light theme for CodeMirror editor */
+function lightEditorTheme() {
+  return EditorView.theme({
+    "&": {
+      height: "100%",
+      fontSize: "14px",
+      backgroundColor: "#ffffff"
+    },
+    ".cm-scroller": {
+      overflow: "auto",
+      fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace"
+    },
+    ".cm-content": {
+      caretColor: "#24292f",
+      padding: "10px 0"
+    },
+    ".cm-line": {
+      padding: "0 8px"
+    },
+    ".cm-gutters": {
+      backgroundColor: "#f6f8fa",
+      color: "#656d76",
+      border: "none",
+      borderRight: "1px solid #d1d9e0"
+    },
+    ".cm-activeLineGutter": {
+      backgroundColor: "#f0f6ff"
+    },
+    ".cm-activeLine": {
+      backgroundColor: "rgba(84, 174, 255, 0.08)"
+    }
+  })
+}
+
+/** Dark theme for CodeMirror editor (includes oneDark syntax) */
+function darkEditorTheme() {
+  return [
+    oneDark,
+    EditorView.theme({
+      "&": {
+        height: "100%",
+        fontSize: "14px",
+        backgroundColor: "#1e1e1e"
+      },
+      ".cm-scroller": {
+        overflow: "auto",
+        fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace"
+      },
+      ".cm-content": {
+        caretColor: "#fff",
+        padding: "10px 0"
+      },
+      ".cm-line": {
+        padding: "0 8px"
+      },
+      ".cm-gutters": {
+        backgroundColor: "#1e1e1e",
+        color: "#858585",
+        border: "none"
+      },
+      ".cm-activeLineGutter": {
+        backgroundColor: "#2a2a2a"
+      },
+      ".cm-activeLine": {
+        backgroundColor: "#2a2a2a"
+      }
+    }),
+  ]
+}
+
 export default function CodeMirrorComponent() {
   const editorRef = useRef<HTMLDivElement>(null)
   const viewRef = useRef<EditorView | null>(null)
+  const themeCompartmentRef = useRef(new Compartment())
+  const { resolvedTheme } = useTheme()
 
   // Initialize the Velt CRDT extension
   const { primitives, isLoading, isSynced, status, error } = useCollaboration({
@@ -73,45 +146,19 @@ export default function CodeMirrorComponent() {
       viewRef.current = null
     }
 
+    const themeCompartment = themeCompartmentRef.current
+    const initialThemeExtension = resolvedTheme === 'dark' ? darkEditorTheme() : lightEditorTheme()
+
     const startState = EditorState.create({
       // primitives.ytext is the shared Yjs Text document that syncs across all collaborators
       // toString() converts it to a plain string for the initial editor content
       doc: primitives.ytext.toString(),
       extensions: [
         basicSetup,
-        oneDark,
+        themeCompartment.of(initialThemeExtension),
         css(),
         javascript(),
         html(),
-        EditorView.theme({
-          "&": {
-            height: "100%",
-            fontSize: "14px",
-            backgroundColor: "#1e1e1e"
-          },
-          ".cm-scroller": {
-            overflow: "auto",
-            fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace"
-          },
-          ".cm-content": {
-            caretColor: "#fff",
-            padding: "10px 0"
-          },
-          ".cm-line": {
-            padding: "0 8px"
-          },
-          ".cm-gutters": {
-            backgroundColor: "#1e1e1e",
-            color: "#858585",
-            border: "none"
-          },
-          ".cm-activeLineGutter": {
-            backgroundColor: "#2a2a2a"
-          },
-          ".cm-activeLine": {
-            backgroundColor: "#2a2a2a"
-          }
-        }),
         // yCollab enables real-time collaborative editing with CodeMirror using Yjs
         // - primitives.ytext: The shared Yjs Text document that automatically syncs changes
         // - primitives.awareness: Provides presence information (cursors, selections) for other users
@@ -135,9 +182,18 @@ export default function CodeMirrorComponent() {
     }
   }, [primitives])
 
+  // Reconfigure theme when resolvedTheme changes
+  useEffect(() => {
+    if (!viewRef.current) return
+    const newThemeExtension = resolvedTheme === 'dark' ? darkEditorTheme() : lightEditorTheme()
+    viewRef.current.dispatch({
+      effects: themeCompartmentRef.current.reconfigure(newThemeExtension),
+    })
+  }, [resolvedTheme])
+
   if (error) {
     return (
-      <div className="flex items-center justify-center h-full bg-[#1e1e1e]">
+      <div className="flex items-center justify-center h-full" style={{ backgroundColor: 'var(--app-filetree-bg)' }}>
         <div className="text-red-400">
           <p className="text-lg font-semibold">Failed to initialize editor</p>
           <p className="text-sm mt-2 opacity-75">{error.message}</p>
@@ -148,17 +204,17 @@ export default function CodeMirrorComponent() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full bg-[#1e1e1e]">
-        <div className="text-white">Loading editor...</div>
+      <div className="flex items-center justify-center h-full" style={{ backgroundColor: 'var(--app-filetree-bg)' }}>
+        <div style={{ color: 'var(--app-text-primary)' }}>Loading editor...</div>
       </div>
     )
   }
 
   return (
-    <div className="h-full w-full overflow-hidden bg-[#1e1e1e] flex flex-col">
+    <div className="h-full w-full overflow-hidden flex flex-col">
       <div ref={editorRef} className="flex-1 min-h-0" style={{ overflow: 'auto' }} />
-      <div className="flex items-center gap-3 px-3 py-1 text-xs font-mono border-t border-[#333]"
-        style={{ backgroundColor: '#1a1a1a', color: '#858585' }}>
+      <div className="flex items-center gap-3 px-3 py-1 text-xs font-mono"
+        style={{ backgroundColor: 'var(--app-surface)', color: 'var(--app-text-tertiary)', borderTop: '1px solid var(--app-border)' }}>
         <span className="flex items-center gap-1.5">
           <span
             className="inline-block w-2 h-2 rounded-full"

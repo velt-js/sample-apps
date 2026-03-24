@@ -171,11 +171,12 @@ export async function setVeltDocument(documentId, documentName = 'Untitled') {
 }
 
 /**
- * Enable dark mode
+ * Set dark mode
+ * @param {boolean} isDark - Whether to enable dark mode
  */
-export function enableDarkMode() {
+export function setDarkMode(isDark) {
   if (veltClient) {
-    veltClient.setDarkMode(true);
+    veltClient.setDarkMode(isDark);
   }
 }
 
