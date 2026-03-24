@@ -77,72 +77,23 @@
 }
 
 /* Core Editor Styles - Matching Figma Design */
-.core-editor-content {
+.core-editor-textarea {
+  width: 100%;
+  min-height: 800px;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
   font-family: 'Geist Mono', monospace;
   font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--app-text-primary);
-}
-
-.core-editor-content [data-heading="h1"] {
-  font-family: 'Urbanist', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.5;
-  color: var(--app-text-primary);
-  display: block;
-  margin-bottom: 16px;
-}
-
-.core-editor-content [data-heading="h2"] {
-  font-family: 'Urbanist', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.5;
-  color: var(--app-text-primary);
-  display: block;
-  margin-bottom: 16px;
-}
-
-.core-editor-content [data-heading="h3"] {
-  font-family: 'Urbanist', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.5;
-  color: var(--app-text-primary);
-  display: block;
-  margin-bottom: 16px;
-}
-
-.core-editor-content .section-body p {
-  margin-bottom: 16px;
   opacity: 0.8;
 }
 
-.core-editor-content .section-block {
-  position: relative;
-  margin-bottom: 8px;
-}
-
-.core-editor-content .section-comment-tool {
-  position: absolute;
-  top: 4px;
-  right: -40px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.core-editor-content .section-block:hover .section-comment-tool {
-  opacity: 1;
-}
-
-.core-editor-content [contenteditable] {
-  outline: none;
-}
-
-.core-editor-content [contenteditable]:focus {
-  outline: none;
+.core-editor-textarea::placeholder {
+  color: var(--app-text-tertiary);
 }
 
 /* Helper Text Animation */
