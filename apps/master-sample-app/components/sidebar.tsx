@@ -34,6 +34,7 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-self-hosting-forms-page-mode-demo': 'page-mode-demo',
     'react-crdt-text-editors-tiptap-tiptap-crdt-demo': 'tiptap-crdt-demo',
     'react-crdt-text-editors-codemirror-codemirror-crdt-demo': 'codemirror-crdt-demo',
+    'react-crdt-text-editors-blocknote-blocknote-demo': 'blocknote-crdt-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -64,6 +65,7 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     crdtTextEditors: false,
     crdtTiptap: false,
     crdtCodemirror: false,
+    crdtBlocknote: false,
   }
 
   // Initialize expandedSections from localStorage or use defaults
@@ -679,6 +681,31 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 )}
                               >
                                 codemirror-crdt-demo
+                              </button>
+                            </div>
+                          )}
+
+                          {/* blocknote Section */}
+                          <button
+                            onClick={() => toggleSection("crdtBlocknote")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>blocknote</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.crdtBlocknote && "rotate-90")} />
+                          </button>
+                          {expandedSections.crdtBlocknote && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("blocknote-crdt-demo")
+                                  onSampleSelect?.("react-crdt-text-editors-blocknote-blocknote-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "blocknote-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                blocknote-crdt-demo
                               </button>
                             </div>
                           )}

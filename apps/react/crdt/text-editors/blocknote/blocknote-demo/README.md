@@ -1,6 +1,6 @@
 # BlockNote Collaborative Editor Demo
 
-> **[🚀 View Live Demo](https://sample-apps-blocknote-demo.vercel.app)**
+> **[🚀 View Live Demo](https://sample-apps-blocknote-react-crdt-de.vercel.app)** | **[🔗 Alt Demo](https://sample-apps-blocknote-react-crdt-demo-velt-team-eng.vercel.app)**
 
 ## Overview
 
