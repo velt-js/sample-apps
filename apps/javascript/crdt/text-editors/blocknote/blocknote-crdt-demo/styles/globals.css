@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --app-bg: #ffffff;
+    --app-surface: #f5f5f5;
+    --app-surface-border: #e0e0e0;
+    --app-border: #e0e0e0;
+    --app-text-primary: #000000;
+    --app-text-tertiary: rgba(0,0,0,0.52);
+    --app-toggle-active-bg: rgba(0,0,0,0.06);
+    --app-sidebar-bg: #f0f0f0;
+    --app-icon-invert: invert(1);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --app-bg: #000000;
+    --app-surface: rgb(17,17,17);
+    --app-surface-border: rgb(20,20,20);
+    --app-border: #141414;
+    --app-text-primary: #ffffff;
+    --app-text-tertiary: rgba(255,255,255,0.52);
+    --app-toggle-active-bg: rgba(255,255,255,0.08);
+    --app-sidebar-bg: #0e0e0e;
+    --app-icon-invert: none;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html, body, #app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* BlockNote Editor Styles - Matching Figma Design */
+
+/* Editor container and content area */
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--app-bg);
+}
+
+.editor-content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+/* BlockNote body text: Geist Mono 16px */
+.bn-editor .bn-block-content {
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}
+
+/* BlockNote headings: Urbanist */
+.bn-editor [data-level="1"] .bn-inline-content {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+}
+
+.bn-editor [data-level="2"] .bn-inline-content {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+}
+
+.bn-editor [data-level="3"] .bn-inline-content {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+}
+
+/* Dark theme overrides for BlockNote */
+.dark .bn-editor,
+[data-color-scheme="dark"] .bn-editor {
+  --bn-colors-editor-background: #000000 !important;
+  --bn-colors-editor-text: #ffffff !important;
+}
+
+.dark .bn-container[data-color-scheme="dark"],
+.dark .bn-container {
+  --bn-colors-editor-background: #000000 !important;
+  --bn-colors-editor-text: #ffffff !important;
+}
+
+/* Paragraph opacity in body text (matching tiptap) */
+.bn-editor .bn-block-content[data-content-type="paragraph"] .bn-inline-content {
+  opacity: 0.8;
+}
+
+.bn-editor .bn-block-content[data-content-type="heading"] .bn-inline-content {
+  opacity: 1;
+}
+
+/* Collaboration cursor styling */
+.collaboration-cursor__caret, .collaboration-carets__caret {
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  margin-left: -1px;
+  margin-right: -1px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+}
+
+.collaboration-cursor__label, .collaboration-carets__label {
+  border-radius: 3px 3px 3px 0;
+  color: #0d0d0d;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  left: -1px;
+  line-height: normal;
+  padding: 0.1rem 0.3rem;
+  position: absolute;
+  top: -1.4em;
+  user-select: none;
+  white-space: nowrap;
+}
