@@ -45,6 +45,14 @@ import blocknoteCrdtDemoMeta from './blocknote-crdt-demo/metadata'
 import { codeFiles as blocknoteCrdtDemoCodeFiles } from './blocknote-crdt-demo/code-files'
 import coreCrdtDemoMeta from './core-crdt-demo/metadata'
 import { codeFiles as coreCrdtDemoCodeFiles } from './core-crdt-demo/code-files'
+import jsCoreCrdtDemoMeta from './js-core-crdt-demo/metadata'
+import { codeFiles as jsCoreCrdtDemoCodeFiles } from './js-core-crdt-demo/code-files'
+import jsBlocknoteCrdtDemoMeta from './js-blocknote-crdt-demo/metadata'
+import { codeFiles as jsBlocknoteCrdtDemoCodeFiles } from './js-blocknote-crdt-demo/code-files'
+import jsTiptapCrdtDemoMeta from './js-tiptap-crdt-demo/metadata'
+import { codeFiles as jsTiptapCrdtDemoCodeFiles } from './js-tiptap-crdt-demo/code-files'
+import jsCodemirrorCrdtDemoMeta from './js-codemirror-crdt-demo/metadata'
+import { codeFiles as jsCodemirrorCrdtDemoCodeFiles } from './js-codemirror-crdt-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -138,6 +146,22 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-core-core-crdt-demo': {
     metadata: coreCrdtDemoMeta,
     codeFiles: coreCrdtDemoCodeFiles
+  },
+  'javascript-crdt-text-editors-blocknote-blocknote-crdt-demo': {
+    metadata: jsBlocknoteCrdtDemoMeta,
+    codeFiles: jsBlocknoteCrdtDemoCodeFiles
+  },
+  'javascript-crdt-text-editors-core-core-crdt-demo': {
+    metadata: jsCoreCrdtDemoMeta,
+    codeFiles: jsCoreCrdtDemoCodeFiles
+  },
+  'javascript-crdt-text-editors-tiptap-tiptap-crdt-demo': {
+    metadata: jsTiptapCrdtDemoMeta,
+    codeFiles: jsTiptapCrdtDemoCodeFiles
+  },
+  'javascript-crdt-text-editors-codemirror-codemirror-crdt-demo': {
+    metadata: jsCodemirrorCrdtDemoMeta,
+    codeFiles: jsCodemirrorCrdtDemoCodeFiles
   }
 }
 

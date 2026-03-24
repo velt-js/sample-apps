@@ -36,6 +36,8 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-crdt-text-editors-codemirror-codemirror-crdt-demo': 'codemirror-crdt-demo',
     'react-crdt-text-editors-blocknote-blocknote-demo': 'blocknote-crdt-demo',
     'react-crdt-text-editors-core-core-crdt-demo': 'core-crdt-demo',
+    'javascript-crdt-text-editors-blocknote-blocknote-crdt-demo': 'js-blocknote-crdt-demo',
+    'javascript-crdt-text-editors-tiptap-tiptap-crdt-demo': 'js-tiptap-crdt-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -68,6 +70,11 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     crdtCodemirror: false,
     crdtBlocknote: false,
     crdtCore: false,
+    javascript: false,
+    jsCrdt: false,
+    jsCrdtTextEditors: false,
+    jsCrdtBlocknote: false,
+    jsCrdtTiptap: false,
   }
 
   // Initialize expandedSections from localStorage or use defaults
@@ -734,6 +741,119 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                               >
                                 core-crdt-demo
                               </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* javascript Section */}
+                <div className="mb-1">
+                  <button
+                    onClick={() => toggleSection("javascript")}
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
+                  >
+                    <span>javascript</span>
+                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.javascript && "rotate-90")} />
+                  </button>
+                  {expandedSections.javascript && (
+                    <div className="mt-2 ml-2 space-y-1">
+                      {/* crdt Section */}
+                      <button
+                        onClick={() => toggleSection("jsCrdt")}
+                        className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/50"
+                      >
+                        <span>crdt</span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.jsCrdt && "rotate-90")} />
+                      </button>
+                      {expandedSections.jsCrdt && (
+                        <div className="mt-2 ml-2 space-y-1">
+                          {/* text-editors Section */}
+                          <button
+                            onClick={() => toggleSection("jsCrdtTextEditors")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>text-editors</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.jsCrdtTextEditors && "rotate-90")} />
+                          </button>
+                          {expandedSections.jsCrdtTextEditors && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              {/* blocknote Section */}
+                              <button
+                                onClick={() => toggleSection("jsCrdtBlocknote")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>blocknote</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.jsCrdtBlocknote && "rotate-90")} />
+                              </button>
+                              {expandedSections.jsCrdtBlocknote && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("js-blocknote-crdt-demo")
+                                      onSampleSelect?.("javascript-crdt-text-editors-blocknote-blocknote-crdt-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "js-blocknote-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    blocknote-crdt-demo
+                                  </button>
+                                </div>
+                              )}
+
+                              {/* codemirror Section */}
+                              <button
+                                onClick={() => toggleSection("jsCrdtCodemirror")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>codemirror</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.jsCrdtCodemirror && "rotate-90")} />
+                              </button>
+                              {expandedSections.jsCrdtCodemirror && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("js-codemirror-crdt-demo")
+                                      onSampleSelect?.("javascript-crdt-text-editors-codemirror-codemirror-crdt-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "js-codemirror-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    codemirror-crdt-demo
+                                  </button>
+                                </div>
+                              )}
+
+                              {/* tiptap Section */}
+                              <button
+                                onClick={() => toggleSection("jsCrdtTiptap")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>tiptap</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.jsCrdtTiptap && "rotate-90")} />
+                              </button>
+                              {expandedSections.jsCrdtTiptap && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("js-tiptap-crdt-demo")
+                                      onSampleSelect?.("javascript-crdt-text-editors-tiptap-tiptap-crdt-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "js-tiptap-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    tiptap-crdt-demo
+                                  </button>
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
