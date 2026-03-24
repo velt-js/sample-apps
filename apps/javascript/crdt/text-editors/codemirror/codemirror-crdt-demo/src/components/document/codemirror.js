@@ -1,10 +1,10 @@
 /**
  * CodeMirror Component with Velt CRDT
  *
- * Vanilla JS port using createVeltCodeMirrorStore from @veltdev/codemirror-crdt.
+ * Vanilla JS implementation using createCollaboration from @veltdev/codemirror-crdt (v2 API).
  */
 
-import { createVeltCodeMirrorStore } from '@veltdev/codemirror-crdt';
+import { createCollaboration } from '@veltdev/codemirror-crdt';
 import { yCollab } from 'y-codemirror.next';
 import { EditorState } from '@codemirror/state';
 import { basicSetup, EditorView } from 'codemirror';
@@ -77,22 +77,19 @@ export async function createCodeMirrorEditor(container, veltClient, editorId = '
   container.appendChild(wrapper);
 
   let view = null;
-  let store = null;
+  let manager = null;
 
   try {
-    // Create the CRDT store
-    console.log('[CodeMirror] Creating Velt CRDT store...');
-    store = await createVeltCodeMirrorStore({
+    // [Velt] Create the CollaborationManager using createCollaboration (v2 API)
+    console.log('[CodeMirror] Creating collaboration manager...');
+    manager = await createCollaboration({
       editorId: editorId,
       veltClient: veltClient,
       initialContent: initialContent,
+      onError: (error) => console.error('[CodeMirror] Collaboration error:', error),
     });
 
-    if (!store) {
-      throw new Error('Failed to create CRDT store');
-    }
-
-    console.log('[CodeMirror] Store created, initializing editor...');
+    console.log('[CodeMirror] Collaboration manager created, initializing editor...');
 
     // Remove loading spinner
     wrapper.removeChild(loadingSpinner);
@@ -103,9 +100,12 @@ export async function createCodeMirrorEditor(container, veltClient, editorId = '
     editorDiv.style.overflow = 'auto';
     wrapper.appendChild(editorDiv);
 
+    // [Velt] Get Yjs primitives from the collaboration manager (v2 API)
+    const { ytext, awareness, undoManager } = manager.getCollaborationPrimitives();
+
     // Create editor state
     const startState = EditorState.create({
-      doc: store.getYText()?.toString() ?? '',
+      doc: ytext?.toString() ?? '',
       extensions: [
         basicSetup,
         oneDark,
@@ -142,9 +142,7 @@ export async function createCodeMirrorEditor(container, veltClient, editorId = '
           },
         }),
         // yCollab enables real-time collaborative editing with CodeMirror using Yjs
-        yCollab(store.getYText(), store.getAwareness(), {
-          undoManager: store.getUndoManager(),
-        }),
+        yCollab(ytext, awareness, { undoManager }),
       ],
     });
 
@@ -155,6 +153,15 @@ export async function createCodeMirrorEditor(container, veltClient, editorId = '
     });
 
     console.log('[CodeMirror] Editor initialized successfully');
+
+    // [Velt] Subscribe to status and sync events (v2 API)
+    manager.onStatusChange((status) => {
+      console.log('[CodeMirror] Connection status:', status);
+    });
+
+    manager.onSynced((synced) => {
+      console.log('[CodeMirror] Synced:', synced);
+    });
   } catch (error) {
     console.error('[CodeMirror] Failed to initialize:', error);
 
@@ -172,15 +179,15 @@ export async function createCodeMirrorEditor(container, veltClient, editorId = '
   return {
     el: wrapper,
     view,
-    store,
+    manager,
     destroy() {
       if (view) {
         view.destroy();
         view = null;
       }
-      if (store && store.destroy) {
-        store.destroy();
-        store = null;
+      if (manager) {
+        manager.destroy();
+        manager = null;
       }
       wrapper.remove();
     },
