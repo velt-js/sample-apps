@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useRef, useCallback } from 'react'
 import { useStore } from '@veltdev/crdt-react'
 import { useVeltClient, useLiveState } from '@veltdev/react'
 import { CoreEditorProps } from './types'
@@ -30,26 +30,11 @@ interface CursorMap {
   [userId: string]: CursorEntry
 }
 
-// Mirror div helper: measure pixel coords of a character offset in a textarea
+// ── Mirror helpers: map character offsets to pixel positions ─────────
+
 function escapeHTML(str: string) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')
-}
-
-function getOffsetCoords(
-  textarea: HTMLTextAreaElement,
-  mirror: HTMLDivElement,
-  offset: number,
-  content: string,
-) {
-  syncMirrorStyles(textarea, mirror)
-  const before = content.substring(0, offset)
-  mirror.innerHTML = escapeHTML(before) + '<span id="__m">|</span>'
-  const marker = mirror.querySelector('#__m')
-  if (!marker) return null
-  const mr = marker.getBoundingClientRect()
-  const tr = textarea.getBoundingClientRect()
-  return { top: mr.top - tr.top + textarea.scrollTop, left: mr.left - tr.left }
 }
 
 function syncMirrorStyles(textarea: HTMLTextAreaElement, mirror: HTMLDivElement) {
@@ -65,13 +50,23 @@ function syncMirrorStyles(textarea: HTMLTextAreaElement, mirror: HTMLDivElement)
   }
 }
 
+function getOffsetCoords(
+  textarea: HTMLTextAreaElement, mirror: HTMLDivElement,
+  offset: number, content: string,
+) {
+  syncMirrorStyles(textarea, mirror)
+  mirror.innerHTML = escapeHTML(content.substring(0, offset)) + '<span id="__m">|</span>'
+  const marker = mirror.querySelector('#__m')
+  if (!marker) return null
+  const mr = marker.getBoundingClientRect()
+  const tr = textarea.getBoundingClientRect()
+  return { top: mr.top - tr.top + textarea.scrollTop, left: mr.left - tr.left }
+}
+
 function getSelectionRects(
-  textarea: HTMLTextAreaElement,
-  mirror: HTMLDivElement,
-  start: number,
-  end: number,
-  content: string,
-): { top: number; left: number; width: number; height: number }[] {
+  textarea: HTMLTextAreaElement, mirror: HTMLDivElement,
+  start: number, end: number, content: string,
+) {
   if (start === end) return []
   syncMirrorStyles(textarea, mirror)
   mirror.innerHTML =
@@ -98,17 +93,19 @@ function getSelectionRects(
   return rects
 }
 
+// ── Component ───────────────────────────────────────────────────────
+
 export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const mirrorRef = useRef<HTMLDivElement>(null)
   const { client } = useVeltClient()
 
-  // [Velt] CRDT store
+  // [Velt] CRDT store — per docs, status and isSynced are returned directly
   const {
     value: text,
     update: updateText,
-    isSynced: hookSynced,
-    status: hookStatus,
+    status,
+    isSynced,
     store,
   } = useStore<string>({
     storeId: STORE_ID,
@@ -116,30 +113,9 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
     initialValue: initialContent,
   })
 
-  // Provider status workaround
-  const [realStatus, setRealStatus] = useState<string>('connecting')
-  const [realSynced, setRealSynced] = useState(false)
-
-  useEffect(() => {
-    if (!store) return
-    const provider = store.getProvider?.()
-    if (!provider) return
-    if (provider.status && provider.status !== 'connecting') setRealStatus(provider.status)
-    if (provider.synced) setRealSynced(true)
-    const onStatus = ({ status: s }: { status: string }) => setRealStatus(s)
-    const onSynced = (synced: boolean) => setRealSynced(synced)
-    provider.on('status', onStatus)
-    provider.on('synced', onSynced)
-    return () => { provider.off?.('status', onStatus); provider.off?.('synced', onSynced) }
-  }, [store])
-
-  const status = realStatus !== 'connecting' ? realStatus : hookStatus
-  const isSynced = realSynced || hookSynced
-
   // Get local user info
   const localUserRef = useRef<{ userId: string; name: string; color: string } | null>(null)
-  useEffect(() => {
-    if (!client) return
+  if (!localUserRef.current && client) {
     try {
       const user = (client as any).getUser?.()
       if (user) {
@@ -150,13 +126,10 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
         }
       }
     } catch { /* ignore */ }
-  }, [client])
+  }
 
-  // [Velt] Live cursors via useLiveState — broadcasts cursor positions through Velt's real-time channel
-  // listenToNewChangesOnly: don't load stale cursor data from server on refresh
+  // [Velt] Live cursors via useLiveState
   const [cursors, setCursors] = useLiveState<CursorMap>('core-crdt-cursors', {}, { syncDuration: 50, listenToNewChangesOnly: true })
-
-  // Broadcast local cursor position
   const cursorsRef = useRef<CursorMap>(cursors || {})
   cursorsRef.current = cursors || {}
 
@@ -164,7 +137,7 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
     if (!textareaRef.current || !localUserRef.current) return
     const user = localUserRef.current
     const ta = textareaRef.current
-    const next: CursorMap = {
+    setCursors({
       ...cursorsRef.current,
       [user.userId]: {
         name: user.name,
@@ -173,8 +146,7 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
         head: ta.selectionEnd,
         timestamp: Date.now(),
       },
-    }
-    setCursors(next)
+    })
   }, [setCursors])
 
   // Filter remote cursors (exclude self, remove stale >30s)
@@ -183,7 +155,7 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
     .filter(([, c]) => Date.now() - c.timestamp < 30000)
     .map(([uid, c]) => ({ userId: uid, ...c }))
 
-  // Status display
+  // Status — use hook values directly like the reference demo
   const statusDotColor =
     status === 'connected' ? (isSynced ? '#22c55e' : '#eab308') :
     status === 'connecting' ? '#eab308' : '#ef4444'
@@ -224,7 +196,7 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
                   spellCheck={false}
                 />
 
-                {/* Hidden mirror div for measuring cursor pixel positions */}
+                {/* Hidden mirror div for pixel-position measurement */}
                 <div
                   ref={mirrorRef}
                   aria-hidden="true"
@@ -249,18 +221,11 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
                   const start = Math.min(cursor.anchor, cursor.head)
                   const end = Math.max(cursor.anchor, cursor.head)
                   const hasSelection = start !== end
-
-                  // Caret at head position
                   const caretCoords = getOffsetCoords(ta, mirror, cursor.head, content)
-
-                  // Selection highlight rects (multi-line aware)
-                  const selRects = hasSelection
-                    ? getSelectionRects(ta, mirror, start, end, content)
-                    : []
+                  const selRects = hasSelection ? getSelectionRects(ta, mirror, start, end, content) : []
 
                   return (
                     <div key={cursor.userId} style={{ pointerEvents: 'none' }}>
-                      {/* Selection highlights */}
                       {selRects.map((rect, i) => (
                         <div
                           key={`sel-${i}`}
@@ -278,7 +243,6 @@ export default function CoreEditor({ scrollContainerRef }: CoreEditorProps) {
                           }}
                         />
                       ))}
-                      {/* Cursor caret */}
                       {caretCoords && (
                         <div
                           style={{
