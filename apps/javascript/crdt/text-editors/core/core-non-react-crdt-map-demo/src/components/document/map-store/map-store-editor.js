@@ -38,6 +38,9 @@ export async function createMapStoreEditor(container, veltClient, user) {
   let storeUnsub = null;
   let liveStateSub = null;
   let keyOrderSub = null;
+  let annotationSub = null;
+  let annotationDataByTargetId = {};
+  let commentModal = null;
 
   // Local user info for focus broadcasting
   const localUser = {
@@ -216,6 +219,61 @@ export async function createMapStoreEditor(container, veltClient, user) {
     if (liveStateElement) liveStateElement.setLiveStateData('core-crdt-map-key-order', newOrder);
   }
 
+  // ── Comment annotations ──────────────────────────────────────────
+  try {
+    const commentElement = veltClient.getCommentElement();
+    if (commentElement) {
+      annotationSub = commentElement.getAllCommentAnnotations().subscribe((annotations) => {
+        const dataMap = {};
+        if (annotations && Array.isArray(annotations)) {
+          annotations.forEach((annotation) => {
+            const targetId = annotation.targetElementId;
+            if (targetId) {
+              if (!dataMap[targetId]) dataMap[targetId] = { count: 0, hasUnread: false };
+              if (annotation.status?.id !== 'RESOLVED') dataMap[targetId].count = annotation.comments?.length || 0;
+              if (annotation.unread) dataMap[targetId].hasUnread = true;
+            }
+          });
+        }
+        annotationDataByTargetId = dataMap;
+        const active = document.activeElement;
+        if (active && entryListEl.contains(active) && active.tagName === 'INPUT') return;
+        renderEntries();
+      });
+    }
+  } catch (e) { console.warn('[MapStoreEditor] Comment annotations not available:', e); }
+
+  // ── Comment modal ──────────────────────────────────────────────────
+  function showCommentModal(key, value) {
+    if (commentModal) commentModal.remove();
+    const targetId = `map-entry-${key.replace(/\s+/g, '-').toLowerCase()}`;
+    commentModal = document.createElement('div');
+    commentModal.innerHTML = `
+      <div class="comment-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:60;"></div>
+      <div class="comment-center" style="position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:16px;">
+        <div class="comment-box" style="background:var(--task-surface);border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:512px;width:100%;max-height:80vh;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgb(229,231,235);">
+            <h3 style="font-size:14px;font-weight:600;color:var(--task-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${key}: ${value}</h3>
+            <button class="comment-close-btn" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:none;background:transparent;cursor:pointer;">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M15 5L5 15M5 5l10 10" stroke="var(--task-text-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div style="flex:1;overflow:auto;" id="${targetId}">
+            <velt-inline-comments-section target-element-id="${targetId}" shadow-dom="false" composer-position="bottom" multi-thread="false"></velt-inline-comments-section>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(commentModal);
+    commentModal.querySelector('.comment-overlay').onclick = closeCommentModal;
+    commentModal.querySelector('.comment-center').onclick = closeCommentModal;
+    commentModal.querySelector('.comment-box').onclick = (e) => e.stopPropagation();
+    commentModal.querySelector('.comment-close-btn').onclick = closeCommentModal;
+  }
+
+  function closeCommentModal() {
+    if (commentModal) { commentModal.remove(); commentModal = null; }
+  }
+
   // ── CRDT mutations ─────────────────────────────────────────────────
 
   function addEntry() {
@@ -232,10 +290,23 @@ export async function createMapStoreEditor(container, veltClient, user) {
     const current = store.getValue() || {};
     const obj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {};
     const updated = { ...obj };
-    if (oldKey !== newKey) delete updated[oldKey];
-    updated[newKey] = newValue;
+    // Auto-deduplicate: if renaming to an existing key, append a number
+    let finalKey = newKey;
+    if (oldKey !== newKey && updated[newKey] !== undefined) {
+      let counter = 1;
+      while (updated[`${newKey} ${counter}`] !== undefined) counter++;
+      finalKey = `${newKey} ${counter}`;
+    }
+    if (oldKey !== finalKey) {
+      delete updated[oldKey];
+      // Update keyOrder BEFORE store.update() — the subscribe callback fires
+      // synchronously and re-renders with the current keyOrder, so it must
+      // already reflect the rename to preserve ordering.
+      keyOrder = keyOrder.map(k => k === oldKey ? finalKey : k);
+      if (liveStateElement) liveStateElement.setLiveStateData('core-crdt-map-key-order', keyOrder);
+    }
+    updated[finalKey] = newValue;
     store.update(updated);
-    if (oldKey !== newKey) setKeyOrderSync(getOrderedKeys().map(k => k === oldKey ? newKey : k));
   }
 
   function deleteEntry(key) {
@@ -243,8 +314,9 @@ export async function createMapStoreEditor(container, veltClient, user) {
     const obj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {};
     const updated = { ...obj };
     delete updated[key];
+    // Update keyOrder BEFORE store.update() to prevent ordering issues on re-render
+    setKeyOrderSync(keyOrder.filter(k => k !== key));
     store.update(updated);
-    setKeyOrderSync(getOrderedKeys().filter(k => k !== key));
   }
 
   function getOrderedKeys() {
@@ -308,8 +380,21 @@ export async function createMapStoreEditor(container, veltClient, user) {
             ${focusUser && focusField === 'value' ? `<div style="position:absolute;top:-16px;left:0;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;color:white;z-index:10;background:${focusColor};white-space:nowrap;">${focusUser}</div>` : ''}
             <input class="map-value-input" value="${String(value).replace(/"/g, '&quot;')}" style="width:100%;background:transparent;border:none;font-size:16px;font-weight:500;color:var(--task-text);font-family:Inter,sans-serif;${focusColor && focusField === 'value' ? `outline:2px solid ${focusColor};outline-offset:2px;border-radius:4px;` : 'outline:none;'}" />
           </div>
-          <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;width:36px;justify-content:end;">
-            <button class="map-delete-btn map-action-hover" style="padding:4px;border:none;background:transparent;cursor:pointer;border-radius:4px;opacity:0;transition:opacity 0.15s;">
+          <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;width:72px;justify-content:end;">
+            ${(() => {
+              const targetId = `map-entry-${key.replace(/\s+/g, '-').toLowerCase()}`;
+              const annot = annotationDataByTargetId[targetId];
+              const count = annot?.count || 0;
+              const hasUnread = annot?.hasUnread || false;
+              return `<button class="map-comment-btn" style="padding:6px;border:none;background:transparent;cursor:pointer;border-radius:4px;display:flex;align-items:center;gap:2px;transition:opacity 0.15s;">
+                <span style="position:relative;display:inline-flex;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgb(152,152,152)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  ${hasUnread ? '<span style="position:absolute;top:-2px;right:-2px;width:5px;height:5px;background:#BD323C;border-radius:50%;"></span>' : ''}
+                </span>
+                ${count > 0 ? `<span style="font-size:9px;font-weight:500;color:rgb(152,152,152);">${count}</span>` : ''}
+              </button>`;
+            })()}
+            <button class="map-delete-btn map-action-hover" style="padding:6px;border:none;background:transparent;cursor:pointer;border-radius:4px;opacity:0;transition:opacity 0.15s;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--task-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
             </button>
           </div>
@@ -332,23 +417,27 @@ export async function createMapStoreEditor(container, veltClient, user) {
 
       // ── Key input ────────────────────────────────────────────────
       const keyInput = row.querySelector('.map-key-input');
+      const valueInput = row.querySelector('.map-value-input');
       keyInput.onclick = (e) => e.stopPropagation();
       keyInput.onfocus = () => broadcastFocus(key, 'key');
       keyInput.onblur = () => {
-        if (keyInput.value.trim() && keyInput.value !== key) {
-          updateEntry(key, keyInput.value.trim(), value);
-        } else if (!keyInput.value.trim()) {
+        const newKey = keyInput.value.trim();
+        if (newKey && newKey !== key) {
+          updateEntry(key, newKey, valueInput.value);
+        } else if (!newKey) {
           keyInput.value = key;
         }
       };
 
       // ── Value input (save on every keystroke) ────────────────────
-      const valueInput = row.querySelector('.map-value-input');
       valueInput.onclick = (e) => e.stopPropagation();
       valueInput.onfocus = () => broadcastFocus(key, 'value');
       valueInput.oninput = () => {
         updateEntry(key, key, valueInput.value);
       };
+
+      // ── Comment ──────────────────────────────────────────────────
+      row.querySelector('.map-comment-btn').onclick = (e) => { e.stopPropagation(); showCommentModal(key, value); };
 
       // ── Delete ───────────────────────────────────────────────────
       row.querySelector('.map-delete-btn').onclick = (e) => { e.stopPropagation(); deleteEntry(key); };
@@ -363,6 +452,8 @@ export async function createMapStoreEditor(container, veltClient, user) {
   return {
     el: root,
     destroy() {
+      closeCommentModal();
+      if (annotationSub) annotationSub.unsubscribe();
       if (storeUnsub) storeUnsub();
       if (liveStateSub) liveStateSub.unsubscribe();
       if (keyOrderSub) keyOrderSub.unsubscribe();

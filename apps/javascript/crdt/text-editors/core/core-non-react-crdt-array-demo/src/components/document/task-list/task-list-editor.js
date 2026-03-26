@@ -26,6 +26,16 @@ function hashToIndex(str, len) {
   return Math.abs(hash) % len;
 }
 
+// Deduplicate tasks by ID (CRDT arrays can duplicate when multiple clients seed initial data)
+function deduplicateTasks(arr) {
+  const seen = new Set();
+  return arr.filter(t => {
+    if (seen.has(t.id)) return false;
+    seen.add(t.id);
+    return true;
+  });
+}
+
 function relativeTime(ts) {
   const s = Math.floor((Date.now() - ts) / 1000);
   if (s < 60) return 'just now';
@@ -55,6 +65,9 @@ export async function createTaskListEditor(container, veltClient, user) {
   let remoteFocuses = {};
   let liveStateSub = null;
   let storeUnsub = null;
+  let annotationSub = null;
+  let annotationDataByTargetId = {};
+  let commentModal = null;
 
   // Local user info for focus broadcasting
   const localUser = {
@@ -129,9 +142,12 @@ export async function createTaskListEditor(container, veltClient, user) {
 
   console.log('[TaskListEditor] Store created successfully');
 
+  const initVal = store.getValue();
+  tasks = deduplicateTasks(Array.isArray(initVal) ? initVal : []);
+
   // [Velt] Subscribe to store changes (local + remote)
   storeUnsub = store.subscribe((newTasks) => {
-    tasks = Array.isArray(newTasks) ? newTasks : [];
+    tasks = deduplicateTasks(Array.isArray(newTasks) ? newTasks : []);
     // Skip re-render if user is actively editing an input
     const active = document.activeElement;
     if (active && taskListEl.contains(active) && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) {
@@ -139,10 +155,6 @@ export async function createTaskListEditor(container, veltClient, user) {
     }
     renderTaskList();
   });
-
-  // [Velt] Read initial value from store
-  const initVal = store.getValue();
-  tasks = Array.isArray(initVal) ? initVal : [];
 
   // ── Live focus (Velt Live State) ───────────────────────────────────
 
@@ -177,6 +189,61 @@ export async function createTaskListEditor(container, veltClient, user) {
         timestamp: Date.now(),
       },
     });
+  }
+
+  // ── Comment annotations ──────────────────────────────────────────
+  try {
+    const commentElement = veltClient.getCommentElement();
+    if (commentElement) {
+      annotationSub = commentElement.getAllCommentAnnotations().subscribe((annotations) => {
+        const dataMap = {};
+        if (annotations && Array.isArray(annotations)) {
+          annotations.forEach((annotation) => {
+            const targetId = annotation.targetElementId;
+            if (targetId) {
+              if (!dataMap[targetId]) dataMap[targetId] = { count: 0, hasUnread: false };
+              if (annotation.status?.id !== 'RESOLVED') dataMap[targetId].count = annotation.comments?.length || 0;
+              if (annotation.unread) dataMap[targetId].hasUnread = true;
+            }
+          });
+        }
+        annotationDataByTargetId = dataMap;
+        const active = document.activeElement;
+        if (active && taskListEl.contains(active) && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
+        renderTaskList();
+      });
+    }
+  } catch (e) { console.warn('[TaskListEditor] Comment annotations not available:', e); }
+
+  // ── Comment modal ──────────────────────────────────────────────────
+  function showCommentModal(task) {
+    if (commentModal) commentModal.remove();
+    const targetId = `task-${task.id}`;
+    commentModal = document.createElement('div');
+    commentModal.innerHTML = `
+      <div class="comment-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:60;"></div>
+      <div class="comment-center" style="position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:16px;">
+        <div class="comment-box" style="background:var(--task-surface);border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:512px;width:100%;max-height:80vh;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgb(229,231,235);">
+            <h3 style="font-size:14px;font-weight:600;color:var(--task-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${task.title}</h3>
+            <button class="comment-close-btn" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:none;background:transparent;cursor:pointer;">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M15 5L5 15M5 5l10 10" stroke="var(--task-text-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div style="flex:1;overflow:auto;" id="${targetId}">
+            <velt-inline-comments-section target-element-id="${targetId}" shadow-dom="false" composer-position="bottom" multi-thread="false"></velt-inline-comments-section>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(commentModal);
+    commentModal.querySelector('.comment-overlay').onclick = closeCommentModal;
+    commentModal.querySelector('.comment-center').onclick = closeCommentModal;
+    commentModal.querySelector('.comment-box').onclick = (e) => e.stopPropagation();
+    commentModal.querySelector('.comment-close-btn').onclick = closeCommentModal;
+  }
+
+  function closeCommentModal() {
+    if (commentModal) { commentModal.remove(); commentModal = null; }
   }
 
   // ── CRDT Mutations ─────────────────────────────────────────────────
@@ -298,6 +365,18 @@ export async function createTaskListEditor(container, veltClient, user) {
           </button>
           <span style="font-size:14px;font-weight:500;color:var(--task-text-secondary);font-family:Inter,sans-serif;white-space:nowrap;flex-shrink:0;">${relativeTime(task.createdAt)}</span>
           <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+            ${(() => {
+              const annot = annotationDataByTargetId[`task-${task.id}`];
+              const count = annot?.count || 0;
+              const hasUnread = annot?.hasUnread || false;
+              return `<button class="task-comment-btn" style="padding:4px;border:none;background:transparent;cursor:pointer;border-radius:4px;display:flex;align-items:center;gap:2px;transition:opacity 0.15s;">
+                <span style="position:relative;display:inline-flex;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgb(152,152,152)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  ${hasUnread ? '<span style="position:absolute;top:-2px;right:-2px;width:5px;height:5px;background:#BD323C;border-radius:50%;"></span>' : ''}
+                </span>
+                ${count > 0 ? `<span style="font-size:9px;font-weight:500;color:rgb(152,152,152);">${count}</span>` : ''}
+              </button>`;
+            })()}
             <button class="task-delete-btn task-action-hover" style="padding:4px;border:none;background:transparent;cursor:pointer;border-radius:4px;opacity:0;transition:opacity 0.15s;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--task-text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
             </button>
@@ -312,12 +391,12 @@ export async function createTaskListEditor(container, veltClient, user) {
       // Events
       row.onclick = () => {
         expandedTaskId = expandedTaskId === task.id ? null : task.id;
-        broadcastFocus(task.id);
         renderTaskList();
       };
 
       const titleInput = row.querySelector('.task-title-input');
       titleInput.onclick = (e) => e.stopPropagation();
+      titleInput.onfocus = () => broadcastFocus(task.id);
       titleInput.oninput = () => {
         updateTask(task.id, { title: titleInput.value });
       };
@@ -333,6 +412,11 @@ export async function createTaskListEditor(container, veltClient, user) {
         updateTask(task.id, { status: STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length] });
       };
 
+      row.querySelector('.task-comment-btn').onclick = (e) => {
+        e.stopPropagation();
+        showCommentModal(task);
+      };
+
       row.querySelector('.task-delete-btn').onclick = (e) => {
         e.stopPropagation();
         deleteTask(task.id);
@@ -344,6 +428,7 @@ export async function createTaskListEditor(container, veltClient, user) {
         descArea.onclick = (e) => e.stopPropagation();
         const descInput = row.querySelector('.task-desc-input');
         if (descInput) {
+          descInput.onfocus = () => broadcastFocus(task.id);
           descInput.oninput = () => {
             updateTask(task.id, { description: descInput.value });
           };
@@ -364,6 +449,8 @@ export async function createTaskListEditor(container, veltClient, user) {
     el: root,
     // [Velt] Cleanup: unsubscribe from store and live state, destroy store
     destroy() {
+      closeCommentModal();
+      if (annotationSub) annotationSub.unsubscribe();
       if (storeUnsub) storeUnsub();
       if (liveStateSub) liveStateSub.unsubscribe();
       if (store) store.destroy();

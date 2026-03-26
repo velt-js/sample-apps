@@ -119,7 +119,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 .task-row:hover .task-action-hover {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .task-row input:focus,

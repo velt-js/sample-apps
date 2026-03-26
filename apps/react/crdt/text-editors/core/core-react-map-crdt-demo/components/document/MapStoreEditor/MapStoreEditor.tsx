@@ -210,13 +210,20 @@ export default function MapStoreEditor() {
     const current = store?.getValue() || {}
     const obj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {}
     const updated = { ...obj }
-    if (oldKey !== newKey) {
+    // Auto-deduplicate: if renaming to an existing key, append a number
+    let finalKey = newKey
+    if (oldKey !== newKey && updated[newKey] !== undefined) {
+      let counter = 1
+      while (updated[`${newKey} ${counter}`] !== undefined) counter++
+      finalKey = `${newKey} ${counter}`
+    }
+    if (oldKey !== finalKey) {
       delete updated[oldKey]
     }
-    updated[newKey] = newValue
+    updated[finalKey] = newValue
     updateEntries(updated)
-    if (oldKey !== newKey) {
-      setKeyOrder(orderedKeys.map(k => k === oldKey ? newKey : k))
+    if (oldKey !== finalKey) {
+      setKeyOrder(orderedKeys.map(k => k === oldKey ? finalKey : k))
     }
   }, [store, updateEntries, orderedKeys, setKeyOrder])
 
@@ -298,7 +305,7 @@ export default function MapStoreEditor() {
                 const targetId = `map-entry-${key.replace(/\s+/g, '-').toLowerCase()}`
                 return (
                   <MapEntryRow
-                    key={key}
+                    key={index}
                     entryKey={key}
                     entryValue={value as string}
                     index={index}

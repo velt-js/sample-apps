@@ -16,7 +16,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = 'theme-preference';
 
 function getSystemTheme(): ResolvedTheme {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
@@ -44,9 +44,9 @@ function getUrlTheme(): Theme | null {
 }
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   // URL param takes priority (master app override), then localStorage
-  return getUrlTheme() || (localStorage.getItem(STORAGE_KEY) as Theme) || 'dark';
+  return getUrlTheme() || (localStorage.getItem(STORAGE_KEY) as Theme) || 'light';
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
