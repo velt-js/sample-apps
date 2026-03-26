@@ -1,5 +1,5 @@
 {
-  "name": "@apps/vanilla-js-CRDT-text-editors-core-core-crdt-demo",
+  "name": "@apps/vanilla-js-CRDT-text-editors-core-core-non-react-crdt-demo",
   "version": "0.1.0",
   "private": true,
   "type": "module",

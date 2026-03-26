@@ -35,7 +35,7 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-crdt-text-editors-tiptap-tiptap-crdt-demo': 'tiptap-crdt-demo',
     'react-crdt-text-editors-codemirror-codemirror-crdt-demo': 'codemirror-crdt-demo',
     'react-crdt-text-editors-blocknote-blocknote-demo': 'blocknote-crdt-demo',
-    'react-crdt-text-editors-core-core-crdt-demo': 'core-crdt-demo',
+    'react-crdt-text-editors-core-core-react-crdt-demo': 'core-react-crdt-demo',
     'javascript-crdt-text-editors-blocknote-blocknote-crdt-demo': 'js-blocknote-crdt-demo',
     'javascript-crdt-text-editors-tiptap-tiptap-crdt-demo': 'js-tiptap-crdt-demo',
   }
@@ -731,15 +731,15 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                             <div className="mt-2 ml-2 space-y-1">
                               <button
                                 onClick={() => {
-                                  setSelectedItem("core-crdt-demo")
-                                  onSampleSelect?.("react-crdt-text-editors-core-core-crdt-demo")
+                                  setSelectedItem("core-react-crdt-demo")
+                                  onSampleSelect?.("react-crdt-text-editors-core-core-react-crdt-demo")
                                 }}
                                 className={cn(
                                   "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                                  selectedItem === "core-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                  selectedItem === "core-react-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
                                 )}
                               >
-                                core-crdt-demo
+                                core-react-crdt-demo
                               </button>
                             </div>
                           )}

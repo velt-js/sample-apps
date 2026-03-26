@@ -43,10 +43,10 @@ import vueAgGridMultipleToolsMeta from './vue-ag-grid-multiple-tools/metadata'
 import { codeFiles as vueAgGridMultipleToolsCodeFiles } from './vue-ag-grid-multiple-tools/code-files'
 import blocknoteCrdtDemoMeta from './blocknote-crdt-demo/metadata'
 import { codeFiles as blocknoteCrdtDemoCodeFiles } from './blocknote-crdt-demo/code-files'
-import coreCrdtDemoMeta from './core-crdt-demo/metadata'
-import { codeFiles as coreCrdtDemoCodeFiles } from './core-crdt-demo/code-files'
-import jsCoreCrdtDemoMeta from './js-core-crdt-demo/metadata'
-import { codeFiles as jsCoreCrdtDemoCodeFiles } from './js-core-crdt-demo/code-files'
+import coreCrdtDemoMeta from './core-react-crdt-demo/metadata'
+import { codeFiles as coreCrdtDemoCodeFiles } from './core-react-crdt-demo/code-files'
+import jsCoreCrdtDemoMeta from './js-core-non-react-crdt-demo/metadata'
+import { codeFiles as jsCoreCrdtDemoCodeFiles } from './js-core-non-react-crdt-demo/code-files'
 import jsBlocknoteCrdtDemoMeta from './js-blocknote-crdt-demo/metadata'
 import { codeFiles as jsBlocknoteCrdtDemoCodeFiles } from './js-blocknote-crdt-demo/code-files'
 import jsTiptapCrdtDemoMeta from './js-tiptap-crdt-demo/metadata'
@@ -143,7 +143,7 @@ export const SAMPLES: Record<string, Sample> = {
     metadata: blocknoteCrdtDemoMeta,
     codeFiles: blocknoteCrdtDemoCodeFiles
   },
-  'react-crdt-text-editors-core-core-crdt-demo': {
+  'react-crdt-text-editors-core-core-react-crdt-demo': {
     metadata: coreCrdtDemoMeta,
     codeFiles: coreCrdtDemoCodeFiles
   },
@@ -151,7 +151,7 @@ export const SAMPLES: Record<string, Sample> = {
     metadata: jsBlocknoteCrdtDemoMeta,
     codeFiles: jsBlocknoteCrdtDemoCodeFiles
   },
-  'javascript-crdt-text-editors-core-core-crdt-demo': {
+  'javascript-crdt-text-editors-core-core-non-react-crdt-demo': {
     metadata: jsCoreCrdtDemoMeta,
     codeFiles: jsCoreCrdtDemoCodeFiles
   },
