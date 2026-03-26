@@ -84,7 +84,6 @@ export default function TaskRow({
       }}
       onClick={() => {
         onToggleExpand(task.id)
-        onFocus(task.id)
       }}
     >
       {/* Remote focus indicator */}
@@ -113,7 +112,7 @@ export default function TaskRow({
             style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
             value={editTitle}
             onChange={handleTitleChange}
-            onFocus={() => { isEditingTitleRef.current = true }}
+            onFocus={() => { isEditingTitleRef.current = true; onFocus(task.id) }}
             onBlur={() => {
               isEditingTitleRef.current = false
               if (!editTitle.trim()) {
@@ -182,7 +181,7 @@ export default function TaskRow({
             style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-expanded-text)', minHeight: '80px' }}
             value={editDesc}
             onChange={handleDescChange}
-            onFocus={() => { isEditingDescRef.current = true }}
+            onFocus={() => { isEditingDescRef.current = true; onFocus(task.id) }}
             onBlur={() => { isEditingDescRef.current = false }}
             placeholder="Add a description..."
           />

@@ -148,7 +148,7 @@ function NodeBox({
   pos: { x: number; y: number; w: number }
   remoteFocus: { name: string; color: string } | null
   editingId: string | null
-  onStartEdit: (id: string) => void
+  onStartEdit: (id: string | null) => void
   onFinishEdit: (id: string, text: string) => void
   onAddChild: (parentId: string) => void
   onDelete: (id: string) => void
@@ -192,7 +192,8 @@ function NodeBox({
             style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
             value={editText}
             onChange={(e) => { setEditText(e.target.value); onFinishEdit(node.id, e.target.value) }}
-            onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur(); if (e.key === 'Escape') { setEditText(node.text); onFinishEdit(node.id, node.text) } }}
+            onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur(); if (e.key === 'Escape') { setEditText(node.text); onFinishEdit(node.id, node.text); (e.target as HTMLInputElement).blur() } }}
+            onBlur={() => onStartEdit(null)}
             onClick={(e) => e.stopPropagation()}
           />
         ) : (
@@ -539,7 +540,6 @@ export default function MindMapEditor() {
     if (!el) return
     const doc = store.getDoc()
     doc.transact(() => { el.setAttribute('text', text) })
-    setEditingId(null)
   }, [store])
 
   const deleteNode = useCallback((nodeId: string) => {

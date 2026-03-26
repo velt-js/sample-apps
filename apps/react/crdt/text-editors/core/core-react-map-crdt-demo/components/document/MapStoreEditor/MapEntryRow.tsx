@@ -109,7 +109,7 @@ export default function MapEntryRow({
         onClick={() => onFocus(entryKey, 'value')}
       >
         {/* Key input */}
-        <div className="relative flex-1 min-w-0">
+        <div className="relative flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
           {remoteFocusUser && remoteFocusField === 'key' && (
             <div className="absolute -top-4 left-0 text-[10px] font-semibold px-1.5 py-0.5 rounded text-white z-10 whitespace-nowrap" style={{ backgroundColor: remoteFocusColor || '#999' }}>{remoteFocusUser}</div>
           )}
