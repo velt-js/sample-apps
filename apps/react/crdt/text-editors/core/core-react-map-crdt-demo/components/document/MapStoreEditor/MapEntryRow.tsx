@@ -41,13 +41,20 @@ export default function MapEntryRow({
   const keyRef = useRef<HTMLInputElement>(null)
   const valueRef = useRef<HTMLInputElement>(null)
 
+  const isEditingKeyRef = useRef(false)
+  const isEditingValueRef = useRef(false)
+
   useEffect(() => {
-    setEditKey(entryKey)
+    if (!isEditingKeyRef.current) setEditKey(entryKey)
   }, [entryKey])
 
   useEffect(() => {
-    setEditValue(entryValue)
+    if (!isEditingValueRef.current) setEditValue(entryValue)
   }, [entryValue])
+
+  const handleKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditKey(e.target.value)
+  }
 
   const handleKeyBlur = () => {
     if (editKey.trim() && editKey !== entryKey) {
@@ -57,10 +64,10 @@ export default function MapEntryRow({
     }
   }
 
-  const handleValueBlur = () => {
-    if (editValue !== entryValue) {
-      onUpdate(entryKey, editKey, editValue)
-    }
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    setEditValue(val)
+    onUpdate(entryKey, editKey, val)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -118,10 +125,10 @@ export default function MapEntryRow({
           className="bg-transparent border-none outline-none text-base font-medium flex-1 min-w-0"
           style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
           value={editKey}
-          onChange={(e) => setEditKey(e.target.value)}
-          onBlur={handleKeyBlur}
+          onChange={handleKeyChange}
+          onBlur={() => { isEditingKeyRef.current = false; handleKeyBlur() }}
           onKeyDown={handleKeyDown}
-          onFocus={() => onFocus(entryKey)}
+          onFocus={() => { isEditingKeyRef.current = true; onFocus(entryKey) }}
         />
 
         {/* Vertical separator */}
@@ -136,10 +143,10 @@ export default function MapEntryRow({
           className="bg-transparent border-none outline-none text-base font-medium flex-1 min-w-0"
           style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
           value={editValue}
-          onChange={(e) => setEditValue(e.target.value)}
-          onBlur={handleValueBlur}
+          onChange={handleValueChange}
+          onBlur={() => { isEditingValueRef.current = false }}
           onKeyDown={handleKeyDown}
-          onFocus={() => onFocus(entryKey)}
+          onFocus={() => { isEditingValueRef.current = true; onFocus(entryKey) }}
         />
 
         {/* Actions */}

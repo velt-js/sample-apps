@@ -161,7 +161,7 @@ function NodeBox({
   const inputRef = useRef<HTMLInputElement>(null)
   const isEditing = editingId === node.id
 
-  useEffect(() => { setEditText(node.text) }, [node.text])
+  useEffect(() => { if (!isEditing) setEditText(node.text) }, [node.text, isEditing])
   useEffect(() => { if (isEditing && inputRef.current) { inputRef.current.focus(); inputRef.current.select() } }, [isEditing])
 
   return (
@@ -187,8 +187,7 @@ function NodeBox({
             className="bg-transparent border-none outline-none text-base w-full text-center"
             style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
             value={editText}
-            onChange={(e) => setEditText(e.target.value)}
-            onBlur={() => onFinishEdit(node.id, editText)}
+            onChange={(e) => { setEditText(e.target.value); onFinishEdit(node.id, e.target.value) }}
             onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur(); if (e.key === 'Escape') { setEditText(node.text); onFinishEdit(node.id, node.text) } }}
             onClick={(e) => e.stopPropagation()}
           />

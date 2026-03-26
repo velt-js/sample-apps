@@ -47,11 +47,24 @@ export default function TaskListSidebar({
 
   return (
     <div
-      className="h-full flex flex-col justify-between shrink-0"
+      className="h-full flex flex-col shrink-0"
       style={{ width: 251, backgroundColor: 'var(--task-sidebar-bg)' }}
     >
-      {/* Top section */}
-      <div className="flex flex-col gap-2 p-3">
+      {/* Top bar — user avatar + collapse */}
+      <div className="flex items-center justify-between px-4 py-3 shrink-0" style={{ height: 48 }}>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center rounded" style={{ width: 16, height: 16, backgroundColor: 'rgb(245,93,103)' }}>
+            <span className="text-center font-bold" style={{ fontFamily: 'Urbanist, sans-serif', fontSize: 11, color: 'var(--task-text)' }}>{userInitial}</span>
+          </div>
+          <span style={{ fontFamily: 'Urbanist, sans-serif', fontSize: 14, color: 'var(--task-text)' }}>Todo</span>
+        </div>
+        <button className="w-6 h-6 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" onClick={onToggleCollapse}>
+          <CollapseIcon size={16} color="var(--task-text)" />
+        </button>
+      </div>
+
+      {/* Content section */}
+      <div className="flex flex-col gap-2 p-3 flex-1 overflow-y-auto">
         {/* Search */}
         <div
           className="flex items-center gap-2 px-2 h-8 rounded-lg"
@@ -105,48 +118,6 @@ export default function TaskListSidebar({
         ))}
       </div>
 
-      {/* Bottom bar */}
-      <div
-        className="flex items-center justify-between px-4 py-3"
-        style={{ height: 48 }}
-      >
-        <div className="flex items-center gap-2">
-          <div
-            className="flex items-center justify-center rounded"
-            style={{
-              width: 16,
-              height: 16,
-              backgroundColor: 'rgb(245,93,103)',
-            }}
-          >
-            <span
-              className="text-center font-bold"
-              style={{
-                fontFamily: 'Urbanist, sans-serif',
-                fontSize: 11,
-                color: 'var(--task-text)',
-              }}
-            >
-              {userInitial}
-            </span>
-          </div>
-          <span
-            style={{
-              fontFamily: 'Urbanist, sans-serif',
-              fontSize: 14,
-              color: 'var(--task-text)',
-            }}
-          >
-            Todo
-          </span>
-        </div>
-        <button
-          className="w-6 h-6 flex items-center justify-center rounded hover:bg-gray-100 transition-colors"
-          onClick={onToggleCollapse}
-        >
-          <CollapseIcon size={16} color="var(--task-text)" />
-        </button>
-      </div>
     </div>
   )
 }

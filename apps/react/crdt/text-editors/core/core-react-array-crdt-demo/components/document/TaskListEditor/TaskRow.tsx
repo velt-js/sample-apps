@@ -45,20 +45,13 @@ export default function TaskRow({
   onFocus,
   onCommentClick,
 }: TaskRowProps) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [editValue, setEditValue] = useState(task.title)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [editTitle, setEditTitle] = useState(task.title)
+  const [editDesc, setEditDesc] = useState(task.description)
+  const isEditingTitleRef = useRef(false)
+  const isEditingDescRef = useRef(false)
 
-  useEffect(() => {
-    if (isEditing && inputRef.current) {
-      inputRef.current.focus()
-      inputRef.current.select()
-    }
-  }, [isEditing])
-
-  useEffect(() => {
-    setEditValue(task.title)
-  }, [task.title])
+  useEffect(() => { if (!isEditingTitleRef.current) setEditTitle(task.title) }, [task.title])
+  useEffect(() => { if (!isEditingDescRef.current) setEditDesc(task.description) }, [task.description])
 
   const handleStatusClick = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -67,27 +60,16 @@ export default function TaskRow({
     onUpdateTask(task.id, { status: nextStatus })
   }
 
-  const handleTitleDoubleClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setIsEditing(true)
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    setEditTitle(val)
+    onUpdateTask(task.id, { title: val })
   }
 
-  const handleTitleBlur = () => {
-    setIsEditing(false)
-    if (editValue.trim() && editValue !== task.title) {
-      onUpdateTask(task.id, { title: editValue.trim() })
-    } else {
-      setEditValue(task.title)
-    }
-  }
-
-  const handleTitleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      ;(e.target as HTMLInputElement).blur()
-    } else if (e.key === 'Escape') {
-      setEditValue(task.title)
-      setIsEditing(false)
-    }
+  const handleDescChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const val = e.target.value
+    setEditDesc(val)
+    onUpdateTask(task.id, { description: val })
   }
 
   const statusConfig = STATUS_CONFIG[task.status]
@@ -124,28 +106,24 @@ export default function TaskRow({
           className={`shrink-0 transition-transform duration-200 ${isExpanded ? '' : '-rotate-90'}`}
         />
 
-        {/* Title — flexible, takes remaining space */}
+        {/* Title — always an editable input */}
         <div className="flex-1 min-w-0">
-          {isEditing ? (
-            <input
-              ref={inputRef}
-              className="text-sm font-medium bg-transparent border-none outline-none w-full"
-              style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
-              value={editValue}
-              onChange={(e) => setEditValue(e.target.value)}
-              onBlur={handleTitleBlur}
-              onKeyDown={handleTitleKeyDown}
-              onClick={(e) => e.stopPropagation()}
-            />
-          ) : (
-            <span
-              className="text-sm font-medium truncate block"
-              style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
-              onDoubleClick={handleTitleDoubleClick}
-            >
-              {task.title}
-            </span>
-          )}
+          <input
+            className="text-sm font-medium bg-transparent border-none outline-none w-full cursor-text"
+            style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
+            value={editTitle}
+            onChange={handleTitleChange}
+            onFocus={() => { isEditingTitleRef.current = true }}
+            onBlur={() => {
+              isEditingTitleRef.current = false
+              if (!editTitle.trim()) {
+                setEditTitle(task.title)
+                onUpdateTask(task.id, { title: task.title })
+              }
+            }}
+            onClick={(e) => e.stopPropagation()}
+            placeholder="Task title..."
+          />
         </div>
 
         {/* Status */}
@@ -192,18 +170,22 @@ export default function TaskRow({
         </div>
       </div>
 
-      {/* Expanded content */}
+      {/* Expanded content — editable description */}
       {isExpanded && (
         <div
           className="mt-4 rounded-xl p-6"
           style={{ backgroundColor: 'var(--task-expanded-bg)' }}
+          onClick={(e) => e.stopPropagation()}
         >
-          <p
-            className="text-base font-medium leading-6"
-            style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-expanded-text)' }}
-          >
-            {task.description}
-          </p>
+          <textarea
+            className="w-full bg-transparent border-none outline-none resize-none text-base font-medium leading-6"
+            style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-expanded-text)', minHeight: '80px' }}
+            value={editDesc}
+            onChange={handleDescChange}
+            onFocus={() => { isEditingDescRef.current = true }}
+            onBlur={() => { isEditingDescRef.current = false }}
+            placeholder="Add a description..."
+          />
         </div>
       )}
     </div>
