@@ -1,53 +1,55 @@
-# Core CRDT Demo
+# Core XML CRDT Mind Map Demo
 
-> **[🚀 View Live Demo](https://sample-apps-core-react-crdt-demo.vercel.app/)** | **[🔗 Alt Demo](https://sample-apps-core-react-crdt-demo-velt-team-eng.vercel.app/)**
+> **[🚀 View Live Demo](https://sample-apps-core-react-xml-crdt-demo.vercel.app/)**
 
 ## Overview
 
-This demo showcases **real-time collaborative text editing** using a **plain textarea** with **Velt's core CRDT store** (`useStore`). Unlike editor-framework demos (TipTap, BlockNote, CodeMirror), this example intentionally avoids third-party editor libraries to illustrate how Velt CRDT synchronization works at the lowest level—directly on a text string.
+This demo showcases **real-time collaborative mind map editing** using **Velt's core CRDT store** (`useStore`) with `type: 'xml'` for hierarchical data. Unlike the text-based core CRDT demo, this example uses a **Yjs `XmlFragment`** to represent a tree of nodes—demonstrating how Velt CRDT synchronization works with structured, nested data.
 
-### Why a Core / Textarea Demo?
+### Why an XML / Mind Map Demo?
 
-- **Minimal dependencies**: Only `@veltdev/crdt-react` and `@veltdev/react`—no TipTap, BlockNote, or CodeMirror
-- **Transparent CRDT usage**: Shows the raw `useStore` hook with `type: 'text'` for character-level conflict resolution
-- **Live cursors via `useLiveState`**: Demonstrates cursor broadcasting without any editor plugin—purely geometric position mapping
-- **Reference architecture**: A starting point for integrating Velt CRDT into any custom editor or input surface
+- **Hierarchical CRDT data**: Shows `useStore` with `type: 'xml'` for tree-structured content (vs `type: 'text'` for flat strings)
+- **Live focus via `useLiveState`**: Broadcasts which mind map node each user is focused on, with colored borders and name labels
+- **Inline comments per node**: Each node has a comment button that opens a `VeltInlineCommentsSection` modal scoped to that node
+- **Pannable + zoomable canvas**: SVG-based mind map with drag-to-pan and scroll-to-zoom
 
 **Compared to other CRDT demos:**
-- **vs TipTap CRDT**: No rich-text extensions or ProseMirror dependency
-- **vs BlockNote CRDT**: No block-level abstractions or Mantine UI
-- **vs CodeMirror CRDT**: No CodeMirror view or state management
-- **vs ReactFlow CRDT**: Text-based rather than canvas/node-based
+- **vs Core Text CRDT**: Hierarchical XML tree vs flat text string
+- **vs TipTap CRDT**: No rich-text editor; visual mind map nodes instead
+- **vs BlockNote CRDT**: No block-level abstractions; raw Yjs XmlElement manipulation
+- **vs ReactFlow CRDT**: Pure SVG rendering vs ReactFlow's node/edge graph library
 
 ## Path
 
 ```
-apps/react/crdt/text-editors/core/core-crdt-demo/
+apps/react/crdt/text-editors/core/core-react-xml-crdt-demo/
 ```
 
 ## Package Name
 
-`@apps/react-crdt-text-editors-core-core-crdt-demo`
+`@apps/react-crdt-text-editors-core-core-react-xml-crdt-demo`
 
 ## Features
 
 ### Real-time Collaboration
-- **Live Co-editing**: Multiple users simultaneously edit a shared plain-text document via Velt's CRDT `useStore` hook
-- **Live Cursors**: Remote cursor positions and text selections rendered as colored carets and highlight overlays using a hidden mirror `<div>` for pixel-position measurement
+- **Live Co-editing**: Multiple users simultaneously add, rename, and delete mind map nodes via Velt's CRDT `useStore` hook with `type: 'xml'`
+- **Live Focus**: See which node other users are focused on, with colored borders and name labels
 - **Presence Awareness**: See who's currently viewing and editing the document
 - **Notifications**: Stay updated on document activity
-- **Conflict Resolution**: Automatic Yjs-based CRDT conflict resolution for simultaneous character-level edits
+- **Conflict Resolution**: Automatic Yjs-based CRDT conflict resolution for simultaneous tree mutations
 
 ### Editor Features
-- **Plain Textarea**: Zero-dependency editing surface—just a `<textarea>` with CRDT-backed state
+- **Mind Map Canvas**: Pannable and zoomable SVG canvas with top-down tree layout
+- **Node Editing**: Double-click to rename nodes; click + button to add children; trash to delete
+- **Per-Node Comments**: Click the comment icon on any node to open an inline comment thread
 - **Sync Status Indicator**: Live connection and sync status (Synced / Syncing / Connecting / Disconnected)
-- **Table of Contents Sidebar**: Collapsible sidebar with section-based navigation
+- **Store Sidebar**: Collapsible sidebar with multiple store entries
 - **Dark / Light / System Theme**: Full theme support with URL-param override for master-sample-app embedding
 
 ## Directory Structure
 
 ```
-core-crdt-demo/
+core-react-xml-crdt-demo/
 ├── app/
 │   ├── api/
 │   │   └── velt/
@@ -65,14 +67,15 @@ core-crdt-demo/
 ├── components/
 │   ├── header/
 │   │   └── header.tsx                  # Header with Velt tools (presence, notifications)
-│   ├── sidebar/
-│   │   └── sidebar.tsx                 # Table of contents sidebar
 │   ├── document/
 │   │   ├── document-canvas.tsx         # Main document wrapper
-│   │   └── CoreEditor/
-│   │       ├── CoreEditor.tsx          # Core textarea editor with CRDT + live cursors
-│   │       ├── constants.ts            # Initial content and section heading config
+│   │   └── MindMapEditor/
+│   │       ├── MindMapEditor.tsx       # Mind map editor with CRDT XML store + live focus
+│   │       ├── MindMapSidebar.tsx      # Store list sidebar (search, sections)
+│   │       ├── MindMapCommentsModal.tsx # Per-node inline comment modal
+│   │       ├── constants.ts            # Store ID, initial XML content, store items
 │   │       ├── types.ts                # TypeScript type definitions
+│   │       ├── icons.tsx               # SVG icon components
 │   │       └── index.ts                # Barrel export
 │   ├── theme/
 │   │   ├── ThemeContext.tsx            # Theme provider with URL-param support
@@ -88,7 +91,8 @@ core-crdt-demo/
 │       ├── VeltCollaboration.tsx       # Velt client setup and configuration
 │       ├── VeltInitializeDocument.tsx  # Document initialization
 │       ├── VeltInitializeUser.tsx      # User initialization with auth provider
-│       └── VeltTools.tsx               # Velt component exports
+│       ├── VeltTools.tsx               # Velt component exports
+│       └── useVeltEventHandlers.ts    # Comment tool, bubble, and sidebar event handlers
 ├── public/
 │   └── icons/                          # SVG icons for toolbar and sidebar
 ├── styles/
@@ -103,9 +107,9 @@ core-crdt-demo/
 ## Key Technologies
 
 - **Next.js 16** with React 19
-- **@veltdev/crdt** + **@veltdev/crdt-react** - Core CRDT store (`useStore` for text, `useLiveState` for cursors)
+- **@veltdev/crdt** + **@veltdev/crdt-react** - Core CRDT store (`useStore` for XML, `useLiveState` for focus)
 - **@veltdev/react** - Velt collaboration components (comments, presence, notifications, huddle)
-- **Yjs** - Underlying CRDT implementation
+- **Yjs** - Underlying CRDT implementation (`Y.XmlFragment` / `Y.XmlElement`)
 - **Tailwind CSS v3.4** - Styling
 - **TypeScript** - Type safety
 
@@ -124,14 +128,14 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/crdt/text-editors/core/core-crdt-demo
+cd apps/react/crdt/text-editors/core/core-react-xml-crdt-demo
 pnpm dev
 ```
 
 Or run from the root:
 
 ```bash
-pnpm --filter @apps/react-crdt-text-editors-core-core-crdt-demo dev
+pnpm --filter @apps/react-crdt-text-editors-core-core-react-xml-crdt-demo dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -139,55 +143,55 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-crdt-text-editors-core-core-crdt-demo build
+pnpm --filter @apps/react-crdt-text-editors-core-core-react-xml-crdt-demo build
 ```
 
 ## Usage
 
 ### Basic Editing
 
-1. **Type content**: Click into the textarea and start writing
-2. **See collaborators**: View other users' cursors and selections in real-time
-3. **Edit simultaneously**: Multiple users can type in different parts of the document
+1. **Add nodes**: Click the + button on any node or the + button below the tree
+2. **Rename nodes**: Double-click a node to edit its text
+3. **Delete nodes**: Hover over a node and click the trash icon
+4. **Pan and zoom**: Drag the canvas to pan; scroll to zoom in/out
 
 ### Collaborative Features
 
 1. **Join session**: Open the same document URL in multiple browsers or incognito windows
 2. **See active users**: View avatars of online collaborators via the presence indicator
-3. **Live cursors**: See colored carets and selection highlights for each remote user
-4. **Simultaneous edits**: Type at different positions—CRDT merges all changes automatically
+3. **Live focus**: See colored borders and name labels on nodes other users are focused on
+4. **Simultaneous edits**: Multiple users can add, rename, and delete nodes—CRDT merges all changes automatically
 5. **Connection status**: The status dot shows Synced (green), Syncing (yellow), or Disconnected (red)
 
 ### Collaboration Features
 
-- **Comments**: Add popover comments on the document
+- **Per-node comments**: Click the comment icon on any node to open an inline comment thread
+- **Comments sidebar**: Toggle the sidebar to view all comment threads
 - **Notifications**: Bell icon shows document activity
 - **Huddle**: Start audio/video calls with collaborators
-- **Sidebar**: Toggle the comments sidebar for a centralized view
 
 ## How It Works
 
-### CRDT Text Store
+### CRDT XML Store
 
-The editor uses Velt's `useStore` hook with `type: 'text'` to create a shared Yjs `Y.Text` document:
+The editor uses Velt's `useStore` hook with `type: 'xml'` to create a shared Yjs `XmlFragment` tree:
 
 ```typescript
-const { value: text, update: updateText, status, isSynced } = useStore<string>({
-  storeId: 'core-crdt-notepad-1',
-  type: 'text',
-  initialValue: initialContent,
+const { store, status, isSynced } = useStore<string>({
+  storeId: 'core-crdt-xml-mindmap-1',
+  type: 'xml',
 });
 ```
 
-Every keystroke calls `updateText(newValue)`, which applies a Yjs text diff under the hood. Concurrent edits from multiple users are merged automatically.
+The XML tree is read with `store.getXml()` and mutated inside `doc.transact()` blocks. Each node is a `Y.XmlElement` with `id` and `text` attributes, and children nested inside.
 
-### Live Cursors
+### Live Focus
 
-Remote cursor positions are broadcast via `useLiveState` and rendered by measuring character offsets in a hidden mirror `<div>` that replicates the textarea's styling:
+Remote focus state is broadcast via `useLiveState` to show which node each user is working on:
 
 ```typescript
-const [cursors, setCursors] = useLiveState<CursorMap>('core-crdt-cursors', {}, {
-  syncDuration: 50,
+const [focuses, setFocuses] = useLiveState<FocusMap>('core-crdt-xml-focuses', {}, {
+  syncDuration: 100,
   listenToNewChangesOnly: true,
 });
 ```
@@ -207,11 +211,10 @@ If changes aren't syncing:
 3. Ensure multiple users are on the same document ID
 4. Test with two unique users on different browser profiles (e.g., Chrome regular + incognito)
 
-### Live Cursors Not Appearing
-If remote cursors aren't visible:
-1. Ensure the second user has focus on the textarea (cursors broadcast on selection/click/keyup events)
-2. Cursors expire after 30 seconds of inactivity—have the remote user interact with the editor
-3. Check that `useLiveState` is returning data in browser console
+### Live Focus Not Appearing
+If remote focus indicators aren't visible:
+1. Focus entries expire after 30 seconds of inactivity—have the remote user click a node
+2. Check that `useLiveState` is returning data in browser console
 
 ### Yjs Duplicate Instance Errors
 If you see "Yjs was already imported" warnings:

@@ -385,6 +385,7 @@ export default function MindMapEditor() {
   const { client } = useVeltClient()
   const { user } = useAppUser()
 
+  // [Velt] CRDT store — XML type for hierarchical mind map data
   const { store, status, isSynced } = useStore<string>({
     storeId: STORE_ID,
     type: 'xml',
@@ -468,7 +469,7 @@ export default function MindMapEditor() {
     } catch { /* ignore */ }
   }
 
-  // Live focus
+  // [Velt] Live focus via useLiveState — broadcasts which node each user is focused on
   const [focuses, setFocuses] = useLiveState<FocusMap>('core-crdt-xml-focuses', {}, { syncDuration: 100, listenToNewChangesOnly: true })
   const focusesRef = useRef<FocusMap>(focuses || {})
   focusesRef.current = focuses || {}
