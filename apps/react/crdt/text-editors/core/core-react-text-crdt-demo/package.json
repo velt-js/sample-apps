@@ -1,5 +1,5 @@
 {
-  "name": "@apps/react-crdt-text-editors-core-core-react-crdt-demo",
+  "name": "@apps/react-crdt-text-editors-core-core-react-text-crdt-demo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
