@@ -284,8 +284,43 @@ function CanvasArea({
   const containerRef = useRef<HTMLDivElement>(null)
   const [pan, setPan] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
+  const hasFitView = useRef(false)
   const isPanning = useRef(false)
   const lastMouse = useRef({ x: 0, y: 0 })
+
+  // fitView: center tree in container on first render (like ReactFlow)
+  useEffect(() => {
+    if (!layout || !containerRef.current || hasFitView.current) return
+    const el = containerRef.current
+    const cw = el.clientWidth
+    const ch = el.clientHeight
+    if (cw === 0 || ch === 0) return
+
+    // Compute bounding box of all nodes
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+    for (const [, pos] of layout.positions) {
+      minX = Math.min(minX, pos.x)
+      maxX = Math.max(maxX, pos.x + pos.w)
+      minY = Math.min(minY, pos.y)
+      maxY = Math.max(maxY, pos.y + NODE_H)
+    }
+    const treeW = maxX - minX
+    const treeH = maxY - minY
+
+    // Scale to fit with padding (like fitView padding: 0.3)
+    const padding = 0.3
+    const scaleX = cw / (treeW * (1 + padding))
+    const scaleY = ch / (treeH * (1 + padding))
+    const fitZoom = Math.min(scaleX, scaleY, 1) // don't zoom in past 1x
+
+    // Center the tree
+    const offsetX = (cw - treeW * fitZoom) / 2 - minX * fitZoom
+    const offsetY = (ch - treeH * fitZoom) / 2 - minY * fitZoom
+
+    setZoom(fitZoom)
+    setPan({ x: offsetX, y: offsetY })
+    hasFitView.current = true
+  }, [layout])
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (e.button !== 0) return
@@ -323,10 +358,6 @@ function CanvasArea({
     )
   }
 
-  const rootPos = layout.positions.get(rootNode.id)
-  const centerX = rootPos ? rootPos.x + rootPos.w / 2 : 0
-  const btnY = layout.height + 60
-
   return (
     <div
       ref={containerRef}
@@ -360,21 +391,6 @@ function CanvasArea({
           <Connectors node={rootNode} positions={layout.positions} />
           {renderNodes(rootNode, layout.positions, true)}
 
-          {/* Add button below tree */}
-          {rootPos && (
-            <g>
-              <line x1={centerX} y1={layout.height + 40} x2={centerX} y2={btnY} stroke="rgb(0,109,220)" strokeWidth="1" />
-              <foreignObject x={centerX - 16} y={btnY} width={32} height={32}>
-                <button
-                  className="flex items-center justify-center rounded-full hover:bg-blue-50 transition-colors"
-                  style={{ width: 32, height: 32, border: '1px solid rgb(0,109,220)' }}
-                  onClick={() => addChild(rootNode.id)}
-                >
-                  <PlusIcon size={16} color="rgb(0,109,220)" />
-                </button>
-              </foreignObject>
-            </g>
-          )}
         </g>
       </svg>
     </div>
