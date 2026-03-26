@@ -97,6 +97,7 @@
 
 /* Mind Map Node */
 .mindmap-node {
+  position: relative;
   background: var(--task-surface);
   border: 1px solid var(--task-border);
   border-radius: 12px;
