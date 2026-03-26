@@ -6,6 +6,7 @@ import { GripVerticalIcon, TrashIcon, CommentIcon } from './icons'
 interface MapEntryRowProps {
   entryKey: string
   entryValue: string
+  index: number
   remoteFocusUser: string | null
   remoteFocusColor: string | null
   annotationData: { count: number; hasUnread: boolean } | undefined
@@ -13,11 +14,16 @@ interface MapEntryRowProps {
   onDelete: (key: string) => void
   onFocus: (key: string) => void
   onCommentClick: (key: string, value: string) => void
+  onDragStart: (index: number) => void
+  onDragOver: (e: React.DragEvent, index: number) => void
+  onDragEnd: () => void
+  isDragOver: boolean
 }
 
 export default function MapEntryRow({
   entryKey,
   entryValue,
+  index,
   remoteFocusUser,
   remoteFocusColor,
   annotationData,
@@ -25,6 +31,10 @@ export default function MapEntryRow({
   onDelete,
   onFocus,
   onCommentClick,
+  onDragStart,
+  onDragOver,
+  onDragEnd,
+  isDragOver,
 }: MapEntryRowProps) {
   const [editKey, setEditKey] = useState(entryKey)
   const [editValue, setEditValue] = useState(entryValue)
@@ -66,9 +76,20 @@ export default function MapEntryRow({
   const targetElementId = `map-entry-${entryKey.replace(/\s+/g, '-').toLowerCase()}`
 
   return (
-    <div className="flex items-center gap-[10px]">
+    <div
+      className="flex items-center gap-[10px] transition-transform"
+      style={{
+        borderTop: isDragOver ? '2px solid rgb(1,108,221)' : '2px solid transparent',
+      }}
+      onDragOver={(e) => onDragOver(e, index)}
+    >
       {/* Grip handle */}
-      <div className="w-8 h-8 flex items-center justify-center shrink-0 cursor-grab">
+      <div
+        className="w-8 h-8 flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing"
+        draggable
+        onDragStart={() => onDragStart(index)}
+        onDragEnd={onDragEnd}
+      >
         <GripVerticalIcon size={16} color="var(--task-text)" />
       </div>
 
@@ -122,7 +143,7 @@ export default function MapEntryRow({
         />
 
         {/* Actions */}
-        <div className="flex items-center gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center gap-1 shrink-0 w-[72px] justify-end" onClick={(e) => e.stopPropagation()}>
           <button
             className="flex items-center justify-center p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded transition-colors"
             onClick={() => onCommentClick(entryKey, entryValue)}
@@ -134,7 +155,7 @@ export default function MapEntryRow({
             />
           </button>
           <button
-            className="flex items-center justify-center p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors opacity-0 group-hover:opacity-100"
+            className="flex items-center justify-center p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-opacity opacity-0 group-hover:opacity-100"
             onClick={(e) => {
               e.stopPropagation()
               onDelete(entryKey)

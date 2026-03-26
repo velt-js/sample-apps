@@ -42,6 +42,15 @@ export default function MapStoreEditor() {
   const [selectedStoreId, setSelectedStoreId] = useState('image-store')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
+  // Drag-and-drop state
+  const [dragIndex, setDragIndex] = useState<number | null>(null)
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
+
+  // Synced key order via useLiveState so reordering is shared
+  const [keyOrder, setKeyOrder] = useLiveState<string[]>('core-crdt-map-key-order', [], {
+    syncDuration: 100,
+  })
+
   // Comment sidebar state
   const [isGlobalSidebarOpen, setIsGlobalSidebarOpen] = useState(false)
   const [activeCommentToolId, setActiveCommentToolId] = useState<string | null>(null)
@@ -147,37 +156,6 @@ export default function MapStoreEditor() {
     return map
   }, [focuses])
 
-  // CRDT mutation handlers
-  const addEntry = useCallback(() => {
-    const current = store?.getValue() || {}
-    const entriesObj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {}
-    let newKey = 'New Key'
-    let counter = 1
-    while (entriesObj[newKey] !== undefined) {
-      newKey = `New Key ${counter++}`
-    }
-    updateEntries({ ...entriesObj, [newKey]: '' })
-  }, [store, updateEntries])
-
-  const updateEntry = useCallback((oldKey: string, newKey: string, newValue: string) => {
-    const current = store?.getValue() || {}
-    const entriesObj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {}
-    const updated = { ...entriesObj }
-    if (oldKey !== newKey) {
-      delete updated[oldKey]
-    }
-    updated[newKey] = newValue
-    updateEntries(updated)
-  }, [store, updateEntries])
-
-  const deleteEntry = useCallback((key: string) => {
-    const current = store?.getValue() || {}
-    const entriesObj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {}
-    const updated = { ...entriesObj }
-    delete updated[key]
-    updateEntries(updated)
-  }, [store, updateEntries])
-
   // Status indicator
   const statusDotColor =
     status === 'connected' ? (isSynced ? '#22c55e' : '#eab308') :
@@ -186,9 +164,76 @@ export default function MapStoreEditor() {
     status === 'connected' ? (isSynced ? 'Synced' : 'Syncing...') :
     status === 'connecting' ? 'Connecting...' : 'Disconnected'
 
-  // Get entries as array of [key, value] pairs
+  // Get entries as ordered [key, value] pairs
   const entriesObj = (entries && typeof entries === 'object' && !Array.isArray(entries)) ? entries : {}
-  const entryPairs = Object.entries(entriesObj)
+  const allKeys = Object.keys(entriesObj)
+
+  // Build ordered key list: use synced keyOrder, then append any new keys not yet in the order
+  const currentOrder = Array.isArray(keyOrder) ? keyOrder : []
+  const orderedKeys = useMemo(() => {
+    const validOrdered = currentOrder.filter(k => allKeys.includes(k))
+    const newKeys = allKeys.filter(k => !currentOrder.includes(k))
+    return [...validOrdered, ...newKeys]
+  }, [currentOrder, allKeys])
+
+  const entryPairs = orderedKeys.map(k => [k, entriesObj[k] ?? ''] as [string, string])
+
+  // CRDT mutation handlers
+  const addEntry = useCallback(() => {
+    const current = store?.getValue() || {}
+    const obj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {}
+    let newKey = 'New Key'
+    let counter = 1
+    while (obj[newKey] !== undefined) {
+      newKey = `New Key ${counter++}`
+    }
+    updateEntries({ ...obj, [newKey]: '' })
+    setKeyOrder([...orderedKeys, newKey])
+  }, [store, updateEntries, orderedKeys, setKeyOrder])
+
+  const updateEntry = useCallback((oldKey: string, newKey: string, newValue: string) => {
+    const current = store?.getValue() || {}
+    const obj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {}
+    const updated = { ...obj }
+    if (oldKey !== newKey) {
+      delete updated[oldKey]
+    }
+    updated[newKey] = newValue
+    updateEntries(updated)
+    if (oldKey !== newKey) {
+      setKeyOrder(orderedKeys.map(k => k === oldKey ? newKey : k))
+    }
+  }, [store, updateEntries, orderedKeys, setKeyOrder])
+
+  const deleteEntry = useCallback((key: string) => {
+    const current = store?.getValue() || {}
+    const obj = (current && typeof current === 'object' && !Array.isArray(current)) ? current : {}
+    const updated = { ...obj }
+    delete updated[key]
+    updateEntries(updated)
+    setKeyOrder(orderedKeys.filter(k => k !== key))
+  }, [store, updateEntries, orderedKeys, setKeyOrder])
+
+  // Drag handlers
+  const handleDragStart = useCallback((index: number) => {
+    setDragIndex(index)
+  }, [])
+
+  const handleDragOver = useCallback((e: React.DragEvent, index: number) => {
+    e.preventDefault()
+    setDragOverIndex(index)
+  }, [])
+
+  const handleDragEnd = useCallback(() => {
+    if (dragIndex !== null && dragOverIndex !== null && dragIndex !== dragOverIndex) {
+      const newOrder = [...orderedKeys]
+      const [moved] = newOrder.splice(dragIndex, 1)
+      newOrder.splice(dragOverIndex, 0, moved)
+      setKeyOrder(newOrder)
+    }
+    setDragIndex(null)
+    setDragOverIndex(null)
+  }, [dragIndex, dragOverIndex, orderedKeys, setKeyOrder])
 
   // Selected store name
   const selectedStore = storeItems.find(s => s.id === selectedStoreId)
@@ -233,7 +278,7 @@ export default function MapStoreEditor() {
 
             {/* Entry rows */}
             <div className="flex flex-col gap-3 pb-6">
-              {entryPairs.map(([key, value]) => {
+              {entryPairs.map(([key, value], index) => {
                 const remoteFocus = remoteFocusMap[key]
                 const targetId = `map-entry-${key.replace(/\s+/g, '-').toLowerCase()}`
                 return (
@@ -241,6 +286,7 @@ export default function MapStoreEditor() {
                     key={key}
                     entryKey={key}
                     entryValue={value as string}
+                    index={index}
                     remoteFocusUser={remoteFocus?.name || null}
                     remoteFocusColor={remoteFocus?.color || null}
                     annotationData={annotationDataByTargetId[targetId]}
@@ -248,6 +294,10 @@ export default function MapStoreEditor() {
                     onDelete={deleteEntry}
                     onFocus={broadcastFocus}
                     onCommentClick={handleCommentClick}
+                    onDragStart={handleDragStart}
+                    onDragOver={handleDragOver}
+                    onDragEnd={handleDragEnd}
+                    isDragOver={dragOverIndex === index}
                   />
                 )
               })}
