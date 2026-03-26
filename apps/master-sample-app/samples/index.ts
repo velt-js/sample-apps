@@ -59,6 +59,12 @@ import coreMapCrdtDemoMeta from './core-react-map-crdt-demo/metadata'
 import { codeFiles as coreMapCrdtDemoCodeFiles } from './core-react-map-crdt-demo/code-files'
 import coreXmlCrdtDemoMeta from './core-react-xml-crdt-demo/metadata'
 import { codeFiles as coreXmlCrdtDemoCodeFiles } from './core-react-xml-crdt-demo/code-files'
+import jsCoreXmlCrdtDemoMeta from './js-core-non-react-xml-crdt-demo/metadata'
+import { codeFiles as jsCoreXmlCrdtDemoCodeFiles } from './js-core-non-react-xml-crdt-demo/code-files'
+import jsCoreArrayCrdtDemoMeta from './js-core-non-react-array-crdt-demo/metadata'
+import { codeFiles as jsCoreArrayCrdtDemoCodeFiles } from './js-core-non-react-array-crdt-demo/code-files'
+import jsCoreMapCrdtDemoMeta from './js-core-non-react-map-crdt-demo/metadata'
+import { codeFiles as jsCoreMapCrdtDemoCodeFiles } from './js-core-non-react-map-crdt-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -180,6 +186,18 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-core-core-react-xml-crdt-demo': {
     metadata: coreXmlCrdtDemoMeta,
     codeFiles: coreXmlCrdtDemoCodeFiles
+  },
+  'javascript-crdt-text-editors-core-core-non-react-array-crdt-demo': {
+    metadata: jsCoreArrayCrdtDemoMeta,
+    codeFiles: jsCoreArrayCrdtDemoCodeFiles
+  },
+  'javascript-crdt-text-editors-core-core-non-react-map-crdt-demo': {
+    metadata: jsCoreMapCrdtDemoMeta,
+    codeFiles: jsCoreMapCrdtDemoCodeFiles
+  },
+  'javascript-crdt-text-editors-core-core-non-react-xml-crdt-demo': {
+    metadata: jsCoreXmlCrdtDemoMeta,
+    codeFiles: jsCoreXmlCrdtDemoCodeFiles
   }
 }
 

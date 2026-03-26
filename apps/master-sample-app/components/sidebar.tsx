@@ -41,6 +41,9 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-crdt-text-editors-core-core-react-xml-crdt-demo': 'core-react-xml-crdt-demo',
     'javascript-crdt-text-editors-blocknote-blocknote-crdt-demo': 'js-blocknote-crdt-demo',
     'javascript-crdt-text-editors-tiptap-tiptap-crdt-demo': 'js-tiptap-crdt-demo',
+    'javascript-crdt-text-editors-core-core-non-react-array-crdt-demo': 'js-core-non-react-array-crdt-demo',
+    'javascript-crdt-text-editors-core-core-non-react-xml-crdt-demo': 'js-core-non-react-xml-crdt-demo',
+    'javascript-crdt-text-editors-core-core-non-react-map-crdt-demo': 'js-core-non-react-map-crdt-demo',
   }
   return mapping[sampleId] || 'playground'
 }
@@ -78,6 +81,7 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     jsCrdtTextEditors: false,
     jsCrdtBlocknote: false,
     jsCrdtTiptap: false,
+    jsCrdtCore: false,
   }
 
   // Initialize expandedSections from localStorage or use defaults
@@ -890,6 +894,55 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                     )}
                                   >
                                     tiptap-crdt-demo
+                                  </button>
+                                </div>
+                              )}
+
+                              {/* core Section */}
+                              <button
+                                onClick={() => toggleSection("jsCrdtCore")}
+                                className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/20"
+                              >
+                                <span>core</span>
+                                <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.jsCrdtCore && "rotate-90")} />
+                              </button>
+                              {expandedSections.jsCrdtCore && (
+                                <div className="mt-2 ml-2 space-y-1">
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("js-core-non-react-array-crdt-demo")
+                                      onSampleSelect?.("javascript-crdt-text-editors-core-core-non-react-array-crdt-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "js-core-non-react-array-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    core-non-react-array-crdt-demo
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("js-core-non-react-map-crdt-demo")
+                                      onSampleSelect?.("javascript-crdt-text-editors-core-core-non-react-map-crdt-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "js-core-non-react-map-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    core-non-react-map-crdt-demo
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedItem("js-core-non-react-xml-crdt-demo")
+                                      onSampleSelect?.("javascript-crdt-text-editors-core-core-non-react-xml-crdt-demo")
+                                    }}
+                                    className={cn(
+                                      "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                      selectedItem === "js-core-non-react-xml-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                    )}
+                                  >
+                                    core-non-react-xml-crdt-demo
                                   </button>
                                 </div>
                               )}
