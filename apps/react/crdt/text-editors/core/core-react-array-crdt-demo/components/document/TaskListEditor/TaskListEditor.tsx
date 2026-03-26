@@ -30,8 +30,10 @@ export default function TaskListEditor() {
     value: tasks,
     update: updateTasks,
     store,
-    status,
+    isLoading,
     isSynced,
+    status,
+    error,
   } = useStore<Task[]>({
     storeId: STORE_ID,
     type: 'array',
@@ -203,6 +205,17 @@ export default function TaskListEditor() {
   // Selected team name
   const selectedTeam = teamLists.find(l => l.id === selectedListId)
   const teamName = selectedTeam?.name || 'Marketing Tasks'
+
+  if (isLoading) return (
+    <div className="flex h-screen items-center justify-center" style={{ color: 'var(--task-text-secondary)' }}>
+      Loading...
+    </div>
+  )
+  if (error) return (
+    <div className="flex h-screen items-center justify-center" style={{ color: '#ef4444' }}>
+      Error: {error.message}
+    </div>
+  )
 
   return (
     <div className="flex h-screen" style={{ fontFamily: 'Inter, sans-serif' }}>

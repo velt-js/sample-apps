@@ -55,6 +55,8 @@ import jsCodemirrorCrdtDemoMeta from './js-codemirror-crdt-demo/metadata'
 import { codeFiles as jsCodemirrorCrdtDemoCodeFiles } from './js-codemirror-crdt-demo/code-files'
 import coreArrayCrdtDemoMeta from './core-react-array-crdt-demo/metadata'
 import { codeFiles as coreArrayCrdtDemoCodeFiles } from './core-react-array-crdt-demo/code-files'
+import coreMapCrdtDemoMeta from './core-react-map-crdt-demo/metadata'
+import { codeFiles as coreMapCrdtDemoCodeFiles } from './core-react-map-crdt-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -168,6 +170,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-core-core-react-array-crdt-demo': {
     metadata: coreArrayCrdtDemoMeta,
     codeFiles: coreArrayCrdtDemoCodeFiles
+  },
+  'react-crdt-text-editors-core-core-react-map-crdt-demo': {
+    metadata: coreMapCrdtDemoMeta,
+    codeFiles: coreMapCrdtDemoCodeFiles
   }
 }
 

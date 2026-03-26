@@ -37,6 +37,7 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-crdt-text-editors-blocknote-blocknote-demo': 'blocknote-crdt-demo',
     'react-crdt-text-editors-core-core-react-text-crdt-demo': 'core-react-text-crdt-demo',
     'react-crdt-text-editors-core-core-react-array-crdt-demo': 'core-react-array-crdt-demo',
+    'react-crdt-text-editors-core-core-react-map-crdt-demo': 'core-react-map-crdt-demo',
     'javascript-crdt-text-editors-blocknote-blocknote-crdt-demo': 'js-blocknote-crdt-demo',
     'javascript-crdt-text-editors-tiptap-tiptap-crdt-demo': 'js-tiptap-crdt-demo',
   }
@@ -753,6 +754,18 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 )}
                               >
                                 core-react-array-crdt-demo
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("core-react-map-crdt-demo")
+                                  onSampleSelect?.("react-crdt-text-editors-core-core-react-map-crdt-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "core-react-map-crdt-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                core-react-map-crdt-demo
                               </button>
                             </div>
                           )}
