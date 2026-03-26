@@ -49,7 +49,7 @@ function statusIconSvg(status) {
 export async function createTaskListEditor(container, veltClient, user) {
   let store = null;
   let tasks = [];
-  let expandedTaskId = null;
+  let expandedTaskId = 'task-1';
   let selectedListId = 'marketing';
   let searchQuery = '';
   let remoteFocuses = {};
@@ -192,7 +192,7 @@ export async function createTaskListEditor(container, veltClient, user) {
       createdAt: Date.now(),
       commentCount: 0,
     };
-    store.update([...(Array.isArray(current) ? current : []), newTask]);
+    store.update([newTask, ...(Array.isArray(current) ? current : [])]);
   }
 
   function updateTask(id, changes) {

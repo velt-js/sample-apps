@@ -104,21 +104,8 @@ export default function MapEntryRow({
       <div
         id={targetElementId}
         className="map-entry-row flex-1 flex items-center gap-5 relative group"
-        style={{
-          borderLeft: remoteFocusColor ? `3px solid ${remoteFocusColor}` : undefined,
-        }}
         onClick={() => onFocus(entryKey)}
       >
-        {/* Remote focus label */}
-        {remoteFocusUser && (
-          <div
-            className="absolute -top-2 -left-1 text-[10px] font-semibold px-1.5 py-0.5 rounded text-white z-10"
-            style={{ backgroundColor: remoteFocusColor || '#999' }}
-          >
-            {remoteFocusUser}
-          </div>
-        )}
-
         {/* Key input */}
         <input
           ref={keyRef}
@@ -137,17 +124,33 @@ export default function MapEntryRow({
           style={{ borderLeft: '1px solid var(--task-separator)' }}
         />
 
-        {/* Value input */}
-        <input
-          ref={valueRef}
-          className="bg-transparent border-none outline-none text-base font-medium flex-1 min-w-0"
-          style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
-          value={editValue}
-          onChange={handleValueChange}
-          onBlur={() => { isEditingValueRef.current = false }}
-          onKeyDown={handleKeyDown}
-          onFocus={() => { isEditingValueRef.current = true; onFocus(entryKey) }}
-        />
+        {/* Value input — remote focus indicator wraps this field */}
+        <div className="relative flex-1 min-w-0">
+          {remoteFocusUser && (
+            <div
+              className="absolute -top-4 left-0 text-[10px] font-semibold px-1.5 py-0.5 rounded text-white z-10 whitespace-nowrap"
+              style={{ backgroundColor: remoteFocusColor || '#999' }}
+            >
+              {remoteFocusUser}
+            </div>
+          )}
+          <input
+            ref={valueRef}
+            className="bg-transparent border-none text-base font-medium w-full"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              color: 'var(--task-text)',
+              outline: remoteFocusColor ? `2px solid ${remoteFocusColor}` : 'none',
+              outlineOffset: '2px',
+              borderRadius: remoteFocusColor ? '4px' : undefined,
+            }}
+            value={editValue}
+            onChange={handleValueChange}
+            onBlur={() => { isEditingValueRef.current = false }}
+            onKeyDown={handleKeyDown}
+            onFocus={() => { isEditingValueRef.current = true; onFocus(entryKey) }}
+          />
+        </div>
 
         {/* Actions */}
         <div className="flex items-center gap-1 shrink-0 w-[72px] justify-end" onClick={(e) => e.stopPropagation()}>

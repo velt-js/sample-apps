@@ -41,7 +41,7 @@ export default function TaskListEditor() {
   })
 
   // Local UI state
-  const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null)
+  const [expandedTaskId, setExpandedTaskId] = useState<string | null>('task-1')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedListId, setSelectedListId] = useState('marketing')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
@@ -161,7 +161,7 @@ export default function TaskListEditor() {
       commentCount: 0,
     }
     if (Array.isArray(current)) {
-      updateTasks([...current, newTask])
+      updateTasks([newTask, ...current])
     } else {
       updateTasks([newTask])
     }

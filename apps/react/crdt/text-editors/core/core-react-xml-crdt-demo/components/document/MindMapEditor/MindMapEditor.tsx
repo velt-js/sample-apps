@@ -512,13 +512,16 @@ export default function MindMapEditor() {
     if (!xml) return
     const parent = findElementById(xml, parentId)
     if (!parent) return
+    const newId = generateId()
     const doc = store.getDoc()
     doc.transact(() => {
       const el = new Y.XmlElement('node')
-      el.setAttribute('id', generateId())
+      el.setAttribute('id', newId)
       el.setAttribute('text', 'New Node')
       parent.insert(parent.length, [el])
     })
+    // Auto-focus the new node for immediate editing
+    setEditingId(newId)
   }, [store])
 
   const updateNodeText = useCallback((nodeId: string, text: string) => {

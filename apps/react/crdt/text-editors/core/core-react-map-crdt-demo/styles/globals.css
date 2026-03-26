@@ -111,6 +111,12 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+.map-entry-row input:focus {
+  outline: 2px solid rgb(1, 108, 221);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* Helper Text Animation */
 @keyframes pulse-subtle {
   0%, 100% {
