@@ -129,7 +129,7 @@ export default function MapStoreEditor() {
   const focusesRef = useRef<FocusMap>(focuses || {})
   focusesRef.current = focuses || {}
 
-  const broadcastFocus = useCallback((entryKey: string | null) => {
+  const broadcastFocus = useCallback((entryKey: string | null, field: 'key' | 'value' = 'value') => {
     if (!localUserRef.current) return
     const u = localUserRef.current
     setFocuses({
@@ -138,6 +138,7 @@ export default function MapStoreEditor() {
         name: u.name,
         color: u.color,
         entryKey,
+        field,
         timestamp: Date.now(),
       },
     })
@@ -145,12 +146,12 @@ export default function MapStoreEditor() {
 
   // Remote focus map
   const remoteFocusMap = useMemo(() => {
-    const map: Record<string, { name: string; color: string }> = {}
+    const map: Record<string, { name: string; color: string; field: 'key' | 'value' }> = {}
     for (const [uid, entry] of Object.entries(focuses || {})) {
       if (uid === localUserRef.current?.userId) continue
       if (Date.now() - entry.timestamp > 30000) continue
       if (entry.entryKey) {
-        map[entry.entryKey] = { name: entry.name, color: entry.color }
+        map[entry.entryKey] = { name: entry.name, color: entry.color, field: entry.field || 'value' }
       }
     }
     return map
@@ -171,9 +172,23 @@ export default function MapStoreEditor() {
   // Build ordered key list: use synced keyOrder, then append any new keys not yet in the order
   const currentOrder = Array.isArray(keyOrder) ? keyOrder : []
   const orderedKeys = useMemo(() => {
-    const validOrdered = currentOrder.filter(k => allKeys.includes(k))
-    const newKeys = allKeys.filter(k => !currentOrder.includes(k))
-    return [...validOrdered, ...newKeys]
+    const seen = new Set<string>()
+    const result: string[] = []
+    // First add keys from synced order that still exist in the map
+    for (const k of currentOrder) {
+      if (allKeys.includes(k) && !seen.has(k)) {
+        seen.add(k)
+        result.push(k)
+      }
+    }
+    // Then add any new keys not in the order
+    for (const k of allKeys) {
+      if (!seen.has(k)) {
+        seen.add(k)
+        result.push(k)
+      }
+    }
+    return result
   }, [currentOrder, allKeys])
 
   const entryPairs = orderedKeys.map(k => [k, entriesObj[k] ?? ''] as [string, string])
@@ -289,6 +304,7 @@ export default function MapStoreEditor() {
                     index={index}
                     remoteFocusUser={remoteFocus?.name || null}
                     remoteFocusColor={remoteFocus?.color || null}
+                    remoteFocusField={remoteFocus?.field || null}
                     annotationData={annotationDataByTargetId[targetId]}
                     onUpdate={updateEntry}
                     onDelete={deleteEntry}

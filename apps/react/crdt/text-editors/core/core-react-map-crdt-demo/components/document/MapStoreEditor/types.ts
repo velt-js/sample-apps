@@ -12,6 +12,7 @@ export interface FocusEntry {
   name: string
   color: string
   entryKey: string | null
+  field: 'key' | 'value'
   timestamp: number
 }
 

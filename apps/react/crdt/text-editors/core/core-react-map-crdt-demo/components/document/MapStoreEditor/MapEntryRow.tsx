@@ -9,10 +9,11 @@ interface MapEntryRowProps {
   index: number
   remoteFocusUser: string | null
   remoteFocusColor: string | null
+  remoteFocusField: 'key' | 'value' | null
   annotationData: { count: number; hasUnread: boolean } | undefined
   onUpdate: (oldKey: string, newKey: string, newValue: string) => void
   onDelete: (key: string) => void
-  onFocus: (key: string) => void
+  onFocus: (key: string, field: 'key' | 'value') => void
   onCommentClick: (key: string, value: string) => void
   onDragStart: (index: number) => void
   onDragOver: (e: React.DragEvent, index: number) => void
@@ -26,6 +27,7 @@ export default function MapEntryRow({
   index,
   remoteFocusUser,
   remoteFocusColor,
+  remoteFocusField,
   annotationData,
   onUpdate,
   onDelete,
@@ -104,35 +106,38 @@ export default function MapEntryRow({
       <div
         id={targetElementId}
         className="map-entry-row flex-1 flex items-center gap-5 relative group"
-        onClick={() => onFocus(entryKey)}
+        onClick={() => onFocus(entryKey, 'value')}
       >
         {/* Key input */}
-        <input
-          ref={keyRef}
-          className="bg-transparent border-none outline-none text-base font-medium flex-1 min-w-0"
-          style={{ fontFamily: 'Inter, sans-serif', color: 'var(--task-text)' }}
-          value={editKey}
-          onChange={handleKeyChange}
-          onBlur={() => { isEditingKeyRef.current = false; handleKeyBlur() }}
-          onKeyDown={handleKeyDown}
-          onFocus={() => { isEditingKeyRef.current = true; onFocus(entryKey) }}
-        />
+        <div className="relative flex-1 min-w-0">
+          {remoteFocusUser && remoteFocusField === 'key' && (
+            <div className="absolute -top-4 left-0 text-[10px] font-semibold px-1.5 py-0.5 rounded text-white z-10 whitespace-nowrap" style={{ backgroundColor: remoteFocusColor || '#999' }}>{remoteFocusUser}</div>
+          )}
+          <input
+            ref={keyRef}
+            className="bg-transparent border-none text-base font-medium w-full"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              color: 'var(--task-text)',
+              outline: remoteFocusColor && remoteFocusField === 'key' ? `2px solid ${remoteFocusColor}` : 'none',
+              outlineOffset: '2px',
+              borderRadius: remoteFocusColor && remoteFocusField === 'key' ? '4px' : undefined,
+            }}
+            value={editKey}
+            onChange={handleKeyChange}
+            onBlur={() => { isEditingKeyRef.current = false; handleKeyBlur() }}
+            onKeyDown={handleKeyDown}
+            onFocus={() => { isEditingKeyRef.current = true; onFocus(entryKey, 'key') }}
+          />
+        </div>
 
         {/* Vertical separator */}
-        <div
-          className="w-0 h-5 shrink-0"
-          style={{ borderLeft: '1px solid var(--task-separator)' }}
-        />
+        <div className="w-0 h-5 shrink-0" style={{ borderLeft: '1px solid var(--task-separator)' }} />
 
-        {/* Value input — remote focus indicator wraps this field */}
+        {/* Value input */}
         <div className="relative flex-1 min-w-0">
-          {remoteFocusUser && (
-            <div
-              className="absolute -top-4 left-0 text-[10px] font-semibold px-1.5 py-0.5 rounded text-white z-10 whitespace-nowrap"
-              style={{ backgroundColor: remoteFocusColor || '#999' }}
-            >
-              {remoteFocusUser}
-            </div>
+          {remoteFocusUser && remoteFocusField === 'value' && (
+            <div className="absolute -top-4 left-0 text-[10px] font-semibold px-1.5 py-0.5 rounded text-white z-10 whitespace-nowrap" style={{ backgroundColor: remoteFocusColor || '#999' }}>{remoteFocusUser}</div>
           )}
           <input
             ref={valueRef}
@@ -140,15 +145,15 @@ export default function MapEntryRow({
             style={{
               fontFamily: 'Inter, sans-serif',
               color: 'var(--task-text)',
-              outline: remoteFocusColor ? `2px solid ${remoteFocusColor}` : 'none',
+              outline: remoteFocusColor && remoteFocusField === 'value' ? `2px solid ${remoteFocusColor}` : 'none',
               outlineOffset: '2px',
-              borderRadius: remoteFocusColor ? '4px' : undefined,
+              borderRadius: remoteFocusColor && remoteFocusField === 'value' ? '4px' : undefined,
             }}
             value={editValue}
             onChange={handleValueChange}
             onBlur={() => { isEditingValueRef.current = false }}
             onKeyDown={handleKeyDown}
-            onFocus={() => { isEditingValueRef.current = true; onFocus(entryKey) }}
+            onFocus={() => { isEditingValueRef.current = true; onFocus(entryKey, 'value') }}
           />
         </div>
 
