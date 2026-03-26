@@ -1,7 +1,8 @@
 /**
  * Velt Tools Component
  *
- * Vanilla JS port of the React VeltTools component.
+ * Velt Tools Component
+ *
  * Creates Velt tool web components (presence, sidebar button, notifications, huddle).
  */
 

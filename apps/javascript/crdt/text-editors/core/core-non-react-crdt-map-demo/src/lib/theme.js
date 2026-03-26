@@ -1,7 +1,9 @@
 /**
  * Theme Management Module
  *
- * Vanilla JS port of the React ThemeContext.
+ * Theme Management Module
+ *
+ * Manages light/dark/system theme state and persistence.
  * Supports light, dark, and system themes with URL param override and postMessage sync.
  */
 

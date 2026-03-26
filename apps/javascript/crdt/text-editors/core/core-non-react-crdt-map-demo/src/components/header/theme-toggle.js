@@ -1,7 +1,9 @@
 /**
  * Theme Toggle Component
  *
- * Vanilla JS port of the React ThemeToggle component.
+ * Theme Toggle Component
+ *
+ * Toggles between light, dark, and system theme modes.
  * Pill-shaped toggle with light/dark/system options.
  */
 

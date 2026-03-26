@@ -1,7 +1,8 @@
 /**
  * Velt Collaboration Component
  *
- * Vanilla JS port of the React VeltCollaboration component.
+ * Velt Collaboration Component
+ *
  * Creates Velt comments and sidebar web components.
  */
 
