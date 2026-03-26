@@ -158,6 +158,7 @@ function NodeBox({
   isRoot: boolean
 }) {
   const [editText, setEditText] = useState(node.text)
+  const [isHovered, setIsHovered] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const isEditing = editingId === node.id
 
@@ -168,6 +169,7 @@ function NodeBox({
     <foreignObject x={pos.x} y={pos.y - 18} width={pos.w} height={NODE_H + 18} style={{ overflow: 'visible' }}>
       <div style={{ paddingTop: 18 }}>
         <div
+          id={`mindmap-node-${node.id}`}
           className="mindmap-node group relative flex items-center gap-1"
           style={{
             width: pos.w,
@@ -177,6 +179,8 @@ function NodeBox({
           }}
           onClick={() => onFocus(node.id)}
           onDoubleClick={() => onStartEdit(node.id)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           {remoteFocus && (
             <div className="absolute -top-[18px] left-1 text-[9px] font-semibold px-1.5 py-0.5 rounded text-white whitespace-nowrap" style={{ backgroundColor: remoteFocus.color }}>{remoteFocus.name}</div>
@@ -194,17 +198,19 @@ function NodeBox({
         ) : (
           <span className="flex-1 whitespace-nowrap text-center">{node.text}</span>
         )}
-        {/* Comment button — visible if has comments, otherwise hover-only */}
+        {/* Comment button */}
         <button
-          className={`shrink-0 transition-opacity ${annotationData?.count ? '' : 'opacity-0 group-hover:opacity-100'}`}
+          className="shrink-0 transition-opacity"
+          style={{ opacity: annotationData?.count ? 1 : (isHovered ? 1 : 0) }}
           onClick={(e) => { e.stopPropagation(); onCommentClick(node) }}
           title="Comments"
         >
-          <CommentIcon count={annotationData?.count || 0} hasUnread={annotationData?.hasUnread || false} />
+          <CommentIcon size={14} count={annotationData?.count || 0} hasUnread={annotationData?.hasUnread || false} />
         </button>
         {/* Add child button */}
         <button
-          className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="shrink-0 transition-opacity"
+          style={{ opacity: isHovered ? 1 : 0 }}
           onClick={(e) => { e.stopPropagation(); onAddChild(node.id) }}
           title="Add child"
         >
@@ -213,7 +219,8 @@ function NodeBox({
         {/* Delete button (not on root) */}
         {!isRoot && (
           <button
-            className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="shrink-0 transition-opacity"
+            style={{ opacity: isHovered ? 1 : 0 }}
             onClick={(e) => { e.stopPropagation(); onDelete(node.id) }}
             title="Delete"
           >

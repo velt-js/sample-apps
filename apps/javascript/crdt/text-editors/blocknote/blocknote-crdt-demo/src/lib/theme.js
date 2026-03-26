@@ -9,8 +9,8 @@ import { setVeltDarkMode } from './velt.js';
 
 const STORAGE_KEY = 'theme-preference';
 
-let currentTheme = 'dark';
-let resolvedTheme = 'dark';
+let currentTheme = 'light';
+let resolvedTheme = 'light';
 const themeListeners = [];
 
 /**
@@ -61,7 +61,7 @@ function getUrlTheme() {
  * @returns {'light'|'dark'|'system'}
  */
 function getInitialTheme() {
-  return getUrlTheme() || localStorage.getItem(STORAGE_KEY) || 'dark';
+  return getUrlTheme() || localStorage.getItem(STORAGE_KEY) || 'light';
 }
 
 /**
