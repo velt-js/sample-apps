@@ -1,53 +1,58 @@
-# Core CRDT Demo
-
-> **[🚀 View Live Demo](https://sample-apps-core-react-crdt-demo.vercel.app/)** | **[🔗 Alt Demo](https://sample-apps-core-react-crdt-demo-velt-team-eng.vercel.app/)**
+# Core Map CRDT Demo
 
 ## Overview
 
-This demo showcases **real-time collaborative text editing** using a **plain textarea** with **Velt's core CRDT store** (`useStore`). Unlike editor-framework demos (TipTap, BlockNote, CodeMirror), this example intentionally avoids third-party editor libraries to illustrate how Velt CRDT synchronization works at the lowest level—directly on a text string.
+This demo showcases **real-time collaborative key-value editing** using **Velt's core CRDT store** (`useStore`) with `type: 'map'`. Unlike the text CRDT demo (which uses a plain textarea) or the array CRDT demo (which synchronizes a task list), this example demonstrates how to synchronize a `Record<string, string>` map—a set of key-value pairs—using Velt CRDT.
 
-### Why a Core / Textarea Demo?
+### Why a Map CRDT Demo?
 
-- **Minimal dependencies**: Only `@veltdev/crdt-react` and `@veltdev/react`—no TipTap, BlockNote, or CodeMirror
-- **Transparent CRDT usage**: Shows the raw `useStore` hook with `type: 'text'` for character-level conflict resolution
-- **Live cursors via `useLiveState`**: Demonstrates cursor broadcasting without any editor plugin—purely geometric position mapping
-- **Reference architecture**: A starting point for integrating Velt CRDT into any custom editor or input surface
+- **Key-value data sync**: Shows `useStore` with `type: 'map'` for synchronizing string-to-string maps, not text or arrays
+- **Minimal dependencies**: Only `@veltdev/crdt-react` and `@veltdev/react`—no editor framework required
+- **Drag-and-drop reordering**: Synced key order via `useLiveState` so reordering is shared across users
+- **Live focus via `useLiveState`**: Demonstrates broadcasting which entry a user is focused on, with colored indicators
+- **Inline comments**: Per-entry commenting via `VeltInlineCommentsSection` and page-mode comment sidebar
+- **Reference architecture**: A starting point for integrating Velt CRDT into any key-value or settings-based application
 
 **Compared to other CRDT demos:**
+- **vs Core Text CRDT**: Map of key-value pairs rather than a single text string
+- **vs Core Array CRDT**: Flat key-value pairs rather than an array of structured task objects
 - **vs TipTap CRDT**: No rich-text extensions or ProseMirror dependency
 - **vs BlockNote CRDT**: No block-level abstractions or Mantine UI
 - **vs CodeMirror CRDT**: No CodeMirror view or state management
-- **vs ReactFlow CRDT**: Text-based rather than canvas/node-based
+- **vs ReactFlow CRDT**: Key-value based rather than canvas/node-based
 
 ## Path
 
 ```
-apps/react/crdt/text-editors/core/core-crdt-demo/
+apps/react/crdt/text-editors/core/core-react-map-crdt-demo/
 ```
 
 ## Package Name
 
-`@apps/react-crdt-text-editors-core-core-crdt-demo`
+`@apps/react-crdt-text-editors-core-core-react-map-crdt-demo`
 
 ## Features
 
 ### Real-time Collaboration
-- **Live Co-editing**: Multiple users simultaneously edit a shared plain-text document via Velt's CRDT `useStore` hook
-- **Live Cursors**: Remote cursor positions and text selections rendered as colored carets and highlight overlays using a hidden mirror `<div>` for pixel-position measurement
+- **Live Co-editing**: Multiple users simultaneously add, edit, rename, and delete key-value entries via Velt's CRDT `useStore` hook with `type: 'map'`
+- **Live Focus Indicators**: See which entry other users are focused on, with colored border highlights and name labels via `useLiveState`
 - **Presence Awareness**: See who's currently viewing and editing the document
 - **Notifications**: Stay updated on document activity
-- **Conflict Resolution**: Automatic Yjs-based CRDT conflict resolution for simultaneous character-level edits
+- **Conflict Resolution**: Automatic Yjs-based CRDT conflict resolution for simultaneous map mutations
 
-### Editor Features
-- **Plain Textarea**: Zero-dependency editing surface—just a `<textarea>` with CRDT-backed state
+### Map Store Features
+- **Entry CRUD**: Add, rename keys, edit values, and delete key-value entries
+- **Drag-and-Drop Reordering**: Reorder entries with drag handles; order is synced across users via `useLiveState`
+- **Store Sidebar**: Collapsible sidebar with store list navigation
+- **Inline Comments**: Per-entry comment modal using `VeltInlineCommentsSection`
+- **Comment Sidebar**: Global page-mode comment sidebar with focused-thread support
 - **Sync Status Indicator**: Live connection and sync status (Synced / Syncing / Connecting / Disconnected)
-- **Table of Contents Sidebar**: Collapsible sidebar with section-based navigation
-- **Dark / Light / System Theme**: Full theme support with URL-param override for master-sample-app embedding
+- **Dark / Light / System Theme**: Full theme support with URL-param override for embedding
 
 ## Directory Structure
 
 ```
-core-crdt-demo/
+core-react-map-crdt-demo/
 ├── app/
 │   ├── api/
 │   │   └── velt/
@@ -65,13 +70,15 @@ core-crdt-demo/
 ├── components/
 │   ├── header/
 │   │   └── header.tsx                  # Header with Velt tools (presence, notifications)
-│   ├── sidebar/
-│   │   └── sidebar.tsx                 # Table of contents sidebar
 │   ├── document/
 │   │   ├── document-canvas.tsx         # Main document wrapper
-│   │   └── CoreEditor/
-│   │       ├── CoreEditor.tsx          # Core textarea editor with CRDT + live cursors
-│   │       ├── constants.ts            # Initial content and section heading config
+│   │   └── MapStoreEditor/
+│   │       ├── MapStoreEditor.tsx      # Map CRDT editor with live focus + comments
+│   │       ├── MapEntryRow.tsx         # Individual key-value row with drag, edit, delete
+│   │       ├── MapCommentsModal.tsx    # Per-entry inline comments modal
+│   │       ├── MapStoreSidebar.tsx     # Store list navigation sidebar
+│   │       ├── constants.ts            # Store ID, initial map data, store list config
+│   │       ├── icons.tsx               # SVG icon components
 │   │       ├── types.ts                # TypeScript type definitions
 │   │       └── index.ts                # Barrel export
 │   ├── theme/
@@ -85,6 +92,7 @@ core-crdt-demo/
 │       │   ├── VeltNotificationsToolWf.tsx # Customized notifications wireframe
 │       │   ├── VeltSidebarButtonWf.tsx # Customized sidebar button wireframe
 │       │   └── styles.css              # Custom Velt styles
+│       ├── useVeltEventHandlers.ts    # Velt comment/sidebar event handler hooks
 │       ├── VeltCollaboration.tsx       # Velt client setup and configuration
 │       ├── VeltInitializeDocument.tsx  # Document initialization
 │       ├── VeltInitializeUser.tsx      # User initialization with auth provider
@@ -103,10 +111,11 @@ core-crdt-demo/
 ## Key Technologies
 
 - **Next.js 16** with React 19
-- **@veltdev/crdt** + **@veltdev/crdt-react** - Core CRDT store (`useStore` for text, `useLiveState` for cursors)
+- **@veltdev/crdt** + **@veltdev/crdt-react** - Core CRDT store (`useStore` for maps, `useLiveState` for focus and key order)
 - **@veltdev/react** - Velt collaboration components (comments, presence, notifications, huddle)
 - **Yjs** - Underlying CRDT implementation
 - **Tailwind CSS v3.4** - Styling
+- **Inter + Urbanist** - Google Fonts for map store typography
 - **TypeScript** - Type safety
 
 ## Getting Started
@@ -124,14 +133,14 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/crdt/text-editors/core/core-crdt-demo
+cd apps/react/crdt/text-editors/core/core-react-map-crdt-demo
 pnpm dev
 ```
 
 Or run from the root:
 
 ```bash
-pnpm --filter @apps/react-crdt-text-editors-core-core-crdt-demo dev
+pnpm --filter @apps/react-crdt-text-editors-core-core-react-map-crdt-demo dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -139,56 +148,63 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-crdt-text-editors-core-core-crdt-demo build
+pnpm --filter @apps/react-crdt-text-editors-core-core-react-map-crdt-demo build
 ```
 
 ## Usage
 
 ### Basic Editing
 
-1. **Type content**: Click into the textarea and start writing
-2. **See collaborators**: View other users' cursors and selections in real-time
-3. **Edit simultaneously**: Multiple users can type in different parts of the document
+1. **Add an entry**: Click the + button to create a new key-value pair
+2. **Edit an entry**: Click a key or value field to edit it inline, then blur or press Enter to save
+3. **Rename a key**: Edit the key field directly; the old key is removed and the new key is created
+4. **Delete an entry**: Hover over a row and click the trash icon
+5. **Reorder entries**: Drag rows using the grip handle to reorder; order is synced across users
 
 ### Collaborative Features
 
 1. **Join session**: Open the same document URL in multiple browsers or incognito windows
 2. **See active users**: View avatars of online collaborators via the presence indicator
-3. **Live cursors**: See colored carets and selection highlights for each remote user
-4. **Simultaneous edits**: Type at different positions—CRDT merges all changes automatically
+3. **Live focus**: See which entry other users are focused on via colored border highlights
+4. **Simultaneous edits**: Multiple users can add, edit, or delete different entries—CRDT merges all changes automatically
 5. **Connection status**: The status dot shows Synced (green), Syncing (yellow), or Disconnected (red)
 
 ### Collaboration Features
 
-- **Comments**: Add popover comments on the document
+- **Comments**: Add per-entry comments via the comment icon, or use the page-mode comment sidebar
 - **Notifications**: Bell icon shows document activity
 - **Huddle**: Start audio/video calls with collaborators
 - **Sidebar**: Toggle the comments sidebar for a centralized view
 
 ## How It Works
 
-### CRDT Text Store
+### CRDT Map Store
 
-The editor uses Velt's `useStore` hook with `type: 'text'` to create a shared Yjs `Y.Text` document:
+The editor uses Velt's `useStore` hook with `type: 'map'` to create a shared Yjs `Y.Map` document:
 
 ```typescript
-const { value: text, update: updateText, status, isSynced } = useStore<string>({
-  storeId: 'core-crdt-notepad-1',
-  type: 'text',
-  initialValue: initialContent,
+const {
+  value: entries,
+  update: updateEntries,
+  store,
+  status,
+  isSynced,
+} = useStore<Record<string, string>>({
+  storeId: 'core-crdt-map-store-1',
+  type: 'map',
+  initialValue: initialMapData,
 });
 ```
 
-Every keystroke calls `updateText(newValue)`, which applies a Yjs text diff under the hood. Concurrent edits from multiple users are merged automatically.
+Each mutation calls `updateEntries(newMap)`, which applies a Yjs map diff under the hood. Concurrent edits from multiple users are merged automatically.
 
-### Live Cursors
+### Synced Key Order
 
-Remote cursor positions are broadcast via `useLiveState` and rendered by measuring character offsets in a hidden mirror `<div>` that replicates the textarea's styling:
+Entry order is broadcast via `useLiveState` so drag-and-drop reordering is shared across users:
 
 ```typescript
-const [cursors, setCursors] = useLiveState<CursorMap>('core-crdt-cursors', {}, {
-  syncDuration: 50,
-  listenToNewChangesOnly: true,
+const [keyOrder, setKeyOrder] = useLiveState<string[]>('core-crdt-map-key-order', [], {
+  syncDuration: 100,
 });
 ```
 
@@ -206,12 +222,6 @@ If changes aren't syncing:
 2. Verify the `storeId` is the same for all users
 3. Ensure multiple users are on the same document ID
 4. Test with two unique users on different browser profiles (e.g., Chrome regular + incognito)
-
-### Live Cursors Not Appearing
-If remote cursors aren't visible:
-1. Ensure the second user has focus on the textarea (cursors broadcast on selection/click/keyup events)
-2. Cursors expire after 30 seconds of inactivity—have the remote user interact with the editor
-3. Check that `useLiveState` is returning data in browser console
 
 ### Yjs Duplicate Instance Errors
 If you see "Yjs was already imported" warnings:

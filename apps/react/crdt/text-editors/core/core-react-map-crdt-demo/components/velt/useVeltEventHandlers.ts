@@ -15,12 +15,16 @@ export function useVeltEventHandlers({
   openGlobalSidebar,
   setActiveCommentToolId
 }: UseVeltEventHandlersProps) {
+  // [Velt] Get comment utilities for programmatic comment operations
   const commentUtils = useCommentUtils()
+  // [Velt] Subscribe to comment event callbacks
   const commentToolClickedCallback: CommentToolClickEvent = useCommentEventCallback('commentToolClick')
   const commentBubbleClickedCallback: CommentBubbleClickedEvent = useCommentEventCallback('commentBubbleClicked')
   const sidebarButtonClickedCallback: SidebarButtonClickEvent = useCommentEventCallback('sidebarButtonClick')
+  // [Velt] Subscribe to global Velt button click events
   const veltButtonClickEventData: VeltButtonClickEvent = useVeltEventCallback('veltButtonClick')
 
+  // [Velt] Handle custom button click to clear page-mode composer
   useEffect(() => {
     if (veltButtonClickEventData) {
       if (veltButtonClickEventData?.buttonContext?.clickedButtonId === 'remove-page-mode-composer-button') {
@@ -29,6 +33,7 @@ export function useVeltEventHandlers({
     }
   }, [veltButtonClickEventData, commentUtils])
 
+  // [Velt] Handle comment tool click: open sidebar and set page-mode composer context
   useEffect(() => {
     if (commentToolClickedCallback) {
       openGlobalSidebar()
@@ -43,6 +48,7 @@ export function useVeltEventHandlers({
     }
   }, [commentToolClickedCallback, commentUtils, setActiveCommentToolId, openGlobalSidebar])
 
+  // [Velt] Handle sidebar button click: toggle sidebar and clear composer
   useEffect(() => {
     if (sidebarButtonClickedCallback) {
       toggleGlobalSidebar()
@@ -51,6 +57,7 @@ export function useVeltEventHandlers({
     }
   }, [sidebarButtonClickedCallback, commentUtils, setActiveCommentToolId, toggleGlobalSidebar])
 
+  // [Velt] Handle comment bubble click: open sidebar and select the clicked annotation
   useEffect(() => {
     if (commentBubbleClickedCallback && commentUtils) {
       openGlobalSidebar()
