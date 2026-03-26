@@ -438,7 +438,7 @@ export function DemoSwitcher({ isOpen, onClose, onSampleSelect, currentSampleId,
               <div className="text-[9px] font-normal uppercase tracking-[1.35px] text-black/52 dark:text-white/52 mb-3 px-2">
                 Demo
               </div>
-              <div className="space-y-1 max-h-[300px] overflow-y-auto">
+              <div className="space-y-1">
                 {demos.map(demo => (
                   <button
                     key={demo.sampleId}
