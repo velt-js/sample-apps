@@ -98,7 +98,7 @@ function createDocumentSection(title, items, activeItem, onSelect) {
  * @returns {Object} - Component API with el and destroy methods
  */
 export function createSidebar(container) {
-  let isCollapsed = false;
+  let isCollapsed = true;
   let activeItem = 'attention';
 
   const aside = document.createElement('aside');

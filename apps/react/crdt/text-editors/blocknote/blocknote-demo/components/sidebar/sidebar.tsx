@@ -25,7 +25,7 @@ const privateDocuments: DocumentItem[] = [
 
 export default function Sidebar() {
   const [activeItem, setActiveItem] = useState('attention')
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
 
   return (
       <aside

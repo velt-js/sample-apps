@@ -392,7 +392,7 @@ export default function MindMapEditor() {
 
   const [tree, setTree] = useState<MindMapNode[]>([])
   const [selectedStoreId, setSelectedStoreId] = useState('sdk-decision')
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
   const [editingId, setEditingId] = useState<string | null>(null)
   const initializedRef = useRef(false)
 

@@ -40,7 +40,7 @@ export default function MapStoreEditor() {
 
   // Local UI state
   const [selectedStoreId, setSelectedStoreId] = useState('image-store')
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
 
   // Drag-and-drop state
   const [dragIndex, setDragIndex] = useState<number | null>(null)

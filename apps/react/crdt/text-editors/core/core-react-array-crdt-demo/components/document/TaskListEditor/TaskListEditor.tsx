@@ -44,7 +44,7 @@ export default function TaskListEditor() {
   const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedListId, setSelectedListId] = useState('marketing')
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
 
   // Comment sidebar state
   const [isGlobalSidebarOpen, setIsGlobalSidebarOpen] = useState(false)
