@@ -72,8 +72,32 @@ export async function createMapStoreEditor(container, veltClient, user) {
   // Status indicator
   const statusRow = document.createElement('div');
   statusRow.style.cssText = 'display:flex;align-items:center;gap:6px;margin-bottom:24px;';
-  statusRow.innerHTML = '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#eab308;"></span><span style="font-size:12px;color:var(--app-text-tertiary);">Connecting...</span>';
+
+  const statusDot = document.createElement('span');
+  Object.assign(statusDot.style, { display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#eab308' });
+
+  const statusLabel = document.createElement('span');
+  statusLabel.style.cssText = 'font-size:12px;color:var(--app-text-tertiary);';
+  statusLabel.textContent = 'Connecting\u2026';
+
+  statusRow.appendChild(statusDot);
+  statusRow.appendChild(statusLabel);
   innerWrap.appendChild(statusRow);
+
+  // ── Status updates ─────────────────────────────────────────────────
+
+  function updateStatus(status, synced) {
+    if (status === 'connected') {
+      statusDot.style.backgroundColor = synced ? '#22c55e' : '#eab308';
+      statusLabel.textContent = synced ? 'Synced' : 'Syncing\u2026';
+    } else if (status === 'connecting') {
+      statusDot.style.backgroundColor = '#eab308';
+      statusLabel.textContent = 'Connecting\u2026';
+    } else {
+      statusDot.style.backgroundColor = '#ef4444';
+      statusLabel.textContent = 'Disconnected';
+    }
+  }
 
   // Title section
   const titleSection = document.createElement('div');
@@ -112,20 +136,36 @@ export async function createMapStoreEditor(container, veltClient, user) {
 
     console.log('[MapStoreEditor] Store created successfully');
 
+    // [Velt] Seed UI with current CRDT value
+    const initVal = store.getValue();
+    entries = (initVal && typeof initVal === 'object' && !Array.isArray(initVal)) ? initVal : {};
+
+    // Mark as connecting initially, then synced once subscribe fires
+    updateStatus('connecting', false);
+
     // [Velt] Subscribe to store changes (local + remote)
+    let firstSync = true;
     storeUnsub = store.subscribe((newEntries) => {
       entries = (newEntries && typeof newEntries === 'object' && !Array.isArray(newEntries)) ? newEntries : {};
+
+      if (firstSync) {
+        firstSync = false;
+        updateStatus('connected', true);
+      }
+
       const active = document.activeElement;
       if (active && entryListEl.contains(active) && active.tagName === 'INPUT') return;
       renderEntries();
     });
 
-    // [Velt] Seed UI with current CRDT value
-    const initVal = store.getValue();
-    entries = (initVal && typeof initVal === 'object' && !Array.isArray(initVal)) ? initVal : {};
+    // If store.getValue() returned content, we're already synced
+    if (Object.keys(entries).length > 0) {
+      updateStatus('connected', true);
+    }
 
   } catch (error) {
     console.error('[MapStoreEditor] Failed to initialize store:', error);
+    updateStatus('disconnected', false);
     return { destroy() { root.remove(); } };
   }
 
@@ -319,7 +359,6 @@ export async function createMapStoreEditor(container, veltClient, user) {
 
   renderHeader();
   renderEntries();
-  statusRow.innerHTML = '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#22c55e;"></span><span style="font-size:12px;color:var(--app-text-tertiary);">Synced</span>';
 
   return {
     el: root,

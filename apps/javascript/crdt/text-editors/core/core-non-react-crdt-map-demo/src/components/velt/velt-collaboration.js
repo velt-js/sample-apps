@@ -19,17 +19,13 @@ export function createVeltCollaboration(container) {
   const wrapper = document.createElement('div');
   wrapper.id = 'velt-collaboration';
 
-  // [Velt] Create Velt Comments component
+  // Create Velt Comments component
   const comments = document.createElement('velt-comments');
   comments.setAttribute('text-mode', 'false');
   comments.setAttribute('shadow-dom', 'false');
-  comments.setAttribute('popover-mode', 'true');
-  comments.setAttribute('popover-triangle-component', 'false');
-  comments.setAttribute('comment-pin-highlighter', 'false');
-  comments.setAttribute('dialog-on-hover', 'false');
   wrapper.appendChild(comments);
 
-  // [Velt] Create Velt Comments Sidebar
+  // Create Velt Comments Sidebar
   const sidebar = document.createElement('velt-comments-sidebar');
   wrapper.appendChild(sidebar);
 
