@@ -39,21 +39,24 @@
     "packages/*"
   ],
   "packageManager": "pnpm@10.0.0",
+  "pnpm": {
+    "overrides": {
+      "prosemirror-view": "1.38.1"
+    }
+  },
   "overrides": {
-    "@veltdev/crdt": "4.5.8",
-    "@veltdev/crdt-react": "4.5.8",
-    "@veltdev/tiptap-crdt-react": "^4.5.9-beta.2",
-    "@veltdev/blocknote-crdt-react": "4.5.0-beta.3",
-    "@veltdev/codemirror-crdt-react": "4.5.8",
-    "@veltdev/reactflow-crdt": "4.5.8",
-    "@veltdev/react": "5.0.2-beta.7",
+    "@veltdev/crdt": "5.0.0",
+    "@veltdev/crdt-react": "5.0.0",
+    "@veltdev/tiptap-crdt": "5.0.0",
+    "@veltdev/tiptap-crdt-react": "5.0.0",
+    "@veltdev/blocknote-crdt": "5.0.0",
+    "@veltdev/blocknote-crdt-react": "5.0.0",
+    "@veltdev/codemirror-crdt": "5.0.0",
+    "@veltdev/codemirror-crdt-react": "5.0.0",
+    "@veltdev/reactflow-crdt": "5.0.0",
+    "@veltdev/plate-crdt-react": "5.0.0",
+    "@veltdev/react": "5.0.2-beta.11",
     "@codemirror/state": "6.5.3",
-    "@tiptap/core": "3.14.0",
-    "@tiptap/pm": "3.14.0",
-    "@tiptap/react": "3.14.0",
-    "@tiptap/starter-kit": "3.14.0",
-    "@tiptap/extension-text-align": "3.14.0",
-    "@tiptap/extension-underline": "3.14.0",
-    "@tiptap/extension-bubble-menu": "3.14.0"
+    "prosemirror-view": "1.38.1"
   }
 }

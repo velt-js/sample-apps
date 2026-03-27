@@ -99,6 +99,7 @@ export async function createBlockNoteEditor(container, veltClient, editorId) {
     manager = await createCollaboration({
       editorId: editorId,
       veltClient: veltClient,
+      initialContent: blockNoteInitialContent,
       onError: (error) => console.error('[BlockNote] Collaboration error:', error),
     });
 
@@ -126,19 +127,6 @@ export async function createBlockNoteEditor(container, veltClient, editorId) {
 
     // Mount editor to DOM
     editor.mount(mountPoint);
-
-    // Apply initial content if document is empty (brand-new document)
-    const blocks = editor.document;
-    const isEmpty =
-      blocks.length === 0 ||
-      (blocks.length === 1 &&
-        blocks[0].type === 'paragraph' &&
-        Array.isArray(blocks[0].content) &&
-        blocks[0].content.length === 0);
-    if (isEmpty) {
-      console.log('[BlockNote] Document is empty, applying initial content...');
-      editor.replaceBlocks(editor.document, blockNoteInitialContent);
-    }
 
     // [Velt] Subscribe to status and sync events (v2 API)
     statusIndicator.update(manager.status, manager.synced);
