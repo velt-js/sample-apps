@@ -65,6 +65,8 @@ import jsCoreArrayCrdtDemoMeta from './js-core-non-react-array-crdt-demo/metadat
 import { codeFiles as jsCoreArrayCrdtDemoCodeFiles } from './js-core-non-react-array-crdt-demo/code-files'
 import jsCoreMapCrdtDemoMeta from './js-core-non-react-map-crdt-demo/metadata'
 import { codeFiles as jsCoreMapCrdtDemoCodeFiles } from './js-core-non-react-map-crdt-demo/code-files'
+import platejsCrdtDemoMeta from './platejs-crdt-demo/metadata'
+import { codeFiles as platejsCrdtDemoCodeFiles } from './platejs-crdt-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -154,6 +156,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-blocknote-blocknote-demo': {
     metadata: blocknoteCrdtDemoMeta,
     codeFiles: blocknoteCrdtDemoCodeFiles
+  },
+  'react-crdt-text-editors-platejs-platejs-crdt-demo': {
+    metadata: platejsCrdtDemoMeta,
+    codeFiles: platejsCrdtDemoCodeFiles
   },
   'react-crdt-text-editors-core-core-react-text-crdt-demo': {
     metadata: coreCrdtDemoMeta,
