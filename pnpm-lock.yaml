@@ -6,6 +6,8 @@ settings:
 
 overrides:
   prosemirror-view: 1.38.1
+  '@veltdev/crdt': 5.0.1
+  '@veltdev/crdt-react': 5.0.1
 
 importers:
 
@@ -125,8 +127,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -165,8 +167,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -205,8 +207,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -245,8 +247,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -1269,7 +1271,7 @@ importers:
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/reactflow-crdt':
         specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
       '@xyflow/react':
         specifier: ^12.3.0
         version: 12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1324,7 +1326,7 @@ importers:
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/reactflow-crdt':
         specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
       '@xyflow/react':
         specifier: ^12.9.1
         version: 12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1536,11 +1538,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-array-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1594,11 +1596,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-map-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1661,11 +1663,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-text-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1728,11 +1730,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-xml-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.1
+        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -4840,8 +4842,8 @@ packages:
       '@veltdev/types':
         optional: true
 
-  '@veltdev/crdt-react@5.0.0':
-    resolution: {integrity: sha512-2A9YhgaCeHVgSTYkl/mYFBII52TLLoLXPL2Nr9rnsV2rapVzframQ8hCdFvHRkNeifYA45u/M4Y0jxM3Rp/oug==}
+  '@veltdev/crdt-react@5.0.1':
+    resolution: {integrity: sha512-tTAJYNpqTv9vNqR5tvknMBmp0qimR0IovuAEfSzWcbPh6FgLrwR9B8vGbsR8wuyJVgg0/ZSg0APjpypSUmwbAg==}
     peerDependencies:
       '@veltdev/client': '>=5.0.2-beta.8'
       '@veltdev/react': '>=5.0.2-beta.8'
@@ -4854,8 +4856,8 @@ packages:
       '@veltdev/types':
         optional: true
 
-  '@veltdev/crdt@5.0.0':
-    resolution: {integrity: sha512-UCDdJHU9WxC456GNZaWguvGeEE/SB0KyMaR2dciNnRhxTlCboRiFrE7YiuZPej3Y/PYe4Bps67mCq2IQ2dbdzA==}
+  '@veltdev/crdt@5.0.1':
+    resolution: {integrity: sha512-fCCQpe6akPz9ZMif+lFj5urxpT4u7upfZaojql005B2wgXaeW1J//iR3H3Ea9Aky1DbtAWKkai+5pn/tKbURTw==}
     peerDependencies:
       '@veltdev/client': '>=5.0.2-beta.8'
       '@veltdev/react': '>=5.0.2-beta.8'
@@ -4916,7 +4918,7 @@ packages:
     resolution: {integrity: sha512-kDf3+mEzR8+LrIXe5zCsWIK1PwCYwXDu4JQm+V5jdksp868q1PxrxwxObTnT5M16GSbXm3XzBwhj1F2WXXH8JA==}
     peerDependencies:
       '@veltdev/client': '>=5.0.2-beta.8'
-      '@veltdev/crdt': '>=5.0.0-beta.2'
+      '@veltdev/crdt': 5.0.1
       '@veltdev/react': '>=5.0.2-beta.8'
       '@veltdev/types': '>=5.0.2-beta.8'
       '@xyflow/react': ^12.3.6
@@ -10841,13 +10843,13 @@ snapshots:
       '@veltdev/react': 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/types': 5.0.2-beta.9
 
-  '@veltdev/crdt-react@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)':
+  '@veltdev/crdt-react@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)':
     optionalDependencies:
       '@veltdev/client': 5.0.2-beta.9
       '@veltdev/react': 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/types': 5.0.2-beta.9
 
-  '@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+  '@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       lib0: 0.2.117
       y-protocols: 1.0.7(yjs@13.6.30)
@@ -10888,9 +10890,9 @@ snapshots:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@veltdev/reactflow-crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))':
+  '@veltdev/reactflow-crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))':
     dependencies:
-      '@veltdev/crdt': 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@veltdev/crdt': 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@xyflow/react': 12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
       yjs: 13.6.30
@@ -11890,7 +11892,7 @@ snapshots:
       eslint: 9.39.4(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks: 5.2.0(eslint@9.39.4(jiti@2.6.1))
@@ -11907,7 +11909,7 @@ snapshots:
       eslint: 9.39.4(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks: 7.0.1(eslint@9.39.4(jiti@2.6.1))
@@ -11927,7 +11929,7 @@ snapshots:
       eslint: 9.39.4(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks: 7.0.1(eslint@9.39.4(jiti@2.6.1))
@@ -11960,7 +11962,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))
     transitivePeerDependencies:
       - supports-color
 
@@ -11986,7 +11988,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -12015,7 +12017,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-import@2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -12037,6 +12039,8 @@ snapshots:
       semver: 6.3.1
       string.prototype.trimend: 1.0.9
       tsconfig-paths: 3.15.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack

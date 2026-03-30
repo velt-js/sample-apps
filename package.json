@@ -41,12 +41,14 @@
   "packageManager": "pnpm@10.0.0",
   "pnpm": {
     "overrides": {
-      "prosemirror-view": "1.38.1"
+      "prosemirror-view": "1.38.1",
+      "@veltdev/crdt": "5.0.1",
+      "@veltdev/crdt-react": "5.0.1"
     }
   },
   "overrides": {
-    "@veltdev/crdt": "5.0.0",
-    "@veltdev/crdt-react": "5.0.0",
+    "@veltdev/crdt": "5.0.1",
+    "@veltdev/crdt-react": "5.0.1",
     "@veltdev/tiptap-crdt": "5.0.0",
     "@veltdev/tiptap-crdt-react": "5.0.0",
     "@veltdev/blocknote-crdt": "5.0.0",

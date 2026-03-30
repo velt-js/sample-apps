@@ -1,8 +1,7 @@
 'use client'
 
-import { useRef, useEffect, useState, useCallback } from 'react'
-import { useAwareness } from '@veltdev/crdt-react'
-import type { AwarenessState } from '@veltdev/crdt-react'
+import { useRef, useEffect, useState, useCallback, useMemo } from 'react'
+
 interface RemoteCursorsProps {
   textareaRef: React.RefObject<HTMLTextAreaElement | null>
   store: any | null
@@ -12,9 +11,6 @@ interface RemoteCursorsProps {
 // ── Mirror helpers: map character offsets to pixel positions ─────────
 
 function escapeHTML(str: string) {
-  // Only escape HTML-special chars. Do NOT replace spaces with &nbsp; or
-  // newlines with <br> — the mirror uses white-space:pre-wrap which preserves
-  // both natively, matching the textarea's word-wrap behaviour.
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
@@ -76,19 +72,32 @@ function getSelectionRects(
 
 // ── Component ───────────────────────────────────────────────────────
 
+interface ResolvedCursor {
+  clientId: number
+  name: string
+  color: string
+  anchor: number
+  head: number
+}
+
 export default function RemoteCursors({ textareaRef, store, content }: RemoteCursorsProps) {
   const mirrorRef = useRef<HTMLDivElement>(null)
 
-  // ── useAwareness hook for receiving remote cursor states ──
-  const { remoteStates } = useAwareness<AwarenessState>(store)
+  // Awareness version counter — incremented on awareness changes to trigger
+  // useMemo recalculation. Only this (not content) needs useState.
+  const [awarenessVersion, setAwarenessVersion] = useState(0)
 
-  // Broadcast local cursor / selection via store.updateAwareness()
-  // User info (name, color, userId) is auto-populated from the Velt client.
+  // ── Broadcast local cursor as RelativePosition ──
   const broadcastCursor = useCallback(() => {
     if (!textareaRef.current || !store) return
     const ta = textareaRef.current
+
+    const anchorRel = store.createRelativePosition(ta.selectionStart)
+    const headRel = store.createRelativePosition(ta.selectionEnd)
+    if (!anchorRel || !headRel) return
+
     store.updateAwareness({
-      cursor: { anchor: ta.selectionStart, head: ta.selectionEnd },
+      cursor: { anchor: anchorRel, head: headRel },
     })
   }, [store, textareaRef])
 
@@ -97,9 +106,6 @@ export default function RemoteCursors({ textareaRef, store, content }: RemoteCur
     const ta = textareaRef.current
     if (!ta) return
     const handler = () => broadcastCursor()
-    // Deferred broadcast: when clicking inside selected text, the browser
-    // collapses the selection AFTER mouseup/click. requestAnimationFrame
-    // lets us read the updated selectionStart/selectionEnd.
     const deferredHandler = () => requestAnimationFrame(handler)
     const inputHandler = () => setTimeout(handler, 0)
     ta.addEventListener('select', handler)
@@ -116,16 +122,48 @@ export default function RemoteCursors({ textareaRef, store, content }: RemoteCur
     }
   }, [textareaRef, broadcastCursor])
 
-  // Build remote cursors from awareness remoteStates
-  const remoteCursors = remoteStates
-    .filter((s) => s.cursor && s.user)
-    .map((s) => ({
-      clientId: s.clientId,
-      name: s.user!.name,
-      color: s.user!.color,
-      anchor: s.cursor!.anchor,
-      head: s.cursor!.head,
-    }))
+  // Subscribe to awareness changes — bump version to trigger useMemo
+  useEffect(() => {
+    if (!store) return
+    const awareness = store.getAwareness()
+    if (!awareness) return
+    const handler = () => setAwarenessVersion((v) => v + 1)
+    awareness.on('change', handler)
+    return () => { awareness.off('change', handler) }
+  }, [store])
+
+  // ── Resolve remote cursors synchronously during render ──
+  // Depends on both `content` (absolute offsets shift) and `awarenessVersion`
+  // (new cursor data from remote). This eliminates the two-phase render glitch.
+  const remoteCursors = useMemo((): ResolvedCursor[] => {
+    if (!store) return []
+    const awareness = store.getAwareness()
+    if (!awareness) return []
+
+    const localClientId = awareness.clientID
+    const states = awareness.getStates()
+    const cursors: ResolvedCursor[] = []
+
+    states.forEach((state: any, clientId: number) => {
+      if (clientId === localClientId) return
+      if (!state?.cursor || !state?.user) return
+
+      const anchorAbs = store.resolveRelativePosition(state.cursor.anchor)
+      const headAbs = store.resolveRelativePosition(state.cursor.head)
+      if (anchorAbs === null || headAbs === null) return
+
+      cursors.push({
+        clientId,
+        name: state.user.name,
+        color: state.user.color,
+        anchor: anchorAbs,
+        head: headAbs,
+      })
+    })
+
+    return cursors
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store, content, awarenessVersion])
 
   // Force re-render on scroll or window resize so overlays reposition
   const [, setTick] = useState(0)
@@ -165,8 +203,6 @@ export default function RemoteCursors({ textareaRef, store, content }: RemoteCur
         const mirror = mirrorRef.current
         if (!ta || !mirror) return null
 
-        // Clamp offsets to current content length — awareness updates may
-        // arrive before the CRDT text sync, causing out-of-bounds positions.
         const len = content.length
         const anchor = Math.min(Math.max(cursor.anchor, 0), len)
         const head = Math.min(Math.max(cursor.head, 0), len)
@@ -175,7 +211,6 @@ export default function RemoteCursors({ textareaRef, store, content }: RemoteCur
         const hasSelection = start !== end
         const caretCoords = getOffsetCoords(ta, mirror, head, content)
         const selRects = hasSelection ? getSelectionRects(ta, mirror, start, end, content) : []
-
 
         return (
           <div key={cursor.clientId} style={{ pointerEvents: 'none' }}>
