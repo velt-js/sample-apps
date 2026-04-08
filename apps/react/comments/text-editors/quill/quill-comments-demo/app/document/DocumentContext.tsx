@@ -44,16 +44,16 @@ export function useCurrentDocument(): CurrentDocument {
     if (docId) {
       // Use document ID from URL (shareable link)
       setDocumentId(docId);
-      localStorage.setItem('tiptap-document-id', docId);
+      localStorage.setItem('quill-document-id', docId);
     } else {
       // 2. Check localStorage for existing document
-      const stored = localStorage.getItem('tiptap-document-id');
+      const stored = localStorage.getItem('quill-document-id');
       if (stored) {
         docId = stored;
       } else {
         // 3. Generate new document ID
         docId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-        localStorage.setItem('tiptap-document-id', docId);
+        localStorage.setItem('quill-document-id', docId);
       }
 
       // Update URL with document ID for shareability
@@ -69,7 +69,7 @@ export function useCurrentDocument(): CurrentDocument {
   return useMemo(
     () => ({
       documentId: documentId,
-      documentName: "Tiptap Editor",
+      documentName: "Quill Editor",
     }),
     [documentId]
   );

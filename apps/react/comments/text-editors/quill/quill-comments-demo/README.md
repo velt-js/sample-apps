@@ -1,23 +1,20 @@
-# Tiptap Comments Demo
+# Quill Comments Demo
 
-> **[🚀 View Live Demo](https://sample-apps-tiptap-comments-demo.vercel.app)**
-
-https://github.com/user-attachments/assets/c98a84e0-b083-4a3f-818b-d33768fcb15d
-
+> **[🚀 View Live Demo](https://sample-apps-quill-comments-demo.vercel.app)**
 
 ## Overview
 
-This demo showcases **contextual commenting on rich text** built using **Tiptap** with **Velt's commenting integration**. Users can select text, add comments with @mentions, and collaborate asynchronously on document feedback.
+This demo showcases **contextual commenting on rich text** built using **Quill** with **Velt's commenting integration**. Users can select text, add comments with @mentions, and collaborate asynchronously on document feedback.
 
 ## Path
 
 ```
-apps/react/comments/text-editors/tiptap/tiptap-comments-demo/
+apps/react/comments/text-editors/quill/quill-comments-demo/
 ```
 
 ## Package Name
 
-`@apps/react-text-editors-tiptap-tiptap-comments-demo`
+`@apps/react-text-editors-quill-quill-comments-demo`
 
 ## Features
 
@@ -30,15 +27,15 @@ apps/react/comments/text-editors/tiptap/tiptap-comments-demo/
 - **Comment Sidebar**: View and manage all document comments in one place
 
 ### Editor Features
-- **Rich Text Editing**: Powered by Tiptap with StarterKit extensions
-- **Text Formatting**: Bold, italic, and underline styling
+- **Rich Text Editing**: Powered by Quill 2.x
+- **Text Formatting**: Bold, italic, strikethrough, and underline styling
 - **Table of Contents**: Sidebar navigation to quickly jump between sections
 - **Collapsible Sidebar**: Toggle document navigation panel
 
 ## Directory Structure
 
 ```
-tiptap-comments-demo/
+quill-comments-demo/
 ├── app/
 │   ├── layout.tsx                       # Root layout with Velt provider
 │   └── page.tsx                         # Main page
@@ -49,15 +46,14 @@ tiptap-comments-demo/
 │   │   └── sidebar.tsx                  # Table of contents navigation
 │   ├── document/
 │   │   ├── document-canvas.tsx          # Document wrapper component
-│   │   └── TipTapComponent/
-│   │       ├── TipTapComponent.tsx      # Main Tiptap editor with Velt comments
+│   │   └── QuillComponent/
+│   │       ├── QuillComponent.tsx       # Main Quill editor with Velt comments
 │   │       ├── constants.ts             # Editor content and icons
-│   │       ├── extensions.ts            # Custom Tiptap extensions (inline headings)
 │   │       ├── types.ts                 # TypeScript type definitions
 │   │       └── ui/
 │   │           ├── BubbleMenuToolbar.tsx # Text selection toolbar with comment button
-│   │           ├── ToolbarButton.tsx    # Reusable toolbar button component
-│   │           └── ToolbarDivider.tsx   # Toolbar separator component
+│   │           ├── ToolbarButton.tsx     # Reusable toolbar button component
+│   │           └── ToolbarDivider.tsx    # Toolbar separator component
 │   └── velt/
 │       ├── ui-customization/
 │       │   ├── VeltCommentToolWf.tsx    # Customized comment tool
@@ -85,13 +81,11 @@ tiptap-comments-demo/
 
 ## Key Technologies
 
-- **Next.js 15** with React 19
-- **@tiptap/react** - Rich text editor framework
-- **@tiptap/starter-kit** - Essential Tiptap extensions
-- **@tiptap/extension-text-align** - Text alignment extension
-- **@tiptap/extension-underline** - Underline extension
+- **Next.js 16** with React 19
+- **Quill 2.x** - Rich text editor
 - **@veltdev/react** - Velt collaboration components
-- **@veltdev/tiptap-velt-comments** - Tiptap-specific comment integration
+- **@veltdev/quill-velt-comments** - Quill-specific comment integration
+- **@floating-ui/dom** - Bubble menu positioning
 - **Tailwind CSS v3.4** - Styling
 - **TypeScript** - Type safety
 
@@ -110,14 +104,14 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/comments/text-editors/tiptap/tiptap-comments-demo
+cd apps/react/comments/text-editors/quill/quill-comments-demo
 pnpm dev
 ```
 
 Or run from the root:
 
 ```bash
-pnpm --filter @apps/react-text-editors-tiptap-tiptap-comments-demo dev
+pnpm --filter @apps/react-text-editors-quill-quill-comments-demo dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -125,7 +119,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-text-editors-tiptap-tiptap-comments-demo build
+pnpm --filter @apps/react-text-editors-quill-quill-comments-demo build
 ```
 
 ## Usage
@@ -153,7 +147,7 @@ pnpm --filter @apps/react-text-editors-tiptap-tiptap-comments-demo build
 ### Text Formatting
 
 1. **Select text**: Highlight text you want to format
-2. **Use bubble menu**: Choose bold, italic, underline, or comment from the popup
+2. **Use bubble menu**: Choose bold, italic, strikethrough, underline, or comment from the popup
 
 ## Troubleshooting
 
@@ -171,7 +165,7 @@ If Velt features don't appear:
 
 ### Comments Not Appearing
 If comments aren't showing:
-1. Verify the `TiptapVeltComments` extension is loaded
+1. Verify the Quill VeltComments module is registered
 2. Check browser console for errors in `renderComments`
 3. Ensure the `useCommentAnnotations` hook is receiving data
 4. Confirm document ID is properly initialized
@@ -208,6 +202,8 @@ The SDK provides **fullstack components**:
 - 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
 - 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
 - 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
+- 📖 [Quill Documentation](https://quilljs.com/docs/quickstart)
+- 💬 [Velt Quill Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/quill)
 
 ## Important Configuration
 
@@ -226,4 +222,3 @@ public-hoist-pattern[]=!@tailwindcss*
 - Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
-
