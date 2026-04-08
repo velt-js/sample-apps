@@ -6,8 +6,6 @@ settings:
 
 overrides:
   prosemirror-view: 1.38.1
-  '@veltdev/crdt': 5.0.1
-  '@veltdev/crdt-react': 5.0.1
 
 importers:
 
@@ -127,8 +125,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -167,8 +165,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -207,8 +205,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -247,8 +245,8 @@ importers:
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9
@@ -567,10 +565,10 @@ importers:
         version: 10.4.27(postcss@8.5.8)
       eslint:
         specifier: ^9.39.1
-        version: 9.39.4(jiti@2.6.1)
+        version: 9.39.4(jiti@1.21.7)
       eslint-config-next:
         specifier: ^16.0.1
-        version: 16.2.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+        version: 16.2.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       postcss:
         specifier: ^8
         version: 8.5.8
@@ -1045,6 +1043,137 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/react/comments/text-editors/ace/ace-comments-demo:
+    dependencies:
+      '@floating-ui/dom':
+        specifier: ^1.6.0
+        version: 1.7.6
+      '@veltdev/ace-velt-comments':
+        specifier: ^1.0.1
+        version: 1.0.1(ace-builds@1.43.6)
+      '@veltdev/react':
+        specifier: 5.0.2-beta.9
+        version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      ace-builds:
+        specifier: ^1.36.0
+        version: 1.43.6
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      next:
+        specifier: ^16.1.2
+        version: 16.1.2(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.98.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.2.4
+      react-ace:
+        specifier: ^13.0.0
+        version: 13.0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.4(react@19.2.4)
+      tailwind-merge:
+        specifier: ^2.6.0
+        version: 2.6.1
+    devDependencies:
+      '@types/node':
+        specifier: ^22.18.13
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.2.2
+        version: 19.2.3(@types/react@19.2.14)
+      '@veltdev/types':
+        specifier: 5.0.2-beta.9
+        version: 5.0.2-beta.9
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.4.27(postcss@8.5.8)
+      eslint:
+        specifier: ^9.38.0
+        version: 9.39.4(jiti@2.6.1)
+      eslint-config-next:
+        specifier: ^15.5.6
+        version: 15.5.14(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.8
+      tailwindcss:
+        specifier: ^3.4.18
+        version: 3.4.19(tsx@4.21.0)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  apps/react/comments/text-editors/codemirror/codemirror-comments-demo:
+    dependencies:
+      '@codemirror/lang-css':
+        specifier: ^6
+        version: 6.3.1
+      '@codemirror/lang-html':
+        specifier: ^6
+        version: 6.4.11
+      '@codemirror/lang-javascript':
+        specifier: ^6
+        version: 6.2.5
+      '@codemirror/state':
+        specifier: ^6
+        version: 6.6.0
+      '@codemirror/theme-one-dark':
+        specifier: ^6
+        version: 6.1.3
+      '@veltdev/codemirror-velt-comments':
+        specifier: 5.0.0-beta.2
+        version: 5.0.0-beta.2(@codemirror/state@6.6.0)(@codemirror/view@6.40.0)
+      '@veltdev/react':
+        specifier: 5.0.2-beta.9
+        version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@veltdev/types':
+        specifier: 5.0.2-beta.9
+        version: 5.0.2-beta.9
+      clsx:
+        specifier: ^2
+        version: 2.1.1
+      codemirror:
+        specifier: ^6
+        version: 6.0.2
+      next:
+        specifier: ^16.1.2
+        version: 16.1.2(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.98.0)
+      react:
+        specifier: ^19
+        version: 19.2.4
+      react-dom:
+        specifier: ^19
+        version: 19.2.4(react@19.2.4)
+      tailwind-merge:
+        specifier: ^2
+        version: 2.6.1
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
+      autoprefixer:
+        specifier: ^10
+        version: 10.4.27(postcss@8.5.8)
+      postcss:
+        specifier: ^8
+        version: 8.5.8
+      tailwindcss:
+        specifier: ^3.4.0
+        version: 3.4.19(tsx@4.21.0)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   apps/react/comments/text-editors/lexical/lexical-comments-demo:
     dependencies:
       '@lexical/html':
@@ -1080,6 +1209,67 @@ importers:
       next:
         specifier: ^16.1.2
         version: 16.1.2(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.98.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.4(react@19.2.4)
+      tailwind-merge:
+        specifier: ^2.6.0
+        version: 2.6.1
+    devDependencies:
+      '@types/node':
+        specifier: ^22.18.13
+        version: 22.19.15
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.2.2
+        version: 19.2.3(@types/react@19.2.14)
+      '@veltdev/types':
+        specifier: 5.0.2-beta.9
+        version: 5.0.2-beta.9
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.4.27(postcss@8.5.8)
+      eslint:
+        specifier: ^9.38.0
+        version: 9.39.4(jiti@2.6.1)
+      eslint-config-next:
+        specifier: ^15.5.6
+        version: 15.5.14(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.8
+      tailwindcss:
+        specifier: ^3.4.18
+        version: 3.4.19(tsx@4.21.0)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  apps/react/comments/text-editors/quill/quill-comments-demo:
+    dependencies:
+      '@floating-ui/dom':
+        specifier: ^1.6.0
+        version: 1.7.6
+      '@veltdev/quill-velt-comments':
+        specifier: ^5.0.0-beta.2
+        version: 5.0.0-beta.2(quill@2.0.3)
+      '@veltdev/react':
+        specifier: 5.0.2-beta.9
+        version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      next:
+        specifier: ^16.1.2
+        version: 16.1.2(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.98.0)
+      quill:
+        specifier: ^2.0.0
+        version: 2.0.3
       react:
         specifier: ^19.2.0
         version: 19.2.4
@@ -1271,7 +1461,7 @@ importers:
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/reactflow-crdt':
         specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
       '@xyflow/react':
         specifier: ^12.3.0
         version: 12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1326,7 +1516,7 @@ importers:
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/reactflow-crdt':
         specifier: 5.0.0
-        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))
       '@xyflow/react':
         specifier: ^12.9.1
         version: 12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1538,11 +1728,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-array-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1596,11 +1786,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-map-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1663,11 +1853,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-text-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1730,11 +1920,11 @@ importers:
   apps/react/crdt/text-editors/core/core-react-xml-crdt-demo:
     dependencies:
       '@veltdev/crdt':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
-        specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
+        specifier: 5.0.0
+        version: 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)
       '@veltdev/react':
         specifier: 5.0.2-beta.9
         version: 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -4776,6 +4966,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@veltdev/ace-velt-comments@1.0.1':
+    resolution: {integrity: sha512-Ue/lCNVeEcuKCFgGflv4/G1mTkU1MkE+Rq3qSdqTLOjMsgr0/qeuxzOR+GwCoFPkN2+t+Xzgq+tWhNLfIzqN3w==}
+    peerDependencies:
+      ace-builds: ^1.x.x
+
   '@veltdev/blocknote-crdt-react@5.0.0':
     resolution: {integrity: sha512-g9vtD1zo8hZi5zTQRRPhAmPli7KYx8Yj3PUvLhMXLMQ2QosGYhnyhLvil12yR8O0UF99RjFjuSb8ZxNr5oAmXA==}
     peerDependencies:
@@ -4842,8 +5037,14 @@ packages:
       '@veltdev/types':
         optional: true
 
-  '@veltdev/crdt-react@5.0.1':
-    resolution: {integrity: sha512-tTAJYNpqTv9vNqR5tvknMBmp0qimR0IovuAEfSzWcbPh6FgLrwR9B8vGbsR8wuyJVgg0/ZSg0APjpypSUmwbAg==}
+  '@veltdev/codemirror-velt-comments@5.0.0-beta.2':
+    resolution: {integrity: sha512-sVGMfBlzD/J9pjdYEbGCgdVWIdMrXvIqLigw/j3N1KBBcOGZM8ppyJdVZ75Hgde1YwliuMr3eRUI5J5q9YqCJg==}
+    peerDependencies:
+      '@codemirror/state': ^6.x.x
+      '@codemirror/view': ^6.x.x
+
+  '@veltdev/crdt-react@5.0.0':
+    resolution: {integrity: sha512-2A9YhgaCeHVgSTYkl/mYFBII52TLLoLXPL2Nr9rnsV2rapVzframQ8hCdFvHRkNeifYA45u/M4Y0jxM3Rp/oug==}
     peerDependencies:
       '@veltdev/client': '>=5.0.2-beta.8'
       '@veltdev/react': '>=5.0.2-beta.8'
@@ -4856,8 +5057,8 @@ packages:
       '@veltdev/types':
         optional: true
 
-  '@veltdev/crdt@5.0.1':
-    resolution: {integrity: sha512-fCCQpe6akPz9ZMif+lFj5urxpT4u7upfZaojql005B2wgXaeW1J//iR3H3Ea9Aky1DbtAWKkai+5pn/tKbURTw==}
+  '@veltdev/crdt@5.0.0':
+    resolution: {integrity: sha512-UCDdJHU9WxC456GNZaWguvGeEE/SB0KyMaR2dciNnRhxTlCboRiFrE7YiuZPej3Y/PYe4Bps67mCq2IQ2dbdzA==}
     peerDependencies:
       '@veltdev/client': '>=5.0.2-beta.8'
       '@veltdev/react': '>=5.0.2-beta.8'
@@ -4908,6 +5109,11 @@ packages:
       '@veltdev/types':
         optional: true
 
+  '@veltdev/quill-velt-comments@5.0.0-beta.2':
+    resolution: {integrity: sha512-v/DlzjBso+f4IhJytaOfY39obZqpt2I6KVHwhzbrS6OOiU7brJ+W7T9BT0ep/h1pbz4bqntEx7eW9ohHAOqhkA==}
+    peerDependencies:
+      quill: ^2.0.0
+
   '@veltdev/react@5.0.2-beta.9':
     resolution: {integrity: sha512-MTRkKpby47KaO+4Mr9E/yN4m5Lf62ucc90v4mZRko5PqiwdpIwEvZALWO03vyPTQqAnYNVu4tBxpdGenzcB5LQ==}
     peerDependencies:
@@ -4918,7 +5124,7 @@ packages:
     resolution: {integrity: sha512-kDf3+mEzR8+LrIXe5zCsWIK1PwCYwXDu4JQm+V5jdksp868q1PxrxwxObTnT5M16GSbXm3XzBwhj1F2WXXH8JA==}
     peerDependencies:
       '@veltdev/client': '>=5.0.2-beta.8'
-      '@veltdev/crdt': 5.0.1
+      '@veltdev/crdt': '>=5.0.0-beta.2'
       '@veltdev/react': '>=5.0.2-beta.8'
       '@veltdev/types': '>=5.0.2-beta.8'
       '@xyflow/react': ^12.3.6
@@ -5131,6 +5337,9 @@ packages:
 
   '@xyflow/system@0.0.75':
     resolution: {integrity: sha512-iXs+AGFLi8w/VlAoc/iSxk+CxfT6o64Uw/k0CKASOPqjqz6E0rb5jFZgJtXGZCpfQI6OQpu5EnumP5fGxQheaQ==}
+
+  ace-builds@1.43.6:
+    resolution: {integrity: sha512-L1ddibQ7F3vyXR2k2fg+I8TQTPWVA6CKeDQr/h2+8CeyTp3W6EQL8xNFZRTztuP8xNOAqL3IYPqdzs31GCjDvg==}
 
   acorn-import-phases@1.0.4:
     resolution: {integrity: sha512-wKmbr/DDiIXzEOiWrTTUcDm24kQ2vGfZQvM2fwg2vXqR5uW6aapr7ObPtj1th32b9u90/Pf4AItvdTh42fBmVQ==}
@@ -5611,6 +5820,9 @@ packages:
   didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
 
+  diff-match-patch@1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
+
   direction@1.0.4:
     resolution: {integrity: sha512-GYqKi1aH7PJXxdhTeZBFrg8vUBeKXi+cNprXsC1kpJcbcVnV9wBsrOu1cQEdG0WeQwlfHiy3XvnKfIrJ2R0NzQ==}
     hasBin: true
@@ -5888,6 +6100,9 @@ packages:
   eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
 
+  eventemitter3@5.0.4:
+    resolution: {integrity: sha512-mlsTRyGaPBjPedk6Bvw+aqbsXDtoAyAzm5MO7JgU+yVRyMQ5O8bD4Kcci7BS85f93veegeCPkL8R4GLClnjLFw==}
+
   events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
@@ -5897,6 +6112,9 @@ packages:
 
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+
+  fast-diff@1.3.0:
+    resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
 
   fast-equals@5.4.0:
     resolution: {integrity: sha512-jt2DW/aNFNwke7AUd+Z+e6pz39KO5rzdbbFCg2sGafS4mk13MI7Z8O5z9cADNn5lhGODIgLwug6TZO2ctf7kcw==}
@@ -6514,6 +6732,20 @@ packages:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
 
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
+
+  lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+
+  lodash.get@4.4.2:
+    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
+
+  lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+
   lodash.mapvalues@4.6.0:
     resolution: {integrity: sha512-JPFqXFeZQ7BfS00H58kClY7SPVeHertPE0lNuCyZ26/XlN8TvakYD7b9bGyNmXbT/D3BbtPAAmq90gPWqLkxlQ==}
 
@@ -6875,6 +7107,9 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
+  parchment@3.0.0:
+    resolution: {integrity: sha512-HUrJFQ/StvgmXRcQ1ftY6VEZUq3jA2t9ncFN4F84J/vN0/FPpQF+8FKXb3l6fLces6q0uOHj6NJn+2xvZnxO6A==}
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -7151,6 +7386,14 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  quill-delta@5.1.0:
+    resolution: {integrity: sha512-X74oCeRI4/p0ucjb5Ma8adTXd9Scumz367kkMK5V/IatcX6A0vlgLgKbzXWy5nZmCGeNJm2oQX0d2Eqj+ZIlCA==}
+    engines: {node: '>= 12.0.0'}
+
+  quill@2.0.3:
+    resolution: {integrity: sha512-xEYQBqfYx/sfb33VJiKnSJp8ehloavImQ2A6564GAbqG55PGw1dAWUn1MUbQB62t0azawUS2CZZhWCjO8gRvTw==}
+    engines: {npm: '>=8.2.3'}
+
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
@@ -7159,6 +7402,12 @@ packages:
     engines: {node: '>= 10.13.0'}
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
+
+  react-ace@13.0.0:
+    resolution: {integrity: sha512-PPk2O/ArHzDtbnK82QImfHYXwuiitRgHJf5AxwMQh9zciojbWsPmKJm1tMgWOYLCtGEz8/Dh3MxRxrXe7QcstQ==}
+    peerDependencies:
+      react: ^0.13.0 || ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^0.13.0 || ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
 
   react-compiler-runtime@1.0.0:
     resolution: {integrity: sha512-rRfjYv66HlG8896yPUDONgKzG5BxZD1nV9U6rkm+7VCuvQc903C4MjcoZR4zPw53IKSOX9wMQVpA1IAbRtzQ7w==}
@@ -8735,6 +8984,11 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.4':
     optional: true
+
+  '@eslint-community/eslint-utils@4.9.1(eslint@9.39.4(jiti@1.21.7))':
+    dependencies:
+      eslint: 9.39.4(jiti@1.21.7)
+      eslint-visitor-keys: 3.4.3
 
   '@eslint-community/eslint-utils@4.9.1(eslint@9.39.4(jiti@2.6.1))':
     dependencies:
@@ -10631,6 +10885,22 @@ snapshots:
     dependencies:
       '@types/webidl-conversions': 7.0.3
 
+  '@typescript-eslint/eslint-plugin@8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@eslint-community/regexpp': 4.12.2
+      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/scope-manager': 8.57.2
+      '@typescript-eslint/type-utils': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.57.2
+      eslint: 9.39.4(jiti@1.21.7)
+      ignore: 7.0.5
+      natural-compare: 1.4.0
+      ts-api-utils: 2.5.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/eslint-plugin@8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
@@ -10643,6 +10913,18 @@ snapshots:
       ignore: 7.0.5
       natural-compare: 1.4.0
       ts-api-utils: 2.5.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.57.2
+      '@typescript-eslint/types': 8.57.2
+      '@typescript-eslint/typescript-estree': 8.57.2(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.57.2
+      debug: 4.4.3
+      eslint: 9.39.4(jiti@1.21.7)
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
@@ -10677,6 +10959,18 @@ snapshots:
     dependencies:
       typescript: 5.9.3
 
+  '@typescript-eslint/type-utils@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/types': 8.57.2
+      '@typescript-eslint/typescript-estree': 8.57.2(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      debug: 4.4.3
+      eslint: 9.39.4(jiti@1.21.7)
+      ts-api-utils: 2.5.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/type-utils@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/types': 8.57.2
@@ -10702,6 +10996,17 @@ snapshots:
       semver: 7.7.4
       tinyglobby: 0.2.15
       ts-api-utils: 2.5.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/utils@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4(jiti@1.21.7))
+      '@typescript-eslint/scope-manager': 8.57.2
+      '@typescript-eslint/types': 8.57.2
+      '@typescript-eslint/typescript-estree': 8.57.2(typescript@5.9.3)
+      eslint: 9.39.4(jiti@1.21.7)
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
@@ -10802,6 +11107,10 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
+  '@veltdev/ace-velt-comments@1.0.1(ace-builds@1.43.6)':
+    dependencies:
+      ace-builds: 1.43.6
+
   '@veltdev/blocknote-crdt-react@5.0.0(@veltdev/blocknote-crdt@5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@veltdev/blocknote-crdt': 5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
@@ -10843,13 +11152,18 @@ snapshots:
       '@veltdev/react': 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/types': 5.0.2-beta.9
 
-  '@veltdev/crdt-react@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)':
+  '@veltdev/codemirror-velt-comments@5.0.0-beta.2(@codemirror/state@6.6.0)(@codemirror/view@6.40.0)':
+    dependencies:
+      '@codemirror/state': 6.6.0
+      '@codemirror/view': 6.40.0
+
+  '@veltdev/crdt-react@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)':
     optionalDependencies:
       '@veltdev/client': 5.0.2-beta.9
       '@veltdev/react': 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/types': 5.0.2-beta.9
 
-  '@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+  '@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       lib0: 0.2.117
       y-protocols: 1.0.7(yjs@13.6.30)
@@ -10885,14 +11199,18 @@ snapshots:
       '@veltdev/react': 5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@veltdev/types': 5.0.2-beta.9
 
+  '@veltdev/quill-velt-comments@5.0.0-beta.2(quill@2.0.3)':
+    dependencies:
+      quill: 2.0.3
+
   '@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@veltdev/reactflow-crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))':
+  '@veltdev/reactflow-crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/crdt@5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(@xyflow/react@12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4)))':
     dependencies:
-      '@veltdev/crdt': 5.0.1(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@veltdev/crdt': 5.0.0(@veltdev/client@5.0.2-beta.9)(@veltdev/react@5.0.2-beta.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@veltdev/types@5.0.2-beta.9)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@xyflow/react': 12.10.1(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
       yjs: 13.6.30
@@ -11140,6 +11458,8 @@ snapshots:
       d3-interpolate: 3.0.1
       d3-selection: 3.0.0
       d3-zoom: 3.0.0
+
+  ace-builds@1.43.6: {}
 
   acorn-import-phases@1.0.4(acorn@8.16.0):
     dependencies:
@@ -11635,6 +11955,8 @@ snapshots:
 
   didyoumean@1.2.2: {}
 
+  diff-match-patch@1.0.5: {}
+
   direction@1.0.4: {}
 
   dlv@1.1.3: {}
@@ -11892,7 +12214,7 @@ snapshots:
       eslint: 9.39.4(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks: 5.2.0(eslint@9.39.4(jiti@2.6.1))
@@ -11903,18 +12225,18 @@ snapshots:
       - eslint-plugin-import-x
       - supports-color
 
-  eslint-config-next@16.2.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3):
+  eslint-config-next@16.2.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3):
     dependencies:
       '@next/eslint-plugin-next': 16.2.1
-      eslint: 9.39.4(jiti@2.6.1)
+      eslint: 9.39.4(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-react-hooks: 7.0.1(eslint@9.39.4(jiti@2.6.1))
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@1.21.7))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@1.21.7))
+      eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@1.21.7))
+      eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@1.21.7))
+      eslint-plugin-react-hooks: 7.0.1(eslint@9.39.4(jiti@1.21.7))
       globals: 16.4.0
-      typescript-eslint: 8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      typescript-eslint: 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -11929,7 +12251,7 @@ snapshots:
       eslint: 9.39.4(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks: 7.0.1(eslint@9.39.4(jiti@2.6.1))
@@ -11951,6 +12273,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@1.21.7)):
+    dependencies:
+      '@nolyfill/is-core-module': 1.0.39
+      debug: 4.4.3
+      eslint: 9.39.4(jiti@1.21.7)
+      get-tsconfig: 4.13.7
+      is-bun-module: 2.0.0
+      stable-hash: 0.0.5
+      tinyglobby: 0.2.15
+      unrs-resolver: 1.11.1
+    optionalDependencies:
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@1.21.7))
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
@@ -11962,18 +12299,18 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@1.21.7)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
-      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
-      eslint: 9.39.4(jiti@2.6.1)
+      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      eslint: 9.39.4(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@1.21.7))
     transitivePeerDependencies:
       - supports-color
 
@@ -11988,7 +12325,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@1.21.7)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -11997,9 +12334,9 @@ snapshots:
       array.prototype.flatmap: 1.3.3
       debug: 3.2.7
       doctrine: 2.1.0
-      eslint: 9.39.4(jiti@2.6.1)
+      eslint: 9.39.4(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@1.21.7))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -12011,7 +12348,7 @@ snapshots:
       string.prototype.trimend: 1.0.9
       tsconfig-paths: 3.15.0
     optionalDependencies:
-      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -12046,6 +12383,52 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
+  eslint-plugin-import@2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1)):
+    dependencies:
+      '@rtsao/scc': 1.1.0
+      array-includes: 3.1.9
+      array.prototype.findlastindex: 1.2.6
+      array.prototype.flat: 1.3.3
+      array.prototype.flatmap: 1.3.3
+      debug: 3.2.7
+      doctrine: 2.1.0
+      eslint: 9.39.4(jiti@2.6.1)
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
+      hasown: 2.0.2
+      is-core-module: 2.16.1
+      is-glob: 4.0.3
+      minimatch: 3.1.5
+      object.fromentries: 2.0.8
+      object.groupby: 1.0.3
+      object.values: 1.2.1
+      semver: 6.3.1
+      string.prototype.trimend: 1.0.9
+      tsconfig-paths: 3.15.0
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+
+  eslint-plugin-jsx-a11y@6.10.2(eslint@9.39.4(jiti@1.21.7)):
+    dependencies:
+      aria-query: 5.3.2
+      array-includes: 3.1.9
+      array.prototype.flatmap: 1.3.3
+      ast-types-flow: 0.0.8
+      axe-core: 4.11.1
+      axobject-query: 4.1.0
+      damerau-levenshtein: 1.0.8
+      emoji-regex: 9.2.2
+      eslint: 9.39.4(jiti@1.21.7)
+      hasown: 2.0.2
+      jsx-ast-utils: 3.3.5
+      language-tags: 1.0.9
+      minimatch: 3.1.5
+      object.fromentries: 2.0.8
+      safe-regex-test: 1.1.0
+      string.prototype.includes: 2.0.1
+
   eslint-plugin-jsx-a11y@6.10.2(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
       aria-query: 5.3.2
@@ -12069,6 +12452,17 @@ snapshots:
     dependencies:
       eslint: 9.39.4(jiti@2.6.1)
 
+  eslint-plugin-react-hooks@7.0.1(eslint@9.39.4(jiti@1.21.7)):
+    dependencies:
+      '@babel/core': 7.29.0
+      '@babel/parser': 7.29.2
+      eslint: 9.39.4(jiti@1.21.7)
+      hermes-parser: 0.25.1
+      zod: 3.25.67
+      zod-validation-error: 4.0.2(zod@3.25.67)
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-plugin-react-hooks@7.0.1(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
       '@babel/core': 7.29.0
@@ -12079,6 +12473,28 @@ snapshots:
       zod-validation-error: 4.0.2(zod@3.25.67)
     transitivePeerDependencies:
       - supports-color
+
+  eslint-plugin-react@7.37.5(eslint@9.39.4(jiti@1.21.7)):
+    dependencies:
+      array-includes: 3.1.9
+      array.prototype.findlast: 1.2.5
+      array.prototype.flatmap: 1.3.3
+      array.prototype.tosorted: 1.1.4
+      doctrine: 2.1.0
+      es-iterator-helpers: 1.3.1
+      eslint: 9.39.4(jiti@1.21.7)
+      estraverse: 5.3.0
+      hasown: 2.0.2
+      jsx-ast-utils: 3.3.5
+      minimatch: 3.1.5
+      object.entries: 1.1.9
+      object.fromentries: 2.0.8
+      object.values: 1.2.1
+      prop-types: 15.8.1
+      resolve: 2.0.0-next.6
+      semver: 6.3.1
+      string.prototype.matchall: 4.0.12
+      string.prototype.repeat: 1.0.0
 
   eslint-plugin-react@7.37.5(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
@@ -12117,6 +12533,47 @@ snapshots:
   eslint-visitor-keys@4.2.1: {}
 
   eslint-visitor-keys@5.0.1: {}
+
+  eslint@9.39.4(jiti@1.21.7):
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4(jiti@1.21.7))
+      '@eslint-community/regexpp': 4.12.2
+      '@eslint/config-array': 0.21.2
+      '@eslint/config-helpers': 0.4.2
+      '@eslint/core': 0.17.0
+      '@eslint/eslintrc': 3.3.5
+      '@eslint/js': 9.39.4
+      '@eslint/plugin-kit': 0.4.1
+      '@humanfs/node': 0.16.7
+      '@humanwhocodes/module-importer': 1.0.1
+      '@humanwhocodes/retry': 0.4.3
+      '@types/estree': 1.0.8
+      ajv: 6.14.0
+      chalk: 4.1.2
+      cross-spawn: 7.0.6
+      debug: 4.4.3
+      escape-string-regexp: 4.0.0
+      eslint-scope: 8.4.0
+      eslint-visitor-keys: 4.2.1
+      espree: 10.4.0
+      esquery: 1.7.0
+      esutils: 2.0.3
+      fast-deep-equal: 3.1.3
+      file-entry-cache: 8.0.0
+      find-up: 5.0.0
+      glob-parent: 6.0.2
+      ignore: 5.3.2
+      imurmurhash: 0.1.4
+      is-glob: 4.0.3
+      json-stable-stringify-without-jsonify: 1.0.1
+      lodash.merge: 4.6.2
+      minimatch: 3.1.5
+      natural-compare: 1.4.0
+      optionator: 0.9.4
+    optionalDependencies:
+      jiti: 1.21.7
+    transitivePeerDependencies:
+      - supports-color
 
   eslint@9.39.4(jiti@2.6.1):
     dependencies:
@@ -12183,11 +12640,15 @@ snapshots:
 
   eventemitter3@4.0.7: {}
 
+  eventemitter3@5.0.4: {}
+
   events@3.3.0: {}
 
   extend@3.0.2: {}
 
   fast-deep-equal@3.1.3: {}
+
+  fast-diff@1.3.0: {}
 
   fast-equals@5.4.0: {}
 
@@ -12812,6 +13273,14 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
+  lodash-es@4.18.1: {}
+
+  lodash.clonedeep@4.5.0: {}
+
+  lodash.get@4.4.2: {}
+
+  lodash.isequal@4.5.0: {}
+
   lodash.mapvalues@4.6.0: {}
 
   lodash.merge@4.6.2: {}
@@ -13335,6 +13804,8 @@ snapshots:
     dependencies:
       p-limit: 3.1.0
 
+  parchment@3.0.0: {}
+
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -13608,6 +14079,19 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  quill-delta@5.1.0:
+    dependencies:
+      fast-diff: 1.3.0
+      lodash.clonedeep: 4.5.0
+      lodash.isequal: 4.5.0
+
+  quill@2.0.3:
+    dependencies:
+      eventemitter3: 5.0.4
+      lodash-es: 4.18.1
+      parchment: 3.0.0
+      quill-delta: 5.1.0
+
   randombytes@2.1.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -13617,6 +14101,16 @@ snapshots:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
       webpack: 5.105.4
+
+  react-ace@13.0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+    dependencies:
+      ace-builds: 1.43.6
+      diff-match-patch: 1.0.5
+      lodash.get: 4.4.2
+      lodash.isequal: 4.5.0
+      prop-types: 15.8.1
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
 
   react-compiler-runtime@1.0.0(react@19.2.4):
     dependencies:
@@ -14430,6 +14924,17 @@ snapshots:
       is-typed-array: 1.1.15
       possible-typed-array-names: 1.1.0
       reflect.getprototypeof: 1.0.10
+
+  typescript-eslint@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/typescript-estree': 8.57.2(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.57.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
+      eslint: 9.39.4(jiti@1.21.7)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
 
   typescript-eslint@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
