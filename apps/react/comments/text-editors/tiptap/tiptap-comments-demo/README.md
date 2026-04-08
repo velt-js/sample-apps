@@ -85,7 +85,7 @@ tiptap-comments-demo/
 
 ## Key Technologies
 
-- **Next.js 15** with React 19
+- **Next.js 16** with React 19
 - **@tiptap/react** - Rich text editor framework
 - **@tiptap/starter-kit** - Essential Tiptap extensions
 - **@tiptap/extension-text-align** - Text alignment extension

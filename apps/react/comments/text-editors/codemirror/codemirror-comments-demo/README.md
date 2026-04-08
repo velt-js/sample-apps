@@ -1,6 +1,6 @@
 # CodeMirror Comments Demo
 
-> **[View Live Demo](https://sample-apps-codemirror-comments-demo.vercel.app)**
+> **[🚀 View Live Demo](https://sample-apps-codemirror-comments-demo.vercel.app)**
 
 ## Overview
 
@@ -14,7 +14,7 @@ apps/react/comments/text-editors/codemirror/codemirror-comments-demo/
 
 ## Package Name
 
-`@apps/react-comments-text-editors-codemirror-codemirror-comments-demo`
+`@apps/react-text-editors-codemirror-codemirror-comments-demo`
 
 ## Features
 
@@ -126,7 +126,7 @@ pnpm dev
 Or run from the root:
 
 ```bash
-pnpm --filter @apps/react-comments-text-editors-codemirror-codemirror-comments-demo dev
+pnpm --filter @apps/react-text-editors-codemirror-codemirror-comments-demo dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -134,7 +134,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-comments-text-editors-codemirror-codemirror-comments-demo build
+pnpm --filter @apps/react-text-editors-codemirror-codemirror-comments-demo build
 ```
 
 ## Usage

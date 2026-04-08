@@ -54,8 +54,7 @@ lexical-comments-demo/
 │   ├── userAuth/
 │   │   ├── AppProviders.tsx            # App-level providers wrapper
 │   │   ├── AppUserContext.tsx          # User authentication context
-│   │   ├── useAppUser.ts               # User authentication hook
-│   │   └── users.ts                    # Mock user data for testing
+│   │   └── useAppUser.ts               # User authentication hook
 │   ├── layout.tsx                      # Root layout with app providers
 │   └── page.tsx                        # Main page with Velt provider
 ├── components/
@@ -70,7 +69,7 @@ lexical-comments-demo/
 │   │       ├── constants.ts            # Initial document content
 │   │       ├── types.ts                # TypeScript type definitions
 │   │       ├── nodes/
-│   │       │   └── HeadingSpanNode.ts  # Custom heading node for TOC
+│   │       │   └── HeadingSpanNode.tsx # Custom heading node for TOC
 │   │       ├── plugins/
 │   │       │   ├── BubbleMenuPlugin.tsx    # Text selection toolbar plugin
 │   │       │   ├── FormattingPlugin.tsx    # Rich text formatting commands
@@ -78,7 +77,9 @@ lexical-comments-demo/
 │   │       │   ├── TextAlignPlugin.tsx     # Text alignment plugin
 │   │       │   └── InitialContentPlugin.tsx # Load initial content
 │   │       └── ui/
-│   │           └── BubbleMenuToolbar.tsx   # Formatting toolbar component
+│   │           ├── BubbleMenuToolbar.tsx   # Formatting toolbar component
+│   │           ├── ToolbarButton.tsx       # Reusable toolbar button component
+│   │           └── ToolbarDivider.tsx      # Toolbar separator component
 │   └── velt/
 │       ├── ui-customization/
 │       │   └── ...                     # Velt UI customization components
@@ -102,7 +103,7 @@ lexical-comments-demo/
 
 ## Key Technologies
 
-- **Next.js 15** with React 19
+- **Next.js 16** with React 19
 - **Lexical 0.19.0** - Extensible text editor framework
   - `lexical` - Core editor package
   - `@lexical/react` - React integration and plugins
