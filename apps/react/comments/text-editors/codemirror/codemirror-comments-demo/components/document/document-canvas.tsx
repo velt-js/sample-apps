@@ -275,7 +275,7 @@ export default function DocumentCanvas() {
       {/* Main Container Border */}
       <div className="absolute border-2 border-solid h-[720px] left-[16px] right-[16px] rounded-[12px] top-[56px]" style={{ borderColor: 'var(--app-canvas-border)' }} />
 
-      {/* Code Editor Area - CodeMirror CRDT */}
+      {/* Code Editor Area - CodeMirror Comments */}
       <div className="absolute h-[680px] left-[16px] top-[94px] right-[16px] overflow-hidden">
         <CodeMirrorComponent />
       </div>

@@ -3,8 +3,8 @@ import '../styles/globals.css'
 import { AppUserProvider } from './userAuth/AppUserContext'
 
 export const metadata: Metadata = {
-  title: 'codemirror-crdt-demo',
-  description: 'codemirror demo for CRDT',
+  title: 'codemirror-comments-demo',
+  description: 'codemirror demo for comments',
 }
 
 export default function RootLayout({

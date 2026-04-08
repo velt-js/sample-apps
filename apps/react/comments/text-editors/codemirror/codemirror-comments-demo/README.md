@@ -1,45 +1,42 @@
-# CodeMirror CRDT Demo
-
-> **[🚀 View Live Demo](https://sample-apps-codemirror-crdt-demo.vercel.app/)**
-> 
-https://github.com/user-attachments/assets/e5d6c998-a7eb-416c-889d-1a9f3029a4ce
-
+# CodeMirror Comments Demo
 
 ## Overview
 
-This demo showcases **real-time collaborative code editing** built using **CodeMirror 6** with **Velt's CRDT extension**. Multiple users can simultaneously edit code with automatic conflict resolution and live cursor tracking - perfect for pair programming and collaborative code review.
-
-Velt's CRDT extension is based on Yjs.
+This demo showcases **inline text commenting** built using **CodeMirror 6** code editor integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the editor, creating threaded discussions on specific code sections.
 
 ## Path
 
 ```
-apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo/
+apps/react/comments/text-editors/codemirror/codemirror-comments-demo/
 ```
 
 ## Package Name
 
-`@apps/react-CRDT-text-editors-codemirror-codemirror-crdt-demo`
+`@apps/react-comments-text-editors-codemirror-codemirror-comments-demo`
 
 ## Features
 
-### Real-time Collaboration
-- **Live Co-editing**: Multiple users can simultaneously edit code with Velt's CRDT synchronization
-- **Presence Awareness**: See who's currently viewing and editing the document
-- **Live Cursors**: See collaborators' cursor positions and selections in real-time
-- **Notifications**: Stay updated on document activity
-- **Conflict Resolution**: Automatic CRDT-based conflict resolution for simultaneous edits
+### Velt Commenting Features
+- **Text Selection Comments**: Highlight code passages and add comments
+- **Inline Comment Markers**: Visual indicators showing commented text sections
+- **Bubble Menu**: Appears on text selection with a comment button
+- **Threaded Discussions**: Reply to comments and maintain conversation context
+- **Comment Annotations**: Automatic tracking of comment positions as code changes
+- **Comments Sidebar**: Centralized view of all document comments
+- **Real-time Updates**: See new comments and replies instantly
+- **Presence Awareness**: See who's currently viewing the document
+- **Notifications**: Get notified of new comments and mentions
 
 ### Editor Features
-- **Syntax Highlighting**: Code highlighting powered by CodeMirror
-- **Rich Code Editing**: Full-featured code editor with CodeMirror
-- **Undo/Redo**: History that respects collaborative changes
-- **Extensible**: Built on CodeMirror 6's extension system
+- **Syntax Highlighting**: Code highlighting powered by CodeMirror 6
+- **TypeScript Support**: Language support for JavaScript/TypeScript
+- **Light/Dark Themes**: Toggle between light and dark editor themes
+- **Code Editing**: Full-featured code editor with CodeMirror 6 extensions
 
 ## Directory Structure
 
 ```
-codemirror-crdt-demo/
+codemirror-comments-demo/
 ├── app/
 │   ├── api/
 │   │   └── velt/
@@ -49,38 +46,39 @@ codemirror-crdt-demo/
 │   │   ├── DocumentContext.tsx         # Document context provider
 │   │   └── useCurrentDocument.ts       # Document management hook
 │   ├── userAuth/
+│   │   ├── AppProviders.tsx            # App-level providers wrapper
 │   │   ├── AppUserContext.tsx          # User authentication context
-│   │   ├── LoginPanel.tsx              # User login panel component
-│   │   ├── useAppUser.ts               # User authentication hook
-│   │   └── users.ts                    # Mock user data
-│   ├── layout.tsx                      # Root layout with Velt provider
-│   └── page.tsx                        # Main page
+│   │   └── useAppUser.ts              # User authentication hook
+│   ├── layout.tsx                      # Root layout with app providers
+│   └── page.tsx                        # Main page with Velt provider
 ├── components/
 │   ├── header/
-│   │   └── header.tsx                  # Header with Velt tools (presence, notifications)
+│   │   └── header.tsx                  # Header with Velt tools
 │   ├── sidebar/
 │   │   └── sidebar.tsx                 # Left navigation sidebar
 │   ├── document/
-│   │   ├── document-canvas.tsx         # Main document wrapper
+│   │   ├── document-canvas.tsx         # Main document wrapper with file tree
 │   │   └── CodeMirrorComponent/
-│   │       ├── CodeMirrorComponent.tsx # Main CodeMirror editor with Velt CRDT
-│   │       ├── constants.ts            # Editor configuration constants
-│   │       └── types.ts                # TypeScript type definitions
+│   │       ├── CodeMirrorComponent.tsx # Main CodeMirror editor with Velt comments
+│   │       └── ui/
+│   │           └── BubbleMenuToolbar.tsx # Comment button toolbar on text selection
 │   └── velt/
 │       ├── ui-customization/
 │       │   ├── VeltCustomization.tsx   # Velt UI customization wrapper
+│       │   ├── VeltCommentBubbleWf.tsx # Custom comment bubble wireframe
+│       │   ├── VeltCommentToolWf.tsx   # Custom comment tool wireframe
 │       │   ├── VeltNotificationsToolWf.tsx # Custom notifications wireframe
+│       │   ├── VeltSidebarButtonWf.tsx # Custom sidebar button wireframe
 │       │   └── styles.css              # Custom Velt styles
 │       ├── VeltCollaboration.tsx       # Velt client setup and configuration
 │       ├── VeltInitializeDocument.tsx  # Document initialization
 │       ├── VeltInitializeUser.tsx      # User initialization
 │       └── VeltTools.tsx               # Velt component exports
 ├── hooks/                              # Custom React hooks
-├── lib/
-│   └── utils.ts                        # Utility functions
 ├── public/                             # Static assets
 ├── styles/
-│   └── globals.css                     # Global styles
+│   ├── globals.css                     # Global styles
+│   └── codemirror.css                  # CodeMirror editor styles
 ├── .npmrc                              # pnpm config to prevent Tailwind v4 hoisting
 ├── next.config.js
 ├── tailwind.config.js
@@ -91,11 +89,14 @@ codemirror-crdt-demo/
 
 ## Key Technologies
 
-- **Next.js 15** with React 19
+- **Next.js 16** with React 19
 - **CodeMirror 6** - Code editor
-- **@veltdev/codemirror-crdt** - Velt CRDT extension for CodeMirror
+  - `codemirror` - Core editor with basic setup
+  - `@codemirror/lang-javascript` - JavaScript/TypeScript language support
+  - `@codemirror/state` - Editor state management
+  - `@codemirror/theme-one-dark` - Dark theme
+- **@veltdev/codemirror-velt-comments** - Velt comments integration for CodeMirror
 - **@veltdev/react** - Velt collaboration components
-- **Yjs** - Underlying CRDT implementation
 - **Tailwind CSS v3.4** - Styling
 - **TypeScript** - Type safety
 
@@ -114,14 +115,14 @@ pnpm install
 Navigate to the demo directory:
 
 ```bash
-cd apps/react/crdt/text-editors/codemirror/codemirror-crdt-demo
+cd apps/react/comments/text-editors/codemirror/codemirror-comments-demo
 pnpm dev
 ```
 
 Or run from the root:
 
 ```bash
-pnpm --filter @apps/react-CRDT-text-editors-codemirror-codemirror-crdt-demo dev
+pnpm --filter @apps/react-comments-text-editors-codemirror-codemirror-comments-demo dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -129,30 +130,32 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-pnpm --filter @apps/react-CRDT-text-editors-codemirror-codemirror-crdt-demo build
+pnpm --filter @apps/react-comments-text-editors-codemirror-codemirror-comments-demo build
 ```
 
 ## Usage
 
-### Basic Editing
+### Adding Comments
 
-1. **Type code**: Click into the editor and start coding
-2. **See collaborators**: View other users' cursors in real-time
-3. **Edit simultaneously**: Multiple users can code in different parts of the file
+1. **Select text**: Highlight the code passage you want to comment on
+2. **Click comment button**: In the bubble menu toolbar that appears above the selection
+3. **Type comment**: Enter your comment in the popover
+4. **Submit**: Press Enter or click submit
+5. **View comments**: Click comment markers to read and reply
 
-### Collaborative Features
+### Viewing All Comments
 
-1. **Join session**: Open the same document in multiple browsers
-2. **Switch users**: Use the login panel to switch between test users
-3. **See active users**: View avatars of online collaborators in the header
-4. **Live cursors**: See where other users are typing in real-time
-5. **Simultaneous edits**: Code in different parts of the file simultaneously
+1. Click the sidebar button in the header
+2. The comments sidebar appears on the right
+3. View all comments organized by location
+4. Click a comment to jump to that code section
+5. Reply to comments in the sidebar
 
 ### Collaboration Features
 
 - **See active users**: View avatars of online collaborators in the header
 - **Receive notifications**: Bell icon shows document activity
-- **Real-time updates**: All edits appear instantly for all users
+- **Real-time updates**: All comments appear instantly for all users
 
 ## Troubleshooting
 
@@ -164,23 +167,24 @@ If you see PostCSS/Tailwind errors, ensure:
 
 ### Velt Not Loading
 If Velt features don't appear:
-1. Check that `NEXT_PUBLIC_VELT_API_KEY` is set in your environment
+1. Check that `NEXT_PUBLIC_VELT_API_KEY` is set in `app/page.tsx`
 2. Verify user initialization in browser console
 3. Ensure you're running the dev server on the correct port
+4. Check browser console for Velt SDK errors
 
-### CRDT Sync Issues
-If changes aren't syncing:
-1. Check browser console for WebSocket errors
-2. Verify the `editorId` is unique for your document
-3. Ensure multiple users are on the same document ID
-4. Test with two unique users on two different browser profiles (e.g., Chrome regular + Chrome incognito, or different browsers)
+### Comments Not Appearing
+If comments don't render:
+1. Check that `useCommentAnnotations()` returns data
+2. Ensure `renderComments()` is called in useEffect
+3. Verify text selection before creating comment
+4. Check that `CodemirrorVeltComments()` extension is loaded
+5. Check browser console for errors
 
 ### Editor Not Loading
 If the editor doesn't appear:
 1. Check that CodeMirror extensions are loaded correctly
-2. Verify collaboration config is available before editor initialization
-3. Ensure `isLoading` is false before rendering editor
-4. Check browser console for errors
+2. Verify the editor container ref is available
+3. Check browser console for errors
 
 ## About Velt SDK
 
@@ -207,14 +211,14 @@ The SDK provides **fullstack components**:
 - ... and so much more
 
 ### Resources
-- 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
-- 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
-- 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
-- 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
-- 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
+- [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
+- [Use Cases](https://velt.dev/use-case) - See collaboration in action
+- [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
+- [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
+- [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
+- [X/Twitter](https://x.com/veltjs) - Updates and announcements
 - [CodeMirror Documentation](https://codemirror.net/)
-- [Velt CodeMirror CRDT Guide](https://docs.velt.dev/live-co-editing/text-editors/codemirror)
+- [Velt CodeMirror Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/codemirror)
 
 ## Important Configuration
 
@@ -233,4 +237,3 @@ public-hoist-pattern[]=!@tailwindcss*
 - Without the `.npmrc`, pnpm would hoist v4 and cause PostCSS build errors
 
 **Do not delete the `.npmrc` file** - it ensures the correct Tailwind version is used.
-
