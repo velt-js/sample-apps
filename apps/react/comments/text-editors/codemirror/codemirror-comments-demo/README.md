@@ -1,5 +1,7 @@
 # CodeMirror Comments Demo
 
+> **[View Live Demo](https://sample-apps-codemirror-comments-demo.vercel.app)**
+
 ## Overview
 
 This demo showcases **inline text commenting** built using **CodeMirror 6** code editor integrated with **Velt's commenting system**. Users can select text passages and add contextual comments directly within the editor, creating threaded discussions on specific code sections.
@@ -75,6 +77,8 @@ codemirror-comments-demo/
 │       ├── VeltInitializeUser.tsx      # User initialization
 │       └── VeltTools.tsx               # Velt component exports
 ├── hooks/                              # Custom React hooks
+├── lib/
+│   └── utils.ts                        # Utility functions
 ├── public/                             # Static assets
 ├── styles/
 │   ├── globals.css                     # Global styles
@@ -211,14 +215,14 @@ The SDK provides **fullstack components**:
 - ... and so much more
 
 ### Resources
-- [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
-- [Use Cases](https://velt.dev/use-case) - See collaboration in action
-- [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
-- [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
-- [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
-- [X/Twitter](https://x.com/veltjs) - Updates and announcements
-- [CodeMirror Documentation](https://codemirror.net/)
-- [Velt CodeMirror Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/codemirror)
+- 📚 [Documentation](https://docs.velt.dev/get-started/overview) - Guides and API references
+- 🎨 [Use Cases](https://velt.dev/use-case) - See collaboration in action
+- 🎭 [Figma Template](https://www.figma.com/community/file/1402312407969730816/velt-collaboration-kit) - Visualize features for your product
+- 📝 [Release Notes](https://docs.velt.dev/release-notes/version-4/sdk-changelog) - Latest changes
+- 🔒 [Security](https://velt.dev/security) - SOC2 Type 2 & HIPAA compliant
+- 🐦 [X/Twitter](https://x.com/veltjs) - Updates and announcements
+- 📖 [CodeMirror Documentation](https://codemirror.net/)
+- 💬 [Velt CodeMirror Comments Guide](https://docs.velt.dev/async-collaboration/comments/setup/codemirror)
 
 ## Important Configuration
 

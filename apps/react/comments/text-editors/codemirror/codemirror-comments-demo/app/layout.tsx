@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
-import { AppUserProvider } from './userAuth/AppUserContext'
+import '../components/velt/ui-customization/styles.css'
+import { AppProviders } from "@/app/userAuth/AppProviders";
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'codemirror-comments-demo',
-  description: 'codemirror demo for comments',
+  title: 'Velt CodeMirror Comments Demo',
+  description: 'CodeMirror editor with Velt commenting features',
 }
 
 export default function RootLayout({
@@ -15,12 +18,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=new URLSearchParams(window.location.search).get('theme')||localStorage.getItem('theme-preference');var d=t==='dark'||(t==='system'||!t)&&window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()` }} />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            try {
+              var p = new URLSearchParams(window.location.search); var theme = p.get('theme') || localStorage.getItem('theme-preference');
+              var isDark = theme === 'dark' || (!theme && false) || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+              if (isDark) document.documentElement.classList.add('dark');
+            } catch(e) {}
+          })();
+        `}} />
       </head>
       <body>
-        <AppUserProvider>
-          {children}
-        </AppUserProvider>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   )
