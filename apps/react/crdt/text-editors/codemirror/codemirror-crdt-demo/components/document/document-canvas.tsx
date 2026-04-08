@@ -2,7 +2,8 @@
 
 import Sidebar from '../sidebar/sidebar'
 import Header from '../header/header'
-import CodeMirrorComponent from './CodeMirrorComponent/CodeMirrorComponent'
+import dynamic from 'next/dynamic'
+const CodeMirrorComponent = dynamic(() => import('./CodeMirrorComponent/CodeMirrorComponent'), { ssr: false })
 
 // File type icon components
 const FolderIcon = ({ color = '#dcb67a' }: { color?: string }) => (
@@ -184,11 +185,11 @@ export default function DocumentCanvas() {
                 <span className="opacity-80">popup-velt.html</span>
               </div>
 
-              {/* Selected file: styles.scss */}
+              {/* Selected file: app.ts */}
               <div className="flex items-center gap-1 px-2 py-0.5 border border-[#0070f3] rounded-[6px] cursor-pointer" style={{ backgroundColor: 'var(--app-filetree-selected)' }}>
                 <span className="w-[10px]"></span>
-                <FileIcon color="#c6538c" />
-                <span className="font-semibold">styles.scss</span>
+                <FileIcon color="#3178c6" />
+                <span className="font-semibold">app.ts</span>
               </div>
             </div>
 
@@ -288,7 +289,7 @@ export default function DocumentCanvas() {
           <img alt="" className="block max-w-none size-full" src="/figma-assets/icon-chevron-right-white.svg" style={{ filter: 'var(--app-icon-invert)' }} />
         </div>
         <p className="font-['Inter',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[13px] text-nowrap whitespace-pre" style={{ color: 'var(--app-text-primary)' }}>
-          style.scss
+          app.ts
         </p>
       </div>
 

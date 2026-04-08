@@ -1,57 +1,189 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { useCollaboration } from "@veltdev/codemirror-crdt-react"
 import { yCollab } from "y-codemirror.next"
+import { CodemirrorVeltComments, addComment, renderComments } from '@veltdev/codemirror-velt-comments'
+import { useCommentAnnotations } from '@veltdev/react'
 import { EditorState, Compartment } from "@codemirror/state"
 import { basicSetup, EditorView } from "codemirror"
 import { javascript } from "@codemirror/lang-javascript"
-import { css } from "@codemirror/lang-css"
-import { html } from "@codemirror/lang-html"
 import { oneDark } from "@codemirror/theme-one-dark"
 import { useTheme } from '@/components/theme/ThemeContext'
+import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 
 // Initial content for the editor
-const initialContent = `@import "tailwindcss";
-@import "tw-animate-css";
+const initialContent = `import express from "express";
+import cors from "cors";
+import { PrismaClient } from "@prisma/client";
+import { z } from "zod";
 
-@custom-variant dark (&:is(.dark *));
+const app = express();
+const prisma = new PrismaClient();
+const PORT = process.env.PORT || 3000;
 
-:root {
-  --background: oklch(0.98 0.005 85);
-  --foreground: oklch(0.25 0.01 85);
-  --card: oklch(0.99 0.003 85);
-  --card-foreground: oklch(0.25 0.01 85);
-  --popover: oklch(0.99 0.003 85);
-  --popover-foreground: oklch(0.25 0.01 85);
-  --primary: oklch(0.25 0.01 85);
-  --primary-foreground: oklch(0.98 0.005 85);
-  --secondary: oklch(0.92 0.008 85);
-  --secondary-foreground: oklch(0.25 0.01 85);
-  --muted: oklch(0.55 0.015 85);
-  --muted-foreground: oklch(0.55 0.015 85);
-  --accent: oklch(0.92 0.008 85);
-  --accent-foreground: oklch(0.25 0.01 85);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.005 85);
-  --border: oklch(0.9 0.008 85);
-  --input: oklch(0.9 0.008 85);
-  --ring: oklch(0.25 0.01 85);
-  --radius: 0rem;
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.882 0.01 0);
-  --sidebar-ring: oklch(0.225 0 0);
-}
+app.use(cors());
+app.use(express.json());
+
+// Validation schemas
+const CreatePhotoSchema = z.object({
+  title: z.string().min(1).max(200),
+  description: z.string().optional(),
+  url: z.string().url(),
+  tags: z.array(z.string()).default([]),
+  albumId: z.string().uuid().optional(),
+});
+
+const UpdatePhotoSchema = CreatePhotoSchema.partial();
+
+// Middleware: request logger
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    console.log(\`[\${req.method}] \${req.path} - \${res.statusCode} (\${duration}ms)\`);
+  });
+  next();
+});
+
+// Health check
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok", uptime: process.uptime() });
+});
+
+// GET /photos - List all photos with optional filtering
+app.get("/photos", async (req, res) => {
+  try {
+    const { tag, albumId, page = "1", limit = "20" } = req.query;
+
+    const where: Record<string, unknown> = {};
+    if (tag) where.tags = { has: String(tag) };
+    if (albumId) where.albumId = String(albumId);
+
+    const photos = await prisma.photo.findMany({
+      where,
+      skip: (Number(page) - 1) * Number(limit),
+      take: Number(limit),
+      orderBy: { createdAt: "desc" },
+      include: { album: true },
+    });
+
+    const total = await prisma.photo.count({ where });
+
+    res.json({
+      data: photos,
+      pagination: {
+        page: Number(page),
+        limit: Number(limit),
+        total,
+        pages: Math.ceil(total / Number(limit)),
+      },
+    });
+  } catch (error) {
+    console.error("Failed to fetch photos:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// GET /photos/:id - Get a single photo
+app.get("/photos/:id", async (req, res) => {
+  try {
+    const photo = await prisma.photo.findUnique({
+      where: { id: req.params.id },
+      include: { album: true, comments: true },
+    });
+
+    if (!photo) {
+      return res.status(404).json({ error: "Photo not found" });
+    }
+
+    res.json(photo);
+  } catch (error) {
+    console.error("Failed to fetch photo:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// POST /photos - Create a new photo
+app.post("/photos", async (req, res) => {
+  try {
+    const data = CreatePhotoSchema.parse(req.body);
+
+    const photo = await prisma.photo.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        url: data.url,
+        tags: data.tags,
+        albumId: data.albumId,
+      },
+    });
+
+    res.status(201).json(photo);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ error: error.errors });
+    }
+    console.error("Failed to create photo:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// PATCH /photos/:id - Update a photo
+app.patch("/photos/:id", async (req, res) => {
+  try {
+    const data = UpdatePhotoSchema.parse(req.body);
+
+    const photo = await prisma.photo.update({
+      where: { id: req.params.id },
+      data,
+    });
+
+    res.json(photo);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ error: error.errors });
+    }
+    console.error("Failed to update photo:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// DELETE /photos/:id - Delete a photo
+app.delete("/photos/:id", async (req, res) => {
+  try {
+    await prisma.photo.delete({
+      where: { id: req.params.id },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.error("Failed to delete photo:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// GET /albums - List all albums
+app.get("/albums", async (_req, res) => {
+  try {
+    const albums = await prisma.album.findMany({
+      include: { _count: { select: { photos: true } } },
+      orderBy: { name: "asc" },
+    });
+
+    res.json(albums);
+  } catch (error) {
+    console.error("Failed to fetch albums:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(\`Server running on http://localhost:\${PORT}\`);
+});
+
+export default app;
 `
 
 /** Light theme for CodeMirror editor */
@@ -128,14 +260,59 @@ export default function CodeMirrorComponent() {
   const editorRef = useRef<HTMLDivElement>(null)
   const viewRef = useRef<EditorView | null>(null)
   const themeCompartmentRef = useRef(new Compartment())
+  const bubbleMenuRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
 
-  // Initialize the Velt CRDT extension
+  // [Velt] Initialize the Velt CRDT extension for real-time collaborative editing
   const { primitives, isLoading, isSynced, status, error } = useCollaboration({
     editorId: 'codemirror-editor-1',
     initialContent: initialContent,
     onError: (err) => console.error('Collaboration error:', err),
   })
+
+  // [Velt] Subscribe to comment annotations for inline text commenting
+  const commentAnnotations = useCommentAnnotations()
+
+  const [showBubbleMenu, setShowBubbleMenu] = useState(false)
+  const [bubbleMenuPosition, setBubbleMenuPosition] = useState({ top: 0, left: 0 })
+
+  const updateBubbleMenu = useCallback(() => {
+    const view = viewRef.current
+    if (!view) return
+
+    const { from, to } = view.state.selection.main
+    if (from === to) {
+      setShowBubbleMenu(false)
+      return
+    }
+
+    const domSelection = window.getSelection()
+    if (!domSelection || domSelection.rangeCount === 0) {
+      setShowBubbleMenu(false)
+      return
+    }
+
+    const domRange = domSelection.getRangeAt(0)
+    const rect = domRange.getBoundingClientRect()
+
+    const menuHeight = bubbleMenuRef.current?.offsetHeight || 50
+    const menuWidth = bubbleMenuRef.current?.offsetWidth || 60
+
+    setBubbleMenuPosition({
+      top: rect.top + window.scrollY - menuHeight - 10,
+      left: rect.left + window.scrollX + rect.width / 2 - menuWidth / 2,
+    })
+
+    setShowBubbleMenu(true)
+  }, [])
+
+  const handleAddComment = useCallback(() => {
+    const view = viewRef.current
+    if (!view) return
+    // [Velt] Add a comment on the currently selected text
+    addComment({ editor: view })
+    setShowBubbleMenu(false)
+  }, [])
 
   useEffect(() => {
     if (!primitives?.ytext || !editorRef.current) return
@@ -150,21 +327,21 @@ export default function CodeMirrorComponent() {
     const initialThemeExtension = resolvedTheme === 'dark' ? darkEditorTheme() : lightEditorTheme()
 
     const startState = EditorState.create({
-      // primitives.ytext is the shared Yjs Text document that syncs across all collaborators
-      // toString() converts it to a plain string for the initial editor content
       doc: primitives.ytext.toString(),
       extensions: [
         basicSetup,
         themeCompartment.of(initialThemeExtension),
-        css(),
-        javascript(),
-        html(),
-        // yCollab enables real-time collaborative editing with CodeMirror using Yjs
-        // - primitives.ytext: The shared Yjs Text document that automatically syncs changes
-        // - primitives.awareness: Provides presence information (cursors, selections) for other users
-        // - primitives.undoManager: Enables collaborative undo/redo that respects all users' changes
+        javascript({ typescript: true }),
+        // [Velt] yCollab enables real-time collaborative editing with CodeMirror using Yjs
         yCollab(primitives.ytext!, primitives.awareness, {
           undoManager: primitives.undoManager || false
+        }),
+        // [Velt] CodemirrorVeltComments enables inline text commenting
+        CodemirrorVeltComments(),
+        EditorView.updateListener.of((update) => {
+          if (update.selectionSet || update.docChanged) {
+            requestAnimationFrame(() => updateBubbleMenu())
+          }
         }),
       ],
     })
@@ -181,6 +358,13 @@ export default function CodeMirrorComponent() {
       }
     }
   }, [primitives])
+
+  // [Velt] Render comment highlights when annotations change
+  useEffect(() => {
+    if (viewRef.current && commentAnnotations) {
+      renderComments({ editor: viewRef.current, commentAnnotations })
+    }
+  }, [commentAnnotations])
 
   // Reconfigure theme when resolvedTheme changes
   useEffect(() => {
@@ -211,7 +395,7 @@ export default function CodeMirrorComponent() {
   }
 
   return (
-    <div className="h-full w-full overflow-hidden flex flex-col">
+    <div className="h-full w-full overflow-hidden flex flex-col relative">
       <div ref={editorRef} className="flex-1 min-h-0" style={{ overflow: 'auto' }} />
       <div className="flex items-center gap-3 px-3 py-1 text-xs font-mono"
         style={{ backgroundColor: 'var(--app-surface)', color: 'var(--app-text-tertiary)', borderTop: '1px solid var(--app-border)' }}>
@@ -230,6 +414,18 @@ export default function CodeMirrorComponent() {
         <span className="opacity-40">|</span>
         <span>{isSynced ? 'Synced' : 'Syncing\u2026'}</span>
       </div>
+      {showBubbleMenu && (
+        <div
+          ref={bubbleMenuRef}
+          className="fixed z-50"
+          style={{
+            top: `${bubbleMenuPosition.top}px`,
+            left: `${bubbleMenuPosition.left}px`,
+          }}
+        >
+          <BubbleMenuToolbar onAddComment={handleAddComment} />
+        </div>
+      )}
     </div>
   )
 }

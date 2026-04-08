@@ -31,7 +31,7 @@ const allowList = [
 const EMBED_CSP = `frame-ancestors ${allowList}`;
 
 const nextConfig = {
-  transpilePackages: ['@veltdev/react', '@veltdev/codemirror-crdt-react', '@veltdev/codemirror-crdt'],
+  transpilePackages: ['@veltdev/react', '@veltdev/codemirror-crdt-react', '@veltdev/codemirror-crdt', '@veltdev/codemirror-velt-comments'],
   webpack: (config) => {
     // Resolve packages to single instances to prevent duplicate package issues
     const veltReactPath = getPackageDir('@veltdev/react');
