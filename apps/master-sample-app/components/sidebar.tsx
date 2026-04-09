@@ -26,6 +26,8 @@ const sampleIdToItemName = (sampleId: string): string => {
     'react-comments-text-editors-tiptap-tiptap-comments-demo': 'tiptap-comments-demo',
     'react-comments-text-editors-slatejs-slatejs-comments-demo': 'slatejs-comments-demo',
     'react-comments-text-editors-lexical-lexical-comments-demo': 'lexical-comments-demo',
+    'react-comments-text-editors-quill-quill-comments-demo': 'quill-comments-demo',
+    'react-comments-text-editors-codemirror-codemirror-comments-demo': 'codemirror-comments-demo',
     'react-comments-dashboard-custom-dashboard-demo': 'dashboard-demo',
     'react-comments-dashboard-inline-comments-dashboard-inline-comments-demo': 'dashboard-inline-comments-demo',
     'react-comments-website-builder-freestyle-comments-freestyle-comments-demo': 'freestyle-comments-demo',
@@ -61,6 +63,8 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
     tiptap: false,
     slatejs: false,
     lexical: false,
+    quill: false,
+    commentsCodemirror: false,
     commentsDashboard: false,
     commentsWebsiteBuilder: false,
     commentsFreestyleComments: false,
@@ -411,6 +415,56 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
                                 )}
                               >
                                 lexical-comments-demo
+                              </button>
+                            </div>
+                          )}
+
+                          {/* quill Section */}
+                          <button
+                            onClick={() => toggleSection("quill")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>quill</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.quill && "rotate-90")} />
+                          </button>
+                          {expandedSections.quill && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("quill-comments-demo")
+                                  onSampleSelect?.("react-comments-text-editors-quill-quill-comments-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "quill-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                quill-comments-demo
+                              </button>
+                            </div>
+                          )}
+
+                          {/* codemirror Section */}
+                          <button
+                            onClick={() => toggleSection("commentsCodemirror")}
+                            className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent/30"
+                          >
+                            <span>codemirror</span>
+                            <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.commentsCodemirror && "rotate-90")} />
+                          </button>
+                          {expandedSections.commentsCodemirror && (
+                            <div className="mt-2 ml-2 space-y-1">
+                              <button
+                                onClick={() => {
+                                  setSelectedItem("codemirror-comments-demo")
+                                  onSampleSelect?.("react-comments-text-editors-codemirror-codemirror-comments-demo")
+                                }}
+                                className={cn(
+                                  "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
+                                  selectedItem === "codemirror-comments-demo" ? "bg-secondary" : "hover:bg-secondary/50",
+                                )}
+                              >
+                                codemirror-comments-demo
                               </button>
                             </div>
                           )}

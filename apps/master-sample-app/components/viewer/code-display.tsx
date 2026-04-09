@@ -250,7 +250,7 @@ export function FileExplorer({ codeFiles, selectedFile, onFileSelect }: FileExpl
   }
 
   return (
-    <div className="h-full overflow-auto p-2 bg-[#0d0d0d]">
+    <div className="h-full overflow-auto p-2" style={{ backgroundColor: 'var(--code-bg-sidebar)' }}>
       <div className="min-w-max">
         {fileTree.map((node, index) => (
           <FileTreeNode
@@ -276,15 +276,15 @@ export function CodeEditor({ selectedFile }: CodeEditorProps) {
   }, [selectedFile])
 
   return (
-    <div className="h-full flex flex-col overflow-hidden bg-[#1a1a1a]">
+    <div className="h-full flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--code-bg)' }}>
       {selectedFile && (
-        <div className="px-4 py-2 border-b border-border bg-[#111] shrink-0">
+        <div className="px-4 py-2 border-b border-border shrink-0" style={{ backgroundColor: 'var(--code-bg-header)' }}>
           <span className="text-xs font-mono text-muted-foreground">{selectedFile.path}</span>
         </div>
       )}
       <div className="flex-1 overflow-auto">
         <div className="flex">
-          <div className="py-4 px-4 text-right select-none text-[#858585] text-xs font-mono leading-relaxed">
+          <div className="py-4 px-4 text-right select-none text-xs font-mono leading-relaxed" style={{ color: 'var(--code-line-number)' }}>
             {codeContent.split('\n').map((_, i) => (
               <div key={i}>{i + 1}</div>
             ))}
@@ -352,10 +352,10 @@ export function CodeDisplay({ codeFiles, githubRepoPath }: CodeDisplayProps) {
             </div>
           )}
 
-            <div className="flex-1 overflow-auto bg-[#1a1a1a]">
+            <div className="flex-1 overflow-auto" style={{ backgroundColor: 'var(--code-bg)' }}>
               <div className="flex">
                 {/* Line numbers */}
-                <div className="py-4 px-4 text-right select-none text-[#858585] text-xs font-mono leading-relaxed">
+                <div className="py-4 px-4 text-right select-none text-xs font-mono leading-relaxed" style={{ color: 'var(--code-line-number)' }}>
                   {codeContent.split('\n').map((_, i) => (
                     <div key={i}>{i + 1}</div>
                   ))}

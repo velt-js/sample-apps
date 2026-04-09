@@ -67,6 +67,10 @@ import jsCoreMapCrdtDemoMeta from './js-core-non-react-map-crdt-demo/metadata'
 import { codeFiles as jsCoreMapCrdtDemoCodeFiles } from './js-core-non-react-map-crdt-demo/code-files'
 import platejsCrdtDemoMeta from './platejs-crdt-demo/metadata'
 import { codeFiles as platejsCrdtDemoCodeFiles } from './platejs-crdt-demo/code-files'
+import quillCommentsDemoMeta from './quill-comments-demo/metadata'
+import { codeFiles as quillCommentsDemoCodeFiles } from './quill-comments-demo/code-files'
+import codemirrorCommentsDemoMeta from './codemirror-comments-demo/metadata'
+import { codeFiles as codemirrorCommentsDemoCodeFiles } from './codemirror-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -112,6 +116,14 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-lexical-lexical-comments-demo': {
     metadata: lexicalCommentsDemoMeta,
     codeFiles: lexicalCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-quill-quill-comments-demo': {
+    metadata: quillCommentsDemoMeta,
+    codeFiles: quillCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-codemirror-codemirror-comments-demo': {
+    metadata: codemirrorCommentsDemoMeta,
+    codeFiles: codemirrorCommentsDemoCodeFiles
   },
   'react-comments-dashboard-custom-dashboard-demo': {
     metadata: dashboardDemoMeta,
