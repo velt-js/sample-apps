@@ -71,6 +71,11 @@ export const BubbleMenuToolbar: React.FC<BubbleMenuToolbarProps> = ({
 
       {/* Comment Button */}
       <button
+        onMouseDown={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          onMouseDown()
+        }}
         onClick={(e) => {
           e.preventDefault()
           e.stopPropagation()

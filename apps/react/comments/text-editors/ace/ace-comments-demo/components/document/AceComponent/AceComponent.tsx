@@ -3,37 +3,36 @@
 import dynamic from 'next/dynamic'
 import { Ace } from 'ace-builds'
 import { useEffect, useRef, useCallback, useState } from 'react'
-import { useCommentAnnotations } from '@veltdev/react'
+import { useVeltClient } from '@veltdev/react'
+import type { CommentAnnotation } from '@veltdev/types'
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { AceComponentProps } from './types'
 import { initialContent } from './constants'
 import { useTheme } from '../../theme/ThemeContext'
 
 const AceEditor = dynamic(async () => {
-  // Import ace-builds first to set up the global ace object
   await import('ace-builds')
   await import('ace-builds/src-noconflict/mode-markdown')
   await import('ace-builds/src-noconflict/theme-github')
   await import('ace-builds/src-noconflict/theme-monokai')
+
+  const aceVelt = await import('@veltdev/ace-velt-comments')
+  _AceVeltComments = aceVelt.AceVeltComments
+  _addComment = aceVelt.addComment
+  _renderComments = aceVelt.renderComments
+
   return import('react-ace')
 }, { ssr: false })
 
-// Lazily loaded ace-velt-comments functions
+// Module-level refs populated during the dynamic import above
 let _AceVeltComments: typeof import('@veltdev/ace-velt-comments').AceVeltComments | null = null
 let _addComment: typeof import('@veltdev/ace-velt-comments').addComment | null = null
 let _renderComments: typeof import('@veltdev/ace-velt-comments').renderComments | null = null
-let _aceVeltLoaded = false
 
-async function loadAceVelt() {
-  if (_aceVeltLoaded) return
-  const mod = await import('@veltdev/ace-velt-comments')
-  _AceVeltComments = mod.AceVeltComments
-  _addComment = mod.addComment
-  _renderComments = mod.renderComments
-  _aceVeltLoaded = true
+const isResolvedAnnotation = (ann: any): boolean => {
+  return ann?.status?.type === 'terminal' || !!ann?.resolvedByUserId
 }
 
-// Function to clear all comment markers from the Ace editor
 const clearAllCommentMarkers = (editor: Ace.Editor | null) => {
   if (!editor) return
   const session = editor.getSession()
@@ -59,6 +58,7 @@ export default function AceComponent({ scrollContainerRef }: AceComponentProps) 
   const savedSelectionRef = useRef<{ start: Ace.Point; end: Ace.Point } | null>(null)
   const prevAnnotationsLengthRef = useRef<number>(0)
   const { resolvedTheme } = useTheme()
+  const { client } = useVeltClient()
 
   const [bubbleMenu, setBubbleMenu] = useState<{ visible: boolean; x: number; y: number }>({
     visible: false,
@@ -66,16 +66,32 @@ export default function AceComponent({ scrollContainerRef }: AceComponentProps) 
     y: 0,
   })
 
-  const commentAnnotations = useCommentAnnotations()
+  const [commentAnnotations, setCommentAnnotations] = useState<CommentAnnotation[]>([])
 
-  const handleLoad = useCallback(async (editor: Ace.Editor) => {
+  // Subscribe to comment annotations via Velt client, filtering out resolved ones
+  useEffect(() => {
+    if (!client) return
+    const commentElement = client.getCommentElement()
+    if (!commentElement) return
+
+    const subscription = commentElement.getAllCommentAnnotations().subscribe((annotations: CommentAnnotation[]) => {
+      const activeAnnotations = (annotations || []).filter((ann: any) => !isResolvedAnnotation(ann))
+      setCommentAnnotations(activeAnnotations)
+    })
+
+    return () => {
+      if (subscription && typeof subscription.unsubscribe === 'function') {
+        subscription.unsubscribe()
+      }
+    }
+  }, [client])
+
+  const handleLoad = useCallback((editor: Ace.Editor) => {
     editorRef.current = editor
-    await loadAceVelt()
     if (_AceVeltComments) {
       cleanupRef.current = _AceVeltComments(editor)
     }
 
-    // Show bubble menu on selection
     editor.selection.on('changeSelection', () => {
       const range = editor.getSelection().getRange()
       if (range.isEmpty()) {
@@ -97,7 +113,6 @@ export default function AceComponent({ scrollContainerRef }: AceComponentProps) 
     })
   }, [])
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (cleanupRef.current) {
@@ -157,7 +172,7 @@ export default function AceComponent({ scrollContainerRef }: AceComponentProps) 
 
       prevAnnotationsLengthRef.current = currentLength
 
-      if (commentAnnotations && commentAnnotations.length > 0 && _renderComments) {
+      if (commentAnnotations.length > 0 && _renderComments) {
         _renderComments({
           editor: editorRef.current,
           commentAnnotations,
@@ -168,7 +183,6 @@ export default function AceComponent({ scrollContainerRef }: AceComponentProps) 
 
   const handleAddComment = async () => {
     if (editorRef.current) {
-      // Restore saved selection
       if (savedSelectionRef.current) {
         const ace = (window as any).ace
         if (ace) {

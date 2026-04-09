@@ -129,6 +129,29 @@
   background: transparent !important;
 }
 
+/* Velt Comment Marker Styles (Ace-specific) */
+.ace-velt-comment-marker {
+  position: absolute;
+  background-color: rgba(255, 208, 0, 0.3) !important;
+  border-bottom: 2px solid #ffd000;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.ace-velt-comment-marker.velt-comment-selected {
+  background-color: rgba(255, 208, 0, 0.5) !important;
+}
+
+velt-comment-text {
+  background-color: rgba(255, 208, 0, 0.3);
+  border-bottom: 2px solid #ffd000;
+  cursor: pointer;
+}
+
+velt-comment-text.velt-comment-selected {
+  background-color: rgba(255, 208, 0, 0.5);
+}
+
 /* Helper Text Animation */
 @keyframes pulse-subtle {
   0%, 100% {
