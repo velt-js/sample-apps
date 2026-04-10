@@ -3,8 +3,7 @@
 import dynamic from 'next/dynamic'
 import { Ace } from 'ace-builds'
 import { useEffect, useRef, useCallback, useState } from 'react'
-import { useVeltClient } from '@veltdev/react'
-import type { CommentAnnotation } from '@veltdev/types'
+import { useCommentAnnotations } from '@veltdev/react'
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { AceComponentProps } from './types'
 import { initialContent } from './constants'
@@ -29,62 +28,18 @@ let _AceVeltComments: typeof import('@veltdev/ace-velt-comments').AceVeltComment
 let _addComment: typeof import('@veltdev/ace-velt-comments').addComment | null = null
 let _renderComments: typeof import('@veltdev/ace-velt-comments').renderComments | null = null
 
-const isResolvedAnnotation = (ann: any): boolean => {
-  return ann?.status?.type === 'terminal' || !!ann?.resolvedByUserId
-}
-
-const clearAllCommentMarkers = (editor: Ace.Editor | null) => {
-  if (!editor) return
-  const session = editor.getSession()
-  const markers = session.getMarkers(false)
-  for (const markerId in markers) {
-    const marker = markers[markerId]
-    if (marker.clazz && marker.clazz.includes('ace-velt-comment-marker')) {
-      session.removeMarker(parseInt(markerId, 10))
-    }
-  }
-  const container = editor.container
-  const overlayContainer = container.querySelector('.ace-velt-overlay-container')
-  if (overlayContainer) {
-    overlayContainer.innerHTML = ''
-  }
-  const veltCommentTexts = container.querySelectorAll('velt-comment-text')
-  veltCommentTexts.forEach((el: Element) => el.remove())
-}
-
 export default function AceComponent({ scrollContainerRef }: AceComponentProps) {
   const editorRef = useRef<Ace.Editor | null>(null)
   const cleanupRef = useRef<(() => void) | null>(null)
   const savedSelectionRef = useRef<{ start: Ace.Point; end: Ace.Point } | null>(null)
-  const prevAnnotationsLengthRef = useRef<number>(0)
   const { resolvedTheme } = useTheme()
-  const { client } = useVeltClient()
+  const commentAnnotations = useCommentAnnotations()
 
   const [bubbleMenu, setBubbleMenu] = useState<{ visible: boolean; x: number; y: number }>({
     visible: false,
     x: 0,
     y: 0,
   })
-
-  const [commentAnnotations, setCommentAnnotations] = useState<CommentAnnotation[]>([])
-
-  // Subscribe to comment annotations via Velt client, filtering out resolved ones
-  useEffect(() => {
-    if (!client) return
-    const commentElement = client.getCommentElement()
-    if (!commentElement) return
-
-    const subscription = commentElement.getAllCommentAnnotations().subscribe((annotations: CommentAnnotation[]) => {
-      const activeAnnotations = (annotations || []).filter((ann: any) => !isResolvedAnnotation(ann))
-      setCommentAnnotations(activeAnnotations)
-    })
-
-    return () => {
-      if (subscription && typeof subscription.unsubscribe === 'function') {
-        subscription.unsubscribe()
-      }
-    }
-  }, [client])
 
   const handleLoad = useCallback((editor: Ace.Editor) => {
     editorRef.current = editor
@@ -121,63 +76,10 @@ export default function AceComponent({ scrollContainerRef }: AceComponentProps) 
     }
   }, [])
 
-  // Listen for resolve/delete button clicks to force refresh markers
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const buttonText = target.textContent?.toLowerCase() || ''
-
-      const inVeltDialog = target.closest('velt-comment-dialog') ||
-        target.closest('velt-comments-sidebar') ||
-        target.closest('[class*="velt"]') ||
-        target.closest('[class*="comment-dialog"]')
-
-      const isResolveButton = target.closest('button[aria-label="Resolve"]') ||
-        target.closest('[data-velt-action="resolve"]') ||
-        target.closest('.velt-resolve-button') ||
-        (target.tagName === 'BUTTON' && buttonText.includes('resolve'))
-
-      const isDeleteButton = target.closest('button[aria-label="Delete"]') ||
-        target.closest('[data-velt-action="delete"]') ||
-        target.closest('.velt-delete-button') ||
-        target.closest('app-comment-dialog-options-dropdown-content-delete-thread') ||
-        (target.tagName === 'BUTTON' && buttonText.includes('delete'))
-
-      if (isResolveButton || isDeleteButton) {
-        setTimeout(() => {
-          clearAllCommentMarkers(editorRef.current)
-        }, 1000)
-      } else if (inVeltDialog && target.closest('button')) {
-        setTimeout(() => {
-          clearAllCommentMarkers(editorRef.current)
-        }, 1500)
-      }
-    }
-
-    document.addEventListener('click', handleClick, true)
-    return () => {
-      document.removeEventListener('click', handleClick, true)
-    }
-  }, [])
-
   // Render comments when annotations change
   useEffect(() => {
-    if (editorRef.current) {
-      const currentLength = commentAnnotations?.length || 0
-      const prevLength = prevAnnotationsLengthRef.current
-
-      if (prevLength > currentLength || currentLength === 0) {
-        clearAllCommentMarkers(editorRef.current)
-      }
-
-      prevAnnotationsLengthRef.current = currentLength
-
-      if (commentAnnotations.length > 0 && _renderComments) {
-        _renderComments({
-          editor: editorRef.current,
-          commentAnnotations,
-        })
-      }
+    if (editorRef.current && _renderComments) {
+      _renderComments({ editor: editorRef.current, commentAnnotations: commentAnnotations ?? [] })
     }
   }, [commentAnnotations])
 

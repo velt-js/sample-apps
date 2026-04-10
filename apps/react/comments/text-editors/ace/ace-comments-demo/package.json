@@ -11,7 +11,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.6.0",
     "@veltdev/react": "5.0.2-beta.9",
-    "@veltdev/ace-velt-comments": "^1.0.1",
+    "@veltdev/ace-velt-comments": "5.0.0-beta.1",
     "ace-builds": "^1.32.6",
     "react-ace": "^12.0.0",
     "clsx": "^2.1.1",
