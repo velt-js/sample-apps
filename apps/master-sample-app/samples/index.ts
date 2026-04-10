@@ -71,6 +71,8 @@ import quillCommentsDemoMeta from './quill-comments-demo/metadata'
 import { codeFiles as quillCommentsDemoCodeFiles } from './quill-comments-demo/code-files'
 import codemirrorCommentsDemoMeta from './codemirror-comments-demo/metadata'
 import { codeFiles as codemirrorCommentsDemoCodeFiles } from './codemirror-comments-demo/code-files'
+import aceCommentsDemoMeta from './ace-comments-demo/metadata'
+import { codeFiles as aceCommentsDemoCodeFiles } from './ace-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'cursors-playground': {
@@ -124,6 +126,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-codemirror-codemirror-comments-demo': {
     metadata: codemirrorCommentsDemoMeta,
     codeFiles: codemirrorCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-ace-ace-comments-demo': {
+    metadata: aceCommentsDemoMeta,
+    codeFiles: aceCommentsDemoCodeFiles
   },
   'react-comments-dashboard-custom-dashboard-demo': {
     metadata: dashboardDemoMeta,
