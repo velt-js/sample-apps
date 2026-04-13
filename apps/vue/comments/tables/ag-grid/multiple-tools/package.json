@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tabler/icons-vue": "^3.35.0",
-    "@veltdev/client": "5.0.2-beta.9",
+    "@veltdev/client": "5.0.2-beta.17",
     "ag-grid-community": "^34.3.0",
     "ag-grid-vue3": "^34.3.0",
     "vue": "^3.5.13"
