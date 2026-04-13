@@ -393,6 +393,10 @@ export const GlobalVeltStyles = createGlobalStyle`
      velt-comment-dialog-composer-attachments-other-loading-internal {
         display: block !important;
      }
+
+     .velt-comment-attachment-image-icon {
+       display: none !important;
+     }
   }
 
     velt-comment-dialog-composer-attachments-other-icon-internal {
@@ -774,9 +778,11 @@ export const GlobalVeltStyles = createGlobalStyle`
   }
 
   velt-comment-dialog-composer-attachments-internal,
-  velt-comment-dialog-composer-attachments-other-internal {
+  velt-comment-dialog-composer-attachments-other-internal,
+  velt-comment-dialog-composer-attachments-image-internal {
     min-width: 0 !important;
     overflow: hidden !important;
+    width: 100% !important;
   }
 
   .privado-reaction-pin-default-icon {
@@ -1757,7 +1763,7 @@ export const ComposerSubmitButtonWrapper = styled.div`
   outline: 1px solid #5A34D9;
 `;
 
-export const ComposerAttachmentsOther = styled.div`
+export const ComposerAttachments = styled.div`
   display: flex;
   padding: 7px var(--units-xs, 8px);
   align-items: center;
@@ -1768,6 +1774,16 @@ export const ComposerAttachmentsOther = styled.div`
   cursor: pointer !important;
   overflow: hidden;
 
+  .velt-comment-attachment-image-icon {
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+  }
+
   velt-comment-dialog-composer-attachments-other-icon-internal {
     flex-shrink: 0;
     svg {
@@ -1776,7 +1792,16 @@ export const ComposerAttachmentsOther = styled.div`
     }
   }
 
-  velt-comment-dialog-composer-attachments-other-delete-internal {
+  .velt-composer--icon-button {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  velt-comment-dialog-composer-attachments-other-delete-internal, velt-comment-dialog-composer-attachments-image-delete-internal {
     display: none !important;
     flex-shrink: 0;
   }
@@ -1793,6 +1818,10 @@ export const ComposerAttachmentsOther = styled.div`
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
+
+    &:empty {
+      display: none !important;
+    }
   }
 
   velt-comment-dialog-composer-attachments-other-name-internal {
@@ -1806,7 +1835,7 @@ export const ComposerAttachmentsOther = styled.div`
   &:hover {
     background: var(--Gray-10, #F2F6FC);
 
-    velt-comment-dialog-composer-attachments-other-delete-internal {
+    velt-comment-dialog-composer-attachments-other-delete-internal, velt-comment-dialog-composer-attachments-image-delete-internal {
       display: block !important;
     }
   }

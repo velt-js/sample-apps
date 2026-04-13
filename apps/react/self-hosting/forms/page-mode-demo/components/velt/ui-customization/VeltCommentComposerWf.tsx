@@ -1,7 +1,7 @@
 "use client";
 
 import { VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
-import { SendIcon, PdfAttachmentIcon, LoadingSpinnerIcon, DeleteIcon, AttachmentIcon, MentionIcon, DefaultFileIcon, JsonFileIcon, PdfFileTypeIcon, VideoFileIcon } from "./VeltIcons";
+import { SendIcon, PdfAttachmentIcon, LoadingSpinnerIcon, DeleteIcon, AttachmentIcon, MentionIcon, DefaultFileIcon, JsonFileIcon, PdfFileTypeIcon, VideoFileIcon, ImageFileIcon } from "./VeltIcons";
 import {
     ComposerWrapper,
     ComposerInputWrapper,
@@ -11,7 +11,7 @@ import {
     ComposerActionsRight,
     ComposerActionButtonWrapper,
     ComposerSubmitButtonWrapper,
-    ComposerAttachmentsOther
+    ComposerAttachments
 } from './styled';
 
 const VeltCommentComposerWf = () => {
@@ -21,7 +21,7 @@ const VeltCommentComposerWf = () => {
                 <VeltCommentDialogWireframe.Composer.AssignUser veltIf="!{annotation.annotationId}" />
                 <ComposerInputWrapper className="privado-comment-dialog-composer-input-wrapper">
                     <ComposerInputWrapperInner className="privado-comment-dialog-composer-input-wrapper-inner">
-                        <VeltCommentDialogWireframe.Composer.Input placeholder="Write a comment..." />
+                        <VeltCommentDialogWireframe.Composer.Input />
                         <ComposerActionsRight className="privado-comment-dialog-composer-actions-right">
                             <VeltCommentDialogWireframe.Composer.ActionButton type="submit">
                                 <ComposerSubmitButtonWrapper className="privado-comment-dialog-composer-submit-button-wrapper">
@@ -32,9 +32,23 @@ const VeltCommentComposerWf = () => {
                     </ComposerInputWrapperInner>
                     <VeltCommentDialogWireframe.Composer.Attachments>
                         <VeltCommentDialogWireframe.Composer.Attachments.Selected>
-                            <VeltCommentDialogWireframe.Composer.Attachments.Selected.Image />
+                            <VeltCommentDialogWireframe.Composer.Attachments.Selected.Image>
+                                <ComposerAttachments>
+                                    <div className="velt-comment-attachment-image-icon">
+                                        <ImageFileIcon />
+                                    </div>
+                                    <VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Loading>
+                                        <LoadingSpinnerIcon className="loading-spinner" />
+                                    </VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Loading>
+                                    <VeltData className="velt-composer--attachment-name" field="file.file.name" />
+                                    <VeltData className="velt-composer--attachment-name" field="file.name" />
+                                    <VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Delete>
+                                        <DeleteIcon />
+                                    </VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Delete>
+                                </ComposerAttachments>
+                            </VeltCommentDialogWireframe.Composer.Attachments.Selected.Image>
                             <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other>
-                                <ComposerAttachmentsOther className="privado-comment-dialog-composer-attachments-other">
+                                <ComposerAttachments>
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Icon>
                                         <VeltIf condition="{file.fileType} === 'video/mp4' || {file.fileType} === 'audio/mpeg'">
                                             <VideoFileIcon />
@@ -56,7 +70,7 @@ const VeltCommentComposerWf = () => {
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Delete>
                                         <DeleteIcon />
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Delete>
-                                </ComposerAttachmentsOther>
+                                </ComposerAttachments>
                             </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other>
                         </VeltCommentDialogWireframe.Composer.Attachments.Selected>
                     </VeltCommentDialogWireframe.Composer.Attachments>

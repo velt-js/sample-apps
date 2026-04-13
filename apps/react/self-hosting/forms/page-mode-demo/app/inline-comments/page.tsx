@@ -1,6 +1,6 @@
 "use client";
 
-import { VeltProvider, VeltComments, VeltInlineCommentsSection } from "@veltdev/react";
+import { VeltProvider, VeltComments, VeltInlineCommentsSection, VeltCommentTool } from "@veltdev/react";
 import { useVeltAuthProvider } from "@/components/velt/VeltInitializeUser";
 import VeltInitializeDocument from "@/components/velt/VeltInitializeDocument";
 import { VeltCustomization } from "@/components/velt/ui-customization/VeltCustomization";
@@ -25,7 +25,10 @@ export default function InlineCommentsPage() {
                 autoCompleteScrollConfig={{
                     itemSize: 32,
                 }}
-                assignToType='checkbox' />
+                assignToType='checkbox' 
+                deleteOnBackspace={false}
+                deleteReplyConfirmation={true}
+            />
 
             <div className="min-h-screen bg-[#F8FAFF] p-8">
                 <div className="max-w-3xl mx-auto">
