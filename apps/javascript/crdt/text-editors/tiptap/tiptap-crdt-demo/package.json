@@ -19,8 +19,8 @@
     "@tiptap/pm": "^3.14.0",
     "@tiptap/starter-kit": "^3.14.0",
     "@veltdev/client": "5.0.2-beta.17",
-    "@veltdev/tiptap-crdt": "^4.5.9-beta.4",
-    "@veltdev/tiptap-velt-comments": "4.5.8-beta.1",
+    "@veltdev/tiptap-crdt": "5.0.0",
+    "@veltdev/tiptap-velt-comments": "5.0.0-beta.2",
     "@veltdev/types": "5.0.2-beta.17",
     "y-prosemirror": "^1.2.12",
     "yjs": "^13.6.18"

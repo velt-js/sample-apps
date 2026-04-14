@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@veltdev/crdt": "4.5.8",
-    "@veltdev/crdt-react": "4.5.8",
+    "@veltdev/crdt": "5.0.1",
+    "@veltdev/crdt-react": "5.0.1",
     "@veltdev/react": "5.0.2-beta.17",
     "clsx": "^2",
     "next": "^16.1.2",
