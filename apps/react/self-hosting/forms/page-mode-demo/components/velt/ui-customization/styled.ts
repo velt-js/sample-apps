@@ -1060,7 +1060,6 @@ export const GlobalVeltStyles = createGlobalStyle`
     .oe-confirm-delete-message--reply {
       display: none !important;
     }
-
   }
 
   .velt-confirm-dialog--reply {
