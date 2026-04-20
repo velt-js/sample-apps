@@ -2290,8 +2290,8 @@ importers:
   apps/react/self-hosting/forms/page-mode-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 5.0.2-beta.17
-        version: 5.0.2-beta.17(react-dom@19.2.0)(react@19.2.0)
+        specifier: 5.0.2-beta.19
+        version: 5.0.2-beta.19(react-dom@19.2.0)(react@19.2.0)
       mongodb:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2321,8 +2321,8 @@ importers:
         specifier: ^5.1.36
         version: 5.1.36
       '@veltdev/types':
-        specifier: 5.0.2-beta.17
-        version: 5.0.2-beta.17
+        specifier: 5.0.2-beta.19
+        version: 5.0.2-beta.19
       autoprefixer:
         specifier: ^10
         version: 10.4.21(postcss@8.5.6)
@@ -7788,8 +7788,8 @@ packages:
       quill: 2.0.3
     dev: false
 
-  /@veltdev/react@5.0.2-beta.17(react-dom@19.2.0)(react@19.2.0):
-    resolution: {integrity: sha512-dGHAHYbu53zA9LE7MTDE1PR9lroguGCusZIeWOFQLNgbVIHd/tH7n/3P+izJkOzi7umAkJkf52U8GBxtI79d3A==}
+  /@veltdev/react@5.0.2-beta.19(react-dom@19.2.0)(react@19.2.0):
+    resolution: {integrity: sha512-CBXuq3Pg8bW3IEOhIJkT96+f9RWxQOdWltUT/gnPL17i4ll+aIYJatSVQIiMU3mXAgm+mbuhAXUdN/ErEJzzxA==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -7979,8 +7979,8 @@ packages:
       '@tiptap/core': 3.14.0(@tiptap/pm@3.14.0)
     dev: false
 
-  /@veltdev/types@5.0.2-beta.17:
-    resolution: {integrity: sha512-xsSfsp3369HeoetF6/GrAN2UrMI7b8JRedHGkJmKzO2O3Eo1b6V51G/so0cGiAF+zM13hF3keWt0XTfiDGZT+A==}
+  /@veltdev/types@5.0.2-beta.19:
+    resolution: {integrity: sha512-QcU6Y/T9wpWIpZMXZLx+1tj/Ex/P5iwfrzv+FM1bRVQWUhvraGONjttKsLPo7ZRfehAW/CROWYZfi6I4ea8H0A==}
     dev: true
 
   /@veltdev/types@5.0.2-beta.9:

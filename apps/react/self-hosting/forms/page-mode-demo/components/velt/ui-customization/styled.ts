@@ -1027,23 +1027,63 @@ export const GlobalVeltStyles = createGlobalStyle`
     }
   }
   .velt-comment-dialog-composer--inline {
-   &.velt-comment-dialog-composer--no-comments {
-   
-    .privado-comment-dialog-composer-input-wrapper {
-     padding: 11px 12px !important;
+    &.velt-comment-dialog-composer--no-comments {
+    
+        .privado-comment-dialog-composer-input-wrapper {
+        padding: 11px 12px !important;
+        }
+        .privado-comment-dialog-composer-actions-right {
+        display: none !important;
+        }
+
+        .privado-comment-dialog-composer-actions-wrapper {
+            display: flex !important;
+
+            .privado-comment-dialog-composer-actions-right {
+                display: flex !important;
+            }
+        }
     }
-    .privado-comment-dialog-composer-actions-right {
+  }
+
+  .velt-confirm-dialog--comment {
+    .oe-confirm-delete-title--comment {
+      display: flex !important;
+    }
+    .oe-confirm-delete-message--comment {
+      display: flex !important;
+    }
+
+    .oe-confirm-delete-title--reply {
+      display: none !important;
+    }
+    .oe-confirm-delete-message--reply {
       display: none !important;
     }
 
-    .privado-comment-dialog-composer-actions-wrapper {
-        display: flex !important;
+  }
 
-        .privado-comment-dialog-composer-actions-right {
-            display: flex !important;
-        }
+  .velt-confirm-dialog--reply {
+    .oe-confirm-delete-title--reply {
+      display: flex !important;
     }
-}
+    .oe-confirm-delete-message--reply {
+      display: flex !important;
+    }
+    .oe-confirm-delete-title--comment {
+      display: none !important;
+    }
+    .oe-confirm-delete-message--comment {
+      display: none !important;
+    }
+  }
+
+  .privado-comment-dialog-navigate-to-question-button-wrapper {
+    width: 100% !important;
+
+    app-button {
+        width: 100% !important;
+    }
   }
 `;
 
@@ -1774,21 +1814,16 @@ export const ComposerAttachments = styled.div`
   cursor: pointer !important;
   overflow: hidden;
 
-  .velt-comment-attachment-image-icon {
-    display: flex;
-    align-items: center !important;
-    justify-content: center !important;
+  .velt-composer--icon-button{
+    // display: flex;
+    // align-items: center !important;
+    // justify-content: center !important;
+    // flex-shrink: 0 !important;
     svg {
-        width: 16px !important;
-        height: 16px !important;
-    }
-  }
-
-  velt-comment-dialog-composer-attachments-other-icon-internal {
-    flex-shrink: 0;
-    svg {
-      width: 16px !important;
-      height: 16px !important;
+        rect {
+                width: 16px !important;
+                height: 16px !important;
+        }
     }
   }
 
@@ -1801,7 +1836,9 @@ export const ComposerAttachments = styled.div`
     height: auto !important;
   }
 
-  velt-comment-dialog-composer-attachments-other-delete-internal, velt-comment-dialog-composer-attachments-image-delete-internal {
+  
+
+  velt-comment-dialog-composer-attachments-other-delete-internal, velt-comment-dialog-composer-attachments-image-delete-internal, velt-comment-dialog-composer-attachments-other-download-internal, velt-comment-dialog-composer-attachments-image-download-internal {
     display: none !important;
     flex-shrink: 0;
   }
@@ -1835,7 +1872,7 @@ export const ComposerAttachments = styled.div`
   &:hover {
     background: var(--Gray-10, #F2F6FC);
 
-    velt-comment-dialog-composer-attachments-other-delete-internal, velt-comment-dialog-composer-attachments-image-delete-internal {
+    velt-comment-dialog-composer-attachments-other-delete-internal, velt-comment-dialog-composer-attachments-image-delete-internal, velt-comment-dialog-composer-attachments-other-download-internal, velt-comment-dialog-composer-attachments-image-download-internal {
       display: block !important;
     }
   }
@@ -2048,7 +2085,7 @@ export const CommentToolWrapper = styled.div`
     }
   }
 
-  app-comment-bubble-comments-count {
+  velt-comment-bubble-comments-count-internal {
     color: var(--Text-text-accent, #754CFF) !important;
     font-variant-numeric: lining-nums tabular-nums !important;
     font-size: 12px !important;
@@ -2087,7 +2124,7 @@ export const CommentBubbleWrapper = styled.div`
   cursor: pointer;
   border-radius: var(--border-radius-btn-radius-xs, 6px);
 
-  app-comment-bubble-comments-count {
+  velt-comment-bubble-comments-count-internal {
     color: var(--Text-text-accent, #754CFF) !important;
     font-variant-numeric: lining-nums tabular-nums !important;
     font-size: 12px !important;

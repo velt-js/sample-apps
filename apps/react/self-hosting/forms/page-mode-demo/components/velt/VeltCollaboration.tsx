@@ -42,11 +42,16 @@ export function VeltCollaboration() {
         textMode={false}
         commentPinHighlighter={false}
         dialogOnHover={false}
-        // groupMatchedComments={true}
+        commentPlaceholder="Write a comment..."
+        replyPlaceholder="Write a reply..."
         autoCompleteScrollConfig={{
             itemSize: 32,
         }}
         assignToType='checkbox'
+        editCommentPlaceholder="Edit comment..."
+        editReplyPlaceholder="Edit reply..."
+        deleteOnBackspace={false}
+        deleteReplyConfirmation={true}
       />
       <VeltCustomization />
     </>

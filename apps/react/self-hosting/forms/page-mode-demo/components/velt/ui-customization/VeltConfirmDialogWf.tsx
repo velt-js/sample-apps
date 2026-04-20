@@ -1,5 +1,5 @@
 "use client";
-import { VeltConfirmDialogWireframe } from '@veltdev/react';
+import { VeltConfirmDialogWireframe, VeltIf } from '@veltdev/react';
 import {
     ConfirmDialogWrapper,
     ConfirmDialogContent,
@@ -15,8 +15,22 @@ const VeltConfirmDialogWf = () => {
         <VeltConfirmDialogWireframe>
             <ConfirmDialogWrapper>
                 <ConfirmDialogContent>
-                    <VeltConfirmDialogWireframe.Title />
-                    <VeltConfirmDialogWireframe.Message />
+                    <VeltConfirmDialogWireframe.Title>
+                        <div className="oe-confirm-delete-title--comment">
+                            <span>Delete Comment?</span>
+                        </div>
+                        <div className="oe-confirm-delete-title--reply">
+                            <span>Delete Reply?</span>
+                        </div>
+                    </VeltConfirmDialogWireframe.Title>
+                    <VeltConfirmDialogWireframe.Message>
+                        <div className="oe-confirm-delete-message--comment">
+                            <span>This will delete entire thread.</span>
+                        </div>
+                        <div className="oe-confirm-delete-message--reply">
+                            <span>This will delete specific reply.</span>
+                        </div>
+                    </VeltConfirmDialogWireframe.Message>
                     <ConfirmDialogCloseButton>
                         <VeltConfirmDialogWireframe.RejectButton>
                             <ConfirmDialogRejectButton>
@@ -30,7 +44,7 @@ const VeltConfirmDialogWf = () => {
                     <VeltConfirmDialogWireframe.ApproveButton />
                 </ConfirmDialogButtons>
             </ConfirmDialogWrapper>
-        </VeltConfirmDialogWireframe>
+        </VeltConfirmDialogWireframe >
     );
 };
 

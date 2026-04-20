@@ -1,7 +1,7 @@
 "use client";
 
 import { VeltCommentDialogWireframe, VeltData, VeltIf } from "@veltdev/react";
-import { SendIcon, PdfAttachmentIcon, LoadingSpinnerIcon, DeleteIcon, AttachmentIcon, MentionIcon, DefaultFileIcon, JsonFileIcon, PdfFileTypeIcon, VideoFileIcon, ImageFileIcon } from "./VeltIcons";
+import { SendIcon, PdfAttachmentIcon, LoadingSpinnerIcon, DeleteIcon, AttachmentIcon, MentionIcon, DefaultFileIcon, JsonFileIcon, PdfFileTypeIcon, VideoFileIcon, ImageFileIcon, DownloadIcon } from "./VeltIcons";
 import {
     ComposerWrapper,
     ComposerInputWrapper,
@@ -18,7 +18,7 @@ const VeltCommentComposerWf = () => {
     return (
         <VeltCommentDialogWireframe.Composer>
             <ComposerWrapper className="privado-comment-dialog-composer-wrapper">
-                <VeltCommentDialogWireframe.Composer.AssignUser veltIf="!{annotation.annotationId}" />
+                <VeltCommentDialogWireframe.Composer.AssignUser veltIf="{pageModeComposer}" />
                 <ComposerInputWrapper className="privado-comment-dialog-composer-input-wrapper">
                     <ComposerInputWrapperInner className="privado-comment-dialog-composer-input-wrapper-inner">
                         <VeltCommentDialogWireframe.Composer.Input />
@@ -42,6 +42,9 @@ const VeltCommentComposerWf = () => {
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Loading>
                                     <VeltData className="velt-composer--attachment-name" field="file.file.name" />
                                     <VeltData className="velt-composer--attachment-name" field="file.name" />
+                                    <VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Download>
+                                        <DownloadIcon />
+                                    </VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Download>
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Delete>
                                         <DeleteIcon />
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Image.Delete>
@@ -67,6 +70,9 @@ const VeltCommentComposerWf = () => {
                                         <LoadingSpinnerIcon className="loading-spinner" />
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Loading>
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Name />
+                                    <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Download>
+                                        <DownloadIcon />
+                                    </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Download>
                                     <VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Delete>
                                         <DeleteIcon />
                                     </VeltCommentDialogWireframe.Composer.Attachments.Selected.Other.Delete>

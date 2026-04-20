@@ -48,8 +48,8 @@ const VeltCommentDialoglWf = () => {
         // [Velt] Custom wireframe for comment dialog
         <VeltCommentDialogWireframe>
             <CommentDialogWrapper className="privado-comment-dialog-wrapper">
-                <VeltCommentDialogWireframe.AssigneeBanner veltIf="!{focusedThreadMode} && !{inlineCommentSectionMode}" />
-                <VeltIf condition="!{focusedThreadMode} && !{inlineCommentSectionMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
+                <VeltCommentDialogWireframe.AssigneeBanner veltIf="!{focusedThreadMode} && !{inlineCommentSectionMode} && !{pageModeComposer}" />
+                <VeltIf className="privado-comment-dialog-navigate-to-question-button-wrapper" condition="!{focusedThreadMode} && !{inlineCommentSectionMode} && !{pageModeComposer} && {annotation.context.questionTitle}">
                     <VeltButtonWireframe type="button" id="navigate-to-question-button" className="privado-comment-dialog-navigate-to-question-button">
                         <QuestionWrapperContainer className="privado-comment-dialog-question-wrapper-container">
                             <QuestionWrapper className="privado-comment-dialog-question-wrapper">
