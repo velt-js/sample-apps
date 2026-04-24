@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 // [Velt] Provider + collaboration
 import { VeltProvider } from "@veltdev/react";
 import { useVeltAuthProvider } from "@/components/velt/VeltInitializeUser";
@@ -33,7 +34,9 @@ export default function Home() {
     //   }}
     >
       <VeltCollaboration />
-      <DocumentCanvas />
+      <Suspense fallback={null}>
+        <DocumentCanvas />
+      </Suspense>
     </VeltProvider>
   );
 }
