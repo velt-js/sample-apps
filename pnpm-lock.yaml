@@ -2290,8 +2290,8 @@ importers:
   apps/react/self-hosting/forms/page-mode-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 5.0.2-beta.20
-        version: 5.0.2-beta.20(react-dom@19.2.0)(react@19.2.0)
+        specifier: 5.0.2-beta.21
+        version: 5.0.2-beta.21(react-dom@19.2.0)(react@19.2.0)
       mongodb:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2321,8 +2321,8 @@ importers:
         specifier: ^5.1.36
         version: 5.1.36
       '@veltdev/types':
-        specifier: 5.0.2-beta.20
-        version: 5.0.2-beta.20
+        specifier: 5.0.2-beta.21
+        version: 5.0.2-beta.21
       autoprefixer:
         specifier: ^10
         version: 10.4.21(postcss@8.5.6)
@@ -7800,8 +7800,8 @@ packages:
       react-dom: 19.2.0(react@19.2.0)
     dev: false
 
-  /@veltdev/react@5.0.2-beta.20(react-dom@19.2.0)(react@19.2.0):
-    resolution: {integrity: sha512-U1OUdSF7vrqWu4dnQDnkOeqpK+RQe5ykf6mX2GcpVnzt5u8Rso0lOhGGfHZPSnzD9rSlttGHvqvNjJ3vUD2UPw==}
+  /@veltdev/react@5.0.2-beta.21(react-dom@19.2.0)(react@19.2.0):
+    resolution: {integrity: sha512-Gle+wEH1p5U1OtS+sV51e33q/KaiVw+8hIbRFWa2ma/4buV89VB6y2WmUusICPOxi3S0fB0HCQWdID4VfYOLyg==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -7984,8 +7984,8 @@ packages:
   /@veltdev/types@5.0.2-beta.17:
     resolution: {integrity: sha512-xsSfsp3369HeoetF6/GrAN2UrMI7b8JRedHGkJmKzO2O3Eo1b6V51G/so0cGiAF+zM13hF3keWt0XTfiDGZT+A==}
 
-  /@veltdev/types@5.0.2-beta.20:
-    resolution: {integrity: sha512-aZCD5BDwLu8mHfVnW5mUcNjPYTJLsmcUiwpQfgfl4AS0rFCmkM8LaGv72+WsNOMH3tA9VK/Z5lf24InbSeFYSA==}
+  /@veltdev/types@5.0.2-beta.21:
+    resolution: {integrity: sha512-tidwu08SHpeNzWPsducI3NLw2w/OPOyckwJAA18X9BtC2XBSSp9Knn/0ggrSYFtzWdf1m1BhW2ut7lHrKYvAiA==}
     dev: true
 
   /@vercel/analytics@1.6.1(next@16.1.2)(react@19.2.0):

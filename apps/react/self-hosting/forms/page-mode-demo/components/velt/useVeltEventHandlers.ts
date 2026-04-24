@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useCommentUtils, useCommentEventCallback, useVeltEventCallback, useContactSelected } from '@veltdev/react'
+import { useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { useCommentUtils, useCommentEventCallback, useVeltEventCallback, useContactSelected, useCommentAnnotationsCount } from '@veltdev/react'
 import { CommentBubbleClickedEvent, CommentToolClickEvent, SidebarButtonClickEvent, VeltButtonClickEvent } from '@veltdev/types'
 
 interface UseVeltEventHandlersProps {
@@ -27,7 +28,11 @@ export function useVeltEventHandlers({
     const commentBubbleClickedCallback: CommentBubbleClickedEvent = useCommentEventCallback('commentBubbleClicked')
     const sidebarButtonClickedCallback: SidebarButtonClickEvent = useCommentEventCallback('sidebarButtonClick')
     const veltButtonClickEventData: VeltButtonClickEvent = useVeltEventCallback('veltButtonClick')
+    const commentAnnotationsCount = useCommentAnnotationsCount();
     const selectedContact = useContactSelected();
+    const searchParams = useSearchParams()
+    const commentIdFromUrl = searchParams?.get('commentId') ?? null
+    const handledCommentIdRef = useRef<string | null>(null)
 
     // Handle custom button click (remove page mode composer)
     useEffect(() => {
@@ -63,16 +68,38 @@ export function useVeltEventHandlers({
         }
     }, [sidebarButtonClickedCallback, commentUtils, setActiveCommentToolId, toggleGlobalSidebar])
 
-    // Handle comment bubble click (open sidebar and select comment)
+    // Handle comment bubble click (open sidebar, select comment, sync URL)
     useEffect(() => {
         if (commentBubbleClickedCallback && commentUtils) {
+            const { annotationId } = commentBubbleClickedCallback
             openGlobalSidebar()
             setTimeout(() => {
-                commentUtils.selectCommentByAnnotationId(commentBubbleClickedCallback.annotationId)
+                commentUtils.selectCommentByAnnotationId(annotationId)
             }, 0)
             setActiveCommentToolId(commentBubbleClickedCallback.commentAnnotation?.context?.questionId)
+
+            if (typeof window !== 'undefined' && annotationId) {
+                const url = new URL(window.location.href)
+                if (url.searchParams.get('commentId') !== annotationId) {
+                    url.searchParams.set('commentId', annotationId)
+                    window.history.replaceState(window.history.state, '', url.toString())
+                }
+                handledCommentIdRef.current = annotationId
+            }
         }
     }, [commentBubbleClickedCallback, commentUtils, setActiveCommentToolId, openGlobalSidebar])
+
+    useEffect(() => {
+        if (!commentIdFromUrl || !commentUtils) return
+        if (!commentAnnotationsCount?.data) return
+        if (handledCommentIdRef.current === commentIdFromUrl) return
+
+        handledCommentIdRef.current = commentIdFromUrl
+        openGlobalSidebar()
+        setTimeout(() => {
+            commentUtils.selectCommentByAnnotationId(commentIdFromUrl)
+        }, 0)
+    }, [commentIdFromUrl, commentUtils, commentAnnotationsCount, openGlobalSidebar])
 
     useEffect(() => {
         console.log('selectedContact: ', selectedContact);
