@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@veltdev/crdt": "5.0.1",
+    "@veltdev/crdt": "4.5.8",
     "@veltdev/client": "5.0.2-beta.22",
     "@veltdev/types": "5.0.2-beta.22",
     "lib0": "^0.2.93",
