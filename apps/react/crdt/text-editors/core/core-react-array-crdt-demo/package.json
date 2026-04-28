@@ -11,7 +11,7 @@
   "dependencies": {
     "@veltdev/crdt": "5.0.1",
     "@veltdev/crdt-react": "5.0.1",
-    "@veltdev/react": "5.0.2-beta.17",
+    "@veltdev/react": "5.0.2-beta.22",
     "clsx": "^2",
     "next": "^16.1.2",
     "react": "^19",
@@ -22,7 +22,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@veltdev/types": "5.0.2-beta.17",
+    "@veltdev/types": "5.0.2-beta.22",
     "autoprefixer": "^10",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.3",
