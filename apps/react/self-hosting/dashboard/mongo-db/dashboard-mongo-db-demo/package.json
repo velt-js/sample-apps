@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@veltdev/react": "5.0.2-beta.17",
+    "@veltdev/react": "5.0.2-beta.22",
     "clsx": "^2",
     "lucide-react": "^0.454.0",
     "mongodb": "^7.0.0",
@@ -23,7 +23,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@veltdev/types": "5.0.2-beta.17",
+    "@veltdev/types": "5.0.2-beta.22",
     "autoprefixer": "^10",
     "postcss": "^8",
     "tailwindcss": "^3.4.0",
