@@ -121,5 +121,26 @@ export function useVeltEventHandlers({
         }
     }, [commentEventCallbackData]);
 
+    const deleteCommentAnnotationEventCallbackData = useCommentEventCallback('deleteCommentAnnotation');
+    useEffect(() => {
+    if (deleteCommentAnnotationEventCallbackData) {
+        console.log('deleteCommentAnnotationEventCallbackData: ', deleteCommentAnnotationEventCallbackData);
+    }
+    }, [deleteCommentAnnotationEventCallbackData]);
+
+    const deleteCommentEventCallbackData = useCommentEventCallback('deleteComment');
+    useEffect(() => {
+    if (deleteCommentEventCallbackData) {
+        console.log('deleteCommentEventCallbackData: ', deleteCommentEventCallbackData);
+    }
+    }, [deleteCommentEventCallbackData]);
+
+    // @ts-ignore
+    const addCommentDraftEventCallbackData = useCommentEventCallback('addCommentDraft');
+    useEffect(() => {
+    if (addCommentDraftEventCallbackData) {
+        console.log('addCommentDraftEventCallbackData: ', addCommentDraftEventCallbackData);
+    }
+    }, [addCommentDraftEventCallbackData]);
 
 }
