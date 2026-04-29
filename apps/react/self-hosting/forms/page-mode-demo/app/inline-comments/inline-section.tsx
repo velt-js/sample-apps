@@ -120,6 +120,8 @@ const InlineSection = () => {
                                 composerPlaceholder="Write a comment..."
                                 replyPlaceholder="Write a reply..."
                                 fullExpanded={true}
+                                messageTruncation={true}
+                                messageTruncationLines={3}
                             />
                         </div>
                     </section>

@@ -1084,6 +1084,10 @@ export const GlobalVeltStyles = createGlobalStyle`
         width: 100% !important;
     }
   }
+
+  .velt-thread-card-message--show-more-btn {
+    padding-left: 0px !important;
+  }
 `;
 
 // =============================================
