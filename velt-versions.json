@@ -2,9 +2,9 @@
   "$schema": "./velt-versions.schema.json",
   "description": "Centralized Velt package versions for all sample apps. Update versions here and run the update script or let CI/CD handle it.",
   "versions": {
-    "@veltdev/react": "5.0.2-beta.22",
-    "@veltdev/types": "5.0.2-beta.22",
-    "@veltdev/client": "5.0.2-beta.22",
+    "@veltdev/react": "5.0.2-beta.26",
+    "@veltdev/types": "5.0.2-beta.26",
+    "@veltdev/client": "5.0.2-beta.26",
     "@veltdev/crdt": "5.0.1",
     "@veltdev/crdt-react": "5.0.1",
     "@veltdev/codemirror-crdt": "5.0.0",

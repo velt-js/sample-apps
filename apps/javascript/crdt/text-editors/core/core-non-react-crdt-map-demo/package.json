@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@veltdev/crdt": "5.0.1",
-    "@veltdev/client": "5.0.2-beta.22",
-    "@veltdev/types": "5.0.2-beta.22",
+    "@veltdev/client": "5.0.2-beta.26",
+    "@veltdev/types": "5.0.2-beta.26",
     "lib0": "^0.2.93",
     "y-protocols": "^1.0.6",
     "yjs": "^13.6.18"

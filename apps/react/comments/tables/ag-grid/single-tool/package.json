@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tabler/icons-react": "^3.35.0",
-    "@veltdev/react": "5.0.2-beta.22",
+    "@veltdev/react": "5.0.2-beta.26",
     "ag-grid-community": "^34.3.0",
     "ag-grid-react": "^34.3.0",
     "clsx": "^2.1.1",
@@ -23,7 +23,7 @@
     "@types/node": "^22.18.13",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@veltdev/types": "5.0.2-beta.22",
+    "@veltdev/types": "5.0.2-beta.26",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.38.0",
     "eslint-config-next": "^16.0.1",
