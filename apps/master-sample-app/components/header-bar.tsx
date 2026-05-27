@@ -1,10 +1,10 @@
 "use client"
 
-import { Search, ChevronRight, ExternalLink, RotateCcw, Github, Copy, Sun, Moon, Monitor } from "lucide-react"
+import { Search, ChevronRight, ExternalLink, RotateCcw, Github, Copy } from "lucide-react"
 import { VeltLogo } from "./velt-logo"
+import { HeaderThemeToggle } from "./header-theme-toggle"
 import { cn } from "@/lib/utils"
 import { useState, useEffect, useRef } from "react"
-import { useTheme } from "next-themes"
 
 interface HeaderBarProps {
   title: string
@@ -12,6 +12,7 @@ interface HeaderBarProps {
   onModeChange: (mode: "code" | "demo") => void
   onSearchClick: () => void
   onBreadcrumbClick?: (level: number) => void
+  onGoHome?: () => void
   githubUrl?: string
   routePath?: string
   documentId?: string
@@ -39,6 +40,7 @@ export function HeaderBar({
   onModeChange,
   onSearchClick,
   onBreadcrumbClick,
+  onGoHome,
   githubUrl,
   routePath,
   documentId,
@@ -96,11 +98,15 @@ export function HeaderBar({
     <header className="relative flex h-[48px] items-center border-b border-black/8 dark:border-white/8 bg-white dark:bg-[#0e0e0e] px-[19px] shrink-0">
       {/* Left: Brand + Breadcrumbs */}
       <div className="flex items-center gap-4 min-w-0 overflow-hidden font-[family-name:var(--font-urbanist)]">
-        {/* Velt brand */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Velt brand - returns to the landing gallery */}
+        <button
+          onClick={onGoHome}
+          className="flex items-center gap-2 shrink-0 transition-opacity hover:opacity-80"
+          title="All Demos"
+        >
           <VeltLogo className="h-[20px] w-[20px] text-foreground" />
           <span className="text-[20px] font-bold text-black dark:text-white tracking-[0.2px] leading-none">Velt</span>
-        </div>
+        </button>
 
         {/* Vertical divider line */}
         <div className="h-[18px] w-px bg-black/12 dark:bg-white/12 shrink-0" />
@@ -268,48 +274,3 @@ function CodeBracketsIcon({ className }: { className?: string }) {
   )
 }
 
-function HeaderThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
-
-  return (
-    <div className="flex items-center gap-[2px] bg-black/6 dark:bg-[#1e1e1e] rounded-[8px] p-[2px]">
-      <button
-        onClick={() => setTheme("light")}
-        className={cn(
-          "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
-          theme === "light" ? "bg-black/10 dark:bg-white/10 text-black dark:text-white" : "text-black/40 dark:text-white/40 hover:text-black/70 dark:hover:text-white/70"
-        )}
-        title="Light"
-      >
-        <Sun className="h-[14px] w-[14px]" />
-      </button>
-      <button
-        onClick={() => setTheme("dark")}
-        className={cn(
-          "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
-          theme === "dark" ? "bg-black/10 dark:bg-white/10 text-black dark:text-white" : "text-black/40 dark:text-white/40 hover:text-black/70 dark:hover:text-white/70"
-        )}
-        title="Dark"
-      >
-        <Moon className="h-[14px] w-[14px]" />
-      </button>
-      <button
-        onClick={() => setTheme("system")}
-        className={cn(
-          "flex h-[28px] w-[32px] items-center justify-center rounded-[6px] transition-colors",
-          theme === "system" ? "bg-black/10 dark:bg-white/10 text-black dark:text-white" : "text-black/40 dark:text-white/40 hover:text-black/70 dark:hover:text-white/70"
-        )}
-        title="System"
-      >
-        <Monitor className="h-[14px] w-[14px]" />
-      </button>
-    </div>
-  )
-}

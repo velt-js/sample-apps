@@ -1,6 +1,4 @@
 import { Sample } from '@/types/sample'
-import cursorsPlaygroundMeta from './cursors-playground/metadata'
-import { codeFiles as cursorsPlaygroundCodeFiles } from './cursors-playground/code-files'
 import reactflowCrdtMeta from './reactflow-crdt/metadata'
 import { codeFiles as reactflowCrdtCodeFiles } from './reactflow-crdt/code-files'
 import multipleToolsMeta from './multiple-tools/metadata'
@@ -75,10 +73,6 @@ import aceCommentsDemoMeta from './ace-comments-demo/metadata'
 import { codeFiles as aceCommentsDemoCodeFiles } from './ace-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
-  'cursors-playground': {
-    metadata: cursorsPlaygroundMeta,
-    codeFiles: cursorsPlaygroundCodeFiles
-  },
   'react-crdt-canvas-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles

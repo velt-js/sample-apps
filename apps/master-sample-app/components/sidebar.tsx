@@ -15,7 +15,6 @@ interface SidebarProps {
 // Map full sample IDs to sidebar item names
 const sampleIdToItemName = (sampleId: string): string => {
   const mapping: Record<string, string> = {
-    'cursors-playground': 'playground',
     'react-crdt-canvas-reactflow-reactflow-demo': 'reactflow-demo',
     'react-comments-tables-aggrid-multiple-tools': 'aggrid-multiple-tools',
     'react-comments-tables-aggrid-single-tool': 'aggrid-single-tool',
@@ -55,7 +54,6 @@ const sampleIdToItemName = (sampleId: string): string => {
 export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: SidebarProps) {
   // Default expanded sections - only reactflow-demo path is expanded
   const defaultExpandedSections = {
-    cursors: false,
     comments: false,
     commentsTables: false,
     agGrid: false,
@@ -188,33 +186,6 @@ export function Sidebar({ isOpen, onToggle, currentSampleId, onSampleSelect }: S
           <nav className="flex-1 overflow-y-auto px-3">
             {activePill === "feature" ? (
               <>
-                {/* cursors Section */}
-                <div className="mb-1">
-                  <button
-                    onClick={() => toggleSection("cursors")}
-                    className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-mono text-sidebar-foreground bg-sidebar-accent"
-                  >
-                    <span>cursors</span>
-                    <ChevronRight className={cn("h-4 w-4 transition-transform", expandedSections.cursors && "rotate-90")} />
-                  </button>
-                  {expandedSections.cursors && (
-                    <div className="mt-2 space-y-1">
-                      <button
-                        onClick={() => {
-                          setSelectedItem("playground")
-                          onSampleSelect?.("cursors-playground")
-                        }}
-                        className={cn(
-                          "w-full rounded-lg px-3 py-2.5 text-left text-sm font-mono text-sidebar-foreground transition-colors",
-                          selectedItem === "playground" ? "bg-secondary" : "hover:bg-secondary/50",
-                        )}
-                      >
-                        playground
-                      </button>
-                    </div>
-                  )}
-                </div>
-
                 {/* comments Section */}
                 <div className="mb-1">
                   <button

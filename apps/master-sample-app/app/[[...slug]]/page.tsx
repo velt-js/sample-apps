@@ -5,6 +5,7 @@ import { useTheme } from "next-themes"
 import { HeaderBar } from "@/components/header-bar"
 import { DemoSwitcher } from "@/components/demo-switcher"
 import { SampleViewer } from "@/components/viewer/sample-viewer"
+import { LandingPage } from "@/components/landing/landing-page"
 import { getDefaultSample, getSampleById, getAllSamples } from "@/samples"
 
 export default function Page() {
@@ -14,6 +15,9 @@ export default function Page() {
   const [isMounted, setIsMounted] = useState(false)
   const isInitialized = useRef(false)
   const [mode, setMode] = useState<"code" | "demo">("demo")
+  // Top-level view: landing gallery (root) vs the demo viewer
+  const [view, setView] = useState<"landing" | "viewer">("landing")
+  // Demo switcher overlay (old navigation, available on demo viewing pages)
   const [switcherOpen, setSwitcherOpen] = useState(false)
   const [switcherLevel, setSwitcherLevel] = useState<number | undefined>(undefined)
   const { resolvedTheme } = useTheme()
@@ -49,28 +53,22 @@ export default function Page() {
     if (typeof window === 'undefined') return
 
     try {
-      // 1. Determine which sample to load based on URL path
+      // 1. Determine which sample (if any) matches the URL path
       const currentPath = window.location.pathname
       const allSamples = getAllSamples()
       const sampleFromPath = allSamples.find(s => s.metadata.routePath === currentPath)
 
-      let targetSampleId = getDefaultSample().metadata.id
+      isInitialized.current = true
 
-      // Priority order: URL path > localStorage > default
-      if (sampleFromPath) {
-        targetSampleId = sampleFromPath.metadata.id
-      } else {
-        // Fallback to last selected sample from localStorage
-        const lastSelected = localStorage.getItem('last-selected-sample-id')
-        if (lastSelected) {
-          const lastSample = getSampleById(lastSelected)
-          if (lastSample) {
-            targetSampleId = lastSelected
-          }
-        }
+      // No matching sample (e.g. root "/") -> show the landing gallery
+      if (!sampleFromPath) {
+        setView("landing")
+        setIsMounted(true)
+        return
       }
 
-      // Store the selection for persistence
+      // A sample route -> load it in the viewer
+      const targetSampleId = sampleFromPath.metadata.id
       localStorage.setItem('last-selected-sample-id', targetSampleId)
 
       // 2. Check URL for documentId parameter
@@ -85,15 +83,13 @@ export default function Page() {
         docId = getDocumentIdForDemo(targetSampleId)
       }
 
-      // Mark as initialized BEFORE setting state to prevent sample change effect from running
-      isInitialized.current = true
-
       // Update state atomically - both sampleId and documentId together
       // This ensures the iframe never renders with mismatched sample/document
       if (targetSampleId !== currentSampleId) {
         setCurrentSampleId(targetSampleId)
       }
       setDocumentId(docId)
+      setView("viewer")
       setIsMounted(true)
     } catch (error) {
       console.error('Error initializing:', error)
@@ -104,7 +100,10 @@ export default function Page() {
   // Handle sample selection: atomically update both sample and document ID
   // to prevent race conditions where iframe renders with mismatched data
   const handleSampleSelect = useCallback((newSampleId: string) => {
-    if (newSampleId === currentSampleId) return
+    // Already viewing this exact sample — nothing to do.
+    // (When on the landing view we always proceed, even if the id matches
+    // the initial default, so the card click still opens the viewer.)
+    if (view === "viewer" && newSampleId === currentSampleId) return
     if (typeof window === 'undefined') return
 
     try {
@@ -121,6 +120,7 @@ export default function Page() {
       // This prevents the iframe from rendering with mismatched data
       setCurrentSampleId(newSampleId)
       setDocumentId(docId)
+      setView("viewer")
 
       // Update URL after state update
       const routePath = sample.metadata.routePath || window.location.pathname
@@ -132,7 +132,16 @@ export default function Page() {
     } catch (error) {
       console.error('Error changing sample:', error)
     }
-  }, [currentSampleId, getDocumentIdForDemo])
+  }, [view, currentSampleId, getDocumentIdForDemo])
+
+  // Return to the landing gallery
+  const handleGoHome = useCallback(() => {
+    if (typeof window === 'undefined') return
+    setView("landing")
+    if (window.location.pathname !== '/') {
+      window.history.pushState({}, '', '/')
+    }
+  }, [])
 
   // Handle reset: generate new document ID for current demo
   const handleReset = useCallback(() => {
@@ -166,17 +175,35 @@ export default function Page() {
     }
   }, [currentSampleId])
 
-  // Cmd/Ctrl+K keyboard shortcut to open switcher
+  // Cmd/Ctrl+K toggles the demo switcher (only meaningful on demo pages)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault()
-        setSwitcherOpen(prev => !prev)
+        if (view === "viewer") {
+          setSwitcherLevel(undefined)
+          setSwitcherOpen(prev => !prev)
+        }
       }
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [])
+  }, [view])
+
+  // Sync view with browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      if (typeof window === 'undefined') return
+      const sampleFromPath = getAllSamples().find(s => s.metadata.routePath === window.location.pathname)
+      if (sampleFromPath) {
+        handleSampleSelect(sampleFromPath.metadata.id)
+      } else {
+        setView("landing")
+      }
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [handleSampleSelect])
 
   // Compute iframe URL for header bar share/open actions
   const iframeUrl = (() => {
@@ -200,6 +227,15 @@ export default function Page() {
     )
   }
 
+  // Landing gallery (root)
+  if (view === "landing") {
+    return (
+      <LandingPage
+        githubUrl={currentSample.metadata.githubUrl}
+      />
+    )
+  }
+
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-background">
       {/* Top Header Bar */}
@@ -207,6 +243,7 @@ export default function Page() {
         title={currentSample.metadata.title}
         mode={mode}
         onModeChange={setMode}
+        onGoHome={handleGoHome}
         onSearchClick={() => { setSwitcherLevel(undefined); setSwitcherOpen(true) }}
         onBreadcrumbClick={(level) => { setSwitcherLevel(level); setSwitcherOpen(true) }}
         githubUrl={currentSample.metadata.githubUrl}
@@ -216,7 +253,7 @@ export default function Page() {
         iframeUrl={iframeUrl}
       />
 
-      {/* Demo Switcher Overlay */}
+      {/* Demo Switcher Overlay (old navigation) */}
       <DemoSwitcher
         isOpen={switcherOpen}
         onClose={() => { setSwitcherOpen(false); setSwitcherLevel(undefined) }}
