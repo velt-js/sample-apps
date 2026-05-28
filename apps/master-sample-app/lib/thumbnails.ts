@@ -59,7 +59,8 @@ export function getThumbnail(parsed: ParsedSample): Thumbnail | null {
   if (feature === "self-hosting") {
     if (library === "mongo-db") return pair("self-hosting-mongodb")
     if (library === "postgres") return pair("self-hosting-postgresql")
-    return null // forms / page-mode
+    if (appType === "forms") return pair("page-mode")
+    return null
   }
 
   return null // cursors and anything unmatched
