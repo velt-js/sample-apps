@@ -1,6 +1,7 @@
 "use client";
 import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
+import VeltInitializeBotContact from "./VeltInitializeBotContact";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
 import { useEffect } from "react";
 import { useAppUser } from "@/app/userAuth/AppUserContext";
@@ -24,6 +25,7 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
+      <VeltInitializeBotContact />
       <VeltComments
         textMode={false}
       />
