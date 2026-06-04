@@ -22,6 +22,23 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 | **CodeMirror** | `tmcw/awesome-codemirror` | Plugins | [#1](https://github.com/tmcw/awesome-codemirror/pull/1) | 🟢 Open |
 | **Velt SDK** (realtime) | `jacktuck/awesome-realtime` | Websockets → Hosted | [#2](https://github.com/jacktuck/awesome-realtime/pull/2) | 🟢 Open |
 
+### Batch 2 — database & CRDT lists (opened 2026-06-03)
+
+| Library | Repo | Section | PR | Status |
+|---------|------|---------|----|--------|
+| **MongoDB** | `ramnes/awesome-mongodb` | Applications | [#155](https://github.com/ramnes/awesome-mongodb/pull/155) | 🟢 Open |
+| **CRDT** (Velt SDK) | `alangibson/awesome-crdt` | Implementations → Data Structures | [#14](https://github.com/alangibson/awesome-crdt/pull/14) | 🟢 Open (repo dormant since 2021 — low merge odds) |
+
+**Evaluated & skipped this round (rows 11–22 + SDK lists):**
+- **PostgreSQL** (`awesome-postgres`) — list is Postgres *tooling* only; no "applications" section → off-scope.
+- **Vue** (`awesome-vue`) — rules explicitly **bar commercial products**; only sanctioned path is "open an issue for advertising," not a PR.
+- **React** (`awesome-react`) — "no advertisement board / entirely free resources" → vendor SDK is a coin-flip; not worth the goodwill risk.
+- **awesome-rtc** — WebRTC/SIP/VoIP only → off-scope.
+- **realtime-web-technologies-guide** — in-scope but abandoned since 2020 + heavy logo-block format → low ROI.
+- **Chart.js / Nivo / Lottie / Angular** — no sample app yet; build a demo first to submit a real entry.
+- **Highcharts / AG Grid** — no PR/form venue (registry 410 / outreach-only).
+- **TanStack Table / Next.js (Vercel)** — sign-in submission forms, not CLI-pushable PRs.
+
 ### Skipped from the original "first 10" — with reasoning
 
 | Library | Venue attempted | Skip reason | Detailed reasoning |
@@ -59,11 +76,11 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 | 14 | **AG Grid** | Table | ✅ | ✅ | — | [Tools & Extensions](https://www.ag-grid.com/community/tools-extensions/) | No self-serve — **pitch via Contact Us / GitHub** | ⚫ Outreach only |
 | 15 | **TanStack Table** | Table | ✅ | ❌ | P2 | [TanStack Showcase](https://tanstack.com/showcase) | Form — "Submit Your Project" (sign in w/ GitHub) | ⚪ To do (form) |
 | 16 | **Lottie** | Media | ❌ | ✅ | P1 | [awesome-lottie](https://github.com/LottieFiles/awesome-lottie) · [Integrations](https://lottiefiles.com/integrations) | GitHub PR (Libraries → Web) · Form | ⚪ To do (build demo first) |
-| 17 | **MongoDB** | Database | ✅ | ✅ | P2 | [awesome-mongodb](https://github.com/ramnes/awesome-mongodb) | GitHub PR — "Applications" section | ⚪ To do |
-| 18 | **PostgreSQL** | Database | ✅ | ❌ | P2 | [awesome-postgres](https://github.com/dhamaniasad/awesome-postgres) | GitHub PR — relevant category | ⚪ To do |
+| 17 | **MongoDB** | Database | ✅ | ✅ | P2 | [awesome-mongodb](https://github.com/ramnes/awesome-mongodb) | GitHub PR — "Applications" section | 🟢 [PR #155](https://github.com/ramnes/awesome-mongodb/pull/155) |
+| 18 | **PostgreSQL** | Database | ✅ | ❌ | P2 | [awesome-postgres](https://github.com/dhamaniasad/awesome-postgres) | GitHub PR — relevant category | 🔴 Off-scope (no "applications" section) |
 | 19 | **Next.js** | Framework | ✅ | ✅ | P1 | [Vercel Templates](https://vercel.com/templates/submit) · [next.js examples](https://github.com/vercel/next.js/tree/canary/examples) | Form · GitHub PR | ⚪ To do (Vercel form) |
-| 20 | **React** | Framework | ✅ | ✅ | P2 | [awesome-react](https://github.com/enaqx/awesome-react) | GitHub PR — "React Real Apps" (⚠ no promo framing) | ⚪ To do |
-| 21 | **Vue** | Framework | ✅ | ✅ | P2 | [awesome-vue](https://github.com/vuejs/awesome-vue) | GitHub PR — Open Source / Apps (repo link, not demo) | ⚪ To do |
+| 20 | **React** | Framework | ✅ | ✅ | P2 | [awesome-react](https://github.com/enaqx/awesome-react) | GitHub PR — "React Real Apps" (⚠ no promo framing) | 🔴 Skipped — anti-promo / commercial |
+| 21 | **Vue** | Framework | ✅ | ✅ | P2 | [awesome-vue](https://github.com/vuejs/awesome-vue) | GitHub PR — Open Source / Apps (repo link, not demo) | 🔴 Skipped — commercial products barred |
 | 22 | **Angular** | Framework | ❌ | ✅ | P2 | [awesome-angular](https://github.com/PatrickJS/awesome-angular) | GitHub PR — relevant / new category | ⚪ To do (build demo first) |
 
 **Excluded (no PR/form venue):** Highcharts (registry returns 410), AG Grid (outreach only) — kept in the table for completeness.
