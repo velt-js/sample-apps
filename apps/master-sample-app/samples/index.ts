@@ -71,8 +71,14 @@ import codemirrorCommentsDemoMeta from './codemirror-comments-demo/metadata'
 import { codeFiles as codemirrorCommentsDemoCodeFiles } from './codemirror-comments-demo/code-files'
 import aceCommentsDemoMeta from './ace-comments-demo/metadata'
 import { codeFiles as aceCommentsDemoCodeFiles } from './ace-comments-demo/code-files'
+import activityLogDemoMeta from './activity-log-demo/metadata'
+import { codeFiles as activityLogDemoCodeFiles } from './activity-log-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
+  'react-activity-document-custom-activity-log-demo': {
+    metadata: activityLogDemoMeta,
+    codeFiles: activityLogDemoCodeFiles
+  },
   'react-crdt-canvas-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
     codeFiles: reactflowCrdtCodeFiles
