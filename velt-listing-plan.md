@@ -12,12 +12,12 @@ Goal: get Velt featured/listed on the official sites, GitHub repos, "awesome" li
 
 ## ✅ Submitted PRs — Batch 1 (opened 2026-06-03, from `yoen-velt`)
 
-All opened from `velt-js/sample-apps` integrations; each is a single-line list entry. Status as of opening: OPEN, mergeable, +1/−0.
+All opened from `velt-js/sample-apps` integrations; each is a single-line list entry. Statuses re-checked live via GitHub API on 2026-06-09 across all batches (incl. Batch 0 below): **2 merged, 7 open**.
 
 | Library | Repo | Section | PR | Status |
 |---------|------|---------|----|--------|
 | **SlateJS** | `ianstormtaylor/slate` | Extensions and Plugins (docs) | [#6067](https://github.com/ianstormtaylor/slate/pull/6067) | 🟢 Open |
-| **BlockNote** | `defensestation/awesome-blocknote` | Tools → Plugins | [#5](https://github.com/defensestation/awesome-blocknote/pull/5) | 🟢 Open |
+| **BlockNote** | `defensestation/awesome-blocknote` | Tools → Plugins | [#5](https://github.com/defensestation/awesome-blocknote/pull/5) | ✅ **Merged** 2026-06-07 |
 | **Quill** | `quilljs/awesome-quill` | Other | [#63](https://github.com/quilljs/awesome-quill/pull/63) | 🟢 Open |
 | **CodeMirror** | `tmcw/awesome-codemirror` | Plugins | [#1](https://github.com/tmcw/awesome-codemirror/pull/1) | 🟢 Open |
 | **Velt SDK** (realtime) | `jacktuck/awesome-realtime` | Websockets → Hosted | [#2](https://github.com/jacktuck/awesome-realtime/pull/2) | 🟢 Open |
@@ -28,6 +28,13 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 |---------|------|---------|----|--------|
 | **MongoDB** | `ramnes/awesome-mongodb` | Applications | [#155](https://github.com/ramnes/awesome-mongodb/pull/155) | 🟢 Open |
 | **CRDT** (Velt SDK) | `alangibson/awesome-crdt` | Implementations → Data Structures | [#14](https://github.com/alangibson/awesome-crdt/pull/14) | 🟢 Open (repo dormant since 2021 — low merge odds) |
+
+### Batch 0 — Vercel Chat SDK (opened 2026-06-01/02, earlier outreach — pre-dates this plan)
+
+| Library | Repo | Section | PR | Status |
+|---------|------|---------|----|--------|
+| **Vercel Chat SDK** | `vercel/chat` | Adapters docs (vendor-official adapter) | [#572](https://github.com/vercel/chat/pull/572) | ✅ **Merged** 2026-06-02 |
+| **Vercel Chat SDK** (follow-up) | `vercel/chat` | Adapters docs — sharpen description + live demo link | [#578](https://github.com/vercel/chat/pull/578) | 🟢 Open |
 
 **Evaluated & skipped this round (rows 11–22 + SDK lists):**
 - **PostgreSQL** (`awesome-postgres`) — list is Postgres *tooling* only; no "applications" section → off-scope.
@@ -54,45 +61,60 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 
 ---
 
-## 1. Per-library venues
+## 1. Per-library listings — official docs sites first (verified 2026-06-09)
 
-**Status legend** — 🟢 PR open · 🟡 already listed (no action) · 🔴 not viable / off-scope · ⚪ to do · ⚫ no PR/form venue.
+**The play:** get Velt listed on each library's **official documentation site**, the way Velt is already listed on React Flow's [multiplayer guide](https://reactflow.dev/learn/advanced-use/multiplayer) — a "Third Party Libraries and Services" table alongside Yjs, Liveblocks, Supabase, Convex, Jazz, Automerge, and Loro. That listing came from a simple pitch via [xyflow.com/contact](https://xyflow.com/contact); the xyflow team added the entry themselves. GitHub awesome-lists are the fallback track (open PRs tracked in "Submitted PRs" above).
 
-| # | Library | Category | Demo? | Docs? | Pri | Venue | How to submit | Status / PR |
-|---|---------|----------|:-----:|:-----:|:---:|-------|---------------|-------------|
-| 1 | **TipTap** | Editor | ✅ | ✅ | P1 | [awesome-tiptap](https://github.com/ueberdosis/awesome-tiptap) | GitHub PR — "Community extensions" / "Who's using Tiptap?" | 🟡 Already listed (google-docs-comments) |
-| 2 | **Lexical** | Editor | ✅ | ✅ | P2 | [facebook/lexical](https://github.com/facebook/lexical) | GitHub PR to `examples/` — **requires Meta CLA** | 🔴 Deferred — Meta CLA + code PR |
-| 3 | **SlateJS** | Editor | ✅ | ✅ | P1 | [Slate docs Resources](https://docs.slatejs.org/general/resources) | GitHub PR to Slate docs (already lists Yjs integrations) | 🟢 [PR #6067](https://github.com/ianstormtaylor/slate/pull/6067) |
-| 4 | **Quill** | Editor | ✅ | ✅ | P1 | [awesome-quill](https://github.com/quilljs/awesome-quill) | GitHub PR — "Modules" category, one entry/PR | 🟢 [PR #63](https://github.com/quilljs/awesome-quill/pull/63) |
-| 5 | **CodeMirror** | Editor | ✅ | ✅ | P2 | [awesome-codemirror](https://github.com/tmcw/awesome-codemirror) | GitHub PR — ⚠ list is small/stale, marginal value | 🟢 [PR #1](https://github.com/tmcw/awesome-codemirror/pull/1) |
-| 6 | **Ace** | Editor | ✅ | ✅ | P2 | [ace wiki — Extensions](https://github.com/ajaxorg/ace/wiki/Extensions) | GitHub PR/issue (no awesome list exists) | 🔴 Not PR-able (wiki) |
-| 7 | **PlateJS** | Editor | ✅ | ✅ | P2 | [udecode/plate examples](https://platejs.org/docs/examples) · [awesome-wysiwyg-editors](https://github.com/JefMari/awesome-wysiwyg-editors) | GitHub PR | 🔴 Off-scope → [awesome-realtime PR #2](https://github.com/jacktuck/awesome-realtime/pull/2) |
-| 8 | **BlockNote** | CRDT editor | ✅ | ✅ | P1 | [BlockNote Examples](https://www.blocknotejs.org/examples) · [awesome-blocknote](https://github.com/defensestation/awesome-blocknote) | Copy example on StackBlitz → GitHub PR | 🟢 [PR #5](https://github.com/defensestation/awesome-blocknote/pull/5) |
-| 9 | **React Flow / xyflow** | Canvas/CRDT | ✅ | ✅ | P1 | [awesome-node-based-uis](https://github.com/xyflow/awesome-node-based-uis) · [Showcase](https://reactflow.dev/showcase) | GitHub PR ("Applications") · Form | 🔴 Off-scope (node-UI must be main product) |
-| 10 | **Yjs** | CRDT | ✅ | ✅ | P1 | [yjs/yjs README](https://github.com/yjs/yjs) · [Yjs docs](https://docs.yjs.dev/ecosystem/connection-provider) | GitHub PR — Providers section (Velt = a Yjs provider) | 🟡 Already listed (Connection Providers) |
-| 11 | **Chart.js** | Chart | ❌ | ✅ | P1 | [chartjs/awesome](https://github.com/chartjs/awesome) | GitHub PR — repo 30+ days old, alphabetical | ⚪ To do (build demo first) |
-| 12 | **Highcharts** | Chart | ❌ | ✅ | — | — none | Plugin registry discontinued (410) — **outreach only** | ⚫ No PR/form venue |
-| 13 | **Nivo** | Chart | ❌ | ✅ | P2 | [awesome-react-components](https://github.com/brillout/awesome-react-components) | GitHub PR — ⚠ "remove-one-to-add-one" rule | ⚪ To do (build demo first) |
-| 14 | **AG Grid** | Table | ✅ | ✅ | — | [Tools & Extensions](https://www.ag-grid.com/community/tools-extensions/) | No self-serve — **pitch via Contact Us / GitHub** | ⚫ Outreach only |
-| 15 | **TanStack Table** | Table | ✅ | ❌ | P2 | [TanStack Showcase](https://tanstack.com/showcase) | Form — "Submit Your Project" (sign in w/ GitHub) | ⚪ To do (form) |
-| 16 | **Lottie** | Media | ❌ | ✅ | P1 | [awesome-lottie](https://github.com/LottieFiles/awesome-lottie) · [Integrations](https://lottiefiles.com/integrations) | GitHub PR (Libraries → Web) · Form | ⚪ To do (build demo first) |
-| 17 | **MongoDB** | Database | ✅ | ✅ | P2 | [awesome-mongodb](https://github.com/ramnes/awesome-mongodb) | GitHub PR — "Applications" section | 🟢 [PR #155](https://github.com/ramnes/awesome-mongodb/pull/155) |
-| 18 | **PostgreSQL** | Database | ✅ | ❌ | P2 | [awesome-postgres](https://github.com/dhamaniasad/awesome-postgres) | GitHub PR — relevant category | 🔴 Off-scope (no "applications" section) |
-| 19 | **Next.js** | Framework | ✅ | ✅ | P1 | [Vercel Templates](https://vercel.com/templates/submit) · [next.js examples](https://github.com/vercel/next.js/tree/canary/examples) | Form · GitHub PR | ⚪ To do (Vercel form) |
-| 20 | **React** | Framework | ✅ | ✅ | P2 | [awesome-react](https://github.com/enaqx/awesome-react) | GitHub PR — "React Real Apps" (⚠ no promo framing) | 🔴 Skipped — anti-promo / commercial |
-| 21 | **Vue** | Framework | ✅ | ✅ | P2 | [awesome-vue](https://github.com/vuejs/awesome-vue) | GitHub PR — Open Source / Apps (repo link, not demo) | 🔴 Skipped — commercial products barred |
-| 22 | **Angular** | Framework | ❌ | ✅ | P2 | [awesome-angular](https://github.com/PatrickJS/awesome-angular) | GitHub PR — relevant / new category | ⚪ To do (build demo first) |
+**Legend** — **Demo?/Docs?** = working sample app / dedicated Velt docs page · 🟢 listed or PR open · 🔴 not viable · ⚪ to do · ⚫ no docs venue.
 
-**Excluded (no PR/form venue):** Highcharts (registry returns 410), AG Grid (outreach only) — kept in the table for completeness.
+| # | Library | Demo? | Docs? | Docs-site venue (section) | Path | Status |
+|---|---------|:-----:|:-----:|---------------------------|------|:------:|
+| 1 | **React Flow** | ✅ | ✅ | [Multiplayer guide](https://reactflow.dev/learn/advanced-use/multiplayer) — "Third Party Libraries and Services" | via [xyflow.com/contact](https://xyflow.com/contact) | 🟢 **Listed** (model case) |
+| 2 | **Yjs** | ✅ | ✅ | [docs.yjs.dev → Connection Provider](https://docs.yjs.dev/ecosystem/connection-provider) + yjs.dev "Services" — Liveblocks, y-sweet, SuperViz, Hocuspocus there; Velt only in the README (⭐ sponsor) | One-line PR to `yjs/docs` `SUMMARY.md` + ping @dmonad | ⚪ **Top pick** |
+| 3 | **BlockNote** | ✅ | ✅ | [Collaboration docs](https://www.blocknotejs.org/docs/features/collaboration) — "Yjs Providers" (Liveblocks, PartyKit, Y-Sweet listed) | team@blocknotejs.org + PR | ⚪ **Top pick** |
+| 4 | **Next.js / Vercel** | ✅ | ✅ | [Vercel Marketplace](https://vercel.com/integrations) — DevTools (**Liveblocks already listed**) | [Marketplace program form](https://vercel.com/marketplace/program) | ⚪ **Top pick** |
+| 5 | **AG Grid** | ✅ | ✅ | [Tools & Extensions](https://www.ag-grid.com/community/tools-extensions/) — type "Extension" (commercial AdapTable listed) | PR to `tools-extensions.json` in `ag-grid/ag-grid` + contact-form note | ⚪ **Top pick** |
+| 6 | **SlateJS** | ✅ | ✅ | [Resources](https://docs.slatejs.org/general/resources) — "Extensions and Plugins" (@liveblocks/yjs listed) | [PR #6067](https://github.com/ianstormtaylor/slate/pull/6067) open — nudge via Slack | 🟢 PR open |
+| 7 | **Ace** | ✅ | ✅ | [ace.c9.io](https://ace.c9.io/) — "Related Projects" (has a collab extension) | PR to `ajaxorg/ace` `index.html` | ⚪ |
+| 8 | **PlateJS** | ✅ | ✅ | [Yjs doc](https://platejs.org/docs/yjs) — "Provider Types" (no hosted SaaS yet) | Discord, then PR to `udecode/plate` | ⚪ |
+| 9 | **Highcharts** | ❌ | ✅ | [Integrations](https://www.highcharts.com/integrations) — "Community Resources" | Email Highsoft via [contact page](https://www.highcharts.com/about-us/contact/) | ⚪ Outreach |
+| 10 | **Vue** | ✅ | ✅ | vuejs.org ecosystem placement ([themes page](https://vuejs.org/ecosystem/themes.html) model) | **evan@vuejs.org** (published placement contact) | ⚪ Outreach |
+| 11 | **MongoDB** | ✅ | ✅ | [Partner ecosystem catalog](https://cloud.mongodb.com/ecosystem/) + Atlas partner-integrations docs | [Technology Partner form](https://www.mongodb.com/partners) | ⚪ BD |
+| 12 | **TanStack Table** | ✅ | ❌ | [Partners wall](https://tanstack.com/partners) (paid tiers) + free [showcase](https://tanstack.com/showcase) | partners@tanstack.com | ⚪ Paid |
+| 13 | **Chart.js** | ❌ | ✅ | [chartjs/awesome](https://github.com/chartjs/awesome) (linked from official docs nav) — "Plugins"/"Tools" | PR — entry must link a GitHub repo ≥30 days old | ⚪ Repo-gated |
+| 14 | **Lottie** | ❌ | ✅ | [lottiefiles.com/integrations](https://lottiefiles.com/integrations) — "list your integrations" prompt | Self-serve link (browser only — bot-gated) + support@lottiefiles.com | ⚪ Gated |
+| 15 | **CodeMirror** | ✅ | ✅ | [Community packages](https://codemirror.net/docs/community/) — "Editor Extensions" (open-source-only policy) | Forum + edit via code.haverbeke.berlin (GitHub mirror archived) | ⚪ Gated |
+| 16 | **Lexical** | ✅ | ✅ | [Collaboration guide](https://lexical.dev/docs/collaboration/react) — "Yjs providers" ("only y-websocket officially supported") | PR to `facebook/lexical` (Meta CLA) | 🔴 Low odds — win Yjs docs instead |
+| 17 | **PostgreSQL** | ✅ | ❌ | [Software Catalogue](https://www.postgresql.org/download/product-categories/) | Self-serve form — weak category fit | 🔴 |
+| 18 | **TipTap** | ✅ | ✅ | None — tiptap.dev sells competing Collaboration/Comments | Already on `awesome-tiptap` ×2 (the ceiling) | ⚫ |
+| 19 | **Quill** | ✅ | ✅ | None — no resources/community page on quilljs.com | Fallback: [awesome-quill PR #63](https://github.com/quilljs/awesome-quill/pull/63) | ⚫ |
+| 20 | **React** | ✅ | ✅ | None — react.dev is vendor-neutral by design | — | ⚫ |
+| 21 | **Angular** | ❌ | ✅ | None — community-resources section rejected ([#58622](https://github.com/angular/angular/issues/58622)) | — | ⚫ |
+| 22 | **Nivo** | ❌ | ✅ | None — site down (HTTP 402), no ecosystem page ever existed | — | ⚫ |
 
-**Notes:**
-- *Demo ❌ / Docs ✅* (Chart.js, Highcharts, Nivo, Lottie, Angular): documented but no sample app yet — a demo must be built before submitting to examples/showcase venues.
-- *Demo ✅ / Docs ❌* (TanStack Table, PostgreSQL): working sample but no docs page — fine for awesome-list/showcase; may warrant a docs page too.
-- *Stale lists:* `awesome-slate` (abandoned since 2023) — use the Slate docs Resources PR instead; `awesome-codemirror` (small/stale) — marginal.
+**Propose-a-page (no slot yet, warm team):** Svelte Flow multiplayer guide (404 today — pitch xyflow to port the React Flow guide, Velt included) · [reactflow.dev/showcase](https://reactflow.dev/showcase) submission (Velt-powered demo) · PlateJS hosted-provider section · Highcharts "Community Resources" entry.
 
 ---
 
-## 2. Cross-cutting platforms — bigger exposure than per-library lists
+## 2. Verification note (2026-06-02)
+
+- All 28 venue URLs load; none broken.
+- **Vercel `/templates/submit`** returns HTTP 200 with a real browser user-agent — the 404 sometimes seen is transient/client-side; Vercel staff confirm it's the official form. Review turnaround is reportedly slow (~4 weeks).
+- Each venue's exact format rules (CONTRIBUTING.md, character limits, categories) should be re-checked at submission time.
+
+---
+
+## 3. Recommended sequencing — cross-cutting first
+
+1. **Package one flagship Next.js Velt demo** — public GitHub repo, "Deploy to Vercel" button, `.env.example` with documented vars, clear README. This single artifact is the unit of submission.
+2. **Submit to Vercel Templates** (form) — highest ROI; start here.
+3. **Adapt into platform variants** — Workers/Pages version for **Cloudflare** (add Playwright E2E); "Velt + Supabase realtime collaboration" example for **Supabase**; then StackBlitz / Replit (low marginal effort).
+4. **Parallel low-effort track** — fire off the P1 per-library awesome-list / showcase PRs (TipTap, Quill, Slate, BlockNote, React Flow, Yjs, Chart.js, Lottie, MongoDB, Postgres, Vue, React, Angular). Independent and cheap.
+5. **SDK-level listings** — add the Velt SDK to awesome-realtime / awesome-rtc / realtime-web-technologies-guide.
+
+---
+
+## 4. Cross-cutting platforms — bigger exposure than per-library lists
 
 These take **one** sample app and expose it to a broad, multi-framework audience.
 
@@ -113,168 +135,42 @@ These take **one** sample app and expose it to a broad, multi-framework audience
 
 ---
 
-## 3. Recommended sequencing — cross-cutting first
+## 5. Outreach contacts & playbook (research 2026-06-09)
 
-1. **Package one flagship Next.js Velt demo** — public GitHub repo, "Deploy to Vercel" button, `.env.example` with documented vars, clear README. This single artifact is the unit of submission.
-2. **Submit to Vercel Templates** (form) — highest ROI; start here.
-3. **Adapt into platform variants** — Workers/Pages version for **Cloudflare** (add Playwright E2E); "Velt + Supabase realtime collaboration" example for **Supabase**; then StackBlitz / Replit (low marginal effort).
-4. **Parallel low-effort track** — fire off the P1 per-library awesome-list / showcase PRs (TipTap, Quill, Slate, BlockNote, React Flow, Yjs, Chart.js, Lottie, MongoDB, Postgres, Vue, React, Angular). Independent and cheap.
-5. **SDK-level listings** — add the Velt SDK to awesome-realtime / awesome-rtc / realtime-web-technologies-guide.
+Per-library contact channels, **ranked: contact form / partnerships email → docs-repo PR (most docs pages are open-source) → community channel**. All URLs/paths live-verified 2026-06-09. Ordered by priority.
 
----
+| Library | Primary contact (form / email) | Docs-repo PR path (fallback) | Community channel | Owner |
+|---------|-------------------------------|------------------------------|-------------------|-------|
+| **Yjs** | PR is the primary path; pair with a ping to **@dmonad** (Kevin Jahns) leveraging the existing sponsor relationship — Velt's README entry already carries the sponsor ⭐ | `yjs/docs` → `SUMMARY.md` "Connection Provider" (one-line external link, e.g. `* [Velt](https://velt.dev/libraries/yjs)`) + optional card in `ecosystem/connection-provider/README.md`. Merged precedent: Tiptap employee's PR adding Hocuspocus (2025-11). Caution: an ElectricSQL PR without outreach has sat unmerged since 2025-08 — pair PR with the ping | [discuss.yjs.dev](https://discuss.yjs.dev) (active; dmonad responds) | Kevin Jahns / community |
+| **BlockNote** | **team@blocknotejs.org** — the [About page](https://www.blocknotejs.org/about) explicitly invites partnership/integration inquiries | `TypeCellOS/BlockNote` → `docs/content/docs/features/collaboration/index.mdx` | Discord [discord.com/invite/Qc2QTTH5dF](https://discord.com/invite/Qc2QTTH5dF) | TypeCellOS |
+| **Vercel** | [Marketplace program form](https://vercel.com/marketplace/program) ("Ready to join the marketplace?") + [Technology Partner form](https://vercel.com/partners) | — (marketplace is gated; eventually requires a real integration build — OAuth etc.) | — | Vercel Inc. |
+| **AG Grid** | PR **is** the path: `ag-grid/ag-grid` → `external/ag-website-shared/src/content/community/tools-extensions.json` (+ webp logo); send a parallel heads-up via the [contact form](https://www.ag-grid.com/about/) | Same JSON PR | GitHub issues | AG Grid Ltd |
+| **SlateJS** | Nudge open [PR #6067](https://github.com/ianstormtaylor/slate/pull/6067) for review via the Slack workspace (invite link in repo README) | `ianstormtaylor/slate` → `docs/general/resources.md` (PR already open) | Slack (volunteer-run project) | Community (Ian Storm Taylor) |
+| **Ace** | PR only | `ajaxorg/ace` → `index.html` (repo root renders ace.c9.io, "Related Projects" list) | [GitHub Discussions](https://github.com/ajaxorg/ace/discussions) | Community (ajaxorg) |
+| **xyflow** (follow-ups) | [xyflow.com/contact](https://xyflow.com/contact) form + **info@xyflow.com** — the proven channel that produced the existing listing | `xyflow/web` → `sites/reactflow.dev/src/content/learn/advanced-use/multiplayer.mdx` (Svelte Flow content in same repo under `sites/svelteflow.dev/`) | Discord [discord.com/invite/RVmnytFmGW](https://discord.com/invite/RVmnytFmGW) | xyflow GmbH |
+| **PlateJS** | Discord first to socialize, then PR | `udecode/plate` → `content/docs/(plugins)/(collaboration)/yjs.mdx` | Discord [discord.gg/mAZRuBzGM3](https://discord.gg/mAZRuBzGM3) | udecode (Ziad Beyens) |
+| **Highcharts** | [Contact page](https://www.highcharts.com/about-us/contact/) — general email is obfuscated on-page (historically info@highsoft.com — read it off the page before sending); sales form at shop.highcharts.com/contact | — (website not open-source) | Discord / Stack Overflow | Highsoft AS (Norway) |
+| **Vue** | **evan@vuejs.org** — published placement contact (themes-affiliation CTA precedent); agency-partner [Airtable form](https://airtable.com/shrCQhat57SApJI2l) as a secondary intake | `vuejs/docs` → `src/ecosystem/` (curated/commercial — a cold PR will likely be redirected to the email) | Vue Land Discord | Vue team / Evan You |
+| **MongoDB** | "Become a Partner" form on [mongodb.com/partners](https://www.mongodb.com/partners) (category: **Technology**); registration portal `mongodb.my.salesforce-sites.com/partnerregistration` | — (Atlas partner-integrations docs are program-fed, not PR-able) | — | MongoDB, Inc. |
+| **TanStack** | **partners@tanstack.com** (subject "TanStack Partnership Inquiry") — paid tiers; free supplement: [showcase submit](https://tanstack.com/showcase/submit) (GitHub/Google login) with a Velt + TanStack Table demo | — (partner wall not PR-able; showcase is DB-backed) | Discord | TanStack LLC |
+| **Chart.js** | PR only: `chartjs/awesome` → `README.md`. CONTRIBUTING rules: link a **GitHub repo** (not npm/velt.dev), repo ≥30 days old, alphabetical order, one entry per PR | Same | Discord [discord.gg/HxEguTK6av](https://discord.gg/HxEguTK6av) | Community (chartjs org) |
+| **CodeMirror** | Post on [discuss.codemirror.net](https://discuss.codemirror.net) first; submit the change via **code.haverbeke.berlin** (`codemirror/website` → `site/docs/community/index.html`) — the GitHub mirror is archived, no PRs possible there | Gitea instance (above) | Forum | Marijn Haverbeke (sponsor-funded) |
+| **LottieFiles** | "Want to list your Lottie integrations?" link on [lottiefiles.com/integrations](https://lottiefiles.com/integrations) (open in a real browser — Cloudflare-blocks bots) + **support@lottiefiles.com** (slow per forum reports) | — | [forum.lottiefiles.com](https://forum.lottiefiles.com) | Design Barn Inc. |
+| **Lexical** | PR only (expect pushback): `facebook/lexical` → `packages/lexical-website/docs/collaboration/react.md` — requires Meta CLA | Same | Discord [discord.gg/KmG4wQnnD9](https://discord.gg/KmG4wQnnD9) | Meta |
+| **PostgreSQL** | Self-serve [product submission](https://www.postgresql.org/account/products/new/) (free community account) — low value, weak category fit | — (catalogue is database-driven) | pgsql-www list | PostgreSQL community |
 
-## 4. Verification note (2026-06-02)
+**No-venue rows (do not spend outreach here):** React (react.dev is vendor-neutral by design) · Angular (concept rejected in [#58622](https://github.com/angular/angular/issues/58622)) · Nivo (site down; GitHub Discussions/Discord only) · Quill (no on-site page; awesome-quill + slab/quill Discussions are the fallback) · TipTap (direct competitor; `humans@tiptap.dev` / [contact-sales](https://tiptap.dev/contact-sales) exist but an on-site listing is unrealistic — awesome-tiptap listing already secured).
 
-- All 28 venue URLs load; none broken.
-- **Vercel `/templates/submit`** returns HTTP 200 with a real browser user-agent — the 404 sometimes seen is transient/client-side; Vercel staff confirm it's the official form. Review turnaround is reportedly slow (~4 weeks).
-- Each venue's exact format rules (CONTRIBUTING.md, character limits, categories) should be re-checked at submission time.
+### Pitch template (anchor every outreach on the React Flow precedent)
 
----
+> Hi — we're Velt ([velt.dev](https://velt.dev)), a collaboration SDK (comments, presence, cursors, realtime sync). We maintain a {library} integration with a working demo ({demo link}) and a dedicated docs page ({docs link}). We're listed on React Flow's multiplayer guide under "Third Party Libraries and Services" ([reactflow.dev/learn/advanced-use/multiplayer](https://reactflow.dev/learn/advanced-use/multiplayer)) alongside Yjs, Liveblocks, and Supabase. Could Velt be added to {page} under {section}? Happy to draft the entry or open the PR ourselves.
 
-## 5. Additional venues (research 2026-06-04)
+Fill {demo link}/{docs link} from the **Demo?/Docs?** columns in section 1 — only pitch libraries where at least one is ✅.
 
-Found via a fresh web sweep, de-duplicated against sections 1–2 above. All are GitHub-PR or web-form (no forums/Reddit/Discord/HN), and plausibly accept a **commercial** dev SDK. Verified live June 2026 (web fetch + GitHub API for stars/last-push). **Status legend unchanged** — none submitted yet, so every row is ⚪ to do. Demo-gated and integration-gated rows are flagged the same way as Chart.js/Lottie/Angular in section 1.
+### Wave ordering
 
-### 5A. Dev-tool / SaaS directories — actionable now, no demo required (highest leverage)
+1. **Wave 1 — warm natural slots, free, do now:** Yjs docs PR + dmonad ping · BlockNote email + PR · Slate PR #6067 merge-nudge · Ace PR · AG Grid JSON PR + contact-form note.
+2. **Wave 2 — forms & BD outreach:** Vercel Marketplace application · xyflow follow-ups (showcase submission, Svelte Flow multiplayer guide pitch) · Highcharts email · Vue email to Evan You · MongoDB Technology Partner application.
+3. **Wave 3 — build-first / gated:** Chart.js (publish the Velt chart-comments repo, wait 30 days) · CodeMirror (open-source a Velt↔CodeMirror binding package) · LottieFiles (build a Lottie integration) · PlateJS (Discord, then PR) · TanStack (decide on paid sponsorship).
+4. **Skip:** React · Angular · Nivo · Quill (on-site) · TipTap (on-site) · PostgreSQL.
 
-| Venue | Method + URL | Fit / category | Cost | Value | Status | Gotcha |
-|-------|--------------|----------------|------|:-----:|:------:|--------|
-| **DevHunt** | PR to `MarsX-dev/devhunt` **+** web form (GitHub login), [devhunt.org](https://devhunt.org) | Purpose-built dev-tool launch; collab SDK on-topic | Free | ★★★ | ⚪ | Launch-day upvote mechanic; quieter than PH |
-| **agamm/awesome-developer-first** | [GitHub PR](https://github.com/agamm/awesome-developer-first) (1.7k★, active) | "tools/services you pay for" — fits *Messaging* or propose a *Collaboration* category | Free | ★★★ | ⚪ | Must justify vs Liveblocks/Ably; not all PRs merged |
-| **Peerlist Launchpad** | Web form, [peerlist.io/launchpad](https://peerlist.io/launchpad) | Engineer-heavy builder audience | Free | ★★★ | ⚪ | Need complete Peerlist profile; weekly Mon/Tue window |
-| **devtoolsd/awesome-devtools** | [GitHub PR](https://github.com/devtoolsd/awesome-devtools) (664★) | Dev-only list (Figma/Linear/Postman listed) | Free | ★★ | ⚪ | No dedicated collaboration category |
-| **Uneed** | Form, [uneed.best/submit-a-tool](https://www.uneed.best/submit-a-tool) | Maker/SaaS + dev tools | Free ($30 skip-line) | ★★ | ⚪ | Broader maker audience |
-| **Fazier** | Form (site badge or paid), [fazier.com](https://fazier.com) | PH-alternative, indie-dev | Free / paid | ★★ | ⚪ | Requires site badge or paid |
-| **SaaSHub** | Form, [saashub.com/services/submit](https://www.saashub.com/services/submit) | "Alternative to Liveblocks/Ably" SEO/backlink | Free | ★★ | ⚪ | SEO value > direct dev traffic |
-| **AlternativeTo** | Form, "Suggest new application" | List as alt to Liveblocks/Ably/PartyKit | Free | ★★ | ⚪ | Admins decline many |
-| **StackShare** | Form, "List a Tool" | Tech-stack directory | Free | ★★ | ⚪ | Payoff slow (others add to stacks) |
-| **G2 / Capterra-GetApp** | Vendor form (one profile, G2-owned 2026) | Collaboration / dev-infra category | Free to list | ★★ | ⚪ | Review-gated ranking; buyer/PM audience |
-| **SourceForge / Startup Stash / Slant** | Forms | B2B "alternatives" / startup tools / "best X" Q&A | Free | ★ | ⚪ | IT/founder-skewed; Slant needs a fitting question |
-
-**Skip (checked, rejected):** OpenAlternative (OSS-only) · BetaList (unreleased-only) · SaaSworthy (sales/SEO-farm) · Openbase (defunct/unverified) · Toolerific / devtoolslist (SEO farms). **Product Hunt** is mechanically viable but a one-shot launch event, not a durable listing — optional. **Console.dev** is email/editorial + beta-gated (see 5D).
-
-### 5B. New integration / ecosystem awesome-lists — GitHub PR
-
-| Repo | Section | Demo? | Value | Status | Notes |
-|------|---------|:-----:|:-----:|:------:|-------|
-| **alexanderop/awesome-local-first** | Dev Tools → State Management & Sync | ✅ have | ★★★ | ⚪ | Active (150★, 2026-05). Already lists Liveblocks, PartyKit, Hocuspocus — Velt's exact peers. **Cleanest one-line PR, no demo prerequisite. Top pick.** |
-| **bytefer/awesome-nextjs** | "Integrated" (3rd-party SaaS) | ✅ have | ★★★ | ⚪ | Active; sits with Stripe/Auth0/Sanity. Pairs with the flagship Next.js demo. |
-| **ghostwriternr/awesome-cloudflare** | Frameworks & Libraries (propose Collaboration) | needs CF angle | ★★ | ⚪ | Competitor mirror: **PartyKit listed, Velt not.** |
-| **lukeed/awesome-cloudflare-workers** | Tool/Boss | needs CF angle | ★★ | ⚪ | Same mirror; verify recency at submit time |
-| **artemnistuley/awesome-prosemirror** | Community modules | ✅ via TipTap/BlockNote | ★ | ⚪ | Borderline — Velt binds via TipTap/BlockNote/Yjs, not PM directly; expect scrutiny |
-
-**Demo-gated** (build demo first, then legitimate — same pattern as Chart.js/Lottie): **editor-js/awesome-editorjs** (2.8k★, high traffic) · **Milkdown/awesome**.
-**Skip:** l-mbert/awesome-lexical (dormant since 2022) · awesome-svelte / awesome-astro (no Velt SDK there) · excalidraw-libraries (asset registry, not tools) · awesome-tldraw (doesn't exist yet) · schickling/awesome-local-first (superseded by alexanderop's — don't double-submit).
-
-### 5C. Template / "deploy-to" galleries — one demo repo fans out
-
-> **Insight:** a single polished public **Next.js Velt demo repo** (`.env.example`, README, `app.json`, deploy buttons) feeds Vercel (section 2) **and** all of the below. Build once.
-
-| Venue | Method | Value | Status | Note |
-|-------|--------|:-----:|:------:|------|
-| **Railway Templates** | Dashboard publish form + `Deploy on Railway` button ([docs](https://docs.railway.com/guides/publish-and-share)) | ★★★ | ⚪ | Biggest new template reach; any Next.js app deploys as-is; pays kickbacks |
-| **Heroku Elements Buttons** | `app.json` + Deploy button → [elements.heroku.com/buttons](https://elements.heroku.com/buttons) | ★★ | ⚪ | Easy README-button win; declining ecosystem |
-| **Koyeb one-click** | Deploy button | ★ | ⚪ | Button works; no public PR/form for curated catalog |
-
-**Separate higher-effort, higher-payoff workstream — shadcn ecosystem:** [shadcn/ui Registry Directory](https://github.com/shadcn-ui/ui) (PR to `apps/v4/registry/directory.json`) + [birobirobiro/awesome-shadcn-ui](https://github.com/birobirobiro/awesome-shadcn-ui) (PR). Both require first publishing an open-source shadcn-compatible Velt component registry — real engineering, not a quick PR.
-**Skip for now:** awesome-vite / awesome-tailwindcss (need a free-starter/Tailwind artifact + bar commercial framing) · Zeabur (Discord-gated) · Render / DigitalOcean / Astro / Nuxt / Remix (no open community gallery, or CLA/module build required).
-
-### 5D. Partner marketplaces & dev media — require an integration artifact or editorial angle
-
-| Venue | Method | Requirement | Value | Status |
-|-------|--------|-------------|:-----:|:------:|
-| **Supabase Partners/Integrations** | Form, [forms.supabase.com/partner](https://forms.supabase.com/partner) → [supabase.com/partners/integrations](https://supabase.com/partners/integrations) | Build a real "Velt + Supabase" demo first; reviewers assess a genuine integration | ★★★ | ⚪ |
-| **Vercel Integrations Marketplace** (Connectable Account — distinct from Templates) | Integrations console form ([spec](https://vercel.com/docs/integrations/create-integration/submit-integration)) | Real eng lift: OAuth redirect + token exchange + EULA/Privacy URLs. Where Clerk etc. live (good mirror) | ★★★ | ⚪ |
-| **Cooperpress** (JS Weekly ~450k, React Status, Node Weekly, Frontend Focus) | "Suggest a link" form in each issue footer + editor@cooperpress.com | Pitch a concrete demo/launch, not the homepage | ★★ | ⚪ |
-| **Console.dev** | Editorial email submit vs [console.dev/selection-criteria](https://console.dev/selection-criteria) | **Beta-gated** — only features pre-1.0 / beta-labeled releases; need a beta-tagged Velt surface | ★ | ⚪ |
-| **Changelog News** | Form, [changelog.com/news/submit](https://changelog.com/news/submit) | Explicitly **not commercial** — frame as OSS demo / technical write-up | ★ | ⚪ |
-
-**Skip:** TLDR (paid only) · Framer / Webflow / Atlassian / Monday / Segment / Zapier / WordPress (need platform-specific plugin builds, poor fit for a JS SDK) · Netlify Integrations (partner-gated) · Smashing / CSS-Tricks (article pitches, not tool forms).
-
-### Action-first ordering
-1. **alexanderop/awesome-local-first** — cleanest one-line PR, lists Velt's exact peers, no demo needed.
-2. **DevHunt + agamm/awesome-developer-first + devtoolsd/awesome-devtools + bytefer/awesome-nextjs** — clean PRs/forms, no demo, fit the existing recipe.
-3. **Peerlist Launchpad + Uneed/Fazier + SaaSHub/AlternativeTo** — web forms; capture "Liveblocks/Ably alternative" intent.
-4. **Railway Templates** (+ Heroku button) — once the flagship Next.js demo repo exists.
-5. **Supabase Partners / Vercel Marketplace** — after the respective integration artifacts are built.
-6. **awesome-cloudflare(-workers)** — once there's a credible CF/edge angle (competitor mirror vs PartyKit).
-
----
-
-## 6. High-traffic & outreach venues (research 2026-06-04, scored)
-
-This round prioritizes **reach/impact for outreach** — so it includes editorial, newsletter, review-aggregator, and partner-marketplace venues, not just self-serve PR/form. De-duplicated against sections 1–5. Verified live June 2026 (web fetch + SimilarWeb/source-reported figures).
-
-**Scoring** — **Tr** = Traffic/Reach (1–5) · **Rel** = Relevance to devs building collaborative/real-time apps (1–5) · **Ease** = how easy to land (5 = free self-serve form/PR · 3 = light outreach/email · 1 = hard editorial/cold/notability-gated) · **Impact** = composite ★/★★/★★★. Traffic figures are estimates and decay — re-verify at outreach time.
-
-### 6A. Developer publications & blogs — guest-post / editorial (durable SEO, must be genuine tutorial not ad)
-
-| Venue | Reach | Tr | Rel | Ease | Impact | Path | Gotcha |
-|-------|-------|:--:|:--:|:----:|:------:|------|--------|
-| **LogRocket Blog** | ~5M views/mo, DA~80 | 5 | 5 | 4 | ★★★ | [become-a-logrocket-guest-author](https://blog.logrocket.com/become-a-logrocket-guest-author/) (pays ≤$350) | Heavy edit; 1-mo repost exclusivity. **Best single target.** |
-| **freeCodeCamp News** | ~11M visits/mo, DA~90+ | 5 | 4 | 3 | ★★★ | [author application + style guide](https://www.freecodecamp.org/news/developer-news-style-guide/) | Strictly educational; Velt only as incidental tool. Apply as a person, not "Velt." |
-| **InfoQ** | ~1.5M readers, DA~88 | 4 | 4 | 3 | ★★★ | editors@infoq.com / [write-for-infoq](https://www.infoq.com/write-for-infoq/) | Architect audience (= buyers). Vendor-neutral; 1 proposal/quarter. |
-| **The New Stack** | ~1–1.5M/mo, DA~85 | 4 | 4 | 4 | ★★★ | editorial contributors@thenewstack.io **or** paid sponsors@ (can be promotional) | Sponsored lane = pay-to-play but lets you talk product. |
-| **SitePoint** | ~2–3M/mo, DA~88 | 4 | 4 | 4 | ★★★ | [write-for-us](https://www.sitepoint.com/write-for-us/) (pays $150–300+) | Practical build-along tutorials; promo pitches rejected. |
-| **DZone** | ~3–4M/mo, DA~83 | 4 | 4 | 5 | ★★★ | [self-serve contribute](https://dzone.com/pages/contribute) | **Lowest-friction high-DA win.** Real name + title; queue unless DZone Core. |
-| **Smashing Magazine** | ~3–4M/mo, DA~90 | 4 | 3 | 2 | ★★ | [write-for-us](https://www.smashingmagazine.com/write-for-us/) | Design/UX lean → frame as "multiplayer/presence UX." Tough bar. |
-| **HackerNoon** | ~0.7–1M/mo (declining), DA~80 | 3 | 4 | 5 | ★★ | [self-serve submit](https://help.hackernoon.com/how-do-i-get-published) | Use free editorial lane (not paid PR newswire). |
-| **CSS-Tricks** | low cadence, DA~90 legacy | 3 | 3 | 4 | ★★ | [guest-writing](https://css-tricks.com/guest-writing/) ($250) | Revived but slow; front-end framing only. |
-| **Codrops** | ~1–2M/mo, DA~85 | 3 | 3 | 3 | ★★ | [submit](https://tympanus.net/codrops/submit/) | Only a visually striking cursors/whiteboard demo fits. |
-| **dev.to org / Hashnode team blog** | dev.to ~10M+/mo; Hashnode ~3–5M/mo | 5/4 | 4 | 5 | ★★ | free org/team blog; "Featured" is curated, paid sponsorship opaque | Owned-channel play; organic reach algorithm-dependent. |
-
-**Skip:** Stack Overflow Blog (employees only) · Better Programming (sunset) · web.dev (unpitchable cold — DevRel only) · Telerik/Syncfusion (vendor blogs, no open guest path) · generic "write-for-us" link farms.
-
-### 6B. Developer newsletters & curated media — by reach (mostly paid sponsorship; daily.dev is the free standout)
-
-| Venue | Reach | Tr | Rel | Ease | Impact | Path | Cost |
-|-------|-------|:--:|:--:|:----:|:------:|------|------|
-| **daily.dev** (Source + Squad) | 500k+ digest, multi-M feed | 5 | 5 | 4 | ★★★ | [suggest blog/changelog RSS as Source](https://docs.daily.dev/docs/for-content-creators/suggest-new-source) + run a public Squad | **Free** |
-| **Bytes.dev** (ui.dev) | ~216k JS devs | 5 | 5 | 2 | ★★★ | [advertise](https://bytes.dev/advertise) → sponsor@fireship.dev | Paid (request kit) |
-| **This Week in React** | ~40k mid/senior React | 4 | 5 | 4 | ★★★ | [sponsor form](https://thisweekinreact.com/sponsor) | Sponsored Links €1,600/4 issues; placement €800+/issue |
-| **Smashing newsletter** | ~185k front-end/design | 5 | 4 | 2 | ★★★ | advertising@smashingmagazine.com | Paid (opaque) |
-| **Refind** | ~491k daily | 5 | 3 | 3 | ★★ | [sponsors](https://refind.com/sponsors) (CPA) | Pay-per-click, topic-target |
-| **Pointer.io** | ~55k eng leaders | 4 | 4 | 3 | ★★ | [sponsorship](https://www.pointer.io/sponsorship/) | ~$1,500+/issue (buyer persona) |
-| **CSS Weekly** | ~43k | 4 | 4 | 3 | ★★ | [advertise](https://css-weekly.com/advertise/) | Sponsored Link $300/wk |
-| **Hacker Newsletter** | ~60k | 4 | 4 | 3 | ★★ | email curator (footer; /sponsor 404s) | Paid |
-| **Rendezvous w/ Cassidoo** | ~17k, 65% open | 3 | 4 | 3 | ★★ | [sponsor](https://cassidoo.co/newsletter/sponsor/) / BuySellAds | Self-serve |
-| **Web Tools Weekly** | ~13.6k | 2 | 4 | 4 | ★★ | [sponsor](https://webtoolsweekly.com/sponsor) | Cheap test: Text Link $30 |
-| **React Newsletter / React Digest** | ~17k / ~22k | 3 | 5 | 3 | ★ | site / [Paved](https://www.paved.com/react-newsletters) | Paid (overlaps TWIR) |
-
-**Skip:** The Overflow (wound down) · Lobsters (forum) · Frontend Weekly clones (verify which is live) · long-tail JS newsletters (Bytes/JS Weekly/TWIR already cover the audience). **Note:** the popular GitHub developer-newsletters list has stale counts — figures above are source-current.
-
-### 6C. Software review / comparison / tech-intel directories — by traffic (dev-intel vs SEO-only flagged)
-
-| Venue | Traffic | Tr | Rel | Ease | Impact | Path | Note |
-|-------|---------|:--:|:--:|:----:|:------:|------|------|
-| **Crunchbase** | ~13–15M/mo | 5 | 4 | 5 | ★★★ | [add + claim](https://www.crunchbase.com/) | Free; investor/CTO/intel reach + high-DR backlink |
-| **Wappalyzer** (tech entry) | ~8.6M/mo | 5 | 5 | 4 | ★★★ | [suggest technology](https://www.wappalyzer.com/technologies/suggest/) | **True dev/intel reach** — auto-detects Velt's JS fingerprint |
-| **G2** (profile + Real-Time Collaboration category) | very high DA | 5 | 4 | 4 | ★★★ | [claim](https://sell.g2.com/) | Ranks for "[competitor] alternatives"; **seed ~5–10 reviews first** |
-| **TrustRadius** | ~284k/mo | 3 | 4 | 4 | ★★★ | [claim](https://solutions.trustradius.com/claim-your-profile/) | Free tier; indexes Programming/Developer Software; review-gated ranking |
-| **BuiltWith** (tech trends) | ~1.3M/mo | 4 | 5 | 4 | ★★★ | auto-detect + [add](https://builtwith.com/) | "Who uses Velt" trend page; detection-driven |
-| **Slashdot Software** | mid | 4 | 4 | 5 | ★★ | [submit product](https://slashdot.org/software/new) | Free; auto-generates "vs Liveblocks" pages (competitor gap) |
-| **Gartner Peer Insights** | ~181k/mo | 3 | 4 | 4 | ★★ | [vendor portal](https://www.gartner.com/peer-insights/vendor-portal/overview) | Needs enterprise customers; review-gated |
-| **PeerSpot / Software Advice / FinancesOnline / GoodFirms / Crozdesk** | varies | 2–4 | 2 | 3–5 | ★–★★ | self-serve vendor sign-up | Mostly **SEO/backlink only**; generic-SaaS buyer audience |
-| **Trustpilot** | ~69M/mo | 5 | 2 | 4 | ★★ | [claim](https://business.trustpilot.com/signup) | Huge traffic, wrong audience — trust-badge/backlink value |
-| **Product Hunt** (alternatives pages) | high, dev/maker | 4 | 4 | 3 | ★★★ | maintain product page + appear on competitors' /alternatives | Highest dev-intent besides Wappalyzer |
-
-**Skip:** Siftery (folded into G2) · Wikipedia "comparison of collaborative software" (notability-gated — will be reverted; revisit after independent press) · Owler/Cuspera/Tracxn/Serchen (negligible traffic).
-
-### 6D. Partner marketplaces & competitor-gap venues (need a real integration artifact; durable + co-marketing)
-
-| Venue | Tr | Rel | Ease | Impact | Path | Requirement / competitor present |
-|-------|:--:|:--:|:----:|:------:|------|----------------------------------|
-| **Convex Components** (has a "Collaboration" category) | 4 | 5 | 5 | ★★★ | [convex.dev/components](https://www.convex.dev/components) | Publish a thin Velt+Convex npm component; category gap (Velt absent) |
-| **Sanity Exchange** | 4 | 3 | 4 | ★★ | [sanity.io/exchange](https://www.sanity.io/exchange) | Build a Velt-comments-on-Studio plugin |
-| **Appwrite Integrations** | 4 | 4 | 3 | ★★ | [appwrite.io/integrations](https://appwrite.io/integrations) | Technology-partner form + working integration; co-marketing |
-| **Contentful / Storyblok / Auth0 / Knock** | 3–4 | 2–3 | 2–3 | ★ | respective partner programs | Heavy: build+maintain app + partner onboarding. Pursue only if a product integration already makes sense |
-
-**Competitor-gap quick hits (they're listed, Velt isn't, open path exists):** G2 (Liveblocks profile + alternatives) · Slashdot (Liveblocks + auto "vs" pages) · Convex Components (Collaboration category) · Ably's own "best realtime collaboration SDKs" listicle lists Liveblocks/Cord/Replicache/PubNub — **can't join it; counter-play is our own SEO listicle + neutral-roundup outreach.**
-**Reality check:** competitor "integrations/partners" pages are mostly **outbound** (Liveblocks documents connecting *to* Supabase/Cursor; it isn't listed *on* them) — so durable competitor overlap concentrates in review aggregators (G2, Slashdot) and listicles, not partner marketplaces.
-
-### Top outreach targets to action first (highest impact-per-effort)
-1. **Free, dev-relevant, do today:** daily.dev (Source RSS + Squad) · Crunchbase · Wappalyzer suggest · BuiltWith · Slashdot · DZone self-serve post · Product Hunt page hygiene + competitor /alternatives.
-2. **High-traffic editorial (genuine tutorial):** LogRocket → DZone → The New Stack (editorial + sponsored) → freeCodeCamp / InfoQ / SitePoint.
-3. **Paid newsletter push (precise audience):** This Week in React (Sponsored Links, cheap) → Bytes.dev (max JS reach) → Pointer.io (buyer persona).
-4. **Review-aggregator gap (seed reviews first):** G2 + TrustRadius "Real-Time Collaboration" category.
-5. **Integration-artifact venues:** Convex Components (lowest lift) → Sanity Exchange → Appwrite.

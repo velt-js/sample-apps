@@ -6,4 +6,5 @@ packages:
   - "apps/*/*/*/*/*"
   - "apps/*/*/*/*/*/*"
   - "packages/*"
+  - "outreach"
 
