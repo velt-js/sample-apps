@@ -15,6 +15,8 @@ import tanstackSingleToolMeta from './tanstack-single-tool/metadata'
 import { codeFiles as tanstackSingleToolCodeFiles } from './tanstack-single-tool/code-files'
 import tiptapCommentsDemoMeta from './tiptap-comments-demo/metadata'
 import { codeFiles as tiptapCommentsDemoCodeFiles } from './tiptap-comments-demo/code-files'
+import apryseCommentsDemoMeta from './apryse-comments-demo/metadata'
+import { codeFiles as apryseCommentsDemoCodeFiles } from './apryse-comments-demo/code-files'
 import slatejsCommentsDemoMeta from './slatejs-comments-demo/metadata'
 import { codeFiles as slatejsCommentsDemoCodeFiles } from './slatejs-comments-demo/code-files'
 import lexicalCommentsDemoMeta from './lexical-comments-demo/metadata'
@@ -110,6 +112,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-tiptap-tiptap-comments-demo': {
     metadata: tiptapCommentsDemoMeta,
     codeFiles: tiptapCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-apryse-apryse-comments-demo': {
+    metadata: apryseCommentsDemoMeta,
+    codeFiles: apryseCommentsDemoCodeFiles
   },
   'react-comments-text-editors-slatejs-slatejs-comments-demo': {
     metadata: slatejsCommentsDemoMeta,

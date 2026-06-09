@@ -15,7 +15,7 @@ function pair(key: string, hasLight = true): Thumbnail {
 }
 
 // Comment demos that have a dedicated thumbnail (dark + light)
-const COMMENT_LIBS = new Set(["tiptap", "slatejs", "lexical", "quill", "codemirror", "ace"])
+const COMMENT_LIBS = new Set(["tiptap", "slatejs", "lexical", "quill", "codemirror", "ace", "apryse"])
 // CRDT editor demos with a per-library thumbnail
 const CRDT_EDITOR_LIBS = new Set(["tiptap", "codemirror", "blocknote"])
 
