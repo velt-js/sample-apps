@@ -60,7 +60,7 @@ Without this step, `useAllActivities()` returns `null`/empty and `<VeltActivityL
 ## Key Technologies
 
 - **Next.js 16** with React 19
-- **@veltdev/react** `5.0.2-beta.26` — Activity Log component + hooks (requires `>= 5.0.2-beta.13`)
+- **@veltdev/react** `5.0.2-beta.34` — Activity Log component + hooks (requires `>= 5.0.2-beta.13`; versions before beta.34 stream activities in-session only and do not persist them)
 - **Tailwind CSS v3.4** — styling
 - **TypeScript**
 

@@ -10,8 +10,11 @@ interface HeaderProps {
 }
 
 export default function Header({ toggleCommentsSidebar, toggleActivityLog }: HeaderProps) {
-  // [Velt] Live activity subscription. Returns null while loading — handle it
-  // explicitly before reading .length so first paint never throws.
+  // [Velt] Live org-wide activity subscription (this demo uses a dedicated org,
+  // so org-wide is effectively the document feed). Returns null while loading;
+  // handle it explicitly before reading .length so first paint never throws.
+  // Note: document-scoped configs (currentDocumentOnly / documentIds) return
+  // empty in SDK 5.0.2-beta.34 due to a hashed-vs-raw documentId comparison.
   const activities = useAllActivities();
   const eventCount = activities === null ? null : activities.length;
 

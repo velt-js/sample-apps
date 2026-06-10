@@ -30,6 +30,11 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
  * Do not replicate this pattern in your production application.
  */
 
+// Dedicated org for this demo. Activity Log history backfill currently fails in
+// orgs with >50 active documents (unchunked getActivitiesForDocuments call), so
+// this demo uses its own small org instead of the shared sample-apps-demo-org.
+const ORGANIZATION_ID = "activity-log-demo-org";
+
 type AppUserContextValue = {
   user: User | undefined;
   login: (u: User) => void;
@@ -88,7 +93,7 @@ function generateRandomUser(): User {
     userId: userId,
     name: fullName,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
-    organizationId: "sample-apps-demo-org",
+    organizationId: ORGANIZATION_ID,
     photoUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=${avatarColor.substring(1)}&color=fff&size=128`,
   };
 }
@@ -120,11 +125,12 @@ export function AppUserProvider({
       const stored = storage.getItem(STORAGE_KEY);
 
       let selectedUser: User;
-      if (stored) {
+      const parsed: User | undefined = stored ? JSON.parse(stored) : undefined;
+      if (parsed && parsed.organizationId === ORGANIZATION_ID) {
         // Use existing user from storage
-        selectedUser = JSON.parse(stored);
+        selectedUser = parsed;
       } else {
-        // Generate NEW random user
+        // Generate NEW random user (also replaces users stored under an old org)
         selectedUser = generateRandomUser();
         storage.setItem(STORAGE_KEY, JSON.stringify(selectedUser));
       }
