@@ -7,6 +7,7 @@ import {
   VERIFIED_DATE,
 } from "@/data/outreach";
 import CrossCutting from "@/components/CrossCutting";
+import Drafts from "@/components/Drafts";
 import LibraryTable from "@/components/LibraryTable";
 import Playbook from "@/components/Playbook";
 import SectionHeader from "@/components/SectionHeader";
@@ -17,6 +18,7 @@ const NAV = [
   { href: "#playbook", label: "02 Playbook" },
   { href: "#prs", label: "03 PRs" },
   { href: "#platforms", label: "04 Platforms" },
+  { href: "#drafts", label: "05 Drafts" },
 ];
 
 export default function Page() {
@@ -167,6 +169,16 @@ export default function Page() {
           note="One flagship demo, many galleries"
         />
         <CrossCutting />
+      </section>
+
+      {/* 05 — Outreach drafts */}
+      <section id="drafts" className="pt-16">
+        <SectionHeader
+          index="05"
+          title="Outreach drafts"
+          note="First 10 targets · ready to send · verified 2026-06-10"
+        />
+        <Drafts />
       </section>
 
       <footer className="mt-20 border-t-2 border-rule-strong pt-4">

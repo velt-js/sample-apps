@@ -728,6 +728,210 @@ export const PLATFORMS: Platform[] = [
   },
 ];
 
+export interface Draft {
+  target: string;
+  channel: "Email" | "GitHub PR" | "Form" | "Slack" | "Discord";
+  to: string;
+  toUrl?: string;
+  blocker?: string;
+  fields?: { label: string; value: string }[];
+  subject?: string;
+  body: string;
+  code?: { label: string; content: string };
+}
+
+/** Outreach drafts for the first 10 targets — mirrors /velt-outreach-drafts.md (verified 2026-06-10). */
+export const DRAFTS: Draft[] = [
+  {
+    target: "Yjs",
+    channel: "GitHub PR",
+    to: "yjs/docs → SUMMARY.md (+ ping @dmonad)",
+    toUrl: "https://github.com/yjs/docs",
+    subject: "PR title: Add Velt to Connection Providers",
+    body: `Adds Velt to the Connection Provider list, matching the existing external entries (y-sweet, Liveblocks, SuperViz, Hocuspocus).
+
+Velt is a managed Yjs backend — realtime WebSocket sync, persistent storage, offline support with automatic reconnection, and version history, with no server setup (@veltdev/crdt on npm). It's already listed in the yjs/yjs README under Providers as "Velt YJs" ⭐ — this PR mirrors that entry onto the docs site.
+
+Docs: https://docs.velt.dev/realtime-collaboration/crdt/overview · Live demo: https://velt-general-crdt-demo.vercel.app/
+
+— Ping comment for @dmonad —
+Hi Kevin — small one: this mirrors Velt's existing README Providers entry onto docs.yjs.dev, alongside Liveblocks/SuperViz/Hocuspocus. We sponsor through GitHub Sponsors and would love to stay aligned with how you want commercial providers represented — happy to adjust wording or placement. Separately: is the yjs.dev front-page "Services" section open to the same addition?`,
+    code: {
+      label: "SUMMARY.md — append after the Hocuspocus line",
+      content: `  * [Velt](https://velt.dev/libraries/yjs)`,
+    },
+  },
+  {
+    target: "BlockNote",
+    channel: "Email",
+    to: "team@blocknotejs.org",
+    subject: "Adding Velt to the Yjs Providers list in your collaboration docs?",
+    body: `Hi BlockNote team,
+
+I'm Yoen from Velt (velt.dev) — we build a collaboration SDK (comments, presence, cursors, and a managed Yjs backend). We maintain a dedicated BlockNote integration and would love to be listed in the "Yjs Providers" section of your collaboration docs, alongside Liveblocks, PartyKit, and Y-Sweet:
+
+- Integration docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/blocknote
+- Live demo: https://velt-blocknote-crdt-demo.vercel.app/
+- Library page: https://velt.dev/libraries/blocknote
+
+For context, we're listed on React Flow's multiplayer guide under "Third Party Libraries and Services" (reactflow.dev/learn/advanced-use/multiplayer), and our BlockNote plugin entry was just merged into awesome-blocknote.
+
+Happy to open the PR ourselves with whatever wording you prefer — it'd be a one-liner in the providers list. Also open to going deeper (a joint example or guide) if that's interesting to you.
+
+Thanks!
+Yoen — Velt`,
+  },
+  {
+    target: "SlateJS",
+    channel: "Slack",
+    to: "Slate Slack workspace (invite in repo README)",
+    toUrl: "https://github.com/ianstormtaylor/slate/pull/6067",
+    blocker: "Join the Slack workspace",
+    body: `Hi all 👋 — I opened a small docs PR last week adding Velt to the Resources page under Extensions and Plugins, next to the existing collaboration entries (@liveblocks/yjs, slate-yjs): https://github.com/ianstormtaylor/slate/pull/6067
+
+It's a one-line addition, CI is green (Netlify preview built), and the changeset bot is happy since it's docs-only. Would any maintainer have a moment to review? Happy to tweak the wording or placement if you'd prefer something different. Thanks for maintaining Slate! 🙏`,
+  },
+  {
+    target: "Ace",
+    channel: "GitHub PR",
+    to: "ajaxorg/ace → index.html (Related Projects)",
+    toUrl: "https://github.com/ajaxorg/ace",
+    subject: "PR title: Add Velt collaboration SDK to Related Projects",
+    body: `Adds Velt to the Related Projects list on the homepage, next to the existing Ace collaboration extension.
+
+Velt is a collaboration SDK with a dedicated Ace integration — threaded comments anchored to code, presence, and live cursors:
+- Integration docs: https://docs.velt.dev/async-collaboration/comments/setup/ace
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/ace/ace-comments-demo
+
+Matches the existing list format; happy to shorten the label if preferred.`,
+    code: {
+      label: "index.html — insert after the ace-collab-ext <li>",
+      content: `<li><a href="https://docs.velt.dev/async-collaboration/comments/setup/ace">Velt collaboration SDK for Ace (comments, presence, cursors)</a></li>`,
+    },
+  },
+  {
+    target: "AG Grid",
+    channel: "GitHub PR",
+    to: "ag-grid/ag-grid → tools-extensions.json (+ contact-form heads-up)",
+    toUrl: "https://www.ag-grid.com/about/",
+    blocker: "Produce velt.webp logo first",
+    subject: "PR title: docs(community): add Velt to Tools & Extensions",
+    body: `Adds Velt to the community Tools & Extensions directory as an Extension. Velt adds cell-level commenting (with aggregation), presence, and live cursors on top of AG Grid.
+
+- Integration docs: https://docs.velt.dev/integrations/ag-grid
+- React demo: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/tables/ag-grid/comment-aggregation
+- Vue demo: https://github.com/velt-js/sample-apps/tree/main/apps/vue/comments/tables/ag-grid
+
+Includes velt.webp per the existing logo convention. Happy to adjust the description, type, or tags to fit your curation.
+
+— Contact form note (ag-grid.com/about: Yoen / Zhang / yoen@velt.dev) —
+Hi — I'm Yoen from Velt (velt.dev). We make a collaboration SDK with a dedicated AG Grid integration: cell-level threaded comments with aggregation, presence, and live cursors (docs: docs.velt.dev/integrations/ag-grid). I've just opened a PR adding Velt to your community Tools & Extensions directory (alongside extensions like AdapTable) — flagging it here so it reaches the right person, and happy to adjust anything. We'd also be open to a deeper partnership conversation if useful. Thanks!`,
+    code: {
+      label: "tools-extensions.json — new entry (AdapTable-style commercial shape)",
+      content: `{
+    "link": "https://docs.velt.dev/integrations/ag-grid",
+    "title": "Velt",
+    "description": "Velt is a collaboration SDK that adds commenting, presence, and live collaboration to AG Grid. Users can attach threaded comments to individual cells with comment aggregation across rows and columns, see who else is viewing the grid, and follow along with live cursors — all with a few lines of code.",
+    "open_source": false,
+    "type": "Extension",
+    "tags": ["Extension"],
+    "frameworks": ["React", "TypeScript", "Vue"],
+    "img": "velt.webp"
+}`,
+    },
+  },
+  {
+    target: "xyflow (follow-ups)",
+    channel: "Form",
+    to: "xyflow.com/contact — fields: Your Email, Your message",
+    toUrl: "https://xyflow.com/contact",
+    fields: [
+      { label: "Your Email", value: "yoen@velt.dev" },
+      { label: "Your message", value: "(body below)" },
+    ],
+    body: `Hi xyflow team!
+
+Yoen from Velt here — thank you again for including us in the React Flow multiplayer guide's third-party table; it's been a genuinely great channel for us.
+
+Two quick follow-ups:
+
+1. Showcase: we'd love to submit our collaborative React Flow demo for the showcase — live multiplayer canvas with comments, presence, and cursors built on our dedicated React Flow library: https://velt-reactflow-crdt-demo.vercel.app/ (source: https://github.com/velt-js/velt-reactflow-crdt-demo, docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/reactflow).
+
+2. Svelte Flow: noticed svelteflow.dev doesn't have a multiplayer guide yet. Would you be open to porting the React Flow one (third-party table included)? We'd be glad to help — drafting the page, building a Svelte Flow example, whatever is useful.
+
+Cheers,
+Yoen — Velt`,
+  },
+  {
+    target: "PlateJS",
+    channel: "Discord",
+    to: "discord.gg/mAZRuBzGM3 → then PR to udecode/plate",
+    toUrl: "https://discord.gg/mAZRuBzGM3",
+    blocker: "Join the Discord",
+    body: `Hey Plate team 👋 — Yoen from Velt here. We're a collaboration SDK with a managed Yjs backend, and we have a working Plate integration (docs: https://docs.velt.dev/async-collaboration/comments/setup/plate, demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/crdt/text-editors/platejs/platejs-crdt-demo).
+
+Your Yjs doc's Provider Types section covers Hocuspocus, WebRTC, and custom providers via UnifiedProvider — would you be open to a small docs PR mentioning Velt as a hosted option there (and/or a line in Related)? We'd be the first managed backend listed; happy to match whatever format you want. For reference we're listed on React Flow's multiplayer guide alongside Yjs/Liveblocks/Supabase.`,
+    code: {
+      label: "yjs.mdx — Related list line (if green-lit)",
+      content: `- [Velt](https://velt.dev) - Managed Yjs backend (hosted provider via UnifiedProvider)`,
+    },
+  },
+  {
+    target: "Highcharts",
+    channel: "Email",
+    to: "hello@highsoft.com",
+    blocker: "Verify email on their contact page before sending",
+    subject: "Listing Velt under Community Resources on highcharts.com/integrations",
+    body: `Hi Highsoft team,
+
+I'm Yoen from Velt (velt.dev). We build a collaboration SDK that adds commenting and presence to charting libraries — including a dedicated Highcharts integration that lets users pin threaded comments directly onto data points and chart regions:
+
+- Integration docs: https://docs.velt.dev/async-collaboration/comments/setup/chart-comments-setup/highcharts
+- Library page: https://velt.dev/libraries/highcharts
+
+Would you consider adding Velt to the "Community Resources" section of highcharts.com/integrations? We noticed the section lists ecosystem projects built around Highcharts, and chart-level collaboration feels like a natural addition for your dashboard-building customers.
+
+For reference, we're listed on React Flow's multiplayer guide ("Third Party Libraries and Services," alongside Yjs, Liveblocks, and Supabase). Happy to provide a logo, a one-line description in your format, or a live demo if that helps the evaluation.
+
+Best,
+Yoen Zhang — Velt
+yoen@velt.dev`,
+  },
+  {
+    target: "Vue",
+    channel: "Email",
+    to: "evan@vuejs.org",
+    subject: "Ecosystem placement inquiry — Velt collaboration SDK for Vue",
+    body: `Hi Evan,
+
+I'm Yoen from Velt (velt.dev) — a collaboration SDK (comments, presence, live cursors, realtime sync) with first-class Vue support. We maintain working Vue demos, e.g. collaborative commenting on AG Grid tables in Vue: https://github.com/velt-js/sample-apps/tree/main/apps/vue/comments/tables/ag-grid
+
+I saw vuejs.org features ecosystem placements (the themes page, partner listings) and wanted to ask: is there a path for a developer-tool SDK like ours to be listed — whether in an existing section or as a sponsored placement? We're happy to discuss terms if it's a paid slot.
+
+For context, we're listed on React Flow's multiplayer guide alongside Yjs, Liveblocks, and Supabase, and we're in the Yjs ecosystem as a connection provider.
+
+Thanks for everything you do for Vue!
+Yoen Zhang — Velt
+yoen@velt.dev`,
+  },
+  {
+    target: "Vercel",
+    channel: "Form",
+    to: "vercel.com/marketplace/program — multi-step intake",
+    toUrl: "https://vercel.com/marketplace/program",
+    blocker: "Multi-step form; expect integration-build follow-up",
+    fields: [
+      { label: "Company name", value: "Velt" },
+      { label: "Contact name", value: "Yoen Zhang" },
+      { label: "Email address", value: "yoen@velt.dev" },
+      { label: "Company website", value: "https://velt.dev" },
+    ],
+    body: `Pitch blurb for the follow-up step / reviewer call:
+
+Velt is a collaboration SDK for product teams: comments, presence, live cursors, huddles, recording, and a managed Yjs/CRDT backend — added to any React/Next.js app in a few lines. We'd list in DevTools (where Liveblocks sits today) as a connectable account. Most of our customers deploy on Vercel; our demos are Next.js apps deployed on Vercel (e.g. https://velt-blocknote-crdt-demo.vercel.app/, https://velt-reactflow-crdt-demo.vercel.app/, hub: https://samples.velt.dev/). We're ready to build the OAuth/token-exchange integration per your integration spec.`,
+  },
+];
+
 export const SEQUENCING = [
   "Package one flagship Next.js Velt demo — public repo, Deploy button, .env.example, clear README.",
   "Submit to Vercel Templates (form) — highest ROI; start here.",
