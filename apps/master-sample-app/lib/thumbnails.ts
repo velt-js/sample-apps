@@ -56,6 +56,12 @@ export function getThumbnail(parsed: ParsedSample): Thumbnail | null {
     return null
   }
 
+  if (feature === "realtime") {
+    // Single Editor Mode demo shares the tiptap editor visual with the CRDT demo
+    if (appType === "text-editors" && library === "tiptap") return pair("crdt-tiptap")
+    return null
+  }
+
   if (feature === "self-hosting") {
     if (library === "mongo-db") return pair("self-hosting-mongodb")
     if (library === "postgres") return pair("self-hosting-postgresql")
