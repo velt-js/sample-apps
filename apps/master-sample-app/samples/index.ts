@@ -25,6 +25,8 @@ import dashboardDemoMeta from './dashboard-demo/metadata'
 import { codeFiles as dashboardDemoCodeFiles } from './dashboard-demo/code-files'
 import tiptapCrdtDemoMeta from './tiptap-crdt-demo/metadata'
 import { codeFiles as tiptapCrdtDemoCodeFiles } from './tiptap-crdt-demo/code-files'
+import singleEditorModeDemoMeta from './single-editor-mode-demo/metadata'
+import { codeFiles as singleEditorModeDemoCodeFiles } from './single-editor-mode-demo/code-files'
 import codemirrorCrdtDemoMeta from './codemirror-crdt-demo/metadata'
 import { codeFiles as codemirrorCrdtDemoCodeFiles } from './codemirror-crdt-demo/code-files'
 import dashboardMongoDbDemoMeta from './dashboard-mongo-db-demo/metadata'
@@ -144,6 +146,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-crdt-text-editors-tiptap-tiptap-crdt-demo': {
     metadata: tiptapCrdtDemoMeta,
     codeFiles: tiptapCrdtDemoCodeFiles
+  },
+  'react-realtime-text-editors-tiptap-single-editor-mode-demo': {
+    metadata: singleEditorModeDemoMeta,
+    codeFiles: singleEditorModeDemoCodeFiles
   },
   'react-crdt-text-editors-codemirror-codemirror-crdt-demo': {
     metadata: codemirrorCrdtDemoMeta,
