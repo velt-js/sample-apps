@@ -79,6 +79,8 @@ import activityLogDemoMeta from './activity-log-demo/metadata'
 import { codeFiles as activityLogDemoCodeFiles } from './activity-log-demo/code-files'
 import recorderDemoMeta from './recorder-demo/metadata'
 import { codeFiles as recorderDemoCodeFiles } from './recorder-demo/code-files'
+import lottieCommentsDemoMeta from './lottie-comments-demo/metadata'
+import { codeFiles as lottieCommentsDemoCodeFiles } from './lottie-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'react-activity-document-custom-activity-log-demo': {
@@ -88,6 +90,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-recorder-document-custom-recorder-demo': {
     metadata: recorderDemoMeta,
     codeFiles: recorderDemoCodeFiles
+  },
+  'react-comments-video-player-lottie-lottie-comments-demo': {
+    metadata: lottieCommentsDemoMeta,
+    codeFiles: lottieCommentsDemoCodeFiles
   },
   'react-crdt-canvas-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
