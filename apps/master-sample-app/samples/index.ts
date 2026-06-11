@@ -81,6 +81,8 @@ import recorderDemoMeta from './recorder-demo/metadata'
 import { codeFiles as recorderDemoCodeFiles } from './recorder-demo/code-files'
 import lottieCommentsDemoMeta from './lottie-comments-demo/metadata'
 import { codeFiles as lottieCommentsDemoCodeFiles } from './lottie-comments-demo/code-files'
+import chartjsCommentsDemoMeta from './chartjs-comments-demo/metadata'
+import { codeFiles as chartjsCommentsDemoCodeFiles } from './chartjs-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'react-activity-document-custom-activity-log-demo': {
@@ -94,6 +96,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-video-player-lottie-lottie-comments-demo': {
     metadata: lottieCommentsDemoMeta,
     codeFiles: lottieCommentsDemoCodeFiles
+  },
+  'react-comments-charts-chartjs-chartjs-comments-demo': {
+    metadata: chartjsCommentsDemoMeta,
+    codeFiles: chartjsCommentsDemoCodeFiles
   },
   'react-crdt-canvas-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
