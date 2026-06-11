@@ -1,7 +1,5 @@
 'use client'
 
-// [Velt] Comment mode state drives the "click a data point" hint
-import { useCommentModeState } from '@veltdev/react'
 import MetricCard from './MetricCard'
 import RevenueBarChart from '@/components/charts/RevenueBarChart'
 import ActiveUsersLineChart from '@/components/charts/ActiveUsersLineChart'
@@ -21,21 +19,8 @@ function ChartCard({ title, children }: { title: string; children: React.ReactNo
 }
 
 export default function DashboardGrid() {
-  // [Velt] True while the comment tool is active
-  const commentMode = useCommentModeState()
-
   return (
     <div className="flex flex-col gap-4">
-      {commentMode && (
-        <div
-          className="flex items-center gap-2 rounded-lg px-3 py-2 text-[13px]"
-          style={{ backgroundColor: 'rgba(99,102,241,0.12)', color: 'var(--app-text-primary)' }}
-        >
-          <span className="inline-block size-2 rounded-full shrink-0" style={{ backgroundColor: '#6366f1' }} />
-          Comment mode: click a data point on either chart to pin feedback to it.
-        </div>
-      )}
-
       {/* KPI row */}
       <div className="flex flex-wrap gap-4">
         <MetricCard label="Q2 Revenue" value="$4.2M" delta="+12%" />

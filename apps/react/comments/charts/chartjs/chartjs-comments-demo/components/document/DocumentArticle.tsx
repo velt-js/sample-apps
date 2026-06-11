@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+// [Velt] Comment mode state drives the "click a data point" hint chip
+import { useCommentModeState } from '@veltdev/react'
 import DashboardGrid from '@/components/dashboard/DashboardGrid'
 
 type ReviewStatus = 'Draft' | 'In Review' | 'Approved' | 'Changes Requested'
@@ -14,6 +16,8 @@ const STATUS_COLORS: Record<ReviewStatus, string> = {
 
 export default function DocumentArticle() {
   const [status, setStatus] = useState<ReviewStatus>('In Review')
+  // [Velt] True while the comment tool is active
+  const commentMode = useCommentModeState()
 
   return (
     <article
@@ -83,6 +87,19 @@ export default function DocumentArticle() {
         >
           ↻ Move to review
         </button>
+        {/* Comment-mode hint chip; visibility toggle keeps the row from
+            reflowing, so chart pins never shift mid-comment */}
+        <span
+          className="flex items-center gap-2 rounded-lg px-3 py-[6px] text-[13px]"
+          style={{
+            backgroundColor: 'rgba(99,102,241,0.12)',
+            color: 'var(--app-text-primary)',
+            visibility: commentMode ? 'visible' : 'hidden',
+          }}
+        >
+          <span className="inline-block size-2 rounded-full shrink-0" style={{ backgroundColor: '#6366f1' }} />
+          Comment mode is on. Click a data point to pin feedback.
+        </span>
       </div>
 
       {/* The dashboard: metric cards + the two commentable charts */}
