@@ -27,7 +27,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'recorder-demo',
-  description: 'Velt Recorder demo — async design review with audio, video, and screen recordings',
+  description: 'Velt Recorder demo: async design review with audio, video, and screen recordings',
 }
 
 export default function RootLayout({

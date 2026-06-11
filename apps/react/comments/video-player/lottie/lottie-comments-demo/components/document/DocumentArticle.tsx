@@ -28,7 +28,7 @@ export default function DocumentArticle({ registerSeekHandler }: DocumentArticle
       {/* Title + meta */}
       <div className="mb-6">
         <h1 className="font-['Urbanist',sans-serif] font-semibold text-[34px] leading-tight mb-3">
-          Brand Intro — v3
+          Brand Intro v3
         </h1>
         <div className="flex items-center gap-3 text-[14px]" style={{ color: 'var(--app-text-tertiary)' }}>
           <span>Animation by Jordan Lee</span>
@@ -58,7 +58,7 @@ export default function DocumentArticle({ registerSeekHandler }: DocumentArticle
         <p>
           <strong style={{ color: 'var(--app-text-primary)' }}>Reviewers:</strong>{' '}
           pause on any frame (or scrub to it) and use the comment tool to pin feedback to that
-          exact frame. Comments show up as bubbles on the timeline — click one to jump back to
+          exact frame. Comments show up as bubbles on the timeline. Click one to jump back to
           its frame.
         </p>
       </div>

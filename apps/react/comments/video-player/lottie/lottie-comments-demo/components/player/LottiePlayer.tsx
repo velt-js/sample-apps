@@ -234,7 +234,7 @@ export default function LottiePlayer({ registerSeekHandler }: LottiePlayerProps)
             className="text-[12px] tabular-nums shrink-0"
             style={{ color: 'var(--app-text-tertiary)' }}
           >
-            frame {currentFrame} / {totalFrames || '—'}
+            frame {currentFrame} / {totalFrames || '…'}
           </span>
 
           <div className="ml-auto flex items-center gap-2">

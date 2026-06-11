@@ -27,7 +27,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'lottie-comments-demo',
-  description: 'Velt Comments demo — frame-pinned motion design review on a Lottie animation',
+  description: 'Velt Comments demo: frame-pinned motion design review on a Lottie animation',
 }
 
 export default function RootLayout({

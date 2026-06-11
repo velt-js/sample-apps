@@ -70,7 +70,7 @@ export function useCurrentDocument(): CurrentDocument {
   return useMemo(
     () => ({
       documentId: documentId,
-      documentName: "Brand Intro — v3",
+      documentName: "Brand Intro v3",
     }),
     [documentId]
   );

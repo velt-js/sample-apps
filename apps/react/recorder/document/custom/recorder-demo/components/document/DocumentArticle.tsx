@@ -12,9 +12,9 @@ const STATUS_COLORS: Record<ReviewStatus, string> = {
 }
 
 const MOCKUPS = [
-  { label: 'Mockup A — Onboarding flow', detail: 'First-run wizard, 3 steps' },
-  { label: 'Mockup B — Workspace home', detail: 'Document grid + quick actions' },
-  { label: 'Mockup C — Share dialog', detail: 'Invite by email, link permissions' },
+  { label: 'Mockup A: Onboarding flow', detail: 'First-run wizard, 3 steps' },
+  { label: 'Mockup B: Workspace home', detail: 'Document grid + quick actions' },
+  { label: 'Mockup C: Share dialog', detail: 'Invite by email, link permissions' },
 ]
 
 export default function DocumentArticle() {
@@ -29,7 +29,7 @@ export default function DocumentArticle() {
       {/* Title + meta */}
       <div id="doc-header" className="mb-6">
         <h1 className="font-['Urbanist',sans-serif] font-semibold text-[34px] leading-tight mb-3">
-          Q3 Launch — Product Spec
+          Q3 Launch Product Spec
         </h1>
         <div className="flex items-center gap-3 text-[14px]" style={{ color: 'var(--app-text-tertiary)' }}>
           <span>By Jordan Lee</span>
@@ -163,8 +163,8 @@ export default function DocumentArticle() {
           </h2>
           <p>
             Should the share link default to viewer or editor access? Is the three-step wizard one
-            step too many? Record a quick walkthrough of your take — a screen recording over the
-            mockups above works best — and it will show up in the Recordings panel for the team.
+            step too many? Record a quick walkthrough of your take (a screen recording over the
+            mockups above works best) and it will show up in the Recordings panel for the team.
           </p>
         </section>
       </div>

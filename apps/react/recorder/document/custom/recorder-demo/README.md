@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo showcases the **Velt Recorder** — async audio, video, and screen recording built into a product app. The scenario is an **async design review**: a "Q3 Launch — Product Spec" document where reviewers record walkthrough feedback instead of scheduling a meeting. Recordings can be pinned to the page, and every recording lands in a **Recordings panel** with playback, a transcript, an **AI summary**, and the beta **video editor**.
+This demo showcases the **Velt Recorder** — async audio, video, and screen recording built into a product app. The scenario is an **async design review**: a "Q3 Launch Product Spec" document where reviewers record walkthrough feedback instead of scheduling a meeting. Recordings can be pinned to the page, and every recording lands in a **Recordings panel** with playback, a transcript, an **AI summary**, and the beta **video editor**.
 
 ## Path
 
@@ -37,7 +37,7 @@ apps/react/recorder/document/custom/recorder-demo/
 | `components/velt/VeltTools.tsx` | `VeltRecorderTool type="all"` + floating `VeltRecorderControlPanel` |
 | `components/recordings/RecordingsPanel.tsx` | Always-mounted drawer: `useRecordings()` list, `VeltRecorderPlayer`, delete |
 | `components/document/document-canvas.tsx` | Layout + `VeltRecorderNotes` for pinned recordings |
-| `components/document/DocumentArticle.tsx` | The "Q3 Launch — Product Spec" review document |
+| `components/document/DocumentArticle.tsx` | The "Q3 Launch Product Spec" review document |
 
 ## Key Technologies
 

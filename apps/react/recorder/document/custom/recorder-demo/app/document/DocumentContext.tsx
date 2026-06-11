@@ -70,7 +70,7 @@ export function useCurrentDocument(): CurrentDocument {
   return useMemo(
     () => ({
       documentId: documentId,
-      documentName: "Q3 Launch — Product Spec",
+      documentName: "Q3 Launch Product Spec",
     }),
     [documentId]
   );

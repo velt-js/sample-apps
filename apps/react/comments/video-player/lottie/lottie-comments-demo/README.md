@@ -2,7 +2,7 @@
 
 ## Overview
 
-This demo showcases **Velt Comments on a Lottie animation player**. The scenario is a **motion design review**: an animator shares "Brand Intro — v3" and reviewers pin comments to exact frames. Comments appear as bubbles on the player's seek bar (`VeltCommentPlayerTimeline`); clicking a bubble or a sidebar comment seeks the animation back to that frame.
+This demo showcases **Velt Comments on a Lottie animation player**. The scenario is a **motion design review**: an animator shares "Brand Intro v3" and reviewers pin comments to exact frames. Comments appear as bubbles on the player's seek bar (`VeltCommentPlayerTimeline`); clicking a bubble or a sidebar comment seeks the animation back to that frame.
 
 Built per the [Lottie Player Setup docs](https://docs.velt.dev/async-collaboration/comments/setup/lottie-player-setup).
 

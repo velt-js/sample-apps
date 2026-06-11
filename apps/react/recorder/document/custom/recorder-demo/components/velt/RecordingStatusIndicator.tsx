@@ -111,7 +111,7 @@ export default function RecordingStatusIndicator() {
           <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="#34c759" strokeWidth="3">
             <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span>Recording saved — view it in the Recordings panel</span>
+          <span>Recording saved. View it in the Recordings panel</span>
         </>
       )}
     </div>
