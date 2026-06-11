@@ -633,6 +633,58 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  apps/react/comments/charts/highcharts/highcharts-comments-demo:
+    dependencies:
+      '@veltdev/react':
+        specifier: 5.0.2-beta.34
+        version: 5.0.2-beta.34(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      highcharts:
+        specifier: ^13.0.0
+        version: 13.0.0
+      highcharts-react-official:
+        specifier: ^3.2.3
+        version: 3.2.3(highcharts@13.0.0)(react@19.2.0)
+      next:
+        specifier: ^16.1.2
+        version: 16.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.99.0)
+      react:
+        specifier: ^19
+        version: 19.2.0
+      react-dom:
+        specifier: ^19
+        version: 19.2.0(react@19.2.0)
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.19.17
+      '@types/react':
+        specifier: ^19
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
+      '@veltdev/types':
+        specifier: 5.0.2-beta.34
+        version: 5.0.2-beta.34
+      autoprefixer:
+        specifier: ^10
+        version: 10.5.0(postcss@8.5.12)
+      eslint:
+        specifier: ^9.39.1
+        version: 9.39.4(jiti@2.6.1)
+      eslint-config-next:
+        specifier: ^16.0.1
+        version: 16.2.4(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      postcss:
+        specifier: ^8
+        version: 8.5.12
+      tailwindcss:
+        specifier: ^3.4.0
+        version: 3.4.19(tsx@4.21.0)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   apps/react/comments/dashboard/custom/dashboard-demo:
     dependencies:
       '@veltdev/react':
@@ -6834,6 +6886,23 @@ packages:
 
   hermes-parser@0.25.1:
     resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
+
+  highcharts-react-official@3.2.3:
+    resolution: {integrity: sha512-2gL8bVGe6Pf75tSe6IB5Ucd0nIOJX7ZrpttQBZVrjN2J9StdVZ12aOinXHIOFvlc6EzP8CbN13WS8NUq+9mptA==}
+    peerDependencies:
+      highcharts: '>=6.0.0'
+      react: '>=16.8.0'
+
+  highcharts@13.0.0:
+    resolution: {integrity: sha512-AoFXei9hSnVXo8X5PmXzSiNXwPMgA+NzyN35uRRy0N1XwbJbRI1laTCaaFci9QB9Wyv9ZFWlgF0xzgivavJpDA==}
+    peerDependencies:
+      jspdf: ^4.1.0
+      svg2pdf.js: ^2.7.0
+    peerDependenciesMeta:
+      jspdf:
+        optional: true
+      svg2pdf.js:
+        optional: true
 
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
@@ -13675,6 +13744,13 @@ snapshots:
   hermes-parser@0.25.1:
     dependencies:
       hermes-estree: 0.25.1
+
+  highcharts-react-official@3.2.3(highcharts@13.0.0)(react@19.2.0):
+    dependencies:
+      highcharts: 13.0.0
+      react: 19.2.0
+
+  highcharts@13.0.0: {}
 
   hoist-non-react-statics@3.3.2:
     dependencies:
