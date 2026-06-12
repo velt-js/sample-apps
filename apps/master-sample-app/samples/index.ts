@@ -85,6 +85,8 @@ import chartjsCommentsDemoMeta from './chartjs-comments-demo/metadata'
 import { codeFiles as chartjsCommentsDemoCodeFiles } from './chartjs-comments-demo/code-files'
 import highchartsCommentsDemoMeta from './highcharts-comments-demo/metadata'
 import { codeFiles as highchartsCommentsDemoCodeFiles } from './highcharts-comments-demo/code-files'
+import nivoCommentsDemoMeta from './nivo-comments-demo/metadata'
+import { codeFiles as nivoCommentsDemoCodeFiles } from './nivo-comments-demo/code-files'
 
 export const SAMPLES: Record<string, Sample> = {
   'react-activity-document-custom-activity-log-demo': {
@@ -106,6 +108,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-charts-highcharts-highcharts-comments-demo': {
     metadata: highchartsCommentsDemoMeta,
     codeFiles: highchartsCommentsDemoCodeFiles
+  },
+  'react-comments-charts-nivo-nivo-comments-demo': {
+    metadata: nivoCommentsDemoMeta,
+    codeFiles: nivoCommentsDemoCodeFiles
   },
   'react-crdt-canvas-reactflow-reactflow-demo': {
     metadata: reactflowCrdtMeta,
