@@ -785,13 +785,11 @@ Yoen — Velt`,
   },
   {
     target: "SlateJS",
-    channel: "Slack",
-    to: "Slate Slack workspace (invite in repo README)",
+    channel: "GitHub PR",
+    to: "ianstormtaylor/slate → docs/general/resources.md (merged)",
     toUrl: "https://github.com/ianstormtaylor/slate/pull/6067",
-    done: "PR #6067 merged 2026-06-13 — no nudge needed",
-    body: `Hi all 👋 — I opened a small docs PR last week adding Velt to the Resources page under Extensions and Plugins, next to the existing collaboration entries (@liveblocks/yjs, slate-yjs): https://github.com/ianstormtaylor/slate/pull/6067
-
-It's a one-line addition, CI is green (Netlify preview built), and the changeset bot is happy since it's docs-only. Would any maintainer have a moment to review? Happy to tweak the wording or placement if you'd prefer something different. Thanks for maintaining Slate! 🙏`,
+    done: "PR #6067 merged 2026-06-13 — no Slack nudge needed",
+    body: `✅ No action needed. PR #6067 was merged by Dylan Schiemann on 2026-06-13 — Velt is now listed on the Slate Resources page under Extensions and Plugins. No need to join the Slate Slack workspace.`,
   },
   {
     target: "Ace",

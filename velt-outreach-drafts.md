@@ -132,15 +132,9 @@ Ready-to-send messages, form submissions, and PR diffs for the top 10 targets in
 
 ---
 
-## 5. SlateJS — merge nudge for open PR #6067
+## 5. SlateJS — ✅ DONE (PR #6067 merged 2026-06-13)
 
-**Channel:** Slack workspace (invite link in the `ianstormtaylor/slate` README) — volunteer-run project, so polite + zero-effort-to-merge framing. PR state verified: open, mergeable, CI green (Netlify preview success), no reviews yet; only the benign changeset-bot note (docs PRs need no changeset).
-
-**Slack message (#general or wherever docs PRs get discussed):**
-
-> Hi all 👋 — I opened a small docs PR last week adding Velt to the Resources page under Extensions and Plugins, next to the existing collaboration entries (@liveblocks/yjs, slate-yjs): https://github.com/ianstormtaylor/slate/pull/6067
->
-> It's a one-line addition, CI is green (Netlify preview built), and the changeset bot is happy since it's docs-only. Would any maintainer have a moment to review? Happy to tweak the wording or placement if you'd prefer something different. Thanks for maintaining Slate! 🙏
+**No action needed.** PR [#6067](https://github.com/ianstormtaylor/slate/pull/6067) was merged by Dylan Schiemann on 2026-06-13 — Velt is now listed on the [Slate Resources page](https://docs.slatejs.org/general/resources) under Extensions and Plugins. No Slack nudge required; no need to join the Slate Slack workspace.
 
 ---
 
@@ -271,7 +265,7 @@ Hosted backends like [Velt](https://docs.velt.dev/realtime-collaboration/crdt/ov
 |---|--------|--------|---------|
 | 1 | Yjs | Open PR + ping @dmonad | none — ready |
 | 2 | BlockNote | Send email | none — ready |
-| 3 | SlateJS | Slack nudge on PR #6067 | join Slack workspace |
+| 3 | SlateJS | ✅ Done — PR #6067 merged 2026-06-13 | none — no Slack needed |
 | 4 | Ace | Open PR | none — ready |
 | 5 | AG Grid | Open PR + contact form | **produce velt.webp logo first** |
 | 6 | xyflow | Contact form | none — ready |
