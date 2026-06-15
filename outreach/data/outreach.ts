@@ -131,9 +131,9 @@ export const LIBRARIES: Library[] = [
       url: "https://docs.slatejs.org/general/resources",
       section: "Extensions and Plugins",
     },
-    path: "PR #6067 open — nudge via Slack",
-    status: "pr-open",
-    note: "@liveblocks/yjs already listed on the page.",
+    path: "PR #6067 merged 2026-06-13 — Velt now listed",
+    status: "listed",
+    note: "@liveblocks/yjs already listed on the page; Velt added via merged PR #6067.",
   },
   {
     rank: 7,
@@ -417,9 +417,9 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "SlateJS",
-    primary: "Nudge open PR #6067 for review via Slack",
+    primary: "✅ Done — PR #6067 merged 2026-06-13",
     primaryUrl: "https://github.com/ianstormtaylor/slate/pull/6067",
-    repoPath: "ianstormtaylor/slate → docs/general/resources.md",
+    repoPath: "ianstormtaylor/slate → docs/general/resources.md (merged)",
     community: "Slack (volunteer-run)",
     owner: "Community (Ian Storm Taylor)",
   },
@@ -527,7 +527,7 @@ export const WAVES = [
     items: [
       "Yjs docs PR + @dmonad ping",
       "BlockNote email + PR",
-      "Slate PR #6067 merge-nudge",
+      "Slate PR #6067 ✅ merged",
       "Ace PR",
       "AG Grid JSON PR + contact-form note",
     ],
@@ -561,7 +561,7 @@ export const WAVES = [
 export type PRStatus = "open" | "merged" | "closed";
 
 /** PR statuses re-checked live via the GitHub API on 2026-06-09. */
-export const PR_STATUS_CHECKED = "June 9, 2026";
+export const PR_STATUS_CHECKED = "June 15, 2026";
 
 export interface SubmittedPR {
   library: string;
@@ -595,19 +595,20 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     mergedAt: "June 7, 2026",
   },
   {
-    library: "Vercel Chat SDK (follow-up)",
-    repo: "vercel/chat",
-    section: "Adapters docs — sharpen description + live demo link",
-    pr: "#578",
-    prUrl: "https://github.com/vercel/chat/pull/578",
-    status: "open",
-  },
-  {
     library: "SlateJS",
     repo: "ianstormtaylor/slate",
     section: "Extensions and Plugins (docs)",
     pr: "#6067",
     prUrl: "https://github.com/ianstormtaylor/slate/pull/6067",
+    status: "merged",
+    mergedAt: "June 13, 2026",
+  },
+  {
+    library: "Vercel Chat SDK (follow-up)",
+    repo: "vercel/chat",
+    section: "Adapters docs — sharpen description + live demo link",
+    pr: "#578",
+    prUrl: "https://github.com/vercel/chat/pull/578",
     status: "open",
   },
   {
@@ -733,6 +734,7 @@ export interface Draft {
   channel: "Email" | "GitHub PR" | "Form" | "Slack" | "Discord";
   to: string;
   toUrl?: string;
+  done?: string;
   blocker?: string;
   fields?: { label: string; value: string }[];
   subject?: string;
@@ -786,7 +788,7 @@ Yoen — Velt`,
     channel: "Slack",
     to: "Slate Slack workspace (invite in repo README)",
     toUrl: "https://github.com/ianstormtaylor/slate/pull/6067",
-    blocker: "Join the Slack workspace",
+    done: "PR #6067 merged 2026-06-13 — no nudge needed",
     body: `Hi all 👋 — I opened a small docs PR last week adding Velt to the Resources page under Extensions and Plugins, next to the existing collaboration entries (@liveblocks/yjs, slate-yjs): https://github.com/ianstormtaylor/slate/pull/6067
 
 It's a one-line addition, CI is green (Netlify preview built), and the changeset bot is happy since it's docs-only. Would any maintainer have a moment to review? Happy to tweak the wording or placement if you'd prefer something different. Thanks for maintaining Slate! 🙏`,

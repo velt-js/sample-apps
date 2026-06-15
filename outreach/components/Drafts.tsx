@@ -22,7 +22,11 @@ export default function Drafts() {
             >
               {d.channel}
             </span>
-            {d.blocker ? (
+            {d.done ? (
+              <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-moss sm:inline">
+                ✅ {d.done}
+              </span>
+            ) : d.blocker ? (
               <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-signal sm:inline">
                 ⚠ {d.blocker}
               </span>
