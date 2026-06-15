@@ -885,11 +885,7 @@ Hi — I'm Yoen from Velt (velt.dev). We make a collaboration SDK with a dedicat
 
 Yoen from Velt here — thank you again for including us in the React Flow multiplayer guide's third-party table; it's been a genuinely great channel for us.
 
-Two quick follow-ups:
-
-1. Showcase: we'd love to submit our collaborative React Flow demo for the showcase — live multiplayer canvas with comments, presence, and cursors built on our dedicated React Flow library: https://velt-reactflow-crdt-demo.vercel.app/ (source: https://github.com/velt-js/velt-reactflow-crdt-demo, docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/reactflow).
-
-2. Svelte Flow: noticed svelteflow.dev doesn't have a multiplayer guide yet. If you're ever interested in porting the React Flow one (third-party table included), we'd love to collaborate — we don't have a Svelte Flow integration today, but we'd be open to building one to support it.
+A quick follow-up: we'd love to submit our collaborative React Flow demo for the showcase — a live multiplayer canvas with comments, presence, and cursors built on our dedicated React Flow library: https://velt-reactflow-crdt-demo.vercel.app/ (source: https://github.com/velt-js/velt-reactflow-crdt-demo, docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/reactflow).
 
 Cheers,
 Yoen — Velt`,
