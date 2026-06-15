@@ -173,9 +173,9 @@ export const LIBRARIES: Library[] = [
       url: "https://www.highcharts.com/integrations",
       section: "Community Resources",
     },
-    path: "Email Highsoft via highcharts.com/about-us/contact",
+    path: "Email sent 2026-06-15 to Highsoft — awaiting reply",
     status: "outreach",
-    note: "No submission process exists; the old plugin registry is a 404.",
+    note: "No submission process exists; the old plugin registry is a 404. Email sent.",
   },
   {
     rank: 10,
@@ -187,9 +187,9 @@ export const LIBRARIES: Library[] = [
       url: "https://vuejs.org/ecosystem/themes.html",
       section: "Themes-page placement model",
     },
-    path: "evan@vuejs.org — published placement contact",
+    path: "Email sent 2026-06-15 to evan@vuejs.org — awaiting reply",
     status: "outreach",
-    note: "vuejs.org demonstrably sells ecosystem placements.",
+    note: "vuejs.org demonstrably sells ecosystem placements. Email sent.",
   },
   {
     rank: 11,
@@ -433,7 +433,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "xyflow (follow-ups)",
-    primary: "xyflow.com/contact + info@xyflow.com — the proven channel",
+    primary: "✅ Showcase form submitted 2026-06-15 — awaiting reply",
     primaryUrl: "https://xyflow.com/contact",
     repoPath: "xyflow/web → sites/reactflow.dev/…/multiplayer.mdx",
     community: "Discord",
@@ -448,7 +448,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "Highcharts",
-    primary: "Contact page (email obfuscated on-page; sales form on shop.highcharts.com)",
+    primary: "✅ Email sent 2026-06-15 to Highsoft — awaiting reply",
     primaryUrl: "https://www.highcharts.com/about-us/contact/",
     repoPath: "— (website not open-source)",
     community: "Discord / Stack Overflow",
@@ -456,7 +456,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "Vue",
-    primary: "evan@vuejs.org — published placement contact",
+    primary: "✅ Email sent 2026-06-15 to evan@vuejs.org — awaiting reply",
     repoPath: "vuejs/docs → src/ecosystem/ (curated; cold PR redirected to email)",
     community: "Vue Land Discord",
     owner: "Vue team / Evan You",
@@ -877,6 +877,7 @@ Hi — I'm Yoen from Velt (velt.dev). We make a collaboration SDK with a dedicat
     channel: "Form",
     to: "xyflow.com/contact — fields: Your Email, Your message",
     toUrl: "https://xyflow.com/contact",
+    done: "Showcase form submitted 2026-06-15 — awaiting reply",
     fields: [
       { label: "Your Email", value: "yoen@velt.dev" },
       { label: "Your message", value: "(body below)" },
@@ -908,7 +909,7 @@ Your Yjs doc's Provider Types section covers Hocuspocus, WebRTC, and custom prov
     target: "Highcharts",
     channel: "Email",
     to: "hello@highsoft.com",
-    blocker: "Verify email on their contact page before sending",
+    done: "Email sent 2026-06-15 — awaiting reply",
     subject: "Listing Velt under Community Resources on highcharts.com/integrations",
     body: `Hi Highsoft team,
 
@@ -929,6 +930,7 @@ yoen@velt.dev`,
     target: "Vue",
     channel: "Email",
     to: "evan@vuejs.org",
+    done: "Email sent 2026-06-15 — awaiting reply",
     subject: "Ecosystem placement inquiry — Velt collaboration SDK for Vue",
     body: `Hi Evan,
 

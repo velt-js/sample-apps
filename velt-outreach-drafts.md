@@ -265,8 +265,8 @@ Hosted backends like [Velt](https://docs.velt.dev/realtime-collaboration/crdt/ov
 | 3 | SlateJS | ✅ Done — PR #6067 merged 2026-06-13 | none — no Slack needed |
 | 4 | Ace | ✅ Done — [PR #5981](https://github.com/ajaxorg/ace/pull/5981) open | awaiting review |
 | 5 | AG Grid | ✅ Done — [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) open + contact form submitted | awaiting review |
-| 6 | xyflow | Contact form | none — ready |
+| 6 | xyflow | ✅ Showcase form submitted 2026-06-15 | awaiting reply |
 | 7 | PlateJS | ✅ Discord message sent | PR to follow on reply |
-| 8 | Highcharts | Send email | verify hello@highsoft.com on-page |
-| 9 | Vue | Send email | none — ready |
+| 8 | Highcharts | ✅ Email sent 2026-06-15 | awaiting reply |
+| 9 | Vue | ✅ Email sent 2026-06-15 | awaiting reply |
 | 10 | Vercel | Submit marketplace form | form is multi-step; expect integration-build follow-up |
