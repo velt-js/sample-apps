@@ -263,13 +263,13 @@ Hosted backends like [Velt](https://docs.velt.dev/realtime-collaboration/crdt/ov
 
 | # | Target | Action | Blocker |
 |---|--------|--------|---------|
-| 1 | Yjs | Open PR + ping @dmonad | none — ready |
+| 1 | Yjs | ✅ Done — [PR #81](https://github.com/yjs/docs/pull/81) open + @dmonad ping | awaiting review |
 | 2 | BlockNote | Send email | none — ready |
 | 3 | SlateJS | ✅ Done — PR #6067 merged 2026-06-13 | none — no Slack needed |
-| 4 | Ace | Open PR | none — ready |
+| 4 | Ace | ✅ Done — [PR #5981](https://github.com/ajaxorg/ace/pull/5981) open | awaiting review |
 | 5 | AG Grid | Open PR + contact form | **produce velt.webp logo first** |
 | 6 | xyflow | Contact form | none — ready |
-| 7 | PlateJS | Discord message | join Discord |
+| 7 | PlateJS | ✅ Discord message sent | PR to follow on reply |
 | 8 | Highcharts | Send email | verify hello@highsoft.com on-page |
 | 9 | Vue | Send email | none — ready |
 | 10 | Vercel | Submit marketplace form | form is multi-step; expect integration-build follow-up |

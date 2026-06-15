@@ -71,10 +71,10 @@ export const LIBRARIES: Library[] = [
       url: "https://docs.yjs.dev/ecosystem/connection-provider",
       section: "Ecosystem → Connection Provider (+ yjs.dev “Services”)",
     },
-    path: "One-line PR to yjs/docs SUMMARY.md + ping @dmonad",
-    status: "todo",
+    path: "PR #81 open to yjs/docs SUMMARY.md + @dmonad ping posted",
+    status: "pr-open",
     topPick: true,
-    note: "Liveblocks, y-sweet, SuperViz, Hocuspocus listed there; Velt only in the yjs/yjs README (sponsor ⭐). The docs site is the unsynced surface.",
+    note: "Liveblocks, y-sweet, SuperViz, Hocuspocus listed there; Velt only in the yjs/yjs README (sponsor ⭐). PR #81 mirrors it onto the docs site.",
   },
   {
     rank: 3,
@@ -145,9 +145,9 @@ export const LIBRARIES: Library[] = [
       url: "https://ace.c9.io/",
       section: "Related Projects",
     },
-    path: "PR to ajaxorg/ace index.html",
-    status: "todo",
-    note: "A collaboration extension (ace-collab-ext) is already listed.",
+    path: "PR #5981 open to ajaxorg/ace index.html",
+    status: "pr-open",
+    note: "A collaboration extension (ace-collab-ext) is already listed; PR #5981 adds Velt next to it.",
   },
   {
     rank: 8,
@@ -159,9 +159,9 @@ export const LIBRARIES: Library[] = [
       url: "https://platejs.org/docs/yjs",
       section: "Provider Types",
     },
-    path: "Discord, then PR to udecode/plate",
-    status: "todo",
-    note: "No hosted SaaS listed yet — Velt would be first.",
+    path: "Discord message sent — PR to udecode/plate next",
+    status: "outreach",
+    note: "No hosted SaaS listed yet — Velt would be first. Discord pitch sent; awaiting maintainer reply before PR.",
   },
   {
     rank: 9,
@@ -385,8 +385,8 @@ export interface Contact {
 export const CONTACTS: Contact[] = [
   {
     library: "Yjs",
-    primary: "PR is the path; pair with a ping to @dmonad — Velt’s README entry already carries the sponsor ⭐",
-    primaryUrl: "https://github.com/yjs/docs",
+    primary: "✅ Opened — PR #81 + @dmonad ping posted. Awaiting review",
+    primaryUrl: "https://github.com/yjs/docs/pull/81",
     repoPath: "yjs/docs → SUMMARY.md (Connection Provider)",
     community: "discuss.yjs.dev",
     owner: "Kevin Jahns / community",
@@ -425,7 +425,8 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "Ace",
-    primary: "PR only",
+    primary: "✅ Opened — PR #5981. Awaiting review",
+    primaryUrl: "https://github.com/ajaxorg/ace/pull/5981",
     repoPath: "ajaxorg/ace → index.html (“Related Projects”)",
     community: "GitHub Discussions",
     owner: "Community (ajaxorg)",
@@ -440,7 +441,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "PlateJS",
-    primary: "Discord first to socialize, then PR",
+    primary: "✅ Discord message sent — PR to follow on reply",
     repoPath: "udecode/plate → content/docs/…/yjs.mdx",
     community: "Discord",
     owner: "udecode (Ziad Beyens)",
@@ -604,6 +605,24 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     mergedAt: "June 13, 2026",
   },
   {
+    library: "Yjs",
+    repo: "yjs/docs",
+    section: "Ecosystem → Connection Provider (SUMMARY.md)",
+    pr: "#81",
+    prUrl: "https://github.com/yjs/docs/pull/81",
+    status: "open",
+    note: "Docs-site PR (§1 primary channel) + @dmonad ping posted",
+  },
+  {
+    library: "Ace",
+    repo: "ajaxorg/ace",
+    section: "Homepage → Related Projects (index.html)",
+    pr: "#5981",
+    prUrl: "https://github.com/ajaxorg/ace/pull/5981",
+    status: "open",
+    note: "Docs-site PR (§1 primary channel)",
+  },
+  {
     library: "Vercel Chat SDK (follow-up)",
     repo: "vercel/chat",
     section: "Adapters docs — sharpen description + live demo link",
@@ -748,7 +767,8 @@ export const DRAFTS: Draft[] = [
     target: "Yjs",
     channel: "GitHub PR",
     to: "yjs/docs → SUMMARY.md (+ ping @dmonad)",
-    toUrl: "https://github.com/yjs/docs",
+    toUrl: "https://github.com/yjs/docs/pull/81",
+    done: "PR #81 opened 2026-06-15 + @dmonad ping posted — awaiting review",
     subject: "PR title: Add Velt to Connection Providers",
     body: `Adds Velt to the Connection Provider list, matching the existing external entries (y-sweet, Liveblocks, SuperViz, Hocuspocus).
 
@@ -795,7 +815,8 @@ Yoen — Velt`,
     target: "Ace",
     channel: "GitHub PR",
     to: "ajaxorg/ace → index.html (Related Projects)",
-    toUrl: "https://github.com/ajaxorg/ace",
+    toUrl: "https://github.com/ajaxorg/ace/pull/5981",
+    done: "PR #5981 opened 2026-06-15 — awaiting review",
     subject: "PR title: Add Velt collaboration SDK to Related Projects",
     body: `Adds Velt to the Related Projects list on the homepage, next to the existing Ace collaboration extension.
 
@@ -867,7 +888,7 @@ Yoen — Velt`,
     channel: "Discord",
     to: "discord.gg/mAZRuBzGM3 → then PR to udecode/plate",
     toUrl: "https://discord.gg/mAZRuBzGM3",
-    blocker: "Join the Discord",
+    done: "Discord message sent 2026-06-15 — PR to follow on maintainer reply",
     body: `Hey Plate team 👋 — Yoen from Velt here. We're a collaboration SDK with a managed Yjs backend, and we have a working Plate integration (docs: https://docs.velt.dev/async-collaboration/comments/setup/plate, demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/crdt/text-editors/platejs/platejs-crdt-demo).
 
 Your Yjs doc's Provider Types section covers Hocuspocus, WebRTC, and custom providers via UnifiedProvider — would you be open to a small docs PR mentioning Velt as a hosted option there (and/or a line in Related)? We'd be the first managed backend listed; happy to match whatever format you want. For reference we're listed on React Flow's multiplayer guide alongside Yjs/Liveblocks/Supabase.`,
