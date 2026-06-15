@@ -116,10 +116,10 @@ export const LIBRARIES: Library[] = [
       url: "https://www.ag-grid.com/community/tools-extensions/",
       section: "Type “Extension”",
     },
-    path: "PR to tools-extensions.json in ag-grid/ag-grid + contact-form note",
-    status: "todo",
+    path: "PR #14075 open (JSON entry + velt.webp) to ag-grid/ag-grid",
+    status: "pr-open",
     topPick: true,
-    note: "Commercial, closed-source AdapTable already listed — clean precedent.",
+    note: "Commercial, closed-source AdapTable already listed — clean precedent. PR #14075 adds Velt as an Extension.",
   },
   {
     rank: 6,
@@ -409,8 +409,8 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "AG Grid",
-    primary: "PR is the path; parallel heads-up via the contact form",
-    primaryUrl: "https://www.ag-grid.com/about/",
+    primary: "✅ Opened — PR #14075 (JSON + velt.webp). Optional contact-form heads-up",
+    primaryUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
     repoPath: "ag-grid/ag-grid → …/community/tools-extensions.json",
     community: "GitHub issues",
     owner: "AG Grid Ltd",
@@ -623,6 +623,15 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     note: "Docs-site PR (§1 primary channel)",
   },
   {
+    library: "AG Grid",
+    repo: "ag-grid/ag-grid",
+    section: "Community → Tools & Extensions (JSON + velt.webp)",
+    pr: "#14075",
+    prUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
+    status: "open",
+    note: "Docs-site PR (§1 primary channel) — Extension entry + logo",
+  },
+  {
     library: "Vercel Chat SDK (follow-up)",
     repo: "vercel/chat",
     section: "Adapters docs — sharpen description + live demo link",
@@ -833,9 +842,9 @@ Matches the existing list format; happy to shorten the label if preferred.`,
   {
     target: "AG Grid",
     channel: "GitHub PR",
-    to: "ag-grid/ag-grid → tools-extensions.json (+ contact-form heads-up)",
-    toUrl: "https://www.ag-grid.com/about/",
-    blocker: "Produce velt.webp logo first",
+    to: "ag-grid/ag-grid → tools-extensions.json (+ optional contact-form heads-up)",
+    toUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
+    done: "PR #14075 opened 2026-06-15 (JSON + velt.webp) — awaiting review",
     subject: "PR title: docs(community): add Velt to Tools & Extensions",
     body: `Adds Velt to the community Tools & Extensions directory as an Extension. Velt adds cell-level commenting (with aggregation), presence, and live cursors on top of AG Grid.
 

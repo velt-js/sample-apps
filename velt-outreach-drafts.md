@@ -88,7 +88,7 @@ Ready-to-send messages, form submissions, and PR diffs for the top 10 targets in
 
 ---
 
-## 4. AG Grid — PR with JSON entry + contact-form heads-up
+## 4. AG Grid — ✅ PR #14075 OPEN ([ag-grid/ag-grid#14075](https://github.com/ag-grid/ag-grid/pull/14075))
 
 **Channel:** PR to `ag-grid/ag-grid` (branch `latest`) → `external/ag-website-shared/src/content/community/tools-extensions.json`, plus a logo at `documentation/ag-grid-docs/public/community/tools-extensions/velt.webp`. AdapTable (commercial, closed-source) is the precedent entry.
 
@@ -128,7 +128,7 @@ Ready-to-send messages, form submissions, and PR diffs for the top 10 targets in
 | Work email | yoen@velt.dev |
 | Message | Hi — I'm Yoen from Velt (velt.dev). We make a collaboration SDK with a dedicated AG Grid integration: cell-level threaded comments with aggregation, presence, and live cursors (docs: docs.velt.dev/integrations/ag-grid). I've just opened a PR adding Velt to your community Tools & Extensions directory (alongside extensions like AdapTable) — flagging it here so it reaches the right person, and happy to adjust anything. We'd also be open to a deeper partnership conversation if useful. Thanks! |
 
-**TODO before sending:** produce `velt.webp` (square logo, match existing assets in that folder).
+**✅ Done:** [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) opened 2026-06-15 with the JSON entry + a 544×296 `velt.webp` branded card (matching the landscape preview-image convention, e.g. plotly/adaptable). Optional next step: a parallel heads-up via the [contact form](https://www.ag-grid.com/about/) using the message below.
 
 ---
 
@@ -267,7 +267,7 @@ Hosted backends like [Velt](https://docs.velt.dev/realtime-collaboration/crdt/ov
 | 2 | BlockNote | Send email | none — ready |
 | 3 | SlateJS | ✅ Done — PR #6067 merged 2026-06-13 | none — no Slack needed |
 | 4 | Ace | ✅ Done — [PR #5981](https://github.com/ajaxorg/ace/pull/5981) open | awaiting review |
-| 5 | AG Grid | Open PR + contact form | **produce velt.webp logo first** |
+| 5 | AG Grid | ✅ Done — [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) open (+ optional contact-form heads-up) | awaiting review |
 | 6 | xyflow | Contact form | none — ready |
 | 7 | PlateJS | ✅ Discord message sent | PR to follow on reply |
 | 8 | Highcharts | Send email | verify hello@highsoft.com on-page |

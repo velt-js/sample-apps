@@ -12,7 +12,7 @@ Goal: get Velt featured/listed on the official sites, GitHub repos, "awesome" li
 
 ## ✅ Submitted PRs — Batch 1 (opened 2026-06-03, from `yoen-velt`)
 
-All opened from `velt-js/sample-apps` integrations; each is a single-line list entry. Statuses re-checked live via GitHub API on 2026-06-15 across all batches (incl. Batch 0 + Batch 3 below): **3 merged, 8 open**.
+All opened from `velt-js/sample-apps` integrations; each is a single-line list entry. Statuses re-checked live via GitHub API on 2026-06-15 across all batches (incl. Batch 0 + Batch 3 below): **3 merged, 9 open**.
 
 | Library | Repo | Section | PR | Status |
 |---------|------|---------|----|--------|
@@ -42,6 +42,7 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 |---------|------|---------|----|--------|
 | **Yjs** | `yjs/docs` | Ecosystem → Connection Provider (`SUMMARY.md`) | [#81](https://github.com/yjs/docs/pull/81) | 🟢 Open (+ @dmonad ping) |
 | **Ace** | `ajaxorg/ace` | Homepage → Related Projects (`index.html`) | [#5981](https://github.com/ajaxorg/ace/pull/5981) | 🟢 Open |
+| **AG Grid** | `ag-grid/ag-grid` | Community → Tools & Extensions (`tools-extensions.json` + velt.webp) | [#14075](https://github.com/ag-grid/ag-grid/pull/14075) | 🟢 Open |
 
 **Evaluated & skipped this round (rows 11–22 + SDK lists):**
 - **PostgreSQL** (`awesome-postgres`) — list is Postgres *tooling* only; no "applications" section → off-scope.
@@ -80,7 +81,7 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 | 2 | **Yjs** | ✅ | ✅ | [docs.yjs.dev → Connection Provider](https://docs.yjs.dev/ecosystem/connection-provider) + yjs.dev "Services" — Liveblocks, y-sweet, SuperViz, Hocuspocus there; Velt only in the README (⭐ sponsor) | [PR #81](https://github.com/yjs/docs/pull/81) to `SUMMARY.md` + @dmonad ping | 🟢 **PR open** |
 | 3 | **BlockNote** | ✅ | ✅ | [Collaboration docs](https://www.blocknotejs.org/docs/features/collaboration) — "Yjs Providers" (Liveblocks, PartyKit, Y-Sweet listed) | team@blocknotejs.org + PR | ⚪ **Top pick** |
 | 4 | **Next.js / Vercel** | ✅ | ✅ | [Vercel Marketplace](https://vercel.com/integrations) — DevTools (**Liveblocks already listed**) | [Marketplace program form](https://vercel.com/marketplace/program) | ⚪ **Top pick** |
-| 5 | **AG Grid** | ✅ | ✅ | [Tools & Extensions](https://www.ag-grid.com/community/tools-extensions/) — type "Extension" (commercial AdapTable listed) | PR to `tools-extensions.json` in `ag-grid/ag-grid` + contact-form note | ⚪ **Top pick** |
+| 5 | **AG Grid** | ✅ | ✅ | [Tools & Extensions](https://www.ag-grid.com/community/tools-extensions/) — type "Extension" (commercial AdapTable listed) | [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) (JSON entry + velt.webp) | 🟢 **PR open** |
 | 6 | **SlateJS** | ✅ | ✅ | [Resources](https://docs.slatejs.org/general/resources) — "Extensions and Plugins" (@liveblocks/yjs listed) | [PR #6067](https://github.com/ianstormtaylor/slate/pull/6067) merged 2026-06-13 | 🟢 **Listed** |
 | 7 | **Ace** | ✅ | ✅ | [ace.c9.io](https://ace.c9.io/) — "Related Projects" (has a collab extension) | [PR #5981](https://github.com/ajaxorg/ace/pull/5981) to `index.html` | 🟢 **PR open** |
 | 8 | **PlateJS** | ✅ | ✅ | [Yjs doc](https://platejs.org/docs/yjs) — "Provider Types" (no hosted SaaS yet) | Discord, then PR to `udecode/plate` | ⚪ |
@@ -151,7 +152,7 @@ Per-library contact channels, **ranked: contact form / partnerships email → do
 | **Yjs** | ✅ Opened — [PR #81](https://github.com/yjs/docs/pull/81) + @dmonad ping posted (leverages the sponsor ⭐). Awaiting review | `yjs/docs` → `SUMMARY.md` "Connection Provider" (merged precedent: Tiptap's Hocuspocus PR, 2025-11) | [discuss.yjs.dev](https://discuss.yjs.dev) (active; dmonad responds) | Kevin Jahns / community |
 | **BlockNote** | **team@blocknotejs.org** — the [About page](https://www.blocknotejs.org/about) explicitly invites partnership/integration inquiries | `TypeCellOS/BlockNote` → `docs/content/docs/features/collaboration/index.mdx` | Discord [discord.com/invite/Qc2QTTH5dF](https://discord.com/invite/Qc2QTTH5dF) | TypeCellOS |
 | **Vercel** | [Marketplace program form](https://vercel.com/marketplace/program) ("Ready to join the marketplace?") + [Technology Partner form](https://vercel.com/partners) | — (marketplace is gated; eventually requires a real integration build — OAuth etc.) | — | Vercel Inc. |
-| **AG Grid** | PR **is** the path: `ag-grid/ag-grid` → `external/ag-website-shared/src/content/community/tools-extensions.json` (+ webp logo); send a parallel heads-up via the [contact form](https://www.ag-grid.com/about/) | Same JSON PR | GitHub issues | AG Grid Ltd |
+| **AG Grid** | ✅ Opened — [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) (JSON + velt.webp). Optional: parallel heads-up via the [contact form](https://www.ag-grid.com/about/) | `ag-grid/ag-grid` → `…/community/tools-extensions.json` | GitHub issues | AG Grid Ltd |
 | **SlateJS** | ✅ Done — [PR #6067](https://github.com/ianstormtaylor/slate/pull/6067) merged 2026-06-13 | `ianstormtaylor/slate` → `docs/general/resources.md` (merged) | Slack (volunteer-run project) | Community (Ian Storm Taylor) |
 | **Ace** | ✅ Opened — [PR #5981](https://github.com/ajaxorg/ace/pull/5981). Awaiting review | `ajaxorg/ace` → `index.html` (repo root renders ace.c9.io, "Related Projects" list) | [GitHub Discussions](https://github.com/ajaxorg/ace/discussions) | Community (ajaxorg) |
 | **xyflow** (follow-ups) | [xyflow.com/contact](https://xyflow.com/contact) form + **info@xyflow.com** — the proven channel that produced the existing listing | `xyflow/web` → `sites/reactflow.dev/src/content/learn/advanced-use/multiplayer.mdx` (Svelte Flow content in same repo under `sites/svelteflow.dev/`) | Discord [discord.com/invite/RVmnytFmGW](https://discord.com/invite/RVmnytFmGW) | xyflow GmbH |
@@ -176,7 +177,7 @@ Fill {demo link}/{docs link} from the **Demo?/Docs?** columns in section 1 — o
 
 ### Wave ordering
 
-1. **Wave 1 — warm natural slots, free, do now:** ~~Yjs docs PR + dmonad ping~~ (✅ [PR #81](https://github.com/yjs/docs/pull/81) open) · BlockNote email + PR · ~~Slate PR #6067~~ (✅ merged) · ~~Ace PR~~ (✅ [PR #5981](https://github.com/ajaxorg/ace/pull/5981) open) · AG Grid JSON PR + contact-form note.
+1. **Wave 1 — warm natural slots, free, do now:** ~~Yjs docs PR + dmonad ping~~ (✅ [PR #81](https://github.com/yjs/docs/pull/81) open) · BlockNote email + PR · ~~Slate PR #6067~~ (✅ merged) · ~~Ace PR~~ (✅ [PR #5981](https://github.com/ajaxorg/ace/pull/5981) open) · ~~AG Grid JSON PR~~ (✅ [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) open).
 2. **Wave 2 — forms & BD outreach:** Vercel Marketplace application · xyflow follow-ups (showcase submission, Svelte Flow multiplayer guide pitch) · Highcharts email · Vue email to Evan You · MongoDB Technology Partner application.
 3. **Wave 3 — build-first / gated:** Chart.js (publish the Velt chart-comments repo, wait 30 days) · CodeMirror (open-source a Velt↔CodeMirror binding package) · LottieFiles (build a Lottie integration) · PlateJS (Discord, then PR) · TanStack (decide on paid sponsorship).
 4. **Skip:** React · Angular · Nivo · Quill (on-site) · TipTap (on-site) · PostgreSQL.
