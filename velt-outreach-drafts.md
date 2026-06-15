@@ -265,7 +265,7 @@ Hosted backends like [Velt](https://docs.velt.dev/realtime-collaboration/crdt/ov
 | # | Target | Action | Blocker |
 |---|--------|--------|---------|
 | 1 | Yjs | ✅ Done — [PR #81](https://github.com/yjs/docs/pull/81) open + @dmonad ping | awaiting review |
-| 2 | BlockNote | Send email | none — ready |
+| 2 | BlockNote | ✅ Email sent 2026-06-15 | awaiting reply (PR offer to follow) |
 | 3 | SlateJS | ✅ Done — PR #6067 merged 2026-06-13 | none — no Slack needed |
 | 4 | Ace | ✅ Done — [PR #5981](https://github.com/ajaxorg/ace/pull/5981) open | awaiting review |
 | 5 | AG Grid | ✅ Done — [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) open + contact form submitted | awaiting review |

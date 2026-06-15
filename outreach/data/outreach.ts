@@ -86,10 +86,10 @@ export const LIBRARIES: Library[] = [
       url: "https://www.blocknotejs.org/docs/features/collaboration",
       section: "Yjs Providers",
     },
-    path: "team@blocknotejs.org + PR",
-    status: "todo",
+    path: "Email sent 2026-06-15 to team@blocknotejs.org — awaiting reply (PR offer to follow)",
+    status: "outreach",
     topPick: true,
-    note: "Liveblocks, PartyKit, Y-Sweet listed — richest SaaS-peer precedent of all 22.",
+    note: "Liveblocks, PartyKit, Y-Sweet listed — richest SaaS-peer precedent of all 22. Email sent; PR offered.",
   },
   {
     rank: 4,
@@ -393,7 +393,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "BlockNote",
-    primary: "team@blocknotejs.org — About page invites partnerships",
+    primary: "✅ Email sent 2026-06-15 to team@blocknotejs.org — awaiting reply",
     primaryUrl: "https://www.blocknotejs.org/about",
     repoPath: "TypeCellOS/BlockNote → docs/…/collaboration/index.mdx",
     community: "Discord",
@@ -796,6 +796,7 @@ Hi Kevin — small one: this mirrors Velt's existing README Providers entry onto
     target: "BlockNote",
     channel: "Email",
     to: "team@blocknotejs.org",
+    done: "Email sent 2026-06-15 — awaiting reply (PR offer to follow)",
     subject: "Adding Velt to the Yjs Providers list in your collaboration docs?",
     body: `Hi BlockNote team,
 
