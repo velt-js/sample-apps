@@ -253,7 +253,7 @@ Hosted backends like [Velt](https://docs.velt.dev/realtime-collaboration/crdt/ov
 >
 > 1. **Showcase:** we'd love to submit our collaborative React Flow demo for the showcase — live multiplayer canvas with comments, presence, and cursors built on our dedicated React Flow library: https://velt-reactflow-crdt-demo.vercel.app/ (source: https://github.com/velt-js/velt-reactflow-crdt-demo, docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/reactflow).
 >
-> 2. **Svelte Flow:** noticed svelteflow.dev doesn't have a multiplayer guide yet. Would you be open to porting the React Flow one (third-party table included)? We'd be glad to help — drafting the page, building a Svelte Flow example, whatever is useful.
+> 2. **Svelte Flow:** noticed svelteflow.dev doesn't have a multiplayer guide yet. If you're ever interested in porting the React Flow one (third-party table included), we'd love to collaborate — we don't have a Svelte Flow integration today, but we'd be open to building one to support it.
 >
 > Cheers,
 > Yoen — Velt
