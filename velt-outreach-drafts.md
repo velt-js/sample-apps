@@ -52,11 +52,12 @@ Ready-to-send messages, form submissions, and PR diffs for the top 10 targets in
 
 > Hi BlockNote team,
 >
-> I'm Yoen from Velt (velt.dev) — we build a collaboration SDK (comments, presence, cursors, and a managed Yjs backend). We maintain a dedicated BlockNote integration and would love to be listed in the "Yjs Providers" section of your collaboration docs, alongside Liveblocks, PartyKit, and Y-Sweet:
+> I'm Yoen from Velt (velt.dev) — we build a collaboration SDK (comments, presence, cursors, and a managed Yjs backend). Velt is a Yjs connection provider — we're listed in the official Yjs README (https://github.com/yjs/yjs) — so we slot directly into BlockNote's existing Yjs-based collaboration. We maintain a dedicated BlockNote integration and would love to be listed in the "Yjs Providers" section of your collaboration docs, alongside Liveblocks, PartyKit, and Y-Sweet:
 >
 > - Integration docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/blocknote
 > - Live demo: https://velt-blocknote-crdt-demo.vercel.app/
 > - Library page: https://velt.dev/libraries/blocknote
+> - Yjs provider (listed in yjs/yjs README): https://github.com/yjs/yjs
 >
 > For context, we're listed on React Flow's multiplayer guide under "Third Party Libraries and Services" (reactflow.dev/learn/advanced-use/multiplayer), and our BlockNote plugin entry was just merged into awesome-blocknote.
 >
@@ -128,7 +129,7 @@ Ready-to-send messages, form submissions, and PR diffs for the top 10 targets in
 | Work email | yoen@velt.dev |
 | Message | Hi — I'm Yoen from Velt (velt.dev). We make a collaboration SDK with a dedicated AG Grid integration: cell-level threaded comments with aggregation, presence, and live cursors (docs: docs.velt.dev/integrations/ag-grid). I've just opened a PR adding Velt to your community Tools & Extensions directory (alongside extensions like AdapTable) — flagging it here so it reaches the right person, and happy to adjust anything. We'd also be open to a deeper partnership conversation if useful. Thanks! |
 
-**✅ Done:** [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) opened 2026-06-15 with the JSON entry + a 544×296 `velt.webp` branded card (matching the landscape preview-image convention, e.g. plotly/adaptable). Optional next step: a parallel heads-up via the [contact form](https://www.ag-grid.com/about/) using the message below.
+**✅ Done:** [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) opened 2026-06-15 with the JSON entry + a 544×296 `velt.webp` branded card (matching the landscape preview-image convention, e.g. plotly/adaptable). Parallel heads-up via the [contact form](https://www.ag-grid.com/about/) **submitted** 2026-06-15 (message below).
 
 ---
 
@@ -267,7 +268,7 @@ Hosted backends like [Velt](https://docs.velt.dev/realtime-collaboration/crdt/ov
 | 2 | BlockNote | Send email | none — ready |
 | 3 | SlateJS | ✅ Done — PR #6067 merged 2026-06-13 | none — no Slack needed |
 | 4 | Ace | ✅ Done — [PR #5981](https://github.com/ajaxorg/ace/pull/5981) open | awaiting review |
-| 5 | AG Grid | ✅ Done — [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) open (+ optional contact-form heads-up) | awaiting review |
+| 5 | AG Grid | ✅ Done — [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) open + contact form submitted | awaiting review |
 | 6 | xyflow | Contact form | none — ready |
 | 7 | PlateJS | ✅ Discord message sent | PR to follow on reply |
 | 8 | Highcharts | Send email | verify hello@highsoft.com on-page |

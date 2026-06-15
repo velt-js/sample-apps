@@ -409,7 +409,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "AG Grid",
-    primary: "✅ Opened — PR #14075 (JSON + velt.webp). Optional contact-form heads-up",
+    primary: "✅ Opened — PR #14075 (JSON + velt.webp) + contact form submitted",
     primaryUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
     repoPath: "ag-grid/ag-grid → …/community/tools-extensions.json",
     community: "GitHub issues",
@@ -799,11 +799,12 @@ Hi Kevin — small one: this mirrors Velt's existing README Providers entry onto
     subject: "Adding Velt to the Yjs Providers list in your collaboration docs?",
     body: `Hi BlockNote team,
 
-I'm Yoen from Velt (velt.dev) — we build a collaboration SDK (comments, presence, cursors, and a managed Yjs backend). We maintain a dedicated BlockNote integration and would love to be listed in the "Yjs Providers" section of your collaboration docs, alongside Liveblocks, PartyKit, and Y-Sweet:
+I'm Yoen from Velt (velt.dev) — we build a collaboration SDK (comments, presence, cursors, and a managed Yjs backend). Velt is a Yjs connection provider — we're listed in the official Yjs README (https://github.com/yjs/yjs) — so we slot directly into BlockNote's existing Yjs-based collaboration. We maintain a dedicated BlockNote integration and would love to be listed in the "Yjs Providers" section of your collaboration docs, alongside Liveblocks, PartyKit, and Y-Sweet:
 
 - Integration docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/blocknote
 - Live demo: https://velt-blocknote-crdt-demo.vercel.app/
 - Library page: https://velt.dev/libraries/blocknote
+- Yjs provider (listed in yjs/yjs README): https://github.com/yjs/yjs
 
 For context, we're listed on React Flow's multiplayer guide under "Third Party Libraries and Services" (reactflow.dev/learn/advanced-use/multiplayer), and our BlockNote plugin entry was just merged into awesome-blocknote.
 
@@ -842,9 +843,9 @@ Matches the existing list format; happy to shorten the label if preferred.`,
   {
     target: "AG Grid",
     channel: "GitHub PR",
-    to: "ag-grid/ag-grid → tools-extensions.json (+ optional contact-form heads-up)",
+    to: "ag-grid/ag-grid → tools-extensions.json (+ contact form submitted)",
     toUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
-    done: "PR #14075 opened 2026-06-15 (JSON + velt.webp) — awaiting review",
+    done: "PR #14075 open (JSON + velt.webp) + contact form submitted — awaiting review",
     subject: "PR title: docs(community): add Velt to Tools & Extensions",
     body: `Adds Velt to the community Tools & Extensions directory as an Extension. Velt adds cell-level commenting (with aggregation), presence, and live cursors on top of AG Grid.
 
