@@ -14,7 +14,6 @@ import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { TipTapComponentProps } from './types'
 import { initialContent } from './constants'
-import { InlineH1, InlineH2, InlineH3 } from './extensions'
 // [Velt] Inline per-edit suggestion engine for the body (Google-Docs style):
 // each edit is wrapped in deletion (strikethrough) / insertion (underline) marks
 // and committed as its own Velt suggestion carrying the real old → new diff.
@@ -24,15 +23,16 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: false,
+        // Real block headings (h1–h3). Inline styled-span "headings" were the
+        // source of a track-changes bug: editing text inside a styled inline
+        // span makes the browser emit a whole-span replace per keystroke, which
+        // the suggestion engine captured as "delete entire heading → reinsert".
+        heading: { levels: [1, 2, 3] },
       }),
       TextAlign.configure({
-        types: ['paragraph'],
+        types: ['paragraph', 'heading'],
       }),
       Underline,
-      InlineH1,
-      InlineH2,
-      InlineH3,
       TiptapVeltComments, // [Velt] Registers TipTap extension that enables comment markers and selection tracking in the editor
       ...SuggestionExtensions(), // [Velt] Inline suggestion marks + ProseMirror plugin (tracks each body edit)
     ],

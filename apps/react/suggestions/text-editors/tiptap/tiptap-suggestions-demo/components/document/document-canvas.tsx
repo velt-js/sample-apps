@@ -21,7 +21,7 @@ export default function DocumentCanvas() {
   const scrollToHeading = useCallback((headingText: string) => {
     if (!scrollContainerRef.current) return
 
-    const headings = scrollContainerRef.current.querySelectorAll('[data-heading]')
+    const headings = scrollContainerRef.current.querySelectorAll('h1, h2, h3')
     const targetHeading = Array.from(headings).find(
       (heading) => heading.textContent?.toLowerCase().trim() === headingText.toLowerCase().trim()
     )
