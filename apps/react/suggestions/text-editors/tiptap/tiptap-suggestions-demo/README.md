@@ -82,7 +82,7 @@ tiptap-suggestions-demo/
 │   │   ├── OpenSuggestionsPanel.tsx # Lists open suggestions + comment threads
 │   │   ├── ProposalContext.tsx      # Proposal state + writeField
 │   │   ├── ProposalFields.tsx       # Metadata fields tagged as suggestion targets
-│   │   ├── SuggestionModeToggle.tsx # Enable/disable suggestion mode
+│   │   ├── SuggestionModeIndicator.tsx # Auto-enables suggestion mode (always on)
 │   │   └── types.ts                 # Proposal model + target ids
 │   ├── theme/
 │   │   ├── ThemeContext.tsx         # Light/dark/system theme provider

@@ -27,7 +27,7 @@ import bubbleMenuToolbarContent from '../../../react/suggestions/text-editors/ti
 import suggestionsTypesContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/types.ts?raw'
 import proposalContextContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/ProposalContext.tsx?raw'
 import proposalFieldsContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/ProposalFields.tsx?raw'
-import suggestionModeToggleContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/SuggestionModeToggle.tsx?raw'
+import suggestionModeIndicatorContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/SuggestionModeIndicator.tsx?raw'
 import openSuggestionsPanelContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/OpenSuggestionsPanel.tsx?raw'
 import applySuggestionsContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/ApplySuggestions.tsx?raw'
 
@@ -68,7 +68,7 @@ export const codeFiles: SampleCodeFile[] = [
   { path: `${BASE}/components/suggestions/types.ts`, language: 'typescript', content: codeContent.suggestionsTypesContent },
   { path: `${BASE}/components/suggestions/ProposalContext.tsx`, language: 'typescript', content: codeContent.proposalContextContent },
   { path: `${BASE}/components/suggestions/ProposalFields.tsx`, language: 'typescript', content: codeContent.proposalFieldsContent },
-  { path: `${BASE}/components/suggestions/SuggestionModeToggle.tsx`, language: 'typescript', content: codeContent.suggestionModeToggleContent },
+  { path: `${BASE}/components/suggestions/SuggestionModeIndicator.tsx`, language: 'typescript', content: codeContent.suggestionModeIndicatorContent },
   { path: `${BASE}/components/suggestions/OpenSuggestionsPanel.tsx`, language: 'typescript', content: codeContent.openSuggestionsPanelContent },
   { path: `${BASE}/components/suggestions/ApplySuggestions.tsx`, language: 'typescript', content: codeContent.applySuggestionsContent }
 ]

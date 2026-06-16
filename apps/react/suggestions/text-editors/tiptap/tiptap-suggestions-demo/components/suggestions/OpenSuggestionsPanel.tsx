@@ -23,8 +23,8 @@ export default function OpenSuggestionsPanel() {
 
       {suggestions.length === 0 ? (
         <div style={S.empty}>
-          No suggestions yet. Switch to <strong>Suggesting</strong> in the header,
-          then edit a field — or the article body — to propose a change.
+          No suggestions yet. Edit a field — or the article body — to propose a
+          change; every edit is captured as a <strong>suggestion</strong>.
         </div>
       ) : (
         <ul style={S.list}>
