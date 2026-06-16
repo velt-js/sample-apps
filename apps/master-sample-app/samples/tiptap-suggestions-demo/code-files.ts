@@ -30,6 +30,14 @@ import proposalFieldsContent from '../../../react/suggestions/text-editors/tipta
 import suggestionModeIndicatorContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/SuggestionModeIndicator.tsx?raw'
 import openSuggestionsPanelContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/OpenSuggestionsPanel.tsx?raw'
 import applySuggestionsContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/suggestions/ApplySuggestions.tsx?raw'
+import inlineCoreExtensionContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/core/SuggestionExtension.ts?raw'
+import inlineCorePluginContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/core/plugin.ts?raw'
+import inlineCoreSuggestionMarkContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/core/suggestionMark.ts?raw'
+import inlineCoreTypesContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/core/types.ts?raw'
+import inlineCoreTargetIdsContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/core/targetIds.ts?raw'
+import inlineBridgeContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/velt/VeltSuggestionBridge.tsx?raw'
+import inlineSchedulerContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/velt/commitScheduler.ts?raw'
+import inlineTargetGettersContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/suggestion/velt/useTargetGetters.ts?raw'
 
 export const codeFiles: SampleCodeFile[] = [
   // App
@@ -70,5 +78,15 @@ export const codeFiles: SampleCodeFile[] = [
   { path: `${BASE}/components/suggestions/ProposalFields.tsx`, language: 'typescript', content: codeContent.proposalFieldsContent },
   { path: `${BASE}/components/suggestions/SuggestionModeIndicator.tsx`, language: 'typescript', content: codeContent.suggestionModeIndicatorContent },
   { path: `${BASE}/components/suggestions/OpenSuggestionsPanel.tsx`, language: 'typescript', content: codeContent.openSuggestionsPanelContent },
-  { path: `${BASE}/components/suggestions/ApplySuggestions.tsx`, language: 'typescript', content: codeContent.applySuggestionsContent }
+  { path: `${BASE}/components/suggestions/ApplySuggestions.tsx`, language: 'typescript', content: codeContent.applySuggestionsContent },
+
+  // Inline body suggestion engine (Google-Docs style): marks + ProseMirror plugin + Velt bridge
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/core/SuggestionExtension.ts`, language: 'typescript', content: codeContent.inlineCoreExtensionContent },
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/core/plugin.ts`, language: 'typescript', content: codeContent.inlineCorePluginContent },
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/core/suggestionMark.ts`, language: 'typescript', content: codeContent.inlineCoreSuggestionMarkContent },
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/core/types.ts`, language: 'typescript', content: codeContent.inlineCoreTypesContent },
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/core/targetIds.ts`, language: 'typescript', content: codeContent.inlineCoreTargetIdsContent },
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/velt/VeltSuggestionBridge.tsx`, language: 'typescript', content: codeContent.inlineBridgeContent },
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/velt/commitScheduler.ts`, language: 'typescript', content: codeContent.inlineSchedulerContent },
+  { path: `${BASE}/components/document/TipTapComponent/suggestion/velt/useTargetGetters.ts`, language: 'typescript', content: codeContent.inlineTargetGettersContent }
 ]

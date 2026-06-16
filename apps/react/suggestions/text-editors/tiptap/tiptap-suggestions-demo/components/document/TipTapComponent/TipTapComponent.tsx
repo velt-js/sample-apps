@@ -8,18 +8,17 @@ import Underline from '@tiptap/extension-underline'
 import { useEffect } from 'react'
 import {
   useCommentAnnotations,
-  useRegisterTarget,
-  useUnregisterTarget,
   useSuggestionModeState,
-  useSuggestionEventCallback,
-  usePendingSuggestion,
 } from '@veltdev/react' // [Velt] Comments + Suggestions hooks
 import { TiptapVeltComments, addComment, renderComments } from '@veltdev/tiptap-velt-comments' // [Velt] TipTap extension and utilities for integrating Velt comments into the editor
 import { BubbleMenuToolbar } from './ui/BubbleMenuToolbar'
 import { TipTapComponentProps } from './types'
 import { initialContent } from './constants'
 import { InlineH1, InlineH2, InlineH3 } from './extensions'
-import { TARGET } from '@/components/suggestions/types'
+// [Velt] Inline per-edit suggestion engine for the body (Google-Docs style):
+// each edit is wrapped in deletion (strikethrough) / insertion (underline) marks
+// and committed as its own Velt suggestion carrying the real old → new diff.
+import { SuggestionExtensions, VeltSuggestionBridge } from './suggestion'
 
 export default function TipTapComponent({ scrollContainerRef }: TipTapComponentProps) {
   const editor = useEditor({
@@ -35,6 +34,7 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
       InlineH2,
       InlineH3,
       TiptapVeltComments, // [Velt] Registers TipTap extension that enables comment markers and selection tracking in the editor
+      ...SuggestionExtensions(), // [Velt] Inline suggestion marks + ProseMirror plugin (tracks each body edit)
     ],
     content: initialContent,
     immediatelyRender: false, // Prevents SSR hydration mismatches by only rendering on client
@@ -48,40 +48,10 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
     }
   }, [editor, commentAnnotations])
 
-  // ── [Velt] The editor body as a Suggestion target ──────────────────────────
-  // Register the editor as a complex target with a getter returning its live
-  // HTML. When suggestion mode is on, focusing the body snapshots oldValue and
-  // blurring commits one suggestion (whole-body old → new). Comments still work
-  // (selecting text doesn't change content, so it never creates a suggestion).
+  // Subtle accent while suggesting mode is on (always on in this demo). Per-edit
+  // pending state is shown inline (dashed strikethrough/underline), not as a
+  // whole-body badge.
   const suggesting = useSuggestionModeState() ?? false
-  const bodyPending = usePendingSuggestion(TARGET.body)
-  const { registerTarget } = useRegisterTarget()
-  const { unregisterTarget } = useUnregisterTarget()
-
-  useEffect(() => {
-    if (!editor) return
-    registerTarget({ targetId: TARGET.body, getter: () => editor.getHTML() })
-    return () => unregisterTarget(TARGET.body)
-  }, [editor, registerTarget, unregisterTarget])
-
-  // Apply / revert body suggestions on the editor. Idempotent: only sets
-  // content when it actually differs, so re-fired events are harmless.
-  const approvedEvent = useSuggestionEventCallback('suggestionApproved')
-  const rejectedEvent = useSuggestionEventCallback('suggestionRejected')
-
-  useEffect(() => {
-    const s = approvedEvent?.suggestion
-    if (!editor || !s || s.targetId !== TARGET.body) return
-    const next = s.newValue as string
-    if (editor.getHTML() !== next) editor.commands.setContent(next)
-  }, [approvedEvent, editor])
-
-  useEffect(() => {
-    const s = rejectedEvent?.suggestion
-    if (!editor || !s || s.targetId !== TARGET.body) return
-    const prev = s.oldValue as string
-    if (editor.getHTML() !== prev) editor.commands.setContent(prev)
-  }, [rejectedEvent, editor])
 
   const addTiptapVeltComment = () => {
     if (editor) {
@@ -99,44 +69,23 @@ export default function TipTapComponent({ scrollContainerRef }: TipTapComponentP
 
   return (
     <div className="w-full" data-name="Tiptap / Suggestions Body">
+      {/* [Velt] Renderless: enables the inline suggestion plugin, sets the
+          author, debounce-commits each edit as a suggestion, and applies/reverts
+          inline marks on accept/reject. */}
+      <VeltSuggestionBridge editor={editor} />
+
       <div
         className="relative border border-solid rounded-[16px] p-[42px_56px_56px_56px] min-h-[460px] transition-shadow"
         style={{
           backgroundColor: 'var(--app-surface)',
-          borderColor: bodyPending ? '#f59e0b' : suggesting ? '#6366f1' : 'var(--app-surface-border)',
-          boxShadow: bodyPending
-            ? '0 0 0 1px rgba(245,158,11,0.55)'
-            : suggesting
-              ? '0 0 0 1px rgba(99,102,241,0.45)'
-              : 'none',
+          borderColor: suggesting ? '#6366f1' : 'var(--app-surface-border)',
+          boxShadow: suggesting ? '0 0 0 1px rgba(99,102,241,0.45)' : 'none',
         }}
       >
-        {bodyPending && (
-          <span
-            title={bodyPending.summary ?? undefined}
-            className="absolute top-4 right-4 z-10"
-            style={{
-              background: '#f59e0b',
-              color: '#1a1205',
-              fontSize: 9,
-              fontWeight: 700,
-              letterSpacing: '.08em',
-              padding: '2px 7px',
-              borderRadius: 4,
-            }}
-          >
-            PENDING
-          </span>
-        )}
-
-        {/* Tagging this wrapper makes the editor a suggestion target — the SDK
-            walks up from the edited contenteditable to find this targetId. */}
-        <div data-velt-suggestion-target={TARGET.body}>
-          <EditorContent
-            editor={editor}
-            className="tiptap-editor-content prose prose-invert max-w-none"
-          />
-        </div>
+        <EditorContent
+          editor={editor}
+          className="tiptap-editor-content prose prose-invert max-w-none"
+        />
 
         {editor && (
           <BubbleMenu editor={editor} options={{ placement: 'top', offset: 8 }}>

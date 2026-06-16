@@ -44,10 +44,24 @@ export default function DocumentCanvas() {
 
       <div ref={scrollContainerRef} className="h-screen overflow-y-auto">
         <div className="flex justify-center pt-[64px] px-4 pb-28">
-          <div className="w-full max-w-[850px] flex flex-col gap-5">
-            <ProposalFields />
-            <TipTapComponent scrollContainerRef={scrollContainerRef} />
-            <OpenSuggestionsPanel />
+          {/* Editor (flex-1) left, narrow approval rail right. The pair is
+              centered and capped, so the editor sits left-of-center. */}
+          <div className="w-full max-w-[1284px] flex items-start gap-6">
+            {/* LEFT: proposal fields + editor, stacked */}
+            <div className="flex-1 min-w-0 max-w-[820px] flex flex-col gap-5">
+              <ProposalFields />
+              <TipTapComponent scrollContainerRef={scrollContainerRef} />
+              {/* Below lg the sticky rail is hidden; show the panel stacked here */}
+              <div className="lg:hidden">
+                <OpenSuggestionsPanel />
+              </div>
+            </div>
+
+            {/* RIGHT: narrow approval rail. sticky so it stays in view while the
+                long body scrolls; top offset clears the Header icon cluster. */}
+            <div className="hidden lg:block w-[440px] shrink-0 sticky top-[56px] self-start">
+              <OpenSuggestionsPanel />
+            </div>
           </div>
         </div>
       </div>

@@ -14,6 +14,8 @@ import { FIELD_LABEL, TARGET } from './types'
 export default function OpenSuggestionsPanel() {
   const suggestions = useSuggestions() ?? []
   const pendingCount = suggestions.filter((s) => s.status === 'pending').length
+  // Newest first — sort by creation time descending.
+  const ordered = [...suggestions].sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
 
   return (
     <div style={S.card}>
@@ -28,23 +30,15 @@ export default function OpenSuggestionsPanel() {
         </div>
       ) : (
         <ul style={S.list}>
-          {suggestions.map((s) => (
+          {ordered.map((s) => (
             <li key={s.annotationId} style={S.listItem}>
               <div style={S.changeHeader}>
-                <span style={S.changeLabel}>{FIELD_LABEL[s.targetId] ?? s.targetId}</span>
+                <span style={S.changeLabel}>{labelFor(s)}</span>
                 <span style={statusStyle(s.status)}>{s.status}</span>
               </div>
 
               <div style={S.diff}>
-                {s.targetId === TARGET.body ? (
-                  <span style={S.summary}>{s.summary ?? 'Edited the article body'}</span>
-                ) : (
-                  <>
-                    <span style={S.oldValue}>{truncate(String(s.oldValue))}</span>
-                    <span style={S.arrow}>→</span>
-                    <span style={S.newValue}>{truncate(String(s.newValue))}</span>
-                  </>
-                )}
+                <Diff s={s} />
               </div>
 
               <VeltCommentThread
@@ -56,6 +50,64 @@ export default function OpenSuggestionsPanel() {
         </ul>
       )}
     </div>
+  )
+}
+
+// A suggestion can come from a metadata field (title/status/category/date) or
+// from an inline body edit produced by the Tiptap suggestion engine. Inline
+// body edits carry `metadata.kind` and the real diff in `metadata.oldValue` /
+// `metadata.newValue` (the SDK's top-level oldValue is empty for those).
+type SuggestionLike = {
+  targetId: string
+  oldValue: unknown
+  newValue: unknown
+  summary: string | null
+  metadata?: Record<string, unknown>
+}
+
+function isInlineBody(s: SuggestionLike): boolean {
+  return typeof s.metadata?.kind === 'string'
+}
+
+function labelFor(s: SuggestionLike): string {
+  if (isInlineBody(s)) return 'Article body'
+  return FIELD_LABEL[s.targetId] ?? s.targetId
+}
+
+function Diff({ s }: { s: SuggestionLike }) {
+  // Inline body edit — read the real per-edit diff from metadata.
+  if (isInlineBody(s)) {
+    const kind = String(s.metadata?.kind)
+    if (kind === 'format-add' || kind === 'format-remove') {
+      return <span style={S.summary}>{s.summary ?? 'Formatting change'}</span>
+    }
+    const oldV = String(s.metadata?.oldValue ?? '')
+    const newV = String(s.metadata?.newValue ?? '')
+    return (
+      <>
+        {oldV && <span style={S.oldValue}>{truncate(oldV)}</span>}
+        {oldV && newV && <span style={S.arrow}>→</span>}
+        {newV && <span style={S.newValue}>{truncate(newV)}</span>}
+      </>
+    )
+  }
+  // Date field — neutral before → after (no strikethrough).
+  if (s.targetId === TARGET.publishDate) {
+    return (
+      <>
+        <span style={S.oldValueNeutral}>{truncate(String(s.oldValue))}</span>
+        <span style={S.arrow}>→</span>
+        <span style={S.newValue}>{truncate(String(s.newValue))}</span>
+      </>
+    )
+  }
+  // Text field (title/status/category) — strikethrough old → new.
+  return (
+    <>
+      <span style={S.oldValue}>{truncate(String(s.oldValue))}</span>
+      <span style={S.arrow}>→</span>
+      <span style={S.newValue}>{truncate(String(s.newValue))}</span>
+    </>
   )
 }
 
@@ -89,7 +141,7 @@ const S: Record<string, CSSProperties> = {
     background: 'var(--app-surface)',
     border: '1px solid var(--app-surface-border)',
     borderRadius: 16,
-    padding: '20px 24px 24px',
+    padding: '16px 14px 18px',
   },
   sectionLabel: {
     fontSize: 11,
@@ -110,12 +162,19 @@ const S: Record<string, CSSProperties> = {
     padding: '20px 16px',
     textAlign: 'center',
   },
-  list: { padding: 0, margin: 0, listStyle: 'none' },
+  list: {
+    padding: 0,
+    margin: 0,
+    listStyle: 'none',
+    maxHeight: 'calc(100vh - 160px)',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+  },
   listItem: {
     listStyle: 'none',
     border: '1px solid var(--app-surface-border)',
     borderRadius: 12,
-    padding: 14,
+    padding: 12,
     marginBottom: 12,
     background: 'var(--app-bg)',
   },
@@ -145,6 +204,16 @@ const S: Record<string, CSSProperties> = {
     background: 'rgba(255,113,98,0.10)',
     padding: '2px 6px',
     borderRadius: 4,
+    overflowWrap: 'anywhere',
+    minWidth: 0,
+  },
+  oldValueNeutral: {
+    color: 'var(--app-text-secondary)',
+    background: 'var(--app-surface-hover)',
+    padding: '2px 6px',
+    borderRadius: 4,
+    overflowWrap: 'anywhere',
+    minWidth: 0,
   },
   arrow: { color: 'var(--app-text-tertiary)' },
   newValue: {
@@ -153,6 +222,8 @@ const S: Record<string, CSSProperties> = {
     padding: '2px 6px',
     borderRadius: 4,
     fontWeight: 500,
+    overflowWrap: 'anywhere',
+    minWidth: 0,
   },
   summary: { color: 'var(--app-text-secondary)', fontStyle: 'italic' },
 }

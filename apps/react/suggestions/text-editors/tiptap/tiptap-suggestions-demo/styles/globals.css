@@ -195,3 +195,66 @@
   user-select: none;
   white-space: nowrap;
 }
+
+/* Suggestion threads render inline in the narrow approval rail. Force the Velt
+   thread host to fill its container so it doesn't render at intrinsic width and
+   overflow the ~320px rail. */
+velt-comment-thread,
+.v-comment-thread-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ── Inline suggestion marks (Google-Docs "suggesting" style) ────────────────
+   The editor body wraps each pending edit in a deletion (strikethrough) + an
+   insertion (underline) span, colored per author via --velt-suggestion-color.
+   Pending = dashed; committed = solid. */
+.velt-suggestion {
+  --color: var(--velt-suggestion-color, #1976d2);
+}
+
+.velt-suggestion-deletion {
+  color: var(--color);
+  background-color: color-mix(in srgb, var(--color) 8%, transparent);
+  text-decoration: line-through;
+  text-decoration-color: var(--color);
+  text-decoration-thickness: 2px;
+  padding: 0 1px;
+}
+
+.velt-suggestion-insertion {
+  color: var(--color);
+  background-color: color-mix(in srgb, var(--color) 8%, transparent);
+  text-decoration: underline;
+  text-decoration-color: var(--color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  padding: 0 1px;
+}
+
+/* Pending = dashed, faint background. Committed = solid. */
+.velt-suggestion-pending .velt-suggestion-deletion,
+.velt-suggestion-pending .velt-suggestion-insertion {
+  text-decoration-style: dashed;
+  background-color: color-mix(in srgb, var(--color) 5%, transparent);
+}
+
+.velt-suggestion-committed .velt-suggestion-deletion,
+.velt-suggestion-committed .velt-suggestion-insertion {
+  text-decoration-style: solid;
+}
+
+/* Format-change kinds: the wrapping span itself carries the visual.
+   No inner deletion/insertion span is present. */
+.velt-suggestion[data-velt-suggestion-kind="format-add"],
+.velt-suggestion[data-velt-suggestion-kind="format-remove"] {
+  background-color: color-mix(in srgb, var(--color) 7%, transparent);
+  border-bottom: 2px dotted var(--color);
+  padding-bottom: 1px;
+}
+
+.velt-suggestion-committed[data-velt-suggestion-kind="format-add"],
+.velt-suggestion-committed[data-velt-suggestion-kind="format-remove"] {
+  border-bottom-style: solid;
+}

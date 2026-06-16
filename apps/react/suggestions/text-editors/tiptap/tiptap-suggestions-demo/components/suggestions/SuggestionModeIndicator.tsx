@@ -3,13 +3,14 @@
 import { useEffect } from 'react'
 import { useEnableSuggestionMode, useVeltClient } from '@veltdev/react'
 import type { TargetEditDetails } from '@veltdev/types'
-import { FIELD_LABEL, TARGET } from './types'
+import { FIELD_LABEL } from './types'
 
 /**
  * This demo runs in suggestion mode only — there is no "editing" mode. We
  * enable suggestion mode as soon as the Velt client is ready and keep it on, so
- * every edit to a tagged field (or the editor body) becomes a proposed change.
- * The badge is purely informational (not a toggle).
+ * every edit to a tagged field becomes a proposed change. (The article body is
+ * handled separately by the inline Tiptap suggestion engine.) The badge is
+ * purely informational (not a toggle).
  */
 export default function SuggestionModeIndicator() {
   const { client } = useVeltClient()
@@ -19,11 +20,6 @@ export default function SuggestionModeIndicator() {
     if (!client) return
     enableSuggestionMode({
       onTargetEditCommit: ({ targetId, oldValue, newValue }: TargetEditDetails) => {
-        // The body's values are HTML strings — show a friendly summary instead
-        // of dumping markup into the diff.
-        if (targetId === TARGET.body) {
-          return { summary: 'Proposed an edit to the article body' }
-        }
         return {
           summary: `${FIELD_LABEL[targetId] ?? targetId}: "${String(oldValue)}" → "${String(newValue)}"`,
         }

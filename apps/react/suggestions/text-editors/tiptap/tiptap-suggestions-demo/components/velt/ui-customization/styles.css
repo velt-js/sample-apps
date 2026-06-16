@@ -248,6 +248,8 @@ velt-comment-text[comment-available="true"]:hover {
 .svf-thread-card-info {
   flex: 1;
   min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .svf-thread-card-info-header {

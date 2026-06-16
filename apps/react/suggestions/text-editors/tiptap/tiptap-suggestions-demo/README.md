@@ -4,7 +4,12 @@
 
 ## Overview
 
-This demo showcases **suggestion mode on rich text and metadata fields** built using **Tiptap** with **Velt's Suggestions + Comments integration**. When suggestion mode is on, edits aren't written straight to the document — they're captured as proposed changes that a reviewer accepts or rejects from the comment dialog, Google Docs-style. On accept, the app applies the change; on reject, it reverts.
+This demo showcases **Google-Docs-style suggestion mode** built using **Tiptap** with **Velt's Suggestions + Comments integration**. Suggestion mode is always on: edits aren't written straight to the document — they're captured as proposed changes that a reviewer accepts or rejects. On accept, the change is applied; on reject, it reverts.
+
+The demo combines **two suggestion surfaces**:
+
+- **Inline rich-text body** — an inline track-changes engine (under `components/document/TipTapComponent/suggestion/`) wraps every edit in deletion (strikethrough) / insertion (underline) marks and commits each edit cluster as its own Velt suggestion carrying the real `old → new` diff.
+- **Structured metadata fields** — title, status, category, and publish-date inputs tagged with `data-velt-suggestion-target`, captured as suggestions on commit (blur/change).
 
 ## Path
 
@@ -19,13 +24,12 @@ apps/react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/
 ## Features
 
 ### Suggestions Features
-- **Suggestion Mode Toggle**: Flip between normal editing and "Suggesting" from the header
+- **Always-On Suggesting**: Suggestion mode is auto-enabled when the Velt client is ready; the header shows a non-interactive "Suggesting" indicator (not a toggle)
+- **Inline Body Tracking**: Typing in the article body shows as an underline and deletions as a strikethrough, colored per author; each edit cluster is debounce-committed (~2s idle / on blur / when the cursor leaves the block) as its own suggestion
+- **Format Tracking**: Bold / italic / underline / strike changes on a selection become `format-add` / `format-remove` suggestions
 - **Field Targets**: Title, status, category, and publish-date fields are tagged as suggestion targets via `data-velt-suggestion-target`
-- **Rich-Text Body Target**: The whole Tiptap body is registered as a target through a custom getter, so prose edits can be proposed too
-- **Auto-Capture on Commit**: Committing an edit to a tagged target auto-creates a pending suggestion with a human-readable summary
-- **Accept / Reject in the Comment Dialog**: Reviewers act on each suggestion from a customized comment dialog wireframe
-- **Apply on Accept**: Accepted suggestions write `newValue` into app state; rejected ones revert to `oldValue`
-- **Suggestions Panel**: Lists open suggestions with the underlying comment thread
+- **Accept / Reject**: Reviewers act on each suggestion from the comment thread (customized dialog wireframe); on approve the inline mark is replaced with the new value and the field state is written, on reject the mark/field reverts
+- **Suggestions Panel**: Lists open suggestions (body edits and field edits) with the real `old → new` diff and the underlying comment thread
 
 ### Commenting Features
 - **Text Selection Comments**: Highlight any text to add inline comments
@@ -61,18 +65,31 @@ tiptap-suggestions-demo/
 │   └── page.tsx                     # Main page with VeltProvider
 ├── components/
 │   ├── header/
-│   │   └── header.tsx               # Floating top-right controls (suggestion toggle, theme, Velt tools)
+│   │   └── header.tsx               # Floating top-right controls (suggesting indicator, theme, Velt tools)
 │   ├── sidebar/
 │   │   └── sidebar.tsx              # Collapsible Table of Contents (jumps between headings)
 │   ├── velt-logo.tsx                # Velt logo component
 │   ├── document/
 │   │   ├── document-canvas.tsx      # App shell: header, sidebar, fields, editor, panels
 │   │   └── TipTapComponent/
-│   │       ├── TipTapComponent.tsx  # Tiptap editor + Velt comments + body target
+│   │       ├── TipTapComponent.tsx  # Tiptap editor + Velt comments + inline suggestion engine
 │   │       ├── constants.ts         # Initial editor content
 │   │       ├── extensions.ts        # Custom inline heading extensions
 │   │       ├── index.tsx            # Re-exports
 │   │       ├── types.ts             # TypeScript type definitions
+│   │       ├── suggestion/          # Inline track-changes engine for the body
+│   │       │   ├── index.ts         # Barrel: SuggestionExtensions + VeltSuggestionBridge
+│   │       │   ├── core/            # Tiptap-only layer (no @veltdev imports)
+│   │       │   │   ├── SuggestionExtension.ts # Tiptap extension: marks + commands + plugin
+│   │       │   │   ├── plugin.ts             # ProseMirror plugin: rewrites edits into pending clusters
+│   │       │   │   ├── suggestionMark.ts     # Wrapping / insertion / deletion marks
+│   │       │   │   ├── targetIds.ts          # Stable suggestion id helpers
+│   │       │   │   ├── types.ts              # Core types (SuggestionKind, author, clusters)
+│   │       │   │   └── index.ts              # Core barrel
+│   │       │   └── velt/            # Velt integration layer
+│   │       │       ├── VeltSuggestionBridge.tsx # Renderless: mode/author sync, commit, apply/revert
+│   │       │       ├── commitScheduler.ts       # Debounce / blur / cursor-leaves-block commit triggers
+│   │       │       └── useTargetGetters.ts      # registerTarget getters for committed clusters
 │   │       └── ui/
 │   │           ├── BubbleMenuToolbar.tsx # Selection toolbar with comment button
 │   │           ├── ToolbarButton.tsx     # Reusable toolbar button
@@ -121,7 +138,8 @@ tiptap-suggestions-demo/
 - **@tiptap/starter-kit** - Essential Tiptap extensions
 - **@veltdev/react** - Velt collaboration components + Suggestions API hooks
 - **@veltdev/tiptap-velt-comments** - Tiptap-specific comment integration
-- **Velt Suggestions API** - Suggestion mode, targets, accept/reject lifecycle
+- **Velt Suggestions API** - Suggestion mode, targets, commit, accept/reject lifecycle (`useEnableSuggestionMode`, `useRegisterTarget`, `useCommitSuggestion`, `useSuggestions`, `useSuggestionEventCallback`)
+- **Inline suggestion engine** - A self-contained Tiptap track-changes module (`components/document/TipTapComponent/suggestion/`, split into a Velt-agnostic `core/` and a `velt/` integration layer)
 - **Tailwind CSS v3.4** - Styling
 - **TypeScript** - Type safety
 
@@ -162,11 +180,12 @@ pnpm --filter @apps/react-suggestions-text-editors-tiptap-tiptap-suggestions-dem
 
 ### Proposing Changes (Suggestion Mode)
 
-1. **Enable suggestion mode**: Click the **Editing / Suggesting** toggle in the header
-2. **Edit a target**: Change the title, status, category, publish date, or the article body
-3. **Commit the edit**: Blur a text/date field or change a select — the SDK captures it as a pending suggestion
-4. **Review**: Open the comment dialog on the suggestion and click **Accept** or **Reject**
-5. **Result**: Accepted changes are applied to the document; rejected changes revert to the original value
+Suggestion mode is **always on** — there is no editing mode to switch into. The header shows a "Suggesting" indicator.
+
+1. **Edit the body**: Type or delete in the article — your text shows as an underline (insertion) or strikethrough (deletion) in your color. After ~2s idle (or on blur / when the cursor leaves the block) the edit is committed as a suggestion and the underline turns solid.
+2. **Edit a field**: Change the title, status, category, or publish date — blurring the field (or changing a select) captures it as a suggestion.
+3. **Review**: Open the suggestion's comment thread (in the panel or inline) and click **Accept** or **Reject**.
+4. **Result**: Accepted changes are applied to the document; rejected changes revert to the original value.
 
 ### Adding Comments
 
@@ -198,10 +217,10 @@ If Velt features don't appear:
 
 ### Suggestions Not Capturing
 If edits aren't becoming suggestions:
-1. Confirm suggestion mode is **on** (toggle shows "Suggesting")
-2. Verify the field has a `data-velt-suggestion-target` attribute
-3. Ensure the value actually changed — no-op edits never create a suggestion
-4. Check that the target getter reads live edit-time state (not post-commit state)
+1. Confirm the header shows the **"Suggesting"** indicator (suggestion mode auto-enables once the Velt client is ready)
+2. For the body: ensure `SuggestionExtensions()` is in the editor's `extensions` and `<VeltSuggestionBridge editor={editor} />` is mounted; body edits commit after ~2s idle / on blur / when the cursor leaves the block
+3. For fields: verify the control has a `data-velt-suggestion-target` attribute and the value actually changed (no-op edits never create a suggestion)
+4. Check the browser console for `[velt-suggestion] commit failed` errors
 
 ### Comments Not Appearing
 If comments aren't showing:
