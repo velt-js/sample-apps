@@ -1,0 +1,28 @@
+<svg width="600" height="337" viewBox="0 0 600 337" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="337" fill="#f4f4f5"/>
+  <!-- document card -->
+  <rect x="150" y="40" width="300" height="257" rx="12" fill="#ffffff" stroke="#e4e4e7"/>
+  <!-- metadata field row (a suggestion target, pending) -->
+  <text x="178" y="74" font-family="ui-monospace, Menlo, monospace" font-size="10" fill="#9ca3af">TITLE</text>
+  <rect x="178" y="82" width="244" height="26" rx="6" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-dasharray="4 3"/>
+  <rect x="188" y="92" width="150" height="7" rx="3" fill="#e7dcc2"/>
+  <rect x="372" y="88" width="42" height="14" rx="4" fill="#f59e0b"/>
+  <text x="393" y="98" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="7" font-weight="700" fill="#1a1205">PENDING</text>
+  <!-- body text lines -->
+  <rect x="178" y="128" width="244" height="8" rx="4" fill="#ececef"/>
+  <rect x="178" y="146" width="244" height="8" rx="4" fill="#ececef"/>
+  <rect x="178" y="164" width="190" height="8" rx="4" fill="#ececef"/>
+  <!-- suggestion review row: status + accept/reject -->
+  <rect x="178" y="196" width="244" height="64" rx="8" fill="#fafafa" stroke="#e4e4e7"/>
+  <rect x="190" y="208" width="58" height="15" rx="7" fill="rgba(99,102,241,0.14)"/>
+  <text x="219" y="218" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="7" font-weight="700" fill="#6366f1">PENDING</text>
+  <!-- accept -->
+  <rect x="300" y="206" width="54" height="20" rx="6" fill="#198f65"/>
+  <path d="M312 216 l4 4 l8 -9" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- reject -->
+  <rect x="360" y="206" width="50" height="20" rx="6" fill="none" stroke="rgba(255,113,98,0.7)"/>
+  <path d="M378 211 l14 10 M392 211 l-14 10" stroke="#ff7162" stroke-width="2" stroke-linecap="round"/>
+  <rect x="190" y="236" width="160" height="7" rx="3" fill="#ececef"/>
+  <!-- label -->
+  <text x="300" y="322" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#52525b">tiptap · suggestions</text>
+</svg>

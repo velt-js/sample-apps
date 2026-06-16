@@ -56,6 +56,11 @@ export function getThumbnail(parsed: ParsedSample): Thumbnail | null {
     return null
   }
 
+  if (feature === "suggestions") {
+    if (appType === "text-editors") return pair(`suggestion-${library}`)
+    return null
+  }
+
   if (feature === "realtime") {
     // Single Editor Mode demo shares the tiptap editor visual with the CRDT demo
     if (appType === "text-editors" && library === "tiptap") return pair("crdt-tiptap")
