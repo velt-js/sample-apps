@@ -7,9 +7,9 @@ import { FIELD_LABEL, TARGET } from './types'
 /**
  * Lists every Suggestion on the document. For each one we show the actual
  * pending change (label + old → new diff, or a summary for the body), then a
- * <VeltCommentThread dialogVariant="suggestion-mode-thread"> for the Accept /
- * Reject actions + discussion. Reviewers act here; the outcome flows to
- * <ApplySuggestions /> (fields) and TipTapComponent (body).
+ * <VeltCommentThread> — Velt's default comment dialog — for the Accept / Reject
+ * actions + discussion. Reviewers act here; the outcome flows to the inline
+ * suggestion bridge (body) and <ApplySuggestions /> (fields).
  */
 export default function OpenSuggestionsPanel() {
   const suggestions = useSuggestions() ?? []
@@ -41,10 +41,7 @@ export default function OpenSuggestionsPanel() {
                 <Diff s={s} />
               </div>
 
-              <VeltCommentThread
-                annotationId={s.annotationId}
-                dialogVariant="suggestion-mode-thread"
-              />
+              <VeltCommentThread annotationId={s.annotationId} />
             </li>
           ))}
         </ul>

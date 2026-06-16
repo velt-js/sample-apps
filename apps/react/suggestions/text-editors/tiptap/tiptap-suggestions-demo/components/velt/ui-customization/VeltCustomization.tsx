@@ -3,7 +3,6 @@ import { useVeltClient, VeltWireframe } from "@veltdev/react";
 import VeltCommentToolWf from "./VeltCommentToolWf";
 import VeltNotificationsToolWf from "./VeltNotificationsToolWf";
 import VeltSidebarButtonWf from "./VeltSidebarButtonWf";
-import VeltCommentDialogSuggestionModeWf from "./VeltCommentDialogSuggestionModeWf";
 import { useEffect } from "react";
 import { useTheme } from "@/components/theme/ThemeContext";
 
@@ -22,7 +21,6 @@ export function VeltCustomization() {
       <VeltCommentToolWf />
       <VeltNotificationsToolWf />
       <VeltSidebarButtonWf />
-      <VeltCommentDialogSuggestionModeWf />
     </VeltWireframe>
   );
 }

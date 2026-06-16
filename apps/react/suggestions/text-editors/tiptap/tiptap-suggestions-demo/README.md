@@ -28,7 +28,7 @@ apps/react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/
 - **Inline Body Tracking**: Typing in the article body shows as an underline and deletions as a strikethrough, colored per author; each edit cluster is debounce-committed (~2s idle / on blur / when the cursor leaves the block) as its own suggestion
 - **Format Tracking**: Bold / italic / underline / strike changes on a selection become `format-add` / `format-remove` suggestions
 - **Field Targets**: Title, status, category, and publish-date fields are tagged as suggestion targets via `data-velt-suggestion-target`
-- **Accept / Reject**: Reviewers act on each suggestion from the comment thread (customized dialog wireframe); on approve the inline mark is replaced with the new value and the field state is written, on reject the mark/field reverts
+- **Accept / Reject**: Reviewers act on each suggestion from the comment thread (Velt's default comment dialog); on approve the inline mark is replaced with the new value and the field state is written, on reject the mark/field reverts
 - **Suggestions Panel**: Lists open suggestions (body edits and field edits) with the real `old → new` diff and the underlying comment thread
 
 ### Commenting Features
@@ -106,12 +106,11 @@ tiptap-suggestions-demo/
 │   │   └── ThemeToggle.tsx          # Theme switcher
 │   └── velt/
 │       ├── ui-customization/
-│       │   ├── VeltCommentDialogSuggestionModeWf.tsx # Accept/Reject dialog wireframe
 │       │   ├── VeltCommentToolWf.tsx                 # Customized comment tool
 │       │   ├── VeltCustomization.tsx                 # Velt UI customization wrapper
 │       │   ├── VeltNotificationsToolWf.tsx           # Customized notifications
 │       │   ├── VeltSidebarButtonWf.tsx               # Customized sidebar button
-│       │   └── styles.css                            # Velt CSS variables + dialog styles
+│       │   └── styles.css                            # Velt CSS variables + theme config
 │       ├── VeltCollaboration.tsx     # Velt comments + sidebar + customization
 │       ├── VeltInitializeBotContact.tsx # Registers bot as @-mentionable contact
 │       ├── VeltInitializeDocument.tsx   # Document initialization

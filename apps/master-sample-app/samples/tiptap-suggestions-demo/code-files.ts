@@ -19,7 +19,6 @@ import veltInitializeDocumentContent from '../../../react/suggestions/text-edito
 import veltCollaborationContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/velt/VeltCollaboration.tsx?raw'
 import veltToolsContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/velt/VeltTools.tsx?raw'
 import veltCustomizationContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/velt/ui-customization/VeltCustomization.tsx?raw'
-import veltSuggestionModeWfContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/velt/ui-customization/VeltCommentDialogSuggestionModeWf.tsx?raw'
 import headerContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/header/header.tsx?raw'
 import documentCanvasContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/document-canvas.tsx?raw'
 import tipTapComponentContent from '../../../react/suggestions/text-editors/tiptap/tiptap-suggestions-demo/components/document/TipTapComponent/TipTapComponent.tsx?raw'
@@ -60,9 +59,8 @@ export const codeFiles: SampleCodeFile[] = [
   { path: `${BASE}/components/velt/VeltCollaboration.tsx`, language: 'typescript', content: codeContent.veltCollaborationContent },
   { path: `${BASE}/components/velt/VeltTools.tsx`, language: 'typescript', content: codeContent.veltToolsContent },
 
-  // Custom components (suggestion review dialog)
+  // Velt UI customization
   { path: `${BASE}/components/velt/ui-customization/VeltCustomization.tsx`, language: 'typescript', content: codeContent.veltCustomizationContent },
-  { path: `${BASE}/components/velt/ui-customization/VeltCommentDialogSuggestionModeWf.tsx`, language: 'typescript', content: codeContent.veltSuggestionModeWfContent },
 
   // Header (theme toggle, Velt tools, suggestion-mode toggle)
   { path: `${BASE}/components/header/header.tsx`, language: 'typescript', content: codeContent.headerContent },
