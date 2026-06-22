@@ -34,6 +34,7 @@ export default function Page() {
 
   const prsMerged = SUBMITTED_PRS.filter((pr) => pr.status === "merged").length;
   const prsOpen = SUBMITTED_PRS.filter((pr) => pr.status === "open").length;
+  const prsClosed = SUBMITTED_PRS.filter((pr) => pr.status === "closed").length;
 
   const stats = [
     { value: LIBRARIES.length, label: "Library targets" },
@@ -44,6 +45,7 @@ export default function Page() {
     { value: notViable, label: "Not viable" },
     { value: prsMerged, label: "PRs merged" },
     { value: prsOpen, label: "PRs open" },
+    { value: prsClosed, label: "PRs closed" },
   ];
 
   return (
@@ -114,7 +116,7 @@ export default function Page() {
       </section>
 
       {/* Stats band */}
-      <section className="grid grid-cols-2 gap-px border-b border-rule bg-rule sm:grid-cols-4 lg:grid-cols-8">
+      <section className="grid grid-cols-2 gap-px border-b border-rule bg-rule sm:grid-cols-4 lg:grid-cols-9">
         {stats.map((s) => (
           <div key={s.label} className="bg-paper px-4 py-6 text-center">
             <div className="font-display text-4xl font-light">{s.value}</div>

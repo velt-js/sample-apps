@@ -561,8 +561,8 @@ export const WAVES = [
 
 export type PRStatus = "open" | "merged" | "closed";
 
-/** PR statuses re-checked live via the GitHub API on 2026-06-09. */
-export const PR_STATUS_CHECKED = "June 15, 2026";
+/** PR statuses re-checked live via the GitHub API on 2026-06-22. */
+export const PR_STATUS_CHECKED = "June 22, 2026";
 
 export interface SubmittedPR {
   library: string;
@@ -572,6 +572,7 @@ export interface SubmittedPR {
   prUrl: string;
   status: PRStatus;
   mergedAt?: string;
+  closedAt?: string;
   note?: string;
 }
 
@@ -637,7 +638,8 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     section: "Adapters docs — sharpen description + live demo link",
     pr: "#578",
     prUrl: "https://github.com/vercel/chat/pull/578",
-    status: "open",
+    status: "merged",
+    mergedAt: "June 18, 2026",
   },
   {
     library: "Quill",
@@ -669,7 +671,9 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     section: "Applications",
     pr: "#155",
     prUrl: "https://github.com/ramnes/awesome-mongodb/pull/155",
-    status: "open",
+    status: "closed",
+    closedAt: "June 17, 2026",
+    note: "Closed unmerged — deprioritize the awesome-list fallback; use MongoDB partner program if pursuing MongoDB.",
   },
   {
     library: "CRDT (Velt SDK)",

@@ -35,6 +35,9 @@ export default function SubmittedPRs() {
             {pr.mergedAt && (
               <p className="mt-2 text-xs font-medium text-moss">Merged {pr.mergedAt}</p>
             )}
+            {pr.closedAt && (
+              <p className="mt-2 text-xs font-medium text-signal">Closed {pr.closedAt}</p>
+            )}
             {pr.note && <p className="mt-2 text-xs italic text-signal">{pr.note}</p>}
           </a>
         );

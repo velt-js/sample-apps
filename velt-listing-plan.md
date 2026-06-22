@@ -12,7 +12,7 @@ Goal: get Velt featured/listed on the official sites, GitHub repos, "awesome" li
 
 ## ✅ Submitted PRs — Batch 1 (opened 2026-06-03, from `yoen-velt`)
 
-All opened from `velt-js/sample-apps` integrations; each is a single-line list entry. Statuses re-checked live via GitHub API on 2026-06-15 across all batches (incl. Batch 0 + Batch 3 below): **3 merged, 9 open**.
+All opened from `velt-js/sample-apps` integrations; each is a single-line list entry. Statuses re-checked live via GitHub API on 2026-06-22 across all batches (incl. Batch 0 + Batch 3 below): **4 merged, 7 open, 1 closed unmerged**.
 
 | Library | Repo | Section | PR | Status |
 |---------|------|---------|----|--------|
@@ -26,7 +26,7 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 
 | Library | Repo | Section | PR | Status |
 |---------|------|---------|----|--------|
-| **MongoDB** | `ramnes/awesome-mongodb` | Applications | [#155](https://github.com/ramnes/awesome-mongodb/pull/155) | 🟢 Open |
+| **MongoDB** | `ramnes/awesome-mongodb` | Applications | [#155](https://github.com/ramnes/awesome-mongodb/pull/155) | 🔴 Closed unmerged 2026-06-17 |
 | **CRDT** (Velt SDK) | `alangibson/awesome-crdt` | Implementations → Data Structures | [#14](https://github.com/alangibson/awesome-crdt/pull/14) | 🟢 Open (repo dormant since 2021 — low merge odds) |
 
 ### Batch 0 — Vercel Chat SDK (opened 2026-06-01/02, earlier outreach — pre-dates this plan)
@@ -34,7 +34,7 @@ All opened from `velt-js/sample-apps` integrations; each is a single-line list e
 | Library | Repo | Section | PR | Status |
 |---------|------|---------|----|--------|
 | **Vercel Chat SDK** | `vercel/chat` | Adapters docs (vendor-official adapter) | [#572](https://github.com/vercel/chat/pull/572) | ✅ **Merged** 2026-06-02 |
-| **Vercel Chat SDK** (follow-up) | `vercel/chat` | Adapters docs — sharpen description + live demo link | [#578](https://github.com/vercel/chat/pull/578) | 🟢 Open |
+| **Vercel Chat SDK** (follow-up) | `vercel/chat` | Adapters docs — sharpen description + live demo link | [#578](https://github.com/vercel/chat/pull/578) | ✅ **Merged** 2026-06-18 |
 
 ### Batch 3 — official docs-site PRs (opened 2026-06-15 — the §1 primary channel)
 
@@ -181,4 +181,3 @@ Fill {demo link}/{docs link} from the **Demo?/Docs?** columns in section 1 — o
 2. **Wave 2 — forms & BD outreach:** Vercel Marketplace application · ~~xyflow showcase submission~~ (✅ sent) · ~~Highcharts email~~ (✅ sent) · ~~Vue email to Evan You~~ (✅ sent) · MongoDB Technology Partner application.
 3. **Wave 3 — build-first / gated:** Chart.js (publish the Velt chart-comments repo, wait 30 days) · CodeMirror (open-source a Velt↔CodeMirror binding package) · LottieFiles (build a Lottie integration) · PlateJS (Discord, then PR) · TanStack (decide on paid sponsorship).
 4. **Skip:** React · Angular · Nivo · Quill (on-site) · TipTap (on-site) · PostgreSQL.
-
