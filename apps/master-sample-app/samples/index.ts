@@ -29,6 +29,8 @@ import prosemirrorCommentsDemoMeta from './prosemirror-comments-demo/metadata'
 import { codeFiles as prosemirrorCommentsDemoCodeFiles } from './prosemirror-comments-demo/code-files'
 import tinymceCommentsDemoMeta from './tinymce-comments-demo/metadata'
 import { codeFiles as tinymceCommentsDemoCodeFiles } from './tinymce-comments-demo/code-files'
+import superdocCommentsDemoMeta from './superdoc-comments-demo/metadata'
+import { codeFiles as superdocCommentsDemoCodeFiles } from './superdoc-comments-demo/code-files'
 import monacoCommentsDemoMeta from './monaco-comments-demo/metadata'
 import { codeFiles as monacoCommentsDemoCodeFiles } from './monaco-comments-demo/code-files'
 import dashboardDemoMeta from './dashboard-demo/metadata'
@@ -182,6 +184,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-tinymce-tinymce-comments-demo': {
     metadata: tinymceCommentsDemoMeta,
     codeFiles: tinymceCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-superdoc-superdoc-comments-demo': {
+    metadata: superdocCommentsDemoMeta,
+    codeFiles: superdocCommentsDemoCodeFiles
   },
   'react-comments-text-editors-monaco-monaco-comments-demo': {
     metadata: monacoCommentsDemoMeta,

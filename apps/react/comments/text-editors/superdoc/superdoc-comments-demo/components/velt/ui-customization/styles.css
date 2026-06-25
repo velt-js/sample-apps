@@ -1,0 +1,177 @@
+/* [Velt] Place Velt UI customization styles here */
+
+/* Velt Comment Text Styling */
+velt-comment-text[comment-available="true"] {
+  background-color: rgba(255, 208, 0, 0.3);
+  border-radius: 2px;
+  padding: 2px 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+velt-comment-text[comment-available="true"]:hover {
+  background-color: rgba(255, 208, 0, 0.4);
+}
+
+/* Theme Configuration - Based on Figma Design */
+:root {
+  /* Typography */
+  --velt-default-font-family: Poppins;
+
+  /* Border Radius */
+  --velt-border-radius-2xs: 0.061rem; /* 0.972px */
+  --velt-border-radius-xs: 0.125rem; /* 2px */
+  --velt-border-radius-sm: 0.375rem; /* 6px */
+  --velt-border-radius-md: 0.750rem; /* 12px */
+  --velt-border-radius-lg: 1.000rem; /* 16px */
+  --velt-border-radius-xl: 1.167rem; /* 18.667px - circular buttons */
+  --velt-border-radius-2xl: 1.500rem; /* 24px - pill shape */
+  --velt-border-radius-3xl: 2.000rem; /* 32px */
+  --velt-border-radius-full: 5.000rem; /* 80px */
+
+  /* Light Mode */
+  /* Accent Colors */
+  --velt-light-mode-accent: #141414;
+  --velt-light-mode-accent-text: #ffffff;
+  --velt-light-mode-accent-hover: #000000;
+  --velt-light-mode-accent-foreground: #ffffff;
+  --velt-light-mode-accent-light: #1f1f1f;
+  --velt-light-mode-accent-transparent: rgba(20, 20, 20, 0.08);
+
+  /* Background Shades */
+  --velt-light-mode-background-0: #ffffff;
+  --velt-light-mode-background-1: #fafafa;
+  --velt-light-mode-background-2: #f5f5f5;
+  --velt-light-mode-background-3: #f0f0f0;
+  --velt-light-mode-background-4: #ebebeb;
+  --velt-light-mode-background-5: #e5e5e5;
+  --velt-light-mode-background-6: #e0e0e0;
+  --velt-light-mode-background-7: #dbdbdb;
+  --velt-light-mode-background-8: #d6d6d6;
+  --velt-light-mode-background-9: #d1d1d1;
+  --velt-light-mode-background-10: #cccccc;
+
+  /* Text Shades */
+  --velt-light-mode-text-0: #ffffff;
+  --velt-light-mode-text-1: #f2f2f2;
+  --velt-light-mode-text-2: #e6e6e6;
+  --velt-light-mode-text-3: #d9d9d9;
+  --velt-light-mode-text-4: #cccccc;
+  --velt-light-mode-text-5: #bfbfbf;
+  --velt-light-mode-text-6: #b3b3b3;
+  --velt-light-mode-text-7: #a6a6a6;
+  --velt-light-mode-text-8: #999999;
+  --velt-light-mode-text-9: #8c8c8c;
+  --velt-light-mode-text-10: #808080;
+  --velt-light-mode-text-11: #737373;
+  --velt-light-mode-text-12: #666666;
+
+  /* Border Shades */
+  --velt-light-mode-border-0: #ffffff;
+  --velt-light-mode-border-1: #f5f5f5;
+  --velt-light-mode-border-2: #ebebeb;
+  --velt-light-mode-border-3: #e0e0e0;
+  --velt-light-mode-border-4: #d6d6d6;
+  --velt-light-mode-border-5: #cccccc;
+  --velt-light-mode-border-6: #c2c2c2;
+  --velt-light-mode-border-7: #b8b8b8;
+  --velt-light-mode-border-8: #adadad;
+  --velt-light-mode-border-9: #a3a3a3;
+  --velt-light-mode-border-10: #999999;
+
+  /* Semantic Colors */
+  --velt-light-mode-error: #FF7162;
+  --velt-light-mode-error-hover: #DE5041;
+  --velt-light-mode-error-foreground: #ffffff;
+  --velt-light-mode-error-light: #FFF4F2;
+  --velt-light-mode-warning: #FFCD2E;
+  --velt-light-mode-warning-hover: #C69400;
+  --velt-light-mode-warning-foreground: #141414;
+  --velt-light-mode-warning-light: #FFFBEE;
+  --velt-light-mode-success: #198F65;
+  --velt-light-mode-success-hover: #006B41;
+  --velt-light-mode-success-foreground: #ffffff;
+  --velt-light-mode-success-light: #EDF6F3;
+
+  /* Dark Mode - Matching Figma Design */
+  /* Accent Colors */
+  --velt-dark-mode-accent: #141414;
+  --velt-dark-mode-accent-text: #ffffff;
+  --velt-dark-mode-accent-hover: #000000;
+  --velt-dark-mode-accent-foreground: #ffffff;
+  --velt-dark-mode-accent-light: #1f1f1f;
+  --velt-dark-mode-accent-transparent: rgba(20, 20, 20, 0.08);
+
+  /* Background Shades */
+  --velt-dark-mode-background-0: #000000;
+  --velt-dark-mode-background-1: #0a0a0a;
+  --velt-dark-mode-background-2: #141414;
+  --velt-dark-mode-background-3: #1a1a1a;
+  --velt-dark-mode-background-4: #1f1f1f;
+  --velt-dark-mode-background-5: #242424;
+  --velt-dark-mode-background-6: #292929;
+  --velt-dark-mode-background-7: #2e2e2e;
+  --velt-dark-mode-background-8: #333333;
+  --velt-dark-mode-background-9: #383838;
+  --velt-dark-mode-background-10: #3d3d3d;
+
+  /* Text Shades */
+  --velt-dark-mode-text-0: #ffffff;
+  --velt-dark-mode-text-1: #f2f2f2;
+  --velt-dark-mode-text-2: #e6e6e6;
+  --velt-dark-mode-text-3: #d9d9d9;
+  --velt-dark-mode-text-4: #cccccc;
+  --velt-dark-mode-text-5: #bfbfbf;
+  --velt-dark-mode-text-6: #b3b3b3;
+  --velt-dark-mode-text-7: #a6a6a6;
+  --velt-dark-mode-text-8: #999999;
+  --velt-dark-mode-text-9: #8c8c8c;
+  --velt-dark-mode-text-10: #808080;
+  --velt-dark-mode-text-11: #737373;
+  --velt-dark-mode-text-12: #666666;
+
+  /* Border Shades */
+  --velt-dark-mode-border-0: #0f0f0f;
+  --velt-dark-mode-border-1: #141414;
+  --velt-dark-mode-border-2: #1a1a1a;
+  --velt-dark-mode-border-3: #1f1f1f;
+  --velt-dark-mode-border-4: #242424;
+  --velt-dark-mode-border-5: #292929;
+  --velt-dark-mode-border-6: #2e2e2e;
+  --velt-dark-mode-border-7: #333333;
+  --velt-dark-mode-border-8: #383838;
+  --velt-dark-mode-border-9: #3d3d3d;
+  --velt-dark-mode-border-10: #424242;
+
+  /* Semantic Colors */
+  --velt-dark-mode-error: #FF7162;
+  --velt-dark-mode-error-hover: #DE5041;
+  --velt-dark-mode-error-foreground: #ffffff;
+  --velt-dark-mode-error-light: #2a1917;
+  --velt-dark-mode-warning: #FFCD2E;
+  --velt-dark-mode-warning-hover: #C69400;
+  --velt-dark-mode-warning-foreground: #141414;
+  --velt-dark-mode-warning-light: #2a2512;
+  --velt-dark-mode-success: #198F65;
+  --velt-dark-mode-success-hover: #006B41;
+  --velt-dark-mode-success-foreground: #ffffff;
+  --velt-dark-mode-success-light: #0f2319;
+
+  /* Spacing - Based on Figma measurements */
+  --velt-spacing-2xs: 0.125rem; /* 2px */
+  --velt-spacing-xs: 0.194rem; /* 3.111px */
+  --velt-spacing-sm: 0.291rem; /* 4.667px - vertical padding */
+  --velt-spacing-md: 0.375rem; /* 6px - gap between components */
+  --velt-spacing-lg: 0.389rem; /* 6.222px - horizontal padding */
+  --velt-spacing-xl: 0.583rem; /* 9.333px - right padding for badge */
+  --velt-spacing-2xl: 1rem; /* 16px */
+
+  /* Font Size - Based on Figma */
+  --velt-font-size-2xs: 0.625rem; /* 10px */
+  --velt-font-size-xs: 0.681rem; /* 10.89px - badge text */
+  --velt-font-size-sm: 0.875rem; /* 14px */
+  --velt-font-size-md: 0.972rem; /* 15.556px - icon size */
+  --velt-font-size-lg: 1.167rem; /* 18.667px - icon container */
+  --velt-font-size-xl: 1.75rem; /* 28px - component height */
+  --velt-font-size-2xl: 2rem; /* 32px */
+}
