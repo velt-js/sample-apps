@@ -6,7 +6,7 @@ const metadata: SampleMetadata = {
   title: 'react / comments / text-editors / prosemirror / prosemirror-comments-demo',
   category: 'feature',
   section: 'prosemirror',
-  iframeUrl: 'https://sample-apps-prosemirror-comments-demo.vercel.app',
+  iframeUrl: 'https://sample-apps-prosemirror-comments-de.vercel.app/',
   iframeUrl2: 'https://sample-apps-prosemirror-comments-demo-velt-team-eng.vercel.app',
   githubUrl: 'https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/prosemirror/prosemirror-comments-demo',
   githubRepoPath: 'velt-js/sample-apps',
