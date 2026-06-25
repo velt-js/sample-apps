@@ -1786,6 +1786,67 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/react/comments/text-editors/tinymce/tinymce-comments-demo:
+    dependencies:
+      '@tinymce/tinymce-react':
+        specifier: ^6.3.0
+        version: 6.3.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(tinymce@8.6.0)
+      '@veltdev/react':
+        specifier: 5.0.2-beta.34
+        version: 5.0.2-beta.34(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/tinymce-velt-comments':
+        specifier: 1.0.1
+        version: 1.0.1(tinymce@8.6.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      next:
+        specifier: ^16.1.2
+        version: 16.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.99.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
+      tailwind-merge:
+        specifier: ^2.6.0
+        version: 2.6.1
+      tinymce:
+        specifier: ^8.6.0
+        version: 8.6.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.18.13
+        version: 22.19.17
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.2.2
+        version: 19.2.3(@types/react@19.2.14)
+      '@veltdev/types':
+        specifier: 5.0.2-beta.34
+        version: 5.0.2-beta.34
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.5.0(postcss@8.5.12)
+      eslint:
+        specifier: ^9.38.0
+        version: 9.39.4(jiti@2.6.1)
+      eslint-config-next:
+        specifier: ^15.5.6
+        version: 15.5.15(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.12
+      tailwindcss:
+        specifier: ^3.4.18
+        version: 3.4.19(tsx@4.21.0)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   apps/react/comments/text-editors/tiptap/tiptap-comments-demo:
     dependencies:
       '@floating-ui/dom':
@@ -5289,6 +5350,16 @@ packages:
     resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
     engines: {node: '>=12'}
 
+  '@tinymce/tinymce-react@6.3.0':
+    resolution: {integrity: sha512-E++xnn0XzDzpKr40jno2Kj7umfAE6XfINZULEBBeNjTMvbACWzA6CjiR6V8eTDc9yVmdVhIPqVzV4PqD5TZ/4g==}
+    peerDependencies:
+      react: ^19.0.0 || ^18.0.0 || ^17.0.1 || ^16.7.0
+      react-dom: ^19.0.0 || ^18.0.0 || ^17.0.1 || ^16.7.0
+      tinymce: ^8.0.0 || ^7.0.0 || ^6.0.0 || ^5.5.1
+    peerDependenciesMeta:
+      tinymce:
+        optional: true
+
   '@tiptap/core@3.22.5':
     resolution: {integrity: sha512-L1lhWz6ujGny8LduTJ7MBWYhzigwOvfUJUrJ7IzOJSuy3+OAzisdGDD1GV7LEO/hU0Hr2Mkm1wajRIHExvS9HQ==}
     peerDependencies:
@@ -6074,6 +6145,11 @@ packages:
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       slate: ^0.112.0
       slate-react: ^0.112.1
+
+  '@veltdev/tinymce-velt-comments@1.0.1':
+    resolution: {integrity: sha512-NXdJNadHKwwL8blq51CLF3csljD8qlWxyAwmnWijUlfcEmjVk/WXUXjp0dbZUThVmXV4Nr3KRsJ0HEJ7b9S0Fg==}
+    peerDependencies:
+      tinymce: '>=6.0.0'
 
   '@veltdev/tiptap-crdt-react@5.0.0':
     resolution: {integrity: sha512-Blg5CB2mBum/lvPhlKV0j07OC/O9KDsYI8jlTBdYeH2EV4VS3cpegLt/9bbeM5cOjzvQxxTp5sThmRK0kODZQA==}
@@ -8991,6 +9067,9 @@ packages:
     resolution: {integrity: sha512-pn99VhoACYR8nFHhxqix+uvsbXineAasWm5ojXoN8xEwK5Kd3/TrhNn1wByuD52UxWRLy8pu+kRMniEi6Eq9Zg==}
     engines: {node: '>=12.0.0'}
 
+  tinymce@8.6.0:
+    resolution: {integrity: sha512-qODYoNL4cPIzNFpkEEQDm3DWI78I/nQXIPwUMHRN+q/LyT9Wzt7xis2Nfhk88kV6sibp6MJXPSaUDVNe02ZB/w==}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -11838,6 +11917,14 @@ snapshots:
 
   '@tanstack/table-core@8.21.3': {}
 
+  '@tinymce/tinymce-react@6.3.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(tinymce@8.6.0)':
+    dependencies:
+      prop-types: 15.8.1
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+    optionalDependencies:
+      tinymce: 8.6.0
+
   '@tiptap/core@3.22.5(@tiptap/pm@3.22.5)':
     dependencies:
       '@tiptap/pm': 3.22.5
@@ -12672,6 +12759,10 @@ snapshots:
       react-dom: 19.2.5(react@19.2.5)
       slate: 0.103.0
       slate-react: 0.110.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate@0.103.0)
+
+  '@veltdev/tinymce-velt-comments@1.0.1(tinymce@8.6.0)':
+    dependencies:
+      tinymce: 8.6.0
 
   '@veltdev/tiptap-crdt-react@5.0.0(afcbb0b634a0c2d1e243739bfc7a0953)':
     dependencies:
@@ -16531,6 +16622,8 @@ snapshots:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
+
+  tinymce@8.6.0: {}
 
   to-regex-range@5.0.1:
     dependencies:
