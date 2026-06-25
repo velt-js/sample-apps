@@ -38,6 +38,9 @@ apps/react/comments/text-editors/superdoc/superdoc-comments-demo/
 
 ## Directory Structure
 
+This tree focuses on the runtime SuperDoc comments app and the files developers
+need to understand the integration.
+
 ```txt
 superdoc-comments-demo/
 ├── app/
@@ -88,6 +91,7 @@ superdoc-comments-demo/
 
 - Next.js 16 with React 19
 - SuperDoc from `@harbour-enterprises/superdoc`
+- `@hocuspocus/provider`, installed as a SuperDoc peer dependency
 - `@veltdev/superdoc-velt-comments`
 - `@veltdev/react`
 - Tailwind CSS v3.4
@@ -121,6 +125,10 @@ pnpm --filter @apps/react-text-editors-superdoc-superdoc-comments-demo build
 ```
 
 This demo uses the `@veltdev/superdoc-velt-comments` package for the SuperDoc-specific Velt comments integration.
+
+The SuperDoc demo uses the SuperDoc-specific Velt packages and versions required
+by the current SuperDoc integration. It does not use the Tiptap, Lexical, or
+CRDT packages from the sibling text-editor demos.
 
 ## Usage
 
@@ -193,7 +201,7 @@ If Velt features do not appear:
 The integration package used by this demo is `@veltdev/superdoc-velt-comments`.
 
 1. Run `pnpm install` from the monorepo root.
-2. Confirm `@veltdev/superdoc-velt-comments` and `@harbour-enterprises/superdoc` are present in `package.json`.
+2. Confirm `@veltdev/superdoc-velt-comments`, `@harbour-enterprises/superdoc`, and SuperDoc's `@hocuspocus/provider` peer dependency are present in `package.json`.
 3. If installation fails, confirm your npm registry access can install scoped `@veltdev` and `@harbour-enterprises` packages.
 
 ## About Velt SDK
