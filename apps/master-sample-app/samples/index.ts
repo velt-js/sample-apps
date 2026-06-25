@@ -23,6 +23,8 @@ import slatejsCommentsDemoMeta from './slatejs-comments-demo/metadata'
 import { codeFiles as slatejsCommentsDemoCodeFiles } from './slatejs-comments-demo/code-files'
 import lexicalCommentsDemoMeta from './lexical-comments-demo/metadata'
 import { codeFiles as lexicalCommentsDemoCodeFiles } from './lexical-comments-demo/code-files'
+import draftjsCommentsDemoMeta from './draftjs-comments-demo/metadata'
+import { codeFiles as draftjsCommentsDemoCodeFiles } from './draftjs-comments-demo/code-files'
 import dashboardDemoMeta from './dashboard-demo/metadata'
 import { codeFiles as dashboardDemoCodeFiles } from './dashboard-demo/code-files'
 import tiptapCrdtDemoMeta from './tiptap-crdt-demo/metadata'
@@ -162,6 +164,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-lexical-lexical-comments-demo': {
     metadata: lexicalCommentsDemoMeta,
     codeFiles: lexicalCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-draftjs-draftjs-comments-demo': {
+    metadata: draftjsCommentsDemoMeta,
+    codeFiles: draftjsCommentsDemoCodeFiles
   },
   'react-comments-text-editors-quill-quill-comments-demo': {
     metadata: quillCommentsDemoMeta,
