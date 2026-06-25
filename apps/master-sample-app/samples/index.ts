@@ -25,6 +25,8 @@ import lexicalCommentsDemoMeta from './lexical-comments-demo/metadata'
 import { codeFiles as lexicalCommentsDemoCodeFiles } from './lexical-comments-demo/code-files'
 import draftjsCommentsDemoMeta from './draftjs-comments-demo/metadata'
 import { codeFiles as draftjsCommentsDemoCodeFiles } from './draftjs-comments-demo/code-files'
+import prosemirrorCommentsDemoMeta from './prosemirror-comments-demo/metadata'
+import { codeFiles as prosemirrorCommentsDemoCodeFiles } from './prosemirror-comments-demo/code-files'
 import dashboardDemoMeta from './dashboard-demo/metadata'
 import { codeFiles as dashboardDemoCodeFiles } from './dashboard-demo/code-files'
 import tiptapCrdtDemoMeta from './tiptap-crdt-demo/metadata'
@@ -168,6 +170,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-draftjs-draftjs-comments-demo': {
     metadata: draftjsCommentsDemoMeta,
     codeFiles: draftjsCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-prosemirror-prosemirror-comments-demo': {
+    metadata: prosemirrorCommentsDemoMeta,
+    codeFiles: prosemirrorCommentsDemoCodeFiles
   },
   'react-comments-text-editors-quill-quill-comments-demo': {
     metadata: quillCommentsDemoMeta,

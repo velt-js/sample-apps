@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    /* App theme variables (light default) */
+    --app-bg: #ffffff;
+    --app-surface: #f5f5f5;
+    --app-surface-border: #e0e0e0;
+    --app-surface-hover: #e8e8e8;
+    --app-border: #e0e0e0;
+    --app-text-primary: #000000;
+    --app-text-secondary: rgba(0,0,0,0.8);
+    --app-text-tertiary: rgba(0,0,0,0.52);
+    --app-text-muted: rgba(0,0,0,0.5);
+    --app-toggle-active-bg: rgba(0,0,0,0.06);
+    --app-sidebar-bg: #f0f0f0;
+    --app-icon-invert: invert(1);
+    --app-icon-active-invert: none;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    /* App theme variables (dark) */
+    --app-bg: #000000;
+    --app-surface: rgb(17,17,17);
+    --app-surface-border: rgb(20,20,20);
+    --app-surface-hover: rgb(34,34,34);
+    --app-border: #141414;
+    --app-text-primary: #ffffff;
+    --app-text-secondary: rgba(255,255,255,0.8);
+    --app-text-tertiary: rgba(255,255,255,0.52);
+    --app-text-muted: rgba(255,255,255,0.5);
+    --app-toggle-active-bg: rgba(255,255,255,0.08);
+    --app-sidebar-bg: #0e0e0e;
+    --app-icon-invert: none;
+    --app-icon-active-invert: invert(1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ProseMirror Editor Styles - Matching the text-editor sample UI */
+.prosemirror-editor-content {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--app-text-primary);
+}
+
+.prosemirror-editor-content .ProseMirror {
+  min-height: 760px;
+  outline: none;
+}
+
+.prosemirror-editor-content .ProseMirror:focus {
+  outline: none;
+}
+
+.prosemirror-editor-content .ProseMirror p {
+  margin-bottom: 16px;
+  opacity: 0.8;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.prosemirror-editor-content .ProseMirror h1 {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  color: var(--app-text-primary) !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  margin-bottom: 20px !important;
+}
+
+.prosemirror-editor-content .ProseMirror h2 {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  color: var(--app-text-primary) !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  margin-top: 26px !important;
+  margin-bottom: 8px !important;
+}
+
+.prosemirror-editor-content .ProseMirror h3 {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  color: var(--app-text-primary) !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  margin-top: 20px !important;
+  margin-bottom: 8px !important;
+}
+
+.prosemirror-editor-content .ProseMirror blockquote {
+  border-left: 2px solid var(--app-text-muted);
+  margin-left: 0;
+  padding-left: 16px;
+}
+
+.prosemirror-editor-content .ProseMirror u {
+  text-decoration: underline;
+}
+
+.prosemirror-editor-content .ProseMirror s {
+  text-decoration: line-through;
+}
+
+/* Velt comment highlighting */
+velt-comment-text[comment-available="true"] {
+  background-color: rgba(255, 255, 0, 0.2);
+}
+
+/* Helper Text Animation */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Collaboration cursor styling - Dark theme adjustments */
+.collaboration-cursor__caret {
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  margin-left: -1px;
+  margin-right: -1px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+}
+
+/* Render the username above the caret */
+.collaboration-cursor__label {
+  border-radius: 3px 3px 3px 0;
+  color: #000000;
+  background: #ffffff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  left: -1px;
+  line-height: normal;
+  padding: 0.1rem 0.3rem;
+  position: absolute;
+  top: -1.4em;
+  user-select: none;
+  white-space: nowrap;
+}
