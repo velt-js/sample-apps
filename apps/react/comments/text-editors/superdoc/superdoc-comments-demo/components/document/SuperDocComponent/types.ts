@@ -12,6 +12,5 @@ export interface AddCommentBubblePosition {
 
 export interface AddCommentToolbarProps {
   onAddComment: () => void
-  position?: AddCommentBubblePosition | null
-  variant?: 'bubble' | 'fixed'
+  position: AddCommentBubblePosition | null
 }

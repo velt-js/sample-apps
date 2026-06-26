@@ -2,32 +2,19 @@ import type { AddCommentToolbarProps } from '../types'
 
 export function AddCommentToolbar({
   onAddComment,
-  position = null,
-  variant = 'bubble',
+  position,
 }: AddCommentToolbarProps) {
-  if (variant === 'bubble' && !position) return null
-
-  const isBubble = variant === 'bubble'
+  if (!position) return null
 
   return (
     <div
-      className={
-        isBubble
-          ? 'fixed z-[80] -translate-x-1/2'
-          : 'absolute bottom-8 left-1/2 z-50 -translate-x-1/2'
-      }
-      style={
-        isBubble && position
-          ? {
-              left: position.left,
-              top: position.top,
-              transform:
-                position.placement === 'top'
-                  ? 'translate(-50%, -100%)'
-                  : 'translate(-50%, 0)',
-            }
-          : undefined
-      }
+      className="fixed z-[80] -translate-x-1/2"
+      style={{
+        left: position.left,
+        top: position.top,
+        transform:
+          position.placement === 'top' ? 'translate(-50%, -100%)' : 'translate(-50%, 0)',
+      }}
     >
       <button
         onMouseDown={(event) => {
@@ -39,11 +26,7 @@ export function AddCommentToolbar({
           onAddComment()
         }}
         className="flex items-center gap-2 rounded-full bg-[#6366f1] py-[10px] pl-[14px] pr-[18px] text-white shadow-[0_8px_24px_rgba(79,70,229,0.45),0_2px_6px_rgba(0,0,0,0.2)] transition-colors hover:bg-[#4f46e5]"
-        title={
-          isBubble
-            ? 'Add a Velt comment to the selected text'
-            : 'Select text in the document, then add a Velt comment'
-        }
+        title="Add a Velt comment to the selected text"
         type="button"
       >
         <svg

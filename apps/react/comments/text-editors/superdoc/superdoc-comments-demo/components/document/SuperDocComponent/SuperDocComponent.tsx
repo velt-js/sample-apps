@@ -381,14 +381,7 @@ export default function SuperDocComponent({ scrollContainerRef }: SuperDocCompon
       </div>
 
       {instance ? (
-        <>
-          <AddCommentToolbar
-            onAddComment={handleAddComment}
-            position={bubblePosition}
-            variant="bubble"
-          />
-          <AddCommentToolbar onAddComment={handleAddComment} variant="fixed" />
-        </>
+        <AddCommentToolbar onAddComment={handleAddComment} position={bubblePosition} />
       ) : null}
     </div>
   )
