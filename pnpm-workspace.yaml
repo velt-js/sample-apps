@@ -8,3 +8,7 @@ packages:
   - "packages/*"
   - "outreach"
 
+overrides:
+  prosemirror-view: "1.38.1"
+  '@veltdev/crdt': "5.0.1"
+  '@veltdev/crdt-react': "5.0.1"

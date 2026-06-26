@@ -1646,6 +1646,64 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/react/comments/text-editors/nutrient/nutrient-comments-demo:
+    dependencies:
+      '@nutrient-sdk/viewer':
+        specifier: 1.15.1
+        version: 1.15.1
+      '@veltdev/nutrient-velt-comments':
+        specifier: 1.0.1
+        version: 1.0.1(@nutrient-sdk/viewer@1.15.1)
+      '@veltdev/react':
+        specifier: 5.0.2-beta.34
+        version: 5.0.2-beta.34(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      next:
+        specifier: ^16.1.2
+        version: 16.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.99.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
+      tailwind-merge:
+        specifier: ^2.6.0
+        version: 2.6.1
+    devDependencies:
+      '@types/node':
+        specifier: ^22.18.13
+        version: 22.19.17
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.2.2
+        version: 19.2.3(@types/react@19.2.14)
+      '@veltdev/types':
+        specifier: 5.0.2-beta.34
+        version: 5.0.2-beta.34
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.5.0(postcss@8.5.12)
+      eslint:
+        specifier: ^9.38.0
+        version: 9.39.4(jiti@2.6.1)
+      eslint-config-next:
+        specifier: ^15.5.6
+        version: 15.5.15(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.12
+      tailwindcss:
+        specifier: ^3.4.18
+        version: 3.4.19(tsx@4.21.0)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   apps/react/comments/text-editors/prosemirror/prosemirror-comments-demo:
     dependencies:
       '@veltdev/prosemirror-velt-comments':
@@ -4490,6 +4548,9 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
+  '@nutrient-sdk/viewer@1.15.1':
+    resolution: {integrity: sha512-VRj05CGGMoXZZbvWJSBBgYzYoCRdwOPne1IWFNr/l0hkyB5ijKoVh8m94O6w3Ru8cW0OnBv4VfjxJQK9Mci6Yg==}
+
   '@parcel/watcher-android-arm64@2.5.6':
     resolution: {integrity: sha512-YQxSS34tPF/6ZG7r/Ih9xy+kP/WwediEUsqmtf0cuCV5TPPKw/PQHRhueUo6JdeFJaqV3pyjm0GdYjZotbRt/A==}
     engines: {node: '>= 10.0.0'}
@@ -5907,10 +5968,16 @@ packages:
   '@types/pg@8.20.0':
     resolution: {integrity: sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==}
 
+  '@types/prop-types@15.7.15':
+    resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
+
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
       '@types/react': ^19.2.0
+
+  '@types/react@18.3.31':
+    resolution: {integrity: sha512-vfEqpXTvwT91yhmwdfouStN2hSKwTvyRs8qpLfADyrq/kxDw0hZM7Wk9Ug1FELj8hIby+S/+kQCSRFF32nv2Qw==}
 
   '@types/react@19.2.14':
     resolution: {integrity: sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==}
@@ -6303,6 +6370,11 @@ packages:
     resolution: {integrity: sha512-iZ59fGBZwzf5GNewT9fK595+AhwIJqj9rx7tL7JbEVmIAmzG2D0yaxP4nsSL54zpjvf94+kQjHV00iTqFLow9w==}
     peerDependencies:
       monaco-editor: '>=0.30.0'
+
+  '@veltdev/nutrient-velt-comments@1.0.1':
+    resolution: {integrity: sha512-JsiME0NFV+IU+aoc74J10D+wV3IWo3dnftnMQqTOQ6V2MzYmprGoeP1tFirDnIM/gxV/cslNS7XG6nAyWPI5cg==}
+    peerDependencies:
+      '@nutrient-sdk/viewer': ^1.9.0
 
   '@veltdev/plate-comments-react@5.0.0-beta.3':
     resolution: {integrity: sha512-ucueFUo0GQ5MBoAnWUrCXiPNw6G0DohBKNHajthCe082ETwMtSsrPbV/Cl8hXTq+E2rWH14AuyKSn/9oe6VIuA==}
@@ -11434,6 +11506,10 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
+  '@nutrient-sdk/viewer@1.15.1':
+    dependencies:
+      '@types/react': 18.3.31
+
   '@parcel/watcher-android-arm64@2.5.6':
     optional: true
 
@@ -12925,9 +13001,16 @@ snapshots:
       pg-protocol: 1.13.0
       pg-types: 2.2.0
 
+  '@types/prop-types@15.7.15': {}
+
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
       '@types/react': 19.2.14
+
+  '@types/react@18.3.31':
+    dependencies:
+      '@types/prop-types': 15.7.15
+      csstype: 3.2.3
 
   '@types/react@19.2.14':
     dependencies:
@@ -13387,6 +13470,10 @@ snapshots:
   '@veltdev/monaco-velt-comments@1.0.1(monaco-editor@0.55.1)':
     dependencies:
       monaco-editor: 0.55.1
+
+  '@veltdev/nutrient-velt-comments@1.0.1(@nutrient-sdk/viewer@1.15.1)':
+    dependencies:
+      '@nutrient-sdk/viewer': 1.15.1
 
   '@veltdev/plate-comments-react@5.0.0-beta.3(@platejs/core@52.3.21(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.5)))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-react@0.123.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-dom@0.123.0(slate@0.123.0))(slate@0.123.0))(slate@0.123.0)':
     dependencies:
