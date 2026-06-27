@@ -1908,8 +1908,8 @@ importers:
   apps/react/comments/text-editors/superdoc/superdoc-comments-demo:
     dependencies:
       '@harbour-enterprises/superdoc':
-        specifier: ^1.41.0
-        version: 1.43.1(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
+        specifier: ^1.43.2
+        version: 1.43.2(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
       '@hocuspocus/provider':
         specifier: ^2.13.6
         version: 2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
@@ -1918,7 +1918,7 @@ importers:
         version: 5.0.2-beta.34(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/superdoc-velt-comments':
         specifier: 1.0.2
-        version: 1.0.2(@harbour-enterprises/superdoc@1.43.1(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))
+        version: 1.0.2(@harbour-enterprises/superdoc@1.43.2(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -4050,8 +4050,8 @@ packages:
       prosemirror-state: ^1.0.0
       prosemirror-view: 1.38.1
 
-  '@harbour-enterprises/superdoc@1.43.1':
-    resolution: {integrity: sha512-1l1JfBrPSRqRCLutzM1iKVVBPf1vTs9XWbrxB0lzLqgAu327UVPDPO1Ec5q/ZEi/IPnp1IfMpcq51CZxas91Rw==}
+  '@harbour-enterprises/superdoc@1.43.2':
+    resolution: {integrity: sha512-ieeAJtE0wfrKlCYhVcSC0KhdAUH0r5GORjTLhBCQ/x8xZ+gG1DEOHgZQ+wnhdfZDW7dapuEQUoj76+36aA054Q==}
     peerDependencies:
       '@hocuspocus/provider': ^2.13.6
       pdfjs-dist: ^5.4.296
@@ -10857,7 +10857,7 @@ snapshots:
       prosemirror-transform: 1.12.0
       prosemirror-view: 1.38.1
 
-  '@harbour-enterprises/superdoc@1.43.1(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)':
+  '@harbour-enterprises/superdoc@1.43.2(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       '@hocuspocus/provider': 2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@types/mdast': 4.0.4
@@ -13552,9 +13552,9 @@ snapshots:
       slate: 0.103.0
       slate-react: 0.110.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate@0.103.0)
 
-  '@veltdev/superdoc-velt-comments@1.0.2(@harbour-enterprises/superdoc@1.43.1(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))':
+  '@veltdev/superdoc-velt-comments@1.0.2(@harbour-enterprises/superdoc@1.43.2(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))':
     dependencies:
-      '@harbour-enterprises/superdoc': 1.43.1(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
+      '@harbour-enterprises/superdoc': 1.43.2(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
 
   '@veltdev/tinymce-velt-comments@1.0.1(tinymce@8.6.0)':
     dependencies:

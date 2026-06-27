@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@harbour-enterprises/superdoc": "^1.41.0",
+    "@harbour-enterprises/superdoc": "^1.43.2",
     "@hocuspocus/provider": "^2.13.6",
     "@veltdev/react": "5.0.2-beta.34",
     "@veltdev/superdoc-velt-comments": "1.0.2",
