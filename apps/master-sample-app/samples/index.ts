@@ -33,6 +33,8 @@ import superdocCommentsDemoMeta from './superdoc-comments-demo/metadata'
 import { codeFiles as superdocCommentsDemoCodeFiles } from './superdoc-comments-demo/code-files'
 import nutrientCommentsDemoMeta from './nutrient-comments-demo/metadata'
 import { codeFiles as nutrientCommentsDemoCodeFiles } from './nutrient-comments-demo/code-files'
+import spreadjsCommentsDemoMeta from './spreadjs-comments-demo/metadata'
+import { codeFiles as spreadjsCommentsDemoCodeFiles } from './spreadjs-comments-demo/code-files'
 import monacoCommentsDemoMeta from './monaco-comments-demo/metadata'
 import { codeFiles as monacoCommentsDemoCodeFiles } from './monaco-comments-demo/code-files'
 import dashboardDemoMeta from './dashboard-demo/metadata'
@@ -194,6 +196,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-nutrient-nutrient-comments-demo': {
     metadata: nutrientCommentsDemoMeta,
     codeFiles: nutrientCommentsDemoCodeFiles
+  },
+  'react-comments-spreadsheets-spreadjs-spreadjs-comments-demo': {
+    metadata: spreadjsCommentsDemoMeta,
+    codeFiles: spreadjsCommentsDemoCodeFiles
   },
   'react-comments-text-editors-monaco-monaco-comments-demo': {
     metadata: monacoCommentsDemoMeta,
