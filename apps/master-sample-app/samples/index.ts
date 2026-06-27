@@ -29,6 +29,8 @@ import prosemirrorCommentsDemoMeta from './prosemirror-comments-demo/metadata'
 import { codeFiles as prosemirrorCommentsDemoCodeFiles } from './prosemirror-comments-demo/code-files'
 import tinymceCommentsDemoMeta from './tinymce-comments-demo/metadata'
 import { codeFiles as tinymceCommentsDemoCodeFiles } from './tinymce-comments-demo/code-files'
+import ckeditorCommentsDemoMeta from './ckeditor-comments-demo/metadata'
+import { codeFiles as ckeditorCommentsDemoCodeFiles } from './ckeditor-comments-demo/code-files'
 import superdocCommentsDemoMeta from './superdoc-comments-demo/metadata'
 import { codeFiles as superdocCommentsDemoCodeFiles } from './superdoc-comments-demo/code-files'
 import nutrientCommentsDemoMeta from './nutrient-comments-demo/metadata'
@@ -188,6 +190,10 @@ export const SAMPLES: Record<string, Sample> = {
   'react-comments-text-editors-tinymce-tinymce-comments-demo': {
     metadata: tinymceCommentsDemoMeta,
     codeFiles: tinymceCommentsDemoCodeFiles
+  },
+  'react-comments-text-editors-ckeditor-ckeditor-comments-demo': {
+    metadata: ckeditorCommentsDemoMeta,
+    codeFiles: ckeditorCommentsDemoCodeFiles
   },
   'react-comments-text-editors-superdoc-superdoc-comments-demo': {
     metadata: superdocCommentsDemoMeta,

@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    /* App theme variables (light default) */
+    --app-bg: #ffffff;
+    --app-surface: #f5f5f5;
+    --app-surface-border: #e0e0e0;
+    --app-surface-hover: #e8e8e8;
+    --app-border: #e0e0e0;
+    --app-text-primary: #000000;
+    --app-text-secondary: rgba(0,0,0,0.8);
+    --app-text-tertiary: rgba(0,0,0,0.52);
+    --app-text-muted: rgba(0,0,0,0.5);
+    --app-toggle-active-bg: rgba(0,0,0,0.06);
+    --app-sidebar-bg: #f0f0f0;
+    --app-icon-invert: invert(1);
+    --app-icon-active-invert: none;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    /* App theme variables (dark) */
+    --app-bg: #000000;
+    --app-surface: rgb(17,17,17);
+    --app-surface-border: rgb(20,20,20);
+    --app-surface-hover: rgb(34,34,34);
+    --app-border: #141414;
+    --app-text-primary: #ffffff;
+    --app-text-secondary: rgba(255,255,255,0.8);
+    --app-text-tertiary: rgba(255,255,255,0.52);
+    --app-text-muted: rgba(255,255,255,0.5);
+    --app-toggle-active-bg: rgba(255,255,255,0.08);
+    --app-sidebar-bg: #0e0e0e;
+    --app-icon-invert: none;
+    --app-icon-active-invert: invert(1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* CKEditor Styles - Matching the text-editor sample UI */
+.ckeditor-editor-content {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--app-text-primary);
+}
+
+.ckeditor-editor-content .ck.ck-editor {
+  color: var(--app-text-primary);
+  width: 100%;
+}
+
+.ckeditor-editor-content .ck.ck-editor__main {
+  min-height: 760px;
+}
+
+.ckeditor-editor-content .ck.ck-editor__editable {
+  background: transparent;
+  border: 0 !important;
+  box-shadow: none;
+  color: var(--app-text-primary);
+  font-family: 'Geist Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  min-height: 760px;
+  padding: 0 !important;
+}
+
+.ckeditor-editor-content .ck.ck-editor__editable:focus {
+  box-shadow: none;
+}
+
+.ckeditor-editor-content .ck.ck-toolbar {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--app-surface-border);
+  gap: 4px;
+  margin-bottom: 24px;
+  padding: 0 0 12px;
+}
+
+.ckeditor-editor-content .ck.ck-toolbar .ck-toolbar__separator {
+  background: var(--app-surface-border);
+  margin: 0 4px;
+}
+
+.ckeditor-editor-content .ck.ck-button,
+.ckeditor-editor-content .ck.ck-dropdown__button {
+  background: transparent;
+  border: 0;
+  border-radius: 8px !important;
+  color: var(--app-text-primary);
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 32px;
+}
+
+.ckeditor-editor-content .ck.ck-button:hover,
+.ckeditor-editor-content .ck.ck-button.ck-on,
+.ckeditor-editor-content .ck.ck-dropdown__button:hover,
+.ckeditor-editor-content .ck.ck-dropdown__button.ck-on {
+  background: var(--app-surface-hover) !important;
+}
+
+.ckeditor-editor-content .ck.ck-button .ck-icon,
+.ckeditor-editor-content .ck.ck-dropdown__button .ck-icon {
+  color: var(--app-text-primary);
+}
+
+.ckeditor-editor-content .ck.ck-dropdown__panel {
+  background: var(--app-surface);
+  border-color: var(--app-surface-border);
+}
+
+.ckeditor-editor-content .ck.ck-list {
+  background: var(--app-surface);
+}
+
+.ckeditor-editor-content .ck.ck-list__item .ck-button {
+  color: var(--app-text-primary);
+}
+
+.ckeditor-editor-content .ck-content h1,
+.ckeditor-editor-content .ck-content h2,
+.ckeditor-editor-content .ck-content h3 {
+  color: var(--app-text-primary);
+  font-family: Urbanist, Inter, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.ckeditor-editor-content .ck-content h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.ckeditor-editor-content .ck-content h2 {
+  font-size: 20px;
+  margin-top: 26px;
+  margin-bottom: 8px;
+}
+
+.ckeditor-editor-content .ck-content h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.ckeditor-editor-content .ck-content p {
+  line-height: 1.4;
+  margin: 0 0 16px;
+  opacity: 0.8;
+}
+
+.ckeditor-editor-content .ck-content blockquote {
+  border-left: 2px solid rgba(0, 0, 0, 0.35);
+  margin-left: 0;
+  padding-left: 16px;
+}
+
+.dark .ckeditor-editor-content .ck-content blockquote {
+  border-left-color: rgba(255, 255, 255, 0.45);
+}
+
+.dark .ckeditor-editor-content .ck.ck-button:hover,
+.dark .ckeditor-editor-content .ck.ck-button.ck-on,
+.dark .ckeditor-editor-content .ck.ck-dropdown__button:hover,
+.dark .ckeditor-editor-content .ck.ck-dropdown__button.ck-on {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Velt comment highlighting */
+velt-comment-text {
+  background-color: rgba(255, 255, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 204, 0, 0.7);
+  cursor: pointer;
+}
+
+velt-comment-text:hover,
+velt-comment-text[comment-selected="true"],
+velt-comment-text.velt-comment-selected {
+  background-color: rgba(255, 255, 0, 0.35);
+}
+
+/* Helper Text Animation */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Collaboration cursor styling - Dark theme adjustments */
+.collaboration-cursor__caret {
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  margin-left: -1px;
+  margin-right: -1px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+}
+
+/* Render the username above the caret */
+.collaboration-cursor__label {
+  border-radius: 3px 3px 3px 0;
+  color: #000000;
+  background: #ffffff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  left: -1px;
+  line-height: normal;
+  padding: 0.1rem 0.3rem;
+  position: absolute;
+  top: -1.4em;
+  user-select: none;
+  white-space: nowrap;
+}
