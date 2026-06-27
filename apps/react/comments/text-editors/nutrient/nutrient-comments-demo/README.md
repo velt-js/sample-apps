@@ -21,6 +21,7 @@ Package name:
 - Nutrient Web SDK PDF viewer loaded client-side
 - Text selection comments powered by `@veltdev/nutrient-velt-comments`
 - Selection bubble with an Add Comment button
+- View-only Velt comment overlays anchored to PDF text selections
 - Velt comments sidebar, notifications, presence, and user identity
 - Light and dark demo shell that matches the other text-editor sample apps
 
@@ -50,7 +51,6 @@ nutrient-comments-demo/
 │   ├── icons/
 │   └── velt-test-document.pdf           # Bundled PDF fixture
 ├── styles/globals.css                   # App, viewer, and highlight styles
-├── .npmrc                               # pnpm config to prevent Tailwind v4 hoisting
 ├── next.config.js
 ├── package.json
 └── tsconfig.json
@@ -62,7 +62,7 @@ nutrient-comments-demo/
 - `@veltdev/react`
 - `@veltdev/nutrient-velt-comments`
 
-This demo is scoped to Nutrient. It does not include dependencies from other editor demos.
+This demo is scoped to Nutrient. It does not include dependencies from other editor, spreadsheet, or viewer demos.
 
 ## Running Locally
 
@@ -101,20 +101,6 @@ NEXT_PUBLIC_NUTRIENT_LICENSE_KEY=your_nutrient_license_key
 ```
 
 Without a Nutrient license key, the viewer may run in trial mode.
-
-## Important Configuration
-
-### `.npmrc` File
-
-This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS v4 from other workspace packages:
-
-```txt
-public-hoist-pattern[]=*
-public-hoist-pattern[]=!tailwindcss
-shamefully-hoist=false
-```
-
-This matters because the demo uses Tailwind CSS v3.4.x with traditional PostCSS configuration. Do not delete `.npmrc`; it keeps this demo aligned with the other text-editor sample apps.
 
 ## Troubleshooting
 

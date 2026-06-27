@@ -53,7 +53,6 @@ spreadjs-comments-demo/
 │   └── velt-test-document.xlsx             # Deterministic workbook fixture
 ├── types/spread-sheets-io.d.ts             # Side-effect module declaration
 ├── styles/globals.css                      # App, workbook, and highlight styles
-├── .npmrc                                  # pnpm config to prevent Tailwind v4 hoisting
 ├── next.config.js
 ├── package.json
 └── tsconfig.json
@@ -66,7 +65,7 @@ spreadjs-comments-demo/
 - `@veltdev/react`
 - `@veltdev/spreadjs-velt-comments`
 
-This demo is scoped to SpreadJS. It does not include dependencies from other editor or viewer demos.
+This demo is scoped to SpreadJS. It does not include dependencies from other editor, spreadsheet, or viewer demos.
 
 ## Running Locally
 
@@ -94,12 +93,7 @@ pnpm --filter @apps/react-comments-spreadsheets-spreadjs-spreadjs-comments-demo 
 
 ## Environment Variables
 
-This demo follows the existing sample-app pattern and reads Velt credentials from environment variables:
-
-```bash
-NEXT_PUBLIC_VELT_API_KEY=your_velt_api_key
-VELT_AUTH_TOKEN=your_velt_auth_token
-```
+This demo follows the existing sample-app pattern and includes demo Velt credentials in `app/page.tsx` and `app/api/velt/token/route.ts`. Replace those values with your own Velt API key and auth token before adapting this demo for another project.
 
 The SpreadJS license key is optional:
 
@@ -108,20 +102,6 @@ NEXT_PUBLIC_SPREADJS_LICENSE_KEY=your_spreadjs_license_key
 ```
 
 Without a SpreadJS license key, the workbook may run in evaluation mode.
-
-## Important Configuration
-
-### `.npmrc` File
-
-This demo includes a `.npmrc` file that prevents pnpm from hoisting Tailwind CSS v4 from other workspace packages:
-
-```txt
-public-hoist-pattern[]=*
-public-hoist-pattern[]=!tailwindcss
-shamefully-hoist=false
-```
-
-This matters because the demo uses Tailwind CSS v3.4.x with traditional PostCSS configuration. Do not delete `.npmrc`; it keeps this demo aligned with the other sample apps.
 
 ## Troubleshooting
 
@@ -133,7 +113,7 @@ This matters because the demo uses Tailwind CSS v3.4.x with traditional PostCSS 
 
 ### Velt Comments Do Not Appear
 
-1. Confirm the Velt API key and auth token are configured.
+1. Confirm the demo Velt API key and auth token in `app/page.tsx` and `app/api/velt/token/route.ts` are valid.
 2. Confirm the demo user is initialized and the document is registered with Velt.
 3. Select a cell or range in the workbook before clicking Add Comment.
 4. Confirm `SpreadJSVeltComments.configure(...).attach(instance)` runs after `workbook.import(...)` succeeds.
