@@ -1,12 +1,12 @@
 /**
- * Velt outreach / listing plan — structured data for the review dashboard.
+ * Velt outreach / listing plan -- structured data for the review dashboard.
  *
- * Source of truth: /velt-listing-plan.md (repo root). All venue URLs were
- * live-verified 2026-06-09; awesome-list PRs opened 2026-06-03. If the plan
- * doc changes, mirror the change here.
+ * Source of truth: /velt-listing-plan.md (repo root). Venue URLs, submitted PRs,
+ * sample-app metadata, and docs pages were live-verified 2026-06-30. If the
+ * plan doc changes, mirror the change here.
  */
 
-export const VERIFIED_DATE = "June 9, 2026";
+export const VERIFIED_DATE = "June 30, 2026";
 
 export type LibraryStatus =
   | "listed"
@@ -57,9 +57,9 @@ export const LIBRARIES: Library[] = [
       url: "https://reactflow.dev/learn/advanced-use/multiplayer",
       section: "Third Party Libraries and Services",
     },
-    path: "Won via xyflow.com/contact — the team added the entry themselves",
+    path: "Won via xyflow.com/contact -- the team added the entry themselves",
     status: "listed",
-    note: "The model case. Velt sits alongside Yjs, Jazz, Liveblocks, Supabase, Convex, Automerge, Loro.",
+    note: "The model case. Velt sits alongside Yjs, Jazz, Liveblocks, Supabase, Convex, Automerge, and Loro.",
   },
   {
     rank: 2,
@@ -67,14 +67,14 @@ export const LIBRARIES: Library[] = [
     hasDemo: true,
     hasDocs: true,
     venue: {
-      label: "docs.yjs.dev → Connection Provider",
+      label: "docs.yjs.dev",
       url: "https://docs.yjs.dev/ecosystem/connection-provider",
-      section: "Ecosystem → Connection Provider (+ yjs.dev “Services”)",
+      section: "Ecosystem -> Connection Provider",
     },
     path: "PR #81 open to yjs/docs SUMMARY.md + @dmonad ping posted",
     status: "pr-open",
     topPick: true,
-    note: "Liveblocks, y-sweet, SuperViz, Hocuspocus listed there; Velt only in the yjs/yjs README (sponsor ⭐). PR #81 mirrors it onto the docs site.",
+    note: "Liveblocks, y-sweet, SuperViz, and Hocuspocus are listed there; Velt is also in the yjs/yjs README.",
   },
   {
     rank: 3,
@@ -86,10 +86,10 @@ export const LIBRARIES: Library[] = [
       url: "https://www.blocknotejs.org/docs/features/collaboration",
       section: "Yjs Providers",
     },
-    path: "Email sent 2026-06-15 to team@blocknotejs.org — awaiting reply (PR offer to follow)",
+    path: "Email sent 2026-06-15 to team@blocknotejs.org -- awaiting reply",
     status: "outreach",
     topPick: true,
-    note: "Liveblocks, PartyKit, Y-Sweet listed — richest SaaS-peer precedent of all 22. Email sent; PR offered.",
+    note: "Liveblocks, PartyKit, and Y-Sweet are listed. Best SaaS-peer precedent after React Flow.",
   },
   {
     rank: 4,
@@ -104,7 +104,7 @@ export const LIBRARIES: Library[] = [
     path: "Marketplace program form (vercel.com/marketplace/program)",
     status: "todo",
     topPick: true,
-    note: "Liveblocks already listed — direct competitor precedent.",
+    note: "Liveblocks is already listed -- direct competitor precedent.",
   },
   {
     rank: 5,
@@ -114,12 +114,12 @@ export const LIBRARIES: Library[] = [
     venue: {
       label: "Tools & Extensions",
       url: "https://www.ag-grid.com/community/tools-extensions/",
-      section: "Type “Extension”",
+      section: "Type: Extension",
     },
     path: "PR #14075 open (JSON entry + velt.webp) to ag-grid/ag-grid",
     status: "pr-open",
     topPick: true,
-    note: "Commercial, closed-source AdapTable already listed — clean precedent. PR #14075 adds Velt as an Extension.",
+    note: "Commercial, closed-source AdapTable already listed -- clean precedent.",
   },
   {
     rank: 6,
@@ -131,9 +131,9 @@ export const LIBRARIES: Library[] = [
       url: "https://docs.slatejs.org/general/resources",
       section: "Extensions and Plugins",
     },
-    path: "PR #6067 merged 2026-06-13 — Velt now listed",
+    path: "PR #6067 merged 2026-06-13 -- Velt now listed",
     status: "listed",
-    note: "@liveblocks/yjs already listed on the page; Velt added via merged PR #6067.",
+    note: "@liveblocks/yjs was already listed; Velt added via merged PR #6067.",
   },
   {
     rank: 7,
@@ -147,7 +147,7 @@ export const LIBRARIES: Library[] = [
     },
     path: "PR #5981 open to ajaxorg/ace index.html",
     status: "pr-open",
-    note: "A collaboration extension (ace-collab-ext) is already listed; PR #5981 adds Velt next to it.",
+    note: "A collaboration extension is already listed; PR #5981 adds Velt next to it.",
   },
   {
     rank: 8,
@@ -159,26 +159,56 @@ export const LIBRARIES: Library[] = [
       url: "https://platejs.org/docs/yjs",
       section: "Provider Types",
     },
-    path: "Discord message sent — PR to udecode/plate next",
+    path: "Discord message sent -- PR to udecode/plate next if maintainers are receptive",
     status: "outreach",
-    note: "No hosted SaaS listed yet — Velt would be first. Discord pitch sent; awaiting maintainer reply before PR.",
+    note: "No hosted SaaS listed yet. Velt would be first.",
   },
   {
     rank: 9,
+    name: "Chart.js",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "chartjs/awesome",
+      url: "https://github.com/chartjs/awesome",
+      section: "Plugins / Tools",
+    },
+    path: "PR to README.md; use the sample-apps GitHub path + live demo + docs",
+    status: "todo",
+    topPick: true,
+    note: "Previously blocked by no demo. Now actionable; re-check CONTRIBUTING at submit time.",
+  },
+  {
+    rank: 10,
+    name: "LottieFiles / Lottie",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "Integrations",
+      url: "https://lottiefiles.com/integrations",
+      section: "List your integrations prompt",
+    },
+    path: "Integration listing form submitted 2026-07-01 -- awaiting reply",
+    status: "outreach",
+    topPick: true,
+    note: "Previously blocked by no artifact. Form is now submitted; use support fallback only if no response.",
+  },
+  {
+    rank: 11,
     name: "Highcharts",
-    hasDemo: false,
+    hasDemo: true,
     hasDocs: true,
     venue: {
       label: "Integrations",
       url: "https://www.highcharts.com/integrations",
       section: "Community Resources",
     },
-    path: "Email sent 2026-06-15 to Highsoft — awaiting reply",
+    path: "Email sent 2026-06-15 to Highsoft; follow up with live demo link",
     status: "outreach",
-    note: "No submission process exists; the old plugin registry is a 404. Email sent.",
+    note: "No submission process exists; website is not PR-able.",
   },
   {
-    rank: 10,
+    rank: 12,
     name: "Vue",
     hasDemo: true,
     hasDocs: true,
@@ -187,12 +217,12 @@ export const LIBRARIES: Library[] = [
       url: "https://vuejs.org/ecosystem/themes.html",
       section: "Themes-page placement model",
     },
-    path: "Email sent 2026-06-15 to evan@vuejs.org — awaiting reply",
+    path: "Email sent 2026-06-15 to evan@vuejs.org -- awaiting reply",
     status: "outreach",
-    note: "vuejs.org demonstrably sells ecosystem placements. Email sent.",
+    note: "vuejs.org demonstrably sells ecosystem placements.",
   },
   {
-    rank: 11,
+    rank: 13,
     name: "MongoDB",
     hasDemo: true,
     hasDocs: true,
@@ -203,52 +233,108 @@ export const LIBRARIES: Library[] = [
     },
     path: "Technology Partner form (mongodb.com/partners)",
     status: "bd",
-    note: "Formal BD program — application + partner agreement, not a docs PR.",
+    note: "Formal BD program. The awesome-list PR was closed unmerged; use partner route if pursuing.",
   },
   {
-    rank: 12,
+    rank: 14,
     name: "TanStack Table",
     hasDemo: true,
     hasDocs: false,
     venue: {
       label: "Partners wall",
       url: "https://tanstack.com/partners",
-      section: "Paid tiers (+ free showcase)",
+      section: "Paid tiers + free showcase",
     },
     path: "partners@tanstack.com",
     status: "paid",
-    note: "AG Grid, Clerk, WorkOS pay to be there. Free supplement: showcase submission.",
-  },
-  {
-    rank: 13,
-    name: "Chart.js",
-    hasDemo: false,
-    hasDocs: true,
-    venue: {
-      label: "chartjs/awesome",
-      url: "https://github.com/chartjs/awesome",
-      section: "Plugins / Tools (linked from official docs nav)",
-    },
-    path: "PR — entry must link a GitHub repo ≥30 days old",
-    status: "gated",
-    note: "Publish the Velt chart-comments repo first, then wait out the 30-day rule.",
-  },
-  {
-    rank: 14,
-    name: "Lottie",
-    hasDemo: false,
-    hasDocs: true,
-    venue: {
-      label: "lottiefiles.com/integrations",
-      url: "https://lottiefiles.com/integrations",
-      section: "“List your integrations” prompt",
-    },
-    path: "Self-serve link (browser only — bot-gated) + support@lottiefiles.com",
-    status: "gated",
-    note: "Needs an actual Lottie integration artifact first.",
+    note: "AG Grid, Clerk, and WorkOS pay to be there. Free supplement: showcase submission.",
   },
   {
     rank: 15,
+    name: "Apryse",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "Apryse contact",
+      url: "https://apryse.com/contact-sales",
+      section: "Partner / integration inquiry",
+    },
+    path: "Contact-sales pitch; no public plugin directory or PR-able docs listing found",
+    status: "bd",
+    note: "Commercial SDK ecosystem. Pitch the WebViewer comments demo as a customer integration story.",
+  },
+  {
+    rank: 16,
+    name: "Nutrient",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "Nutrient contact",
+      url: "https://www.nutrient.io/contact/",
+      section: "Partner / integration inquiry",
+    },
+    path: "Contact form submitted 2026-07-01 -- awaiting reply",
+    status: "bd",
+    note: "Former PSPDFKit ecosystem. Treat as BD rather than a GitHub PR target; form is now in flight.",
+  },
+  {
+    rank: 17,
+    name: "SpreadJS",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "MESCIUS contact",
+      url: "https://developer.mescius.com/contact",
+      section: "Product / partner inquiry",
+    },
+    path: "MESCIUS contact form submitted 2026-07-01 -- awaiting reply",
+    status: "bd",
+    note: "Commercial spreadsheet SDK; demo currently needs an evaluation key for runtime display.",
+  },
+  {
+    rank: 18,
+    name: "TinyMCE",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "TinyMCE integrations docs",
+      url: "https://www.tiny.cloud/docs/tinymce/latest/integrations/",
+      section: "No self-serve third-party listing; use contact route",
+    },
+    path: "Tiny Cloud contact form submitted 2026-07-01 -- awaiting reply",
+    status: "outreach",
+    note: "TinyMCE has official integration docs but no public vendor marketplace for third-party plugins; contact route is now in flight.",
+  },
+  {
+    rank: 19,
+    name: "CKEditor",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "CKEditor integrations docs",
+      url: "https://ckeditor.com/docs/ckeditor5/latest/getting-started/integrations/overview.html",
+      section: "No self-serve third-party listing; use contact route",
+    },
+    path: "CKEditor contact form submitted 2026-07-01 -- awaiting reply",
+    status: "outreach",
+    note: "CKEditor has first-party integrations and plugin docs, but no open listing path found; contact route is now in flight.",
+  },
+  {
+    rank: 20,
+    name: "SuperDoc",
+    hasDemo: true,
+    hasDocs: true,
+    venue: {
+      label: "SuperDoc docs / GitHub",
+      url: "https://docs.superdoc.dev/",
+      section: "Integration docs / issue route",
+    },
+    path: "Open an issue or contact maintainers; no marketplace/listing page found",
+    status: "outreach",
+    note: "Small ecosystem. A Velt integration note is plausible, but path is maintainer-led.",
+  },
+  {
+    rank: 21,
     name: "CodeMirror",
     hasDemo: true,
     hasDocs: true,
@@ -257,12 +343,12 @@ export const LIBRARIES: Library[] = [
       url: "https://codemirror.net/docs/community/",
       section: "Editor Extensions",
     },
-    path: "Forum + edit via code.haverbeke.berlin (GitHub mirror archived)",
+    path: "Forum + edit via code.haverbeke.berlin; GitHub mirror archived",
     status: "gated",
-    note: "Open-source-only policy — needs an OSS Velt↔CodeMirror binding package.",
+    note: "Open-source-only policy -- needs an OSS Velt/CodeMirror binding package.",
   },
   {
-    rank: 16,
+    rank: 22,
     name: "Lexical",
     hasDemo: true,
     hasDocs: true,
@@ -273,10 +359,50 @@ export const LIBRARIES: Library[] = [
     },
     path: "PR to facebook/lexical (Meta CLA)",
     status: "low-odds",
-    note: "Page states only y-websocket is officially supported — win the Yjs docs instead.",
+    note: "Page says only y-websocket is officially supported. Win the Yjs docs instead.",
   },
   {
-    rank: 17,
+    rank: 23,
+    name: "Monaco",
+    hasDemo: true,
+    hasDocs: true,
+    venue: null,
+    path: "No official ecosystem/resources page found; product repo is not a listing directory",
+    status: "no-venue",
+    note: "Keep demo/docs for users, but skip listing outreach unless Microsoft opens a showcase path.",
+  },
+  {
+    rank: 24,
+    name: "ProseMirror",
+    hasDemo: true,
+    hasDocs: true,
+    venue: null,
+    path: "No official plugin directory; forum-only discussion path is excluded by this plan",
+    status: "no-venue",
+    note: "The official site has docs/examples/reference, not third-party vendor listings.",
+  },
+  {
+    rank: 25,
+    name: "DraftJS",
+    hasDemo: true,
+    hasDocs: true,
+    venue: null,
+    path: "No maintained official resources/listing page found",
+    status: "no-venue",
+    note: "Legacy editor ecosystem; skip outreach beyond keeping docs/demo live.",
+  },
+  {
+    rank: 26,
+    name: "Nivo",
+    hasDemo: true,
+    hasDocs: true,
+    venue: null,
+    path: "No official ecosystem/listing venue found",
+    status: "no-venue",
+    note: "Demo/docs are now live, but there is still no viable official listing path.",
+  },
+  {
+    rank: 27,
     name: "PostgreSQL",
     hasDemo: true,
     hasDocs: false,
@@ -285,59 +411,49 @@ export const LIBRARIES: Library[] = [
       url: "https://www.postgresql.org/download/product-categories/",
       section: "Self-serve product submission",
     },
-    path: "Self-serve form — weak category fit",
+    path: "Self-serve form -- weak category fit",
     status: "low-odds",
-    note: "A frontend SDK doesn’t match any catalogue category; moderators likely reject.",
+    note: "A frontend SDK does not match the catalogue categories cleanly.",
   },
   {
-    rank: 18,
+    rank: 28,
     name: "TipTap",
     hasDemo: true,
     hasDocs: true,
     venue: null,
-    path: "Already on awesome-tiptap ×2 — that’s the ceiling",
+    path: "Already on awesome-tiptap x2 -- that is the ceiling",
     status: "no-venue",
     note: "tiptap.dev sells competing Collaboration/Comments products.",
   },
   {
-    rank: 19,
+    rank: 29,
     name: "Quill",
     hasDemo: true,
     hasDocs: true,
     venue: null,
     path: "Fallback: awesome-quill PR #63",
     status: "no-venue",
-    note: "No resources/community page exists on quilljs.com (both candidates 404).",
+    note: "No resources/community page exists on quilljs.com.",
   },
   {
-    rank: 20,
+    rank: 30,
     name: "React",
     hasDemo: true,
     hasDocs: true,
     venue: null,
-    path: "—",
+    path: "--",
     status: "no-venue",
     note: "react.dev is vendor-neutral by design.",
   },
   {
-    rank: 21,
+    rank: 31,
     name: "Angular",
     hasDemo: false,
     hasDocs: true,
     venue: null,
-    path: "—",
+    path: "--",
     status: "no-venue",
     note: "Community-resources section explicitly rejected (angular/angular #58622).",
-  },
-  {
-    rank: 22,
-    name: "Nivo",
-    hasDemo: false,
-    hasDocs: true,
-    venue: null,
-    path: "—",
-    status: "no-venue",
-    note: "Site down (HTTP 402); no ecosystem page ever existed.",
   },
 ];
 
@@ -347,7 +463,7 @@ export const MODEL_CASE = {
   pageLabel: "reactflow.dev/learn/advanced-use/multiplayer",
   section: "Third Party Libraries and Services",
   description:
-    "Velt is listed as “CRDT with managed backend … with a dedicated React Flow Library” alongside Yjs, Jazz, Liveblocks, Supabase, Convex, Automerge, and Loro.",
+    "Velt is listed as a CRDT/collaboration option alongside Yjs, Jazz, Liveblocks, Supabase, Convex, Automerge, and Loro.",
   how: "A simple pitch through xyflow.com/contact (form + info@xyflow.com). The xyflow team committed the entry themselves in January 2026.",
   peers: ["Yjs", "Jazz", "Liveblocks", "Supabase", "Convex", "Velt", "Automerge", "Loro"],
 };
@@ -356,20 +472,21 @@ export const PROPOSE_A_PAGE = [
   {
     title: "Svelte Flow multiplayer guide",
     detail:
-      "svelteflow.dev has no multiplayer page (404 today). Pitch xyflow — a proven contact — on porting the React Flow guide, third-party table and Velt included.",
+      "svelteflow.dev has no multiplayer page today. Pitch xyflow -- a proven contact -- on porting the React Flow guide with Velt included.",
   },
   {
     title: "reactflow.dev showcase",
     detail:
-      "Explicit “we want to feature it here!” CTA. Submit a Velt-powered React Flow demo via the contact form.",
+      "Explicit showcase CTA. Submit a Velt-powered React Flow demo via the proven contact form.",
   },
   {
     title: "PlateJS hosted-provider section",
-    detail: "Provider Types has no SaaS entries yet. Socialize on Discord, then PR.",
+    detail: "Provider Types has no SaaS entries yet. Socialize on Discord, then PR if approved.",
   },
   {
-    title: "Highcharts “Community Resources” entry",
-    detail: "The section exists but has no intake — email Highsoft a Velt chart-comments entry.",
+    title: "Commercial viewer/editor partner stories",
+    detail:
+      "Apryse, Nutrient, SpreadJS, TinyMCE, CKEditor, and SuperDoc are better handled as partner/content pitches than code-listing PRs.",
   },
 ];
 
@@ -385,17 +502,17 @@ export interface Contact {
 export const CONTACTS: Contact[] = [
   {
     library: "Yjs",
-    primary: "✅ Opened — PR #81 + @dmonad ping posted. Awaiting review",
+    primary: "Opened -- PR #81 + @dmonad ping posted. Awaiting review",
     primaryUrl: "https://github.com/yjs/docs/pull/81",
-    repoPath: "yjs/docs → SUMMARY.md (Connection Provider)",
+    repoPath: "yjs/docs -> SUMMARY.md (Connection Provider)",
     community: "discuss.yjs.dev",
     owner: "Kevin Jahns / community",
   },
   {
     library: "BlockNote",
-    primary: "✅ Email sent 2026-06-15 to team@blocknotejs.org — awaiting reply",
+    primary: "Email sent 2026-06-15 to team@blocknotejs.org -- awaiting reply",
     primaryUrl: "https://www.blocknotejs.org/about",
-    repoPath: "TypeCellOS/BlockNote → docs/…/collaboration/index.mdx",
+    repoPath: "TypeCellOS/BlockNote -> docs/.../collaboration/index.mdx",
     community: "Discord",
     owner: "TypeCellOS",
   },
@@ -403,134 +520,168 @@ export const CONTACTS: Contact[] = [
     library: "Vercel",
     primary: "Marketplace program form + Technology Partner form",
     primaryUrl: "https://vercel.com/marketplace/program",
-    repoPath: "— (marketplace is gated; needs a real integration build)",
-    community: "—",
+    repoPath: "-- (marketplace is gated; needs a real integration build)",
+    community: "--",
     owner: "Vercel Inc.",
   },
   {
     library: "AG Grid",
-    primary: "✅ Opened — PR #14075 (JSON + velt.webp) + contact form submitted",
+    primary: "Opened -- PR #14075 (JSON + velt.webp) + contact form submitted",
     primaryUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
-    repoPath: "ag-grid/ag-grid → …/community/tools-extensions.json",
+    repoPath: "ag-grid/ag-grid -> .../community/tools-extensions.json",
     community: "GitHub issues",
     owner: "AG Grid Ltd",
   },
   {
     library: "SlateJS",
-    primary: "✅ Done — PR #6067 merged 2026-06-13",
+    primary: "Done -- PR #6067 merged 2026-06-13",
     primaryUrl: "https://github.com/ianstormtaylor/slate/pull/6067",
-    repoPath: "ianstormtaylor/slate → docs/general/resources.md (merged)",
+    repoPath: "ianstormtaylor/slate -> docs/general/resources.md (merged)",
     community: "Slack (volunteer-run)",
     owner: "Community (Ian Storm Taylor)",
   },
   {
     library: "Ace",
-    primary: "✅ Opened — PR #5981. Awaiting review",
+    primary: "Opened -- PR #5981. Awaiting review",
     primaryUrl: "https://github.com/ajaxorg/ace/pull/5981",
-    repoPath: "ajaxorg/ace → index.html (“Related Projects”)",
+    repoPath: "ajaxorg/ace -> index.html (Related Projects)",
     community: "GitHub Discussions",
     owner: "Community (ajaxorg)",
   },
   {
-    library: "xyflow (follow-ups)",
-    primary: "✅ Showcase form submitted 2026-06-15 — awaiting reply",
-    primaryUrl: "https://xyflow.com/contact",
-    repoPath: "xyflow/web → sites/reactflow.dev/…/multiplayer.mdx",
+    library: "PlateJS",
+    primary: "Discord message sent -- PR to follow on reply",
+    repoPath: "udecode/plate -> content/docs/.../yjs.mdx",
     community: "Discord",
-    owner: "xyflow GmbH",
+    owner: "udecode",
   },
   {
-    library: "PlateJS",
-    primary: "✅ Discord message sent — PR to follow on reply",
-    repoPath: "udecode/plate → content/docs/…/yjs.mdx",
+    library: "Chart.js",
+    primary: "GitHub PR to chartjs/awesome; re-check CONTRIBUTING before submit",
+    primaryUrl: "https://github.com/chartjs/awesome",
+    repoPath: "chartjs/awesome -> README.md",
     community: "Discord",
-    owner: "udecode (Ziad Beyens)",
+    owner: "Community (chartjs org)",
+  },
+  {
+    library: "LottieFiles",
+    primary: "Integration listing form submitted 2026-07-01 -- awaiting reply",
+    primaryUrl: "https://lottiefiles.com/integrations",
+    repoPath: "--",
+    community: "forum.lottiefiles.com",
+    owner: "Design Barn Inc.",
   },
   {
     library: "Highcharts",
-    primary: "✅ Email sent 2026-06-15 to Highsoft — awaiting reply",
+    primary: "Email sent 2026-06-15 to Highsoft -- follow up with live demo",
     primaryUrl: "https://www.highcharts.com/about-us/contact/",
-    repoPath: "— (website not open-source)",
+    repoPath: "-- (website not open-source)",
     community: "Discord / Stack Overflow",
-    owner: "Highsoft AS (Norway)",
+    owner: "Highsoft AS",
+  },
+  {
+    library: "Apryse",
+    primary: "Contact-sales / partner inquiry",
+    primaryUrl: "https://apryse.com/contact-sales",
+    repoPath: "-- (no public listing repo found)",
+    community: "--",
+    owner: "Apryse",
+  },
+  {
+    library: "Nutrient",
+    primary: "Contact form submitted 2026-07-01 -- awaiting reply",
+    primaryUrl: "https://www.nutrient.io/contact/",
+    repoPath: "-- (no public listing repo found)",
+    community: "--",
+    owner: "Nutrient",
+  },
+  {
+    library: "SpreadJS",
+    primary: "MESCIUS contact form submitted 2026-07-01 -- awaiting reply",
+    primaryUrl: "https://developer.mescius.com/contact",
+    repoPath: "-- (no public listing repo found)",
+    community: "--",
+    owner: "MESCIUS",
+  },
+  {
+    library: "TinyMCE",
+    primary: "Tiny Cloud contact form submitted 2026-07-01 -- awaiting reply",
+    primaryUrl: "https://www.tiny.cloud/contact/",
+    repoPath: "-- (no self-serve marketplace found)",
+    community: "--",
+    owner: "Tiny Technologies",
+  },
+  {
+    library: "CKEditor",
+    primary: "CKEditor contact form submitted 2026-07-01 -- awaiting reply",
+    primaryUrl: "https://ckeditor.com/contact/",
+    repoPath: "-- (no self-serve marketplace found)",
+    community: "--",
+    owner: "CKSource",
+  },
+  {
+    library: "SuperDoc",
+    primary: "Maintainer issue/contact route",
+    primaryUrl: "https://docs.superdoc.dev/",
+    repoPath: "SuperDoc docs / GitHub issue if maintainers accept ecosystem notes",
+    community: "GitHub",
+    owner: "SuperDoc maintainers",
   },
   {
     library: "Vue",
-    primary: "✅ Email sent 2026-06-15 to evan@vuejs.org — awaiting reply",
-    repoPath: "vuejs/docs → src/ecosystem/ (curated; cold PR redirected to email)",
+    primary: "Email sent 2026-06-15 to evan@vuejs.org -- awaiting reply",
+    repoPath: "vuejs/docs -> src/ecosystem/ (curated; cold PR likely redirected)",
     community: "Vue Land Discord",
     owner: "Vue team / Evan You",
   },
   {
     library: "MongoDB",
-    primary: "“Become a Partner” form, category: Technology",
+    primary: "Become a Partner form, category: Technology",
     primaryUrl: "https://www.mongodb.com/partners",
-    repoPath: "— (docs listing is program-fed)",
-    community: "—",
+    repoPath: "-- (docs listing is program-fed)",
+    community: "--",
     owner: "MongoDB, Inc.",
   },
   {
     library: "TanStack",
-    primary: "partners@tanstack.com (“TanStack Partnership Inquiry”) — paid tiers",
-    repoPath: "— (partner wall not PR-able)",
+    primary: "partners@tanstack.com -- paid tiers",
+    repoPath: "-- (partner wall not PR-able)",
     community: "Discord",
     owner: "TanStack LLC",
   },
   {
-    library: "Chart.js",
-    primary: "PR only — GitHub repo link, ≥30 days old, alphabetical, one per PR",
-    primaryUrl: "https://github.com/chartjs/awesome",
-    repoPath: "chartjs/awesome → README.md",
-    community: "Discord",
-    owner: "Community (chartjs org)",
-  },
-  {
     library: "CodeMirror",
-    primary: "Forum post first; change via code.haverbeke.berlin (GitHub mirror archived)",
+    primary: "Forum post first; change via code.haverbeke.berlin",
     primaryUrl: "https://discuss.codemirror.net",
-    repoPath: "codemirror/website (Gitea) → site/docs/community/index.html",
+    repoPath: "codemirror/website (Gitea) -> site/docs/community/index.html",
     community: "Forum",
     owner: "Marijn Haverbeke",
   },
   {
-    library: "LottieFiles",
-    primary: "“List your integrations” link (real browser only) + support@lottiefiles.com",
-    primaryUrl: "https://lottiefiles.com/integrations",
-    repoPath: "—",
-    community: "forum.lottiefiles.com",
-    owner: "Design Barn Inc.",
-  },
-  {
     library: "Lexical",
-    primary: "PR only (expect pushback) — requires Meta CLA",
-    repoPath: "facebook/lexical → packages/lexical-website/docs/collaboration/react.md",
+    primary: "PR only, expect pushback -- requires Meta CLA",
+    repoPath: "facebook/lexical -> packages/lexical-website/docs/collaboration/react.md",
     community: "Discord",
     owner: "Meta",
-  },
-  {
-    library: "PostgreSQL",
-    primary: "Self-serve product submission (free community account) — low value",
-    primaryUrl: "https://www.postgresql.org/account/products/new/",
-    repoPath: "— (catalogue is database-driven)",
-    community: "pgsql-www list",
-    owner: "PostgreSQL community",
   },
 ];
 
 export const NO_VENUE_NOTE =
-  "Do not spend outreach on: React (vendor-neutral by design) · Angular (concept rejected, #58622) · Nivo (site down) · Quill (no on-site page) · TipTap (direct competitor; awesome-tiptap listing already secured).";
+  "Do not spend outreach on: DraftJS (legacy/no maintained listing); Monaco (no official ecosystem page); ProseMirror (forum-only, no listing directory); Nivo (demo/docs now live, but no official listing venue); React (vendor-neutral); Angular (concept rejected, #58622); Quill (no on-site page); TipTap (direct competitor; awesome-tiptap listing already secured).";
 
-export const PITCH_TEMPLATE = `Hi — we're Velt (velt.dev), a collaboration SDK (comments, presence, cursors, realtime sync). We maintain a {library} integration with a working demo ({demo link}) and a dedicated docs page ({docs link}). We're listed on React Flow's multiplayer guide under "Third Party Libraries and Services" (reactflow.dev/learn/advanced-use/multiplayer) alongside Yjs, Liveblocks, and Supabase. Could Velt be added to {page} under {section}? Happy to draft the entry or open the PR ourselves.`;
+export const PITCH_TEMPLATE = `Hi -- we're Velt (velt.dev), a collaboration SDK (comments, presence, cursors, realtime sync). We maintain a {library} integration with a working demo ({demo link}) and a dedicated docs page ({docs link}). We're listed on React Flow's multiplayer guide under "Third Party Libraries and Services" (reactflow.dev/learn/advanced-use/multiplayer) alongside Yjs, Liveblocks, and Supabase. Could Velt be added to {page} under {section}? Happy to draft the entry or open the PR ourselves.`;
 
 export const WAVES = [
   {
-    title: "Warm natural slots — free, do now",
+    title: "Warm natural slots -- free, do now",
     items: [
-      "Yjs docs PR + @dmonad ping",
-      "BlockNote email + PR",
-      "Slate PR #6067 ✅ merged",
-      "Ace PR",
-      "AG Grid JSON PR + contact-form note",
+      "Yjs docs PR + @dmonad ping (PR #81 open)",
+      "BlockNote email + PR offer",
+      "Slate PR #6067 merged",
+      "Ace PR #5981 open",
+      "AG Grid PR #14075 open",
+      "Chart.js PR now that demo/docs exist",
+      "LottieFiles listing form submitted 2026-07-01",
     ],
   },
   {
@@ -538,31 +689,34 @@ export const WAVES = [
     items: [
       "Vercel Marketplace application",
       "xyflow follow-ups (showcase, Svelte Flow guide)",
-      "Highcharts email",
-      "Vue email to Evan You",
+      "Highcharts follow-up with live demo",
+      "Vue email follow-up",
       "MongoDB Technology Partner application",
+      "Nutrient / SpreadJS partner-content forms submitted 2026-07-01",
+      "TinyMCE / CKEditor contact forms submitted 2026-07-01",
+      "Apryse partner-content pitch",
+      "SuperDoc maintainer issue",
     ],
   },
   {
     title: "Build-first / gated",
     items: [
-      "Chart.js — publish the chart-comments repo, wait 30 days",
-      "CodeMirror — open-source a Velt↔CodeMirror binding",
-      "LottieFiles — build a Lottie integration",
-      "PlateJS — Discord, then PR",
-      "TanStack — decide on paid sponsorship",
+      "CodeMirror -- open-source a Velt/CodeMirror binding package",
+      "PlateJS -- Discord, then PR if maintainers approve",
+      "TanStack -- decide on paid sponsorship",
+      "Lexical -- only pursue if the Yjs docs win creates stronger precedent",
     ],
   },
   {
     title: "Skip",
-    items: ["React", "Angular", "Nivo", "Quill (on-site)", "TipTap (on-site)", "PostgreSQL"],
+    items: ["DraftJS", "Monaco", "ProseMirror", "Nivo", "React", "Angular", "Quill (on-site)", "TipTap (on-site)", "PostgreSQL"],
   },
 ];
 
 export type PRStatus = "open" | "merged" | "closed";
 
-/** PR statuses re-checked live via the GitHub API on 2026-06-22. */
-export const PR_STATUS_CHECKED = "June 22, 2026";
+/** PR statuses re-checked live via GitHub CLI on 2026-06-30. */
+export const PR_STATUS_CHECKED = "June 30, 2026";
 
 export interface SubmittedPR {
   library: string;
@@ -580,17 +734,17 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
   {
     library: "Vercel Chat SDK",
     repo: "vercel/chat",
-    section: "Adapters docs — vendor-official adapter",
+    section: "Adapters docs -- vendor-official adapter",
     pr: "#572",
     prUrl: "https://github.com/vercel/chat/pull/572",
     status: "merged",
     mergedAt: "June 2, 2026",
-    note: "Earlier outreach — pre-dates the plan doc",
+    note: "Earlier outreach -- pre-dates the plan doc",
   },
   {
     library: "BlockNote",
     repo: "defensestation/awesome-blocknote",
-    section: "Tools → Plugins",
+    section: "Tools -> Plugins",
     pr: "#5",
     prUrl: "https://github.com/defensestation/awesome-blocknote/pull/5",
     status: "merged",
@@ -608,34 +762,34 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
   {
     library: "Yjs",
     repo: "yjs/docs",
-    section: "Ecosystem → Connection Provider (SUMMARY.md)",
+    section: "Ecosystem -> Connection Provider (SUMMARY.md)",
     pr: "#81",
     prUrl: "https://github.com/yjs/docs/pull/81",
     status: "open",
-    note: "Docs-site PR (§1 primary channel) + @dmonad ping posted",
+    note: "Docs-site PR plus @dmonad ping posted",
   },
   {
     library: "Ace",
     repo: "ajaxorg/ace",
-    section: "Homepage → Related Projects (index.html)",
+    section: "Homepage -> Related Projects (index.html)",
     pr: "#5981",
     prUrl: "https://github.com/ajaxorg/ace/pull/5981",
     status: "open",
-    note: "Docs-site PR (§1 primary channel)",
+    note: "Docs-site PR",
   },
   {
     library: "AG Grid",
     repo: "ag-grid/ag-grid",
-    section: "Community → Tools & Extensions (JSON + velt.webp)",
+    section: "Community -> Tools & Extensions (JSON + velt.webp)",
     pr: "#14075",
     prUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
     status: "open",
-    note: "Docs-site PR (§1 primary channel) — Extension entry + logo",
+    note: "Docs-site PR -- Extension entry + logo",
   },
   {
     library: "Vercel Chat SDK (follow-up)",
     repo: "vercel/chat",
-    section: "Adapters docs — sharpen description + live demo link",
+    section: "Adapters docs -- sharpen description + live demo link",
     pr: "#578",
     prUrl: "https://github.com/vercel/chat/pull/578",
     status: "merged",
@@ -660,7 +814,7 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
   {
     library: "Velt SDK (realtime)",
     repo: "jacktuck/awesome-realtime",
-    section: "Websockets → Hosted",
+    section: "Websockets -> Hosted",
     pr: "#2",
     prUrl: "https://github.com/jacktuck/awesome-realtime/pull/2",
     status: "open",
@@ -673,16 +827,16 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     prUrl: "https://github.com/ramnes/awesome-mongodb/pull/155",
     status: "closed",
     closedAt: "June 17, 2026",
-    note: "Closed unmerged — deprioritize the awesome-list fallback; use MongoDB partner program if pursuing MongoDB.",
+    note: "Closed unmerged -- use MongoDB partner program if pursuing MongoDB.",
   },
   {
     library: "CRDT (Velt SDK)",
     repo: "alangibson/awesome-crdt",
-    section: "Implementations → Data Structures",
+    section: "Implementations -> Data Structures",
     pr: "#14",
     prUrl: "https://github.com/alangibson/awesome-crdt/pull/14",
     status: "open",
-    note: "Repo dormant since 2021 — low merge odds",
+    note: "Repo dormant since 2021 -- low merge odds",
   },
 ];
 
@@ -717,7 +871,7 @@ export const PLATFORMS: Platform[] = [
     type: "Examples dir",
     submitVia: "GitHub PR",
     submitUrl: "https://github.com/supabase/supabase/tree/master/examples",
-    notes: "Add a “Velt + Supabase realtime collaboration” example",
+    notes: "Add a Velt + Supabase realtime collaboration example",
     value: 3,
   },
   {
@@ -774,25 +928,23 @@ export interface Draft {
   code?: { label: string; content: string };
 }
 
-/** Outreach drafts for the first 10 targets — mirrors /velt-outreach-drafts.md (verified 2026-06-10). */
+/** Outreach drafts for actionable targets -- mirrors /velt-outreach-drafts.md (verified 2026-06-30). */
 export const DRAFTS: Draft[] = [
   {
     target: "Yjs",
     channel: "GitHub PR",
-    to: "yjs/docs → SUMMARY.md (+ ping @dmonad)",
+    to: "yjs/docs -> SUMMARY.md (+ ping @dmonad)",
     toUrl: "https://github.com/yjs/docs/pull/81",
-    done: "PR #81 opened 2026-06-15 + @dmonad ping posted — awaiting review",
+    done: "PR #81 opened 2026-06-15 + @dmonad ping posted -- awaiting review",
     subject: "PR title: Add Velt to Connection Providers",
     body: `Adds Velt to the Connection Provider list, matching the existing external entries (y-sweet, Liveblocks, SuperViz, Hocuspocus).
 
-Velt is a managed Yjs backend — realtime WebSocket sync, persistent storage, offline support with automatic reconnection, and version history, with no server setup (@veltdev/crdt on npm). It's already listed in the yjs/yjs README under Providers as "Velt YJs" ⭐ — this PR mirrors that entry onto the docs site.
+Velt is a managed Yjs backend with realtime WebSocket sync, persistence, offline support, automatic reconnection, and version history. It is already listed in the yjs/yjs README under Providers as Velt YJs; this PR mirrors that entry onto the docs site.
 
-Docs: https://docs.velt.dev/realtime-collaboration/crdt/overview · Live demo: https://velt-general-crdt-demo.vercel.app/
-
-— Ping comment for @dmonad —
-Hi Kevin — small one: this mirrors Velt's existing README Providers entry onto docs.yjs.dev, alongside Liveblocks/SuperViz/Hocuspocus. We sponsor through GitHub Sponsors and would love to stay aligned with how you want commercial providers represented — happy to adjust wording or placement. Separately: is the yjs.dev front-page "Services" section open to the same addition?`,
+Docs: https://docs.velt.dev/realtime-collaboration/crdt/overview
+Live demo: https://velt-general-crdt-demo.vercel.app/`,
     code: {
-      label: "SUMMARY.md — append after the Hocuspocus line",
+      label: "SUMMARY.md -- append after the Hocuspocus line",
       content: `  * [Velt](https://velt.dev/libraries/yjs)`,
     },
   },
@@ -800,158 +952,212 @@ Hi Kevin — small one: this mirrors Velt's existing README Providers entry onto
     target: "BlockNote",
     channel: "Email",
     to: "team@blocknotejs.org",
-    done: "Email sent 2026-06-15 — awaiting reply (PR offer to follow)",
+    done: "Email sent 2026-06-15 -- awaiting reply",
     subject: "Adding Velt to the Yjs Providers list in your collaboration docs?",
     body: `Hi BlockNote team,
 
-I'm Yoen from Velt (velt.dev) — we build a collaboration SDK (comments, presence, cursors, and a managed Yjs backend). Velt is a Yjs connection provider — we're listed in the official Yjs README (https://github.com/yjs/yjs) — so we slot directly into BlockNote's existing Yjs-based collaboration. We maintain a dedicated BlockNote integration and would love to be listed in the "Yjs Providers" section of your collaboration docs, alongside Liveblocks, PartyKit, and Y-Sweet:
+I'm Yoen from Velt (velt.dev). We build a collaboration SDK with comments, presence, cursors, and a managed Yjs backend. Velt slots into BlockNote's existing Yjs-based collaboration, and we maintain a dedicated BlockNote integration.
 
 - Integration docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/blocknote
 - Live demo: https://velt-blocknote-crdt-demo.vercel.app/
 - Library page: https://velt.dev/libraries/blocknote
-- Yjs provider (listed in yjs/yjs README): https://github.com/yjs/yjs
 
-For context, we're listed on React Flow's multiplayer guide under "Third Party Libraries and Services" (reactflow.dev/learn/advanced-use/multiplayer), and our BlockNote plugin entry was just merged into awesome-blocknote.
+Could Velt be listed in the Yjs Providers section of your collaboration docs alongside Liveblocks, PartyKit, and Y-Sweet? Happy to open the PR with whatever wording you prefer.
 
-Happy to open the PR ourselves with whatever wording you prefer — it'd be a one-liner in the providers list. Also open to going deeper (a joint example or guide) if that's interesting to you.
-
-Thanks!
-Yoen — Velt`,
-  },
-  {
-    target: "SlateJS",
-    channel: "GitHub PR",
-    to: "ianstormtaylor/slate → docs/general/resources.md (merged)",
-    toUrl: "https://github.com/ianstormtaylor/slate/pull/6067",
-    done: "PR #6067 merged 2026-06-13 — no Slack nudge needed",
-    body: `✅ No action needed. PR #6067 was merged by Dylan Schiemann on 2026-06-13 — Velt is now listed on the Slate Resources page under Extensions and Plugins. No need to join the Slate Slack workspace.`,
+Thanks,
+Yoen -- Velt`,
   },
   {
     target: "Ace",
     channel: "GitHub PR",
-    to: "ajaxorg/ace → index.html (Related Projects)",
+    to: "ajaxorg/ace -> index.html (Related Projects)",
     toUrl: "https://github.com/ajaxorg/ace/pull/5981",
-    done: "PR #5981 opened 2026-06-15 — awaiting review",
+    done: "PR #5981 opened 2026-06-15 -- awaiting review",
     subject: "PR title: Add Velt collaboration SDK to Related Projects",
     body: `Adds Velt to the Related Projects list on the homepage, next to the existing Ace collaboration extension.
 
-Velt is a collaboration SDK with a dedicated Ace integration — threaded comments anchored to code, presence, and live cursors:
-- Integration docs: https://docs.velt.dev/async-collaboration/comments/setup/ace
-- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/ace/ace-comments-demo
+Velt is a collaboration SDK with a dedicated Ace integration: threaded comments anchored to code, presence, and live cursors.
 
-Matches the existing list format; happy to shorten the label if preferred.`,
+- Integration docs: https://docs.velt.dev/async-collaboration/comments/setup/ace
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/ace/ace-comments-demo`,
     code: {
-      label: "index.html — insert after the ace-collab-ext <li>",
+      label: "index.html -- insert after the ace-collab-ext item",
       content: `<li><a href="https://docs.velt.dev/async-collaboration/comments/setup/ace">Velt collaboration SDK for Ace (comments, presence, cursors)</a></li>`,
     },
   },
   {
     target: "AG Grid",
     channel: "GitHub PR",
-    to: "ag-grid/ag-grid → tools-extensions.json (+ contact form submitted)",
+    to: "ag-grid/ag-grid -> tools-extensions.json",
     toUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
-    done: "PR #14075 open (JSON + velt.webp) + contact form submitted — awaiting review",
+    done: "PR #14075 open + contact form submitted -- awaiting review",
     subject: "PR title: docs(community): add Velt to Tools & Extensions",
-    body: `Adds Velt to the community Tools & Extensions directory as an Extension. Velt adds cell-level commenting (with aggregation), presence, and live cursors on top of AG Grid.
+    body: `Adds Velt to the community Tools & Extensions directory as an Extension. Velt adds cell-level commenting with aggregation, presence, and live cursors on top of AG Grid.
 
 - Integration docs: https://docs.velt.dev/integrations/ag-grid
 - React demo: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/tables/ag-grid/comment-aggregation
-- Vue demo: https://github.com/velt-js/sample-apps/tree/main/apps/vue/comments/tables/ag-grid
+- Vue demo: https://github.com/velt-js/sample-apps/tree/main/apps/vue/comments/tables/ag-grid`,
+  },
+  {
+    target: "Chart.js",
+    channel: "GitHub PR",
+    to: "chartjs/awesome -> README.md",
+    toUrl: "https://github.com/chartjs/awesome",
+    subject: "PR title: Add Velt Chart.js comments demo",
+    body: `Adds Velt to the Chart.js ecosystem list as a collaboration/comments integration.
 
-Includes velt.webp per the existing logo convention. Happy to adjust the description, type, or tags to fit your curation.
+Velt adds collaborative comments to Chart.js dashboards so users can place threaded discussions on chart data and review context directly in the visualization.
 
-— Contact form note (ag-grid.com/about: Yoen / Zhang / yoen@velt.dev) —
-Hi — I'm Yoen from Velt (velt.dev). We make a collaboration SDK with a dedicated AG Grid integration: cell-level threaded comments with aggregation, presence, and live cursors (docs: docs.velt.dev/integrations/ag-grid). I've just opened a PR adding Velt to your community Tools & Extensions directory (alongside extensions like AdapTable) — flagging it here so it reaches the right person, and happy to adjust anything. We'd also be open to a deeper partnership conversation if useful. Thanks!`,
+- Live demo: https://sample-apps-chartjs-comments-demo.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/charts/chartjs/chartjs-comments-demo
+- Integration docs: https://docs.velt.dev/async-collaboration/comments/setup/chart-comments-setup/chartjs
+
+I checked CONTRIBUTING before opening this PR and matched the list ordering/format.`,
     code: {
-      label: "tools-extensions.json — new entry (AdapTable-style commercial shape)",
-      content: `{
-    "link": "https://docs.velt.dev/integrations/ag-grid",
-    "title": "Velt",
-    "description": "Velt is a collaboration SDK that adds commenting, presence, and live collaboration to AG Grid. Users can attach threaded comments to individual cells with comment aggregation across rows and columns, see who else is viewing the grid, and follow along with live cursors — all with a few lines of code.",
-    "open_source": false,
-    "type": "Extension",
-    "tags": ["Extension"],
-    "frameworks": ["React", "TypeScript", "Vue"],
-    "img": "velt.webp"
-}`,
+      label: "Candidate one-line entry",
+      content: `- [Velt Chart.js Comments](https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/charts/chartjs/chartjs-comments-demo) - Collaborative comments, presence, and review workflows for Chart.js dashboards.`,
     },
   },
   {
-    target: "xyflow (follow-ups)",
+    target: "LottieFiles",
     channel: "Form",
-    to: "xyflow.com/contact — fields: Your Email, Your message",
-    toUrl: "https://xyflow.com/contact",
-    done: "Showcase form submitted 2026-06-15 — awaiting reply",
+    to: "lottiefiles.com/integrations",
+    toUrl: "https://lottiefiles.com/integrations",
+    done: "Integration listing form submitted 2026-07-01 -- awaiting reply",
     fields: [
-      { label: "Your Email", value: "yoen@velt.dev" },
-      { label: "Your message", value: "(body below)" },
+      { label: "Company / product", value: "Velt" },
+      { label: "Website", value: "https://velt.dev" },
+      { label: "Integration URL", value: "https://sample-apps-lottie-comments-demo.vercel.app" },
+      { label: "Docs URL", value: "https://docs.velt.dev/async-collaboration/comments/setup/lottie-player-setup" },
     ],
-    body: `Hi xyflow team!
+    subject: "List Velt as a Lottie collaboration integration",
+    body: `Velt is a collaboration SDK that adds comments, presence, and review workflows to web apps. Our Lottie integration lets reviewers comment on animated media timelines and keep feedback anchored to the playback state.
 
-Yoen from Velt here — thank you again for including us in the React Flow multiplayer guide's third-party table; it's been a genuinely great channel for us.
-
-A quick follow-up: we'd love to submit our collaborative React Flow demo for the showcase — a live multiplayer canvas with comments, presence, and cursors built on our dedicated React Flow library: https://velt-reactflow-crdt-demo.vercel.app/ (source: https://github.com/velt-js/velt-reactflow-crdt-demo, docs: https://docs.velt.dev/realtime-collaboration/crdt/setup/reactflow).
-
-Cheers,
-Yoen — Velt`,
-  },
-  {
-    target: "PlateJS",
-    channel: "Discord",
-    to: "discord.gg/mAZRuBzGM3 → then PR to udecode/plate",
-    toUrl: "https://discord.gg/mAZRuBzGM3",
-    done: "Discord message sent 2026-06-15 — PR to follow on maintainer reply",
-    body: `Hey Plate team 👋 — Yoen from Velt here. We're a collaboration SDK with a managed Yjs backend, and we have a working Plate integration (docs: https://docs.velt.dev/async-collaboration/comments/setup/plate, demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/crdt/text-editors/platejs/platejs-crdt-demo).
-
-Your Yjs doc's Provider Types section covers Hocuspocus, WebRTC, and custom providers via UnifiedProvider — would you be open to a small docs PR mentioning Velt as a hosted option there (and/or a line in Related)? We'd be the first managed backend listed; happy to match whatever format you want. For reference we're listed on React Flow's multiplayer guide alongside Yjs/Liveblocks/Supabase.`,
-    code: {
-      label: "yjs.mdx — Related list line (if green-lit)",
-      content: `- [Velt](https://velt.dev) - Managed Yjs backend (hosted provider via UnifiedProvider)`,
-    },
+Live demo: https://sample-apps-lottie-comments-demo.vercel.app
+Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/video-player/lottie/lottie-comments-demo
+Docs: https://docs.velt.dev/async-collaboration/comments/setup/lottie-player-setup`,
   },
   {
     target: "Highcharts",
     channel: "Email",
-    to: "hello@highsoft.com",
-    done: "Email sent 2026-06-15 — awaiting reply",
-    subject: "Listing Velt under Community Resources on highcharts.com/integrations",
+    to: "Highsoft contact",
+    toUrl: "https://www.highcharts.com/about-us/contact/",
+    done: "Email sent 2026-06-15 -- follow up with live demo link",
+    subject: "Following up: Velt comments integration for Highcharts",
     body: `Hi Highsoft team,
 
-I'm Yoen from Velt (velt.dev). We build a collaboration SDK that adds commenting and presence to charting libraries — including a dedicated Highcharts integration that lets users pin threaded comments directly onto data points and chart regions:
+Following up with a working demo for the Velt + Highcharts comments integration:
 
-- Integration docs: https://docs.velt.dev/async-collaboration/comments/setup/chart-comments-setup/highcharts
-- Library page: https://velt.dev/libraries/highcharts
+- Live demo: https://sample-apps-highcharts-comments-dem.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/charts/highcharts/highcharts-comments-demo
+- Docs: https://docs.velt.dev/async-collaboration/comments/setup/chart-comments-setup/highcharts
 
-Would you consider adding Velt to the "Community Resources" section of highcharts.com/integrations? We noticed the section lists ecosystem projects built around Highcharts, and chart-level collaboration feels like a natural addition for your dashboard-building customers.
-
-For reference, we're listed on React Flow's multiplayer guide ("Third Party Libraries and Services," alongside Yjs, Liveblocks, and Supabase). Happy to provide a logo, a one-line description in your format, or a live demo if that helps the evaluation.
-
-Best,
-Yoen Zhang — Velt
-yoen@velt.dev`,
+Velt lets teams pin threaded comments directly to chart context, which fits dashboard review and analytics workflows. Would Highsoft consider listing Velt in the Community Resources section of highcharts.com/integrations? Happy to provide a logo and one-line entry.`,
   },
   {
-    target: "Vue",
-    channel: "Email",
-    to: "evan@vuejs.org",
-    done: "Email sent 2026-06-15 — awaiting reply",
-    subject: "Ecosystem placement inquiry — Velt collaboration SDK for Vue",
-    body: `Hi Evan,
+    target: "Apryse",
+    channel: "Form",
+    to: "Apryse contact sales",
+    toUrl: "https://apryse.com/contact-sales",
+    subject: "Velt collaboration comments integration for Apryse WebViewer",
+    body: `Hi Apryse team,
 
-I'm Yoen from Velt (velt.dev) — a collaboration SDK (comments, presence, live cursors, realtime sync) with first-class Vue support. We maintain working Vue demos, e.g. collaborative commenting on AG Grid tables in Vue: https://github.com/velt-js/sample-apps/tree/main/apps/vue/comments/tables/ag-grid
+I'm Yoen from Velt. We maintain a Velt comments integration for Apryse WebViewer that adds collaborative threaded comments and review workflows around documents in a React/Next.js app.
 
-I saw vuejs.org features ecosystem placements (the themes page, partner listings) and wanted to ask: is there a path for a developer-tool SDK like ours to be listed — whether in an existing section or as a sponsored placement? We're happy to discuss terms if it's a paid slot.
+- Live demo: https://sample-apps-apryse-comments-demo.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/apryse/apryse-comments-demo
+- Docs: https://docs.velt.dev/async-collaboration/comments/setup/apryse
 
-For context, we're listed on React Flow's multiplayer guide alongside Yjs, Liveblocks, and Supabase, and we're in the Yjs ecosystem as a connection provider.
+Is there a partner, integrations, or customer-story route where this could be listed for Apryse developers? Happy to adapt the copy or build a joint example if useful.`,
+  },
+  {
+    target: "Nutrient",
+    channel: "Form",
+    to: "Nutrient contact",
+    toUrl: "https://www.nutrient.io/contact/",
+    done: "Contact form submitted 2026-07-01 -- awaiting reply",
+    subject: "Velt collaboration comments integration for Nutrient",
+    body: `Hi Nutrient team,
 
-Thanks for everything you do for Vue!
-Yoen Zhang — Velt
-yoen@velt.dev`,
+I'm Yoen from Velt. We maintain a Velt comments integration for Nutrient that adds collaborative threaded comments and review workflows to document experiences.
+
+- Live demo: https://sample-apps-nutrient-comments-demo.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/nutrient/nutrient-comments-demo
+- Docs: https://docs.velt.dev/async-collaboration/comments/setup/nutrient
+
+Is there an integrations, partner, or customer-story path where this could be listed for Nutrient developers? Happy to provide copy, screenshots, or a joint sample.`,
+  },
+  {
+    target: "SpreadJS",
+    channel: "Form",
+    to: "MESCIUS contact",
+    toUrl: "https://developer.mescius.com/contact",
+    done: "MESCIUS contact form submitted 2026-07-01 -- awaiting reply",
+    subject: "Velt comments integration for SpreadJS spreadsheets",
+    body: `Hi MESCIUS team,
+
+I'm Yoen from Velt. We built a Velt comments integration for SpreadJS so teams can add collaborative threaded comments to spreadsheet experiences.
+
+- Live demo: https://sample-apps-spreadjs-comments-demo.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/spreadsheets/spreadjs/spreadjs-comments-demo
+- Docs: https://docs.velt.dev/async-collaboration/comments/setup/spreadjs
+
+Is there a partner/integrations route where this could be listed or reviewed? Happy to share a licensed/evaluation setup if needed for validation.`,
+  },
+  {
+    target: "TinyMCE",
+    channel: "Form",
+    to: "Tiny Cloud contact",
+    toUrl: "https://www.tiny.cloud/contact/",
+    done: "Tiny Cloud contact form submitted 2026-07-01 -- awaiting reply",
+    subject: "Velt collaborative comments integration for TinyMCE",
+    body: `Hi TinyMCE team,
+
+I'm Yoen from Velt. We maintain a Velt comments integration for TinyMCE that lets users add threaded comments to selected text in TinyMCE editors.
+
+- Live demo: https://sample-apps-tinymce-comments-demo.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/tinymce/tinymce-comments-demo
+- Docs: https://docs.velt.dev/async-collaboration/comments/setup/tinymce
+
+Would you consider listing or referencing this as a third-party integration for TinyMCE users? Happy to draft the entry or adapt to your docs format.`,
+  },
+  {
+    target: "CKEditor",
+    channel: "Form",
+    to: "CKEditor contact",
+    toUrl: "https://ckeditor.com/contact/",
+    done: "CKEditor contact form submitted 2026-07-01 -- awaiting reply",
+    subject: "Velt collaborative comments integration for CKEditor",
+    body: `Hi CKEditor team,
+
+I'm Yoen from Velt. We maintain a Velt comments integration for CKEditor that adds collaborative threaded comments to selected editor text.
+
+- Live demo: https://sample-apps-ckeditor-comments-demo.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/ckeditor/ckeditor-comments-demo
+- Docs: https://docs.velt.dev/async-collaboration/comments/setup/ckeditor
+
+Is there a recommended third-party integration or plugin listing path for CKEditor ecosystem tools? Happy to provide copy, screenshots, or a docs PR if that is the preferred route.`,
+  },
+  {
+    target: "SuperDoc",
+    channel: "GitHub PR",
+    to: "SuperDoc docs / maintainer issue",
+    toUrl: "https://docs.superdoc.dev/",
+    subject: "Add Velt as a SuperDoc comments integration",
+    body: `Hi SuperDoc team,
+
+Velt maintains a SuperDoc comments integration that adds collaborative threaded comments and review workflows around SuperDoc documents.
+
+- Live demo: https://sample-apps-superdoc-comments-demo.vercel.app
+- Demo source: https://github.com/velt-js/sample-apps/tree/main/apps/react/comments/text-editors/superdoc/superdoc-comments-demo
+- Docs: https://docs.velt.dev/async-collaboration/comments/setup/superdoc
+
+Would you be open to a short integrations/docs note for Velt? Happy to open a PR or issue with your preferred wording.`,
   },
   {
     target: "Vercel",
     channel: "Form",
-    to: "vercel.com/marketplace/program — multi-step intake",
+    to: "vercel.com/marketplace/program -- multi-step intake",
     toUrl: "https://vercel.com/marketplace/program",
     blocker: "Multi-step form; expect integration-build follow-up",
     fields: [
@@ -960,16 +1166,16 @@ yoen@velt.dev`,
       { label: "Email address", value: "yoen@velt.dev" },
       { label: "Company website", value: "https://velt.dev" },
     ],
-    body: `Pitch blurb for the follow-up step / reviewer call:
-
-Velt is a collaboration SDK for product teams: comments, presence, live cursors, huddles, recording, and a managed Yjs/CRDT backend — added to any React/Next.js app in a few lines. We'd list in DevTools (where Liveblocks sits today) as a connectable account. Most of our customers deploy on Vercel; our demos are Next.js apps deployed on Vercel (e.g. https://velt-blocknote-crdt-demo.vercel.app/, https://velt-reactflow-crdt-demo.vercel.app/, hub: https://samples.velt.dev/). We're ready to build the OAuth/token-exchange integration per your integration spec.`,
+    body: `Velt is a collaboration SDK for product teams: comments, presence, live cursors, huddles, recording, and a managed Yjs/CRDT backend, added to a React/Next.js app in a few lines. We would list in DevTools, where Liveblocks sits today, as a connectable account. Most of our demos are Next.js apps deployed on Vercel (hub: https://samples.velt.dev/). We are ready to build the OAuth/token-exchange integration per your marketplace spec.`,
   },
 ];
 
 export const SEQUENCING = [
-  "Package one flagship Next.js Velt demo — public repo, Deploy button, .env.example, clear README.",
-  "Submit to Vercel Templates (form) — highest ROI; start here.",
-  "Adapt into platform variants — Cloudflare (Playwright E2E), Supabase example, then StackBlitz / Replit.",
-  "Parallel low-effort track — fire off the per-library awesome-list / showcase PRs.",
-  "SDK-level listings — awesome-realtime / awesome-rtc / realtime-web-technologies-guide.",
+  "Package one flagship Next.js Velt demo -- public repo, Deploy button, .env.example, clear README.",
+  "Submit to Vercel Templates/Marketplace -- highest cross-cutting ROI.",
+  "Open the newly unblocked Chart.js PR.",
+  "Keep submitted forms warm: LottieFiles, Nutrient, SpreadJS, TinyMCE, and CKEditor.",
+  "Send the remaining Apryse pitch and open the SuperDoc maintainer issue.",
+  "Keep existing PRs warm: Yjs, Ace, AG Grid, Quill, CodeMirror, awesome-realtime, awesome-crdt.",
+  "Skip no-venue rows unless a new official listing path appears.",
 ];

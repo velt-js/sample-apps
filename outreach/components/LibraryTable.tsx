@@ -7,7 +7,7 @@ import StatusChip from "./StatusChip";
 type Filter = "all" | "top-picks" | "actionable" | "in-flight" | "not-viable";
 
 const FILTERS: { id: Filter; label: string }[] = [
-  { id: "all", label: "All 22" },
+  { id: "all", label: "All targets" },
   { id: "top-picks", label: "Top picks" },
   { id: "actionable", label: "Actionable" },
   { id: "in-flight", label: "Listed / PR open" },
