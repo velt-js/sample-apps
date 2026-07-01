@@ -243,7 +243,7 @@ Yoen -- Velt
 
 **Channel:** [MESCIUS contact](https://developer.mescius.com/contact)
 
-**Status:** Submitted 2026-07-01; awaiting reply.
+**Status:** In talks with Founder as of 2026-07-01.
 
 **Subject:** `Velt comments integration for SpreadJS spreadsheets`
 
@@ -373,7 +373,7 @@ Velt is a collaboration SDK for product teams: comments, presence, live cursors,
 | 7 | Highcharts | Send live-demo follow-up | Awaiting response |
 | 8 | Apryse | Send partner/contact pitch | BD route |
 | 9 | Nutrient | Submitted 2026-07-01 | Awaiting reply |
-| 10 | SpreadJS | Submitted 2026-07-01 | Awaiting reply; demo may require eval key |
+| 10 | SpreadJS | In talks with Founder | Active conversation; demo may require eval key |
 | 11 | TinyMCE | Submitted 2026-07-01 | Awaiting reply |
 | 12 | CKEditor | Submitted 2026-07-01 | Awaiting reply |
 | 13 | SuperDoc | PR #3787 opened; issue #3788 created | Awaiting review |
