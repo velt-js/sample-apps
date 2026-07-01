@@ -314,9 +314,11 @@ Yoen -- Velt
 
 ---
 
-## 13. SuperDoc -- Maintainer Issue / PR Ask
+## 13. SuperDoc -- PR And Tracking Issue
 
-**Channel:** [SuperDoc docs](https://docs.superdoc.dev/) / maintainer issue route.
+**Channel:** [SuperDoc PR #3787](https://github.com/superdoc-dev/superdoc/pull/3787) and [tracking issue #3788](https://github.com/superdoc-dev/superdoc/issues/3788).
+
+**Status:** PR opened and issue created 2026-07-01; awaiting review.
 
 **Subject:** `Add Velt as a SuperDoc comments integration`
 
@@ -374,7 +376,7 @@ Velt is a collaboration SDK for product teams: comments, presence, live cursors,
 | 10 | SpreadJS | Submitted 2026-07-01 | Awaiting reply; demo may require eval key |
 | 11 | TinyMCE | Submitted 2026-07-01 | Awaiting reply |
 | 12 | CKEditor | Submitted 2026-07-01 | Awaiting reply |
-| 13 | SuperDoc | Ask maintainers for docs/listing path | Maintainer-led |
+| 13 | SuperDoc | PR #3787 opened; issue #3788 created | Awaiting review |
 | 14 | Vercel | Submit marketplace program form | Multi-step, integration build likely |
 
 No drafts are maintained for DraftJS, Monaco, ProseMirror, or Nivo because current research did not find an actionable official venue.

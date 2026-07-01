@@ -57,7 +57,7 @@ Statuses re-checked live with GitHub CLI on 2026-06-30: **4 merged, 7 open, 1 cl
 | 17 | SpreadJS | Yes | Yes | [MESCIUS contact](https://developer.mescius.com/contact) | MESCIUS contact form submitted 2026-07-01; awaiting reply | BD |
 | 18 | TinyMCE | Yes | Yes | [TinyMCE integrations docs](https://www.tiny.cloud/docs/tinymce/latest/integrations/) | Tiny Cloud contact form submitted 2026-07-01; awaiting reply | Outreach |
 | 19 | CKEditor | Yes | Yes | [CKEditor integrations docs](https://ckeditor.com/docs/ckeditor5/latest/getting-started/integrations/overview.html) | CKEditor contact form submitted 2026-07-01; awaiting reply | Outreach |
-| 20 | SuperDoc | Yes | Yes | [SuperDoc docs](https://docs.superdoc.dev/) | Maintainer issue/contact route | Outreach |
+| 20 | SuperDoc | Yes | Yes | [SuperDoc docs PR](https://github.com/superdoc-dev/superdoc/pull/3787) | PR #3787 open; tracking issue #3788 points to the PR | PR open |
 | 21 | CodeMirror | Yes | Yes | [Community packages](https://codemirror.net/docs/community/) | Forum + code.haverbeke.berlin; needs OSS binding package | Gated |
 | 22 | Lexical | Yes | Yes | [Collaboration guide](https://lexical.dev/docs/collaboration/react) | Meta CLA docs PR; low odds | Low odds |
 | 23 | Monaco | Yes | Yes | None found | No official ecosystem/resources page; skip | No venue |
@@ -93,7 +93,7 @@ Per-library contact channels, ranked as: contact form / partner email -> docs-re
 | SpreadJS | MESCIUS contact form submitted 2026-07-01 | No public listing repo found | BD/content pitch; awaiting reply |
 | TinyMCE | Tiny Cloud contact form submitted 2026-07-01 | No self-serve marketplace found | Content/integration pitch; awaiting reply |
 | CKEditor | CKEditor contact form submitted 2026-07-01 | No self-serve marketplace found | Content/integration pitch; awaiting reply |
-| SuperDoc | [SuperDoc docs](https://docs.superdoc.dev/) | Maintainer issue/contact route | Small ecosystem; ask before PR |
+| SuperDoc | [PR #3787](https://github.com/superdoc-dev/superdoc/pull/3787); [issue #3788](https://github.com/superdoc-dev/superdoc/issues/3788) | `apps/docs/editor/custom-ui/comments.mdx` | Small docs PR opened; awaiting review |
 | Vue | evan@vuejs.org | Curated ecosystem pages | Paid/curated likely |
 | MongoDB | [Become a Partner](https://www.mongodb.com/partners) | Program-fed docs | Technology partner route |
 | TanStack | partners@tanstack.com | Partner wall not PR-able | Paid/sponsored |
@@ -111,7 +111,7 @@ Ready-to-use copy lives in `velt-outreach-drafts.md` and is mirrored into `outre
 - Existing in-flight/warm targets: Yjs, BlockNote, Ace, AG Grid, Vercel.
 - Newly unblocked self-serve targets: Chart.js still open; LottieFiles form submitted 2026-07-01.
 - Existing stale-status refresh: Highcharts follow-up with live demo.
-- Commercial/editor partner-content targets: Apryse and SuperDoc still open; Nutrient, SpreadJS, TinyMCE, and CKEditor forms submitted 2026-07-01.
+- Commercial/editor partner-content targets: Apryse still open; SuperDoc PR #3787 and issue #3788 opened 2026-07-01; Nutrient, SpreadJS, TinyMCE, and CKEditor forms submitted 2026-07-01.
 
 No drafts are maintained for DraftJS, Monaco, ProseMirror, or Nivo because the current research did not identify an actionable official venue.
 
@@ -120,7 +120,7 @@ No drafts are maintained for DraftJS, Monaco, ProseMirror, or Nivo because the c
 ## 4. Wave Ordering
 
 1. **Warm natural slots -- free, do now:** Yjs docs PR, BlockNote email/PR offer, Slate listed, Ace PR, AG Grid PR, Chart.js PR, LottieFiles form submitted 2026-07-01.
-2. **Forms and BD outreach:** Vercel Marketplace, xyflow follow-ups, Highcharts follow-up, Vue follow-up, MongoDB partner form, Apryse pitch, submitted Nutrient/SpreadJS/TinyMCE/CKEditor forms, SuperDoc maintainer issue.
+2. **Forms and BD outreach:** Vercel Marketplace, xyflow follow-ups, Highcharts follow-up, Vue follow-up, MongoDB partner form, Apryse pitch, submitted Nutrient/SpreadJS/TinyMCE/CKEditor forms, SuperDoc PR #3787 / issue #3788.
 3. **Build-first / gated:** CodeMirror OSS binding, PlateJS maintainer approval, TanStack paid sponsorship, Lexical only if Yjs/docs precedent improves odds.
 4. **Skip:** DraftJS, Monaco, ProseMirror, Nivo, React, Angular, Quill on-site, TipTap on-site, PostgreSQL.
 
