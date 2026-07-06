@@ -145,9 +145,9 @@ export const LIBRARIES: Library[] = [
       url: "https://ace.c9.io/",
       section: "Related Projects",
     },
-    path: "PR #5981 open to ajaxorg/ace index.html",
+    path: "PR #5981 open; approved by xyos on 2026-07-03; Codecov green",
     status: "pr-open",
-    note: "A collaboration extension is already listed; PR #5981 adds Velt next to it.",
+    note: "A collaboration extension is already listed; PR #5981 is approved and awaiting merge.",
   },
   {
     rank: 8,
@@ -329,9 +329,9 @@ export const LIBRARIES: Library[] = [
       url: "https://github.com/superdoc-dev/superdoc/pull/3787",
       section: "Custom UI comments guide",
     },
-    path: "PR #3787 open; tracking issue #3788 points to the PR",
+    path: "PR #3787 open; issue #3788 has positive maintainer response and DX review assigned",
     status: "pr-open",
-    note: "Small docs PR adds a managed-comments section to SuperDoc's custom comments guide.",
+    note: "Teo Azzollini responded positively and tagged Caio Pizzol, SuperDoc's head of DX, for docs review.",
   },
   {
     rank: 21,
@@ -542,7 +542,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "Ace",
-    primary: "Opened -- PR #5981. Awaiting review",
+    primary: "PR #5981 approved by xyos 2026-07-03; Codecov green; awaiting merge",
     primaryUrl: "https://github.com/ajaxorg/ace/pull/5981",
     repoPath: "ajaxorg/ace -> index.html (Related Projects)",
     community: "GitHub Discussions",
@@ -621,7 +621,7 @@ export const CONTACTS: Contact[] = [
   },
   {
     library: "SuperDoc",
-    primary: "PR #3787 open; issue #3788 links to the PR",
+    primary: "PR #3787 open; issue #3788 has positive maintainer response and DX review assigned",
     primaryUrl: "https://github.com/superdoc-dev/superdoc/pull/3787",
     repoPath: "superdoc-dev/superdoc -> apps/docs/editor/custom-ui/comments.mdx",
     community: "GitHub",
@@ -678,7 +678,7 @@ export const WAVES = [
       "Yjs docs PR + @dmonad ping (PR #81 open)",
       "BlockNote email + PR offer",
       "Slate PR #6067 merged",
-      "Ace PR #5981 open",
+      "Ace PR #5981 approved; awaiting merge",
       "AG Grid PR #14075 open",
       "Chart.js PR now that demo/docs exist",
       "LottieFiles listing form submitted 2026-07-01",
@@ -694,7 +694,7 @@ export const WAVES = [
       "MongoDB Technology Partner application",
       "Nutrient contact form submitted 2026-07-01; SpreadJS in talks with Founder",
       "TinyMCE / CKEditor contact forms submitted 2026-07-01",
-      "SuperDoc PR #3787 + issue #3788",
+      "SuperDoc PR #3787 + issue #3788; head of DX review assigned",
       "Apryse partner-content pitch",
     ],
   },
@@ -715,8 +715,8 @@ export const WAVES = [
 
 export type PRStatus = "open" | "merged" | "closed";
 
-/** PR statuses re-checked live via GitHub CLI on 2026-06-30. */
-export const PR_STATUS_CHECKED = "June 30, 2026";
+/** PR statuses re-checked live via GitHub CLI on 2026-07-06. */
+export const PR_STATUS_CHECKED = "July 6, 2026";
 
 export interface SubmittedPR {
   library: string;
@@ -775,7 +775,7 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     pr: "#5981",
     prUrl: "https://github.com/ajaxorg/ace/pull/5981",
     status: "open",
-    note: "Docs-site PR",
+    note: "Approved by xyos on 2026-07-03; Codecov reports all modified coverable lines covered; awaiting merge",
   },
   {
     library: "AG Grid",
@@ -785,6 +785,15 @@ export const SUBMITTED_PRS: SubmittedPR[] = [
     prUrl: "https://github.com/ag-grid/ag-grid/pull/14075",
     status: "open",
     note: "Docs-site PR -- Extension entry + logo",
+  },
+  {
+    library: "SuperDoc",
+    repo: "superdoc-dev/superdoc",
+    section: "Custom UI comments guide",
+    pr: "#3787",
+    prUrl: "https://github.com/superdoc-dev/superdoc/pull/3787",
+    status: "open",
+    note: "Issue #3788 got positive maintainer response; Caio Pizzol, head of DX, assigned for docs review",
   },
   {
     library: "Vercel Chat SDK (follow-up)",
@@ -972,7 +981,7 @@ Yoen -- Velt`,
     channel: "GitHub PR",
     to: "ajaxorg/ace -> index.html (Related Projects)",
     toUrl: "https://github.com/ajaxorg/ace/pull/5981",
-    done: "PR #5981 opened 2026-06-15 -- awaiting review",
+    done: "PR #5981 approved by xyos 2026-07-03; Codecov green -- awaiting merge",
     subject: "PR title: Add Velt collaboration SDK to Related Projects",
     body: `Adds Velt to the Related Projects list on the homepage, next to the existing Ace collaboration extension.
 
@@ -1143,7 +1152,7 @@ Is there a recommended third-party integration or plugin listing path for CKEdit
     channel: "GitHub PR",
     to: "SuperDoc docs / maintainer issue",
     toUrl: "https://github.com/superdoc-dev/superdoc/pull/3787",
-    done: "PR #3787 opened and tracking issue #3788 created on 2026-07-01 -- awaiting review",
+    done: "PR #3787 open; issue #3788 received positive maintainer response on 2026-07-06 and Caio Pizzol was tagged for docs review",
     subject: "Add Velt as a SuperDoc comments integration",
     body: `Hi SuperDoc team,
 
@@ -1178,7 +1187,7 @@ export const SEQUENCING = [
   "Keep submitted forms warm: LottieFiles, Nutrient, TinyMCE, and CKEditor.",
   "Track the active SpreadJS Founder conversation.",
   "Send the remaining Apryse pitch.",
-  "Keep SuperDoc PR #3787 / issue #3788 warm.",
+  "Keep SuperDoc PR #3787 / issue #3788 warm with Caio Pizzol's docs review.",
   "Keep existing PRs warm: Yjs, Ace, AG Grid, Quill, CodeMirror, awesome-realtime, awesome-crdt.",
   "Skip no-venue rows unless a new official listing path appears.",
 ];

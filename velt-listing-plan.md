@@ -4,7 +4,7 @@ Goal: get Velt featured/listed on the official sites, GitHub repos, "awesome" li
 
 - **Scope:** every documented Velt integration and sample app across editors, CRDT, canvas, tables, charts, media, databases, frameworks, viewers, and spreadsheets.
 - **Venue order:** official docs/listing venue first, GitHub PR or form fallback, then outreach draft/contact details. Community forums and Discord are tracked only when they are a necessary maintainer preflight.
-- **Verified:** sample metadata, docs pages, official venues, and submitted PR states checked on 2026-06-30. User-submitted form states recorded on 2026-07-01.
+- **Verified:** sample metadata, docs pages, and official venues checked on 2026-06-30. Submitted PR states rechecked on 2026-07-06. User-submitted form states recorded on 2026-07-01.
 - **Important:** this plan prepares outreach only. No additional PRs, forms, or emails should be submitted unless a later goal explicitly asks for that.
 
 **Legend** -- **Demo?** = working sample app in `apps/master-sample-app/samples/*/metadata.ts`; **Docs?** = dedicated Velt docs page in `/Users/yoenzhang/Downloads/docs`; **Status:** Listed / PR open / To do / Outreach / BD / Paid / Gated / Low odds / No venue.
@@ -13,7 +13,7 @@ Goal: get Velt featured/listed on the official sites, GitHub repos, "awesome" li
 
 ## Submitted PRs
 
-Statuses re-checked live with GitHub CLI on 2026-06-30: **4 merged, 7 open, 1 closed unmerged**.
+Statuses re-checked live with GitHub CLI on 2026-07-06: **4 merged, 8 open, 1 closed unmerged**.
 
 | Library | Repo | Section | PR | Status |
 |---|---|---|---|---|
@@ -22,8 +22,9 @@ Statuses re-checked live with GitHub CLI on 2026-06-30: **4 merged, 7 open, 1 cl
 | SlateJS | `ianstormtaylor/slate` | Extensions and Plugins | [#6067](https://github.com/ianstormtaylor/slate/pull/6067) | Merged 2026-06-13 |
 | Vercel Chat SDK follow-up | `vercel/chat` | Adapters docs -- sharper description + demo | [#578](https://github.com/vercel/chat/pull/578) | Merged 2026-06-18 |
 | Yjs | `yjs/docs` | Ecosystem -> Connection Provider | [#81](https://github.com/yjs/docs/pull/81) | Open |
-| Ace | `ajaxorg/ace` | Homepage -> Related Projects | [#5981](https://github.com/ajaxorg/ace/pull/5981) | Open |
+| Ace | `ajaxorg/ace` | Homepage -> Related Projects | [#5981](https://github.com/ajaxorg/ace/pull/5981) | Open; approved by xyos 2026-07-03; Codecov green |
 | AG Grid | `ag-grid/ag-grid` | Community -> Tools & Extensions | [#14075](https://github.com/ag-grid/ag-grid/pull/14075) | Open |
+| SuperDoc | `superdoc-dev/superdoc` | Custom UI comments guide | [#3787](https://github.com/superdoc-dev/superdoc/pull/3787) | Open; issue #3788 has positive maintainer response and DX review assigned |
 | Quill | `quilljs/awesome-quill` | Other | [#63](https://github.com/quilljs/awesome-quill/pull/63) | Open |
 | CodeMirror | `tmcw/awesome-codemirror` | Plugins | [#1](https://github.com/tmcw/awesome-codemirror/pull/1) | Open |
 | Velt SDK realtime | `jacktuck/awesome-realtime` | Websockets -> Hosted | [#2](https://github.com/jacktuck/awesome-realtime/pull/2) | Open |
@@ -44,7 +45,7 @@ Statuses re-checked live with GitHub CLI on 2026-06-30: **4 merged, 7 open, 1 cl
 | 4 | Next.js / Vercel | Yes | Yes | [Vercel Marketplace](https://vercel.com/integrations) -- DevTools | [Marketplace program form](https://vercel.com/marketplace/program) | To do |
 | 5 | AG Grid | Yes | Yes | [Tools & Extensions](https://www.ag-grid.com/community/tools-extensions/) | [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) | PR open |
 | 6 | SlateJS | Yes | Yes | [Resources](https://docs.slatejs.org/general/resources) -- Extensions and Plugins | [PR #6067](https://github.com/ianstormtaylor/slate/pull/6067) merged | Listed |
-| 7 | Ace | Yes | Yes | [ace.c9.io](https://ace.c9.io/) -- Related Projects | [PR #5981](https://github.com/ajaxorg/ace/pull/5981) | PR open |
+| 7 | Ace | Yes | Yes | [ace.c9.io](https://ace.c9.io/) -- Related Projects | [PR #5981](https://github.com/ajaxorg/ace/pull/5981) approved by xyos; Codecov green; awaiting merge | PR open |
 | 8 | PlateJS | Yes | Yes | [Yjs docs](https://platejs.org/docs/yjs) -- Provider Types | Discord sent; PR if maintainers approve | Outreach |
 | 9 | Chart.js | Yes | Yes | [chartjs/awesome](https://github.com/chartjs/awesome) -- Plugins / Tools | PR to `README.md`; use live demo, docs, and sample-app source | To do |
 | 10 | LottieFiles / Lottie | Yes | Yes | [LottieFiles integrations](https://lottiefiles.com/integrations) | Integration listing form submitted 2026-07-01; awaiting reply | Outreach |
@@ -57,7 +58,7 @@ Statuses re-checked live with GitHub CLI on 2026-06-30: **4 merged, 7 open, 1 cl
 | 17 | SpreadJS | Yes | Yes | [MESCIUS contact](https://developer.mescius.com/contact) | In talks with Founder as of 2026-07-01 | BD |
 | 18 | TinyMCE | Yes | Yes | [TinyMCE integrations docs](https://www.tiny.cloud/docs/tinymce/latest/integrations/) | Tiny Cloud contact form submitted 2026-07-01; awaiting reply | Outreach |
 | 19 | CKEditor | Yes | Yes | [CKEditor integrations docs](https://ckeditor.com/docs/ckeditor5/latest/getting-started/integrations/overview.html) | CKEditor contact form submitted 2026-07-01; awaiting reply | Outreach |
-| 20 | SuperDoc | Yes | Yes | [SuperDoc docs PR](https://github.com/superdoc-dev/superdoc/pull/3787) | PR #3787 open; tracking issue #3788 points to the PR | PR open |
+| 20 | SuperDoc | Yes | Yes | [SuperDoc docs PR](https://github.com/superdoc-dev/superdoc/pull/3787) | PR #3787 open; issue #3788 has positive maintainer response and DX review assigned | PR open |
 | 21 | CodeMirror | Yes | Yes | [Community packages](https://codemirror.net/docs/community/) | Forum + code.haverbeke.berlin; needs OSS binding package | Gated |
 | 22 | Lexical | Yes | Yes | [Collaboration guide](https://lexical.dev/docs/collaboration/react) | Meta CLA docs PR; low odds | Low odds |
 | 23 | Monaco | Yes | Yes | None found | No official ecosystem/resources page; skip | No venue |
@@ -84,7 +85,7 @@ Per-library contact channels, ranked as: contact form / partner email -> docs-re
 | BlockNote | team@blocknotejs.org | `TypeCellOS/BlockNote` collaboration docs | TypeCellOS |
 | Vercel | [Marketplace program form](https://vercel.com/marketplace/program) | Gated marketplace integration build | Vercel |
 | AG Grid | [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) + contact form | `tools-extensions.json` | AG Grid Ltd |
-| Ace | [PR #5981](https://github.com/ajaxorg/ace/pull/5981) | `index.html` Related Projects | ajaxorg/community |
+| Ace | [PR #5981](https://github.com/ajaxorg/ace/pull/5981) approved by xyos; Codecov green | `index.html` Related Projects | ajaxorg/community; awaiting merge |
 | Chart.js | [chartjs/awesome](https://github.com/chartjs/awesome) PR | `README.md` | Check CONTRIBUTING at submit time |
 | LottieFiles | Integration listing form submitted 2026-07-01 | No repo path | Design Barn Inc.; awaiting reply |
 | Highcharts | [Highcharts contact](https://www.highcharts.com/about-us/contact/) | Website not open-source | Highsoft AS |
@@ -93,7 +94,7 @@ Per-library contact channels, ranked as: contact form / partner email -> docs-re
 | SpreadJS | In talks with Founder as of 2026-07-01 | No public listing repo found | BD/content pitch; active conversation |
 | TinyMCE | Tiny Cloud contact form submitted 2026-07-01 | No self-serve marketplace found | Content/integration pitch; awaiting reply |
 | CKEditor | CKEditor contact form submitted 2026-07-01 | No self-serve marketplace found | Content/integration pitch; awaiting reply |
-| SuperDoc | [PR #3787](https://github.com/superdoc-dev/superdoc/pull/3787); [issue #3788](https://github.com/superdoc-dev/superdoc/issues/3788) | `apps/docs/editor/custom-ui/comments.mdx` | Small docs PR opened; awaiting review |
+| SuperDoc | [PR #3787](https://github.com/superdoc-dev/superdoc/pull/3787); [issue #3788](https://github.com/superdoc-dev/superdoc/issues/3788) | `apps/docs/editor/custom-ui/comments.mdx` | Positive maintainer response; Caio Pizzol tagged/assigned for docs review |
 | Vue | evan@vuejs.org | Curated ecosystem pages | Paid/curated likely |
 | MongoDB | [Become a Partner](https://www.mongodb.com/partners) | Program-fed docs | Technology partner route |
 | TanStack | partners@tanstack.com | Partner wall not PR-able | Paid/sponsored |
@@ -108,10 +109,10 @@ Per-library contact channels, ranked as: contact form / partner email -> docs-re
 
 Ready-to-use copy lives in `velt-outreach-drafts.md` and is mirrored into `outreach/data/outreach.ts` for the dashboard. Drafts exist only for actionable targets:
 
-- Existing in-flight/warm targets: Yjs, BlockNote, Ace, AG Grid, Vercel.
+- Existing in-flight/warm targets: Yjs, BlockNote, Ace, AG Grid, SuperDoc, Vercel.
 - Newly unblocked self-serve targets: Chart.js still open; LottieFiles form submitted 2026-07-01.
 - Existing stale-status refresh: Highcharts follow-up with live demo.
-- Commercial/editor partner-content targets: Apryse still open; SuperDoc PR #3787 and issue #3788 opened 2026-07-01; SpreadJS is in talks with Founder; Nutrient, TinyMCE, and CKEditor forms submitted 2026-07-01.
+- Commercial/editor partner-content targets: Apryse still open; SuperDoc PR #3787 has a positive maintainer response and DX review assigned; SpreadJS is in talks with Founder; Nutrient, TinyMCE, and CKEditor forms submitted 2026-07-01.
 
 No drafts are maintained for DraftJS, Monaco, ProseMirror, or Nivo because the current research did not identify an actionable official venue.
 
@@ -119,8 +120,8 @@ No drafts are maintained for DraftJS, Monaco, ProseMirror, or Nivo because the c
 
 ## 4. Wave Ordering
 
-1. **Warm natural slots -- free, do now:** Yjs docs PR, BlockNote email/PR offer, Slate listed, Ace PR, AG Grid PR, Chart.js PR, LottieFiles form submitted 2026-07-01.
-2. **Forms and BD outreach:** Vercel Marketplace, xyflow follow-ups, Highcharts follow-up, Vue follow-up, MongoDB partner form, Apryse pitch, SpreadJS Founder conversation, submitted Nutrient/TinyMCE/CKEditor forms, SuperDoc PR #3787 / issue #3788.
+1. **Warm natural slots -- free, do now:** Yjs docs PR, BlockNote email/PR offer, Slate listed, Ace PR approved/awaiting merge, AG Grid PR, Chart.js PR, LottieFiles form submitted 2026-07-01.
+2. **Forms and BD outreach:** Vercel Marketplace, xyflow follow-ups, Highcharts follow-up, Vue follow-up, MongoDB partner form, Apryse pitch, SpreadJS Founder conversation, submitted Nutrient/TinyMCE/CKEditor forms, SuperDoc PR #3787 / issue #3788 with DX review assigned.
 3. **Build-first / gated:** CodeMirror OSS binding, PlateJS maintainer approval, TanStack paid sponsorship, Lexical only if Yjs/docs precedent improves odds.
 4. **Skip:** DraftJS, Monaco, ProseMirror, Nivo, React, Angular, Quill on-site, TipTap on-site, PostgreSQL.
 

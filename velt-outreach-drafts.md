@@ -1,6 +1,6 @@
 # Velt -- Outreach Drafts For Actionable Targets
 
-Ready-to-send messages, form submissions, and PR snippets for the targets in `velt-listing-plan.md`. Venue paths, Velt asset URLs, sample metadata, docs pages, and PR states were verified on 2026-06-30. User-submitted form states were recorded on 2026-07-01. Sender: yoen@velt.dev.
+Ready-to-send messages, form submissions, and PR snippets for the targets in `velt-listing-plan.md`. Venue paths, Velt asset URLs, sample metadata, docs pages, and PR states were verified on 2026-06-30; submitted PR states were rechecked on 2026-07-06. User-submitted form states were recorded on 2026-07-01. Sender: yoen@velt.dev.
 
 Do not submit PRs, forms, or emails from this file unless a later goal explicitly asks for that action.
 
@@ -77,7 +77,7 @@ Yoen -- Velt
 
 **Channel:** GitHub PR, already open: [ajaxorg/ace#5981](https://github.com/ajaxorg/ace/pull/5981)
 
-**Status:** Open as of 2026-06-30.
+**Status:** Approved by `xyos` on 2026-07-03; Codecov green; awaiting merge as of 2026-07-06.
 
 **PR title:** `Add Velt collaboration SDK to Related Projects`
 
@@ -318,7 +318,7 @@ Yoen -- Velt
 
 **Channel:** [SuperDoc PR #3787](https://github.com/superdoc-dev/superdoc/pull/3787) and [tracking issue #3788](https://github.com/superdoc-dev/superdoc/issues/3788).
 
-**Status:** PR opened and issue created 2026-07-01; awaiting review.
+**Status:** Positive maintainer response from `teo-azzollini` on 2026-07-06; `caio-pizzol`, head of DX, tagged/assigned for docs review.
 
 **Subject:** `Add Velt as a SuperDoc comments integration`
 
@@ -366,7 +366,7 @@ Velt is a collaboration SDK for product teams: comments, presence, live cursors,
 |---|---|---|---|
 | 1 | Yjs | Already open: [PR #81](https://github.com/yjs/docs/pull/81) | Awaiting review |
 | 2 | BlockNote | Already emailed | Awaiting reply |
-| 3 | Ace | Already open: [PR #5981](https://github.com/ajaxorg/ace/pull/5981) | Awaiting review |
+| 3 | Ace | Already open: [PR #5981](https://github.com/ajaxorg/ace/pull/5981) | Approved by xyos; Codecov green; awaiting merge |
 | 4 | AG Grid | Already open: [PR #14075](https://github.com/ag-grid/ag-grid/pull/14075) | Awaiting review |
 | 5 | Chart.js | Open PR to `chartjs/awesome` | Re-check CONTRIBUTING |
 | 6 | LottieFiles | Submitted 2026-07-01 | Awaiting reply |
@@ -376,7 +376,7 @@ Velt is a collaboration SDK for product teams: comments, presence, live cursors,
 | 10 | SpreadJS | In talks with Founder | Active conversation; demo may require eval key |
 | 11 | TinyMCE | Submitted 2026-07-01 | Awaiting reply |
 | 12 | CKEditor | Submitted 2026-07-01 | Awaiting reply |
-| 13 | SuperDoc | PR #3787 opened; issue #3788 created | Awaiting review |
+| 13 | SuperDoc | PR #3787 opened; issue #3788 has positive maintainer response | Caio Pizzol tagged/assigned for docs review |
 | 14 | Vercel | Submit marketplace program form | Multi-step, integration build likely |
 
 No drafts are maintained for DraftJS, Monaco, ProseMirror, or Nivo because current research did not find an actionable official venue.
