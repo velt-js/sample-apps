@@ -59,7 +59,7 @@ export default function DocumentCanvas() {
 
             {/* RIGHT: narrow approval rail. sticky so it stays in view while the
                 long body scrolls; top offset clears the Header icon cluster. */}
-            <div className="hidden lg:block w-[440px] shrink-0 sticky top-[56px] self-start">
+            <div className="hidden lg:block w-[391px] shrink-0 sticky top-[56px] self-start">
               <OpenSuggestionsPanel />
             </div>
           </div>

@@ -94,7 +94,7 @@ export function useCommitScheduler(
         await commitSuggestion({
           targetId,
           newValue: info.newValue,
-          summary: info.label,
+          // summary: info.label,
           metadata: {
             kind: info.kind,
             oldValue: info.oldValue,

@@ -32,14 +32,6 @@ export default function OpenSuggestionsPanel() {
         <ul style={S.list}>
           {ordered.map((s) => (
             <li key={s.annotationId} style={S.listItem}>
-              <div style={S.changeHeader}>
-                <span style={S.changeLabel}>{labelFor(s)}</span>
-                <span style={statusStyle(s.status)}>{s.status}</span>
-              </div>
-
-              <div style={S.diff}>
-                <Diff s={s} />
-              </div>
 
               <VeltCommentThread annotationId={s.annotationId} />
             </li>
@@ -169,11 +161,11 @@ const S: Record<string, CSSProperties> = {
   },
   listItem: {
     listStyle: 'none',
-    border: '1px solid var(--app-surface-border)',
-    borderRadius: 12,
-    padding: 12,
+    // border: '1px solid var(--app-surface-border)',
+    // borderRadius: 12,
+    // padding: 12,
     marginBottom: 12,
-    background: 'var(--app-bg)',
+    // background: 'var(--app-bg)',
   },
   changeHeader: {
     display: 'flex',

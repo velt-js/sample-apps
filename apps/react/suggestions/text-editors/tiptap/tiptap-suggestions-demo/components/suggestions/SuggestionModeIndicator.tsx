@@ -18,13 +18,7 @@ export default function SuggestionModeIndicator() {
 
   useEffect(() => {
     if (!client) return
-    enableSuggestionMode({
-      onTargetEditCommit: ({ targetId, oldValue, newValue }: TargetEditDetails) => {
-        return {
-          summary: `${FIELD_LABEL[targetId] ?? targetId}: "${String(oldValue)}" → "${String(newValue)}"`,
-        }
-      },
-    })
+    enableSuggestionMode()
   }, [client, enableSuggestionMode])
 
   return (
