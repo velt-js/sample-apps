@@ -43,8 +43,14 @@ export function parseSample(sample: Sample): ParsedSample {
   }
 }
 
+// Route segments whose display name differs from their title-cased form
+const labelOverrides: Record<string, string> = {
+  realtime: 'Single Editor Mode',
+}
+
 export function formatLabel(value: string): string {
   if (!value) return ''
+  if (labelOverrides[value]) return labelOverrides[value]
   return value
     .split(/[-_]/)
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
