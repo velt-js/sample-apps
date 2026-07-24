@@ -1,5 +1,5 @@
 "use client";
-import { useVeltClient, VeltComments, VeltCommentsSidebar } from "@veltdev/react";
+import { useVeltClient, VeltComments, VeltCommentsSidebar, VeltHuddle } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import VeltSingleEditorMode from "./VeltSingleEditorMode";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
@@ -27,6 +27,8 @@ export function VeltCollaboration() {
       <VeltInitializeDocument />
       {/* [Velt] Enable Single Editor Mode (one editor, everyone else read-only) */}
       <VeltSingleEditorMode />
+      {/* [Velt] Huddle root component (required for VeltHuddleTool) */}
+      <VeltHuddle />
       <VeltComments
         shadowDom={false}
         textMode={false}

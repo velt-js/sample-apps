@@ -1,5 +1,5 @@
 "use client";
-import { useVeltClient, VeltComments } from "@veltdev/react";
+import { useVeltClient, VeltComments, VeltHuddle } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 import { VeltCustomization } from "./ui-customization/VeltCustomization";
 import { useEffect } from "react";
@@ -20,6 +20,8 @@ export function VeltCollaboration() {
   return (
     <>
       <VeltInitializeDocument />
+      {/* [Velt] Huddle root component (required for VeltHuddleTool) */}
+      <VeltHuddle />
       <VeltComments
         shadowDom={false}
         textMode={false}
