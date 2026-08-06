@@ -11,7 +11,7 @@
   "dependencies": {
     "@nivo/line": "^0.99.0",
     "@nivo/pie": "^0.99.0",
-    "@veltdev/react": "5.0.2-beta.34",
+    "@veltdev/react": "6.0.5",
     "next": "^16.1.2",
     "react": "^19",
     "react-dom": "^19"
@@ -20,7 +20,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@veltdev/types": "5.0.2-beta.34",
+    "@veltdev/types": "6.0.5",
     "autoprefixer": "^10",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.1",

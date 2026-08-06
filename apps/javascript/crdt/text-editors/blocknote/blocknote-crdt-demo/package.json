@@ -13,8 +13,8 @@
     "@blocknote/core": "^0.47.0",
     "@blocknote/mantine": "^0.47.0",
     "@veltdev/blocknote-crdt": "5.0.0",
-    "@veltdev/client": "5.0.2-beta.26",
-    "@veltdev/types": "5.0.2-beta.26",
+    "@veltdev/client": "6.0.5",
+    "@veltdev/types": "6.0.5",
     "yjs": "^13.6.18"
   },
   "devDependencies": {
