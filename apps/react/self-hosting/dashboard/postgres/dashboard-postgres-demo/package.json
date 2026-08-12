@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@veltdev/react": "6.0.5",
+    "@veltdev/react": "6.0.6",
     "clsx": "^2",
     "lucide-react": "^0.454.0",
     "next": "^16.1.2",
@@ -24,7 +24,7 @@
     "@types/pg": "^8.11.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@veltdev/types": "6.0.5",
+    "@veltdev/types": "6.0.6",
     "autoprefixer": "^10",
     "postcss": "^8",
     "sass": "^1.80.0",

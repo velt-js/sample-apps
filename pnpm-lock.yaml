@@ -30,13 +30,13 @@ importers:
         version: 0.47.3(@mantine/core@8.3.18(@mantine/hooks@8.3.18(react@19.2.5))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@mantine/hooks@8.3.18(react@19.2.5))(@mantine/utils@6.0.22(react@19.2.5))(@types/hast@3.0.4)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/blocknote-crdt':
         specifier: 5.0.0
-        version: 5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       yjs:
         specifier: ^13.6.18
         version: 13.6.30
@@ -84,14 +84,14 @@ importers:
         specifier: ^6.37.0
         version: 6.41.1
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/codemirror-crdt':
         specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.1(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       codemirror:
         specifier: ^6
         version: 6.0.2
@@ -124,14 +124,14 @@ importers:
   apps/javascript/crdt/text-editors/core/core-non-react-crdt-array-demo:
     dependencies:
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       lib0:
         specifier: ^0.2.93
         version: 0.2.117
@@ -164,14 +164,14 @@ importers:
   apps/javascript/crdt/text-editors/core/core-non-react-crdt-map-demo:
     dependencies:
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       lib0:
         specifier: ^0.2.93
         version: 0.2.117
@@ -204,14 +204,14 @@ importers:
   apps/javascript/crdt/text-editors/core/core-non-react-text-crdt-demo:
     dependencies:
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       lib0:
         specifier: ^0.2.93
         version: 0.2.117
@@ -244,14 +244,14 @@ importers:
   apps/javascript/crdt/text-editors/core/core-non-react-xml-crdt-demo:
     dependencies:
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       lib0:
         specifier: ^0.2.93
         version: 0.2.117
@@ -308,17 +308,17 @@ importers:
         specifier: ^3.14.0
         version: 3.22.5
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/tiptap-crdt':
         specifier: 5.0.1
-        version: 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/tiptap-velt-comments':
         specifier: 5.0.0-beta.3
         version: 5.0.0-beta.3(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       y-prosemirror:
         specifier: ^1.2.12
         version: 1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
@@ -532,8 +532,8 @@ importers:
   apps/react/activity/document/custom/activity-log-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -560,8 +560,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.10)
@@ -584,8 +584,8 @@ importers:
   apps/react/comments/charts/chartjs/chartjs-comments-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       chart.js:
         specifier: ^4.5.1
         version: 4.5.1
@@ -612,8 +612,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -636,8 +636,8 @@ importers:
   apps/react/comments/charts/highcharts/highcharts-comments-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       highcharts:
         specifier: ^13.0.0
         version: 13.0.0
@@ -664,8 +664,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -694,8 +694,8 @@ importers:
         specifier: ^0.99.0
         version: 0.99.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       next:
         specifier: ^16.1.2
         version: 16.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.99.0)
@@ -716,8 +716,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -740,8 +740,8 @@ importers:
   apps/react/comments/dashboard/custom/dashboard-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -768,8 +768,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -792,8 +792,8 @@ importers:
   apps/react/comments/dashboard/inline-comments/dashboard-inline-comments-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -826,8 +826,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -847,8 +847,8 @@ importers:
         specifier: ^1.6.0
         version: 1.7.6
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -875,8 +875,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -905,8 +905,8 @@ importers:
         specifier: ^19.1.3
         version: 19.1.3
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/spreadjs-velt-comments':
         specifier: 1.0.2
         version: 1.0.2(@mescius/spread-sheets@19.1.3)
@@ -936,8 +936,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -963,8 +963,8 @@ importers:
         specifier: ^3.35.0
         version: 3.41.1(react@19.2.5)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       ag-grid-community:
         specifier: ^34.3.0
         version: 34.3.1
@@ -997,8 +997,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1024,8 +1024,8 @@ importers:
         specifier: ^3.35.0
         version: 3.41.1(react@19.2.5)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       ag-grid-community:
         specifier: ^34.3.0
         version: 34.3.1
@@ -1058,8 +1058,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1085,8 +1085,8 @@ importers:
         specifier: ^3.35.0
         version: 3.41.1(react@19.2.5)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       ag-grid-community:
         specifier: ^34.3.0
         version: 34.3.1
@@ -1119,8 +1119,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1149,8 +1149,8 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1177,8 +1177,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1207,8 +1207,8 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1235,8 +1235,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1265,8 +1265,8 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1293,8 +1293,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1323,8 +1323,8 @@ importers:
         specifier: 5.0.0-beta.1
         version: 5.0.0-beta.1(ace-builds@1.43.6)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       ace-builds:
         specifier: ^1.32.6
         version: 1.43.6
@@ -1357,8 +1357,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1387,8 +1387,8 @@ importers:
         specifier: 5.0.0-beta.1
         version: 5.0.0-beta.1(@pdftron/webviewer@11.13.0)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1415,8 +1415,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1445,8 +1445,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(ckeditor5@48.2.0)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       ckeditor5:
         specifier: ^48.2.0
         version: 48.2.0
@@ -1476,8 +1476,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1518,8 +1518,8 @@ importers:
         specifier: 5.0.0-beta.2
         version: 5.0.0-beta.2(@codemirror/state@6.6.0)(@codemirror/view@6.41.1)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -1549,8 +1549,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -1576,8 +1576,8 @@ importers:
         specifier: 5.0.0-beta.1
         version: 5.0.0-beta.1(draft-js@0.11.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1610,8 +1610,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1649,14 +1649,14 @@ importers:
         specifier: ^0.19.0
         version: 0.19.0
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/lexical-velt-comments':
         specifier: 5.0.0-beta.2
         version: 5.0.0-beta.2(lexical@0.19.0)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1686,8 +1686,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1716,8 +1716,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(monaco-editor@0.55.1)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1747,8 +1747,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1777,8 +1777,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(@nutrient-sdk/viewer@1.15.1)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1805,8 +1805,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1832,8 +1832,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1878,8 +1878,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1908,8 +1908,8 @@ importers:
         specifier: 5.0.0-beta.2
         version: 5.0.0-beta.2(quill@2.0.3)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1939,8 +1939,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -1963,11 +1963,11 @@ importers:
   apps/react/comments/text-editors/slatejs/slatejs-comments-demo:
     dependencies:
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/slate-velt-comments':
         specifier: 5.0.0-beta.1
         version: 5.0.0-beta.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-react@0.110.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate@0.103.0))(slate@0.103.0)
@@ -2006,8 +2006,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -2036,8 +2036,8 @@ importers:
         specifier: ^2.13.6
         version: 2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/superdoc-velt-comments':
         specifier: 1.0.2
         version: 1.0.2(@harbour-enterprises/superdoc@1.43.2(@hocuspocus/provider@2.15.3(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-transform@1.12.0)(prosemirror-view@1.38.1)(react@19.2.0)(typescript@5.9.3)(y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))
@@ -2067,8 +2067,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -2094,8 +2094,8 @@ importers:
         specifier: ^6.3.0
         version: 6.3.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(tinymce@8.6.0)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tinymce-velt-comments':
         specifier: 1.0.1
         version: 1.0.1(tinymce@8.6.0)
@@ -2128,8 +2128,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -2173,8 +2173,8 @@ importers:
         specifier: ^3.14.0
         version: 3.22.5
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/tiptap-velt-comments':
         specifier: 5.0.0-beta.3
         version: 5.0.0-beta.3(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))
@@ -2204,8 +2204,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -2228,8 +2228,8 @@ importers:
   apps/react/comments/video-player/lottie/lottie-comments-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       lottie-web:
         specifier: ^5.12.2
         version: 5.13.0
@@ -2253,8 +2253,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -2277,11 +2277,11 @@ importers:
   apps/react/comments/website-builder/freestyle-comments/freestyle-comments-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/reactflow-crdt':
         specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@6.0.5)(@veltdev/crdt@5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(@xyflow/react@12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.5)(use-sync-external-store@1.6.0(react@19.2.5)))
+        version: 5.0.1(@veltdev/client@6.0.6)(@veltdev/crdt@5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(@xyflow/react@12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.5)(use-sync-external-store@1.6.0(react@19.2.5)))
       '@xyflow/react':
         specifier: ^12.3.0
         version: 12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -2314,8 +2314,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -2332,11 +2332,11 @@ importers:
   apps/react/crdt/canvas/reactflow/reactflow-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/reactflow-crdt':
         specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@6.0.5)(@veltdev/crdt@5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(@xyflow/react@12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.5)(use-sync-external-store@1.6.0(react@19.2.5)))
+        version: 5.0.1(@veltdev/client@6.0.6)(@veltdev/crdt@5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(@xyflow/react@12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.5)(use-sync-external-store@1.6.0(react@19.2.5)))
       '@xyflow/react':
         specifier: ^12.9.1
         version: 12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -2375,8 +2375,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -2415,13 +2415,13 @@ importers:
         version: 8.3.18(react@19.2.5)
       '@veltdev/blocknote-crdt':
         specifier: 5.0.0
-        version: 5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/blocknote-crdt-react':
         specifier: 5.0.0
-        version: 5.0.0(@veltdev/blocknote-crdt@5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        version: 5.0.0(@veltdev/blocknote-crdt@5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2448,8 +2448,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -2488,19 +2488,19 @@ importers:
         version: 6.1.3
       '@veltdev/codemirror-crdt':
         specifier: 5.0.1
-        version: 5.0.1(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.1(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/codemirror-crdt-react':
         specifier: 5.0.1
-        version: 5.0.1(@veltdev/codemirror-crdt@5.0.1(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        version: 5.0.1(@veltdev/codemirror-crdt@5.0.1(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/codemirror-velt-comments':
         specifier: 5.0.0-beta.2
         version: 5.0.0-beta.2(@codemirror/state@6.6.0)(@codemirror/view@6.41.1)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -2552,13 +2552,13 @@ importers:
     dependencies:
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -2585,8 +2585,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -2610,13 +2610,13 @@ importers:
     dependencies:
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -2652,8 +2652,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -2677,13 +2677,13 @@ importers:
     dependencies:
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -2719,8 +2719,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -2744,13 +2744,13 @@ importers:
     dependencies:
       '@veltdev/crdt':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/crdt-react':
         specifier: 5.0.2
-        version: 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)
+        version: 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -2786,8 +2786,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -2829,10 +2829,10 @@ importers:
         version: 5.0.0-beta.3(@platejs/core@52.3.21(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.5)))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-react@0.123.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-dom@0.123.0(slate@0.123.0))(slate@0.123.0))(slate@0.123.0)
       '@veltdev/plate-crdt-react':
         specifier: 5.0.1
-        version: 5.0.1(8d7d91feadfa3e6f6251097dcc991b97)
+        version: 5.0.1(9e4a17bd0a81230d2b3f8b689c2ceba9)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -2871,8 +2871,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -2919,14 +2919,14 @@ importers:
         specifier: ^3.0.0
         version: 3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@veltdev/tiptap-crdt':
         specifier: 5.0.1
-        version: 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/tiptap-crdt-react':
         specifier: 5.0.1
-        version: 5.0.1(f413e4d2c2c7c80254fe75adfbdc998c)
+        version: 5.0.1(17f117bd7e43e40ef22deef87102ecfd)
       '@veltdev/tiptap-velt-comments':
         specifier: 5.0.0-beta.3
         version: 5.0.0-beta.3(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))
@@ -2962,8 +2962,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -3013,14 +3013,14 @@ importers:
         specifier: ^3.0.0
         version: 3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-crdt':
         specifier: 5.0.1
-        version: 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+        version: 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@veltdev/tiptap-crdt-react':
         specifier: 5.0.1
-        version: 5.0.1(121f59e1fbdb907edfc09b965c32a964)
+        version: 5.0.1(3a0f9f5a1d12401b75a1fd6b30cd8466)
       '@veltdev/tiptap-velt-comments':
         specifier: 5.0.0-beta.3
         version: 5.0.0-beta.3(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))
@@ -3056,8 +3056,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -3080,8 +3080,8 @@ importers:
   apps/react/recorder/document/custom/recorder-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -3108,8 +3108,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -3132,8 +3132,8 @@ importers:
   apps/react/self-hosting/dashboard/mongo-db/dashboard-mongo-db-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -3169,8 +3169,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -3187,8 +3187,8 @@ importers:
   apps/react/self-hosting/dashboard/postgres/dashboard-postgres-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       clsx:
         specifier: ^2
         version: 2.1.1
@@ -3227,8 +3227,8 @@ importers:
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -3248,8 +3248,8 @@ importers:
   apps/react/self-hosting/forms/page-mode-demo:
     dependencies:
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       mongodb:
         specifier: ^7.0.0
         version: 7.2.0
@@ -3279,8 +3279,8 @@ importers:
         specifier: ^5.1.36
         version: 5.1.36
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10
         version: 10.5.0(postcss@8.5.12)
@@ -3321,8 +3321,8 @@ importers:
         specifier: ^3.14.0
         version: 3.22.5
       '@veltdev/react':
-        specifier: 6.0.5
-        version: 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 6.0.6
+        version: 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@veltdev/tiptap-velt-comments':
         specifier: 5.0.0-beta.3
         version: 5.0.0-beta.3(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))
@@ -3352,8 +3352,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
       '@veltdev/types':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.12)
@@ -3379,8 +3379,8 @@ importers:
         specifier: ^3.35.0
         version: 3.41.1(vue@3.5.33(typescript@5.9.3))
       '@veltdev/client':
-        specifier: 6.0.5
-        version: 6.0.5
+        specifier: 6.0.6
+        version: 6.0.6
       ag-grid-community:
         specifier: ^34.3.0
         version: 34.3.1
@@ -6612,8 +6612,8 @@ packages:
     peerDependencies:
       ckeditor5: '>=42.0.0'
 
-  '@veltdev/client@6.0.5':
-    resolution: {integrity: sha512-9RB8be7Uzc/ZTbkOSyp9wJmy89oDklLq1sjUAZM9k9eZOlX62SYyFciR5Fd1URGEuH1THiq1dITG2QgbV4A3Tw==}
+  '@veltdev/client@6.0.6':
+    resolution: {integrity: sha512-5x46igPyG7IOz9GBcgE5f+JbYbzZwhy8wPSpb3yDsfVYBuXSZyD1pLwSIYxQ+ZzUVv55Ls/LpDTuwrzjUDxEvQ==}
 
   '@veltdev/codemirror-crdt-react@5.0.1':
     resolution: {integrity: sha512-NPlWL43UdDNfie+r3tfQrPm21Y9fIO1gZ6jXIgt9YxF4zpUngMlY+1wKzrn0Pd2vbTRXLwYWvlHcL5bvHsPNBw==}
@@ -6745,8 +6745,8 @@ packages:
     peerDependencies:
       quill: ^2.0.0
 
-  '@veltdev/react@6.0.5':
-    resolution: {integrity: sha512-H8j7yylx8Vz2HuRovVG0f/wSN6jm67nU8bFElr36KFnEI2qj4A6qKDlS8iS1wb46ssRjY5LDUFod0gEOD1BmZw==}
+  '@veltdev/react@6.0.6':
+    resolution: {integrity: sha512-+tObVy7enmnuqPGqEjpiDIBvTtnyrEAZZLFL2FYBXE5cOJgfZSk5iy0O6L/bo1IsWS4LCv4tPlQ8UNoadFsU9A==}
     peerDependencies:
       react: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
       react-dom: ^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.0.0
@@ -6836,8 +6836,8 @@ packages:
     peerDependencies:
       '@tiptap/core': ^3.x.x
 
-  '@veltdev/types@6.0.5':
-    resolution: {integrity: sha512-Lg+mQbbqb8p0GhYE7zxJExtp0lDxhiAvMgJ3xV6kxvo8HhQMuQeoJi5PVt2ORx/vUDVg4k9kqKeDeo0S7zRx+A==}
+  '@veltdev/types@6.0.6':
+    resolution: {integrity: sha512-YSv27c84L4/G3vUoklaFzyWjRs7JqD5Xj4XVj+n1aIJBplKlipOX6Ugl4whO514h3Cj81rCY7L3HP8QPjMzu+Q==}
 
   '@vercel/analytics@2.0.1':
     resolution: {integrity: sha512-MTQG6V9qQrt1tsDeF+2Uoo5aPjqbVPys1xvnIftXSJYG2SrwXRHnqEvVoYID7BTruDz4lCd2Z7rM1BdkUehk2g==}
@@ -14183,71 +14183,71 @@ snapshots:
     dependencies:
       '@pdftron/webviewer': 11.13.0
 
-  '@veltdev/blocknote-crdt-react@5.0.0(@veltdev/blocknote-crdt@5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+  '@veltdev/blocknote-crdt-react@5.0.0(@veltdev/blocknote-crdt@5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
     dependencies:
-      '@veltdev/blocknote-crdt': 5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@veltdev/blocknote-crdt': 5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
-  '@veltdev/blocknote-crdt@5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+  '@veltdev/blocknote-crdt@5.0.0(@blocknote/core@0.47.3(@types/hast@3.0.4))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       '@blocknote/core': 0.47.3(@types/hast@3.0.4)
       y-protocols: 1.0.7(yjs@13.6.30)
       yjs: 13.6.30
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
   '@veltdev/ckeditor-velt-comments@1.0.1(ckeditor5@48.2.0)':
     dependencies:
       ckeditor5: 48.2.0
 
-  '@veltdev/client@6.0.5': {}
+  '@veltdev/client@6.0.6': {}
 
-  '@veltdev/codemirror-crdt-react@5.0.1(@veltdev/codemirror-crdt@5.0.1(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+  '@veltdev/codemirror-crdt-react@5.0.1(@veltdev/codemirror-crdt@5.0.1(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
     dependencies:
-      '@veltdev/codemirror-crdt': 5.0.1(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/codemirror-crdt': 5.0.1(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
     optionalDependencies:
-      '@veltdev/types': 6.0.5
+      '@veltdev/types': 6.0.6
 
-  '@veltdev/codemirror-crdt@5.0.1(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+  '@veltdev/codemirror-crdt@5.0.1(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       lib0: 0.2.117
       y-protocols: 1.0.7(yjs@13.6.30)
       yjs: 13.6.30
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
   '@veltdev/codemirror-velt-comments@5.0.0-beta.2(@codemirror/state@6.6.0)(@codemirror/view@6.41.1)':
     dependencies:
       '@codemirror/state': 6.6.0
       '@codemirror/view': 6.41.1
 
-  '@veltdev/crdt-react@5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)':
+  '@veltdev/crdt-react@5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)':
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
-  '@veltdev/crdt@5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+  '@veltdev/crdt@5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       lib0: 0.2.117
       y-protocols: 1.0.7(yjs@13.6.30)
       yjs: 13.6.30
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
   '@veltdev/draftjs-velt-comments@5.0.0-beta.1(draft-js@0.11.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
@@ -14275,7 +14275,7 @@ snapshots:
       slate: 0.123.0
       slate-react: 0.123.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-dom@0.123.0(slate@0.123.0))(slate@0.123.0)
 
-  '@veltdev/plate-crdt-react@5.0.1(8d7d91feadfa3e6f6251097dcc991b97)':
+  '@veltdev/plate-crdt-react@5.0.1(9e4a17bd0a81230d2b3f8b689c2ceba9)':
     dependencies:
       '@platejs/core': 52.3.21(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.5))
       '@platejs/yjs': 52.3.10(@hocuspocus/provider@3.4.4(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(platejs@53.0.0(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.5)))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate@0.123.0)(y-webrtc@10.3.0(yjs@13.6.30))
@@ -14285,9 +14285,9 @@ snapshots:
       slate: 0.123.0
       slate-react: 0.123.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-dom@0.123.0(slate@0.123.0))(slate@0.123.0)
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
   '@veltdev/prosemirror-velt-comments@1.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)':
     dependencies:
@@ -14299,27 +14299,27 @@ snapshots:
     dependencies:
       quill: 2.0.3
 
-  '@veltdev/react@6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@veltdev/react@6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+  '@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
     dependencies:
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
 
-  '@veltdev/reactflow-crdt@5.0.1(@veltdev/client@6.0.5)(@veltdev/crdt@5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(@xyflow/react@12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.5)(use-sync-external-store@1.6.0(react@19.2.5)))':
+  '@veltdev/reactflow-crdt@5.0.1(@veltdev/client@6.0.6)(@veltdev/crdt@5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(@xyflow/react@12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)(yjs@13.6.30)(zustand@5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.5)(use-sync-external-store@1.6.0(react@19.2.5)))':
     dependencies:
-      '@veltdev/crdt': 5.0.2(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@veltdev/crdt': 5.0.2(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(lib0@0.2.117)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@xyflow/react': 12.10.2(@types/react@19.2.14)(immer@10.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react: 19.2.5
       yjs: 13.6.30
       zustand: 5.0.12(@types/react@19.2.14)(immer@10.2.0)(react@19.2.5)(use-sync-external-store@1.6.0(react@19.2.5))
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
   '@veltdev/slate-velt-comments@5.0.0-beta.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate-react@0.110.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(slate@0.103.0))(slate@0.103.0)':
     dependencies:
@@ -14340,35 +14340,35 @@ snapshots:
     dependencies:
       tinymce: 8.6.0
 
-  '@veltdev/tiptap-crdt-react@5.0.1(121f59e1fbdb907edfc09b965c32a964)':
+  '@veltdev/tiptap-crdt-react@5.0.1(17f117bd7e43e40ef22deef87102ecfd)':
     dependencies:
       '@tiptap/core': 3.22.5(@tiptap/pm@3.22.5)
       '@tiptap/extension-collaboration': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
       '@tiptap/extension-collaboration-caret': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))
       '@tiptap/pm': 3.22.5
       '@tiptap/y-tiptap': 3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
-      '@veltdev/react': 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@veltdev/tiptap-crdt': 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
-      react: 19.2.0
-      react-dom: 19.2.0(react@19.2.0)
-    optionalDependencies:
-      '@veltdev/types': 6.0.5
-
-  '@veltdev/tiptap-crdt-react@5.0.1(f413e4d2c2c7c80254fe75adfbdc998c)':
-    dependencies:
-      '@tiptap/core': 3.22.5(@tiptap/pm@3.22.5)
-      '@tiptap/extension-collaboration': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
-      '@tiptap/extension-collaboration-caret': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))
-      '@tiptap/pm': 3.22.5
-      '@tiptap/y-tiptap': 3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/tiptap-crdt': 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/tiptap-crdt': 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
     optionalDependencies:
-      '@veltdev/types': 6.0.5
+      '@veltdev/types': 6.0.6
 
-  '@veltdev/tiptap-crdt@5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+  '@veltdev/tiptap-crdt-react@5.0.1(3a0f9f5a1d12401b75a1fd6b30cd8466)':
+    dependencies:
+      '@tiptap/core': 3.22.5(@tiptap/pm@3.22.5)
+      '@tiptap/extension-collaboration': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
+      '@tiptap/extension-collaboration-caret': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))
+      '@tiptap/pm': 3.22.5
+      '@tiptap/y-tiptap': 3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@veltdev/react': 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/tiptap-crdt': 5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+    optionalDependencies:
+      '@veltdev/types': 6.0.6
+
+  '@veltdev/tiptap-crdt@5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       '@tiptap/core': 3.22.5(@tiptap/pm@3.22.5)
       '@tiptap/extension-collaboration': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
@@ -14378,11 +14378,11 @@ snapshots:
       y-protocols: 1.0.7(yjs@13.6.30)
       yjs: 13.6.30
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@veltdev/types': 6.0.6
 
-  '@veltdev/tiptap-crdt@5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.5)(@veltdev/react@6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.5)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+  '@veltdev/tiptap-crdt@5.0.1(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/extension-collaboration-caret@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/extension-collaboration@3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@veltdev/client@6.0.6)(@veltdev/react@6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@veltdev/types@6.0.6)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       '@tiptap/core': 3.22.5(@tiptap/pm@3.22.5)
       '@tiptap/extension-collaboration': 3.22.5(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))(@tiptap/pm@3.22.5)(@tiptap/y-tiptap@3.0.3(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.38.1)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
@@ -14392,15 +14392,15 @@ snapshots:
       y-protocols: 1.0.7(yjs@13.6.30)
       yjs: 13.6.30
     optionalDependencies:
-      '@veltdev/client': 6.0.5
-      '@veltdev/react': 6.0.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@veltdev/types': 6.0.5
+      '@veltdev/client': 6.0.6
+      '@veltdev/react': 6.0.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@veltdev/types': 6.0.6
 
   '@veltdev/tiptap-velt-comments@5.0.0-beta.3(@tiptap/core@3.22.5(@tiptap/pm@3.22.5))':
     dependencies:
       '@tiptap/core': 3.22.5(@tiptap/pm@3.22.5)
 
-  '@veltdev/types@6.0.5': {}
+  '@veltdev/types@6.0.6': {}
 
   '@vercel/analytics@2.0.1(next@16.1.2(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(sass@1.99.0))(react@19.2.5)(vue@3.5.33(typescript@5.9.3))':
     optionalDependencies:
